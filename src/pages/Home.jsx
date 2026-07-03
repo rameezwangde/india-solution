@@ -1,238 +1,413 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, Play, Users, Clock, Sparkles, Crosshair, Heart, Star } from 'lucide-react';
+import { ArrowRight, CalendarDays, Users, Award, Briefcase, Clock, Sparkles, Crosshair, Heart, Star } from 'lucide-react';
 import { fadeUp, staggerContainer } from '../utils/animations';
+const happyClients = ['Google', 'Capgemini', 'DHL', 'IBM', 'Bajaj', 'Audi', 'Amazon'];
+const stats = [
+  {
+    value: '5,600+',
+    label: 'Events Completed',
+    icon: CalendarDays,
+    ring: 'border-[#E91E63] shadow-[0_0_28px_rgba(233,30,99,0.58)]',
+    dot: 'bg-[#E91E63]',
+    bar: 'bg-[#E91E63]',
+  },
+  {
+    value: '2,500+',
+    label: 'Happy Clients',
+    icon: Users,
+    ring: 'border-[#FF2A85] shadow-[0_0_28px_rgba(255,42,133,0.58)]',
+    dot: 'bg-[#FF2A85]',
+    bar: 'bg-[#FF2A85]',
+  },
+  {
+    value: '15+',
+    label: 'Years Experience',
+    icon: Award,
+    ring: 'border-[#E91E63] shadow-[0_0_28px_rgba(233,30,99,0.5)]',
+    dot: 'bg-[#E91E63]',
+    bar: 'bg-[#E91E63]',
+  },
+  {
+    value: '50+',
+    label: 'Event Categories',
+    icon: Star,
+    ring: 'border-[#FF9800] shadow-[0_0_28px_rgba(255,152,0,0.58)]',
+    dot: 'bg-[#FF9800]',
+    bar: 'bg-[#FF9800]',
+  },
+];
+
+const ClientLogo = ({ brand }) => {
+  switch (brand) {
+    case 'Google':
+      return (
+        <span className="text-4xl font-medium tracking-tight md:text-5xl" aria-label="Google">
+          <span className="text-[#4285F4]">G</span><span className="text-[#DB4437]">o</span><span className="text-[#F4B400]">o</span><span className="text-[#4285F4]">g</span><span className="text-[#0F9D58]">l</span><span className="text-[#DB4437]">e</span>
+        </span>
+      );
+    case 'Capgemini':
+      return (
+        <span className="flex items-center gap-2 text-3xl font-semibold italic text-[#0070AD] md:text-4xl" aria-label="Capgemini">
+          Capgemini
+          <span className="h-5 w-7 rounded-full bg-[#12ABDB] [clip-path:ellipse(45%_35%_at_50%_50%)]" />
+        </span>
+      );
+    case 'DHL':
+      return (
+        <span className="flex items-end gap-2 text-[#D40511]" aria-label="DHL Group">
+          <span className="text-4xl font-black italic tracking-tight md:text-5xl">DHL</span>
+          <span className="mb-1 text-sm font-bold">Group</span>
+        </span>
+      );
+    case 'IBM':
+      return <span className="ibm-wordmark" aria-label="IBM">IBM</span>;
+    case 'Bajaj':
+      return (
+        <span className="flex items-center gap-3 text-[#005BAA]" aria-label="Bajaj">
+          <span className="text-4xl font-black leading-none md:text-5xl">B</span>
+          <span className="text-2xl font-black tracking-widest md:text-3xl">BAJAJ</span>
+        </span>
+      );
+    case 'Audi':
+      return (
+        <span className="flex flex-col items-center leading-none" aria-label="Audi">
+          <span className="flex -space-x-2">
+            {[0, 1, 2, 3].map((ring) => (
+              <span key={ring} className="h-8 w-8 rounded-full border-[3px] border-[#9B9B9B] bg-transparent" />
+            ))}
+          </span>
+          <span className="mt-1 text-2xl font-bold text-[#E0001B]">Audi</span>
+        </span>
+      );
+    case 'Amazon':
+      return <span className="amazon-wordmark" aria-label="Amazon">amazon</span>;
+    default:
+      return <span>{brand}</span>;
+  }
+};
 
 const Home = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative pt-32 md:pt-40 lg:pt-48 pb-16 lg:pb-32 overflow-hidden">
-        {/* Abstract Background Elements */}
-        <div className="absolute top-[-5%] left-[-5%] w-[60%] lg:w-[40%] h-[40%] bg-magenta/20 blur-[100px] rounded-full pointer-events-none" />
-        <div className="absolute bottom-[-5%] right-[-5%] w-[60%] lg:w-[40%] h-[40%] bg-orange/20 blur-[100px] rounded-full pointer-events-none" />
-        
-        <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-12 lg:gap-12 items-center">
-            
-            {/* Left Content */}
-            <motion.div 
-              variants={staggerContainer}
-              initial="hidden"
-              animate="visible"
-              className="max-w-2xl"
-            >
-              <motion.p variants={fadeUp} className="text-gray-400 font-semibold tracking-widest uppercase mb-4 text-xs lg:text-sm text-center lg:text-left mt-8 lg:mt-0">
-                CREATING <span className="text-[#B026FF]">UNFORGETTABLE</span> MOMENTS
-              </motion.p>
-              
-              <motion.h1 variants={fadeUp} className="text-4xl md:text-5xl lg:text-7xl font-display font-medium leading-tight mb-6 text-white text-center lg:text-left">
-                Extraordinary Events.<br />
-                <span className="text-[#B026FF]">Impeccable </span>
-                <span className="text-[#FF512F]">Execution.</span>
-              </motion.h1>
-              
-              <motion.p variants={fadeUp} className="text-gray-400 text-base md:text-lg mb-8 leading-relaxed max-w-xl text-center lg:text-left mx-auto lg:mx-0">
-                From intimate celebrations to grand corporate affairs, we turn your vision into unforgettable experiences with creativity, precision, and passion.
-              </motion.p>
-              
-              <motion.div variants={fadeUp} className="flex flex-col sm:flex-row flex-wrap items-center justify-center lg:justify-start gap-4 lg:gap-6">
-                <button className="px-8 py-3 rounded-full bg-gradient-to-r from-purple-600 via-magenta to-orange text-white font-medium text-sm hover:opacity-90 transition-opacity flex items-center gap-2 group shadow-lg shadow-magenta/20">
-                  EXPLORE SERVICES
-                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                </button>
-                <button className="px-6 py-3 rounded-full text-white font-medium text-sm hover:text-magenta transition-colors flex items-center gap-3">
-                  WATCH SHOWREEL
-                  <span className="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center">
-                    <Play size={12} className="text-white ml-0.5" />
-                  </span>
-                </button>
-              </motion.div>
+      <section className="hero-showcase relative min-h-[680px] overflow-hidden px-5 pb-6 pt-28 text-white sm:px-8 lg:px-12 lg:pt-32">
+        <div className="hero-showcase-glow hero-showcase-glow-left" />
+        <div className="hero-showcase-glow hero-showcase-glow-right" />
+
+        <div className="container relative z-10 mx-auto max-w-[1340px]">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            animate="visible"
+            className="mx-auto max-w-4xl text-center"
+          >
+            <motion.div variants={fadeUp} className="mb-3 flex items-center justify-center gap-4 text-[10px] font-bold uppercase tracking-[0.36em] text-[#FF4B64]">
+              <span className="h-px w-8 bg-gradient-to-r from-transparent to-magenta" />
+              <span>Crafting Unforgettable Moments</span>
+              <span className="h-px w-8 bg-gradient-to-r from-orange to-transparent" />
             </motion.div>
 
-            {/* Right Image / Visual */}
-            <motion.div 
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative w-full h-[350px] md:h-[450px] lg:h-[600px] mt-8 lg:mt-0"
-            >
-              <div className="absolute inset-0 rounded-[40px] overflow-hidden">
-                <img 
-                  src="/hero-stage.png" 
-                  alt="Luxury Event Setup" 
-                  className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-1000"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-navy-900/80 via-transparent to-transparent" />
-                
-                {/* Curved Design Element Overlay */}
-                <svg className="absolute left-[-2px] top-0 h-full w-[100px] text-navy-900 drop-shadow-2xl" viewBox="0 0 100 1000" preserveAspectRatio="none" fill="currentColor">
-                  <path d="M0,0 L100,0 C30,300 30,700 100,1000 L0,1000 Z" />
-                </svg>
-              </div>
+            <motion.h1 variants={fadeUp} className="font-display text-4xl font-semibold uppercase leading-tight tracking-[0.18em] text-white sm:text-5xl lg:text-6xl">
+              Creating
+              <span className="block bg-gradient-to-r from-[#B026FF] via-magenta to-orange bg-clip-text italic text-transparent">Unforgettable Events</span>
+              <span className="block text-2xl tracking-[0.36em] sm:text-3xl lg:text-4xl">Since 2010</span>
+            </motion.h1>
 
-              {/* Floating Badge */}
-              <motion.div 
-                animate={{ y: [0, -15, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute left-[-40px] bottom-[20%] glass-card p-6 rounded-full w-40 h-40 flex flex-col items-center justify-center text-center border-magenta/30"
-              >
-                <span className="text-magenta text-[10px] tracking-widest uppercase mb-1">Celebrating</span>
-                <span className="text-4xl font-display font-semibold text-white leading-none mb-1">15+</span>
-                <span className="text-gray-300 text-xs uppercase tracking-wide">Years of<br/>Excellence</span>
-              </motion.div>
+            <motion.div variants={fadeUp} className="mx-auto my-3 flex w-52 items-center justify-center gap-4">
+              <span className="h-px flex-1 bg-gradient-to-r from-transparent to-magenta" />
+              <span className="text-orange">&#10022;</span>
+              <span className="h-px flex-1 bg-gradient-to-r from-magenta to-transparent" />
             </motion.div>
 
-          </div>
-        </div>
-      </section>
+            <motion.p variants={fadeUp} className="mx-auto max-w-xl text-sm leading-6 text-gray-300 md:text-base">
+              At India Solution, we bring your vision to life, from intimate celebrations to grand corporate gatherings. Trust us to handle the details while you enjoy the moment.
+            </motion.p>
+          </motion.div>
 
-      {/* Stats Strip */}
-      <section className="relative z-20 -mt-10 mb-20 px-6 lg:px-12">
-        <div className="container mx-auto">
-          <div className="bg-white p-6 md:p-8 grid grid-cols-2 lg:grid-cols-4 gap-8 rounded-2xl shadow-xl">
-            
-            <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-magenta to-purple-600 flex items-center justify-center text-white shadow-lg shadow-magenta/30">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-              </div>
-              <div>
-                <h4 className="text-2xl font-medium font-display text-navy-900">5,600+</h4>
-                <p className="text-gray-500 text-sm">Events Completed</p>
-              </div>
-            </div>
-
-            <div className="hidden lg:block w-px bg-gray-200"></div>
-
-            <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-600 to-magenta flex items-center justify-center text-white shadow-lg shadow-purple-600/30">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
-              </div>
-              <div>
-                <h4 className="text-2xl font-medium font-display text-navy-900">15+</h4>
-                <p className="text-gray-500 text-sm">Years Experience</p>
-              </div>
-            </div>
-
-            <div className="hidden lg:block w-px bg-gray-200"></div>
-
-            <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-600 to-magenta flex items-center justify-center text-white shadow-lg shadow-purple-600/30">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-              </div>
-              <div>
-                <h4 className="text-2xl font-medium font-display text-navy-900">2,500+</h4>
-                <p className="text-gray-500 text-sm">Happy Clients</p>
-              </div>
-            </div>
-
-            <div className="w-px bg-gray-200 hidden md:block"></div>
-
-            <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-600 to-magenta flex items-center justify-center text-white shadow-lg shadow-magenta/30">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              </div>
-              <div>
-                <h4 className="text-2xl font-medium font-display text-navy-900">50+</h4>
-                <p className="text-gray-500 text-sm">Event Categories</p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-      
-      {/* About Us Section */}
-      <section className="py-20 px-6 lg:px-12 relative z-20">
-        <div className="container mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <motion.div 
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <div className="relative rounded-[30px] overflow-hidden">
-                <img src="/about-us.png" alt="India Solution Events" className="w-full h-auto object-cover" />
-                <div className="absolute inset-0 bg-navy-900/40"></div>
-                <div className="absolute bottom-6 left-6 right-6 glass-card p-6 border-magenta/30">
-                  <p className="text-white font-display font-medium text-lg">"Turning visions into reality for personal and professional events."</p>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.35 }}
+            className="hero-stat-bar mx-auto mt-5 max-w-[860px]"
+          >
+            <div className="grid grid-cols-2 gap-y-5 md:grid-cols-4 md:gap-y-0">
+              {stats.map((stat, index) => (
+                <div key={stat.label} className={`flex items-center justify-center gap-4 px-5 ${index > 0 ? 'md:border-l md:border-white/10' : ''}`}>
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-magenta/35 bg-magenta/10 text-magenta shadow-[0_0_18px_rgba(233,30,99,0.2)]">
+                    <stat.icon size={20} strokeWidth={1.7} />
+                  </div>
+                  <div className="text-left">
+                    <h3 className="text-2xl font-bold leading-none text-white">{stat.value}</h3>
+                    <p className="mt-1 text-xs text-gray-300">{stat.label}</p>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-            
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 34 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.45 }}
+            className="hero-photo-stage relative mx-auto mt-5 h-[300px] max-w-[1200px] sm:h-[340px] lg:h-[360px]"
+          >
+            <div className="hero-photo-card hero-photo-card-one">
+              <img src="/about-us.png" alt="Wedding floral aisle decor" />
+            </div>
+            <div className="hero-photo-card hero-photo-card-two">
+              <img src="/hero-stage.png" alt="Candlelit event table" />
+            </div>
+            <div className="hero-photo-card hero-photo-card-main">
+              <img src="/about-us.png" alt="Grand stage celebration" />
+            </div>
+            <div className="hero-photo-card hero-photo-card-four">
+              <img src="/hero-stage.png" alt="Corporate event stage" />
+            </div>
+            <div className="hero-photo-card hero-photo-card-five">
+              <img src="/about-us.png" alt="Evening celebration lounge" />
+            </div>
+
+            <div className="hero-years-badge">
+              <span className="text-orange">&#9819;</span>
+              <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-magenta">Celebrating</span>
+              <span className="font-display text-5xl font-semibold leading-none text-white">15+</span>
+              <span className="text-xs font-bold uppercase tracking-widest text-white">Years of Excellence</span>
+              <span className="mt-1 h-0.5 w-9 bg-orange" />
+            </div>
+          </motion.div>
+        </div>
+      </section>
+      {/* About Us Section */}
+      <section className="about-showcase relative overflow-hidden px-5 py-16 text-white sm:px-8 lg:px-12 lg:py-20">
+        <div className="about-showcase-wave about-showcase-wave-left" />
+        <div className="about-showcase-wave about-showcase-wave-right" />
+
+        <div className="container relative z-10 mx-auto">
+          <div className="grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr] xl:gap-14">
             <motion.div
               variants={staggerContainer}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
+              className="max-w-2xl"
             >
-              <motion.span variants={fadeUp} className="text-magenta font-semibold tracking-widest uppercase mb-4 block text-sm">About Our Company</motion.span>
-              <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-display font-medium mb-6 leading-tight">Welcome to <span className="text-gradient">India Solution</span></motion.h2>
-              <motion.p variants={fadeUp} className="text-gray-400 text-lg mb-6 leading-relaxed">
-                Since 2010, India Solution Events has been a trusted name in event management, delivering over 15 years of expertise in crafting unforgettable experiences. Based in Bengaluru, we specialize in turning visions into reality for both personal and professional events, ensuring every detail is executed to perfection.
+              <motion.span variants={fadeUp} className="mb-3 block text-xs font-bold uppercase tracking-widest text-[#FF4B64]">
+                About Our Company
+              </motion.span>
+              <motion.span variants={fadeUp} className="mb-5 block h-0.5 w-10 bg-[#FF4B64]" />
+              <motion.h2 variants={fadeUp} className="font-display text-4xl font-semibold leading-tight text-white md:text-5xl">
+                Welcome to
+                <span className="block bg-gradient-to-r from-magenta via-[#FF4B64] to-orange bg-clip-text text-transparent">India Solution</span>
+              </motion.h2>
+              <motion.div variants={fadeUp} className="my-6 flex items-center gap-5 text-magenta/70">
+                <span className="h-px w-24 bg-gradient-to-r from-magenta to-orange/70" />
+                <span className="text-sm text-[#FF4B64]">&#10022;</span>
+                <span className="h-px w-24 bg-gradient-to-r from-orange/70 to-transparent" />
+              </motion.div>
+              <motion.p variants={fadeUp} className="mb-5 text-sm leading-7 text-gray-300 md:text-base">
+                Since 2010, <strong className="text-white">India Solution Events</strong> has been a trusted name in event management, delivering over 15 years of expertise in crafting unforgettable experiences. Based in Bengaluru, we specialize in turning visions into reality for both <strong className="text-white">personal and professional events</strong>, ensuring every detail is executed to perfection.
               </motion.p>
-              <motion.p variants={fadeUp} className="text-gray-400 text-lg mb-8 leading-relaxed">
-                Whether it’s an intimate gathering or a grand corporate affair, our dedicated team is ready to bring creativity, professionalism, and excellence to your special moments.
+              <motion.p variants={fadeUp} className="mb-7 text-sm leading-7 text-gray-300 md:text-base">
+                Whether it&rsquo;s an intimate gathering or a grand corporate affair, our dedicated team is ready to bring creativity, professionalism, and excellence to your special moments.
               </motion.p>
-              <motion.button variants={fadeUp} className="px-8 py-3 rounded-full border-2 border-magenta text-magenta font-semibold hover:bg-magenta hover:text-white transition-all shadow-[0_0_15px_rgba(233,30,99,0.3)]">
+
+              <div className="space-y-4">
+                <motion.div variants={fadeUp} className="about-info-card group">
+                  <div className="about-info-icon border-magenta text-magenta shadow-[0_0_24px_rgba(233,30,99,0.34)]">
+                    <Users size={28} strokeWidth={1.6} />
+                  </div>
+                  <div>
+                    <h3 className="font-display text-xl font-semibold text-white">About Celebratory Events</h3>
+                    <span className="my-2 block h-0.5 w-12 bg-magenta" />
+                    <p className="text-xs leading-5 text-gray-400 md:text-sm">
+                      We bring your special moments to life with unmatched creativity and attention to detail. From dreamy weddings with stunning d&eacute;cor to fun-filled birthday parties, elegant engagement ceremonies, and even pre-wedding festivities like mehndi and sangeet nights, we ensure every occasion is as unique as your story.
+                    </p>
+                  </div>
+                </motion.div>
+
+                <motion.div variants={fadeUp} className="about-info-card group">
+                  <div className="about-info-icon border-orange text-orange shadow-[0_0_24px_rgba(255,152,0,0.32)]">
+                    <Briefcase size={28} strokeWidth={1.6} />
+                  </div>
+                  <div>
+                    <h3 className="font-display text-xl font-semibold text-white">Corporate &amp; Formal Events</h3>
+                    <span className="my-2 block h-0.5 w-12 bg-orange" />
+                    <p className="text-xs leading-5 text-gray-400 md:text-sm">
+                      Our expertise in corporate and formal event management ensures your professional gatherings are handled seamlessly. Be it a dynamic product launch, an inspiring corporate conference, a grand stage show, or team-building retreats, we execute every detail with precision and innovation.
+                    </p>
+                  </div>
+                </motion.div>
+              </div>
+
+              <motion.button variants={fadeUp} className="mt-5 inline-flex items-center gap-8 rounded-full bg-gradient-to-r from-magenta via-[#FF4B64] to-orange px-8 py-4 text-sm font-bold uppercase text-white shadow-[0_0_26px_rgba(233,30,99,0.35)] transition-transform hover:-translate-y-0.5">
                 Discover More
+                <ArrowRight size={18} />
               </motion.button>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="space-y-0"
+            >
+              <div className="overflow-hidden rounded-[38px] border border-white/10 shadow-[0_0_40px_rgba(233,30,99,0.12)]">
+                <img src="/hero-stage.png" alt="India Solution event decor" className="h-[300px] w-full object-cover md:h-[420px]" />
+              </div>
+
+              <div className="stats-glow-panel relative -mt-1 overflow-hidden rounded-[22px] border border-magenta/50 px-5 py-8 shadow-[0_0_32px_rgba(233,30,99,0.18)] md:px-7 md:py-9">
+                <div className="stats-wave stats-wave-purple" />
+                <div className="stats-wave stats-wave-orange" />
+                <div className="relative z-10 grid grid-cols-2 gap-y-10 md:grid-cols-4 md:gap-y-0">
+                  {stats.map((stat, index) => (
+                    <div key={stat.label} className={`relative flex flex-col items-center text-center ${index > 0 ? 'md:border-l md:border-white/20' : ''}`}>
+                      <div className={`relative mb-6 flex h-16 w-16 items-center justify-center rounded-full border-2 bg-white/5 ${stat.ring}`}>
+                        <stat.icon size={28} className="text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.75)]" strokeWidth={1.7} />
+                        <span className={`absolute -right-1 bottom-2 h-3 w-3 rounded-full shadow-[0_0_12px_currentColor] ${stat.dot}`} />
+                      </div>
+                      <h4 className="font-display text-3xl font-semibold leading-none text-white drop-shadow-[0_4px_10px_rgba(255,255,255,0.18)] md:text-4xl">{stat.value}</h4>
+                      <p className="mt-2 text-xs font-medium text-gray-300 md:text-sm">{stat.label}</p>
+                      <span className={`mt-4 h-1 w-10 rounded-full ${stat.bar}`} />
+                    </div>
+                  ))}
+                </div>
+              </div>
             </motion.div>
           </div>
         </div>
       </section>
+      {/* Brand Statement Section */}
+      <section className="brand-collage-section relative overflow-hidden px-5 py-16 text-white sm:px-8 lg:px-12 lg:py-20">
+        <div className="brand-collage-dots" />
+        <div className="container relative z-10 mx-auto max-w-[1320px]">
+          <div className="grid items-center gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:gap-16">
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="brand-collage-frame"
+            >
+              <div className="brand-collage-slice brand-collage-slice-one">
+                <img src="/about-us.png" alt="Wedding aisle decor" />
+              </div>
+              <div className="brand-collage-slice brand-collage-slice-two">
+                <img src="/hero-stage.png" alt="Event table floral decor" />
+              </div>
+              <div className="brand-collage-slice brand-collage-slice-three">
+                <img src="/about-us.png" alt="Corporate event lighting" />
+              </div>
+            </motion.div>
 
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.08 }}
+              className="max-w-xl"
+            >
+              <h2 className="font-display text-4xl font-semibold italic uppercase leading-tight tracking-[0.08em] text-white md:text-5xl lg:text-6xl">
+                Creating
+                <span className="block bg-gradient-to-r from-magenta via-[#FF4B64] to-orange bg-clip-text text-transparent">Unforgettable</span>
+                <span className="block">Events</span>
+              </h2>
+
+              <div className="my-7 flex items-center gap-4">
+                <span className="h-px w-24 bg-gradient-to-r from-magenta to-[#FF4B64]" />
+                <span className="text-[#FF7A59]">&#10022;</span>
+                <span className="h-px w-24 bg-gradient-to-r from-[#FF4B64] to-orange" />
+              </div>
+
+              <p className="font-display text-3xl font-semibold italic uppercase tracking-[0.18em] text-white md:text-4xl">
+                Since <span className="bg-gradient-to-r from-[#FF4B64] to-orange bg-clip-text text-transparent">2010</span>
+              </p>
+
+              <p className="mt-8 max-w-lg text-lg leading-8 text-gray-300">
+                At India Solution, we bring your vision to life, from intimate celebrations to grand corporate gatherings. Trust us to handle the details while you enjoy the moment.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
       {/* Why Choose Us */}
-      <section className="py-24 px-6 lg:px-12 relative overflow-hidden bg-navy-800/30">
-        <div className="container mx-auto">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
+      <section className="relative overflow-hidden bg-[#050917] px-5 py-16 text-white sm:px-8 lg:px-12">
+        <div className="container mx-auto max-w-[1460px]">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center max-w-3xl mx-auto mb-16"
+            className="mx-auto mb-8 max-w-3xl text-center"
           >
-            <span className="text-orange font-semibold tracking-widest uppercase mb-4 block text-sm">Why Us</span>
-            <h2 className="text-4xl md:text-5xl font-display font-medium mb-6">Why Choose <span className="text-gradient">India Solution</span></h2>
-            <p className="text-gray-400 text-lg">
-              At India Solution Events, we pride ourselves on delivering unmatched quality and excellence. Your dream event is our priority, and quality is our promise.
+            <div className="mb-3 flex items-center justify-center gap-3 text-xs font-bold uppercase tracking-[0.22em] text-[#FF4B64]">
+              <span className="h-px w-9 bg-gradient-to-r from-transparent to-[#FF4B64]" />
+              <span>&#10022;</span>
+              <span>Why Choose Us</span>
+              <span>&#10022;</span>
+              <span className="h-px w-9 bg-gradient-to-r from-[#FF4B64] to-transparent" />
+            </div>
+            <h2 className="font-display text-4xl font-medium leading-tight text-white md:text-6xl">
+              Why Choose <span className="text-magenta">India</span> <span className="text-orange">Solution</span>
+            </h2>
+            <p className="mx-auto mt-5 max-w-xl text-base leading-7 text-gray-300">
+              We combine creativity, precision and passion to deliver events that leave a lasting impression.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
+          <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
             {[
-              { title: "Skilled Team", desc: "Our experienced and passionate professionals bring creativity, innovation, and expertise.", icon: Users, color: "from-magenta to-purple-600" },
-              { title: "Flawless Punctuality", desc: "We ensure every event unfolds seamlessly, adhering to meticulously planned timelines.", icon: Clock, color: "from-orange to-pink-500" },
-              { title: "Endless Creativity", desc: "From imaginative wedding themes to innovative corporate setups, we craft events that stand out.", icon: Sparkles, color: "from-purple-600 to-magenta" },
-              { title: "Attention to Detail", desc: "Every detail, big or small, matters to us. We ensure everything is flawlessly executed.", icon: Crosshair, color: "from-pink-500 to-orange" },
-              { title: "Long-Lasting Bonds", desc: "Many of our clients become part of the family, returning for future celebrations.", icon: Heart, color: "from-magenta to-orange" },
-              { title: "Proven Excellence", desc: "Our reputation is built on the heartfelt recommendations of those we've had the privilege to serve.", icon: Star, color: "from-orange to-purple-600" }
+              { title: "Skilled Team", desc: "Our experienced professionals bring creativity, innovation and expertise to every event.", icon: Users, image: "/about-us.png", position: "center" },
+              { title: "Flawless Punctuality", desc: "We ensure every event unfolds seamlessly, adhering to meticulously planned timelines.", icon: Clock, image: "/hero-stage.png", position: "center" },
+              { title: "Endless Creativity", desc: "From imaginative themes to innovative corporate setups, we craft events that stand out and inspire.", icon: Sparkles, image: "/about-us.png", position: "right center" },
+              { title: "Attention to Detail", desc: "Every detail, big or small, matters to us. We ensure everything is flawlessly executed.", icon: Crosshair, image: "/hero-stage.png", position: "left center" },
+              { title: "Long-Lasting Bonds", desc: "Many of our clients become part of the family, returning for future celebrations.", icon: Heart, image: "/about-us.png", position: "center bottom" },
+              { title: "Proven Excellence", desc: "Our reputation is built on the heartfelt recommendations of those we have had the privilege to serve.", icon: Star, image: "/hero-stage.png", position: "right center" },
             ].map((feature, i) => (
               <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
+                key={feature.title}
+                initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="group relative rounded-2xl bg-[#0F1423] border border-white/5 p-8 overflow-hidden hover:-translate-y-2 transition-all duration-300 shadow-xl"
+                transition={{ delay: i * 0.06 }}
+                className="group relative h-[260px] overflow-hidden rounded-xl border border-white/15 bg-[#0F1423] shadow-[0_18px_45px_rgba(0,0,0,0.28)]"
               >
-                {/* Glowing Hover Border Effect */}
-                <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r ${feature.color} blur-[20px] -z-10`} />
-                <div className="absolute inset-[1px] bg-[#0F1423] rounded-2xl -z-10" />
+                <img
+                  src={feature.image}
+                  alt=""
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  style={{ objectPosition: feature.position }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050917]/95 via-[#050917]/55 to-[#050917]/10" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#050917]/65 via-transparent to-transparent" />
 
-                {/* Card Number Background - Removed as requested */}
-
-                {/* Icon */}
-                <div className="mb-6 relative">
-                  <div className={`w-14 h-14 rounded-full bg-gradient-to-br ${feature.color} opacity-20 absolute top-0 left-0 blur-md group-hover:opacity-50 transition-opacity`} />
-                  <div className="w-14 h-14 rounded-full bg-[#1A2235] border border-white/10 flex items-center justify-center relative z-10 group-hover:scale-110 transition-transform duration-300">
-                    <feature.icon size={24} className="text-white font-light stroke-1" />
+                <div className="relative z-10 flex h-full flex-col justify-end p-6">
+                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-magenta bg-[#111827]/65 text-magenta shadow-[0_0_22px_rgba(233,30,99,0.22)]">
+                    <feature.icon size={23} strokeWidth={1.7} />
                   </div>
+                  <h3 className="font-display text-2xl font-semibold text-white">{feature.title}</h3>
+                  <span className="my-2 block h-0.5 w-8 bg-gradient-to-r from-magenta to-orange" />
+                  <p className="max-w-[310px] text-sm leading-5 text-gray-300">{feature.desc}</p>
                 </div>
-
-                <h3 className="text-xl font-display font-medium mb-3 text-white group-hover:text-magenta transition-colors">{feature.title}</h3>
-                <p className="text-gray-400 leading-relaxed text-sm relative z-10">{feature.desc}</p>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+      {/* Happy Clients */}
+      <section className="bg-white pb-20 text-black">
+        <div className="border-b-[14px] border-[#103A69]">
+          <div className="rounded-[28px] bg-[#5AA4EE] px-6 py-5 text-center md:rounded-[34px]">
+            <h2 className="text-4xl font-black text-white md:text-5xl">Our Happy Clients</h2>
+          </div>
+
+          <div className="overflow-hidden py-14">
+            <div className="client-logo-track flex items-center gap-16 md:gap-24">
+              {[...happyClients, ...happyClients].map((brand, index) => (
+                <div key={`${brand}-${index}`} className="client-logo-item" aria-hidden={index >= happyClients.length}>
+                  <ClientLogo brand={brand} />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

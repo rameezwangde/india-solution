@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronDown, MapPin, Phone, Mail } from 'lucide-react';
+import { Menu, X, ChevronDown, Phone, Mail } from 'lucide-react';
 import { FaFacebookF, FaInstagram, FaYoutube, FaLinkedinIn } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -31,7 +31,7 @@ const Navbar = () => {
     <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'glass' : 'bg-transparent'}`}>
       {/* Top Contact Strip */}
       <div className={`hidden lg:block border-b border-white/5 transition-all duration-300 ${isScrolled ? 'hidden' : 'block'}`}>
-        <div className="container mx-auto px-6 lg:px-12 py-2 flex justify-between items-center text-xs text-gray-300">
+        <div className="container mx-auto px-6 lg:px-12 py-1 flex justify-between items-center text-xs text-gray-300">
           <div className="flex gap-6">
             <a href="tel:+916360181932" className="flex items-center gap-2 hover:text-magenta transition-colors">
               <Phone size={12} className="text-magenta" /> +91 6360181932
@@ -52,27 +52,23 @@ const Navbar = () => {
         </div>
       </div>
 
-      <div className="container mx-auto px-6 lg:px-12 py-4">
+      <div className="container mx-auto px-6 lg:px-12 py-2">
         <div className="flex items-center justify-between">
-          {/* Logo matching the mockup */}
-          <Link to="/" className="flex items-center gap-2">
-            <div className="bg-red-600 text-white p-1 rounded">
-               {/* Simplified SVG to mimic the red logo icon */}
-               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-            </div>
-            <div className="flex flex-col leading-none">
-              <span className="text-xl font-bold text-orange tracking-tight">India</span>
-              <span className="text-xl font-bold text-white tracking-tight">solution</span>
-            </div>
+          <Link to="/" className="block shrink-0" aria-label="India Solution home">
+            <img
+              src="/india-solution-logo.png"
+              alt="India Solution"
+              className="h-16 w-auto object-contain sm:h-[72px] lg:h-20"
+            />
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-6">
             {navLinks.map((link) => (
               <div key={link.name} className="relative group">
                 <Link
                   to={link.path}
-                  className={`text-sm font-medium uppercase tracking-wider transition-colors hover:text-magenta flex items-center gap-1
+                  className={`text-[13px] font-medium uppercase tracking-wider transition-colors hover:text-magenta flex items-center gap-1
                     ${location.pathname === link.path ? 'text-magenta' : 'text-gray-300'}`}
                 >
                   {link.name}
@@ -80,7 +76,7 @@ const Navbar = () => {
                 </Link>
                 {/* Simplified Dropdown Indicator */}
                 {link.hasDropdown && (
-                  <div className="absolute top-full left-0 mt-4 w-48 glass rounded-xl overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                  <div className="absolute top-full left-0 mt-3 w-48 glass rounded-xl overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
                     <Link to="/services" className="block px-4 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Corporate Events</Link>
                     <Link to="/services" className="block px-4 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Weddings</Link>
                     <Link to="/services" className="block px-4 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Exhibitions</Link>
@@ -91,7 +87,7 @@ const Navbar = () => {
           </div>
 
           <div className="hidden lg:block">
-             <Link to="/contact" className="px-6 py-2.5 rounded-full bg-gradient-to-r from-magenta to-orange text-white font-medium text-sm hover:glow-magenta transition-all">
+             <Link to="/contact" className="px-5 py-2 rounded-full bg-gradient-to-r from-magenta to-orange text-white font-medium text-[13px] hover:glow-magenta transition-all">
                 CONTACT US
              </Link>
           </div>
