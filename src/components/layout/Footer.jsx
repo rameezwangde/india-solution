@@ -12,7 +12,7 @@ const Footer = () => {
           <div>
             <Link to="/" className="inline-block mb-6">
               <span className="text-2xl font-bold text-white tracking-tight">
-                India <span className="text-magenta">Solution</span>
+                India <span className="site-gold-text">Solution</span>
               </span>
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
@@ -36,7 +36,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-white font-display font-semibold mb-6">Quick Links</h4>
+            <h4 className="site-heading text-white font-semibold mb-6">Quick Links</h4>
             <ul className="space-y-3">
               <li><Link to="/about" className="text-gray-400 hover:text-magenta text-sm transition-colors">About Us</Link></li>
               <li><Link to="/services" className="text-gray-400 hover:text-magenta text-sm transition-colors">Our Services</Link></li>
@@ -48,7 +48,7 @@ const Footer = () => {
 
           {/* Services */}
           <div>
-            <h4 className="text-white font-display font-semibold mb-6">Our Services</h4>
+            <h4 className="site-heading text-white font-semibold mb-6">Our Services</h4>
             <ul className="space-y-3">
               <li><Link to="/services" className="text-gray-400 hover:text-orange text-sm transition-colors">Corporate Events</Link></li>
               <li><Link to="/services" className="text-gray-400 hover:text-orange text-sm transition-colors">Weddings & Pre-Wedding</Link></li>
@@ -60,7 +60,7 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h4 className="text-white font-display font-semibold mb-6">Contact Info</h4>
+            <h4 className="site-heading text-white font-semibold mb-6">Contact Info</h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <MapPin size={18} className="text-magenta mt-1 shrink-0" />
@@ -81,7 +81,7 @@ const Footer = () => {
         
         <div className="pt-8 border-t border-white/5 text-center flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-gray-500 text-sm">
-            © {new Date().getFullYear()} India Solution Events. All rights reserved.
+            Â© {new Date().getFullYear()} India Solution Events. All rights reserved.
           </p>
           <div className="flex gap-4">
             <Link to="/privacy" className="text-gray-500 hover:text-white text-sm transition-colors">Privacy Policy</Link>

@@ -101,21 +101,21 @@ const Home = () => {
             animate="visible"
             className="mx-auto max-w-4xl text-center"
           >
-            <motion.div variants={fadeUp} className="mb-3 flex items-center justify-center gap-4 text-[10px] font-bold uppercase tracking-[0.36em] text-[#FF4B64]">
+            <motion.div variants={fadeUp} className="mb-3 flex items-center justify-center gap-4 text-[10px] font-bold uppercase tracking-[0.36em] text-gold">
               <span className="h-px w-8 bg-gradient-to-r from-transparent to-magenta" />
               <span>Crafting Unforgettable Moments</span>
               <span className="h-px w-8 bg-gradient-to-r from-orange to-transparent" />
             </motion.div>
 
-            <motion.h1 variants={fadeUp} className="font-display text-4xl font-semibold uppercase leading-tight tracking-[0.18em] text-white sm:text-5xl lg:text-6xl">
+            <motion.h1 variants={fadeUp} className="site-heading text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">
               Creating
-              <span className="block bg-gradient-to-r from-[#B026FF] via-magenta to-orange bg-clip-text italic text-transparent">Unforgettable Events</span>
+              <span className="site-heading-accent block italic">Unforgettable Events</span>
               <span className="block text-2xl tracking-[0.36em] sm:text-3xl lg:text-4xl">Since 2010</span>
             </motion.h1>
 
             <motion.div variants={fadeUp} className="mx-auto my-3 flex w-52 items-center justify-center gap-4">
               <span className="h-px flex-1 bg-gradient-to-r from-transparent to-magenta" />
-              <span className="text-orange">&#10022;</span>
+              <span className="text-gold">&#10022;</span>
               <span className="h-px flex-1 bg-gradient-to-r from-magenta to-transparent" />
             </motion.div>
 
@@ -168,7 +168,7 @@ const Home = () => {
             </div>
 
             <div className="hero-years-badge">
-              <span className="text-orange">&#9819;</span>
+              <span className="text-gold">&#9819;</span>
               <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-magenta">Celebrating</span>
               <span className="font-display text-5xl font-semibold leading-none text-white">15+</span>
               <span className="text-xs font-bold uppercase tracking-widest text-white">Years of Excellence</span>
@@ -191,21 +191,21 @@ const Home = () => {
               viewport={{ once: true }}
               className="max-w-2xl"
             >
-              <motion.span variants={fadeUp} className="mb-3 block text-xs font-bold uppercase tracking-widest text-[#FF4B64]">
+              <motion.span variants={fadeUp} className="mb-3 block text-xs font-bold uppercase tracking-widest text-gold">
                 About Our Company
               </motion.span>
               <motion.span variants={fadeUp} className="mb-5 block h-0.5 w-10 bg-[#FF4B64]" />
-              <motion.h2 variants={fadeUp} className="font-display text-4xl font-semibold leading-tight text-white md:text-5xl">
+              <motion.h2 variants={fadeUp} className="site-heading text-4xl font-semibold leading-tight md:text-5xl">
                 Welcome to
-                <span className="block bg-gradient-to-r from-magenta via-[#FF4B64] to-orange bg-clip-text text-transparent">India Solution</span>
+                <span className="site-heading-accent block">India Solution</span>
               </motion.h2>
               <motion.div variants={fadeUp} className="my-6 flex items-center gap-5 text-magenta/70">
                 <span className="h-px w-24 bg-gradient-to-r from-magenta to-orange/70" />
-                <span className="text-sm text-[#FF4B64]">&#10022;</span>
+                <span className="text-sm text-gold">&#10022;</span>
                 <span className="h-px w-24 bg-gradient-to-r from-orange/70 to-transparent" />
               </motion.div>
               <motion.p variants={fadeUp} className="mb-5 text-sm leading-7 text-gray-300 md:text-base">
-                Since 2010, <strong className="text-white">India Solution Events</strong> has been a trusted name in event management, delivering over 15 years of expertise in crafting unforgettable experiences. Based in Bengaluru, we specialize in turning visions into reality for both <strong className="text-white">personal and professional events</strong>, ensuring every detail is executed to perfection.
+                Since 2010, <strong className="site-gold-text">India Solution Events</strong> has been a trusted name in event management, delivering over 15 years of expertise in crafting unforgettable experiences. Based in Bengaluru, we specialize in turning visions into reality for both <strong className="site-gold-text">personal and professional events</strong>, ensuring every detail is executed to perfection.
               </motion.p>
               <motion.p variants={fadeUp} className="mb-7 text-sm leading-7 text-gray-300 md:text-base">
                 Whether it&rsquo;s an intimate gathering or a grand corporate affair, our dedicated team is ready to bring creativity, professionalism, and excellence to your special moments.
@@ -239,7 +239,7 @@ const Home = () => {
                 </motion.div>
               </div>
 
-              <motion.button variants={fadeUp} className="mt-5 inline-flex items-center gap-8 rounded-full bg-gradient-to-r from-magenta via-[#FF4B64] to-orange px-8 py-4 text-sm font-bold uppercase text-white shadow-[0_0_26px_rgba(233,30,99,0.35)] transition-transform hover:-translate-y-0.5">
+              <motion.button variants={fadeUp} className="mt-5 inline-flex items-center gap-8 rounded-full bg-gradient-to-r from-magenta via-gold to-orange px-8 py-4 text-sm font-bold uppercase text-white shadow-[0_0_26px_rgba(233,30,99,0.35)] transition-transform hover:-translate-y-0.5">
                 Discover More
                 <ArrowRight size={18} />
               </motion.button>
@@ -307,20 +307,20 @@ const Home = () => {
               transition={{ duration: 0.7, delay: 0.08 }}
               className="max-w-xl"
             >
-              <h2 className="font-display text-4xl font-semibold italic uppercase leading-tight tracking-[0.08em] text-white md:text-5xl lg:text-6xl">
+              <h2 className="site-heading text-4xl font-semibold italic leading-tight md:text-5xl lg:text-6xl">
                 Creating
-                <span className="block bg-gradient-to-r from-magenta via-[#FF4B64] to-orange bg-clip-text text-transparent">Unforgettable</span>
+                <span className="site-heading-accent block">Unforgettable</span>
                 <span className="block">Events</span>
               </h2>
 
               <div className="my-7 flex items-center gap-4">
-                <span className="h-px w-24 bg-gradient-to-r from-magenta to-[#FF4B64]" />
+                <span className="h-px w-24 bg-gradient-to-r from-magenta to-gold" />
                 <span className="text-[#FF7A59]">&#10022;</span>
-                <span className="h-px w-24 bg-gradient-to-r from-[#FF4B64] to-orange" />
+                <span className="h-px w-24 bg-gradient-to-r from-gold to-orange" />
               </div>
 
-              <p className="font-display text-3xl font-semibold italic uppercase tracking-[0.18em] text-white md:text-4xl">
-                Since <span className="bg-gradient-to-r from-[#FF4B64] to-orange bg-clip-text text-transparent">2010</span>
+              <p className="site-heading text-3xl font-semibold italic tracking-[0.18em] md:text-4xl">
+                Since <span className="bg-gradient-to-r from-gold to-orange bg-clip-text text-transparent">2010</span>
               </p>
 
               <p className="mt-8 max-w-lg text-lg leading-8 text-gray-300">
@@ -331,7 +331,7 @@ const Home = () => {
         </div>
       </section>
       {/* Why Choose Us */}
-      <section className="relative overflow-hidden bg-[#050917] px-5 py-16 text-white sm:px-8 lg:px-12">
+      <section className="relative overflow-hidden bg-[#10172A] px-5 py-16 text-white sm:px-8 lg:px-12">
         <div className="container mx-auto max-w-[1460px]">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -339,15 +339,15 @@ const Home = () => {
             viewport={{ once: true }}
             className="mx-auto mb-8 max-w-3xl text-center"
           >
-            <div className="mb-3 flex items-center justify-center gap-3 text-xs font-bold uppercase tracking-[0.22em] text-[#FF4B64]">
+            <div className="mb-3 flex items-center justify-center gap-3 text-xs font-bold uppercase tracking-[0.22em] text-gold">
               <span className="h-px w-9 bg-gradient-to-r from-transparent to-[#FF4B64]" />
               <span>&#10022;</span>
               <span>Why Choose Us</span>
               <span>&#10022;</span>
-              <span className="h-px w-9 bg-gradient-to-r from-[#FF4B64] to-transparent" />
+              <span className="h-px w-9 bg-gradient-to-r from-gold to-transparent" />
             </div>
-            <h2 className="font-display text-4xl font-medium leading-tight text-white md:text-6xl">
-              Why Choose <span className="text-magenta">India</span> <span className="text-orange">Solution</span>
+            <h2 className="site-heading text-4xl font-medium leading-tight md:text-6xl">
+              Why Choose <span className="site-heading-accent">India Solution</span>
             </h2>
             <p className="mx-auto mt-5 max-w-xl text-base leading-7 text-gray-300">
               We combine creativity, precision and passion to deliver events that leave a lasting impression.
@@ -377,8 +377,8 @@ const Home = () => {
                   className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   style={{ objectPosition: feature.position }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050917]/95 via-[#050917]/55 to-[#050917]/10" />
-                <div className="absolute inset-0 bg-gradient-to-r from-[#050917]/65 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#10172A]/92 via-[#10172A]/48 to-[#10172A]/8" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#10172A]/55 via-transparent to-transparent" />
 
                 <div className="relative z-10 flex h-full flex-col justify-end p-6">
                   <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-magenta bg-[#111827]/65 text-magenta shadow-[0_0_22px_rgba(233,30,99,0.22)]">
@@ -397,7 +397,7 @@ const Home = () => {
       <section className="bg-white pb-20 text-black">
         <div className="border-b-[14px] border-[#103A69]">
           <div className="rounded-[28px] bg-[#5AA4EE] px-6 py-5 text-center md:rounded-[34px]">
-            <h2 className="text-4xl font-black text-white md:text-5xl">Our Happy Clients</h2>
+            <h2 className="site-heading text-4xl font-black md:text-5xl">Our Happy Clients</h2>
           </div>
 
           <div className="overflow-hidden py-14">

@@ -8,9 +8,9 @@ export default {
     extend: {
       colors: {
         navy: {
-          900: '#0B0F19', // Deep Navy / Black background
-          800: '#111827', // Lighter Navy for cards
-          700: '#1F2937', // Borders / Accents
+          900: '#12182A', // Lighter purple-navy background
+          800: '#1A2236', // Lighter Navy for cards
+          700: '#2C3850', // Borders / Accents
         },
         magenta: {
           DEFAULT: '#E91E63',
@@ -19,6 +19,10 @@ export default {
         orange: {
           DEFAULT: '#FF9800',
           glow: '#FF6B00',
+        },
+        gold: {
+          DEFAULT: '#F4C430',
+          deep: '#C49A12',
         },
       },
       fontFamily: {

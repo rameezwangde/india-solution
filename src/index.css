@@ -15,15 +15,30 @@
 
 @layer utilities {
   .glass {
-    @apply bg-navy-800/40 backdrop-blur-md border border-white/5;
+    @apply bg-navy-800/55 backdrop-blur-md border border-white/10;
   }
   
   .glass-card {
-    @apply bg-navy-800/50 backdrop-blur-lg border border-white/10 rounded-2xl shadow-xl;
+    @apply bg-navy-800/65 backdrop-blur-lg border border-white/15 rounded-2xl shadow-xl;
   }
   
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-magenta to-orange;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-magenta via-gold to-orange;
+  }
+  .site-eyebrow {
+    @apply text-xs font-bold uppercase tracking-[0.32em] text-gold;
+  }
+
+  .site-heading {
+    @apply font-display uppercase tracking-[0.08em] text-white;
+  }
+
+  .site-heading-accent {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-magenta via-gold to-orange;
+  }
+
+  .site-gold-text {
+    @apply text-gold;
   }
   
   .glow-magenta {
@@ -102,7 +117,7 @@
   background:
     radial-gradient(circle at 5% 10%, rgba(233, 30, 99, 0.28), transparent 30%),
     radial-gradient(circle at 96% 15%, rgba(255, 152, 0, 0.28), transparent 30%),
-    linear-gradient(105deg, #0B0F19 0%, #070B15 45%, #0B0F19 70%, #1F1307 100%);
+    linear-gradient(105deg, #12182A 0%, #121A2A 45%, #12182A 70%, #1F1307 100%);
 }
 
 .stats-glow-panel::before {
@@ -142,7 +157,7 @@
   background:
     radial-gradient(circle at 10% 6%, rgba(233, 30, 99, 0.16), transparent 26%),
     radial-gradient(circle at 88% 10%, rgba(255, 152, 0, 0.14), transparent 24%),
-    linear-gradient(118deg, #050917 0%, #08101c 50%, #080c16 100%);
+    linear-gradient(118deg, #10172A 0%, #131D31 50%, #11182A 100%);
 }
 
 .about-showcase::before {
@@ -206,7 +221,7 @@
   background:
     radial-gradient(circle at 7% 18%, rgba(233, 30, 99, 0.18), transparent 24%),
     radial-gradient(circle at 70% 15%, rgba(255, 152, 0, 0.1), transparent 22%),
-    linear-gradient(112deg, #050917 0%, #06101d 46%, #050917 100%);
+    linear-gradient(112deg, #10172A 0%, #06101d 46%, #10172A 100%);
 }
 
 .brand-collage-section::before {
@@ -259,7 +274,7 @@
   top: 0;
   bottom: 0;
   overflow: hidden;
-  background: #0b0f19;
+  background: #12182A;
 }
 
 .brand-collage-slice img {
@@ -302,7 +317,7 @@
   background:
     linear-gradient(180deg, rgba(5, 9, 23, 0.08) 0%, rgba(6, 13, 26, 0.04) 48%, rgba(5, 9, 23, 0.18) 100%),
     url('/bg image.png') center top / cover no-repeat,
-    #050917;
+    #10172A;
 }
 
 .hero-showcase::before {
@@ -353,7 +368,7 @@
 .hero-stat-bar {
   border: 1px solid rgba(233, 30, 99, 0.26);
   border-radius: 1rem;
-  background: rgba(8, 11, 24, 0.84);
+  background: rgba(18, 24, 42, 0.86);
   box-shadow: 0 18px 48px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.035);
   padding: 0.9rem 0.75rem;
   backdrop-filter: blur(14px);
@@ -369,7 +384,7 @@
   overflow: hidden;
   border: 1px solid rgba(233, 30, 99, 0.78);
   border-radius: 0.9rem;
-  background: #0b0f19;
+  background: #12182A;
   box-shadow: 0 24px 48px rgba(0, 0, 0, 0.42), 0 0 28px rgba(233, 30, 99, 0.26);
 }
 

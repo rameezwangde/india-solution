@@ -26,8 +26,8 @@ const Services = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <span className="text-magenta font-semibold tracking-widest uppercase mb-4 block text-sm">What We Do</span>
-          <h1 className="text-4xl md:text-5xl font-display font-bold mb-6">Our Premium <span className="text-gradient">Services</span></h1>
+          <span className="site-eyebrow mb-4 block">What We Do</span>
+          <h1 className="site-heading text-4xl font-bold md:text-5xl mb-6">Our Premium <span className="text-gradient">Services</span></h1>
           <p className="text-gray-400 text-lg">We offer a wide range of event management services tailored to your specific needs, ensuring every detail is perfectly executed.</p>
         </motion.div>
 
@@ -50,7 +50,7 @@ const Services = () => {
                 <div className="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-6 group-hover:bg-magenta/10 group-hover:border-magenta/30 transition-colors">
                   <Icon className="text-white group-hover:text-magenta transition-colors" size={24} />
                 </div>
-                <h3 className="text-xl font-display font-semibold mb-3">{service.title}</h3>
+                <h3 className="site-heading text-xl font-semibold mb-3">{service.title}</h3>
                 <p className="text-gray-400 text-sm leading-relaxed">{service.desc}</p>
               </motion.div>
             )

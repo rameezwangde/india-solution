@@ -47,9 +47,9 @@ const About = () => {
           animate={{ opacity: 1, y: 0 }}
           className="container relative z-10 mx-auto max-w-5xl text-center"
         >
-          <span className="mb-4 block text-xs font-bold uppercase tracking-[0.35em] text-[#FF4B64]">About Us</span>
-          <h1 className="font-display text-4xl font-semibold leading-tight md:text-6xl">
-            Welcome to <span className="bg-gradient-to-r from-magenta to-orange bg-clip-text text-transparent">India Solution</span>
+          <span className="mb-4 block text-xs font-bold uppercase tracking-[0.35em] text-gold">About Us</span>
+          <h1 className="site-heading text-4xl font-semibold leading-tight md:text-6xl">
+            Welcome to <span className="site-heading-accent">India Solution</span>
           </h1>
           <div className="mx-auto my-5 flex w-44 items-center justify-center gap-3">
             <span className="h-px flex-1 bg-gradient-to-r from-transparent to-magenta" />
@@ -63,7 +63,7 @@ const About = () => {
       </section>
 
       <section className="relative overflow-hidden px-6 py-20 lg:px-12">
-        <div className="absolute inset-0 bg-[#070B18]" />
+        <div className="absolute inset-0 bg-[#121A2D]" />
         <div className="absolute left-0 top-20 h-72 w-72 rounded-full bg-magenta/10 blur-3xl" />
         <div className="absolute right-0 bottom-20 h-80 w-80 rounded-full bg-orange/10 blur-3xl" />
 
@@ -77,13 +77,13 @@ const About = () => {
           >
             <motion.div variants={fadeUp} className="space-y-7 text-center text-gray-300 lg:text-left">
               <p className="text-lg leading-relaxed md:text-xl">
-                At <strong className="text-white">India Solution</strong>, we believe that every event has a story to tell, a moment to cherish, and an opportunity to create lasting impressions. Based in the vibrant city of <strong className="text-white">Bengaluru</strong>, we take pride in offering end-to-end event management services across India, crafting experiences that are as unique as your vision.
+                At <strong className="site-gold-text">India Solution</strong>, we believe that every event has a story to tell, a moment to cherish, and an opportunity to create lasting impressions. Based in the vibrant city of <strong className="site-gold-text">Bengaluru</strong>, we take pride in offering end-to-end event management services across India, crafting experiences that are as unique as your vision.
               </p>
               <p className="text-lg leading-relaxed md:text-xl">
-                Our expertise spans across <strong className="text-white">personal events, corporate gatherings, educational functions, and catering services.</strong> Whether it's a dream wedding, an elegant housewarming, a milestone engagement, a professional conference, or an educational seminar, our dedicated team brings passion, creativity, and professionalism to every occasion.
+                Our expertise spans across <strong className="site-gold-text">personal events, corporate gatherings, educational functions, and catering services.</strong> Whether it's a dream wedding, an elegant housewarming, a milestone engagement, a professional conference, or an educational seminar, our dedicated team brings passion, creativity, and professionalism to every occasion.
               </p>
               <p className="text-lg leading-relaxed md:text-xl">
-                <strong className="text-white">India Solution</strong> is your reliable partner in transforming ideas into unforgettable experiences across India. With creativity, precision, and unwavering commitment, we ensure every detail reflects your vision. Backed by a passionate team and a legacy of trust, we deliver seamless, meaningful, and memorable moments that exceed expectations.
+                <strong className="site-gold-text">India Solution</strong> is your reliable partner in transforming ideas into unforgettable experiences across India. With creativity, precision, and unwavering commitment, we ensure every detail reflects your vision. Backed by a passionate team and a legacy of trust, we deliver seamless, meaningful, and memorable moments that exceed expectations.
               </p>
             </motion.div>
 
@@ -92,7 +92,7 @@ const About = () => {
                 <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full border border-magenta/40 bg-magenta/10 text-magenta">
                   <Target size={28} />
                 </div>
-                <h2 className="mb-3 font-display text-2xl font-semibold text-white">Our Mission</h2>
+                <h2 className="mb-3 site-heading text-2xl font-semibold">Our Mission</h2>
                 <p className="leading-relaxed text-gray-300">
                   To deliver exceptional event solutions by blending creativity, precision, and personalized service, ensuring every event reflects the unique personality and aspirations of our clients.
                 </p>
@@ -102,7 +102,7 @@ const About = () => {
                 <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full border border-orange/40 bg-orange/10 text-orange">
                   <Eye size={28} />
                 </div>
-                <h2 className="mb-3 font-display text-2xl font-semibold text-white">Our Vission</h2>
+                <h2 className="mb-3 site-heading text-2xl font-semibold">Our Vission</h2>
                 <p className="leading-relaxed text-gray-300">
                   To be the most trusted and innovative event management company in India, redefining celebrations and creating unforgettable experiences for our clients.
                 </p>
@@ -113,7 +113,7 @@ const About = () => {
       </section>
 
       <section className="relative overflow-hidden px-6 py-20 lg:px-12">
-        <div className="absolute inset-0 bg-[#050917]" />
+        <div className="absolute inset-0 bg-[#10172A]" />
         <div className="container relative z-10 mx-auto max-w-6xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -121,11 +121,11 @@ const About = () => {
             viewport={{ once: true }}
             className="mx-auto mb-14 max-w-4xl text-center"
           >
-            <span className="mb-4 block text-xs font-bold uppercase tracking-[0.35em] text-[#FF4B64]">Why Choose Us</span>
-            <h2 className="font-display text-4xl font-semibold md:text-5xl">Why Should You Hire Us</h2>
+            <span className="mb-4 block text-xs font-bold uppercase tracking-[0.35em] text-gold">Why Choose Us</span>
+            <h2 className="site-heading text-4xl font-semibold md:text-5xl">Why Should You Hire Us</h2>
             <div className="mx-auto my-5 h-1 w-20 rounded-full bg-gradient-to-r from-magenta to-orange" />
             <p className="text-lg leading-relaxed text-gray-300">
-              At <strong className="text-white">India Solution</strong>, we don't just plan events; we create experiences that leave lasting impressions. Here's why we are the perfect choice for your event management needs:
+              At <strong className="site-gold-text">India Solution</strong>, we don't just plan events; we create experiences that leave lasting impressions. Here's why we are the perfect choice for your event management needs:
             </p>
           </motion.div>
 
@@ -143,7 +143,7 @@ const About = () => {
                   <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full border border-magenta/35 bg-white/5 text-magenta transition-colors group-hover:bg-magenta/10">
                     <Icon size={25} />
                   </div>
-                  <h3 className="mb-3 font-display text-xl font-semibold text-white">{item.title}</h3>
+                  <h3 className="mb-3 site-heading text-xl font-semibold">{item.title}</h3>
                   <p className="leading-relaxed text-gray-400">{item.description}</p>
                 </motion.div>
               );
