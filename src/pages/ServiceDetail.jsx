@@ -479,6 +479,51 @@ const partySections = [
   },
 ];
 
+const sportingEventsSections = [
+  {
+    eyebrow: 'Seamless Event Management for Spectacular Sporting Events',
+    title: 'Unforgettable Sporting Experiences for Major Events & Schools',
+    accent: 'Sporting Experiences',
+    description: (
+      <>
+        for <strong>trade shows, exhibitions</strong>, and <strong>product launches</strong>. Our end-to-end solutions ensure seamless <strong>event coordination, booth design, attendee registration</strong>, and <strong>logistics management</strong>, creating a professional and engaging environment for exhibitors and visitors alike. From pre-event planning to post-event follow-ups, we focus on delivering an exceptional experience that boosts brand visibility, drives lead generation, and enhances attendee engagement
+      </>
+    ),
+    items: [
+      'Venue Selection & Setup',
+      'Ticketing & Registration',
+      'Audio-Visual Equipment & Live Streaming',
+      'Fan Engagement Activities',
+      'Audio-Visual Equipment & Technology Support',
+      'VIP & Media Management',
+      'Security & Crowd Control',
+      'Catering & Concessions',
+      'Transportation & Logistics',
+    ],
+  },
+  {
+    eyebrow: 'Services for Prize-Giving Arrangements in Sporting Events',
+    title: 'Services for Prize-Giving Arrangements in Sporting Events',
+    accent: 'Prize-Giving',
+    description: (
+      <>
+        for <strong>trade shows, exhibitions</strong>, and <strong>product launches</strong>. Our end-to-end solutions ensure seamless <strong>event coordination, booth design, attendee registration</strong>, and <strong>logistics management</strong>, creating a professional and engaging environment for exhibitors and visitors alike. From pre-event planning to post-event follow-ups, we focus on delivering an exceptional experience that boosts brand visibility, drives lead generation, and enhances attendee engagement
+      </>
+    ),
+    items: [
+      'Custom Trophy & Award Designs',
+      'Award Presentation Stage Setup',
+      'Host & Master of Ceremonies',
+      'Photography & Videography',
+      'Audio-Visual Equipment & Technology Support',
+      'VIP & Media Management',
+      'Security & Crowd Control',
+      'Award Distribution Logistics',
+      'Personalized Certificates & Prizes',
+    ],
+  },
+];
+
 const houseWarmingSections = [
   {
     eyebrow: 'Griha Pravesh',
@@ -911,6 +956,7 @@ const PromotionsContent = () => <ServiceContentSections sections={promotionsSect
 const FestivalsContent = () => <ServiceContentSections sections={festivalsSections} />;
 const HouseWarmingContent = () => <ServiceContentSections sections={houseWarmingSections} />;
 const PartyContent = () => <ServiceContentSections sections={partySections} />;
+const SportingEventsContent = () => <ServiceContentSections sections={sportingEventsSections} />;
 const ServiceDetail = () => {
   const { serviceSlug, itemSlug } = useParams();
   const service = findServiceBySlug(serviceSlug);
@@ -956,6 +1002,7 @@ const ServiceDetail = () => {
   const isFestivalsService = service.slug === 'festivals';
   const isHouseWarmingService = service.slug === 'house-warming';
   const isPartyService = service.slug === 'party';
+  const isSportingEventsService = service.slug === 'sporting-events';
 
   return (
     <section className="service-detail-page relative overflow-hidden px-5 pb-20 pt-40 text-white lg:px-10 lg:pt-44">
@@ -1054,6 +1101,7 @@ const ServiceDetail = () => {
         {isFestivalsService && <FestivalsContent />}
         {isHouseWarmingService && <HouseWarmingContent />}
         {isPartyService && <PartyContent />}
+        {isSportingEventsService && <SportingEventsContent />}
 
         <motion.section
           variants={staggerContainer}
