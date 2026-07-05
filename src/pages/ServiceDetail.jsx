@@ -429,6 +429,60 @@ const preWeddingCeremonySections = [
   },
 ];
 
+const festivalsSections = [
+  {
+    eyebrow: 'Royal Celebration',
+    title: 'Mysuru Dasara - Karnataka’s Grand Royal Celebration',
+    accent: 'Dasara',
+    description: 'India Solution can infuse innovation into tradition, making the festival a mesmerizing experience for locals and visitors alike. By integrating cutting-edge technology, flawless planning, and creative execution, every aspect of the festival can be elevated to match its historic and cultural significance. From elaborate processions to interactive digital experiences, India Solution promises a seamless, spectacular celebration.',
+    items: [
+      'Grand Procession Management',
+      'Cultural Event Coordination',
+      'Decorative Lighting & Visual Aesthetics',
+      'Technology Integration',
+      'Artisan & Handicraft Exhibitions',
+      'Food and Culinary Delights',
+      'Sustainability Initiatives',
+      'Tourism & Hospitality Services',
+      'Media & Publicity Management',
+    ],
+  },
+  {
+    eyebrow: 'Heritage Celebration',
+    title: 'Hampi Utsav - A Celebration of Karnataka’s Heritage',
+    accent: 'Hampi Utsav',
+    description: 'India Solution can transform Hampi Utsav into a world-class cultural spectacle while preserving its historical essence. By combining modern technology with traditional aesthetics, the event can capture the grandeur of the Vijayanagara era. Key elements include immersive storytelling, innovative stage designs, and seamless visitor management to create a flawless celebration.',
+    items: [
+      'Themed stage setups for historical performances.',
+      'Sound and light arrangements for cultural shows.',
+      'Customized tourist packages and guided tours.',
+      'Art installations and interactive exhibits.',
+      'Artist and performer management.',
+      'Security and crowd control services.',
+      'Live streaming and media coverage.',
+      'VIP and media coordination.',
+      'Sustainable event practices in heritage sites.',
+    ],
+  },
+  {
+    eyebrow: 'Devotional Festival',
+    title: 'Ganesha Chaturthi - Festival of Lord Ganesha',
+    accent: 'Ganesha Chaturthi',
+    description: 'India Solution can elevate the celebration of Ganesha Chaturthi by ensuring grandeur and devotion while incorporating eco-friendly practices and community engagement. From aesthetically designed pandals to interactive devotional events, the festival can become a harmonious blend of tradition and innovation.',
+    items: [
+      'Designing and setting up thematic pandals.',
+      'Managing idol installation and decoration.',
+      'Organizing immersion processions.',
+      'Sound systems for devotional music and chants.',
+      'Eco-friendly event solutions for immersions.',
+      'Crowd management and safety protocols.',
+      'Offering catering and prasadam distribution',
+      'Coordinating cultural activities and competitions.',
+      'Providing transportation for idols and devotees.',
+    ],
+  },
+];
+
 const promotionsSections = [
   {
     eyebrow: 'Promotional Services',
@@ -784,6 +838,7 @@ const CorporateMeetingsContent = () => <ServiceContentSections sections={corpora
 const PreWeddingCeremonyContent = () => <ServiceContentSections sections={preWeddingCeremonySections} />;
 const TradeShowsContent = () => <ServiceContentSections sections={tradeShowsSections} />;
 const PromotionsContent = () => <ServiceContentSections sections={promotionsSections} />;
+const FestivalsContent = () => <ServiceContentSections sections={festivalsSections} />;
 const ServiceDetail = () => {
   const { serviceSlug, itemSlug } = useParams();
   const service = findServiceBySlug(serviceSlug);
@@ -826,6 +881,7 @@ const ServiceDetail = () => {
   
   const isTradeShowService = service.slug === 'trade-show-exhibition-planning';
   const isPromotionsService = service.slug === 'promotions';
+  const isFestivalsService = service.slug === 'festivals';
 
   return (
     <section className="service-detail-page relative overflow-hidden px-5 pb-20 pt-40 text-white lg:px-10 lg:pt-44">
@@ -921,6 +977,7 @@ const ServiceDetail = () => {
         {isPhotographyVideography && <PhotographyVideographyContent />}
         {isTradeShowService && <TradeShowsContent />}
         {isPromotionsService && <PromotionsContent />}
+        {isFestivalsService && <FestivalsContent />}
 
         <motion.section
           variants={staggerContainer}
