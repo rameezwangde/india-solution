@@ -429,6 +429,75 @@ const preWeddingCeremonySections = [
   },
 ];
 
+const promotionsSections = [
+  {
+    eyebrow: 'Promotional Services',
+    title: 'All-in-One Promotional Services for Products, Events, and Brands',
+    accent: 'Products, Events, and Brands',
+    description: (
+      <>
+        Enhance the visibility of your <strong>products, events, expos, and brands</strong> with our <strong>tailored promotional services</strong> that cater to a wide range of needs. From <strong>product launches and event promotions to brand awareness campaigns and expo marketing</strong>, our strategies are designed to elevate your presence across all platforms. With a combination of traditional and digital tactics, such as <strong>flyers, social media ads, event sponsorship, and PR campaigns</strong>, we create impactful marketing plans that drive engagement and amplify your message. Whatever your promotion goals are, we provide comprehensive solutions that ensure your brand shines, attracts attention, and resonates with your target audience.
+      </>
+    ),
+    items: [
+      'Mobile Van Advertising',
+      'Posters and Banners',
+      'Stickers and Decals',
+      'Flyers and Brochures',
+      'Billboard Advertising',
+      'Digital Screens and Kiosks',
+      'Event Sponsorship and Branded Merchandise',
+      'Public Relations (PR) Campaigns',
+      'Sampling and Demonstrations',
+    ],
+  },
+  {
+    eyebrow: 'Promotional Products',
+    title: 'Custom-Branded Products for Effective Promotion',
+    accent: 'Promotion',
+    description: (
+      <>
+        Elevate your brand visibility with our <strong>custom-made promotional products</strong>, designed to leave a lasting impression. We offer a variety of high-quality items that can be personalized with your logo, message, or QR codes, making them perfect for giveaways, events, and corporate promotions. Whether you want to offer your clients branded <strong>keychains, bags, or water bottles</strong>, we provide a wide range of customizable products to suit every need. These personalized items help increase brand recognition while providing functional, everyday use that keeps your business in mind
+      </>
+    ),
+    items: [
+      'Custom Keychains',
+      'Branded Water Bottles',
+      'Personalized Bags',
+      'Custom Mugs & Cups',
+      'Printed Notebooks & Journals',
+      'Personalized Pens',
+      'Custom USB Drives',
+      'Custom T-Shirts & Apparel',
+      'Printed QR Code Products',
+    ],
+  },
+];
+
+const tradeShowsSections = [
+  {
+    eyebrow: 'Trade Shows',
+    title: 'Trade Shows & Exhibition Events',
+    accent: 'Exhibition',
+    description: (
+      <>
+        for <strong>trade shows, exhibitions</strong>, and <strong>product launches</strong>. Our end-to-end solutions ensure seamless <strong>event coordination, booth design, attendee registration</strong>, and <strong>logistics management</strong>, creating a professional and engaging environment for exhibitors and visitors alike. From pre-event planning to post-event follow-ups, we focus on delivering an exceptional experience that boosts brand visibility, drives lead generation, and enhances attendee engagement
+      </>
+    ),
+    items: [
+      'Attendee Registration & Ticketing',
+      'Logistics & Transportation Services',
+      'Custom Booth Designs & Setup',
+      'Branding & Signage Solutions',
+      'Audio-Visual Equipment & Technology Support',
+      'Staffing & On-Site Assistance',
+      'Marketing & Promotion',
+      'Booth Maintenance & Support',
+      'Post-Event Follow-up & Lead Management',
+    ],
+  },
+];
+
 const cateringSections = [
   {
     eyebrow: 'Culinary Experiences',
@@ -439,6 +508,7 @@ const cateringSections = [
         At <strong>India Solution Event Management</strong>, we offer exceptional catering services that blend the rich flavors of native Indian cuisine with the elegance of Western-style dishes. Our expert chefs focus on delivering the highest quality food, prepared with fresh ingredients and attention to detail. Whether it&apos;s a wedding, corporate event, or private celebration, we ensure a memorable dining experience with delicious food and flawless service.
       </>
     ),
+    listTitle: 'We Deal With Various Quality Cuisines',
     items: [
       'Pure Vegetarian Cuisine',
       'Non-Vegetarian Cuisine',
@@ -494,6 +564,27 @@ const cateringSections = [
     ],
   },
 ];
+
+const photographyVideographySections = [
+  {
+    eyebrow: 'Visual Memories',
+    title: 'Expert Photography & Videography for Events',
+    accent: 'Photography & Videography',
+    description: '',
+    items: [
+      'Still Photography',
+      'Live Event Streaming',
+      'Candid Photography',
+      'Event Highlights Reel',
+      'Album Creation',
+      'Cinematic Video Production',
+      'Drone Photography',
+      'Live Event Coverage',
+      'Product Photography',
+    ],
+  },
+];
+
 const DetailTitle = ({ title, accent }) => {
   if (!accent || !title.includes(accent)) {
     return <>{title}</>;
@@ -524,20 +615,29 @@ const ServiceContentSections = ({ sections }) => (
             <h2 className="site-heading mb-4 text-3xl font-bold leading-tight md:text-5xl">
               <DetailTitle title={section.title} accent={section.accent} />
             </h2>
-            <p className="max-w-2xl text-sm leading-7 text-gray-300 md:text-base">{section.description}</p>
+            {section.description && (
+              <p className="max-w-2xl text-sm leading-7 text-gray-300 md:text-base">{section.description}</p>
+            )}
             <Link to="/contact" className="service-detail-cta mt-6 inline-flex items-center gap-2">
               <Mail size={15} />
               Contact us
             </Link>
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-2">
-            {section.items.map((item) => (
-              <div key={item} className="service-detail-check-item">
-                <span className="service-detail-check-icon"><CheckCircle2 size={14} strokeWidth={2.2} /></span>
-                <span>{item}</span>
-              </div>
-            ))}
+          <div>
+            {section.listTitle && (
+              <h3 className="site-heading mb-5 text-2xl font-bold leading-tight md:text-3xl">
+                {section.listTitle}
+              </h3>
+            )}
+            <div className="grid gap-3 sm:grid-cols-2">
+              {section.items.map((item) => (
+                <div key={item} className="service-detail-check-item">
+                  <span className="service-detail-check-icon"><CheckCircle2 size={14} strokeWidth={2.2} /></span>
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </motion.article>
@@ -592,6 +692,80 @@ const BridalWearContent = () => (
   </>
 );
 
+const PhotographyVideographyContent = () => (
+  <>
+    <motion.section
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="mt-8 text-center"
+    >
+      <h2 className="site-heading mb-8 text-4xl font-bold md:text-5xl">
+        Our Photography and Videography Services
+      </h2>
+    </motion.section>
+
+    <motion.section
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="service-detail-section relative mb-8 overflow-hidden rounded-xl p-6 md:p-7"
+    >
+      <div className="service-detail-section-glow" />
+      <div className="relative grid gap-7 lg:grid-cols-2 lg:items-center">
+        <div>
+          <h3 className="site-heading mb-4 text-2xl font-bold leading-tight md:text-3xl text-gray-100">
+            Comprehensive Photography Services for Every Occasion: Personal and Corporate Events Covered
+          </h3>
+          <p className="text-sm leading-7 text-gray-300 md:text-base">
+            At India Solution Event Management, we provide expert photography services for both personal events (weddings, birthdays, engagements) and corporate events (product launches, conferences, seminars). Our experienced photographers capture every moment with precision, ensuring high-quality visuals that tell your unique story. From intimate gatherings to grand business events, trust us to deliver timeless memories.
+          </p>
+        </div>
+        <div className="h-64 rounded-xl bg-gray-800 flex items-center justify-center text-gray-500 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Camera" className="w-full h-full object-cover opacity-60" />
+        </div>
+      </div>
+    </motion.section>
+
+    <motion.section
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="service-detail-section relative overflow-hidden rounded-xl p-6 md:p-7"
+    >
+      <div className="service-detail-section-glow" />
+      <div className="relative grid gap-7 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+        <div className="h-64 rounded-xl bg-gray-100 flex flex-col items-center justify-center text-yellow-500">
+          <div className="flex gap-1 mb-2">
+            {[1, 2, 3, 4, 5].map((star) => (
+              <svg key={star} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <h2 className="site-heading mb-4 text-3xl font-bold leading-tight md:text-4xl">
+            Expert Photography & Videography for Events
+          </h2>
+          
+          <div className="mb-6 text-gray-400">
+             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-camera"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-2">
+            {photographyVideographySections[0].items.map((item) => (
+              <div key={item} className="service-detail-check-item">
+                <span className="service-detail-check-icon"><CheckCircle2 size={14} strokeWidth={2.2} /></span>
+                <span>{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </motion.section>
+  </>
+);
+
 const GiftsReturnContent = () => <ServiceContentSections sections={giftsReturnSections} />;
 
 const SpecialEntriesContent = () => <ServiceContentSections sections={specialEntriesSections} />;
@@ -608,6 +782,8 @@ const ConferencesContent = () => <ServiceContentSections sections={conferencesSe
 const ProductLaunchesContent = () => <ServiceContentSections sections={productLaunchSections} />;
 const CorporateMeetingsContent = () => <ServiceContentSections sections={corporateMeetingsSections} />;
 const PreWeddingCeremonyContent = () => <ServiceContentSections sections={preWeddingCeremonySections} />;
+const TradeShowsContent = () => <ServiceContentSections sections={tradeShowsSections} />;
+const PromotionsContent = () => <ServiceContentSections sections={promotionsSections} />;
 const ServiceDetail = () => {
   const { serviceSlug, itemSlug } = useParams();
   const service = findServiceBySlug(serviceSlug);
@@ -644,8 +820,12 @@ const ServiceDetail = () => {
   const isConferences = selectedItemSlug === 'conferences';
   const isProductLaunches = selectedItemSlug === 'product-launches';
   const isCorporateMeetings = selectedItemSlug === 'corporate-meetings';
-  const isEventDecorFloralArrangements = selectedItemSlug === 'event-decor-and-floral-arrangements';
-  const isCateringService = service.slug === 'catering';
+  const isEventDecorFloralArrangements = selectedItemSlug === 'event-decor-and-floral-arrangements' || selectedItemSlug === 'decorations' || selectedItemSlug === 'theme-based-parties';
+  const isPhotographyVideography = selectedItemSlug === 'photography-and-videography-services' || selectedItemSlug === 'photography-and-videography';
+  const isCateringService = service.slug === 'catering' || selectedItemSlug === 'catering-services' || selectedItemSlug === 'catering';
+  
+  const isTradeShowService = service.slug === 'trade-show-exhibition-planning';
+  const isPromotionsService = service.slug === 'promotions';
 
   return (
     <section className="service-detail-page relative overflow-hidden px-5 pb-20 pt-40 text-white lg:px-10 lg:pt-44">
@@ -738,6 +918,9 @@ const ServiceDetail = () => {
         {isCorporateMeetings && <CorporateMeetingsContent />}
         {isCateringService && <CateringContent />}
         {isEventDecorFloralArrangements && <PreWeddingCeremonyContent />}
+        {isPhotographyVideography && <PhotographyVideographyContent />}
+        {isTradeShowService && <TradeShowsContent />}
+        {isPromotionsService && <PromotionsContent />}
 
         <motion.section
           variants={staggerContainer}
