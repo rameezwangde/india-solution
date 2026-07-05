@@ -812,7 +812,7 @@ const ServiceDetail = () => {
   const isBeautyServices = selectedItemSlug === 'beauty-services-makeup-and-mehndi';
   const isBridalWear = selectedItemSlug === 'bridal-and-groom-wear-and-jewelry';
   const isGiftsReturn = selectedItemSlug === 'gifts-and-return-gifts';
-  const isSpecialEntries = selectedItemSlug === 'special-entries';
+  const isSpecialEntries = service.slug === 'special-entries';
   const isTransportation = selectedItemSlug === 'transportation';
   const isBirthdayDecoration = selectedItemSlug === 'birthday-decoration';
   const isFunActivities = selectedItemSlug === 'fun-activities';
