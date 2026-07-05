@@ -1,63 +1,122 @@
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import {
+  BriefcaseBusiness,
+  Cake,
+  ChevronRight,
+  Gem,
+  Gift,
+  Heart,
+  House,
+  Megaphone,
+  Music,
+  PanelsTopLeft,
+  PartyPopper,
+  Sparkles,
+  Trophy,
+  Utensils,
+} from 'lucide-react';
 import { staggerContainer, fadeUp } from '../utils/animations';
-import { Sparkles, Music, Users, Camera, Gift, Coffee, Calendar, Star, Building, Briefcase, Heart, Speaker } from 'lucide-react';
+import { serviceCatalog, slugifyServiceItem } from '../data/serviceCatalog';
 
-const servicesList = [
-  { title: "Wedding", icon: Heart, desc: "Flawless planning for your big day, creating memories for a lifetime." },
-  { title: "Corporate Events", icon: Briefcase, desc: "Professional and seamless execution for seminars, product launches, and more." },
-  { title: "Birthday", icon: Gift, desc: "Fun, vibrant, and customized birthday celebrations for all ages." },
-  { title: "Catering", icon: Coffee, desc: "Exquisite culinary experiences tailored to your guests' tastes." },
-  { title: "Pre-Wedding Ceremony", icon: Camera, desc: "Beautifully organized haldi, mehendi, and sangeet functions." },
-  { title: "Trade Shows & Exhibitions", icon: Building, desc: "Engaging booth designs and comprehensive exhibition management." },
-  { title: "Promotions", icon: Speaker, desc: "Impactful brand promotions and activations to reach your audience." },
-  { title: "Special Entries", icon: Sparkles, desc: "Grand and cinematic entry concepts for the bride, groom, or VIPs." },
-  { title: "Festivals", icon: Calendar, desc: "Vibrant and culturally rich festival celebrations." },
-  { title: "House Warming", icon: Star, desc: "Warm and inviting setups for your griha pravesh." },
-  { title: "Parties", icon: Music, desc: "High-energy DJ nights, cocktail parties, and get-togethers." },
-  { title: "Sporting Events", icon: Users, desc: "Organized sports tournaments and athletic events." },
-];
+const iconMap = {
+  BriefcaseBusiness,
+  Cake,
+  Gem,
+  Gift,
+  Heart,
+  House,
+  Megaphone,
+  Music,
+  PanelsTopLeft,
+  PartyPopper,
+  Sparkles,
+  Trophy,
+  Utensils,
+};
 
 const Services = () => {
   return (
-    <div className="pt-32 pb-20 px-6 lg:px-12">
-      <div className="container mx-auto">
-        <motion.div 
+    <section className="services-showcase relative overflow-hidden px-5 pb-20 pt-40 text-white lg:px-10 lg:pt-44">
+      <div className="services-dots services-dots-left" />
+      <div className="services-dots services-dots-right" />
+      <div className="services-wave services-wave-left" />
+      <div className="services-wave services-wave-right" />
+
+      <div className="relative z-10 mx-auto max-w-7xl">
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="mx-auto mb-10 max-w-2xl text-center"
         >
-          <span className="site-eyebrow mb-4 block">What We Do</span>
-          <h1 className="site-heading text-4xl font-bold md:text-5xl mb-6">Our Premium <span className="text-gradient">Services</span></h1>
-          <p className="text-gray-400 text-lg">We offer a wide range of event management services tailored to your specific needs, ensuring every detail is perfectly executed.</p>
+          <div className="mx-auto mb-3 flex items-center justify-center gap-3 text-magenta">
+            <span className="h-px w-10 bg-gradient-to-r from-transparent to-magenta" />
+            <span className="h-1.5 w-1.5 rotate-45 bg-magenta shadow-[0_0_12px_rgba(233,30,99,0.9)]" />
+            <span className="h-px w-10 bg-gradient-to-r from-magenta to-orange" />
+          </div>
+          <h1 className="site-heading text-4xl font-bold leading-none tracking-[0.14em] md:text-5xl">
+            Our <span className="text-gradient">Services</span>
+          </h1>
+          <p className="mx-auto mt-3 max-w-md text-xs leading-5 text-gray-300 md:text-sm">
+            Comprehensive event solutions tailored to create unforgettable experiences.
+          </p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+          viewport={{ once: true, margin: '-80px' }}
+          className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3"
         >
-          {servicesList.map((service, index) => {
-            const Icon = service.icon;
+          {serviceCatalog.map((service, index) => {
+            const Icon = iconMap[service.icon] ?? Sparkles;
+            const accentClass = index % 3 === 2 ? 'service-card-gold' : 'service-card-magenta';
+
             return (
-              <motion.div 
-                key={index}
+              <motion.article
+                key={service.slug}
                 variants={fadeUp}
-                className="glass-card p-8 group hover:-translate-y-2 transition-all duration-300 relative overflow-hidden"
+                className={`service-card group relative flex min-h-[315px] flex-col overflow-hidden rounded-xl p-5 ${accentClass}`}
               >
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-magenta to-orange opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-6 group-hover:bg-magenta/10 group-hover:border-magenta/30 transition-colors">
-                  <Icon className="text-white group-hover:text-magenta transition-colors" size={24} />
+                <div className="mb-4 flex items-start gap-3">
+                  <Link
+                    to={`/services/${service.slug}`}
+                    className="service-icon flex h-10 w-10 shrink-0 items-center justify-center rounded-full border text-magenta transition-colors group-hover:text-gold"
+                    aria-label={service.title}
+                  >
+                    <Icon size={19} strokeWidth={1.8} />
+                  </Link>
+                  <div>
+                    <Link to={`/services/${service.slug}`}>
+                      <h2 className="site-heading service-title text-lg font-bold leading-tight text-gold transition-colors hover:text-orange md:text-xl">
+                        {service.title}
+                      </h2>
+                    </Link>
+                    <p className="mt-1 max-w-[18rem] text-[11px] leading-4 text-gray-400">
+                      {service.description}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="site-heading text-xl font-semibold mb-3">{service.title}</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">{service.desc}</p>
-              </motion.div>
-            )
+
+                <div className="mt-auto grid gap-2">
+                  {service.items.map((item) => (
+                    <Link
+                      key={item}
+                      to={`/services/${service.slug}/${slugifyServiceItem(item)}`}
+                      className="service-point flex items-center gap-2 rounded border px-3 py-2 text-[11px] font-medium leading-tight text-gray-200 transition-all hover:translate-x-1 hover:text-gold md:text-xs"
+                    >
+                      <ChevronRight size={12} className="shrink-0 text-magenta" strokeWidth={2.2} />
+                      <span>{item}</span>
+                    </Link>
+                  ))}
+                </div>
+              </motion.article>
+            );
           })}
         </motion.div>
       </div>
-    </div>
+    </section>
   );
 };
 

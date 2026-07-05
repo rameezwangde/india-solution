@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronDown, Phone, Mail } from 'lucide-react';
+import { Menu, X, Phone, Mail } from 'lucide-react';
 import { FaFacebookF, FaInstagram, FaYoutube, FaLinkedinIn } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -20,12 +20,17 @@ const Navbar = () => {
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Gallery', path: '/gallery' },
-    { name: 'Services', path: '/services', hasDropdown: true },
+    { name: 'Services', path: '/services' },
     { name: 'About Us', path: '/about' },
     { name: 'Testimonials', path: '/testimonials' },
     { name: 'FAQ', path: '/faq' },
     { name: 'Careers', path: '/careers' },
   ];
+
+  const isActiveLink = (path) => {
+    if (path === '/') return location.pathname === '/';
+    return location.pathname === path || location.pathname.startsWith(`${path}/`);
+  };
 
   return (
     <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'glass' : 'bg-transparent'}`}>
@@ -65,24 +70,14 @@ const Navbar = () => {
           {/* Desktop Nav */}
           <div className="hidden lg:flex items-center gap-6">
             {navLinks.map((link) => (
-              <div key={link.name} className="relative group">
-                <Link
-                  to={link.path}
-                  className={`text-[13px] font-medium uppercase tracking-wider transition-colors hover:text-magenta flex items-center gap-1
-                    ${location.pathname === link.path ? 'text-magenta' : 'text-gray-300'}`}
-                >
-                  {link.name}
-                  {link.hasDropdown && <ChevronDown size={14} />}
-                </Link>
-                {/* Simplified Dropdown Indicator */}
-                {link.hasDropdown && (
-                  <div className="absolute top-full left-0 mt-3 w-48 glass rounded-xl overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                    <Link to="/services" className="block px-4 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Corporate Events</Link>
-                    <Link to="/services" className="block px-4 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Weddings</Link>
-                    <Link to="/services" className="block px-4 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Exhibitions</Link>
-                  </div>
-                )}
-              </div>
+              <Link
+                key={link.name}
+                to={link.path}
+                className={`text-[13px] font-medium uppercase tracking-wider transition-colors hover:text-magenta
+                  ${isActiveLink(link.path) ? 'text-magenta' : 'text-gray-300'}`}
+              >
+                {link.name}
+              </Link>
             ))}
           </div>
 
@@ -93,7 +88,7 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Toggle */}
-          <button className="lg:hidden text-white" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+          <button className="lg:hidden text-white" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label="Toggle menu">
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
@@ -113,7 +108,7 @@ const Navbar = () => {
                 <Link
                   key={link.name}
                   to={link.path}
-                  className="text-gray-300 text-lg uppercase tracking-wide py-2 border-b border-white/5"
+                  className={`text-lg uppercase tracking-wide py-2 border-b border-white/5 ${isActiveLink(link.path) ? 'text-magenta' : 'text-gray-300'}`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.name}

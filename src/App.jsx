@@ -3,6 +3,7 @@ import Navbar from './components/layout/Navbar';
 import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
+import ServiceDetail from './pages/ServiceDetail';
 import Contact from './pages/Contact';
 import FAQ from './pages/FAQ';
 import Testimonials from './pages/Testimonials';
@@ -19,6 +20,8 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/about-us" element={<About />} />
             <Route path="/services" element={<Services />} />
+            <Route path="/services/:serviceSlug" element={<ServiceDetail />} />
+            <Route path="/services/:serviceSlug/:itemSlug" element={<ServiceDetail />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/contact-us" element={<Contact />} />
             <Route path="/faq" element={<FAQ />} />
