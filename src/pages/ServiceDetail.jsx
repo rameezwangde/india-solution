@@ -183,13 +183,9 @@ const bridalWearSections = [
 const giftsReturnSections = [
   {
     eyebrow: 'Personalized Keepsakes',
-    title: 'Gifts & Return Gifts',
-    accent: 'Gifts',
-    description: (
-      <>
-        At <strong>India Solution</strong>, we specialize in creating <strong>custom-made gifts</strong> that leave a lasting impression. From unique <strong>Mini Me acrylic miniatures</strong> to personalized <strong>keychains, photo frames, and more</strong>, our gifts are crafted with care to match your imagination. Whether it's for birthdays, anniversaries, or just a gesture of love, we bring your ideas to life with top-quality materials and expert craftsmanship. Explore our wide range of personalized gifts, and let us help you create memories that last forever.
-      </>
-    ),
+    title: 'Invitations & Stationery',
+    accent: 'Stationery',
+    description: "At India Solution, we specialize in creating custom-made gifts that leave a lasting impression. From unique 'Mini Me' acrylic miniatures to personalized keychains, photo frames, and more, our gifts are crafted with care to match your imagination. Whether it's for birthdays, anniversaries, or just a gesture of love, we bring your ideas to life with top-quality materials and expert craftsmanship. Explore our wide range of personalized gifts, and let us help you create memories that last forever.",
     items: [
       '2D Acrylic Mini Me Miniatures',
       'Custom Keychains',
@@ -425,6 +421,60 @@ const preWeddingCeremonySections = [
       'Catering and Menu Planning for Pre-Wedding Functions',
       'Event Decor and Floral Arrangements',
       'Entertainment and Music Services',
+    ],
+  },
+];
+
+const partySections = [
+  {
+    eyebrow: 'Unforgettable Graduation Party Planning',
+    title: 'Celebrate Your Achievement with a Perfect Graduation Party',
+    accent: 'Graduation Party',
+    description: 'At India Solution, we specialize in creating unforgettable graduation parties that truly celebrate your achievements. Our expert event planners ensure every detail, from themed decorations to personalized entertainment, is tailored to make your graduation day extraordinary. Whether it’s a high school graduation or college convocation, we provide end-to-end services for a seamless and memorable event, blending fun, elegance, and personalization. Let us handle the planning, so you can focus on enjoying the milestone',
+    items: [
+      'Themed Decorations',
+      'Stage Setup & Seating Arrangements',
+      'Catering Services',
+      'Entertainment & Games',
+      'Custom Theme Cakes',
+      'Luxury Festive Cakes',
+      'Photography & Videography',
+      'Themed Invitations & E-invites',
+      'Return Gifts & Keepsakes',
+    ],
+  },
+  {
+    eyebrow: 'Celebrate Your Career Milestones',
+    title: 'Honor a Lifetime of Achievements with an Unforgettable Retirement Celebration',
+    accent: 'Retirement Celebration',
+    description: 'At India Solution, we craft retirement parties that honor a lifetime of hard work and dedication. As experienced event coordinators, we design personalized and memorable celebrations that reflect your career’s journey. From elegant decorations to engaging entertainment, we ensure every detail is carefully planned, creating a joyful and heartfelt event. Celebrate your new chapter with a retirement party that’s as remarkable as your achievements.',
+    items: [
+      'Themed Decorations',
+      'Stage Setup & Seating Arrangements',
+      'Catering Services',
+      'Entertainment & Games',
+      'Custom Theme Cakes',
+      'Toast & Speech Coordination',
+      'Photography & Videography',
+      'Themed Invitations & E-invites',
+      'Return Gifts & Keepsakes',
+    ],
+  },
+  {
+    eyebrow: 'Celebrate Achievements with a Spectacular Event',
+    title: 'Honor Your Successes with an Unforgettable Achievement Celebration',
+    accent: 'Achievement Celebration',
+    description: 'At India Solution, we specialize in creating exceptional achievement celebrations that honor personal and professional milestones. Whether celebrating career achievements, academic successes, or personal goals, we provide end-to-end planning and coordination to ensure your event is memorable and meaningful. From tailored decorations to inspiring entertainment, we craft a celebration that reflects your hard-earned success and makes every moment unforgettable.',
+    items: [
+      'Themed Decorations',
+      'Stage Setup & Seating Arrangements',
+      'Catering Services',
+      'Entertainment & Games',
+      'Custom Theme Cakes',
+      'Toast & Speech Coordination',
+      'Photography & Videography',
+      'Themed Invitations & E-invites',
+      'Return Gifts & Keepsakes',
     ],
   },
 ];
@@ -860,6 +910,7 @@ const TradeShowsContent = () => <ServiceContentSections sections={tradeShowsSect
 const PromotionsContent = () => <ServiceContentSections sections={promotionsSections} />;
 const FestivalsContent = () => <ServiceContentSections sections={festivalsSections} />;
 const HouseWarmingContent = () => <ServiceContentSections sections={houseWarmingSections} />;
+const PartyContent = () => <ServiceContentSections sections={partySections} />;
 const ServiceDetail = () => {
   const { serviceSlug, itemSlug } = useParams();
   const service = findServiceBySlug(serviceSlug);
@@ -887,7 +938,7 @@ const ServiceDetail = () => {
   const isInvitationStationery = selectedItemSlug === 'invitations-and-stationery';
   const isBeautyServices = selectedItemSlug === 'beauty-services-makeup-and-mehndi';
   const isBridalWear = selectedItemSlug === 'bridal-and-groom-wear-and-jewelry';
-  const isGiftsReturn = selectedItemSlug === 'gifts-and-return-gifts';
+  const isGiftsReturn = service.slug === 'custom-gifts-return-gifts';
   const isSpecialEntries = service.slug === 'special-entries';
   const isTransportation = selectedItemSlug === 'transportation';
   const isBirthdayDecoration = selectedItemSlug === 'birthday-decoration';
@@ -904,6 +955,7 @@ const ServiceDetail = () => {
   const isPromotionsService = service.slug === 'promotions';
   const isFestivalsService = service.slug === 'festivals';
   const isHouseWarmingService = service.slug === 'house-warming';
+  const isPartyService = service.slug === 'party';
 
   return (
     <section className="service-detail-page relative overflow-hidden px-5 pb-20 pt-40 text-white lg:px-10 lg:pt-44">
@@ -1001,6 +1053,7 @@ const ServiceDetail = () => {
         {isPromotionsService && <PromotionsContent />}
         {isFestivalsService && <FestivalsContent />}
         {isHouseWarmingService && <HouseWarmingContent />}
+        {isPartyService && <PartyContent />}
 
         <motion.section
           variants={staggerContainer}
