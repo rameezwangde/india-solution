@@ -429,6 +429,26 @@ const preWeddingCeremonySections = [
   },
 ];
 
+const houseWarmingSections = [
+  {
+    eyebrow: 'Griha Pravesh',
+    title: 'Make Your Griha Pravesh Grand with Expert Housewarming Planning',
+    accent: 'Housewarming',
+    description: 'Welcome happiness and prosperity into your new home with India Solution’s premium housewarming services! From traditional rituals to modern celebrations, we take care of every detail to ensure your special day is unforgettable. Our experienced team specializes in creating the perfect ambiance for your Griha Pravesh ceremony, combining cultural traditions with contemporary aesthetics. Whether it’s decor, catering, or entertainment, we offer customized housewarming solutions tailored to your preferences. Let us help you make your housewarming celebration an extraordinary and joyous occasion.',
+    items: [
+      'Traditional Pooja Arrangements',
+      'Floral and Lighting Decor',
+      'Customized Invitations',
+      'Live Music & Instrumental Performances',
+      'House Blessing Ritual Coordination',
+      'Thematic Food Catering',
+      'Welcome Gifts for Guests',
+      'Photo and Video Coverage',
+      'Outdoor Canopy or Seating Arrangements',
+    ],
+  },
+];
+
 const festivalsSections = [
   {
     eyebrow: 'Royal Celebration',
@@ -839,6 +859,7 @@ const PreWeddingCeremonyContent = () => <ServiceContentSections sections={preWed
 const TradeShowsContent = () => <ServiceContentSections sections={tradeShowsSections} />;
 const PromotionsContent = () => <ServiceContentSections sections={promotionsSections} />;
 const FestivalsContent = () => <ServiceContentSections sections={festivalsSections} />;
+const HouseWarmingContent = () => <ServiceContentSections sections={houseWarmingSections} />;
 const ServiceDetail = () => {
   const { serviceSlug, itemSlug } = useParams();
   const service = findServiceBySlug(serviceSlug);
@@ -882,6 +903,7 @@ const ServiceDetail = () => {
   const isTradeShowService = service.slug === 'trade-show-exhibition-planning';
   const isPromotionsService = service.slug === 'promotions';
   const isFestivalsService = service.slug === 'festivals';
+  const isHouseWarmingService = service.slug === 'house-warming';
 
   return (
     <section className="service-detail-page relative overflow-hidden px-5 pb-20 pt-40 text-white lg:px-10 lg:pt-44">
@@ -978,6 +1000,7 @@ const ServiceDetail = () => {
         {isTradeShowService && <TradeShowsContent />}
         {isPromotionsService && <PromotionsContent />}
         {isFestivalsService && <FestivalsContent />}
+        {isHouseWarmingService && <HouseWarmingContent />}
 
         <motion.section
           variants={staggerContainer}
