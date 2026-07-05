@@ -5,6 +5,7 @@ import {
   BriefcaseBusiness,
   Cake,
   CheckCircle2,
+  ChevronRight,
   Gem,
   Gift,
   Heart,
@@ -44,7 +45,9 @@ const iconMap = {
 
 const invitationSections = [
   {
+    eyebrow: 'Custom Designs',
     title: 'Invitations & Stationery',
+    accent: 'Stationery',
     description: (
       <>
         Make your event unforgettable with our <strong>Invitation & Stationery Services</strong>, offering customized, high-quality invitations and stationery to match your unique style. From <strong>luxury invitations</strong> to <strong>RSVP cards, thank-you notes, and event signage</strong>, we ensure every detail is perfect. Our expert designers work closely with you to create personalized designs for <strong>corporate events, personal celebrations</strong>, and more. Let us set the tone for your event with stunning custom stationery that leaves a lasting impression
@@ -63,7 +66,9 @@ const invitationSections = [
     ],
   },
   {
+    eyebrow: 'Custom Designs',
     title: 'Digital Invitations',
+    accent: 'Digital',
     description: (
       <>
         Make your event stand out with our <strong>Digital Invitation Services</strong>, offering modern, eco-friendly, and interactive invitations tailored to your style. From <strong>animated e-vites</strong> to <strong>RSVP-integrated invitations, social media invites, and custom digital cards</strong>, we ensure a seamless, engaging experience for your guests. Our expert designers create personalized digital invitations for <strong>corporate events, personal celebrations</strong>, and more, making it easy to share event details instantly. Set the tone for your event with digital invitations that are both stylish and convenient
@@ -85,7 +90,9 @@ const invitationSections = [
 
 const beautySections = [
   {
+    eyebrow: 'Wedding Ready',
     title: 'Bridal Makeup Services',
+    accent: 'Makeup',
     description: 'Transform your bridal look with our expert Bridal Makeup Service, designed to enhance your natural beauty for your big day. Whether you prefer a classic, glamorous, or modern style, our skilled makeup artists use high-quality products and personalized techniques to create a flawless, long-lasting look. Trust our makeup experts to make you feel radiant, from the ceremony to the celebration. Book your bridal makeup consultation today for a perfect, glowing look',
     items: [
       'Pre-Wedding Trial Session',
@@ -100,7 +107,9 @@ const beautySections = [
     ],
   },
   {
+    eyebrow: 'Wedding Ready',
     title: 'Mehndi Services for Brides',
+    accent: 'Mehndi',
     description: 'Enhance your bridal beauty with our expert Mehndi services. Our skilled Mehndi artists create custom, intricate designs that blend tradition and elegance. Whether traditional or modern styles, we craft the perfect design for your bridal look using natural henna for long-lasting, stunning results. Book your bridal Mehndi consultation today for a flawless, personalized experience',
     items: [
       'Bridal Mehndi Designs',
@@ -116,50 +125,392 @@ const beautySections = [
   },
 ];
 
-const InvitationStationeryContent = () => (
+
+const bridalWearSections = [
+  {
+    eyebrow: 'Elegance For Every Moment',
+    title: 'Bridal Wear Services',
+    accent: 'Bridal',
+    description: 'Our Bridal Wear Services offer luxurious, custom-designed bridal gowns, lehengas, and sarees, crafted with the finest fabrics and intricate embroidery. Whether you desire a classic wedding gown or a traditional lehenga, we provide personalized styles that reflect your unique personality and wedding vision. With expert craftsmanship and attention to detail, we ensure you look your absolute best on your special day',
+    items: [
+      'Custom Bridal Gowns',
+      'Traditional Bridal Lehengas',
+      'Bridal Sarees',
+      'Bridal Ensemble Styling',
+      'Bridal Accessories Consultation',
+      'Bridal Fit and Alterations',
+      'Bridal Footwear Selection',
+      'Bridal Blouse and Dupatta Customization',
+      'Bridal Attire Rental Services',
+    ],
+  },
+  {
+    eyebrow: 'Elegance For Every Moment',
+    title: 'Jewelry Services for Brides and Grooms',
+    accent: 'Jewelry',
+    description: "Our Jewelry Services offer an exquisite selection of bridal and groom jewelry, designed to complement your attire and enhance your overall wedding look. From traditional gold and diamond jewelry to modern, custom-designed pieces, we provide a wide range of jewelry options to suit every bride and groom's taste. Whether you prefer traditional or contemporary styles, our expert jewelers offer personalized designs that make your wedding day even more special.",
+    items: [
+      'Custom Bridal Jewelry Design',
+      'Kundan and Polki Jewelry',
+      'Bridal Necklace Sets',
+      'Bridal Earring Selection',
+      'Groom Jewelry Consultation',
+      'Jewelry Rentals for Weddings',
+      'Bridal Hair Jewelry',
+      'Personalized Wedding Bands',
+      'Matching Jewelry Sets for Bridesmaids and Groomsmen',
+    ],
+  },
+  {
+    eyebrow: 'Elegance For Every Moment',
+    title: 'Groom Wear Services',
+    accent: 'Groom',
+    description: "Our Groom Wear Services offer a range of stylish and elegant options to ensure you look your best on your special day. From classic tuxedos and custom-tailored suits to traditional sherwanis, we provide attire that suits every groom's style and wedding theme. Our expert stylists work closely with you to create a look that perfectly complements the bride's attire, ensuring you stand out in elegance and sophistication",
+    items: [
+      'Custom-Tailored Suits',
+      'Sherwanis',
+      'Tuxedos',
+      'Nehru Jackets',
+      'Bridal Party Coordination',
+      'Groom Footwear Selection',
+      'Accessories Consultation',
+      'Bridal Blouse and Dupatta Customization',
+      'Custom Groom Accessories Design',
+    ],
+  },
+];
+
+const giftsReturnSections = [
+  {
+    eyebrow: 'Personalized Keepsakes',
+    title: 'Gifts & Return Gifts',
+    accent: 'Gifts',
+    description: (
+      <>
+        At <strong>India Solution</strong>, we specialize in creating <strong>custom-made gifts</strong> that leave a lasting impression. From unique <strong>Mini Me acrylic miniatures</strong> to personalized <strong>keychains, photo frames, and more</strong>, our gifts are crafted with care to match your imagination. Whether it's for birthdays, anniversaries, or just a gesture of love, we bring your ideas to life with top-quality materials and expert craftsmanship. Explore our wide range of personalized gifts, and let us help you create memories that last forever.
+      </>
+    ),
+    items: [
+      '2D Acrylic Mini Me Miniatures',
+      'Custom Keychains',
+      'Photo Frames',
+      'Printed Clocks',
+      'Customized Cups',
+      'Name Plates',
+      'Wall Art Decor',
+      'Customized Lamps',
+      'Event Souvenirs',
+    ],
+  },
+];
+
+const specialEntriesSections = [
+  {
+    eyebrow: 'Grand Arrival Concepts',
+    title: 'Exclusive Special Entries for Couples: Where Dreams Take Center Stage',
+    accent: 'Special',
+    description: 'Make your wedding grander with India Solution\'s Special Entry Services! We specialize in creating jaw-dropping couple entries with pyrotechnics, creative themes, and unforgettable moments that leave your guests mesmerized. From sparkling pyro works to royal chariots, our innovative ideas bring your dream wedding to life. Let us add a touch of magic and grandeur to your big day with customized couple entry options designed to make every moment memorable.',
+    items: [
+      'Grand Firework Displays',
+      'Royal Carriage & Vintage Car Entry',
+      'Cold Pyro and Fog Effects',
+      'Flower Shower Entry',
+      'LED Dance Performances',
+      'Thematic Couple Walkways',
+      'Drone Show Entry',
+      'Live Band',
+      'Sparkling Umbrella Entry',
+    ],
+  },
+];
+
+const transportationSections = [
+  {
+    eyebrow: 'Luxury Mobility',
+    title: 'Premium Event Transportation Services',
+    accent: 'Transportation',
+    description: (
+      <>
+        Experience <strong>seamless and luxurious event transportation</strong> with our premium services, perfect for <strong>weddings, corporate events, and special occasions</strong>. From <strong>luxury bridal cars and groom entries</strong> to <strong>guest shuttle services and vintage car rentals</strong>, we ensure punctuality, comfort, and style. Let our expert team handle <strong>guest logistics, valet services, and premium vehicle arrangements</strong> to make your event stress-free and unforgettable.
+      </>
+    ),
+    items: [
+      'Luxury Cars for Bride & Groom',
+      'Guest Shuttle Services',
+      'Airport Pick-Up & Drop Services',
+      'Vintage Car Rentals',
+      'VIP and Executive Cars',
+      'Valet Parking Services',
+      'Event Logistics Vehicles',
+      'Tempo Travellers & Mini Buses',
+      'Custom Decorated Vehicles',
+    ],
+  },
+];
+
+const birthdayDecorationSections = [
+  {
+    eyebrow: 'Celebration Styling',
+    title: 'Unforgettable Birthday Celebrations Tailored to You',
+    accent: 'Birthday',
+    description: (
+      <>
+        Make every birthday a <strong>memorable experience</strong> with our expert <strong>birthday event planning services</strong>. At <strong>India Solution</strong>, we specialize in crafting <strong>personalized birthday celebrations</strong> that reflect the personality and preferences of the birthday honoree. From <strong>thematic decorations to entertainment arrangements</strong>, we handle every aspect of the event, ensuring a seamless and joyful experience for everyone. Whether it's an intimate gathering or a grand celebration, our team brings creativity, elegance, and attention to detail to make your birthday event truly special. We ensure that each <strong>birthday party</strong> is filled with fun, laughter, and lasting memories.
+      </>
+    ),
+    items: [
+      'Thematic Party Decor',
+      'Birthday Cake & Dessert Table Setup',
+      'Entertainment & Activities',
+      'Customized Invitations & Party Favors',
+      'Venue Selection & Setup',
+      'Personalized Photo Booth',
+      'Music & Sound System Setup',
+      'Lighting & Ambient Effects',
+      'Party Host/Emcee Services',
+    ],
+  },
+];
+
+const funActivitiesSections = [
+  {
+    eyebrow: 'Playful Experiences',
+    title: 'Birthday Fun Activities',
+    accent: 'Fun',
+    description: 'We make birthday celebrations unforgettable with creative and engaging fun activities for all age groups. Our team ensures the perfect blend of entertainment and excitement, making every birthday special and memorable. From interactive games to artistic experiences, we bring fun-filled moments to life, ensuring guests leave with joyful memories',
+    items: [
+      'Magician Show',
+      'Balloon Twisting',
+      'Face Painting',
+      'Photo Booth with Props',
+      'Puppet Show',
+      'Treasure Hunt',
+      'Carnival Games',
+      'DIY Art & Craft Corner',
+      'Live Cartoon Characters',
+    ],
+  },
+  {
+    eyebrow: 'Playful Experiences',
+    title: 'Corporate Fun Activities',
+    accent: 'Corporate',
+    description: (
+      <>
+        Fun activities designed to boost employee engagement, teamwork, and enjoyment. Whether it&rsquo;s a <strong>corporate gathering, annual day, team-building retreat, or product launch</strong>, we ensure every event is filled with excitement while maintaining a professional touch. Our activities are designed to <strong>encourage collaboration, break the ice, and leave a lasting positive impact</strong>
+      </>
+    ),
+    items: [
+      'Team-Building Games',
+      'Escape Room Challenge',
+      'Icebreaker Sessions',
+      'Trivia Quiz Competitions',
+      'Photo Booth with Corporate Branding',
+      'Carnival Games',
+      'Wellness Activities',
+      'Virtual Reality (VR) Booth',
+      'Live Music & Karaoke',
+    ],
+  },
+  {
+    eyebrow: 'Playful Experiences',
+    title: 'School & College Fun Activities',
+    accent: 'Fun',
+    description: 'Fun activities designed for school and college events. Our goal is to create interactive experiences where students can explore new concepts while having fun. These activities encourage curiosity, teamwork, and creativity, making learning enjoyable and memorable.',
+    items: [
+      'Quiz Competitions',
+      'Debate & Elocution Contests',
+      'STEM Workshops',
+      'Science Experiment Booths',
+      'Spelling Bee Contest',
+      'Educational Treasure Hunt',
+      'Storytelling Sessions',
+      'Math Puzzle Stations',
+      'Book Fair with Reading Corners',
+    ],
+  },
+];
+const corporateNetworkingSections = [
+  {
+    eyebrow: 'Business Growth',
+    title: 'Networking Events for Business Growth',
+    accent: 'Networking',
+    description: 'Elevate your business connections with our expertly organized networking events designed to foster meaningful relationships. Whether you\'re hosting a small mixer or a large-scale conference, we ensure every detail is tailored to create an impactful, professional experience. Connect with industry leaders and peers to unlock new opportunities and grow your business',
+    items: [
+      'Executive Networking Summits',
+      'Industry Leadership Panels',
+      'Peer-to-Peer Networking Forums',
+      'Strategic Partnering Events',
+      'Corporate Networking Retreats',
+      'Investor Networking Forums',
+      'Tech & Innovation Networking Sessions',
+      'Global Networking Conclaves',
+      'Product & Service Launch Networking',
+    ],
+  },
+];
+const conferencesSections = [
+  {
+    eyebrow: 'Industry Leaders',
+    title: 'Transformative Conferences for Industry Leaders',
+    accent: 'Conferences',
+    description: 'Host impactful conferences designed to bring together thought leaders, industry experts, and innovators. Our expertly managed conferences foster dynamic discussions, offer valuable insights, and provide unparalleled networking opportunities to help you stay ahead in your field. Whether you\'re focused on innovation, technology, or leadership, we ensure every detail is tailored to make your conference a success',
+    items: [
+      'Leadership & Executive Conferences',
+      'Industry-Specific Conference Series',
+      'Corporate & Business Development Conferences',
+      'Innovation & Technology Conferences',
+      'Networking & Trade Conferences',
+      'Academic & Research Conferences',
+      'Tech & Innovation Networking Sessions',
+      'Product Innovation & Launch Conferences',
+      'Global Industry Conventions',
+    ],
+  },
+];
+const productLaunchSections = [
+  {
+    eyebrow: 'Brand Impact',
+    title: 'Strategic Product Launches to Drive Brand Awareness and Market Impact',
+    accent: 'Product',
+    description: 'Transform your product launch into a memorable experience that excites your target audience and amplifies your brand presence. From pre-launch teasers to post-launch follow-ups, we create end-to-end event strategies that generate buzz, drive media attention, and deliver measurable business results. Let us ensure that your product gets the launch it deserves',
+    items: [
+      'Exclusive Launch Events',
+      'Virtual Product Launches',
+      'Media & Press Launches',
+      'Pop-Up Launch Experiences',
+      'Product Demonstration Sessions',
+      'Launch Parties & Celebrations',
+      'Collaborative Partner Launches',
+      'Investor & Stakeholder Launches',
+      'Interactive Product Launch Tours',
+    ],
+  },
+];
+const corporateMeetingsSections = [
+  {
+    eyebrow: 'Execution Precision',
+    title: 'Streamlined Corporate Meetings to Foster Collaboration and Drive Success',
+    accent: 'Corporate',
+    description: 'Elevate your corporate meetings with meticulously planned and flawlessly executed events designed to boost productivity, collaboration, and decision-making. Whether it\'s a strategic planning session or a team alignment meeting, we tailor each experience to meet your specific business needs, ensuring smooth logistics and optimal outcomes for your company.',
+    items: [
+      'Strategic Planning Meetings',
+      'Executive Leadership Meetings',
+      'Board of Directors Meetings',
+      'Team Building Meetings',
+      'Quarterly Business Review (QBR) Meetings',
+      'Productivity and Innovation Workshops',
+      'Client & Partner Meetings',
+      'Corporate Training & Development Meetings',
+      'Annual General Meetings (AGM)',
+    ],
+  },
+];
+const cateringSections = [
+  {
+    eyebrow: 'Culinary Experiences',
+    title: 'Exquisite Catering Services Native & Western Flavors for Every Event',
+    accent: 'Catering',
+    description: (
+      <>
+        At <strong>India Solution Event Management</strong>, we offer exceptional catering services that blend the rich flavors of native Indian cuisine with the elegance of Western-style dishes. Our expert chefs focus on delivering the highest quality food, prepared with fresh ingredients and attention to detail. Whether it&apos;s a wedding, corporate event, or private celebration, we ensure a memorable dining experience with delicious food and flawless service.
+      </>
+    ),
+    items: [
+      'Pure Vegetarian Cuisine',
+      'Non-Vegetarian Cuisine',
+      'Traditional Indian Cuisine',
+      'Western Cuisine',
+      'Fusion Cuisine',
+      'Premium/Signature Dishes',
+      'Street Food/Chaat Station',
+      'Dessert & Confectionery Station',
+      'Healthy & Diet-Friendly Options',
+    ],
+  },
+  {
+    eyebrow: 'Custom Cakes',
+    title: 'Delight in Our Premium Custom Cakes for Every Celebration',
+    accent: 'Custom Cakes',
+    description: (
+      <>
+        Indulge in our exquisite custom cakes, expertly crafted to make your special moments unforgettable. Whether it&apos;s a wedding, birthday, anniversary, or corporate event, our skilled bakers create personalized cakes using the finest ingredients, ensuring exceptional taste and stunning presentation. From elegant multi-tiered wedding cakes to fun-themed birthday cakes and sophisticated corporate cakes, each design is customized to match your style, theme, and preferences perfectly. Make your celebrations sweeter with our luxury cakes, tailored to impress.
+      </>
+    ),
+    items: [
+      'Designer Wedding Cakes',
+      'Elegant Engagement Cakes',
+      'Personalized Birthday Cakes',
+      'Anniversary Cakes',
+      'Custom Theme Cakes',
+      'Luxury Festive Cakes',
+      'Corporate Event Cakes',
+      'Healthy & Vegan Cakes',
+      'Dessert Tables & Cupcake Towers',
+    ],
+  },
+  {
+    eyebrow: 'Sweet Treats',
+    title: 'Fun Edible Services',
+    accent: 'Edible',
+    description: (
+      <>
+        Bring joy to your events with our delightful fun edibles that add a burst of sweetness and excitement. From cotton candy and fancy candies to cartoon character cakes and novelty treats, we specialize in creating playful and creative edible masterpieces that captivate both kids and adults alike. Perfect for weddings, birthdays, corporate events, and other celebrations, our fun edibles are designed to complement your event&apos;s theme while satisfying everyone&apos;s sweet tooth. Let us turn your celebration into a memorable experience with these unique and delicious treats.
+      </>
+    ),
+    items: [
+      'Cotton Candy Stalls',
+      'Fancy Candies & Lollipops',
+      'Cartoon Character Cakes',
+      'Themed Cake Pops',
+      'Cupcake Decoration Stations',
+      'Novelty Desserts',
+      'Chocolate Fountains',
+      'Ice Cream & Gelato Stations',
+      'Edible Party Favors',
+    ],
+  },
+];
+const DetailTitle = ({ title, accent }) => {
+  if (!accent || !title.includes(accent)) {
+    return <>{title}</>;
+  }
+
+  const [before, after] = title.split(accent);
+  return (
+    <>
+      {before}<span className="text-gradient">{accent}</span>{after}
+    </>
+  );
+};
+
+const ServiceContentSections = ({ sections }) => (
   <motion.section
     variants={staggerContainer}
     initial="hidden"
     whileInView="visible"
     viewport={{ once: true }}
-    className="mt-12 grid gap-6"
+    className="mt-8 grid gap-6"
   >
-    {invitationSections.map((section) => (
-      <motion.article
-        key={section.title}
-        variants={fadeUp}
-        className="glass-card relative overflow-hidden border-magenta/25 p-7 md:p-9"
-      >
-        <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-gold/10 blur-3xl" />
-        <div className="relative grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+    {sections.map((section) => (
+      <motion.article key={section.title} variants={fadeUp} className="service-detail-section relative overflow-hidden rounded-xl p-6 md:p-7">
+        <div className="service-detail-section-glow" />
+        <div className="relative grid gap-7 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
           <div>
-            <span className="site-eyebrow mb-3 block">Custom Designs</span>
-            <h2 className="site-heading mb-5 text-3xl font-bold leading-tight md:text-5xl">
-              {section.title.includes('&') ? (
-                <>
-                  Invitations <span className="text-gradient">& Stationery</span>
-                </>
-              ) : (
-                <span className="text-gradient">{section.title}</span>
-              )}
+            <span className="service-detail-eyebrow mb-2 block">{section.eyebrow}</span>
+            <h2 className="site-heading mb-4 text-3xl font-bold leading-tight md:text-5xl">
+              <DetailTitle title={section.title} accent={section.accent} />
             </h2>
-            <p className="text-base leading-8 text-gray-300 md:text-lg">{section.description}</p>
-            <Link
-              to="/contact"
-              className="mt-8 inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-magenta to-orange px-7 py-3 text-sm font-semibold uppercase tracking-wide text-white transition-transform hover:-translate-y-0.5"
-            >
-              <Mail size={17} />
+            <p className="max-w-2xl text-sm leading-7 text-gray-300 md:text-base">{section.description}</p>
+            <Link to="/contact" className="service-detail-cta mt-6 inline-flex items-center gap-2">
+              <Mail size={15} />
               Contact us
             </Link>
           </div>
 
           <div className="grid gap-3 sm:grid-cols-2">
             {section.items.map((item) => (
-              <div
-                key={item}
-                className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.035] px-4 py-3 text-sm font-semibold text-gray-100"
-              >
-                <CheckCircle2 size={18} className="shrink-0 text-gold" strokeWidth={2} />
+              <div key={item} className="service-detail-check-item">
+                <span className="service-detail-check-icon"><CheckCircle2 size={14} strokeWidth={2.2} /></span>
                 <span>{item}</span>
               </div>
             ))}
@@ -171,70 +522,67 @@ const InvitationStationeryContent = () => (
 );
 
 const BeautyServicesContent = () => (
-  <motion.section
-    variants={staggerContainer}
-    initial="hidden"
-    whileInView="visible"
-    viewport={{ once: true }}
-    className="mt-12 grid gap-6"
-  >
-    <motion.div variants={fadeUp} className="glass-card relative overflow-hidden p-7 text-center md:p-9">
-      <div className="absolute left-1/2 top-0 h-32 w-72 -translate-x-1/2 rounded-full bg-magenta/20 blur-3xl" />
+  <>
+    <motion.section
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="service-detail-section relative mt-8 overflow-hidden rounded-xl p-6 text-center md:p-7"
+    >
+      <div className="service-detail-section-glow" />
       <div className="relative mx-auto max-w-4xl">
-        <span className="site-eyebrow mb-3 block">Bridal Beauty</span>
-        <h2 className="site-heading mb-4 text-3xl font-bold leading-tight md:text-5xl">
+        <span className="service-detail-eyebrow mb-2 block">Bridal Beauty</span>
+        <h2 className="site-heading mb-3 text-3xl font-bold leading-tight md:text-5xl">
           Beauty Services, <span className="text-gradient">Makeup, and Mehndi</span>
         </h2>
-        <p className="text-base leading-8 text-gray-300 md:text-lg">
+        <p className="text-sm leading-7 text-gray-300 md:text-base">
           Enhance your beauty and glow with our expert Beauty Services, Makeup, and Mehndi - creating the perfect look for your unforgettable moments
         </p>
       </div>
-    </motion.div>
-
-    {beautySections.map((section) => (
-      <motion.article
-        key={section.title}
-        variants={fadeUp}
-        className="glass-card relative overflow-hidden border-magenta/25 p-7 md:p-9"
-      >
-        <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-magenta/10 blur-3xl" />
-        <div className="relative grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-          <div>
-            <span className="site-eyebrow mb-3 block">Wedding Ready</span>
-            <h2 className="site-heading mb-5 text-3xl font-bold leading-tight md:text-5xl">
-              {section.title.includes('Mehndi') ? (
-                <span className="text-gradient">{section.title}</span>
-              ) : (
-                section.title
-              )}
-            </h2>
-            <p className="text-base leading-8 text-gray-300 md:text-lg">{section.description}</p>
-            <Link
-              to="/contact"
-              className="mt-8 inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-magenta to-orange px-7 py-3 text-sm font-semibold uppercase tracking-wide text-white transition-transform hover:-translate-y-0.5"
-            >
-              <Mail size={17} />
-              Contact us
-            </Link>
-          </div>
-
-          <div className="grid gap-3 sm:grid-cols-2">
-            {section.items.map((item) => (
-              <div
-                key={item}
-                className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.035] px-4 py-3 text-sm font-semibold text-gray-100"
-              >
-                <CheckCircle2 size={18} className="shrink-0 text-gold" strokeWidth={2} />
-                <span>{item}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </motion.article>
-    ))}
-  </motion.section>
+    </motion.section>
+    <ServiceContentSections sections={beautySections} />
+  </>
 );
 
+
+const BridalWearContent = () => (
+  <>
+    <motion.section
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="service-detail-section relative mt-8 overflow-hidden rounded-xl p-6 text-center md:p-7"
+    >
+      <div className="service-detail-section-glow" />
+      <div className="relative mx-auto max-w-4xl">
+        <span className="service-detail-eyebrow mb-2 block">Elegance For Every Moment</span>
+        <h2 className="site-heading mb-3 text-3xl font-bold leading-tight md:text-5xl">
+          Bridal & Groom Wear <span className="text-gradient">and Jewelry</span>
+        </h2>
+        <p className="text-sm leading-7 text-gray-300 md:text-base">
+          Complete styling support for brides and grooms, from couture attire to jewelry details that complete every wedding look.
+        </p>
+      </div>
+    </motion.section>
+    <ServiceContentSections sections={bridalWearSections} />
+  </>
+);
+
+const GiftsReturnContent = () => <ServiceContentSections sections={giftsReturnSections} />;
+
+const SpecialEntriesContent = () => <ServiceContentSections sections={specialEntriesSections} />;
+
+const TransportationContent = () => <ServiceContentSections sections={transportationSections} />;
+
+const BirthdayDecorationContent = () => <ServiceContentSections sections={birthdayDecorationSections} />;
+
+const FunActivitiesContent = () => <ServiceContentSections sections={funActivitiesSections} />;
+
+const CateringContent = () => <ServiceContentSections sections={cateringSections} />;
+const CorporateNetworkingContent = () => <ServiceContentSections sections={corporateNetworkingSections} />;
+const ConferencesContent = () => <ServiceContentSections sections={conferencesSections} />;
+const ProductLaunchesContent = () => <ServiceContentSections sections={productLaunchSections} />;
+const CorporateMeetingsContent = () => <ServiceContentSections sections={corporateMeetingsSections} />;
 const ServiceDetail = () => {
   const { serviceSlug, itemSlug } = useParams();
   const service = findServiceBySlug(serviceSlug);
@@ -242,20 +590,17 @@ const ServiceDetail = () => {
 
   if (!service || (itemSlug && !selectedItem)) {
     return (
-      <div className="bg-navy-900 px-6 pb-20 pt-40 text-white lg:px-12 lg:pt-44">
-        <div className="container mx-auto max-w-4xl text-center">
-          <span className="site-eyebrow mb-4 block">Service</span>
+      <section className="service-detail-page relative overflow-hidden px-6 pb-20 pt-40 text-white lg:px-12 lg:pt-44">
+        <div className="relative z-10 mx-auto max-w-4xl text-center">
+          <span className="service-detail-eyebrow mb-4 block">Service</span>
           <h1 className="site-heading mb-6 text-4xl font-bold">Service Not Found</h1>
           <p className="mb-8 text-gray-300">The service you opened is not available.</p>
-          <Link
-            to="/services"
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-magenta to-orange px-7 py-3 text-sm font-semibold uppercase tracking-wide text-white"
-          >
+          <Link to="/services" className="service-detail-cta inline-flex items-center gap-2">
             <ArrowLeft size={16} />
             View All Services
           </Link>
         </div>
-      </div>
+      </section>
     );
   }
 
@@ -264,33 +609,44 @@ const ServiceDetail = () => {
   const selectedItemSlug = selectedItem ? slugifyServiceItem(selectedItem) : '';
   const isInvitationStationery = selectedItemSlug === 'invitations-and-stationery';
   const isBeautyServices = selectedItemSlug === 'beauty-services-makeup-and-mehndi';
+  const isBridalWear = selectedItemSlug === 'bridal-and-groom-wear-and-jewelry';
+  const isGiftsReturn = selectedItemSlug === 'gifts-and-return-gifts';
+  const isSpecialEntries = selectedItemSlug === 'special-entries';
+  const isTransportation = selectedItemSlug === 'transportation';
+  const isBirthdayDecoration = selectedItemSlug === 'birthday-decoration';
+  const isFunActivities = selectedItemSlug === 'fun-activities';
+  const isNetworkingEvents = selectedItemSlug === 'networking-events';
+  const isConferences = selectedItemSlug === 'conferences';
+  const isProductLaunches = selectedItemSlug === 'product-launches';
+  const isCorporateMeetings = selectedItemSlug === 'corporate-meetings';
+  const isCateringService = service.slug === 'catering' && !selectedItem;
 
   return (
-    <div className="bg-navy-900 px-6 pb-20 pt-40 text-white lg:px-12 lg:pt-44">
-      <div className="container mx-auto max-w-7xl">
-        <Link
-          to="/services"
-          className="mb-8 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.22em] text-gray-300 transition-colors hover:text-gold"
-        >
-          <ArrowLeft size={16} />
+    <section className="service-detail-page relative overflow-hidden px-5 pb-20 pt-40 text-white lg:px-10 lg:pt-44">
+      <div className="services-dots services-dots-left" />
+      <div className="services-dots services-dots-right" />
+      <div className="services-wave services-wave-left" />
+      <div className="services-wave services-wave-right" />
+
+      <div className="relative z-10 mx-auto max-w-7xl">
+        <Link to="/services" className="mb-5 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.22em] text-gray-300 transition-colors hover:text-gold">
+          <ArrowLeft size={14} />
           All Services
         </Link>
 
-        <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="grid gap-6 lg:grid-cols-[1fr_0.95fr]">
           <motion.section
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            className="glass-card relative overflow-hidden p-8 md:p-10"
+            className="service-detail-hero-card relative overflow-hidden rounded-xl p-7 md:p-8"
           >
-            <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-magenta/20 blur-3xl" />
-            <div className="absolute bottom-0 left-0 h-44 w-44 rounded-full bg-orange/15 blur-3xl" />
-
+            <div className="service-detail-hero-grid" />
             <div className="relative">
-              <div className="mb-7 flex h-20 w-20 items-center justify-center rounded-full border border-magenta/40 bg-magenta/10 text-magenta shadow-[0_0_28px_rgba(233,30,99,0.25)]">
-                <Icon size={36} strokeWidth={1.7} />
+              <div className="mb-7 flex h-16 w-16 items-center justify-center rounded-full border border-magenta/55 bg-magenta/10 text-magenta shadow-[0_0_24px_rgba(233,30,99,0.22)]">
+                <Icon size={29} strokeWidth={1.7} />
               </div>
-              <span className="site-eyebrow mb-4 block">{service.title}</span>
-              <h1 className="site-heading mb-6 text-4xl font-bold leading-tight md:text-6xl">
+              <span className="service-detail-eyebrow mb-3 block">{service.title}</span>
+              <h1 className="site-heading max-w-3xl text-4xl font-bold leading-tight md:text-6xl">
                 {selectedItem ? (
                   <>
                     {selectedItem}
@@ -303,19 +659,15 @@ const ServiceDetail = () => {
                   </>
                 )}
               </h1>
-              <p className="max-w-3xl text-lg leading-8 text-gray-300">
+              <p className="mt-5 max-w-2xl text-sm leading-7 text-gray-300 md:text-base">
                 {selectedItem
                   ? `India Solution handles ${selectedItem.toLowerCase()} as part of our ${service.title.toLowerCase()} service, with careful planning, polished execution, and attention to every guest-facing detail.`
                   : service.description}
               </p>
-              <div className="mt-9">
-                <Link
-                  to="/contact"
-                  className="inline-flex rounded-full bg-gradient-to-r from-magenta to-orange px-8 py-3 text-sm font-semibold uppercase tracking-wide text-white transition-transform hover:-translate-y-0.5"
-                >
-                  Enquire Now
-                </Link>
-              </div>
+              <Link to="/contact" className="service-detail-cta mt-7 inline-flex items-center gap-2">
+                Enquire Now
+                <ChevronRight size={15} />
+              </Link>
             </div>
           </motion.section>
 
@@ -323,10 +675,10 @@ const ServiceDetail = () => {
             variants={staggerContainer}
             initial="hidden"
             animate="visible"
-            className="glass-card p-7 md:p-8"
+            className="service-detail-chooser relative overflow-hidden rounded-xl p-6 md:p-7"
           >
-            <span className="site-eyebrow mb-4 block">Service Points</span>
-            <h2 className="site-heading mb-6 text-3xl font-semibold">Choose A Detail</h2>
+            <span className="service-detail-eyebrow mb-2 block">Service Points</span>
+            <h2 className="site-heading mb-5 text-3xl font-semibold">Choose A Detail</h2>
             <div className="grid gap-3">
               {service.items.map((item) => {
                 const isActive = item === selectedItem;
@@ -334,13 +686,10 @@ const ServiceDetail = () => {
                   <motion.div key={item} variants={fadeUp}>
                     <Link
                       to={`/services/${service.slug}/${slugifyServiceItem(item)}`}
-                      className={`block rounded-xl border px-4 py-4 text-sm font-semibold transition-all ${
-                        isActive
-                          ? 'border-gold/60 bg-gold/15 text-gold'
-                          : 'border-white/10 bg-white/[0.03] text-gray-200 hover:border-magenta/50 hover:bg-magenta/10 hover:text-white'
-                      }`}
+                      className={`service-detail-choice ${isActive ? 'service-detail-choice-active' : ''}`}
                     >
-                      {item}
+                      <ChevronRight size={13} className="shrink-0" />
+                      <span>{item}</span>
                     </Link>
                   </motion.div>
                 );
@@ -349,22 +698,33 @@ const ServiceDetail = () => {
           </motion.aside>
         </div>
 
-        {isInvitationStationery && <InvitationStationeryContent />}
+        {isInvitationStationery && <ServiceContentSections sections={invitationSections} />}
         {isBeautyServices && <BeautyServicesContent />}
+        {isBridalWear && <BridalWearContent />}
+        {isGiftsReturn && <GiftsReturnContent />}
+        {isSpecialEntries && <SpecialEntriesContent />}
+        {isTransportation && <TransportationContent />}
+        {isBirthdayDecoration && <BirthdayDecorationContent />}
+        {isFunActivities && <FunActivitiesContent />}
+        {isNetworkingEvents && <CorporateNetworkingContent />}
+        {isConferences && <ConferencesContent />}
+        {isProductLaunches && <ProductLaunchesContent />}
+        {isCorporateMeetings && <CorporateMeetingsContent />}
+        {isCateringService && <CateringContent />}
 
         <motion.section
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="mt-14"
+          className="mt-10"
         >
-          <div className="mb-7 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+          <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
             <div>
-              <span className="site-eyebrow mb-3 block">Related Services</span>
+              <span className="service-detail-eyebrow mb-2 block">Related Services</span>
               <h2 className="site-heading text-3xl font-semibold">Explore More</h2>
             </div>
-            <Link to="/services" className="text-sm font-semibold uppercase tracking-[0.18em] text-gold">
+            <Link to="/services" className="text-xs font-semibold uppercase tracking-[0.18em] text-gold transition-colors hover:text-orange">
               View All
             </Link>
           </div>
@@ -373,12 +733,12 @@ const ServiceDetail = () => {
             {relatedServices.map((item) => {
               const RelatedIcon = iconMap[item.icon] ?? Sparkles;
               return (
-                <motion.article key={item.slug} variants={fadeUp} className="glass-card p-6">
-                  <RelatedIcon className="mb-5 text-magenta" size={30} strokeWidth={1.7} />
-                  <h3 className="site-heading mb-3 text-xl font-semibold">{item.title}</h3>
-                  <p className="mb-5 text-sm leading-6 text-gray-400">{item.description}</p>
-                  <Link to={`/services/${item.slug}`} className="text-sm font-semibold text-gold">
-                    Open Service
+                <motion.article key={item.slug} variants={fadeUp} className="service-related-card rounded-xl p-5">
+                  <RelatedIcon className="mb-4 text-magenta" size={26} strokeWidth={1.7} />
+                  <h3 className="site-heading mb-2 text-lg font-semibold">{item.title}</h3>
+                  <p className="mb-4 text-xs leading-5 text-gray-400">{item.description}</p>
+                  <Link to={`/services/${item.slug}`} className="text-xs font-semibold text-gold transition-colors hover:text-orange">
+                    Explore Service
                   </Link>
                 </motion.article>
               );
@@ -386,7 +746,7 @@ const ServiceDetail = () => {
           </div>
         </motion.section>
       </div>
-    </div>
+    </section>
   );
 };
 
