@@ -3,6 +3,7 @@ import Navbar from './components/layout/Navbar';
 import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
+import Contact from './pages/Contact';
 import Footer from './components/layout/Footer';
 
 function App() {
@@ -16,6 +17,8 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/about-us" element={<About />} />
             <Route path="/services" element={<Services />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/contact-us" element={<Contact />} />
           </Routes>
         </main>
         <Footer />

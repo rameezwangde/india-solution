@@ -40,6 +40,9 @@
   .site-gold-text {
     @apply text-gold;
   }
+  .contact-input {
+    @apply w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition-colors placeholder:text-gray-500 focus:border-magenta/70 focus:bg-white/10;
+  }
   
   .glow-magenta {
     @apply shadow-[0_0_20px_rgba(233,30,99,0.4)];
