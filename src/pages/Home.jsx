@@ -394,17 +394,33 @@ const Home = () => {
         </div>
       </section>
       {/* Happy Clients */}
-      <section className="bg-white pb-20 text-black">
-        <div className="border-b-[14px] border-[#103A69]">
-          <div className="rounded-[28px] bg-[#5AA4EE] px-6 py-5 text-center md:rounded-[34px]">
-            <h2 className="site-heading text-4xl font-black md:text-5xl">Our Happy Clients</h2>
+      <section className="bg-[#10172A] px-5 py-16 text-white sm:px-8 lg:px-12">
+        <div className="happy-clients-panel relative mx-auto max-w-[1320px] overflow-hidden rounded-[22px] px-5 py-8 sm:px-8 lg:px-12">
+          <div className="happy-clients-dots happy-clients-dots-left" />
+          <div className="happy-clients-dots happy-clients-dots-right" />
+
+          <div className="relative z-10 text-center">
+            <div className="mx-auto mb-4 flex max-w-xl items-center justify-center gap-4">
+              <span className="h-px flex-1 bg-gradient-to-r from-transparent to-magenta" />
+              <span className="text-gold">&#10022;</span>
+              <span className="h-px flex-1 bg-gradient-to-r from-orange to-transparent" />
+            </div>
+            <h2 className="site-heading text-4xl font-semibold md:text-5xl">
+              Our <span className="site-heading-accent">Happy</span> Clients
+            </h2>
+            <div className="mx-auto mt-4 flex max-w-4xl items-center justify-center gap-4">
+              <span className="h-px flex-1 bg-gradient-to-r from-transparent via-white/10 to-magenta/40" />
+              <span className="text-gold">&#10022;</span>
+              <span className="h-px flex-1 bg-gradient-to-r from-orange/40 via-white/10 to-transparent" />
+            </div>
           </div>
 
-          <div className="overflow-hidden py-14">
-            <div className="client-logo-track flex items-center gap-16 md:gap-24">
+          <div className="relative z-10 mt-9 overflow-hidden py-5">
+            <div className="client-logo-track flex items-center gap-0">
               {[...happyClients, ...happyClients].map((brand, index) => (
-                <div key={`${brand}-${index}`} className="client-logo-item" aria-hidden={index >= happyClients.length}>
+                <div key={`${brand}-${index}`} className="client-logo-item happy-client-logo-item" aria-hidden={index >= happyClients.length}>
                   <ClientLogo brand={brand} />
+                  <span className="happy-client-logo-divider" />
                 </div>
               ))}
             </div>

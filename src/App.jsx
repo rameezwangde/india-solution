@@ -4,6 +4,8 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
 import Contact from './pages/Contact';
+import FAQ from './pages/FAQ';
+import Testimonials from './pages/Testimonials';
 import Footer from './components/layout/Footer';
 
 function App() {
@@ -19,6 +21,9 @@ function App() {
             <Route path="/services" element={<Services />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/contact-us" element={<Contact />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/testimonials" element={<Testimonials />} />
+            <Route path="/testimonial" element={<Testimonials />} />
           </Routes>
         </main>
         <Footer />

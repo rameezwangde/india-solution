@@ -10,10 +10,12 @@ const Footer = () => {
           
           {/* Brand */}
           <div>
-            <Link to="/" className="inline-block mb-6">
-              <span className="text-2xl font-bold text-white tracking-tight">
-                India <span className="site-gold-text">Solution</span>
-              </span>
+            <Link to="/" className="mb-6 inline-block" aria-label="India Solution home">
+              <img
+                src="/india-solution-logo.png"
+                alt="India Solution"
+                className="h-20 w-auto object-contain drop-shadow-[0_0_22px_rgba(255,255,255,0.18)]"
+              />
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
               Creating unforgettable events since 2010. We turn your vision into extraordinary experiences with flawless execution.
@@ -81,7 +83,7 @@ const Footer = () => {
         
         <div className="pt-8 border-t border-white/5 text-center flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-gray-500 text-sm">
-            Â© {new Date().getFullYear()} India Solution Events. All rights reserved.
+            Ã‚Â© {new Date().getFullYear()} India Solution Events. All rights reserved.
           </p>
           <div className="flex gap-4">
             <Link to="/privacy" className="text-gray-500 hover:text-white text-sm transition-colors">Privacy Policy</Link>

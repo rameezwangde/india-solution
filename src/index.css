@@ -21,8 +21,7 @@
   .glass-card {
     @apply bg-navy-800/65 backdrop-blur-lg border border-white/15 rounded-2xl shadow-xl;
   }
-  
-  .text-gradient {
+.text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-magenta via-gold to-orange;
   }
   .site-eyebrow {
@@ -99,7 +98,7 @@
   position: relative;
   display: inline-block;
   padding-bottom: 0.4rem;
-  color: #111;
+  color: #f8fafc;
   font-size: clamp(2.5rem, 4vw, 4rem);
   font-weight: 800;
   line-height: 1;
@@ -480,4 +479,122 @@
     right: 0;
     width: 31%;
   }
+}
+
+@keyframes testimonialAutoScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-50% - 0.75rem));
+  }
+}
+
+.testimonial-scroll-wrap {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(19rem, 27rem);
+  gap: 1.5rem;
+  width: max-content;
+  min-width: 100%;
+  padding: 0.25rem 0.5rem 1.25rem;
+  animation: testimonialAutoScroll 42s linear infinite;
+  will-change: transform;
+}
+
+.testimonial-scroll-wrap:hover,
+.testimonial-scroll-wrap:focus-within {
+  animation-play-state: paused;
+}
+
+.testimonial-scroll-item {
+  min-width: 0;
+}
+
+.testimonial-scroll-viewport {
+  overflow: hidden;
+  padding: 0.25rem 0 1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .testimonial-scroll-viewport {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .testimonial-scroll-wrap {
+    animation: none;
+  }
+}
+.happy-clients-panel {
+  border: 1px solid rgba(233, 30, 99, 0.5);
+  background:
+    radial-gradient(circle at 2% 0%, rgba(233, 30, 99, 0.22), transparent 26%),
+    radial-gradient(circle at 98% 0%, rgba(244, 196, 48, 0.18), transparent 24%),
+    linear-gradient(112deg, #080B17 0%, #12182A 48%, #11110D 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 24px 60px rgba(0, 0, 0, 0.28);
+}
+
+.happy-clients-dots {
+  position: absolute;
+  top: 0;
+  width: 12rem;
+  height: 8.5rem;
+  opacity: 0.45;
+  background-image: radial-gradient(currentColor 1.3px, transparent 1.8px);
+  background-size: 11px 11px;
+  pointer-events: none;
+}
+
+.happy-clients-dots-left {
+  left: 0;
+  color: rgba(233, 30, 99, 0.72);
+  mask-image: linear-gradient(90deg, #000, transparent 82%);
+}
+
+.happy-clients-dots-right {
+  right: 0;
+  color: rgba(244, 196, 48, 0.55);
+  mask-image: linear-gradient(270deg, #000, transparent 82%);
+}
+
+.happy-client-logo-item {
+  position: relative;
+  min-width: clamp(210px, 23vw, 285px);
+  padding-inline: clamp(1.5rem, 3vw, 2.75rem);
+  filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.08));
+}
+
+.happy-client-logo-divider {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  height: 4.25rem;
+  width: 1px;
+  transform: translateY(-50%);
+  background: linear-gradient(to bottom, transparent, rgba(244, 196, 48, 0.42), transparent);
+}
+
+.happy-client-logo-item::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -1.3rem;
+  width: 3.5rem;
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, #E91E63, #F4C430, #FF9800);
+}
+
+.happy-client-logo-item::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -1.48rem;
+  z-index: 1;
+  width: 0.42rem;
+  height: 0.42rem;
+  transform: translateX(-50%) rotate(45deg);
+  background: #F4C430;
+  box-shadow: 0 0 10px rgba(244, 196, 48, 0.55);
 }

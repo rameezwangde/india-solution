@@ -58,7 +58,7 @@ const Navbar = () => {
             <img
               src="/india-solution-logo.png"
               alt="India Solution"
-              className="h-16 w-auto object-contain sm:h-[72px] lg:h-20"
+              className="h-24 w-auto object-contain drop-shadow-[0_0_22px_rgba(255,255,255,0.2)] sm:h-28 lg:h-32"
             />
           </Link>
 
