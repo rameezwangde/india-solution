@@ -405,6 +405,30 @@ const corporateMeetingsSections = [
     ],
   },
 ];
+const preWeddingCeremonySections = [
+  {
+    eyebrow: 'Pre-Wedding Ceremony Services',
+    title: 'Pre-Wedding Ceremony Services',
+    accent: 'Ceremony',
+    description: (
+      <>
+        Our <strong>Pre-Wedding Ceremony Services</strong> include a range of celebrations and rituals that set the stage for your wedding day. From <strong>engagement parties</strong> to <strong>mehndi celebrations and sangeet events</strong>, we help plan and execute each pre-wedding function with creativity and precision. Our expert team ensures everything is taken care of, including the venue, decor, entertainment, and coordination, so you can focus on making memories with your loved ones. Let us help you create a seamless and unforgettable pre-wedding experience that builds excitement for your special day.
+      </>
+    ),
+    items: [
+      'Engagement Party Planning',
+      'Mehndi Ceremony Coordination',
+      'Sangeet Party Planning',
+      'Bridal Shower and Groomâ€™s Party',
+      'Pre-Wedding Photoshoots',
+      'Customized Invitations for Pre-Wedding Events',
+      'Catering and Menu Planning for Pre-Wedding Functions',
+      'Event Decor and Floral Arrangements',
+      'Entertainment and Music Services',
+    ],
+  },
+];
+
 const cateringSections = [
   {
     eyebrow: 'Culinary Experiences',
@@ -583,6 +607,7 @@ const CorporateNetworkingContent = () => <ServiceContentSections sections={corpo
 const ConferencesContent = () => <ServiceContentSections sections={conferencesSections} />;
 const ProductLaunchesContent = () => <ServiceContentSections sections={productLaunchSections} />;
 const CorporateMeetingsContent = () => <ServiceContentSections sections={corporateMeetingsSections} />;
+const PreWeddingCeremonyContent = () => <ServiceContentSections sections={preWeddingCeremonySections} />;
 const ServiceDetail = () => {
   const { serviceSlug, itemSlug } = useParams();
   const service = findServiceBySlug(serviceSlug);
@@ -619,7 +644,8 @@ const ServiceDetail = () => {
   const isConferences = selectedItemSlug === 'conferences';
   const isProductLaunches = selectedItemSlug === 'product-launches';
   const isCorporateMeetings = selectedItemSlug === 'corporate-meetings';
-  const isCateringService = service.slug === 'catering' && !selectedItem;
+  const isEventDecorFloralArrangements = selectedItemSlug === 'event-decor-and-floral-arrangements';
+  const isCateringService = service.slug === 'catering';
 
   return (
     <section className="service-detail-page relative overflow-hidden px-5 pb-20 pt-40 text-white lg:px-10 lg:pt-44">
@@ -711,6 +737,7 @@ const ServiceDetail = () => {
         {isProductLaunches && <ProductLaunchesContent />}
         {isCorporateMeetings && <CorporateMeetingsContent />}
         {isCateringService && <CateringContent />}
+        {isEventDecorFloralArrangements && <PreWeddingCeremonyContent />}
 
         <motion.section
           variants={staggerContainer}
