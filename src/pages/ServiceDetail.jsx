@@ -4,10 +4,12 @@ import {
   ArrowLeft,
   BriefcaseBusiness,
   Cake,
+  CheckCircle2,
   Gem,
   Gift,
   Heart,
   House,
+  Mail,
   Megaphone,
   Music,
   PanelsTopLeft,
@@ -40,6 +42,199 @@ const iconMap = {
   Utensils,
 };
 
+const invitationSections = [
+  {
+    title: 'Invitations & Stationery',
+    description: (
+      <>
+        Make your event unforgettable with our <strong>Invitation & Stationery Services</strong>, offering customized, high-quality invitations and stationery to match your unique style. From <strong>luxury invitations</strong> to <strong>RSVP cards, thank-you notes, and event signage</strong>, we ensure every detail is perfect. Our expert designers work closely with you to create personalized designs for <strong>corporate events, personal celebrations</strong>, and more. Let us set the tone for your event with stunning custom stationery that leaves a lasting impression
+      </>
+    ),
+    items: [
+      'Luxury Foil-Stamped Invitations',
+      'Laser-Cut Invitations',
+      'Vintage Letterpress Invitations',
+      'Modern Minimalist Invitations',
+      'Floral Watercolor Invitations',
+      'Rustic Kraft Paper Invitations',
+      'Custom Illustration Invitations',
+      'Destination Wedding Invitations',
+      'Interactive Invitations',
+    ],
+  },
+  {
+    title: 'Digital Invitations',
+    description: (
+      <>
+        Make your event stand out with our <strong>Digital Invitation Services</strong>, offering modern, eco-friendly, and interactive invitations tailored to your style. From <strong>animated e-vites</strong> to <strong>RSVP-integrated invitations, social media invites, and custom digital cards</strong>, we ensure a seamless, engaging experience for your guests. Our expert designers create personalized digital invitations for <strong>corporate events, personal celebrations</strong>, and more, making it easy to share event details instantly. Set the tone for your event with digital invitations that are both stylish and convenient
+      </>
+    ),
+    items: [
+      'Animated Video Invitations',
+      'E-vites with RSVP Integration',
+      'Email Invitations',
+      'Interactive Webpage Invitations',
+      'Social Media Invitations',
+      'QR Code Invitations',
+      'Virtual Event Invitations',
+      'Animated GIF Invitations',
+      'Personalized E-Cards',
+    ],
+  },
+];
+
+const beautySections = [
+  {
+    title: 'Bridal Makeup Services',
+    description: 'Transform your bridal look with our expert Bridal Makeup Service, designed to enhance your natural beauty for your big day. Whether you prefer a classic, glamorous, or modern style, our skilled makeup artists use high-quality products and personalized techniques to create a flawless, long-lasting look. Trust our makeup experts to make you feel radiant, from the ceremony to the celebration. Book your bridal makeup consultation today for a perfect, glowing look',
+    items: [
+      'Pre-Wedding Trial Session',
+      'Customizable Makeup Styles',
+      'Flawless Foundation Application',
+      'Eye Makeup & Lashes',
+      'Contouring & Highlighting',
+      'Bridal Hair Styling',
+      'Long-Lasting Makeup',
+      'Touch-Up Services',
+      'Makeup for Bridesmaids & Guests',
+    ],
+  },
+  {
+    title: 'Mehndi Services for Brides',
+    description: 'Enhance your bridal beauty with our expert Mehndi services. Our skilled Mehndi artists create custom, intricate designs that blend tradition and elegance. Whether traditional or modern styles, we craft the perfect design for your bridal look using natural henna for long-lasting, stunning results. Book your bridal Mehndi consultation today for a flawless, personalized experience',
+    items: [
+      'Bridal Mehndi Designs',
+      'Henna Tattoo Services',
+      'Custom Mehndi Designs',
+      'Pre-Wedding Mehndi Trial',
+      'Full-Hand & Foot Mehndi',
+      'Traditional Bridal Mehndi',
+      'Modern & Fusion Mehndi Styles',
+      'Bridal Mehndi for Sangeet or Engagement',
+      'Henna Removal Services',
+    ],
+  },
+];
+
+const InvitationStationeryContent = () => (
+  <motion.section
+    variants={staggerContainer}
+    initial="hidden"
+    whileInView="visible"
+    viewport={{ once: true }}
+    className="mt-12 grid gap-6"
+  >
+    {invitationSections.map((section) => (
+      <motion.article
+        key={section.title}
+        variants={fadeUp}
+        className="glass-card relative overflow-hidden border-magenta/25 p-7 md:p-9"
+      >
+        <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-gold/10 blur-3xl" />
+        <div className="relative grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+          <div>
+            <span className="site-eyebrow mb-3 block">Custom Designs</span>
+            <h2 className="site-heading mb-5 text-3xl font-bold leading-tight md:text-5xl">
+              {section.title.includes('&') ? (
+                <>
+                  Invitations <span className="text-gradient">& Stationery</span>
+                </>
+              ) : (
+                <span className="text-gradient">{section.title}</span>
+              )}
+            </h2>
+            <p className="text-base leading-8 text-gray-300 md:text-lg">{section.description}</p>
+            <Link
+              to="/contact"
+              className="mt-8 inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-magenta to-orange px-7 py-3 text-sm font-semibold uppercase tracking-wide text-white transition-transform hover:-translate-y-0.5"
+            >
+              <Mail size={17} />
+              Contact us
+            </Link>
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-2">
+            {section.items.map((item) => (
+              <div
+                key={item}
+                className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.035] px-4 py-3 text-sm font-semibold text-gray-100"
+              >
+                <CheckCircle2 size={18} className="shrink-0 text-gold" strokeWidth={2} />
+                <span>{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </motion.article>
+    ))}
+  </motion.section>
+);
+
+const BeautyServicesContent = () => (
+  <motion.section
+    variants={staggerContainer}
+    initial="hidden"
+    whileInView="visible"
+    viewport={{ once: true }}
+    className="mt-12 grid gap-6"
+  >
+    <motion.div variants={fadeUp} className="glass-card relative overflow-hidden p-7 text-center md:p-9">
+      <div className="absolute left-1/2 top-0 h-32 w-72 -translate-x-1/2 rounded-full bg-magenta/20 blur-3xl" />
+      <div className="relative mx-auto max-w-4xl">
+        <span className="site-eyebrow mb-3 block">Bridal Beauty</span>
+        <h2 className="site-heading mb-4 text-3xl font-bold leading-tight md:text-5xl">
+          Beauty Services, <span className="text-gradient">Makeup, and Mehndi</span>
+        </h2>
+        <p className="text-base leading-8 text-gray-300 md:text-lg">
+          Enhance your beauty and glow with our expert Beauty Services, Makeup, and Mehndi - creating the perfect look for your unforgettable moments
+        </p>
+      </div>
+    </motion.div>
+
+    {beautySections.map((section) => (
+      <motion.article
+        key={section.title}
+        variants={fadeUp}
+        className="glass-card relative overflow-hidden border-magenta/25 p-7 md:p-9"
+      >
+        <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-magenta/10 blur-3xl" />
+        <div className="relative grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+          <div>
+            <span className="site-eyebrow mb-3 block">Wedding Ready</span>
+            <h2 className="site-heading mb-5 text-3xl font-bold leading-tight md:text-5xl">
+              {section.title.includes('Mehndi') ? (
+                <span className="text-gradient">{section.title}</span>
+              ) : (
+                section.title
+              )}
+            </h2>
+            <p className="text-base leading-8 text-gray-300 md:text-lg">{section.description}</p>
+            <Link
+              to="/contact"
+              className="mt-8 inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-magenta to-orange px-7 py-3 text-sm font-semibold uppercase tracking-wide text-white transition-transform hover:-translate-y-0.5"
+            >
+              <Mail size={17} />
+              Contact us
+            </Link>
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-2">
+            {section.items.map((item) => (
+              <div
+                key={item}
+                className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.035] px-4 py-3 text-sm font-semibold text-gray-100"
+              >
+                <CheckCircle2 size={18} className="shrink-0 text-gold" strokeWidth={2} />
+                <span>{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </motion.article>
+    ))}
+  </motion.section>
+);
+
 const ServiceDetail = () => {
   const { serviceSlug, itemSlug } = useParams();
   const service = findServiceBySlug(serviceSlug);
@@ -66,6 +261,9 @@ const ServiceDetail = () => {
 
   const Icon = iconMap[service.icon] ?? Sparkles;
   const relatedServices = serviceCatalog.filter((item) => item.slug !== service.slug).slice(0, 3);
+  const selectedItemSlug = selectedItem ? slugifyServiceItem(selectedItem) : '';
+  const isInvitationStationery = selectedItemSlug === 'invitations-and-stationery';
+  const isBeautyServices = selectedItemSlug === 'beauty-services-makeup-and-mehndi';
 
   return (
     <div className="bg-navy-900 px-6 pb-20 pt-40 text-white lg:px-12 lg:pt-44">
@@ -150,6 +348,9 @@ const ServiceDetail = () => {
             </div>
           </motion.aside>
         </div>
+
+        {isInvitationStationery && <InvitationStationeryContent />}
+        {isBeautyServices && <BeautyServicesContent />}
 
         <motion.section
           variants={staggerContainer}
