@@ -59,17 +59,23 @@ const Navbar = () => {
 
       <div className="container mx-auto px-6 lg:px-12 py-2">
         <div className="flex items-center justify-between">
-          <Link to="/" className="flex flex-col items-center justify-center shrink-0 -space-y-3" aria-label="India Solution home">
+          <Link to="/" className="flex flex-col items-center justify-center shrink-0 gap-0" aria-label="India Solution home">
             <img
               src="/logo-only.png"
               alt="India Solution Logo"
-              className="h-16 w-auto object-contain drop-shadow-[0_0_22px_rgba(255,255,255,0.2)] sm:h-20 lg:h-24"
+              className="h-10 w-auto object-contain drop-shadow-[0_0_22px_rgba(255,255,255,0.2)] sm:h-12 lg:h-14 relative z-10"
             />
             <img
-              src="/text-logo.png"
+              src="/text-logo-new.png"
               alt="India Solution"
-              className="h-6 w-auto object-contain drop-shadow-[0_0_22px_rgba(255,255,255,0.2)] sm:h-8 lg:h-10"
+              className="h-4 w-auto object-contain drop-shadow-[0_0_22px_rgba(255,255,255,0.2)] sm:h-5 lg:h-6 relative z-20"
               style={{ filter: 'brightness(0) saturate(100%) invert(75%) sepia(74%) saturate(769%) hue-rotate(355deg) brightness(102%) contrast(106%)' }}
+            />
+            <img
+              src="/text-logo-2.png"
+              alt="Experience anything and everything"
+              className="h-2.5 w-auto object-contain drop-shadow-[0_0_22px_rgba(255,255,255,0.2)] sm:h-3 lg:h-4 relative z-30"
+              style={{ filter: 'brightness(0) invert(1)' }}
             />
           </Link>
 

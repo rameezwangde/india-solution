@@ -10,17 +10,23 @@ const Footer = () => {
 
           {/* Brand */}
           <div>
-            <Link to="/" className="mb-6 inline-flex flex-col items-start -space-y-3" aria-label="India Solution home">
+            <Link to="/" className="mb-6 inline-flex flex-col items-start gap-0" aria-label="India Solution home">
               <img
                 src="/logo-only.png"
                 alt="India Solution Logo"
-                className="h-14 w-auto object-contain drop-shadow-[0_0_22px_rgba(255,255,255,0.18)]"
+                className="h-8 w-auto object-contain drop-shadow-[0_0_22px_rgba(255,255,255,0.18)] relative z-10"
               />
               <img
-                src="/text-logo.png"
+                src="/text-logo-new.png"
                 alt="India Solution"
-                className="h-5 w-auto object-contain drop-shadow-[0_0_22px_rgba(255,255,255,0.18)]"
+                className="h-3.5 w-auto object-contain drop-shadow-[0_0_22px_rgba(255,255,255,0.18)] relative z-20"
                 style={{ filter: 'brightness(0) saturate(100%) invert(75%) sepia(74%) saturate(769%) hue-rotate(355deg) brightness(102%) contrast(106%)' }}
+              />
+              <img
+                src="/text-logo-2.png"
+                alt="Experience anything and everything"
+                className="h-2 w-auto object-contain drop-shadow-[0_0_22px_rgba(255,255,255,0.18)] relative z-30"
+                style={{ filter: 'brightness(0) invert(1)' }}
               />
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
