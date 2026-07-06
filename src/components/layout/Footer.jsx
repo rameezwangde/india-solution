@@ -7,14 +7,20 @@ const Footer = () => {
     <footer className="bg-navy-800 border-t border-white/5 pt-16 pb-8">
       <div className="container mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-          
+
           {/* Brand */}
           <div>
-            <Link to="/" className="mb-6 inline-block" aria-label="India Solution home">
+            <Link to="/" className="mb-6 inline-flex flex-col items-start -space-y-3" aria-label="India Solution home">
               <img
-                src="/india-solution-logo.png"
+                src="/logo-only.png"
+                alt="India Solution Logo"
+                className="h-14 w-auto object-contain drop-shadow-[0_0_22px_rgba(255,255,255,0.18)]"
+              />
+              <img
+                src="/text-logo.png"
                 alt="India Solution"
-                className="h-20 w-auto object-contain drop-shadow-[0_0_22px_rgba(255,255,255,0.18)]"
+                className="h-5 w-auto object-contain drop-shadow-[0_0_22px_rgba(255,255,255,0.18)]"
+                style={{ filter: 'brightness(0) saturate(100%) invert(75%) sepia(74%) saturate(769%) hue-rotate(355deg) brightness(102%) contrast(106%)' }}
               />
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
@@ -78,9 +84,9 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          
+
         </div>
-        
+
         <div className="pt-8 border-t border-white/5 text-center flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-gray-500 text-sm">
             Ã‚Â© {new Date().getFullYear()} India Solution Events. All rights reserved.

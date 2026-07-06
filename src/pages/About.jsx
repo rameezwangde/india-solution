@@ -47,18 +47,15 @@ const About = () => {
           animate={{ opacity: 1, y: 0 }}
           className="container relative z-10 mx-auto max-w-5xl text-center"
         >
-          <span className="mb-4 block text-xs font-bold uppercase tracking-[0.35em] text-gold">About Us</span>
+          <span className="mb-4 block text-xs font-bold uppercase tracking-[0.35em] text-gold">About India Solution</span>
           <h1 className="site-heading text-4xl font-semibold leading-tight md:text-6xl">
-            Welcome to <span className="site-heading-accent">India Solution</span>
+            Designed, Produced & Delivered <span className="site-heading-accent block mt-3 text-4xl md:text-5xl">Under One Roof.</span>
           </h1>
           <div className="mx-auto my-5 flex w-44 items-center justify-center gap-3">
             <span className="h-px flex-1 bg-gradient-to-r from-transparent to-magenta" />
             <span className="h-3 w-3 rotate-45 bg-gradient-to-br from-magenta to-orange" />
             <span className="h-px flex-1 bg-gradient-to-r from-orange to-transparent" />
           </div>
-          <p className="text-lg font-semibold text-white md:text-xl">
-            Welcome to India Solution - Where Every Event Becomes a Remarkable Memory!
-          </p>
         </motion.div>
       </section>
 
@@ -75,15 +72,24 @@ const About = () => {
             viewport={{ once: true }}
             className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center"
           >
-            <motion.div variants={fadeUp} className="space-y-7 text-center text-gray-300 lg:text-left">
-              <p className="text-lg leading-relaxed md:text-xl">
-                At <strong className="site-gold-text">India Solution</strong>, we believe that every event has a story to tell, a moment to cherish, and an opportunity to create lasting impressions. Based in the vibrant city of <strong className="site-gold-text">Bengaluru</strong>, we take pride in offering end-to-end event management services across India, crafting experiences that are as unique as your vision.
+            <motion.div variants={fadeUp} className="space-y-6 text-center text-gray-300 lg:text-left">
+              <p className="text-base leading-relaxed md:text-lg">
+                For over 15 years, <strong className="site-gold-text">India Solution</strong> has been one of Bengaluru’s trusted names in Event Management and In-House Event Production, delivering seamless, premium-quality experiences for events of every scale.
               </p>
-              <p className="text-lg leading-relaxed md:text-xl">
-                Our expertise spans across <strong className="site-gold-text">personal events, corporate gatherings, educational functions, and catering services.</strong> Whether it's a dream wedding, an elegant housewarming, a milestone engagement, a professional conference, or an educational seminar, our dedicated team brings passion, creativity, and professionalism to every occasion.
+              <p className="text-base leading-relaxed md:text-lg">
+                What truly sets us apart is that everything you see at an event is produced and managed in-house. From concept development, stage production, LED walls, sound, lighting, trussing, fabrication, décor, branding, artist management, technical execution, logistics, and on-ground operations—we handle it all under one roof.
               </p>
-              <p className="text-lg leading-relaxed md:text-xl">
-                <strong className="site-gold-text">India Solution</strong> is your reliable partner in transforming ideas into unforgettable experiences across India. With creativity, precision, and unwavering commitment, we ensure every detail reflects your vision. Backed by a passionate team and a legacy of trust, we deliver seamless, meaningful, and memorable moments that exceed expectations.
+              <p className="text-base leading-relaxed md:text-lg">
+                That means no middlemen, no multiple vendors, no communication gaps—just one dedicated point of contact for your entire event.
+              </p>
+              <p className="text-base leading-relaxed md:text-lg">
+                Because our entire team works together as one unit, every department is perfectly synchronized. The result is better coordination, faster execution, consistent quality, and cost-effective solutions without compromising on creativity or premium standards.
+              </p>
+              <p className="text-base leading-relaxed md:text-lg">
+                Whether you’re planning an intimate celebration for 15 guests or a large-scale production for 15,000 attendees, we deliver the same attention to detail, professionalism, and world-class execution.
+              </p>
+              <p className="text-base leading-relaxed md:text-lg">
+                Over the years, we have proudly served as official production and event partners for leading event management companies, premium venues, corporate organizations, educational institutions, government bodies, brands, and private clients across Karnataka and beyond. Our experience spans both B2B and B2C projects, earning us long-term relationships built on trust, reliability, and exceptional delivery.
               </p>
             </motion.div>
 

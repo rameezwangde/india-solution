@@ -108,9 +108,9 @@ const Home = () => {
             </motion.div>
 
             <motion.h1 variants={fadeUp} className="site-heading text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">
-              Creating
-              <span className="site-heading-accent block italic">Unforgettable Events</span>
-              <span className="block text-2xl tracking-[0.36em] sm:text-3xl lg:text-4xl">Since 2010</span>
+              Designed,
+              <span className="site-heading-accent block italic">Produced & Delivered</span>
+              <span className="block text-2xl tracking-[0.36em] sm:text-3xl lg:text-4xl">Under One Roof.</span>
             </motion.h1>
 
             <motion.div variants={fadeUp} className="mx-auto my-3 flex w-52 items-center justify-center gap-4">
@@ -192,12 +192,12 @@ const Home = () => {
               className="max-w-2xl"
             >
               <motion.span variants={fadeUp} className="mb-3 block text-xs font-bold uppercase tracking-widest text-gold">
-                About Our Company
+                About India Solution
               </motion.span>
               <motion.span variants={fadeUp} className="mb-5 block h-0.5 w-10 bg-[#FF4B64]" />
               <motion.h2 variants={fadeUp} className="site-heading text-4xl font-semibold leading-tight md:text-5xl">
-                Welcome to
-                <span className="site-heading-accent block">India Solution</span>
+                Designed, Produced & Delivered
+                <span className="site-heading-accent block text-3xl mt-2">Under One Roof.</span>
               </motion.h2>
               <motion.div variants={fadeUp} className="my-6 flex items-center gap-5 text-magenta/70">
                 <span className="h-px w-24 bg-gradient-to-r from-magenta to-orange/70" />
@@ -205,44 +205,17 @@ const Home = () => {
                 <span className="h-px w-24 bg-gradient-to-r from-orange/70 to-transparent" />
               </motion.div>
               <motion.p variants={fadeUp} className="mb-5 text-sm leading-7 text-gray-300 md:text-base">
-                Since 2010, <strong className="site-gold-text">India Solution Events</strong> has been a trusted name in event management, delivering over 15 years of expertise in crafting unforgettable experiences. Based in Bengaluru, we specialize in turning visions into reality for both <strong className="site-gold-text">personal and professional events</strong>, ensuring every detail is executed to perfection.
+                For over 15 years, <strong className="site-gold-text">India Solution</strong> has been one of Bengaluru’s trusted names in Event Management and In-House Event Production, delivering seamless, premium-quality experiences for events of every scale.
+              </motion.p>
+              <motion.p variants={fadeUp} className="mb-5 text-sm leading-7 text-gray-300 md:text-base">
+                What truly sets us apart is that everything you see at an event is produced and managed in-house. From concept development, stage production, LED walls, sound, lighting, trussing, fabrication, décor, branding, artist management, technical execution, logistics, and on-ground operations—we handle it all under one roof.
               </motion.p>
               <motion.p variants={fadeUp} className="mb-7 text-sm leading-7 text-gray-300 md:text-base">
-                Whether it&rsquo;s an intimate gathering or a grand corporate affair, our dedicated team is ready to bring creativity, professionalism, and excellence to your special moments.
+                That means no middlemen, no multiple vendors, no communication gaps—just one dedicated point of contact for your entire event.
               </motion.p>
-
-              <div className="space-y-4">
-                <motion.div variants={fadeUp} className="about-info-card group">
-                  <div className="about-info-icon border-magenta text-magenta shadow-[0_0_24px_rgba(233,30,99,0.34)]">
-                    <Users size={28} strokeWidth={1.6} />
-                  </div>
-                  <div>
-                    <h3 className="font-display text-xl font-semibold text-white">About Celebratory Events</h3>
-                    <span className="my-2 block h-0.5 w-12 bg-magenta" />
-                    <p className="text-xs leading-5 text-gray-400 md:text-sm">
-                      We bring your special moments to life with unmatched creativity and attention to detail. From dreamy weddings with stunning d&eacute;cor to fun-filled birthday parties, elegant engagement ceremonies, and even pre-wedding festivities like mehndi and sangeet nights, we ensure every occasion is as unique as your story.
-                    </p>
-                  </div>
-                </motion.div>
-
-                <motion.div variants={fadeUp} className="about-info-card group">
-                  <div className="about-info-icon border-orange text-orange shadow-[0_0_24px_rgba(255,152,0,0.32)]">
-                    <Briefcase size={28} strokeWidth={1.6} />
-                  </div>
-                  <div>
-                    <h3 className="font-display text-xl font-semibold text-white">Corporate &amp; Formal Events</h3>
-                    <span className="my-2 block h-0.5 w-12 bg-orange" />
-                    <p className="text-xs leading-5 text-gray-400 md:text-sm">
-                      Our expertise in corporate and formal event management ensures your professional gatherings are handled seamlessly. Be it a dynamic product launch, an inspiring corporate conference, a grand stage show, or team-building retreats, we execute every detail with precision and innovation.
-                    </p>
-                  </div>
-                </motion.div>
-              </div>
-
-              <motion.button variants={fadeUp} className="mt-5 inline-flex items-center gap-8 rounded-full bg-gradient-to-r from-magenta via-gold to-orange px-8 py-4 text-sm font-bold uppercase text-white shadow-[0_0_26px_rgba(233,30,99,0.35)] transition-transform hover:-translate-y-0.5">
-                Discover More
-                <ArrowRight size={18} />
-              </motion.button>
+              <motion.p variants={fadeUp} className="mb-7 text-sm leading-7 text-gray-300 md:text-base">
+                Because our entire team works together as one unit, every department is perfectly synchronized. The result is better coordination, faster execution, consistent quality, and cost-effective solutions without compromising on creativity or premium standards.
+              </motion.p>
             </motion.div>
 
             <motion.div
@@ -275,6 +248,15 @@ const Home = () => {
               </div>
             </motion.div>
           </div>
+
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mt-16 mx-auto max-w-5xl text-center space-y-6">
+            <p className="text-gray-300 text-sm md:text-base leading-7">
+              Whether you’re planning an intimate celebration for 15 guests or a large-scale production for 15,000 attendees, we deliver the same attention to detail, professionalism, and world-class execution.
+            </p>
+            <p className="text-gray-300 text-sm md:text-base leading-7">
+              Over the years, we have proudly served as official production and event partners for leading event management companies, premium venues, corporate organizations, educational institutions, government bodies, brands, and private clients across Karnataka and beyond. Our experience spans both B2B and B2C projects, earning us long-term relationships built on trust, reliability, and exceptional delivery.
+            </p>
+          </motion.div>
         </div>
       </section>
       {/* Brand Statement Section */}
@@ -330,67 +312,81 @@ const Home = () => {
           </div>
         </div>
       </section>
-      {/* Why Choose Us */}
+      {/* Why Choose Us & Expertise */}
       <section className="relative overflow-hidden bg-[#10172A] px-5 py-16 text-white sm:px-8 lg:px-12">
         <div className="container mx-auto max-w-[1460px]">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mx-auto mb-8 max-w-3xl text-center"
-          >
-            <div className="mb-3 flex items-center justify-center gap-3 text-xs font-bold uppercase tracking-[0.22em] text-gold">
-              <span className="h-px w-9 bg-gradient-to-r from-transparent to-[#FF4B64]" />
-              <span>&#10022;</span>
-              <span>Why Choose Us</span>
-              <span>&#10022;</span>
-              <span className="h-px w-9 bg-gradient-to-r from-gold to-transparent" />
+          <div className="mb-20">
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-10 text-center">
+              <h3 className="font-display text-3xl font-semibold text-gold md:text-4xl">Our Expertise</h3>
+              <div className="mx-auto mt-4 flex w-24 items-center gap-2">
+                <span className="h-px flex-1 bg-gradient-to-r from-transparent to-magenta" />
+                <span className="text-xs text-magenta">&#10022;</span>
+                <span className="h-px flex-1 bg-gradient-to-r from-magenta to-transparent" />
+              </div>
+            </motion.div>
+            
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                "Corporate Events & Conferences", "Product Launches & Brand Activations", 
+                "Award Ceremonies & Annual Days", "Weddings & Reception Productions", 
+                "Fashion Shows & Lifestyle Events", "Concerts & Live Entertainment", 
+                "Store & Business Launches", "Inaugurations & Groundbreaking Ceremonies", 
+                "Exhibitions & Trade Shows", "Cultural & Community Events", 
+                "College Festivals & Graduation Ceremonies", "Birthday Celebrations & Private Parties", 
+                "Social & Family Events", "Government & Public Events", 
+                "Sports Events & Tournaments", "Roadshows & Promotional Campaigns"
+              ].map((item, i) => (
+                <motion.div 
+                  key={i} 
+                  initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.03 }}
+                  className="flex items-start gap-3 rounded-xl bg-white/[0.03] p-5 border border-white/5 hover:border-magenta/40 hover:bg-white/[0.06] transition-all"
+                >
+                  <Star className="text-magenta shrink-0 mt-0.5 drop-shadow-[0_0_8px_rgba(233,30,99,0.5)]" size={18} />
+                  <span className="text-sm font-medium text-gray-200">{item}</span>
+                </motion.div>
+              ))}
             </div>
-            <h2 className="site-heading text-4xl font-medium leading-tight md:text-6xl">
-              Why Choose <span className="site-heading-accent">India Solution</span>
-            </h2>
-            <p className="mx-auto mt-5 max-w-xl text-base leading-7 text-gray-300">
-              We combine creativity, precision and passion to deliver events that leave a lasting impression.
-            </p>
-          </motion.div>
-
-          <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
-            {[
-              { title: "Skilled Team", desc: "Our experienced professionals bring creativity, innovation and expertise to every event.", icon: Users, image: "/about-us.png", position: "center" },
-              { title: "Flawless Punctuality", desc: "We ensure every event unfolds seamlessly, adhering to meticulously planned timelines.", icon: Clock, image: "/hero-stage.png", position: "center" },
-              { title: "Endless Creativity", desc: "From imaginative themes to innovative corporate setups, we craft events that stand out and inspire.", icon: Sparkles, image: "/about-us.png", position: "right center" },
-              { title: "Attention to Detail", desc: "Every detail, big or small, matters to us. We ensure everything is flawlessly executed.", icon: Crosshair, image: "/hero-stage.png", position: "left center" },
-              { title: "Long-Lasting Bonds", desc: "Many of our clients become part of the family, returning for future celebrations.", icon: Heart, image: "/about-us.png", position: "center bottom" },
-              { title: "Proven Excellence", desc: "Our reputation is built on the heartfelt recommendations of those we have had the privilege to serve.", icon: Star, image: "/hero-stage.png", position: "right center" },
-            ].map((feature, i) => (
-              <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, y: 18 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.06 }}
-                className="group relative h-[260px] overflow-hidden rounded-xl border border-white/15 bg-[#0F1423] shadow-[0_18px_45px_rgba(0,0,0,0.28)]"
-              >
-                <img
-                  src={feature.image}
-                  alt=""
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  style={{ objectPosition: feature.position }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#10172A]/92 via-[#10172A]/48 to-[#10172A]/8" />
-                <div className="absolute inset-0 bg-gradient-to-r from-[#10172A]/55 via-transparent to-transparent" />
-
-                <div className="relative z-10 flex h-full flex-col justify-end p-6">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-magenta bg-[#111827]/65 text-magenta shadow-[0_0_22px_rgba(233,30,99,0.22)]">
-                    <feature.icon size={23} strokeWidth={1.7} />
-                  </div>
-                  <h3 className="font-display text-2xl font-semibold text-white">{feature.title}</h3>
-                  <span className="my-2 block h-0.5 w-8 bg-gradient-to-r from-magenta to-orange" />
-                  <p className="max-w-[310px] text-sm leading-5 text-gray-300">{feature.desc}</p>
-                </div>
-              </motion.div>
-            ))}
           </div>
+
+          <div className="mb-20">
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-10 text-center">
+              <h3 className="font-display text-3xl font-semibold text-orange md:text-4xl">Why Choose India Solution?</h3>
+              <div className="mx-auto mt-4 flex w-24 items-center gap-2">
+                <span className="h-px flex-1 bg-gradient-to-r from-transparent to-orange" />
+                <span className="text-xs text-gold">&#10022;</span>
+                <span className="h-px flex-1 bg-gradient-to-r from-gold to-transparent" />
+              </div>
+            </motion.div>
+            
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {[
+                "15+ Years of Industry Experience", "Complete In-House Production", 
+                "No Middlemen or Third-Party Dependencies", "Single Point of Contact", 
+                "Premium Quality at Every Scale", "Cost-Effective Solutions", 
+                "Highly Experienced Technical & Creative Team", "End-to-End Event Management", 
+                "Reliable Execution & On-Time Delivery", "Customized Concepts & Innovative Designs", 
+                "Trusted by Event Companies, Venues, Brands & Corporates"
+              ].map((item, i) => (
+                <motion.div 
+                  key={i} 
+                  initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}
+                  className="flex items-start gap-3 rounded-xl bg-white/[0.03] p-5 border border-white/5 hover:border-orange/40 hover:bg-white/[0.06] transition-all"
+                >
+                  <Star className="text-orange shrink-0 mt-0.5 drop-shadow-[0_0_8px_rgba(255,152,0,0.5)]" size={18} />
+                  <span className="text-sm font-medium text-gray-200">{item}</span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mx-auto max-w-4xl text-center">
+            <p className="text-gray-300 text-sm md:text-base leading-7 mb-10">
+              At India Solution, we don’t just organize events—we design experiences, produce excellence, and execute with precision. Every event reflects our commitment to quality, creativity, innovation, and flawless execution, ensuring every client receives the same premium service, regardless of the event size or budget.
+            </p>
+            <h4 className="text-xl md:text-3xl font-display font-bold tracking-[0.15em] uppercase">
+              <span className="bg-gradient-to-r from-magenta via-gold to-orange bg-clip-text text-transparent">One Team. One Partner. Endless Possibilities.</span>
+            </h4>
+          </motion.div>
         </div>
       </section>
       {/* Happy Clients */}

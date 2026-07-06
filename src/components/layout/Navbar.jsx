@@ -59,11 +59,17 @@ const Navbar = () => {
 
       <div className="container mx-auto px-6 lg:px-12 py-2">
         <div className="flex items-center justify-between">
-          <Link to="/" className="block shrink-0" aria-label="India Solution home">
+          <Link to="/" className="flex flex-col items-center justify-center shrink-0 -space-y-3" aria-label="India Solution home">
             <img
-              src="/india-solution-logo.png"
+              src="/logo-only.png"
+              alt="India Solution Logo"
+              className="h-16 w-auto object-contain drop-shadow-[0_0_22px_rgba(255,255,255,0.2)] sm:h-20 lg:h-24"
+            />
+            <img
+              src="/text-logo.png"
               alt="India Solution"
-              className="h-24 w-auto object-contain drop-shadow-[0_0_22px_rgba(255,255,255,0.2)] sm:h-28 lg:h-32"
+              className="h-6 w-auto object-contain drop-shadow-[0_0_22px_rgba(255,255,255,0.2)] sm:h-8 lg:h-10"
+              style={{ filter: 'brightness(0) saturate(100%) invert(75%) sepia(74%) saturate(769%) hue-rotate(355deg) brightness(102%) contrast(106%)' }}
             />
           </Link>
 
@@ -82,9 +88,9 @@ const Navbar = () => {
           </div>
 
           <div className="hidden lg:block">
-             <Link to="/contact" className="px-5 py-2 rounded-full bg-gradient-to-r from-magenta to-orange text-white font-medium text-[13px] hover:glow-magenta transition-all">
-                CONTACT US
-             </Link>
+            <Link to="/contact" className="px-5 py-2 rounded-full bg-gradient-to-r from-magenta to-orange text-white font-medium text-[13px] hover:glow-magenta transition-all">
+              CONTACT US
+            </Link>
           </div>
 
           {/* Mobile Toggle */}
