@@ -6,8 +6,8 @@ export const serviceCatalog = [
     description: 'Complete wedding planning support for a polished, memorable celebration.',
     items: [
       'Invitations & Stationery',
-      'Beauty Services, Makeup, and Mehndi',
-      'Bridal & Groom Wear and Jewelry',
+      'Beauty Services, Makeup, and Mehendi',
+      'Bridal & Groom Wear and Jewellery',
       'Gifts and Return Gifts',
       'Special Entries',
       'Transportation',

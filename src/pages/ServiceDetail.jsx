@@ -108,18 +108,18 @@ const beautySections = [
   },
   {
     eyebrow: 'Wedding Ready',
-    title: 'Mehndi Services for Brides',
-    accent: 'Mehndi',
-    description: 'Enhance your bridal beauty with our expert Mehndi services. Our skilled Mehndi artists create custom, intricate designs that blend tradition and elegance. Whether traditional or modern styles, we craft the perfect design for your bridal look using natural henna for long-lasting, stunning results. Book your bridal Mehndi consultation today for a flawless, personalized experience',
+    title: 'Mehendi Services for Brides',
+    accent: 'Mehendi',
+    description: 'Enhance your bridal beauty with our expert Mehendi services. Our skilled Mehendi artists create custom, intricate designs that blend tradition and elegance. Whether traditional or modern styles, we craft the perfect design for your bridal look using natural henna for long-lasting, stunning results. Book your bridal Mehendi consultation today for a flawless, personalized experience',
     items: [
-      'Bridal Mehndi Designs',
+      'Bridal Mehendi Designs',
       'Henna Tattoo Services',
-      'Custom Mehndi Designs',
-      'Pre-Wedding Mehndi Trial',
-      'Full-Hand & Foot Mehndi',
-      'Traditional Bridal Mehndi',
-      'Modern & Fusion Mehndi Styles',
-      'Bridal Mehndi for Sangeet or Engagement',
+      'Custom Mehendi Designs',
+      'Pre-Wedding Mehendi Trial',
+      'Full-Hand & Foot Mehendi',
+      'Traditional Bridal Mehendi',
+      'Modern & Fusion Mehendi Styles',
+      'Bridal Mehendi for Sangeet or Engagement',
       'Henna Removal Services',
     ],
   },
@@ -146,19 +146,19 @@ const bridalWearSections = [
   },
   {
     eyebrow: 'Elegance For Every Moment',
-    title: 'Jewelry Services for Brides and Grooms',
-    accent: 'Jewelry',
-    description: "Our Jewelry Services offer an exquisite selection of bridal and groom jewelry, designed to complement your attire and enhance your overall wedding look. From traditional gold and diamond jewelry to modern, custom-designed pieces, we provide a wide range of jewelry options to suit every bride and groom's taste. Whether you prefer traditional or contemporary styles, our expert jewelers offer personalized designs that make your wedding day even more special.",
+    title: 'Jewellery Services for Brides and Grooms',
+    accent: 'Jewellery',
+    description: "Our Jewellery Services offer an exquisite selection of bridal and groom Jewellery, designed to complement your attire and enhance your overall wedding look. From traditional gold and diamond Jewellery to modern, custom-designed pieces, we provide a wide range of Jewellery options to suit every bride and groom's taste. Whether you prefer traditional or contemporary styles, our expert jewellers offer personalized designs that make your wedding day even more special.",
     items: [
-      'Custom Bridal Jewelry Design',
-      'Kundan and Polki Jewelry',
+      'Custom Bridal Jewellery Design',
+      'Kundan and Polki Jewellery',
       'Bridal Necklace Sets',
       'Bridal Earring Selection',
-      'Groom Jewelry Consultation',
-      'Jewelry Rentals for Weddings',
-      'Bridal Hair Jewelry',
+      'Groom Jewellery Consultation',
+      'Jewellery Rentals for Weddings',
+      'Bridal Hair Jewellery',
       'Personalized Wedding Bands',
-      'Matching Jewelry Sets for Bridesmaids and Groomsmen',
+      'Matching Jewellery Sets for Bridesmaids and Groomsmen',
     ],
   },
   {
@@ -408,12 +408,12 @@ const preWeddingCeremonySections = [
     accent: 'Ceremony',
     description: (
       <>
-        Our <strong>Pre-Wedding Ceremony Services</strong> include a range of celebrations and rituals that set the stage for your wedding day. From <strong>engagement parties</strong> to <strong>mehndi celebrations and sangeet events</strong>, we help plan and execute each pre-wedding function with creativity and precision. Our expert team ensures everything is taken care of, including the venue, decor, entertainment, and coordination, so you can focus on making memories with your loved ones. Let us help you create a seamless and unforgettable pre-wedding experience that builds excitement for your special day.
+        Our <strong>Pre-Wedding Ceremony Services</strong> include a range of celebrations and rituals that set the stage for your wedding day. From <strong>engagement parties</strong> to <strong>Mehendi celebrations and sangeet events</strong>, we help plan and execute each pre-wedding function with creativity and precision. Our expert team ensures everything is taken care of, including the venue, decor, entertainment, and coordination, so you can focus on making memories with your loved ones. Let us help you create a seamless and unforgettable pre-wedding experience that builds excitement for your special day.
       </>
     ),
     items: [
       'Engagement Party Planning',
-      'Mehndi Ceremony Coordination',
+      'Mehendi Ceremony Coordination',
       'Sangeet Party Planning',
       'Bridal Shower and Groomâ€™s Party',
       'Pre-Wedding Photoshoots',
@@ -826,10 +826,10 @@ const BeautyServicesContent = () => (
       <div className="relative mx-auto max-w-4xl">
         <span className="service-detail-eyebrow mb-2 block">Bridal Beauty</span>
         <h2 className="site-heading mb-3 text-3xl font-bold leading-tight md:text-5xl">
-          Beauty Services, <span className="text-gradient">Makeup, and Mehndi</span>
+          Beauty Services, <span className="text-gradient">Makeup, and Mehendi</span>
         </h2>
         <p className="text-sm leading-7 text-gray-300 md:text-base">
-          Enhance your beauty and glow with our expert Beauty Services, Makeup, and Mehndi - creating the perfect look for your unforgettable moments
+          Enhance your beauty and glow with our expert Beauty Services, Makeup, and Mehendi - creating the perfect look for your unforgettable moments
         </p>
       </div>
     </motion.section>
@@ -850,10 +850,10 @@ const BridalWearContent = () => (
       <div className="relative mx-auto max-w-4xl">
         <span className="service-detail-eyebrow mb-2 block">Elegance For Every Moment</span>
         <h2 className="site-heading mb-3 text-3xl font-bold leading-tight md:text-5xl">
-          Bridal & Groom Wear <span className="text-gradient">and Jewelry</span>
+          Bridal & Groom Wear <span className="text-gradient">and Jewellery</span>
         </h2>
         <p className="text-sm leading-7 text-gray-300 md:text-base">
-          Complete styling support for brides and grooms, from couture attire to jewelry details that complete every wedding look.
+          Complete styling support for brides and grooms, from couture attire to Jewellery details that complete every wedding look.
         </p>
       </div>
     </motion.section>
@@ -982,8 +982,8 @@ const ServiceDetail = () => {
   const relatedServices = serviceCatalog.filter((item) => item.slug !== service.slug).slice(0, 3);
   const selectedItemSlug = selectedItem ? slugifyServiceItem(selectedItem) : '';
   const isInvitationStationery = selectedItemSlug === 'invitations-and-stationery';
-  const isBeautyServices = selectedItemSlug === 'beauty-services-makeup-and-mehndi';
-  const isBridalWear = selectedItemSlug === 'bridal-and-groom-wear-and-jewelry';
+  const isBeautyServices = selectedItemSlug === 'beauty-services-makeup-and-Mehendi';
+  const isBridalWear = selectedItemSlug === 'bridal-and-groom-wear-and-Jewellery';
   const isGiftsReturn = service.slug === 'custom-gifts-return-gifts';
   const isSpecialEntries = service.slug === 'special-entries';
   const isTransportation = selectedItemSlug === 'transportation';
@@ -1142,3 +1142,4 @@ const ServiceDetail = () => {
 };
 
 export default ServiceDetail;
+
