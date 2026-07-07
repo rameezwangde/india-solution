@@ -25,6 +25,7 @@ const Navbar = () => {
     { name: 'Testimonials', path: '/testimonials' },
     { name: 'FAQ', path: '/faq' },
     { name: 'Careers', path: '/careers' },
+    { name: 'Inventory Demo', path: '/inventory-demo' },
   ];
 
   const isActiveLink = (path) => {

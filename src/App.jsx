@@ -7,6 +7,7 @@ import ServiceDetail from './pages/ServiceDetail';
 import Contact from './pages/Contact';
 import FAQ from './pages/FAQ';
 import Testimonials from './pages/Testimonials';
+import InventoryDemo from './pages/InventoryDemo';
 import Footer from './components/layout/Footer';
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
             <Route path="/faq" element={<FAQ />} />
             <Route path="/testimonials" element={<Testimonials />} />
             <Route path="/testimonial" element={<Testimonials />} />
+            <Route path="/inventory-demo" element={<InventoryDemo />} />
           </Routes>
         </main>
         <Footer />
