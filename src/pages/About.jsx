@@ -38,25 +38,28 @@ const highlights = [
 const About = () => {
   return (
     <div className="bg-navy-900 text-white">
-      <section className="relative overflow-hidden px-6 pb-20 pt-40 lg:px-12 lg:pt-44">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_10%,rgba(176,38,255,0.2),transparent_30%),radial-gradient(circle_at_86%_14%,rgba(255,152,0,0.16),transparent_28%)]" />
-        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-magenta/50 to-transparent" />
-
+      <section className="services-showcase relative overflow-hidden pb-20 pt-40 lg:pt-44">
+        <div className="services-dots services-dots-left" />
+      <div className="services-dots services-dots-right" />
+      <div className="services-wave services-wave-left" />
+      <div className="services-wave services-wave-right" />
+      
+      <div className="relative z-10 mx-auto max-w-7xl px-5 lg:px-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="container relative z-10 mx-auto max-w-5xl text-center"
+          className="mb-16 text-center"
         >
-          <span className="mb-4 block text-xs font-bold uppercase tracking-[0.35em] text-gold">About India Solution</span>
-          <h1 className="site-heading text-4xl font-semibold leading-tight md:text-6xl">
-            Designed, Produced & Delivered <span className="site-heading-accent block mt-3 text-4xl md:text-5xl">Under One Roof.</span>
-          </h1>
-          <div className="mx-auto my-5 flex w-44 items-center justify-center gap-3">
-            <span className="h-px flex-1 bg-gradient-to-r from-transparent to-magenta" />
-            <span className="h-3 w-3 rotate-45 bg-gradient-to-br from-magenta to-orange" />
-            <span className="h-px flex-1 bg-gradient-to-r from-orange to-transparent" />
+          <div className="mx-auto mb-3 flex items-center justify-center gap-3 text-magenta">
+            <span className="h-px w-10 bg-gradient-to-r from-transparent to-magenta" />
+            <span className="h-1.5 w-1.5 rotate-45 bg-magenta shadow-[0_0_12px_rgba(233,30,99,0.9)]" />
+            <span className="h-px w-10 bg-gradient-to-r from-magenta to-orange" />
           </div>
+          <h1 className="site-heading text-4xl font-bold leading-none tracking-[0.14em] md:text-5xl lg:text-6xl">
+            About <span className="text-gradient">Us</span>
+          </h1>
         </motion.div>
+      </div>
       </section>
 
       <section className="relative overflow-hidden px-6 py-20 lg:px-12">

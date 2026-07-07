@@ -64,26 +64,31 @@ const StarRow = ({ className = '' }) => (
 const Testimonials = () => {
   return (
     <div className="bg-navy-900 text-white">
-      <section className="relative overflow-hidden px-6 pb-14 pt-40 lg:px-12 lg:pt-44">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_10%,rgba(233,30,99,0.22),transparent_30%),radial-gradient(circle_at_86%_14%,rgba(255,152,0,0.18),transparent_28%)]" />
-        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-magenta/50 to-transparent" />
+      <section className="services-showcase relative overflow-hidden px-5 pb-20 pt-40 text-white lg:px-10 lg:pt-44">
+        <div className="services-dots services-dots-left" />
+      <div className="services-dots services-dots-right" />
+      <div className="services-wave services-wave-left" />
+      <div className="services-wave services-wave-right" />
+
+      <div className="relative z-10 mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="container relative z-10 mx-auto max-w-5xl text-center"
+          className="mx-auto mb-16 max-w-2xl text-center"
         >
-          <span className="mb-4 block text-xs font-bold uppercase tracking-[0.35em] text-gold">Testimonials</span>
-          <h1 className="site-heading text-4xl font-semibold leading-tight md:text-6xl">
-            Client <span className="site-heading-accent">Reviews</span>
+          <div className="mx-auto mb-3 flex items-center justify-center gap-3 text-magenta">
+            <span className="h-px w-10 bg-gradient-to-r from-transparent to-magenta" />
+            <span className="h-1.5 w-1.5 rotate-45 bg-magenta shadow-[0_0_12px_rgba(233,30,99,0.9)]" />
+            <span className="h-px w-10 bg-gradient-to-r from-magenta to-orange" />
+          </div>
+          <h1 className="site-heading mb-6 text-4xl font-bold leading-none tracking-[0.14em] md:text-5xl lg:text-6xl">
+            What People <span className="text-gradient">Say</span>
           </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-gray-300 md:text-lg">
-            Real words from clients who trusted India Solution Events with weddings, celebrations, corporate launches, and milestone moments.
+          <p className="text-gray-300">
+            Don't just take our word for it. Here's what our clients have to say about their experience with India Solution Events.
           </p>
         </motion.div>
-      </section>
-
-      <section className="relative overflow-hidden px-6 py-16 lg:px-12">
-        <div className="absolute inset-0 bg-[#10172A]" />
+      </div>
         <div className="absolute left-0 top-24 h-72 w-72 rounded-full bg-magenta/10 blur-3xl" />
         <div className="absolute right-0 bottom-20 h-80 w-80 rounded-full bg-orange/10 blur-3xl" />
 
