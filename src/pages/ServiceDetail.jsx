@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Link, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
@@ -18,6 +20,7 @@ import {
   Sparkles,
   Trophy,
   Utensils,
+  X,
 } from 'lucide-react';
 import { fadeUp, staggerContainer } from '../utils/animations';
 import {
@@ -26,6 +29,7 @@ import {
   serviceCatalog,
   slugifyServiceItem,
 } from '../data/serviceCatalog';
+import { corporateMedia } from '../data/corporateMedia';
 
 const iconMap = {
   BriefcaseBusiness,
@@ -767,6 +771,59 @@ const DetailTitle = ({ title, accent }) => {
   );
 };
 
+const ServiceGallery = ({ title, mediaFiles }) => {
+  const [selectedMedia, setSelectedMedia] = useState(null);
+
+  if (!mediaFiles || mediaFiles.length === 0) return null;
+  return (
+    <motion.section
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="mt-12"
+    >
+      <h3 className="site-heading mb-6 text-2xl font-bold md:text-3xl">{title} Gallery</h3>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {mediaFiles.map((file, i) => {
+          const isVideo = file.endsWith('.mp4');
+          return (
+            <div key={i} className="relative aspect-square overflow-hidden rounded-xl bg-gray-900 border border-white/10 group cursor-pointer" onClick={() => setSelectedMedia(file)}>
+              {isVideo ? (
+                <video src={file} className="w-full h-full object-cover pointer-events-none" />
+              ) : (
+                <img src={file} alt={`${title} ${i}`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 pointer-events-none" loading="lazy" />
+              )}
+              {isVideo && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/10 transition-colors pointer-events-none">
+                  <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white">
+                    ▶
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {selectedMedia && createPortal(
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md" onClick={() => setSelectedMedia(null)}>
+          <button className="absolute top-6 right-6 text-white hover:text-gray-300 transition-colors z-[60]" onClick={() => setSelectedMedia(null)}>
+            <X size={32} />
+          </button>
+          <div className="relative w-full max-w-5xl max-h-[90vh] flex items-center justify-center" onClick={e => e.stopPropagation()}>
+            {selectedMedia.endsWith('.mp4') ? (
+              <video src={selectedMedia} className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl" controls autoPlay playsInline />
+            ) : (
+              <img src={selectedMedia} className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl" alt="Enlarged" />
+            )}
+          </div>
+        </div>,
+        document.body
+      )}
+    </motion.section>
+  );
+};
+
 const ServiceContentSections = ({ sections }) => (
   <motion.section
     variants={staggerContainer}
@@ -946,10 +1003,30 @@ const BirthdayDecorationContent = () => <ServiceContentSections sections={birthd
 const FunActivitiesContent = () => <ServiceContentSections sections={funActivitiesSections} />;
 
 const CateringContent = () => <ServiceContentSections sections={cateringSections} />;
-const CorporateNetworkingContent = () => <ServiceContentSections sections={corporateNetworkingSections} />;
-const ConferencesContent = () => <ServiceContentSections sections={conferencesSections} />;
-const ProductLaunchesContent = () => <ServiceContentSections sections={productLaunchSections} />;
-const CorporateMeetingsContent = () => <ServiceContentSections sections={corporateMeetingsSections} />;
+const CorporateNetworkingContent = () => (
+  <>
+    <ServiceContentSections sections={corporateNetworkingSections} />
+    <ServiceGallery title="Networking Events" mediaFiles={corporateMedia['corporate-1']} />
+  </>
+);
+const ConferencesContent = () => (
+  <>
+    <ServiceContentSections sections={conferencesSections} />
+    <ServiceGallery title="Conferences" mediaFiles={corporateMedia['corporate-2']} />
+  </>
+);
+const ProductLaunchesContent = () => (
+  <>
+    <ServiceContentSections sections={productLaunchSections} />
+    <ServiceGallery title="Product Launches" mediaFiles={corporateMedia['corporate-3']} />
+  </>
+);
+const CorporateMeetingsContent = () => (
+  <>
+    <ServiceContentSections sections={corporateMeetingsSections} />
+    <ServiceGallery title="Corporate Meetings" mediaFiles={corporateMedia['corporate-1']} />
+  </>
+);
 const PreWeddingCeremonyContent = () => <ServiceContentSections sections={preWeddingCeremonySections} />;
 const TradeShowsContent = () => <ServiceContentSections sections={tradeShowsSections} />;
 const PromotionsContent = () => <ServiceContentSections sections={promotionsSections} />;
