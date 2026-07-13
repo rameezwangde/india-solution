@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 
 const adminSchema = new mongoose.Schema(
   {
@@ -18,6 +19,7 @@ const adminSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Password is required'],
       minlength: [8, 'Password must be at least 8 characters long'],
+      select: false,
     },
     role: {
       type: String,
@@ -34,6 +36,19 @@ const adminSchema = new mongoose.Schema(
   }
 );
 
-adminSchema.index({ email: 1 });
+// Hash password before saving
+adminSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) {
+    return next();
+  }
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+});
+
+// Compare password
+adminSchema.methods.comparePassword = async function (candidatePassword) {
+  return await bcrypt.compare(candidatePassword, this.password);
+};
+
 
 module.exports = mongoose.model('Admin', adminSchema);
