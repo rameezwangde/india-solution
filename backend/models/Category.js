@@ -32,7 +32,7 @@ const categorySchema = new mongoose.Schema(
 
 // Pre-validate hook to generate slug
 categorySchema.pre('validate', function () {
-  if (this.name && (!this.slug || this.isModified('name'))) {
+  if (this.name && (!this.slug || (this.isModified('name') && !this.isModified('slug')))) {
     this.slug = this.name
       .toLowerCase()
       .replace(/[^a-z0-9\s-]/g, '') // Remove special characters
