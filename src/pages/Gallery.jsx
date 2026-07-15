@@ -11,14 +11,51 @@ const Gallery = () => {
   const [selectedMedia, setSelectedMedia] = useState(null);
   const [filter, setFilter] = useState('All');
   const [weddingSubFilter, setWeddingSubFilter] = useState('Pre-Wedding');
-  
-  // Combine all media from the corporate folders
-  const corporateImages = [
-    ...corporateMedia['corporate-1'],
-    ...corporateMedia['corporate-2'],
-    ...corporateMedia['corporate-3']
-  ].map(src => ({ src, type: 'raw' }));
-  
+  const [corporateSubFilter, setCorporateSubFilter] = useState('Networking Events');
+
+  const corporateCards = [
+    {
+      src: '/images/corporate_networking.png',
+      title: 'Networking Events',
+      description: 'Facilitating meaningful connections with professional and engaging networking environments.',
+      slug: 'networking-events'
+    },
+    {
+      src: '/images/corporate_conference.png',
+      title: 'Conferences',
+      description: 'Seamless execution of large-scale professional conferences and corporate summits.',
+      slug: 'conferences'
+    },
+    {
+      src: '/images/corporate_launch.png',
+      title: 'Product Launches',
+      description: 'Impactful brand reveals and product showcases designed to captivate your audience.',
+      slug: 'product-launches'
+    },
+    {
+      src: '/images/corporate_meeting.png',
+      title: 'Corporate Meetings',
+      description: 'Expertly managed meetings and boardrooms with flawless technical execution.',
+      slug: 'corporate-meetings'
+    }
+  ];
+
+  // Distribute the raw corporate media into the 4 categories
+  const networkingImages = corporateMedia['corporate-1'].map(src => ({ src, type: 'raw' }));
+  const conferenceImages = corporateMedia['corporate-2'].map(src => ({ src, type: 'raw' }));
+  const launchImages = corporateMedia['corporate-3'].map(src => ({ src, type: 'raw' }));
+  const meetingImages = [...corporateMedia['corporate-1'].slice(0, 10), ...corporateMedia['corporate-2'].slice(0, 10)].map(src => ({ src, type: 'raw' }));
+
+  const getCorporateImagesForSubFilter = (subFilter) => {
+    switch (subFilter) {
+      case 'Networking Events': return networkingImages;
+      case 'Conferences': return conferenceImages;
+      case 'Product Launches': return launchImages;
+      case 'Corporate Meetings': return meetingImages;
+      default: return [];
+    }
+  };
+
   const preWeddingCards = [
     {
       src: '/images/wedding_decor.png',
@@ -134,10 +171,17 @@ const Gallery = () => {
   ];
 
   let displayedMedia = [];
+  let activeCorporateCard = null;
+
   if (filter === 'All') {
-    displayedMedia = [...corporateImages, ...preWeddingCards.map(c => ({...c, type: 'card', category: 'pre-wedding-ceremony'})), ...mainWeddingCards.map(c => ({...c, type: 'card', category: 'wedding'}))];
+    displayedMedia = [
+      ...corporateCards.map(c => ({...c, type: 'card', category: 'corporate-events'})),
+      ...preWeddingCards.map(c => ({...c, type: 'card', category: 'pre-wedding-ceremony'})),
+      ...mainWeddingCards.map(c => ({...c, type: 'card', category: 'wedding'}))
+    ];
   } else if (filter === 'Corporate') {
-    displayedMedia = corporateImages;
+    activeCorporateCard = corporateCards.find(c => c.title === corporateSubFilter);
+    displayedMedia = getCorporateImagesForSubFilter(corporateSubFilter);
   } else if (filter === 'Weddings') {
     const activeCards = weddingSubFilter === 'Pre-Wedding' ? preWeddingCards : mainWeddingCards;
     const categorySlug = weddingSubFilter === 'Pre-Wedding' ? 'pre-wedding-ceremony' : 'wedding';
@@ -191,6 +235,32 @@ const Gallery = () => {
           ))}
         </motion.div>
 
+        {/* Corporate Sub-Filters */}
+        <AnimatePresence>
+          {filter === 'Corporate' && (
+            <motion.div 
+              initial={{ opacity: 0, height: 0, marginTop: 0 }}
+              animate={{ opacity: 1, height: 'auto', marginTop: 16 }}
+              exit={{ opacity: 0, height: 0, marginTop: 0 }}
+              className="flex flex-wrap justify-center gap-3 mb-10 overflow-hidden"
+            >
+              {['Networking Events', 'Conferences', 'Product Launches', 'Corporate Meetings'].map((sub) => (
+                <button
+                  key={sub}
+                  onClick={() => setCorporateSubFilter(sub)}
+                  className={`px-6 py-1.5 rounded-full text-xs font-medium tracking-wide transition-all duration-300 border ${
+                    corporateSubFilter === sub
+                      ? 'bg-magenta/20 border-magenta text-white shadow-[0_0_15px_rgba(233,30,99,0.2)]'
+                      : 'border-white/10 bg-transparent text-gray-400 hover:text-white hover:border-white/30'
+                  }`}
+                >
+                  {sub}
+                </button>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         {/* Weddings Sub-Filters */}
         <AnimatePresence>
           {filter === 'Weddings' && (
@@ -213,6 +283,41 @@ const Gallery = () => {
                   {sub}
                 </button>
               ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Corporate Wide Header Banner */}
+        <AnimatePresence mode="wait">
+          {filter === 'Corporate' && activeCorporateCard && (
+            <motion.div
+              key={corporateSubFilter}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20, transition: { duration: 0.2 } }}
+              className="mb-12 max-w-4xl mx-auto bg-[#fdfaf6] rounded-xl overflow-hidden shadow-2xl border border-black/5 flex flex-col md:flex-row md:h-72 group"
+            >
+              <div className="md:w-2/5 relative overflow-hidden aspect-video md:aspect-auto">
+                <img 
+                  src={activeCorporateCard.src} 
+                  alt={activeCorporateCard.title} 
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                />
+              </div>
+              <div className="md:w-3/5 p-6 md:p-10 flex flex-col justify-center">
+                <h3 className="font-serif text-2xl md:text-3xl font-bold text-[#1a202c] mb-3 leading-tight">
+                  {activeCorporateCard.title}
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed mb-6">
+                  {activeCorporateCard.description}
+                </p>
+                <Link 
+                  to={`/services/corporate-events/${activeCorporateCard.slug}`} 
+                  className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-magenta transition-colors hover:text-orange self-start"
+                >
+                  Explore Detail <ChevronRight size={14} strokeWidth={2.5} />
+                </Link>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
