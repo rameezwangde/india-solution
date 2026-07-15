@@ -1,28 +1,78 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Search, Mic } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { inventoryData, inventoryCategories } from '../data/inventoryData';
 import ProductCard from '../components/inventory/ProductCard';
 import CategoryTabs from '../components/inventory/CategoryTabs';
 import EnquiryCartBar from '../components/inventory/EnquiryCartBar';
 import EnquiryCartModal from '../components/inventory/EnquiryCartModal';
 import AdminPreviewSection from '../components/inventory/AdminPreviewSection';
+import { getProducts } from '../api/productService';
+import { getCategories } from '../api/categoryService';
+
+const ProductSkeleton = () => (
+  <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden flex flex-col h-full animate-pulse">
+    <div className="relative aspect-[4/3] bg-white/10 w-full" />
+    <div className="p-5 flex flex-col flex-grow">
+      <div className="h-4 bg-white/10 rounded w-1/4 mb-3" />
+      <div className="h-6 bg-white/10 rounded w-3/4 mb-4" />
+      <div className="flex justify-between items-center mb-4">
+        <div className="h-4 bg-white/10 rounded w-1/3" />
+        <div className="h-4 bg-white/10 rounded w-1/4" />
+      </div>
+      <div className="mt-auto flex items-center justify-between">
+        <div className="h-6 bg-white/10 rounded w-1/4" />
+        <div className="h-10 bg-white/10 rounded-full w-24" />
+      </div>
+    </div>
+  </div>
+);
 
 const InventoryDemo = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('All');
   const [cartItems, setCartItems] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState(['All']);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    const fetchInventory = async () => {
+      try {
+        setLoading(true);
+        const [fetchedProducts, fetchedCategories] = await Promise.all([
+          getProducts(),
+          getCategories()
+        ]);
+        if (isMounted) {
+          setProducts(fetchedProducts);
+          setCategories(['All', ...fetchedCategories]);
+        }
+      } catch (err) {
+        if (isMounted) {
+          console.error(err);
+          setError('Unable to load inventory');
+        }
+      } finally {
+        if (isMounted) setLoading(false);
+      }
+    };
+    fetchInventory();
+    return () => { isMounted = false; };
+  }, []);
 
   // Filter products based on search and category
   const filteredProducts = useMemo(() => {
-    return inventoryData.filter(product => {
+    return products.filter(product => {
       const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
                             product.code.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesCategory = activeCategory === 'All' || product.category === activeCategory;
       return matchesSearch && matchesCategory;
     });
-  }, [searchQuery, activeCategory]);
+  }, [searchQuery, activeCategory, products]);
 
   const handleUpdateQuantity = (product, quantity) => {
     setCartItems(prev => {
@@ -93,28 +143,49 @@ const InventoryDemo = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
-          <CategoryTabs 
-            categories={inventoryCategories} 
-            activeCategory={activeCategory}
-            onSelectCategory={setActiveCategory}
-          />
+          {!loading && !error && (
+            <CategoryTabs 
+              categories={categories} 
+              activeCategory={activeCategory}
+              onSelectCategory={setActiveCategory}
+            />
+          )}
         </motion.div>
 
+        {/* Error State */}
+        {error && (
+          <div className="bg-red-500/10 border border-red-500/20 text-red-400 p-4 rounded-xl mb-8">
+            {error}
+          </div>
+        )}
+
+        {/* Loading State */}
+        {loading && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <ProductSkeleton key={i} />
+            ))}
+          </div>
+        )}
+
         {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredProducts.map((product) => (
-            <ProductCard 
-              key={product.id} 
-              product={product} 
-              cartItem={cartItems.find(item => item.id === product.id)}
-              onUpdateQuantity={handleUpdateQuantity}
-            />
-          ))}
-        </div>
+        {!loading && !error && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {filteredProducts.map((product) => (
+              <ProductCard 
+                key={product.id} 
+                product={product} 
+                cartItem={cartItems.find(item => item.id === product.id)}
+                onUpdateQuantity={handleUpdateQuantity}
+              />
+            ))}
+          </div>
+        )}
         
-        {filteredProducts.length === 0 && (
+        {/* Empty State */}
+        {!loading && !error && filteredProducts.length === 0 && (
           <div className="text-center py-20">
-            <p className="text-gray-400 text-lg">No products found matching your search.</p>
+            <p className="text-gray-400 text-lg">No Inventory Available</p>
           </div>
         )}
       </section>

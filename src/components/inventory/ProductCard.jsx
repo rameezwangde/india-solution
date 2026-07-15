@@ -41,7 +41,14 @@ const ProductCard = ({ product, cartItem, onUpdateQuantity }) => {
         <div className="mt-auto flex items-center justify-between">
           <div className="font-semibold text-white">{product.price}</div>
           
-          {currentQuantity === 0 ? (
+          {product.quantity === 0 ? (
+            <button 
+              disabled
+              className="bg-gray-600 cursor-not-allowed text-white px-4 py-2 rounded-full text-sm font-medium"
+            >
+              Out of Stock
+            </button>
+          ) : currentQuantity === 0 ? (
             <button 
               onClick={handleAdd}
               className="bg-magenta hover:bg-magenta-600 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors"
