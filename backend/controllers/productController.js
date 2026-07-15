@@ -258,6 +258,11 @@ exports.deleteProduct = async (req, res) => {
     const product = await Product.findById(id);
     if (!product) return res.status(404).json({ success: false, message: 'Product not found' });
 
+    if (product.image && product.image.publicId) {
+      const { deleteCloudinaryImage } = require('../utils/cloudinaryUpload');
+      await deleteCloudinaryImage(product.image.publicId);
+    }
+
     await product.deleteOne();
 
     res.status(200).json({
