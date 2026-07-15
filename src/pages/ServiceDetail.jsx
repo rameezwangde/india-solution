@@ -824,6 +824,48 @@ const ServiceGallery = ({ title, mediaFiles }) => {
   );
 };
 
+const serviceImageMapping = {
+  'Invitations & Stationery': '/images/wedding_invitations.png',
+  'Beauty Services, Makeup, and Mehendi': '/images/wedding_makeup.png',
+  'Bridal & Groom Wear and Jewellery': '/images/wedding_attire.png',
+  'Gifts and Return Gifts': 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+  'Special Entries': '/images/wedding_entry.png',
+  'Transportation': '/images/wedding_transport.png',
+  'Event Decor and Floral Arrangements': '/images/wedding_decor.png',
+  'Photography and Videography Services': '/images/wedding_photography.png',
+  'Catering Services': '/images/wedding_catering.png',
+  'Decorations': '/images/wedding_decor.png',
+  'Theme Based Parties': '/images/wedding_theme.png'
+};
+
+const ImageGridServiceContent = ({ items, serviceSlug }) => {
+  return (
+    <motion.section
+      variants={staggerContainer}
+      initial="hidden"
+      animate="visible"
+      className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+    >
+      {items.map((item) => (
+        <motion.div key={item} variants={fadeUp} className="group relative overflow-hidden rounded-2xl bg-gray-900 border border-white/10 shadow-lg cursor-pointer hover:shadow-magenta/20 transition-all duration-300">
+          <Link to={`/services/${serviceSlug}/${slugifyServiceItem(item)}`} className="block h-full">
+            <div className="aspect-[4/3] overflow-hidden relative">
+               <img src={serviceImageMapping[item] || 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'} alt={item} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
+               <div className="absolute inset-0 bg-gradient-to-t from-[#12182a]/95 via-[#12182a]/40 to-transparent pointer-events-none" />
+            </div>
+            <div className="absolute bottom-0 left-0 right-0 p-5 z-10">
+               <h3 className="site-heading text-[15px] font-bold text-white mb-2 group-hover:text-gold transition-colors leading-snug">{item}</h3>
+               <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-magenta flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0 duration-300">
+                 Explore Detail <ChevronRight size={12} strokeWidth={3} />
+               </span>
+            </div>
+          </Link>
+        </motion.div>
+      ))}
+    </motion.section>
+  );
+};
+
 const ServiceContentSections = ({ sections }) => (
   <motion.section
     variants={staggerContainer}
@@ -1157,6 +1199,10 @@ const ServiceDetail = () => {
             </div>
           </motion.aside>
         </div>
+
+        {(!selectedItem && (service.slug === 'wedding' || service.slug === 'pre-wedding-ceremony')) && (
+          <ImageGridServiceContent items={service.items} serviceSlug={service.slug} />
+        )}
 
         {isInvitationStationery && <ServiceContentSections sections={invitationSections} />}
         {isBeautyServices && <BeautyServicesContent />}
