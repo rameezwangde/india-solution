@@ -75,6 +75,56 @@ exports.getCategories = async (req, res) => {
   }
 };
 
+exports.getAdminCategories = async (req, res) => {
+  try {
+    const { search, active, sort } = req.query;
+    let matchStage = {};
+
+    if (active === 'true' || active === 'false') {
+      matchStage.isActive = active === 'true';
+    }
+
+    if (search) {
+      matchStage.$or = [
+        { name: { $regex: search, $options: 'i' } },
+        { description: { $regex: search, $options: 'i' } }
+      ];
+    }
+
+    let sortStage = { name: 1 };
+    if (sort === 'name_desc') sortStage = { name: -1 };
+    else if (sort === 'newest') sortStage = { createdAt: -1 };
+    else if (sort === 'oldest') sortStage = { createdAt: 1 };
+
+    const categories = await Category.aggregate([
+      { $match: matchStage },
+      {
+        $lookup: {
+          from: 'products',
+          localField: '_id',
+          foreignField: 'category',
+          as: 'products'
+        }
+      },
+      {
+        $addFields: {
+          productCount: { $size: '$products' }
+        }
+      },
+      { $project: { products: 0 } },
+      { $sort: sortStage }
+    ]);
+
+    res.status(200).json({
+      success: true,
+      count: categories.length,
+      categories
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
 exports.getCategoryById = async (req, res) => {
   try {
     const { id } = req.params;

@@ -49,7 +49,7 @@ const InventoryDemo = () => {
         ]);
         if (isMounted) {
           setProducts(fetchedProducts.products);
-          setCategories(['All', ...fetchedCategories]);
+          setCategories(['All', ...fetchedCategories.map(c => c.name)]);
         }
       } catch (err) {
         if (isMounted) {
