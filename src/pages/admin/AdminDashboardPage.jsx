@@ -32,8 +32,8 @@ const AdminDashboardPage = () => {
     const fetchDashboardData = async () => {
       try {
         setLoading(true);
-        const [products, categories] = await Promise.all([
-          getProducts(),
+        const [productsResponse, categories] = await Promise.all([
+          getProducts({ limit: 100 }),
           getCategories()
         ]);
         
@@ -41,6 +41,8 @@ const AdminDashboardPage = () => {
         let outOfStockCount = 0;
         let lowStock = [];
         
+        const products = productsResponse.products;
+
         products.forEach(p => {
           inventoryCount += (p.quantity || 0);
           if (p.quantity === 0 || p.status === 'out_of_stock') {

@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AdminAuthProvider } from './context/AdminAuthContext';
+import { ToastProvider } from './context/ToastContext';
 import Navbar from './components/layout/Navbar';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -16,7 +17,8 @@ import AdminLoginPage from './pages/admin/AdminLoginPage';
 import AdminLayout from './components/admin/AdminLayout';
 import ProtectedAdminRoute from './components/admin/ProtectedAdminRoute';
 import AdminDashboardPage from './pages/admin/AdminDashboardPage';
-import { AdminProductsPage, AdminCategoriesPage, AdminEnquiriesPage } from './pages/admin/AdminPlaceholders';
+import AdminProductsPage from './pages/admin/AdminProductsPage';
+import { AdminCategoriesPage, AdminEnquiriesPage } from './pages/admin/AdminPlaceholders';
 
 const PublicLayout = ({ children }) => (
   <div className="min-h-screen flex flex-col bg-navy-900 text-white font-sans selection:bg-magenta selection:text-white overflow-x-hidden">
@@ -30,8 +32,9 @@ const PublicLayout = ({ children }) => (
 
 function App() {
   return (
-    <AdminAuthProvider>
-      <Router>
+    <ToastProvider>
+      <AdminAuthProvider>
+        <Router>
         <Routes>
           {/* Admin Routes */}
           <Route path="/admin/login" element={<AdminLoginPage />} />
@@ -70,6 +73,7 @@ function App() {
         </Routes>
       </Router>
     </AdminAuthProvider>
+    </ToastProvider>
   );
 }
 

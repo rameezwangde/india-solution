@@ -44,11 +44,11 @@ const InventoryDemo = () => {
       try {
         setLoading(true);
         const [fetchedProducts, fetchedCategories] = await Promise.all([
-          getProducts(),
+          getProducts({ limit: 100 }),
           getCategories()
         ]);
         if (isMounted) {
-          setProducts(fetchedProducts);
+          setProducts(fetchedProducts.products);
           setCategories(['All', ...fetchedCategories]);
         }
       } catch (err) {
