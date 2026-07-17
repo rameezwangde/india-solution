@@ -1,36 +1,93 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Trash2 } from 'lucide-react';
+import { X, Trash2, Loader2 } from 'lucide-react';
 import { useState } from 'react';
+import { submitEnquiry } from '../../api/enquiryService';
 
-const EnquiryCartModal = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemoveItem }) => {
+const EnquiryCartModal = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemoveItem, onClearCart }) => {
   const [formData, setFormData] = useState({
-    name: '',
+    customerName: '',
     phone: '',
     email: '',
-    date: '',
-    location: '',
+    companyName: '',
+    eventDate: '',
+    eventLocation: '',
+    city: '',
     notes: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [referenceNumber, setReferenceNumber] = useState('');
+  const [error, setError] = useState(null);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    const itemsText = cartItems.map(item => `- ${item.name} (${item.code}) - Qty: ${item.selectedQuantity}`).join('%0A');
-    const message = `*New Inventory Enquiry*%0A%0A*Customer Details:*%0AName: ${formData.name}%0APhone: ${formData.phone}%0AEmail: ${formData.email || 'N/A'}%0AEvent Date: ${formData.date}%0ALocation: ${formData.location}%0ANotes: ${formData.notes || 'None'}%0A%0A*Selected Items:*%0A${itemsText}`;
-    
-    const whatsappUrl = `https://wa.me/919742091362?text=${message}`;
-    window.open(whatsappUrl, '_blank');
+    setError(null);
 
-    setIsSubmitted(true);
-    setTimeout(() => {
+    if (!formData.customerName.trim()) return setError('Customer name is required.');
+    if (!formData.phone.trim()) return setError('Phone number is required.');
+    if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      return setError('Please enter a valid email address.');
+    }
+    if (cartItems.length === 0) return setError('Your cart is empty. Add at least one product.');
+
+    for (const item of cartItems) {
+      if (!item.selectedQuantity || item.selectedQuantity <= 0) {
+        return setError(`Quantity for ${item.name} must be greater than 0.`);
+      }
+      if (item.quantity !== undefined && item.selectedQuantity > item.quantity) {
+        return setError(`Requested quantity for ${item.name} exceeds available stock (${item.quantity}).`);
+      }
+    }
+
+    setIsSubmitting(true);
+    
+    try {
+      const products = cartItems.map(item => ({
+        product: item.id || item._id,
+        productName: item.name,
+        quantity: item.selectedQuantity,
+        price: item.price || 0
+      }));
+
+      const payload = { ...formData, products };
+      console.log('Submitting payload:', payload); // Dev log
+
+      const response = await submitEnquiry(payload);
+      
+      console.log('API Response:', response); // Dev log
+
+      if (response.success) {
+        setReferenceNumber(response.referenceNumber);
+        setIsSubmitted(true);
+        if (onClearCart) onClearCart();
+        setFormData({
+          customerName: '',
+          phone: '',
+          email: '',
+          companyName: '',
+          eventDate: '',
+          eventLocation: '',
+          city: '',
+          notes: ''
+        });
+      }
+    } catch (err) {
+      console.error('API Error:', err.response || err);
+      setError(err.response?.data?.message || 'Failed to submit enquiry. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleClose = () => {
+    if (isSubmitted) {
       setIsSubmitted(false);
-      onClose();
-    }, 3000);
+    }
+    onClose();
   };
 
   if (!isOpen) return null;
@@ -42,7 +99,7 @@ const EnquiryCartModal = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemo
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          onClick={onClose}
+          onClick={handleClose}
           className="absolute inset-0 bg-black/60 backdrop-blur-sm"
         />
         
@@ -56,8 +113,9 @@ const EnquiryCartModal = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemo
           <div className="flex items-center justify-between p-6 border-b border-white/5 bg-white/5">
             <h2 className="text-2xl font-bold text-white">Enquiry Cart</h2>
             <button
-              onClick={onClose}
-              className="text-gray-400 hover:text-white transition-colors p-2 hover:bg-white/10 rounded-full"
+              onClick={handleClose}
+              disabled={isSubmitting}
+              className="text-gray-400 hover:text-white transition-colors p-2 hover:bg-white/10 rounded-full disabled:opacity-50"
             >
               <X size={24} />
             </button>
@@ -70,8 +128,20 @@ const EnquiryCartModal = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemo
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-white mb-2">Enquiry Sent Successfully!</h3>
-              <p className="text-gray-400">Our team will get back to you shortly with a formal quotation.</p>
+              <h3 className="text-3xl font-bold text-white mb-2">Enquiry Submitted Successfully</h3>
+              <p className="text-gray-400 mb-6 text-lg">Your reference number is:</p>
+              <div className="bg-white/5 border border-white/10 rounded-xl px-8 py-4 mb-8">
+                <span className="text-4xl font-mono font-bold text-magenta tracking-wider">{referenceNumber}</span>
+              </div>
+              <p className="text-gray-400 max-w-md">
+                Our team will review your requirements and get back to you shortly with a formal quotation.
+              </p>
+              <button 
+                onClick={handleClose}
+                className="mt-8 px-8 py-3 bg-white/10 hover:bg-white/20 text-white rounded-xl transition-colors font-medium"
+              >
+                Close Window
+              </button>
             </div>
           ) : (
             <div className="flex flex-col md:flex-row flex-grow overflow-hidden">
@@ -84,7 +154,7 @@ const EnquiryCartModal = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemo
                   <div className="space-y-4">
                     {cartItems.map((item) => (
                       <div key={item.id} className="flex gap-4 p-4 rounded-xl bg-white/5 border border-white/5">
-                        <img src={item.image} alt={item.name} className="w-20 h-20 object-cover rounded-lg" />
+                        <img src={item.image} alt={item.name} className="w-20 h-20 object-cover rounded-lg bg-black/20" />
                         <div className="flex-1 flex flex-col">
                           <div className="flex justify-between items-start">
                             <div>
@@ -111,9 +181,7 @@ const EnquiryCartModal = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemo
                               <span className="text-white font-medium w-4 text-center text-sm">{item.selectedQuantity}</span>
                               <button 
                                 onClick={() => {
-                                  if (item.selectedQuantity < item.quantity) {
-                                    onUpdateQuantity(item, item.selectedQuantity + 1);
-                                  }
+                                  onUpdateQuantity(item, item.selectedQuantity + 1);
                                 }}
                                 className="w-6 h-6 flex items-center justify-center rounded-full hover:bg-white/20 transition-colors text-white text-sm"
                               >
@@ -131,14 +199,31 @@ const EnquiryCartModal = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemo
               {/* Form */}
               <div className="w-full md:w-[350px] lg:w-[400px] p-6 overflow-y-auto bg-black/20">
                 <h3 className="text-lg font-medium text-white mb-4">Customer Details</h3>
+                
+                {error && (
+                  <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
+                    {error}
+                  </div>
+                )}
+
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
                     <input
                       type="text"
-                      name="name"
+                      name="customerName"
                       placeholder="Full Name *"
                       required
-                      value={formData.name}
+                      value={formData.customerName}
+                      onChange={handleChange}
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:border-magenta transition-colors"
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="text"
+                      name="companyName"
+                      placeholder="Company Name"
+                      value={formData.companyName}
                       onChange={handleChange}
                       className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:border-magenta transition-colors"
                     />
@@ -164,29 +249,42 @@ const EnquiryCartModal = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemo
                       className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:border-magenta transition-colors"
                     />
                   </div>
+                  
                   <div className="flex gap-4">
                     <div className="flex-1">
                       <input
                         type="date"
-                        name="date"
-                        required
-                        value={formData.date}
+                        name="eventDate"
+                        value={formData.eventDate}
                         onChange={handleChange}
-                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-magenta transition-colors [color-scheme:dark]"
+                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-gray-400 focus:text-white focus:outline-none focus:border-magenta transition-colors [color-scheme:dark]"
                       />
                     </div>
                   </div>
-                  <div>
-                    <input
-                      type="text"
-                      name="location"
-                      placeholder="Event Location *"
-                      required
-                      value={formData.location}
-                      onChange={handleChange}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:border-magenta transition-colors"
-                    />
+                  
+                  <div className="flex gap-4">
+                    <div className="flex-1">
+                      <input
+                        type="text"
+                        name="city"
+                        placeholder="City"
+                        value={formData.city}
+                        onChange={handleChange}
+                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:border-magenta transition-colors"
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <input
+                        type="text"
+                        name="eventLocation"
+                        placeholder="Venue / Area"
+                        value={formData.eventLocation}
+                        onChange={handleChange}
+                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:border-magenta transition-colors"
+                      />
+                    </div>
                   </div>
+                  
                   <div>
                     <textarea
                       name="notes"
@@ -200,10 +298,15 @@ const EnquiryCartModal = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemo
                   
                   <button
                     type="submit"
-                    disabled={cartItems.length === 0}
-                    className="w-full bg-gradient-to-r from-magenta to-orange hover:glow-magenta text-white font-bold py-4 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-4"
+                    disabled={cartItems.length === 0 || isSubmitting}
+                    className="w-full bg-gradient-to-r from-magenta to-orange hover:glow-magenta text-white font-bold py-4 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-4 flex items-center justify-center gap-2"
                   >
-                    Submit Enquiry
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="animate-spin" size={20} />
+                        Submitting...
+                      </>
+                    ) : 'Submit Enquiry'}
                   </button>
                 </form>
               </div>

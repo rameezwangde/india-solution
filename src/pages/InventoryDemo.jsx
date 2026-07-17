@@ -206,6 +206,7 @@ const InventoryDemo = () => {
         cartItems={cartItems}
         onUpdateQuantity={handleUpdateQuantity}
         onRemoveItem={handleRemoveItem}
+        onClearCart={() => setCartItems([])}
       />
     </div>
   );

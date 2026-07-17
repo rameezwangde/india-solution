@@ -2,37 +2,53 @@ const mongoose = require('mongoose');
 
 const enquirySchema = new mongoose.Schema(
   {
-    customer: {
-      name: {
-        type: String,
-        required: [true, 'Customer name is required'],
-        trim: true,
-      },
-      phone: {
-        type: String,
-        required: [true, 'Customer phone is required'],
-        trim: true,
-      },
-      email: {
-        type: String,
-        lowercase: true,
-        trim: true,
-      },
+    referenceNumber: {
+      type: String,
+      unique: true
     },
-    event: {
-      date: {
-        type: Date,
-      },
-      location: {
-        type: String,
-        trim: true,
-      },
-      notes: {
-        type: String,
-        trim: true,
-      },
+    customerName: {
+      type: String,
+      required: [true, 'Customer name is required'],
+      trim: true,
     },
-    items: [
+    companyName: {
+      type: String,
+      trim: true,
+    },
+    email: {
+      type: String,
+      lowercase: true,
+      trim: true,
+    },
+    phone: {
+      type: String,
+      required: [true, 'Phone number is required'],
+      trim: true,
+    },
+    eventType: {
+      type: String,
+      trim: true,
+    },
+    eventDate: {
+      type: Date,
+    },
+    eventLocation: {
+      type: String,
+      trim: true,
+    },
+    city: {
+      type: String,
+      trim: true,
+    },
+    message: {
+      type: String,
+      trim: true,
+    },
+    notes: {
+      type: String,
+      trim: true,
+    },
+    products: [
       {
         product: {
           type: mongoose.Schema.Types.ObjectId,
@@ -43,31 +59,26 @@ const enquirySchema = new mongoose.Schema(
           type: String,
           required: true,
         },
-        productCode: {
-          type: String,
-          default: '',
-        },
-        quantityRequested: {
+        quantity: {
           type: Number,
           required: true,
-          min: [1, 'Quantity requested must be at least 1'],
+          min: [1, 'Quantity must be at least 1'],
         },
         price: {
           type: Number,
           min: 0,
           default: 0,
-        },
-        totalEstimatedAmount: {
-          type: Number,
-          min: 0,
-          default: 0,
-        },
+        }
       }
     ],
+    totalItems: {
+      type: Number,
+      default: 0,
+    },
     status: {
       type: String,
-      enum: ['new', 'contacted', 'confirmed', 'completed', 'cancelled'],
-      default: 'new',
+      enum: ['Pending', 'Contacted', 'Quotation Sent', 'Confirmed', 'Completed', 'Cancelled'],
+      default: 'Pending',
     },
   },
   {
@@ -75,7 +86,27 @@ const enquirySchema = new mongoose.Schema(
   }
 );
 
+// Pre-save hook to generate sequential reference number
+enquirySchema.pre('save', async function () {
+  if (!this.isNew) {
+    return;
+  }
+  
+  const lastEnquiry = await this.constructor.findOne().sort({ createdAt: -1 });
+  let nextNum = 1;
+  
+  if (lastEnquiry && lastEnquiry.referenceNumber) {
+    const match = lastEnquiry.referenceNumber.match(/ISCRM-(\d+)/);
+    if (match) {
+      nextNum = parseInt(match[1], 10) + 1;
+    }
+  }
+  
+  this.referenceNumber = `ISCRM-${nextNum.toString().padStart(6, '0')}`;
+});
+
 enquirySchema.index({ status: 1 });
 enquirySchema.index({ createdAt: -1 });
+enquirySchema.index({ referenceNumber: 1 });
 
 module.exports = mongoose.model('Enquiry', enquirySchema);

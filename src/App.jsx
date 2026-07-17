@@ -19,7 +19,7 @@ import ProtectedAdminRoute from './components/admin/ProtectedAdminRoute';
 import AdminDashboardPage from './pages/admin/AdminDashboardPage';
 import AdminProductsPage from './pages/admin/AdminProductsPage';
 import AdminCategoriesPage from './pages/admin/AdminCategoriesPage';
-import { AdminEnquiriesPage } from './pages/admin/AdminPlaceholders';
+import AdminEnquiriesPage from './pages/admin/AdminEnquiriesPage';
 
 const PublicLayout = ({ children }) => (
   <div className="min-h-screen flex flex-col bg-navy-900 text-white font-sans selection:bg-magenta selection:text-white overflow-x-hidden">
