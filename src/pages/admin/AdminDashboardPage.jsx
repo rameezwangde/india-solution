@@ -2,27 +2,51 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
   Package, Tags, AlertCircle, TrendingDown, Loader2, 
-  MessageSquare, FileText, Upload, Clock, CheckCircle, XCircle 
+  MessageSquare, FileText, Upload, Clock, CheckCircle, XCircle,
+  Bell, Calendar, ChevronDown, ChevronRight, BarChart2, PieChart as PieChartIcon
 } from 'lucide-react';
 import { getDashboardData } from '../../api/dashboardService';
 import { 
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, 
-  PieChart, Pie, Cell 
+  PieChart, Pie, Cell, Legend
 } from 'recharts';
 
-const StatCard = ({ title, value, icon: Icon, color }) => (
-  <div className="bg-white/5 border border-white/10 rounded-2xl p-6 flex items-center gap-4">
-    <div className={`p-4 rounded-xl ${color}`}>
-      <Icon size={24} className="text-white" />
-    </div>
-    <div>
-      <p className="text-gray-400 text-sm font-medium mb-1">{title}</p>
-      <h3 className="text-2xl font-bold text-white">{value}</h3>
-    </div>
+// SVG Sparkline component
+const Sparkline = ({ color }) => (
+  <div className="mt-4 flex-1 flex items-end h-8 w-full">
+    <svg viewBox="0 0 100 20" className="w-full h-full overflow-visible" preserveAspectRatio="none">
+      <path 
+        d="M0,15 C20,15 30,5 50,10 C70,15 80,5 100,8" 
+        fill="none" 
+        stroke={color} 
+        strokeWidth="1.5" 
+        vectorEffect="non-scaling-stroke"
+      />
+      <circle cx="0" cy="15" r="2" fill={color} />
+      <circle cx="50" cy="10" r="2" fill={color} />
+      <circle cx="100" cy="8" r="2" fill={color} />
+    </svg>
   </div>
 );
 
-const COLORS = ['#eab308', '#3b82f6', '#a855f7', '#22c55e', '#10b981', '#ef4444']; // Matching our standard status colors
+const StatCard = ({ title, value, icon: Icon, colorClass, iconColor, sparklineColor }) => (
+  <div className="bg-[#12121A] border border-white/5 rounded-2xl p-5 flex flex-col justify-between shadow-lg relative overflow-hidden group hover:border-white/10 transition-colors">
+    <div className="flex items-start justify-between mb-2">
+      <div className={`p-3 rounded-full border border-white/5 bg-black/40 ${iconColor} relative flex items-center justify-center`}>
+        {/* Glow effect */}
+        <div className={`absolute inset-0 rounded-full blur-md opacity-30 ${colorClass}`}></div>
+        <Icon size={20} className="relative z-10" />
+      </div>
+      <div className="text-right">
+        <p className="text-gray-400 text-[11px] mb-1 font-medium">{title}</p>
+        <h3 className="text-2xl font-bold text-white leading-none">{value}</h3>
+      </div>
+    </div>
+    <Sparkline color={sparklineColor} />
+  </div>
+);
+
+const COLORS = ['#FF9800', '#3b82f6', '#E91E63', '#22c55e', '#10b981', '#ef4444']; 
 
 const AdminDashboardPage = () => {
   const navigate = useNavigate();
@@ -67,215 +91,154 @@ const AdminDashboardPage = () => {
     );
   }
 
-  const { summary, inventoryByCategory, enquiryStatusDistribution, recentProducts, recentEnquiries, recentImports, lowStockProductsList } = data;
+  const { summary, inventoryByCategory, enquiryStatusDistribution } = data;
 
   return (
-    <div className="space-y-8 pb-8">
-      <div>
-        <h1 className="text-3xl font-bold text-white mb-2">Dashboard Overview</h1>
-        <p className="text-gray-400">Welcome back. Here is the latest status of your inventory and enquiries.</p>
+    <div className="space-y-6 pb-6 min-h-full flex flex-col justify-between relative z-10">
+      
+      {/* Header */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-2">
+        <div>
+          <h1 className="text-2xl font-bold text-white mb-1">
+            Welcome back, <span className="text-transparent bg-clip-text bg-gradient-to-r from-magenta to-orange">India Solution</span> <span className="text-orange">Admin</span>
+          </h1>
+          <p className="text-gray-400 text-xs">Here's what's happening with your inventory today.</p>
+        </div>
+        
+        <div className="flex items-center gap-4">
+          <button className="flex items-center gap-2 bg-[#12121A] border border-white/5 hover:border-white/10 px-4 py-2 rounded-lg text-sm text-gray-300 transition-colors">
+            <Calendar size={16} />
+            <span>18 July 2026</span>
+            <ChevronDown size={16} />
+          </button>
+          
+          <button className="p-2 bg-[#12121A] border border-white/5 hover:border-white/10 rounded-lg text-gray-300 relative transition-colors">
+            <div className="absolute top-2 right-2.5 w-1.5 h-1.5 bg-red-500 rounded-full"></div>
+            <Bell size={20} />
+          </button>
+        </div>
       </div>
 
       {/* 8-Card Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard title="Total Products" value={summary.totalProducts} icon={Package} color="bg-blue-500/20 text-blue-500" />
-        <StatCard title="Total Inventory" value={summary.totalInventoryQuantity} icon={TrendingDown} color="bg-green-500/20 text-green-500" />
-        <StatCard title="Total Categories" value={summary.totalCategories} icon={Tags} color="bg-magenta/20 text-magenta" />
-        <StatCard title="Out of Stock" value={summary.outOfStockProducts} icon={AlertCircle} color="bg-red-500/20 text-red-500" />
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <StatCard title="Total Products" value={summary.totalProducts} icon={Package} colorClass="bg-magenta" iconColor="text-magenta" sparklineColor="#E91E63" />
+        <StatCard title="Total Inventory" value={summary.totalInventoryQuantity} icon={Package} colorClass="bg-orange" iconColor="text-orange" sparklineColor="#FF9800" />
+        <StatCard title="Total Categories" value={summary.totalCategories} icon={Tags} colorClass="bg-purple-500" iconColor="text-purple-500" sparklineColor="#a855f7" />
+        <StatCard title="Out of Stock" value={summary.outOfStockProducts} icon={AlertCircle} colorClass="bg-red-500" iconColor="text-red-500" sparklineColor="#ef4444" />
         
-        <StatCard title="Total Enquiries" value={summary.totalEnquiries} icon={MessageSquare} color="bg-indigo-500/20 text-indigo-500" />
-        <StatCard title="Pending Enquiries" value={summary.pendingEnquiries} icon={Clock} color="bg-yellow-500/20 text-yellow-500" />
-        <StatCard title="Confirmed Enquiries" value={summary.confirmedEnquiries} icon={CheckCircle} color="bg-emerald-500/20 text-emerald-500" />
-        <StatCard title="Completed Enquiries" value={summary.completedEnquiries} icon={FileText} color="bg-teal-500/20 text-teal-500" />
+        <StatCard title="Total Enquiries" value={summary.totalEnquiries} icon={MessageSquare} colorClass="bg-blue-500" iconColor="text-blue-500" sparklineColor="#3b82f6" />
+        <StatCard title="Pending Enquiries" value={summary.pendingEnquiries} icon={Clock} colorClass="bg-orange" iconColor="text-orange" sparklineColor="#FF9800" />
+        <StatCard title="Confirmed Enquiries" value={summary.confirmedEnquiries} icon={CheckCircle} colorClass="bg-green-500" iconColor="text-green-500" sparklineColor="#22c55e" />
+        <StatCard title="Completed Enquiries" value={summary.completedEnquiries} icon={FileText} colorClass="bg-teal-500" iconColor="text-teal-500" sparklineColor="#14b8a6" />
       </div>
 
       {/* Charts Row */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
-          <h2 className="text-xl font-bold text-white mb-6">Inventory by Category</h2>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 flex-1">
+        {/* Bar Chart */}
+        <div className="bg-[#12121A] border border-white/5 rounded-2xl p-6 shadow-lg flex flex-col">
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-sm font-semibold text-white flex items-center gap-2">
+              <BarChart2 className="w-4 h-4 text-magenta" /> Inventory by Category
+            </h2>
+            <button className="text-xs text-gray-400 hover:text-white flex items-center gap-1 bg-white/5 border border-white/10 px-3 py-1.5 rounded-lg transition-colors">
+              View Details <ChevronRight size={14} />
+            </button>
+          </div>
+          
           {inventoryByCategory.length > 0 ? (
-            <div className="h-72">
+            <div className="flex-1 min-h-[250px]">
               <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={inventoryByCategory} layout="vertical" margin={{ top: 5, right: 20, left: 20, bottom: 5 }}>
-                  <XAxis type="number" stroke="#9ca3af" />
-                  <YAxis dataKey="categoryName" type="category" width={100} stroke="#9ca3af" tick={{fill: '#9ca3af', fontSize: 12}} />
+                <BarChart data={inventoryByCategory} layout="vertical" margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
+                  <defs>
+                    <linearGradient id="colorGradient" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stopColor="#E91E63" />
+                      <stop offset="100%" stopColor="#FF9800" />
+                    </linearGradient>
+                  </defs>
+                  <XAxis type="number" hide />
+                  <YAxis dataKey="categoryName" type="category" width={90} axisLine={false} tickLine={false} tick={{fill: '#9ca3af', fontSize: 11}} />
                   <Tooltip 
-                    contentStyle={{ backgroundColor: '#1e1e2d', borderColor: '#3f3f46', borderRadius: '8px', color: '#fff' }}
-                    itemStyle={{ color: '#fff' }}
+                    cursor={{fill: 'rgba(255,255,255,0.02)'}}
+                    contentStyle={{ backgroundColor: '#1e1e2d', borderColor: '#3f3f46', borderRadius: '8px', color: '#fff', fontSize: '12px' }}
                   />
-                  <Bar dataKey="totalQuantity" fill="#f43f5e" radius={[0, 4, 4, 0]} />
+                  <Bar dataKey="totalQuantity" fill="url(#colorGradient)" radius={[0, 4, 4, 0]} barSize={20} />
                 </BarChart>
               </ResponsiveContainer>
+              
+              <div className="flex justify-between px-[90px] mt-2 text-[10px] text-gray-500">
+                <span>0</span>
+                <span>3</span>
+                <span>6</span>
+                <span>9</span>
+                <span>12</span>
+              </div>
+              <div className="text-center text-[10px] text-gray-500 mt-1">Quantity</div>
             </div>
           ) : (
-            <div className="h-72 flex items-center justify-center text-gray-500">No category data available</div>
+            <div className="flex-1 min-h-[250px] flex items-center justify-center text-gray-500 text-sm">No category data available</div>
           )}
         </div>
 
-        <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
-          <h2 className="text-xl font-bold text-white mb-6">Enquiry Status Overview</h2>
+        {/* Donut Chart */}
+        <div className="bg-[#12121A] border border-white/5 rounded-2xl p-6 shadow-lg flex flex-col">
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-sm font-semibold text-white flex items-center gap-2">
+              <PieChartIcon className="w-4 h-4 text-magenta" /> Enquiry Status Overview
+            </h2>
+            <button className="text-xs text-gray-400 hover:text-white flex items-center gap-1 bg-white/5 border border-white/10 px-3 py-1.5 rounded-lg transition-colors">
+              View Details <ChevronRight size={14} />
+            </button>
+          </div>
+          
           {enquiryStatusDistribution.some(s => s.count > 0) ? (
-            <div className="h-72 flex flex-col justify-center">
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie
-                    data={enquiryStatusDistribution}
-                    innerRadius={60}
-                    outerRadius={100}
-                    paddingAngle={5}
-                    dataKey="count"
-                    nameKey="label"
-                  >
-                    {enquiryStatusDistribution.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                  </Pie>
-                  <Tooltip 
-                    contentStyle={{ backgroundColor: '#1e1e2d', borderColor: '#3f3f46', borderRadius: '8px', color: '#fff' }}
-                    itemStyle={{ color: '#fff' }}
-                  />
-                </PieChart>
-              </ResponsiveContainer>
-              <div className="flex flex-wrap justify-center gap-4 mt-2">
+            <div className="flex-1 min-h-[250px] flex flex-col justify-between">
+              <div className="flex-1 relative flex items-center justify-center">
+                <ResponsiveContainer width="100%" height={200}>
+                  <PieChart>
+                    <Pie
+                      data={enquiryStatusDistribution}
+                      innerRadius={60}
+                      outerRadius={85}
+                      paddingAngle={0}
+                      dataKey="count"
+                      nameKey="label"
+                      stroke="transparent"
+                    >
+                      {enquiryStatusDistribution.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                      ))}
+                    </Pie>
+                    <Tooltip 
+                      contentStyle={{ backgroundColor: '#1e1e2d', borderColor: '#3f3f46', borderRadius: '8px', color: '#fff', fontSize: '12px' }}
+                    />
+                  </PieChart>
+                </ResponsiveContainer>
+                {/* Center Icon */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                   <div className="w-12 h-12 rounded-full border border-white/5 bg-black/40 flex items-center justify-center">
+                     <MessageSquare size={16} className="text-white opacity-70" />
+                   </div>
+                </div>
+              </div>
+              
+              <div className="flex flex-wrap justify-center gap-5 mt-4 border-t border-white/5 pt-4">
                 {enquiryStatusDistribution.map((entry, idx) => (
-                  <div key={idx} className="flex items-center gap-2 text-xs text-gray-400">
-                    <span className="w-3 h-3 rounded-full" style={{ backgroundColor: COLORS[idx % COLORS.length] }}></span>
+                  <div key={idx} className="flex items-center gap-2 text-[10px] text-gray-400">
+                    <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: COLORS[idx % COLORS.length] }}></span>
                     {entry.label} ({entry.count})
                   </div>
                 ))}
               </div>
             </div>
           ) : (
-            <div className="h-72 flex items-center justify-center text-gray-500">No enquiry data available</div>
+            <div className="flex-1 min-h-[250px] flex items-center justify-center text-gray-500 text-sm">No enquiry data available</div>
           )}
         </div>
       </div>
-
-      {/* Tables Row 1 */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 space-y-6">
-          <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
-            <div className="p-6 border-b border-white/10 flex justify-between items-center">
-              <h2 className="text-xl font-bold text-white">Recent Enquiries</h2>
-              <Link to="/admin/enquiries" className="text-sm text-magenta hover:text-magenta-400">View All</Link>
-            </div>
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm text-gray-300 whitespace-nowrap">
-                <thead className="bg-white/5 text-gray-400">
-                  <tr>
-                    <th className="px-6 py-4 font-medium">Reference</th>
-                    <th className="px-6 py-4 font-medium">Customer</th>
-                    <th className="px-6 py-4 font-medium">Items</th>
-                    <th className="px-6 py-4 font-medium">Status</th>
-                    <th className="px-6 py-4 font-medium">Date</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-white/10">
-                  {recentEnquiries.length > 0 ? recentEnquiries.map(e => (
-                    <tr 
-                      key={e._id} 
-                      onClick={() => navigate('/admin/enquiries')}
-                      className="hover:bg-white/5 transition-colors cursor-pointer"
-                    >
-                      <td className="px-6 py-4 font-medium text-white">{e.referenceNumber}</td>
-                      <td className="px-6 py-4">
-                        <div>{e.customerName}</div>
-                        <div className="text-xs text-gray-500">{e.phone}</div>
-                      </td>
-                      <td className="px-6 py-4">{e.totalItems}</td>
-                      <td className="px-6 py-4">
-                        <span className="px-2 py-1 rounded-md text-[10px] uppercase font-bold border border-white/10 bg-white/5">
-                          {e.status}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4">{new Date(e.createdAt).toLocaleDateString()}</td>
-                    </tr>
-                  )) : (
-                    <tr>
-                      <td colSpan="5" className="px-6 py-8 text-center text-gray-500">No recent enquiries.</td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
-          </div>
-          
-          <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
-            <div className="p-6 border-b border-white/10 flex justify-between items-center">
-              <h2 className="text-xl font-bold text-white">Recent Imports</h2>
-              <Link to="/admin/import-inventory" className="text-sm text-magenta hover:text-magenta-400">Import</Link>
-            </div>
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm text-gray-300 whitespace-nowrap">
-                <thead className="bg-white/5 text-gray-400">
-                  <tr>
-                    <th className="px-6 py-4 font-medium">File Name</th>
-                    <th className="px-6 py-4 font-medium">Created</th>
-                    <th className="px-6 py-4 font-medium">Failed</th>
-                    <th className="px-6 py-4 font-medium">Date</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-white/10">
-                  {recentImports.length > 0 ? recentImports.map(i => (
-                    <tr key={i._id} className="hover:bg-white/5 transition-colors">
-                      <td className="px-6 py-4 font-medium text-white truncate max-w-[150px]">{i.fileName}</td>
-                      <td className="px-6 py-4 text-green-400">{i.createdCount}</td>
-                      <td className="px-6 py-4 text-red-400">{i.failedCount}</td>
-                      <td className="px-6 py-4 text-xs">{new Date(i.createdAt).toLocaleDateString()}</td>
-                    </tr>
-                  )) : (
-                    <tr>
-                      <td colSpan="4" className="px-6 py-8 text-center text-gray-500">No recent imports.</td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-
-        <div className="space-y-6">
-          <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
-            <div className="p-6 border-b border-white/10 flex justify-between items-center">
-              <h2 className="text-xl font-bold text-white">Low Stock Alerts</h2>
-              <Link to="/admin/products" className="text-sm text-magenta hover:text-magenta-400">View All</Link>
-            </div>
-            <div className="p-6 space-y-4">
-              {lowStockProductsList && lowStockProductsList.length > 0 ? lowStockProductsList.map(p => (
-                <div key={p._id} className="flex items-center justify-between p-4 bg-orange-500/10 border border-orange-500/20 rounded-xl">
-                  <div>
-                    <h4 className="text-white font-medium">{p.name}</h4>
-                    <p className="text-xs text-orange-400 mt-1">{p.category} • {p.quantity} left in stock</p>
-                  </div>
-                </div>
-              )) : (
-                <div className="text-center py-6 text-gray-500">
-                  No low stock items.
-                </div>
-              )}
-            </div>
-          </div>
-
-          <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
-            <div className="p-6 border-b border-white/10">
-              <h2 className="text-xl font-bold text-white">Quick Actions</h2>
-            </div>
-            <div className="p-6 flex flex-col gap-3">
-              <Link to="/admin/products" className="px-4 py-3 bg-white/5 hover:bg-white/10 rounded-xl text-white font-medium transition-colors flex items-center gap-3">
-                <Package size={18} /> Manage Products
-              </Link>
-              <Link to="/admin/categories" className="px-4 py-3 bg-white/5 hover:bg-white/10 rounded-xl text-white font-medium transition-colors flex items-center gap-3">
-                <Tags size={18} /> Manage Categories
-              </Link>
-              <Link to="/admin/enquiries" className="px-4 py-3 bg-white/5 hover:bg-white/10 rounded-xl text-white font-medium transition-colors flex items-center gap-3">
-                <MessageSquare size={18} /> View Enquiries
-              </Link>
-              <Link to="/admin/import-inventory" className="px-4 py-3 bg-white/5 hover:bg-white/10 rounded-xl text-white font-medium transition-colors flex items-center gap-3">
-                <Upload size={18} /> Import Inventory
-              </Link>
-            </div>
-          </div>
-        </div>
+      
+      {/* Footer */}
+      <div className="text-center text-[10px] text-gray-500 pt-4 mt-auto">
+        &copy; 2026 India Solution. All rights reserved.
       </div>
     </div>
   );
