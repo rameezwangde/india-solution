@@ -27,7 +27,7 @@ const importHistorySchema = new mongoose.Schema(
       enum: ['completed', 'completed_with_errors', 'failed'],
       default: 'completed',
     },
-    errors: [
+    errorDetails: [
       {
         sheet: String,
         row: Number,

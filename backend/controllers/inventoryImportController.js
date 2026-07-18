@@ -398,7 +398,7 @@ exports.executeInventoryImport = async (req, res) => {
       failedCount: failed + allInvalidRows.length,
       categoriesCreated,
       status: failed === 0 && allInvalidRows.length === 0 ? 'completed' : 'completed_with_errors',
-      errors: [
+      errorDetails: [
         ...allInvalidRows.map(ir => ({ sheet: ir.sheetName, row: ir.row, reason: ir.reason })),
         ...errors
       ].slice(0, 100) // limit error array size
@@ -416,7 +416,7 @@ exports.executeInventoryImport = async (req, res) => {
         failed: failed + allInvalidRows.length,
         categoriesCreated
       },
-      errors: history.errors
+      errors: history.errorDetails
     });
     
   } catch (error) {

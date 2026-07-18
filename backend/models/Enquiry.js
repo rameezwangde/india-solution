@@ -123,6 +123,5 @@ enquirySchema.pre('save', async function () {
 
 enquirySchema.index({ status: 1 });
 enquirySchema.index({ createdAt: -1 });
-enquirySchema.index({ referenceNumber: 1 });
 
 module.exports = mongoose.model('Enquiry', enquirySchema);
