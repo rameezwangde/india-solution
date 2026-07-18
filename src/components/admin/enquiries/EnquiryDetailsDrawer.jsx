@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, User, Phone, Mail, Building2, MapPin, Calendar, Clock, Package, MessageSquare, Loader2, Save } from 'lucide-react';
+import { X, User, Phone, Mail, Building2, MapPin, Calendar, Clock, Package, MessageSquare, Loader2, Save, AlertTriangle } from 'lucide-react';
 import { updateEnquiryStatus } from '../../../api/enquiryService';
 import { useToast } from '../../../context/ToastContext';
 
@@ -25,26 +25,54 @@ const EnquiryDetailsDrawer = ({ isOpen, onClose, enquiry, onStatusUpdated }) => 
   const [isUpdating, setIsUpdating] = useState(false);
   const [status, setStatus] = useState(enquiry?.status || 'Pending');
   const [notes, setNotes] = useState(enquiry?.notes || '');
+  
+  const [showConfirmModal, setShowConfirmModal] = useState(null); // 'confirm' or 'cancel'
+  const [insufficientItems, setInsufficientItems] = useState([]);
+  
   const { success, error } = useToast();
 
-  // Reset local state when enquiry changes
   React.useEffect(() => {
     if (enquiry) {
       setStatus(enquiry.status);
       setNotes(enquiry.notes || '');
+      setInsufficientItems([]);
+      setShowConfirmModal(null);
     }
   }, [enquiry]);
 
   if (!isOpen || !enquiry) return null;
 
-  const handleUpdate = async () => {
+  const handleUpdate = () => {
+    // Intercept Confirmed
+    if (status === 'Confirmed' && status !== enquiry.status && (!enquiry.stockProcessed || enquiry.stockRestored)) {
+      setShowConfirmModal('confirm');
+      return;
+    }
+    // Intercept Cancelled
+    if (status === 'Cancelled' && status !== enquiry.status && enquiry.stockProcessed && !enquiry.stockRestored) {
+      setShowConfirmModal('cancel');
+      return;
+    }
+    
+    // Normal save
+    executeSave();
+  };
+
+  const executeSave = async () => {
     try {
       setIsUpdating(true);
+      setInsufficientItems([]);
       await updateEnquiryStatus(enquiry._id, status, notes);
       success('Enquiry updated successfully');
+      setShowConfirmModal(null);
       onStatusUpdated();
     } catch (err) {
-      error(err.response?.data?.message || 'Failed to update enquiry');
+      if (err.response?.status === 409 && err.response?.data?.insufficientItems) {
+        setInsufficientItems(err.response.data.insufficientItems);
+      } else {
+        error(err.response?.data?.message || 'Failed to update enquiry');
+        if (!err.response?.data?.insufficientItems) setShowConfirmModal(null);
+      }
     } finally {
       setIsUpdating(false);
     }
@@ -60,7 +88,7 @@ const EnquiryDetailsDrawer = ({ isOpen, onClose, enquiry, onStatusUpdated }) => 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={onClose}
+            onClick={() => { if(!showConfirmModal) onClose(); }}
             className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
           />
           <motion.div
@@ -93,7 +121,21 @@ const EnquiryDetailsDrawer = ({ isOpen, onClose, enquiry, onStatusUpdated }) => 
               
               {/* Management Section */}
               <div className="bg-white/5 rounded-2xl p-5 border border-white/10">
-                <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-4">Manage Status & Notes</h3>
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider">Manage Status & Notes</h3>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs text-gray-500 uppercase font-bold">Stock Status:</span>
+                    {enquiry.stockProcessed && !enquiry.stockRestored && (
+                      <span className="px-2 py-1 bg-blue-500/10 text-blue-400 text-[10px] rounded uppercase font-bold border border-blue-500/20">Deducted</span>
+                    )}
+                    {enquiry.stockRestored && (
+                      <span className="px-2 py-1 bg-gray-500/10 text-gray-400 text-[10px] rounded uppercase font-bold border border-gray-500/20">Restored</span>
+                    )}
+                    {!enquiry.stockProcessed && (
+                      <span className="px-2 py-1 bg-yellow-500/10 text-yellow-500 text-[10px] rounded uppercase font-bold border border-yellow-500/20">Not Processed</span>
+                    )}
+                  </div>
+                </div>
                 
                 <div className="space-y-4">
                   <div>
@@ -230,7 +272,7 @@ const EnquiryDetailsDrawer = ({ isOpen, onClose, enquiry, onStatusUpdated }) => 
                         </div>
                       )}
                       <div className="flex-1">
-                        <div className="text-xs text-magenta mb-0.5">{item.product?.code || 'N/A'}</div>
+                        <div className="text-xs text-magenta mb-0.5">{item.product?.productCode || item.product?.code || 'N/A'}</div>
                         <h4 className="font-bold text-white text-sm">{item.productName}</h4>
                       </div>
                       <div className="px-4 py-2 bg-navy-900 rounded-lg border border-white/10 text-center min-w-[80px]">
@@ -245,6 +287,81 @@ const EnquiryDetailsDrawer = ({ isOpen, onClose, enquiry, onStatusUpdated }) => 
               <div className="h-8"></div> {/* Bottom padding spacer */}
             </div>
           </motion.div>
+          
+          {/* CONFIRM / CANCEL MODAL OVERLAY */}
+          {showConfirmModal && (
+            <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
+              <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setShowConfirmModal(null)} />
+              <div className="relative bg-navy-900 border border-white/10 rounded-2xl p-6 max-w-lg w-full shadow-2xl">
+                <h3 className="text-xl font-bold text-white mb-2">
+                  {showConfirmModal === 'confirm' ? 'Confirm Enquiry' : 'Cancel Confirmed Enquiry'}
+                </h3>
+                <p className="text-gray-400 mb-6 text-sm">
+                  {showConfirmModal === 'confirm' 
+                    ? 'Confirming this enquiry will reduce the available inventory quantities.'
+                    : 'Cancelling this enquiry will restore the deducted inventory quantities.'}
+                </p>
+                
+                {insufficientItems.length > 0 && (
+                  <div className="mb-6 bg-red-500/10 border border-red-500/20 rounded-xl p-4">
+                    <div className="flex items-center gap-2 text-red-400 font-bold mb-3">
+                      <AlertTriangle size={18} /> Insufficient Stock
+                    </div>
+                    <div className="space-y-2">
+                      {insufficientItems.map((item, idx) => (
+                        <div key={idx} className="flex justify-between items-center bg-black/20 p-2 rounded-lg text-sm">
+                          <span className="text-gray-300 truncate pr-2">{item.productName}</span>
+                          <span className="text-red-400 font-mono whitespace-nowrap">Need {item.requested} (Have {item.available})</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                
+                {!insufficientItems.length && showConfirmModal === 'confirm' && (
+                  <div className="mb-6 space-y-2 max-h-60 overflow-y-auto pr-2">
+                    {enquiry.products.map((item, idx) => (
+                      <div key={idx} className="flex justify-between items-center bg-white/5 p-3 rounded-lg text-sm border border-white/5">
+                        <span className="text-gray-300 truncate pr-2 font-medium">{item.productName}</span>
+                        <div className="flex gap-4 text-right">
+                          <div>
+                            <div className="text-[10px] text-gray-500">Request</div>
+                            <div className="text-white font-bold">{item.quantity}</div>
+                          </div>
+                          <div>
+                            <div className="text-[10px] text-gray-500">Available</div>
+                            <div className={`font-bold ${item.product?.quantity >= item.quantity ? 'text-green-400' : 'text-red-400'}`}>
+                              {item.product?.quantity || 0}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                <div className="flex gap-3 mt-6">
+                  <button
+                    onClick={() => setShowConfirmModal(null)}
+                    disabled={isUpdating}
+                    className="flex-1 py-2.5 px-4 bg-white/5 hover:bg-white/10 text-white rounded-lg transition-colors font-medium"
+                  >
+                    Close
+                  </button>
+                  {insufficientItems.length === 0 && (
+                    <button
+                      onClick={executeSave}
+                      disabled={isUpdating}
+                      className="flex-1 py-2.5 px-4 bg-gradient-to-r from-magenta to-orange hover:glow-magenta text-white rounded-lg transition-all font-bold flex justify-center items-center gap-2"
+                    >
+                      {isUpdating ? <Loader2 size={18} className="animate-spin" /> : null}
+                      {showConfirmModal === 'confirm' ? 'Confirm and Update Inventory' : 'Cancel and Restore Inventory'}
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
         </>
       )}
     </AnimatePresence>

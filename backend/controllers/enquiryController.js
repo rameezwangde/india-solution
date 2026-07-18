@@ -132,7 +132,7 @@ exports.getEnquiries = async (req, res) => {
 // @route   GET /api/enquiries/:id
 exports.getEnquiryById = async (req, res) => {
   try {
-    const enquiry = await Enquiry.findById(req.params.id).populate('products.product', 'image code category department');
+    const enquiry = await Enquiry.findById(req.params.id).populate('products.product', 'image productCode category department quantity name price status');
     if (!enquiry) {
       return res.status(404).json({ success: false, message: 'Enquiry not found' });
     }
@@ -151,22 +151,97 @@ exports.updateEnquiry = async (req, res) => {
   try {
     const { status, notes } = req.body;
     
-    let updateFields = {};
-    if (status) updateFields.status = status;
-    if (notes !== undefined) updateFields.notes = notes;
-
-    const enquiry = await Enquiry.findByIdAndUpdate(
-      req.params.id,
-      { $set: updateFields },
-      { new: true, runValidators: true }
-    );
-
+    // We need to fetch the enquiry first to compare status and handle stock
+    const enquiry = await Enquiry.findById(req.params.id).populate('products.product', 'quantity status name');
+    
     if (!enquiry) {
       return res.status(404).json({ success: false, message: 'Enquiry not found' });
     }
 
-    res.status(200).json({ success: true, message: 'Enquiry updated', enquiry });
+    if (notes !== undefined) enquiry.notes = notes;
+
+    if (status && status !== enquiry.status) {
+      // 1. Prevent completed -> cancelled
+      if (enquiry.status === 'Completed' && status === 'Cancelled') {
+        return res.status(409).json({ success: false, message: 'Completed enquiries cannot be cancelled automatically' });
+      }
+
+      // 2. Confirming (Pending -> Confirmed, or Cancelled -> Confirmed)
+      if (status === 'Confirmed' && (!enquiry.stockProcessed || enquiry.stockRestored)) {
+        const insufficientItems = [];
+        for (const item of enquiry.products) {
+          if (!item.product) {
+            insufficientItems.push({ productId: 'deleted', productName: item.productName, requested: item.quantity, available: 0 });
+            continue;
+          }
+          if (item.product.quantity < item.quantity) {
+            insufficientItems.push({ 
+              productId: item.product._id, 
+              productName: item.productName, 
+              requested: item.quantity, 
+              available: item.product.quantity 
+            });
+          }
+        }
+
+        if (insufficientItems.length > 0) {
+          return res.status(409).json({ 
+            success: false, 
+            message: 'Insufficient stock for one or more products', 
+            insufficientItems 
+          });
+        }
+
+        const bulkOps = [];
+        for (const item of enquiry.products) {
+          const newQty = item.product.quantity - item.quantity;
+          const finalStatus = (newQty === 0 && item.product.status !== 'hidden') ? 'out_of_stock' : item.product.status;
+          bulkOps.push({
+            updateOne: {
+              filter: { _id: item.product._id },
+              update: { $inc: { quantity: -item.quantity }, $set: { status: finalStatus } }
+            }
+          });
+        }
+        if (bulkOps.length > 0) await Product.bulkWrite(bulkOps);
+
+        enquiry.stockProcessed = true;
+        enquiry.stockProcessedAt = new Date();
+        enquiry.stockRestored = false;
+        enquiry.stockRestoredAt = null;
+      }
+
+      // 3. Cancelling (Confirmed -> Cancelled)
+      if (status === 'Cancelled' && enquiry.stockProcessed && !enquiry.stockRestored) {
+        const bulkOps = [];
+        for (const item of enquiry.products) {
+          if (!item.product) continue;
+          const newQty = item.product.quantity + item.quantity;
+          const finalStatus = (newQty > 0 && item.product.status === 'out_of_stock') ? 'available' : item.product.status;
+          bulkOps.push({
+            updateOne: {
+              filter: { _id: item.product._id },
+              update: { $inc: { quantity: item.quantity }, $set: { status: finalStatus } }
+            }
+          });
+        }
+        if (bulkOps.length > 0) await Product.bulkWrite(bulkOps);
+
+        enquiry.stockRestored = true;
+        enquiry.stockRestoredAt = new Date();
+      }
+
+      enquiry.status = status;
+    }
+
+    await enquiry.save();
+    
+    // Repopulate for response
+    const updatedEnquiry = await Enquiry.findById(enquiry._id).populate('products.product', 'image productCode category department quantity name price status');
+
+    res.status(200).json({ success: true, message: 'Enquiry updated', enquiry: updatedEnquiry });
   } catch (error) {
+    console.error('Update Enquiry Error:', error);
     res.status(500).json({ success: false, message: error.message });
   }
 };

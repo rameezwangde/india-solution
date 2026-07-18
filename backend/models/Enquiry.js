@@ -80,6 +80,22 @@ const enquirySchema = new mongoose.Schema(
       enum: ['Pending', 'Contacted', 'Quotation Sent', 'Confirmed', 'Completed', 'Cancelled'],
       default: 'Pending',
     },
+    stockProcessed: {
+      type: Boolean,
+      default: false,
+    },
+    stockProcessedAt: {
+      type: Date,
+      default: null,
+    },
+    stockRestored: {
+      type: Boolean,
+      default: false,
+    },
+    stockRestoredAt: {
+      type: Date,
+      default: null,
+    },
   },
   {
     timestamps: true,
