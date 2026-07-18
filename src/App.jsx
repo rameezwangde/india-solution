@@ -20,6 +20,7 @@ import AdminDashboardPage from './pages/admin/AdminDashboardPage';
 import AdminProductsPage from './pages/admin/AdminProductsPage';
 import AdminCategoriesPage from './pages/admin/AdminCategoriesPage';
 import AdminEnquiriesPage from './pages/admin/AdminEnquiriesPage';
+import AdminInventoryImportPage from './pages/admin/AdminInventoryImportPage';
 
 const PublicLayout = ({ children }) => (
   <div className="min-h-screen flex flex-col bg-navy-900 text-white font-sans selection:bg-magenta selection:text-white overflow-x-hidden">
@@ -49,6 +50,7 @@ function App() {
             <Route path="products" element={<AdminProductsPage />} />
             <Route path="categories" element={<AdminCategoriesPage />} />
             <Route path="enquiries" element={<AdminEnquiriesPage />} />
+            <Route path="import-inventory" element={<AdminInventoryImportPage />} />
           </Route>
 
           {/* Public Routes */}

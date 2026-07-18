@@ -8,7 +8,8 @@ import {
   MessageSquare, 
   LogOut, 
   Menu,
-  X
+  X,
+  Upload
 } from 'lucide-react';
 import { useAdminAuth } from '../../context/AdminAuthContext';
 
@@ -21,6 +22,7 @@ const AdminLayout = () => {
     { name: 'Products', path: '/admin/products', icon: <Package size={20} /> },
     { name: 'Categories', path: '/admin/categories', icon: <Tags size={20} /> },
     { name: 'Enquiries', path: '/admin/enquiries', icon: <MessageSquare size={20} /> },
+    { name: 'Import Inventory', path: '/admin/import-inventory', icon: <Upload size={20} /> },
   ];
 
   const SidebarContent = () => (

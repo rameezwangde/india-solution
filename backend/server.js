@@ -20,14 +20,14 @@ const categoryRoutes = require('./routes/categoryRoutes');
 const authRoutes = require('./routes/authRoutes');
 const enquiryRoutes = require('./routes/enquiryRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');
-
+const inventoryImportRoutes = require('./routes/inventoryImportRoutes');
 // Mount routers
 app.use('/api/products', productRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/enquiries', enquiryRoutes);
 app.use('/api/dashboard', dashboardRoutes);
-
+app.use('/api/inventory-import', inventoryImportRoutes);
 // Test endpoint
 app.get('/', (req, res) => {
   res.json({
