@@ -8,9 +8,10 @@ const {
   deleteEnquiry 
 } = require('../controllers/enquiryController');
 const { protect } = require('../middleware/authMiddleware');
+const { enquiryLimiter } = require('../middleware/rateLimiter');
 
 // Public route
-router.post('/', createEnquiry);
+router.post('/', enquiryLimiter, createEnquiry);
 
 // Protected Admin routes
 router.get('/', protect, getEnquiries);

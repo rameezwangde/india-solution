@@ -8,6 +8,7 @@ const {
   downloadInventoryTemplate,
   exportInventory
 } = require('../controllers/inventoryImportController');
+const { importLimiter } = require('../middleware/rateLimiter');
 
 const storage = multer.memoryStorage();
 const upload = multer({
@@ -30,8 +31,8 @@ const upload = multer({
 // All import routes are protected
 router.use(protect);
 
-router.post('/preview', upload.single('inventoryFile'), previewInventoryWorkbook);
-router.post('/execute', upload.single('inventoryFile'), executeInventoryImport);
+router.post('/preview', upload.single('inventoryFile'), importLimiter, previewInventoryWorkbook);
+router.post('/execute', upload.single('inventoryFile'), importLimiter, executeInventoryImport);
 router.get('/template', downloadInventoryTemplate);
 router.get('/export', exportInventory);
 

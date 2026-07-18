@@ -1,7 +1,62 @@
 exports.errorHandler = (err, req, res, next) => {
-  // error middleware placeholder
-  res.status(err.statusCode || 500).json({
+  let error = { ...err };
+  error.message = err.message;
+
+  // Log to console for dev
+  if (process.env.NODE_ENV !== 'production') {
+    console.error(err);
+  }
+
+  // Mongoose bad ObjectId
+  if (err.name === 'CastError') {
+    const message = `Resource not found`;
+    error = new Error(message);
+    error.statusCode = 404;
+  }
+
+  // Mongoose duplicate key
+  if (err.code === 11000) {
+    const message = 'Duplicate field value entered';
+    error = new Error(message);
+    error.statusCode = 409;
+  }
+
+  // Mongoose validation error
+  if (err.name === 'ValidationError') {
+    const message = Object.values(err.errors).map(val => val.message).join(', ');
+    error = new Error(message);
+    error.statusCode = 400;
+  }
+
+  // JWT Errors
+  if (err.name === 'JsonWebTokenError') {
+    const message = 'Invalid token. Please log in again.';
+    error = new Error(message);
+    error.statusCode = 401;
+  }
+  
+  if (err.name === 'TokenExpiredError') {
+    const message = 'Your token has expired. Please log in again.';
+    error = new Error(message);
+    error.statusCode = 401;
+  }
+
+  // Multer Error
+  if (err.code === 'LIMIT_FILE_SIZE') {
+    const message = 'File is too large.';
+    error = new Error(message);
+    error.statusCode = 413;
+  }
+
+  // Payload Too Large (Express body-parser)
+  if (err.type === 'entity.too.large') {
+    const message = 'Payload too large. Request exceeded allowed limits.';
+    error = new Error(message);
+    error.statusCode = 413;
+  }
+
+  res.status(error.statusCode || 500).json({
     success: false,
-    error: err.message || 'Server Error'
+    message: error.message || 'Server Error'
   });
 };
