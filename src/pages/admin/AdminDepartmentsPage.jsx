@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Package, AlertTriangle, Box, Loader2, Info } from 'lucide-react';
-import { getDepartments } from '../../api/productService';
+import { Package, AlertTriangle, Box, Loader2, Info, Trash2 } from 'lucide-react';
+import { getDepartments, clearDepartmentInventory } from '../../api/productService';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const AdminDepartmentsPage = () => {
@@ -11,6 +11,10 @@ const AdminDepartmentsPage = () => {
   
   // Dashboard totals (mocked for now, or we can fetch dashboard stats)
   const [totals, setTotals] = useState({ products: 0, quantity: 0 });
+
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [departmentToDelete, setDepartmentToDelete] = useState(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     const fetchDepartments = async () => {
@@ -32,6 +36,27 @@ const AdminDepartmentsPage = () => {
     };
     fetchDepartments();
   }, []);
+
+  const handleDeleteDepartment = async () => {
+    if (!departmentToDelete) return;
+    setIsDeleting(true);
+    try {
+      await clearDepartmentInventory(departmentToDelete);
+      const data = await getDepartments();
+      if (data.success) {
+        setDepartments(data.departments);
+        const totalProds = data.departments.reduce((acc, d) => acc + d.totalProducts, 0);
+        const totalQty = data.departments.reduce((acc, d) => acc + d.totalQuantity, 0);
+        setTotals({ products: totalProds, quantity: totalQty });
+      }
+      setDeleteModalOpen(false);
+      setDepartmentToDelete(null);
+    } catch (err) {
+      alert(err.response?.data?.message || 'Failed to clear department');
+    } finally {
+      setIsDeleting(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -90,7 +115,14 @@ const AdminDepartmentsPage = () => {
                   <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-magenta/20 to-orange/20 flex items-center justify-center text-magenta">
                     <Package size={20} />
                   </div>
-                  <h3 className="text-xl font-bold text-white">{dept.name}</h3>
+                  <h3 className="text-xl font-bold text-white flex-grow">{dept.name}</h3>
+                  <button 
+                    onClick={() => { setDepartmentToDelete(dept.name); setDeleteModalOpen(true); }}
+                    className="w-8 h-8 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white flex items-center justify-center transition-colors"
+                    title="Clear Department Inventory"
+                  >
+                    <Trash2 size={16} />
+                  </button>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4 mb-6">
@@ -150,6 +182,62 @@ const AdminDepartmentsPage = () => {
           </div>
         )}
       </div>
+
+      {/* Delete Confirmation Modal */}
+      <AnimatePresence>
+        {deleteModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+              onClick={() => !isDeleting && setDeleteModalOpen(false)}
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative bg-[#1e293b] border border-white/10 rounded-2xl w-full max-w-md overflow-hidden shadow-2xl"
+            >
+              <div className="p-6">
+                <div className="flex items-center gap-4 mb-4 text-red-400">
+                  <div className="p-3 bg-red-500/10 rounded-full">
+                    <AlertTriangle size={24} />
+                  </div>
+                  <h3 className="text-xl font-bold text-white">Clear {departmentToDelete}?</h3>
+                </div>
+                
+                <p className="text-gray-300 mb-2">
+                  Are you sure you want to delete <span className="font-bold text-white">ALL inventory</span> in the <span className="text-magenta font-semibold">{departmentToDelete}</span> department?
+                </p>
+                <p className="text-gray-400 text-sm mb-6">
+                  This action cannot be undone. All products belonging to this department will be permanently removed from the database.
+                </p>
+
+                <div className="flex justify-end gap-3">
+                  <button
+                    onClick={() => setDeleteModalOpen(false)}
+                    disabled={isDeleting}
+                    className="px-5 py-2.5 rounded-xl text-gray-300 hover:bg-white/5 hover:text-white transition-colors font-medium disabled:opacity-50"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={handleDeleteDepartment}
+                    disabled={isDeleting}
+                    className="px-5 py-2.5 rounded-xl bg-red-500 hover:bg-red-600 text-white transition-colors font-medium flex items-center gap-2 disabled:opacity-50"
+                  >
+                    {isDeleting ? (
+                      <><Loader2 size={18} className="animate-spin" /> Deleting...</>
+                    ) : (
+                      <><Trash2 size={18} /> Clear Department</>
+                    )}
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

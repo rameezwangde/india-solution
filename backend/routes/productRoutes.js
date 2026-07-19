@@ -25,6 +25,7 @@ const clearInventoryLimiter = rateLimit({
 });
 
 router.delete('/clear-inventory', protect, clearInventoryLimiter, clearInventory);
+router.delete('/clear-department', protect, clearInventoryLimiter, require('../controllers/productController').clearDepartmentInventory);
 router.delete('/clear-test-data', protect, clearInventoryLimiter, clearTestData);
 
 router.get('/departments', getDepartments);

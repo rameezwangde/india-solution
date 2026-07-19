@@ -299,6 +299,28 @@ exports.clearInventory = async (req, res) => {
   }
 };
 
+// @desc    Clear department inventory (Admin only)
+// @route   DELETE /api/products/clear-department
+// @access  Private/Admin
+exports.clearDepartmentInventory = async (req, res) => {
+  try {
+    const { department } = req.query;
+    if (!department) {
+      return res.status(400).json({ success: false, message: 'Department name is required' });
+    }
+
+    const result = await Product.deleteMany({ department });
+    
+    res.status(200).json({
+      success: true,
+      message: `Inventory for ${department} cleared successfully`,
+      deletedCount: result.deletedCount
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Failed to clear department inventory: ' + error.message });
+  }
+};
+
 // @desc    Clear all test operational data (Admin only)
 // @route   DELETE /api/products/clear-test-data
 // @access  Private/Admin

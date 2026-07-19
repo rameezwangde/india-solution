@@ -43,6 +43,11 @@ export const clearTestData = async () => {
   return response.data;
 };
 
+export const clearDepartmentInventory = async (department) => {
+  const response = await api.delete('/products/clear-department', { params: { department } });
+  return response.data;
+};
+
 export const getDepartments = async () => {
   const response = await api.get('/products/departments');
   return response.data;
