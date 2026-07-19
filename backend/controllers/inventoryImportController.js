@@ -3,7 +3,8 @@ const Product = require('../models/Product');
 const Category = require('../models/Category');
 const ImportHistory = require('../models/ImportHistory');
 const InventoryActivity = require('../models/InventoryActivity');
-const { ACTIVITY_TYPES } = require('../services/activityLogger');
+const { logActivity, ACTIVITY_TYPES } = require('../services/activityLogger');
+const { calculateStockStatus } = require('../services/stockStatusHelper');
 const mongoose = require('mongoose');
 
 // Utility to normalize sheet name based on strict mapping rules
@@ -467,7 +468,8 @@ exports.executeInventoryImport = async (req, res) => {
                   quantity: r.quantity, 
                   quantityUnit: r.quantityUnit || existing.quantityUnit,
                   quantityOriginal: r.quantityOriginal || existing.quantityOriginal,
-                  status 
+                  status,
+                  stockStatus: calculateStockStatus(r.quantity, existing.criticalStockThreshold || 2, existing.lowStockThreshold || 5)
                 } }
               }
             });
@@ -498,6 +500,7 @@ exports.executeInventoryImport = async (req, res) => {
                   quantityUnit: r.quantityUnit,
                   quantityOriginal: r.quantityOriginal,
                   status,
+                  stockStatus: calculateStockStatus(r.quantity, existing.criticalStockThreshold || 2, existing.lowStockThreshold || 5),
                   name: r.name,
                   department: r.department,
                   inventorySection: r.inventorySection,
@@ -541,6 +544,9 @@ exports.executeInventoryImport = async (req, res) => {
                 quantityUnit: r.quantityUnit,
                 quantityOriginal: r.quantityOriginal,
                 status,
+                stockStatus: calculateStockStatus(r.quantity, 2, 5),
+                lowStockThreshold: 5,
+                criticalStockThreshold: 2,
                 description: '',
                 size: '',
                 isFeatured: false,

@@ -24,6 +24,7 @@ import AdminInventoryImportPage from './pages/admin/AdminInventoryImportPage';
 import AdminDepartmentsPage from './pages/admin/AdminDepartmentsPage';
 import AdminInventoryActivityPage from './pages/admin/AdminInventoryActivityPage';
 import AdminProductDetailsPage from './pages/admin/AdminProductDetailsPage';
+import AdminLowStockPage from './pages/admin/AdminLowStockPage';
 
 const PublicLayout = ({ children }) => (
   <div className="min-h-screen flex flex-col bg-navy-900 text-white font-sans selection:bg-magenta selection:text-white overflow-x-hidden">
@@ -52,6 +53,7 @@ function App() {
             <Route index element={<AdminDashboardPage />} />
             <Route path="products" element={<AdminProductsPage />} />
             <Route path="products/:id" element={<AdminProductDetailsPage />} />
+            <Route path="low-stock" element={<AdminLowStockPage />} />
             <Route path="inventory-departments" element={<AdminDepartmentsPage />} />
             <Route path="inventory-departments/:departmentSlug" element={<AdminProductsPage />} />
             <Route path="categories" element={<AdminCategoriesPage />} />

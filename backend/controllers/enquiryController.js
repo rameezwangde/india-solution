@@ -2,6 +2,7 @@ const Enquiry = require('../models/Enquiry');
 const Product = require('../models/Product');
 const InventoryActivity = require('../models/InventoryActivity');
 const { ACTIVITY_TYPES } = require('../services/activityLogger');
+const { calculateStockStatus, handleStockStatusChange } = require('../services/stockStatusHelper');
 
 // @desc    Create a new enquiry (Public)
 // @route   POST /api/enquiries
@@ -154,7 +155,7 @@ exports.updateEnquiry = async (req, res) => {
     const { status, notes } = req.body;
     
     // We need to fetch the enquiry first to compare status and handle stock
-    const enquiry = await Enquiry.findById(req.params.id).populate('products.product', 'quantity status name productCode department category');
+    const enquiry = await Enquiry.findById(req.params.id).populate('products.product', 'quantity status name productCode department category stockStatus lowStockThreshold criticalStockThreshold stockAlertAcknowledged');
     
     if (!enquiry) {
       return res.status(404).json({ success: false, message: 'Enquiry not found' });
@@ -201,12 +202,19 @@ exports.updateEnquiry = async (req, res) => {
         for (const item of enquiry.products) {
           const newQty = item.product.quantity - item.quantity;
           const finalStatus = (newQty === 0 && item.product.status !== 'hidden') ? 'out_of_stock' : item.product.status;
+          const newStockStatus = calculateStockStatus(newQty, item.product.criticalStockThreshold, item.product.lowStockThreshold);
+          
           bulkOps.push({
             updateOne: {
               filter: { _id: item.product._id },
-              update: { $inc: { quantity: -item.quantity }, $set: { status: finalStatus } }
+              update: { $inc: { quantity: -item.quantity }, $set: { status: finalStatus, stockStatus: newStockStatus } }
             }
           });
+          
+          if (newStockStatus !== item.product.stockStatus) {
+            await handleStockStatusChange(item.product, item.product.stockStatus, newStockStatus, performedBy);
+          }
+          
           activityDocs.push({
             productId: item.product._id,
             productCode: item.product.productCode || 'N/A',
@@ -244,12 +252,19 @@ exports.updateEnquiry = async (req, res) => {
           if (!item.product) continue;
           const newQty = item.product.quantity + item.quantity;
           const finalStatus = (newQty > 0 && item.product.status === 'out_of_stock') ? 'available' : item.product.status;
+          const newStockStatus = calculateStockStatus(newQty, item.product.criticalStockThreshold, item.product.lowStockThreshold);
+          
           bulkOps.push({
             updateOne: {
               filter: { _id: item.product._id },
-              update: { $inc: { quantity: item.quantity }, $set: { status: finalStatus } }
+              update: { $inc: { quantity: item.quantity }, $set: { status: finalStatus, stockStatus: newStockStatus } }
             }
           });
+
+          if (newStockStatus !== item.product.stockStatus) {
+            await handleStockStatusChange(item.product, item.product.stockStatus, newStockStatus, performedBy);
+          }
+
           activityDocs.push({
             productId: item.product._id,
             productCode: item.product.productCode || 'N/A',

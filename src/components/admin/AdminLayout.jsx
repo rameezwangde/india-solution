@@ -10,7 +10,8 @@ import {
   Menu,
   X,
   Upload,
-  Activity
+  Activity,
+  AlertTriangle
 } from 'lucide-react';
 import { useAdminAuth } from '../../context/AdminAuthContext';
 
@@ -24,6 +25,7 @@ const AdminLayout = () => {
     { name: 'Departments', path: '/admin/inventory-departments', icon: <Package size={20} /> },
     { name: 'Categories', path: '/admin/categories', icon: <Tags size={20} /> },
     { name: 'Enquiries', path: '/admin/enquiries', icon: <MessageSquare size={20} /> },
+    { name: 'Low Stock Centre', path: '/admin/low-stock', icon: <AlertTriangle size={20} /> },
     { name: 'Inventory Activity', path: '/admin/inventory-activity', icon: <Activity size={20} /> },
     { name: 'Import Inventory', path: '/admin/import-inventory', icon: <Upload size={20} /> },
   ];

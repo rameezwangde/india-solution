@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { getDashboardData } from '../../api/dashboardService';
 import { getRecentActivity } from '../../api/activityService';
+import { getStockAlerts } from '../../api/stockAlertService';
 import { format } from 'date-fns';
 import { 
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, 
@@ -31,22 +32,25 @@ const Sparkline = ({ color }) => (
   </div>
 );
 
-const StatCard = ({ title, value, icon: Icon, colorClass, iconColor, sparklineColor }) => (
-  <div className="bg-[#12121A] border border-white/5 rounded-2xl p-5 flex flex-col justify-between shadow-lg relative overflow-hidden group hover:border-white/10 transition-colors">
-    <div className="flex items-start justify-between mb-2">
-      <div className={`p-3 rounded-full border border-white/5 bg-black/40 ${iconColor} relative flex items-center justify-center`}>
-        {/* Glow effect */}
-        <div className={`absolute inset-0 rounded-full blur-md opacity-30 ${colorClass}`}></div>
-        <Icon size={20} className="relative z-10" />
+const StatCard = ({ title, value, icon: Icon, colorClass, iconColor, sparklineColor, linkTo }) => {
+  const content = (
+    <div className="bg-[#12121A] border border-white/5 rounded-2xl p-5 flex flex-col justify-between shadow-lg relative overflow-hidden group hover:border-white/10 transition-colors h-full">
+      <div className="flex items-start justify-between mb-2">
+        <div className={`p-3 rounded-full border border-white/5 bg-black/40 ${iconColor} relative flex items-center justify-center`}>
+          <div className={`absolute inset-0 rounded-full blur-md opacity-30 ${colorClass}`}></div>
+          <Icon size={20} className="relative z-10" />
+        </div>
+        <div className="text-right">
+          <p className="text-gray-400 text-[11px] mb-1 font-medium">{title}</p>
+          <h3 className="text-2xl font-bold text-white leading-none">{value}</h3>
+        </div>
       </div>
-      <div className="text-right">
-        <p className="text-gray-400 text-[11px] mb-1 font-medium">{title}</p>
-        <h3 className="text-2xl font-bold text-white leading-none">{value}</h3>
-      </div>
+      <Sparkline color={sparklineColor} />
     </div>
-    <Sparkline color={sparklineColor} />
-  </div>
-);
+  );
+
+  return linkTo ? <Link to={linkTo} className="block h-full">{content}</Link> : content;
+};
 
 const COLORS = ['#FF9800', '#3b82f6', '#E91E63', '#22c55e', '#10b981', '#ef4444']; 
 
@@ -56,6 +60,7 @@ const AdminDashboardPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activities, setActivities] = useState([]);
+  const [stockAlerts, setStockAlerts] = useState([]);
 
   useEffect(() => {
     const fetchDashboardData = async () => {
@@ -68,6 +73,15 @@ const AdminDashboardPage = () => {
         if (res.success) {
           setData(res);
           setActivities(actRes.activities || []);
+          
+          try {
+            const alertsRes = await getStockAlerts({ limit: 5 });
+            if (alertsRes) {
+              setStockAlerts(alertsRes.products || []);
+            }
+          } catch (alertErr) {
+            console.error("Failed to load stock alerts for dashboard", alertErr);
+          }
         } else {
           setError('Failed to load dashboard data');
         }
@@ -131,7 +145,7 @@ const AdminDashboardPage = () => {
         <StatCard title="Total Products" value={summary.totalProducts} icon={Package} colorClass="bg-magenta" iconColor="text-magenta" sparklineColor="#E91E63" />
         <StatCard title="Total Inventory" value={summary.totalInventoryQuantity} icon={Package} colorClass="bg-orange" iconColor="text-orange" sparklineColor="#FF9800" />
         <StatCard title="Total Categories" value={summary.totalCategories} icon={Tags} colorClass="bg-purple-500" iconColor="text-purple-500" sparklineColor="#a855f7" />
-        <StatCard title="Out of Stock" value={summary.outOfStockProducts} icon={AlertCircle} colorClass="bg-red-500" iconColor="text-red-500" sparklineColor="#ef4444" />
+        <StatCard title="Out of Stock / Low" value={summary.outOfStockProducts} icon={AlertCircle} colorClass="bg-red-500" iconColor="text-red-500" sparklineColor="#ef4444" linkTo="/admin/low-stock" />
         
         <StatCard title="Total Enquiries" value={summary.totalEnquiries} icon={MessageSquare} colorClass="bg-blue-500" iconColor="text-blue-500" sparklineColor="#3b82f6" />
         <StatCard title="Pending Enquiries" value={summary.pendingEnquiries} icon={Clock} colorClass="bg-orange" iconColor="text-orange" sparklineColor="#FF9800" />
@@ -243,8 +257,46 @@ const AdminDashboardPage = () => {
         </div>
       </div>
 
-      {/* Recent Activity Widget */}
-      <div className="bg-[#12121A] border border-white/5 rounded-2xl p-6 shadow-lg">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Stock Alerts Requiring Attention */}
+        <div className="bg-[#12121A] border border-white/5 rounded-2xl p-6 shadow-lg flex flex-col h-[400px]">
+          <div className="flex justify-between items-center mb-6 shrink-0">
+            <h2 className="text-sm font-semibold text-white flex items-center gap-2">
+              <AlertCircle className="w-4 h-4 text-orange-500" /> Stock Alerts
+            </h2>
+            <Link to="/admin/low-stock" className="text-xs text-blue-400 hover:text-blue-300 transition-colors">
+              View All
+            </Link>
+          </div>
+          <div className="overflow-y-auto pr-2 space-y-4 styled-scrollbar flex-1">
+            {stockAlerts.length === 0 ? (
+              <div className="text-center text-gray-500 text-sm h-full flex items-center justify-center">
+                All inventory levels are healthy
+              </div>
+            ) : (
+              stockAlerts.map(alert => (
+                <div key={alert._id} className="flex gap-3 items-center bg-white/5 border border-white/5 p-3 rounded-xl hover:bg-white/10 transition-colors group cursor-pointer">
+                  <div className={`p-2 rounded-lg bg-black/40 ${alert.stockStatus === 'OUT_OF_STOCK' ? 'text-red-500' : alert.stockStatus === 'CRITICAL_STOCK' ? 'text-orange-500' : 'text-yellow-500'}`}>
+                    {alert.stockStatus === 'OUT_OF_STOCK' ? <XCircle size={16} /> : <TrendingDown size={16} />}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-white text-sm font-medium truncate">{alert.name}</p>
+                    <p className="text-gray-400 text-xs truncate">{alert.department}</p>
+                  </div>
+                  <div className="text-right shrink-0">
+                    <p className="text-white text-sm font-bold">{alert.quantity} {alert.quantityUnit}</p>
+                    <p className={`text-[10px] uppercase font-bold tracking-wider ${alert.stockStatus === 'OUT_OF_STOCK' ? 'text-red-500' : alert.stockStatus === 'CRITICAL_STOCK' ? 'text-orange-500' : 'text-yellow-500'}`}>
+                      {alert.stockStatus.replace('_', ' ')}
+                    </p>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+
+        {/* Recent Activity Widget */}
+        <div className="bg-[#12121A] border border-white/5 rounded-2xl p-6 shadow-lg flex flex-col h-[400px]">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-sm font-semibold text-white flex items-center gap-2">
             <Activity className="w-4 h-4 text-magenta" /> Recent Activity
@@ -278,6 +330,7 @@ const AdminDashboardPage = () => {
         ) : (
           <div className="py-8 text-center text-gray-500 text-sm">No recent activity</div>
         )}
+        </div>
       </div>
       
       {/* Footer */}
