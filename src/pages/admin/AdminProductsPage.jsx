@@ -13,6 +13,15 @@ import ProductFormModal from '../../components/admin/products/ProductFormModal';
 import UpdateQuantityModal from '../../components/admin/products/UpdateQuantityModal';
 import ProductImageModal from '../../components/admin/products/ProductImageModal';
 import DeleteConfirmModal from '../../components/admin/products/DeleteConfirmModal';
+import BulkActionToolbar from '../../components/admin/products/BulkActionToolbar';
+import BulkActionModal from '../../components/admin/products/BulkActionModal';
+import ExportModal from '../../components/admin/products/ExportModal';
+
+import { 
+  bulkUpdateDepartment, bulkUpdateCategory, bulkActivate, 
+  bulkDeactivate, bulkDelete, bulkUpdateThresholds 
+} from '../../api/bulkProductService';
+import { generateExport } from '../../api/exportService';
 
 const StatCard = ({ title, value, icon: Icon, color }) => (
   <div className="bg-white/5 border border-white/10 rounded-2xl p-5 flex items-center gap-4">
@@ -62,6 +71,11 @@ const AdminProductsPage = () => {
   
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
+
+  // Bulk & Export States
+  const [selectedProductIds, setSelectedProductIds] = useState(new Set());
+  const [isExportModalOpen, setIsExportModalOpen] = useState(false);
+  const [bulkModal, setBulkModal] = useState({ isOpen: false, mode: null });
 
   const { success, error: showError } = useToast();
 
@@ -243,6 +257,71 @@ const AdminProductsPage = () => {
     }
   };
 
+  // --- BULK ACTION HANDLERS ---
+  const toggleSelectAll = () => {
+    if (selectedProductIds.size === products.length && products.length > 0) {
+      setSelectedProductIds(new Set());
+    } else {
+      setSelectedProductIds(new Set(products.map(p => p.id)));
+    }
+  };
+
+  const toggleSelectProduct = (id) => {
+    const newSet = new Set(selectedProductIds);
+    if (newSet.has(id)) {
+      newSet.delete(id);
+    } else {
+      newSet.add(id);
+    }
+    setSelectedProductIds(newSet);
+  };
+
+  const handleBulkConfirm = async (mode, data) => {
+    const ids = Array.from(selectedProductIds);
+    try {
+      if (mode === 'department') await bulkUpdateDepartment(ids, data.newDepartment);
+      if (mode === 'category') await bulkUpdateCategory(ids, data.newCategoryId);
+      if (mode === 'activate') await bulkActivate(ids);
+      if (mode === 'deactivate') await bulkDeactivate(ids);
+      if (mode === 'delete') await bulkDelete(ids);
+      if (mode === 'thresholds') await bulkUpdateThresholds(ids, data.lowStockThreshold, data.criticalStockThreshold);
+
+      success(`Bulk ${mode} completed successfully.`);
+      setSelectedProductIds(new Set());
+      fetchProducts(); // Refresh list
+    } catch (err) {
+      showError(err.response?.data?.message || `Failed to perform bulk ${mode}`);
+    }
+  };
+
+  const handleExport = async (format, scope) => {
+    try {
+      const ids = Array.from(selectedProductIds);
+      const res = await generateExport(format, scope, filters, ids);
+      
+      // Download file
+      const blob = new Blob([res.data]);
+      const url = window.URL.createObjectURL(blob);
+      const contentDisposition = res.headers['content-disposition'];
+      let filename = `export.${format}`;
+      if (contentDisposition) {
+        const filenameMatch = contentDisposition.match(/filename="?([^"]+)"?/);
+        if (filenameMatch && filenameMatch.length === 2) filename = filenameMatch[1];
+      }
+      
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', filename);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+      success('Export generated successfully');
+    } catch (err) {
+      showError('Failed to generate export');
+    }
+  };
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -251,13 +330,21 @@ const AdminProductsPage = () => {
           <h1 className="text-3xl font-bold text-white mb-2">Products</h1>
           <p className="text-gray-400">Manage inventory products, quantities, pricing and images.</p>
         </div>
-        <button 
-          onClick={() => openForm()}
-          className="bg-gradient-to-r from-magenta to-orange hover:from-magenta-600 hover:to-orange-600 text-white px-5 py-2.5 rounded-lg font-medium flex items-center gap-2 transition-all shadow-lg shadow-magenta/20"
-        >
-          <Plus size={20} />
-          Add Product
-        </button>
+        <div className="flex items-center gap-3">
+          <button 
+            onClick={() => setIsExportModalOpen(true)}
+            className="bg-gray-800 border border-gray-700 hover:bg-gray-700 text-white px-4 py-2.5 rounded-lg font-medium flex items-center gap-2 transition-all"
+          >
+            Export
+          </button>
+          <button 
+            onClick={() => openForm()}
+            className="bg-gradient-to-r from-magenta to-orange hover:from-magenta-600 hover:to-orange-600 text-white px-5 py-2.5 rounded-lg font-medium flex items-center gap-2 transition-all shadow-lg shadow-magenta/20"
+          >
+            <Plus size={20} />
+            Add Product
+          </button>
+        </div>
       </div>
 
       {/* Summary Cards */}
@@ -373,16 +460,24 @@ const AdminProductsPage = () => {
         >
           {/* Desktop Table */}
           <div className="hidden md:block">
-            <table className="w-full text-left text-sm text-gray-300">
-              <thead className="bg-navy-900 text-gray-400 border-b border-white/10 sticky top-0 z-10 shadow-md">
-                <tr>
-                  <th className="px-6 py-4 font-medium">Product</th>
-                  <th className="px-6 py-4 font-medium">Code & Category</th>
-                  <th className="px-6 py-4 font-medium">Price</th>
-                  <th className="px-6 py-4 font-medium">Quantity</th>
-                  <th className="px-6 py-4 font-medium">Status</th>
-                  <th className="px-6 py-4 font-medium text-right">Actions</th>
-                </tr>
+            <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="border-b border-white/10 bg-white/5 text-gray-400 text-sm">
+                <th className="p-4 w-12">
+                  <input 
+                    type="checkbox" 
+                    checked={products.length > 0 && selectedProductIds.size === products.length}
+                    onChange={toggleSelectAll}
+                    className="w-4 h-4 rounded bg-gray-900 border-gray-700 text-magenta focus:ring-magenta focus:ring-offset-gray-900"
+                  />
+                </th>
+                <th className="px-6 py-4 font-medium">Product</th>
+                <th className="px-6 py-4 font-medium">Code & Category</th>
+                <th className="px-6 py-4 font-medium">Price</th>
+                <th className="px-6 py-4 font-medium">Quantity</th>
+                <th className="px-6 py-4 font-medium">Status</th>
+                <th className="px-6 py-4 font-medium text-right">Actions</th>
+              </tr>
               </thead>
               <tbody className="divide-y divide-white/10">
                 {loading && products.length === 0 ? (
@@ -398,7 +493,7 @@ const AdminProductsPage = () => {
                   ))
                 ) : products.length === 0 ? (
                   <tr>
-                    <td colSpan="6" className="px-6 py-12 text-center">
+                    <td colSpan="7" className="px-6 py-12 text-center">
                       <div className="flex flex-col items-center">
                         <Package size={48} className="text-gray-600 mb-4" />
                         <h4 className="text-lg font-medium text-white mb-2">No products found</h4>
@@ -409,8 +504,16 @@ const AdminProductsPage = () => {
                   </tr>
                 ) : (
                   products.map(p => (
-                    <tr key={p.id} className="hover:bg-white/5 transition-colors group">
-                      <td className="px-6 py-4">
+                    <tr key={p.id} className="border-b border-white/5 hover:bg-white/5 transition-colors group">
+                    <td className="p-4 w-12">
+                      <input 
+                        type="checkbox" 
+                        checked={selectedProductIds.has(p.id)}
+                        onChange={() => toggleSelectProduct(p.id)}
+                        className="w-4 h-4 rounded bg-gray-900 border-gray-700 text-magenta focus:ring-magenta focus:ring-offset-gray-900"
+                      />
+                    </td>
+                    <td className="p-4">
                         <div className="flex items-center gap-4">
                           {p.image ? (
                             <img src={p.image} alt={p.name} className="w-12 h-12 rounded-lg object-cover bg-navy-900 border border-white/10" />
@@ -585,6 +688,35 @@ const AdminProductsPage = () => {
         onConfirm={handleDeleteConfirm}
         isDeleting={isProcessing}
       />
+      <BulkActionToolbar 
+        selectedCount={selectedProductIds.size}
+        onClearSelection={() => setSelectedProductIds(new Set())}
+        onBulkDepartment={() => setBulkModal({ isOpen: true, mode: 'department' })}
+        onBulkCategory={() => setBulkModal({ isOpen: true, mode: 'category' })}
+        onBulkActivate={() => setBulkModal({ isOpen: true, mode: 'activate' })}
+        onBulkDeactivate={() => setBulkModal({ isOpen: true, mode: 'deactivate' })}
+        onBulkDelete={() => setBulkModal({ isOpen: true, mode: 'delete' })}
+        onBulkThresholds={() => setBulkModal({ isOpen: true, mode: 'thresholds' })}
+      />
+
+      <BulkActionModal 
+        isOpen={bulkModal.isOpen}
+        mode={bulkModal.mode}
+        selectedCount={selectedProductIds.size}
+        departments={departmentsList}
+        categories={categories}
+        onClose={() => setBulkModal({ isOpen: false, mode: null })}
+        onConfirm={handleBulkConfirm}
+      />
+
+      <ExportModal
+        isOpen={isExportModalOpen}
+        onClose={() => setIsExportModalOpen(false)}
+        onExport={handleExport}
+        totalProducts={stats.total}
+        hasSelection={selectedProductIds.size > 0}
+      />
+
     </div>
   );
 };

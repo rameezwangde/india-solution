@@ -77,8 +77,11 @@ const dashboardRoutes = require('./routes/dashboardRoutes');
 const inventoryImportRoutes = require('./routes/inventoryImportRoutes');
 const activityRoutes = require('./routes/activityRoutes');
 const stockAlertRoutes = require('./routes/stockAlertRoutes');
+const bulkProductRoutes = require('./routes/bulkProductRoutes');
+const exportRoutes = require('./routes/exportRoutes');
 
 // Mount routers
+app.use('/api/products/bulk', bulkProductRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/auth', authRoutes);
@@ -87,6 +90,7 @@ app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/inventory-import', inventoryImportRoutes);
 app.use('/api/inventory/activity', activityRoutes);
 app.use('/api/inventory/stock-alerts', stockAlertRoutes);
+app.use('/api/export', exportRoutes);
 
 // Health endpoint
 app.get('/health', (req, res) => {

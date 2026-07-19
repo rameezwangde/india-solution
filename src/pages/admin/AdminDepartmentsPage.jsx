@@ -4,6 +4,8 @@ import { Package, AlertTriangle, Box, Loader2, Info, Trash2 } from 'lucide-react
 import { getDepartments, clearDepartmentInventory } from '../../api/productService';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useToast } from '../../context/ToastContext';
+import ExportModal from '../../components/admin/products/ExportModal';
+import { generateExport } from '../../api/exportService';
 
 const AdminDepartmentsPage = () => {
   const [departments, setDepartments] = useState([]);
@@ -17,6 +19,8 @@ const AdminDepartmentsPage = () => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [departmentToDelete, setDepartmentToDelete] = useState(null);
   const [isDeleting, setIsDeleting] = useState(false);
+
+  const [isExportModalOpen, setIsExportModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchDepartments = async () => {
@@ -61,6 +65,30 @@ const AdminDepartmentsPage = () => {
     }
   };
 
+  const handleExport = async (format, scope) => {
+    try {
+      const res = await generateExport(format, scope, {}, []);
+      const blob = new Blob([res.data]);
+      const url = window.URL.createObjectURL(blob);
+      const contentDisposition = res.headers['content-disposition'];
+      let filename = `export.${format}`;
+      if (contentDisposition) {
+        const filenameMatch = contentDisposition.match(/filename="?([^"]+)"?/);
+        if (filenameMatch && filenameMatch.length === 2) filename = filenameMatch[1];
+      }
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', filename);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+      showSuccess('Export generated successfully');
+    } catch (err) {
+      showError('Failed to generate export');
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
@@ -100,6 +128,12 @@ const AdminDepartmentsPage = () => {
             <span className="text-gray-400">Total Items: </span>
             <span className="text-white font-bold">{totals.quantity.toLocaleString()}</span>
           </div>
+          <button 
+            onClick={() => setIsExportModalOpen(true)}
+            className="bg-gray-800 border border-gray-700 hover:bg-gray-700 text-white px-4 py-2 rounded-lg font-medium flex items-center gap-2 transition-all ml-2"
+          >
+            Export
+          </button>
         </div>
       </div>
 
@@ -241,6 +275,14 @@ const AdminDepartmentsPage = () => {
           </div>
         )}
       </AnimatePresence>
+
+      <ExportModal
+        isOpen={isExportModalOpen}
+        onClose={() => setIsExportModalOpen(false)}
+        onExport={handleExport}
+        totalProducts={totals.products}
+        hasSelection={false}
+      />
     </div>
   );
 };

@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { getStockAlerts, getStockAlertsSummary, acknowledgeAlert, unacknowledgeAlert, quickUpdateQuantity, updateStockThresholds } from '../../api/stockAlertService';
 import { useToast } from '../../context/ToastContext';
-import { AlertTriangle, Package, Edit, CheckCircle, XCircle, Search, Filter, RefreshCw, X, TrendingUp, TrendingDown, Clock, Activity } from 'lucide-react';
+import { AlertTriangle, Package, Edit, CheckCircle, XCircle, Search, Filter, RefreshCw, X, TrendingUp, TrendingDown, Clock, Activity, Download } from 'lucide-react';
 import { format } from 'date-fns';
+import ExportModal from '../../components/admin/products/ExportModal';
+import { generateExport } from '../../api/exportService';
 
 const StockBadge = ({ status }) => {
   const styles = {
@@ -38,6 +40,7 @@ export default function AdminLowStockPage() {
 
   const [updateModal, setUpdateModal] = useState({ isOpen: false, product: null, mode: 'set', value: '', remarks: '' });
   const [thresholdModal, setThresholdModal] = useState({ isOpen: false, product: null, low: '', critical: '' });
+  const [isExportModalOpen, setIsExportModalOpen] = useState(false);
 
   const fetchSummary = useCallback(async () => {
     try {
@@ -108,6 +111,34 @@ export default function AdminLowStockPage() {
     }
   };
 
+  const handleExport = async (format, scope) => {
+    try {
+      // By default scope will export what is currently filtered, or entire low stock if 'filtered'
+      // If the user selects 'entire', it exports entire DB.
+      // If 'filtered', it will use the low_stock scope on the backend.
+      const currentScope = scope === 'filtered' ? 'low_stock' : scope; 
+      const res = await generateExport(format, currentScope, filters, []);
+      const blob = new Blob([res.data]);
+      const url = window.URL.createObjectURL(blob);
+      const contentDisposition = res.headers['content-disposition'];
+      let filename = `export.${format}`;
+      if (contentDisposition) {
+        const filenameMatch = contentDisposition.match(/filename="?([^"]+)"?/);
+        if (filenameMatch && filenameMatch.length === 2) filename = filenameMatch[1];
+      }
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', filename);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+      showToast('Export generated successfully', 'success');
+    } catch (err) {
+      showToast('Failed to generate export', 'error');
+    }
+  };
+
   return (
     <div className="p-6">
       <div className="flex justify-between items-center mb-6">
@@ -117,9 +148,14 @@ export default function AdminLowStockPage() {
           </h1>
           <p className="text-gray-400 mt-1">Monitor and manage inventory shortages</p>
         </div>
-        <button onClick={() => { fetchSummary(); fetchProducts(); }} className="p-2 bg-gray-800 rounded-lg text-gray-400 hover:text-white hover:bg-gray-700 transition-colors">
-          <RefreshCw size={20} />
-        </button>
+        <div className="flex gap-2">
+          <button onClick={() => setIsExportModalOpen(true)} className="px-4 py-2 bg-gray-800 rounded-lg text-white font-medium hover:bg-gray-700 transition-colors flex items-center gap-2 border border-gray-700">
+            <Download size={18} /> Export
+          </button>
+          <button onClick={() => { fetchSummary(); fetchProducts(); }} className="p-2 bg-gray-800 rounded-lg text-gray-400 hover:text-white hover:bg-gray-700 transition-colors border border-gray-700">
+            <RefreshCw size={20} />
+          </button>
+        </div>
       </div>
 
       {/* Summary Cards */}
@@ -434,6 +470,14 @@ export default function AdminLowStockPage() {
           </div>
         </div>
       )}
+
+      <ExportModal
+        isOpen={isExportModalOpen}
+        onClose={() => setIsExportModalOpen(false)}
+        onExport={handleExport}
+        totalProducts={summary ? summary.totalAttentionRequired : 0}
+        hasSelection={false}
+      />
     </div>
   );
 }
