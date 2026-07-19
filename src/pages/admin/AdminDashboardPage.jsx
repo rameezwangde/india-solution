@@ -8,6 +8,7 @@ import {
 import { getDashboardData } from '../../api/dashboardService';
 import { getRecentActivity } from '../../api/activityService';
 import { getStockAlerts } from '../../api/stockAlertService';
+import api from '../../api/api';
 import { format } from 'date-fns';
 import { 
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, 
@@ -61,6 +62,7 @@ const AdminDashboardPage = () => {
   const [error, setError] = useState(null);
   const [activities, setActivities] = useState([]);
   const [stockAlerts, setStockAlerts] = useState([]);
+  const [auditWarning, setAuditWarning] = useState(null);
 
   useEffect(() => {
     const fetchDashboardData = async () => {
@@ -81,6 +83,17 @@ const AdminDashboardPage = () => {
             }
           } catch (alertErr) {
             console.error("Failed to load stock alerts for dashboard", alertErr);
+          }
+
+          if (import.meta.env.MODE === 'development') {
+            try {
+              const auditRes = await api.get('/admin/data-audit');
+              if (auditRes.data.status !== 'healthy') {
+                setAuditWarning(`Data inconsistency detected: ${auditRes.data.summary.issuesFound} issues found.`);
+              }
+            } catch (auditErr) {
+              console.error("Failed to run development data audit", auditErr);
+            }
           }
         } else {
           setError('Failed to load dashboard data');
@@ -139,6 +152,13 @@ const AdminDashboardPage = () => {
           </button>
         </div>
       </div>
+
+      {auditWarning && (
+        <div className="bg-orange-500/10 border border-orange-500/20 text-orange-400 p-3 rounded-xl flex items-center gap-3 font-medium text-sm">
+          <AlertCircle size={18} />
+          {auditWarning} (Development Warning)
+        </div>
+      )}
 
       {/* 8-Card Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">

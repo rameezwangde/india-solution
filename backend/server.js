@@ -43,7 +43,7 @@ app.use(express.urlencoded({ extended: true, limit: '1mb' }));
 // because they attempt to mutate req.query, which throws a TypeError in Express 5.
 
 // CORS config
-const allowedOrigins = [process.env.CLIENT_URL, process.env.ADMIN_URL];
+const allowedOrigins = [process.env.CLIENT_URL, process.env.ADMIN_URL, process.env.FRONTEND_URL].filter(Boolean);
 if (process.env.ADDITIONAL_ALLOWED_ORIGINS) {
   allowedOrigins.push(...process.env.ADDITIONAL_ALLOWED_ORIGINS.split(',').map(u => u.trim()));
 }
@@ -79,6 +79,8 @@ const activityRoutes = require('./routes/activityRoutes');
 const stockAlertRoutes = require('./routes/stockAlertRoutes');
 const bulkProductRoutes = require('./routes/bulkProductRoutes');
 const exportRoutes = require('./routes/exportRoutes');
+const backupRoutes = require('./routes/backupRoutes');
+const auditRoutes = require('./routes/auditRoutes');
 
 // Mount routers
 app.use('/api/products/bulk', bulkProductRoutes);
@@ -91,6 +93,8 @@ app.use('/api/inventory-import', inventoryImportRoutes);
 app.use('/api/inventory/activity', activityRoutes);
 app.use('/api/inventory/stock-alerts', stockAlertRoutes);
 app.use('/api/export', exportRoutes);
+app.use('/api/admin/backups', backupRoutes);
+app.use('/api/admin/data-audit', auditRoutes);
 
 // Health endpoint
 app.get('/health', (req, res) => {

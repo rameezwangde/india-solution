@@ -11,7 +11,9 @@ import {
   X,
   Upload,
   Activity,
-  AlertTriangle
+  AlertTriangle,
+  Download,
+  HelpCircle
 } from 'lucide-react';
 import { useAdminAuth } from '../../context/AdminAuthContext';
 
@@ -28,6 +30,8 @@ const AdminLayout = () => {
     { name: 'Low Stock Centre', path: '/admin/low-stock', icon: <AlertTriangle size={20} /> },
     { name: 'Inventory Activity', path: '/admin/inventory-activity', icon: <Activity size={20} /> },
     { name: 'Import Inventory', path: '/admin/import-inventory', icon: <Upload size={20} /> },
+    { name: 'Backups', path: '/admin/backups', icon: <Download size={20} /> },
+    { name: 'Help & Guides', path: '/admin/help', icon: <HelpCircle size={20} /> },
   ];
 
   const SidebarContent = () => (
