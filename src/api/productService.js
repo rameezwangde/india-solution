@@ -20,11 +20,32 @@ export const getProducts = async (params = {}) => {
     }));
     return {
       products,
-      pagination: response.data.pagination
+      pagination: {
+        page: response.data.page,
+        totalPages: response.data.pages,
+        totalProducts: response.data.total,
+        hasNextPage: response.data.page < response.data.pages,
+        hasPreviousPage: response.data.page > 1
+      }
     };
   } catch (error) {
     throw error;
   }
+};
+
+export const clearInventory = async () => {
+  const response = await api.delete('/products/clear-inventory');
+  return response.data;
+};
+
+export const clearTestData = async () => {
+  const response = await api.delete('/products/clear-test-data');
+  return response.data;
+};
+
+export const getDepartments = async () => {
+  const response = await api.get('/products/departments');
+  return response.data;
 };
 
 export const getProductById = async (id) => {

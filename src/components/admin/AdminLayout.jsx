@@ -20,6 +20,7 @@ const AdminLayout = () => {
   const navItems = [
     { name: 'Dashboard', path: '/admin', icon: <LayoutDashboard size={20} /> },
     { name: 'Products', path: '/admin/products', icon: <Package size={20} /> },
+    { name: 'Departments', path: '/admin/inventory-departments', icon: <Package size={20} /> },
     { name: 'Categories', path: '/admin/categories', icon: <Tags size={20} /> },
     { name: 'Enquiries', path: '/admin/enquiries', icon: <MessageSquare size={20} /> },
     { name: 'Import Inventory', path: '/admin/import-inventory', icon: <Upload size={20} /> },

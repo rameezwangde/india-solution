@@ -273,3 +273,120 @@ exports.deleteProduct = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
+// @desc    Clear entire inventory (Admin only)
+// @route   DELETE /api/products/clear-inventory
+// @access  Private/Admin
+exports.clearInventory = async (req, res) => {
+  try {
+    const result = await Product.deleteMany({});
+    
+    if (result.deletedCount === 0) {
+      return res.status(200).json({
+        success: true,
+        message: 'Inventory is already empty',
+        deletedCount: 0
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'Inventory cleared successfully',
+      deletedCount: result.deletedCount
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Failed to clear inventory: ' + error.message });
+  }
+};
+
+// @desc    Clear all test operational data (Admin only)
+// @route   DELETE /api/products/clear-test-data
+// @access  Private/Admin
+exports.clearTestData = async (req, res) => {
+  try {
+    const Enquiry = require('../models/Enquiry');
+    const ImportHistory = require('../models/ImportHistory');
+
+    const prods = await Product.deleteMany({});
+    const enqs = await Enquiry.deleteMany({});
+    const history = await ImportHistory.deleteMany({});
+    
+    // Attempt to clear optional collections without failing
+    const mongoose = require('mongoose');
+    let smCount = 0, notifCount = 0;
+    try { smCount = (await mongoose.model('StockMovement').deleteMany({})).deletedCount; } catch(e){}
+    try { notifCount = (await mongoose.model('Notification').deleteMany({})).deletedCount; } catch(e){}
+
+    res.status(200).json({
+      success: true,
+      message: 'Test data cleared successfully',
+      deletedCounts: {
+        products: prods.deletedCount,
+        enquiries: enqs.deletedCount,
+        importHistory: history.deletedCount,
+        stockMovements: smCount,
+        notifications: notifCount
+      }
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Failed to clear test data: ' + error.message });
+  }
+};
+
+// @desc    Get inventory grouped by departments
+// @route   GET /api/products/departments
+// @access  Public/Admin
+exports.getDepartments = async (req, res) => {
+  try {
+    const departments = await Product.aggregate([
+      {
+        $group: {
+          _id: "$department",
+          totalProducts: { $sum: 1 },
+          totalQuantity: { $sum: { $ifNull: ["$quantity", 0] } },
+          inStock: {
+            $sum: { $cond: [{ $gt: ["$quantity", 0] }, 1, 0] }
+          },
+          outOfStock: {
+            $sum: { $cond: [{ $or: [{ $eq: ["$quantity", 0] }, { $eq: ["$status", "out_of_stock"] }] }, 1, 0] }
+          },
+          lowStock: {
+            $sum: { $cond: [{ $and: [{ $gt: ["$quantity", 0] }, { $lte: ["$quantity", 5] }] }, 1, 0] }
+          },
+          activeProducts: {
+            $sum: { $cond: [{ $ne: ["$status", "hidden"] }, 1, 0] }
+          },
+          inactiveProducts: {
+            $sum: { $cond: [{ $eq: ["$status", "hidden"] }, 1, 0] }
+          }
+        }
+      },
+      {
+        $sort: { _id: 1 }
+      }
+    ]);
+
+    const formatted = departments.map(d => {
+      const name = d._id || 'Main Inventory';
+      return {
+        name,
+        slug: name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''),
+        totalProducts: d.totalProducts,
+        totalQuantity: d.totalQuantity,
+        inStock: d.inStock,
+        outOfStock: d.outOfStock,
+        lowStock: d.lowStock,
+        activeProducts: d.activeProducts,
+        inactiveProducts: d.inactiveProducts
+      };
+    });
+
+    res.status(200).json({
+      success: true,
+      count: formatted.length,
+      departments: formatted
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};

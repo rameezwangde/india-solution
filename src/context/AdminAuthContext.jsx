@@ -38,6 +38,8 @@ export const AdminAuthProvider = ({ children }) => {
 
   const handleLogoutLocal = () => {
     localStorage.removeItem('indiaSolutionsAdminToken');
+    localStorage.removeItem('adminFilters');
+    sessionStorage.clear();
     setToken(null);
     setAdmin(null);
     setIsAuthenticated(false);

@@ -5,7 +5,10 @@ const {
   getProductById, 
   createProduct, 
   updateProduct, 
-  deleteProduct 
+  deleteProduct,
+  clearInventory,
+  getDepartments,
+  clearTestData
 } = require('../controllers/productController');
 const {
   uploadProductImage,
@@ -13,7 +16,18 @@ const {
 } = require('../controllers/productImageController');
 const { protect } = require('../middleware/authMiddleware');
 const { uploadMiddleware } = require('../middleware/uploadMiddleware');
+const rateLimit = require('express-rate-limit');
 
+const clearInventoryLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000, // 1 hour window
+  max: 3, // start blocking after 3 requests
+  message: 'Too many clear inventory requests from this IP, please try again after an hour'
+});
+
+router.delete('/clear-inventory', protect, clearInventoryLimiter, clearInventory);
+router.delete('/clear-test-data', protect, clearInventoryLimiter, clearTestData);
+
+router.get('/departments', getDepartments);
 router.get('/', getProducts);
 router.post('/', protect, createProduct);
 

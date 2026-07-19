@@ -6,18 +6,17 @@ const Category = require('./models/Category');
 dotenv.config();
 
 const categoriesToSeed = [
-  'Sofas',
-  'Chairs',
-  'Tables',
-  'Console Tables',
-  'Lighting',
-  'Sound',
-  'Decor',
-  'Kitchen Equipment',
-  'Flowers',
-  'Cloth and Fabric',
-  'Truss and Frames',
-  'Cooling Equipment'
+  'Main Inventory',
+  'Flower Inventory',
+  'Truss Frames & Panels',
+  'Sound Inventory',
+  'Light Inventory',
+  'Cable Inventory',
+  'Cloth Inventory',
+  'Tent House Kitchen Items',
+  'Raaga Inventory',
+  'Raaga Party Hall',
+  'RJ Inventory'
 ];
 
 const generateSlug = (name) => {

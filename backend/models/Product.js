@@ -51,6 +51,21 @@ const productSchema = new mongoose.Schema(
       default: 0,
       required: [true, 'Quantity is required'],
     },
+    quantityUnit: {
+      type: String,
+      trim: true,
+      default: '',
+    },
+    quantityOriginal: {
+      type: String,
+      trim: true,
+      default: '',
+    },
+    inventorySection: {
+      type: String,
+      trim: true,
+      default: '',
+    },
     image: {
       url: { type: String, default: '' },
       publicId: { type: String, default: '' },

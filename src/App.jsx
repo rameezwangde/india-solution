@@ -22,6 +22,8 @@ import AdminCategoriesPage from './pages/admin/AdminCategoriesPage';
 import AdminEnquiriesPage from './pages/admin/AdminEnquiriesPage';
 import AdminInventoryImportPage from './pages/admin/AdminInventoryImportPage';
 
+import AdminDepartmentsPage from './pages/admin/AdminDepartmentsPage';
+
 const PublicLayout = ({ children }) => (
   <div className="min-h-screen flex flex-col bg-navy-900 text-white font-sans selection:bg-magenta selection:text-white overflow-x-hidden">
     <Navbar />
@@ -48,6 +50,8 @@ function App() {
           }>
             <Route index element={<AdminDashboardPage />} />
             <Route path="products" element={<AdminProductsPage />} />
+            <Route path="inventory-departments" element={<AdminDepartmentsPage />} />
+            <Route path="inventory-departments/:departmentSlug" element={<AdminProductsPage />} />
             <Route path="categories" element={<AdminCategoriesPage />} />
             <Route path="enquiries" element={<AdminEnquiriesPage />} />
             <Route path="import-inventory" element={<AdminInventoryImportPage />} />

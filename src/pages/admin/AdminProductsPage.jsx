@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useParams } from 'react-router-dom';
 import { 
   Plus, Search, Filter, RefreshCw, Edit, Trash2, 
   Image as ImageIcon, Package, CheckCircle, AlertTriangle, XCircle,
   ChevronLeft, ChevronRight, Hash, DollarSign
 } from 'lucide-react';
-import { getProducts, deleteProduct, updateProduct } from '../../api/productService';
+import { getProducts, deleteProduct, updateProduct, getDepartments } from '../../api/productService';
 import api from '../../api/api';
 import { useToast } from '../../context/ToastContext';
 
@@ -26,9 +27,12 @@ const StatCard = ({ title, value, icon: Icon, color }) => (
 );
 
 const AdminProductsPage = () => {
+  const { departmentSlug } = useParams();
+
   // Data States
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [departmentsList, setDepartmentsList] = useState([]);
   const [stats, setStats] = useState({ total: 0, available: 0, outOfStock: 0, lowStock: 0 });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -37,15 +41,18 @@ const AdminProductsPage = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
-  const limit = 12;
+  const limit = 50;
 
   const [search, setSearch] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState('');
   const [filters, setFilters] = useState({
     category: '',
+    department: '',
     status: '',
     sort: '-createdAt'
   });
+
+  const [lockedDepartment, setLockedDepartment] = useState(null);
 
   // Modal States
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -71,11 +78,24 @@ const AdminProductsPage = () => {
   useEffect(() => {
     const fetchInitialData = async () => {
       try {
-        const [catRes, prodRes] = await Promise.all([
+        const [catRes, prodRes, deptRes] = await Promise.all([
           api.get('/categories'),
-          getProducts({ limit: 1000 }) // fetching a larger set to calculate stats
+          getProducts({ limit: 1000 }), // fetching a larger set to calculate stats
+          getDepartments()
         ]);
         setCategories(catRes.data.categories || []);
+        
+        let depts = deptRes.departments || [];
+        setDepartmentsList(depts);
+        
+        // Handle URL slug locking
+        if (departmentSlug) {
+          const matchedDept = depts.find(d => d.slug === departmentSlug);
+          if (matchedDept) {
+            setLockedDepartment(matchedDept.name);
+            setFilters(prev => ({ ...prev, department: matchedDept.name }));
+          }
+        }
         
         let avail = 0, oos = 0, low = 0;
         prodRes.products.forEach(p => {
@@ -100,10 +120,14 @@ const AdminProductsPage = () => {
     fetchInitialData();
   }, []);
 
+  const [loadingMore, setLoadingMore] = useState(false);
+
   // Fetch paginated products
-  const fetchProducts = useCallback(async () => {
+  const fetchProducts = useCallback(async (isLoadMore = false) => {
     try {
-      setLoading(true);
+      if (isLoadMore) setLoadingMore(true);
+      else setLoading(true);
+      
       setError(null);
       
       const params = {
@@ -111,18 +135,28 @@ const AdminProductsPage = () => {
         limit,
         search: debouncedSearch,
         category: filters.category,
+        department: lockedDepartment || filters.department,
         status: filters.status,
         sort: filters.sort
       };
 
       const res = await getProducts(params);
-      setProducts(res.products);
+      
+      if (isLoadMore && page > 1) {
+        setProducts(prev => {
+          // Prevent duplicates by checking ids
+          const newProducts = res.products.filter(p => !prev.find(existing => existing.id === p.id));
+          return [...prev, ...newProducts];
+        });
+      } else {
+        setProducts(res.products);
+      }
       
       if (res.pagination) {
-        setTotalPages(res.pagination.pages);
-        setTotalCount(res.pagination.total);
-        if (page > res.pagination.pages && res.pagination.pages > 0) {
-          setPage(res.pagination.pages);
+        setTotalPages(res.pagination.totalPages || res.pagination.pages);
+        setTotalCount(res.pagination.totalProducts || res.pagination.total);
+        if (page > (res.pagination.totalPages || res.pagination.pages) && (res.pagination.totalPages || res.pagination.pages) > 0) {
+          setPage(res.pagination.totalPages || res.pagination.pages);
         }
       }
     } catch (err) {
@@ -130,21 +164,24 @@ const AdminProductsPage = () => {
       setError('Unable to load products');
     } finally {
       setLoading(false);
+      setLoadingMore(false);
     }
   }, [page, debouncedSearch, filters]);
 
   useEffect(() => {
-    fetchProducts();
-  }, [fetchProducts]);
+    fetchProducts(page > 1);
+  }, [fetchProducts, page]);
 
   const handleFilterChange = (key, value) => {
     setFilters(prev => ({ ...prev, [key]: value }));
+    setProducts([]);
     setPage(1);
   };
 
   const resetFilters = () => {
     setSearch('');
     setFilters({ category: '', status: '', sort: '-createdAt' });
+    setProducts([]);
     setPage(1);
   };
 
@@ -174,8 +211,10 @@ const AdminProductsPage = () => {
       await deleteProduct(selectedProduct.id);
       success('Product deleted successfully');
       setIsDeleteOpen(false);
-      fetchProducts();
-      // Optional: recalculate stats
+      
+      // Local state removal
+      setProducts(prev => prev.filter(p => p.id !== selectedProduct.id));
+      setTotalCount(prev => Math.max(0, prev - 1));
     } catch (err) {
       showError(err.response?.data?.message || 'Failed to delete product');
     } finally {
@@ -186,10 +225,17 @@ const AdminProductsPage = () => {
   const handleQuantityConfirm = async (newQuantity) => {
     try {
       setIsProcessing(true);
-      await updateProduct(selectedProduct.id, { quantity: newQuantity });
+      const res = await updateProduct(selectedProduct.id, { quantity: newQuantity });
       success('Quantity updated successfully');
       setIsQtyOpen(false);
-      fetchProducts();
+      
+      // Local state update
+      setProducts(prev => prev.map(p => {
+        if (p.id === selectedProduct.id) {
+          return { ...p, quantity: newQuantity, status: newQuantity > 0 ? 'available' : 'out_of_stock' };
+        }
+        return p;
+      }));
     } catch (err) {
       showError(err.response?.data?.message || 'Failed to update quantity');
     } finally {
@@ -236,6 +282,22 @@ const AdminProductsPage = () => {
         </div>
         
         <div className="flex flex-wrap items-center gap-3">
+          {!lockedDepartment && (
+            <div className="flex items-center gap-2 bg-navy-900 border border-white/10 rounded-lg px-3 py-1">
+              <Package size={16} className="text-gray-400" />
+              <select 
+                value={filters.department} 
+                onChange={(e) => handleFilterChange('department', e.target.value)}
+                className="bg-transparent text-sm text-white py-1.5 focus:outline-none w-36 truncate"
+              >
+                <option value="">All Departments</option>
+                {departmentsList.map(d => (
+                  <option key={d.slug} value={d.name}>{d.name}</option>
+                ))}
+              </select>
+            </div>
+          )}
+
           <div className="flex items-center gap-2 bg-navy-900 border border-white/10 rounded-lg px-3 py-1">
             <Filter size={16} className="text-gray-400" />
             <select 
@@ -292,16 +354,27 @@ const AdminProductsPage = () => {
           <AlertTriangle size={48} className="text-red-500 mb-4" />
           <h3 className="text-xl font-bold text-white mb-2">Unable to load products</h3>
           <p className="text-gray-400 mb-6">{error}</p>
-          <button onClick={fetchProducts} className="bg-white/5 hover:bg-white/10 px-6 py-2 rounded-lg text-white transition-colors">
+          <button onClick={() => fetchProducts()} className="bg-white/5 hover:bg-white/10 px-6 py-2 rounded-lg text-white transition-colors">
             Retry
           </button>
         </div>
       ) : (
-        <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden flex flex-col">
+        <div 
+          className="bg-white/5 border border-white/10 rounded-2xl flex flex-col max-h-[calc(100vh-280px)] overflow-y-auto custom-scrollbar relative"
+          onScroll={(e) => {
+            const { scrollTop, scrollHeight, clientHeight } = e.target;
+            // Fetch more when scrolled near the bottom (within 100px)
+            if (scrollHeight - scrollTop <= clientHeight + 100) {
+              if (!loadingMore && !loading && page < totalPages) {
+                setPage(prev => prev + 1);
+              }
+            }
+          }}
+        >
           {/* Desktop Table */}
-          <div className="hidden md:block overflow-x-auto">
+          <div className="hidden md:block">
             <table className="w-full text-left text-sm text-gray-300">
-              <thead className="bg-navy-900 text-gray-400 border-b border-white/10">
+              <thead className="bg-navy-900 text-gray-400 border-b border-white/10 sticky top-0 z-10 shadow-md">
                 <tr>
                   <th className="px-6 py-4 font-medium">Product</th>
                   <th className="px-6 py-4 font-medium">Code & Category</th>
@@ -312,7 +385,7 @@ const AdminProductsPage = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/10">
-                {loading ? (
+                {loading && products.length === 0 ? (
                   Array.from({ length: 5 }).map((_, i) => (
                     <tr key={i} className="animate-pulse">
                       <td className="px-6 py-4"><div className="h-10 w-48 bg-white/5 rounded"></div></td>
@@ -404,7 +477,7 @@ const AdminProductsPage = () => {
 
           {/* Mobile Cards View */}
           <div className="md:hidden flex flex-col divide-y divide-white/10">
-             {loading ? (
+             {loading && products.length === 0 ? (
                 Array.from({ length: 3 }).map((_, i) => (
                   <div key={i} className="p-4 animate-pulse flex gap-4">
                     <div className="w-16 h-16 bg-white/5 rounded-lg"></div>
@@ -458,29 +531,17 @@ const AdminProductsPage = () => {
               )}
           </div>
 
-          {/* Pagination */}
-          {!loading && totalPages > 1 && (
-            <div className="p-4 border-t border-white/10 bg-navy-900 flex items-center justify-between">
-              <p className="text-sm text-gray-400 hidden sm:block">
-                Showing page <span className="font-medium text-white">{page}</span> of <span className="font-medium text-white">{totalPages}</span> ({totalCount} total)
-              </p>
-              <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
-                <button 
-                  onClick={() => setPage(p => Math.max(1, p - 1))}
-                  disabled={page === 1}
-                  className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1"
-                >
-                  <ChevronLeft size={16} /> <span className="sm:hidden">Prev</span>
-                </button>
-                <div className="text-sm font-medium text-white sm:hidden">{page} / {totalPages}</div>
-                <button 
-                  onClick={() => setPage(p => Math.min(totalPages, p + 1))}
-                  disabled={page === totalPages}
-                  className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1"
-                >
-                  <span className="sm:hidden">Next</span> <ChevronRight size={16} />
-                </button>
-              </div>
+          {/* Infinite Scroll Indicators */}
+          {products.length > 0 && (
+            <div className="p-6 flex justify-center items-center text-sm font-medium">
+              {loadingMore ? (
+                <div className="text-magenta flex items-center gap-2">
+                  <div className="w-4 h-4 rounded-full border-2 border-magenta border-t-transparent animate-spin"></div>
+                  Loading more products...
+                </div>
+              ) : page >= totalPages ? (
+                <div className="text-gray-500">All inventory products loaded</div>
+              ) : null}
             </div>
           )}
         </div>

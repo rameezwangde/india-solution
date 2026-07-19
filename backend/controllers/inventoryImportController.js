@@ -3,39 +3,94 @@ const Product = require('../models/Product');
 const Category = require('../models/Category');
 const ImportHistory = require('../models/ImportHistory');
 
-// Utility to normalize sheet name
+// Utility to normalize sheet name based on strict mapping rules
 const normalizeSheetName = (name) => {
   if (!name) return 'Main Inventory';
-  let cleaned = name.trim().replace(/\s+/g, ' ');
+  let cleaned = name.trim();
   
-  const lower = cleaned.toLowerCase();
-  if (lower === 'tent house kitchen items') return 'Kitchen Inventory';
+  const mapping = {
+    'MAIN INVENTORY': 'Main Inventory',
+    'FLOWER INVENTORY': 'Flower Inventory',
+    'TRUSSFRAMESPANELS': 'Truss Frames & Panels',
+    'SOUND INVENTORY': 'Sound Inventory',
+    'LIGHT INVENTORY': 'Light Inventory',
+    'CABLE INVENTORY': 'Cable Inventory',
+    'CLOTH INVENTORY': 'Cloth Inventory',
+    'Tent House Kitchen Items': 'Tent House Kitchen Items',
+    'Raaga Inventory': 'Raaga Inventory',
+    'Raaga party Hall': 'Raaga Party Hall',
+    'RJ Inventory': 'RJ Inventory'
+  };
   
-  // Title case
+  if (mapping[cleaned]) return mapping[cleaned];
+  
+  // Fallback to title case for unknowns
   return cleaned
+    .replace(/\s+/g, ' ')
     .split(' ')
     .map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
     .join(' ');
 };
 
-// Map keywords to standard categories
+// Map keywords to standard categories with strict word boundaries
 const mapCategory = (text) => {
   if (!text) return 'Decor';
-  const lower = text.toLowerCase();
+  const upper = text.toUpperCase();
   
-  if (lower.includes('sofa')) return 'Sofas';
-  if (lower.includes('chair')) return 'Chairs';
-  if (lower.includes('table') || lower.includes('teapoy')) return 'Tables';
-  if (lower.includes('console')) return 'Console Tables';
-  if (lower.includes('light') || lower.includes('led')) return 'Lighting';
-  if (lower.includes('speaker') || lower.includes('mic') || lower.includes('mixer') || lower.includes('amplifier') || lower.includes('sound')) return 'Sound';
-  if (lower.includes('flower') || lower.includes('rose') || lower.includes('garland')) return 'Flowers';
-  if (lower.includes('cloth') || lower.includes('fabric') || lower.includes('screen') || lower.includes('cover')) return 'Cloth and Fabric';
-  if (lower.includes('truss') || lower.includes('frame') || lower.includes('panel')) return 'Truss and Frames';
-  if (lower.includes('cooler') || lower.includes('fan') || lower.includes('ac') || lower.includes('air')) return 'Cooling Equipment';
-  if (lower.includes('kitchen') || lower.includes('stove') || lower.includes('plate') || lower.includes('spoon') || lower.includes('tray')) return 'Kitchen Equipment';
+  // Create word boundary regex tester allowing optional S for plurals
+  const hasWord = (word) => new RegExp(`\\b${word}S?\\b`).test(upper);
+  
+  if (hasWord('SOFA')) return 'Sofas';
+  if (hasWord('CHAIR') || hasWord('STOOL')) return 'Chairs';
+  if (hasWord('TABLE') || hasWord('TEAPOY')) return 'Tables';
+  if (hasWord('CONSOLE')) return 'Console Tables';
+  if (hasWord('LIGHT') || hasWord('LED') || hasWord('SERIAL') || hasWord('SHARPY')) return 'Lighting';
+  if (hasWord('SPEAKER') || hasWord('MIC') || hasWord('MIXER') || hasWord('AMPLIFIER') || hasWord('AUDIO')) return 'Sound';
+  if (hasWord('FLOWER') || hasWord('ROSE') || hasWord('GARLAND') || hasWord('THORANA')) return 'Flowers';
+  if (hasWord('CLOTH') || hasWord('FABRIC') || hasWord('COVER') || hasWord('SCREEN') || hasWord('CURTAIN')) return 'Cloth and Fabric';
+  if (hasWord('TRUSS') || hasWord('FRAME') || hasWord('PANEL') || hasWord('ARCH')) return 'Truss and Frames';
+  if (hasWord('COOLER') || hasWord('FAN') || hasWord('AC') || hasWord('AIR CONDITIONER')) return 'Cooling Equipment';
+  if (hasWord('STOVE') || hasWord('PLATE') || hasWord('SPOON') || hasWord('TRAY') || hasWord('KETTLE')) return 'Kitchen Equipment';
   
   return 'Decor'; // Fallback
+};
+
+// Parse Quantity
+const parseQuantity = (qtyRaw) => {
+  if (qtyRaw === null || qtyRaw === undefined || String(qtyRaw).trim() === '') {
+    return { quantity: 0, quantityUnit: '', quantityOriginal: '', warning: 'Missing quantity' };
+  }
+  
+  let str = String(qtyRaw).trim().toUpperCase();
+  let quantity = 0;
+  let quantityUnit = '';
+  let quantityOriginal = str;
+  let warning = null;
+  
+  // Check for simple addition like "26+2"
+  if (/^\s*\d+\s*\+\s*\d+\s*$/.test(str)) {
+    const parts = str.split('+');
+    quantity = parseInt(parts[0], 10) + parseInt(parts[1], 10);
+  } else {
+    // Extract number and possible text unit
+    const numMatch = str.match(/(\d+)/);
+    if (numMatch) {
+      quantity = parseInt(numMatch[1], 10);
+      quantityUnit = str.replace(numMatch[1], '').trim();
+    } else {
+      // If no number, check for common unit keywords
+      const keywords = ['BOWL', 'PC', 'PCS', 'BAG', 'BAGS', 'BOX', 'BOXES', 'PKT', 'PKTS'];
+      const hasKeyword = keywords.some(k => str.includes(k));
+      if (hasKeyword) {
+        quantity = 1;
+        quantityUnit = str;
+      } else {
+        warning = 'Non-numeric quantity parsed as 0';
+      }
+    }
+  }
+  
+  return { quantity, quantityUnit, quantityOriginal, warning };
 };
 
 // Clean string helper
@@ -44,10 +99,9 @@ const cleanStr = (str) => {
   return String(str).trim().replace(/\s+/g, ' ');
 };
 
-const PRODUCT_ALIASES = ['PARTICULARS', 'DESCRIPTION', 'ITEM', 'ITEM NAME', 'PRODUCT', 'PRODUCT NAME', 'NAME'];
-const QTY_ALIASES = ['QNTY', 'QTY', 'QUANTITY', 'STOCK', 'AVAILABLE', 'AVAILABLE QUANTITY'];
-const SERIAL_ALIASES = ['SL NO', 'SL NO.', 'SL No.', 'SERIAL NO', 'S.NO', 'S NO', 'CODE', 'PRODUCT CODE'];
-const PRICE_ALIASES = ['PRICE', 'RATE', 'AMOUNT'];
+const PRODUCT_ALIASES = ['PARTICULARS', 'DESCRIPTION'];
+const QTY_ALIASES = ['QNTY', 'QTY'];
+const SERIAL_ALIASES = ['SL NO', 'SL NO.'];
 
 // Main parsing logic
 const parseWorkbook = (buffer) => {
@@ -56,39 +110,43 @@ const parseWorkbook = (buffer) => {
   let totalRowsFound = 0;
   
   for (const sheetName of workbook.SheetNames) {
+    if (sheetName.trim().toUpperCase() === 'SHEET15') continue; // Rule 1
+    
     const sheet = workbook.Sheets[sheetName];
     // Convert sheet to json array of arrays to find header row dynamically
     const rawData = xlsx.utils.sheet_to_json(sheet, { header: 1, defval: '' });
     
     if (rawData.length === 0) continue;
     
-    // Find header row index
+    // Find header row index (Search first 10 rows)
     let headerRowIdx = -1;
-    let colMap = { product: -1, qty: -1, serial: -1, price: -1 };
+    let colMap = { product: -1, qty: -1, serial: -1 };
     
-    for (let i = 0; i < Math.min(20, rawData.length); i++) {
+    for (let i = 0; i < Math.min(10, rawData.length); i++) {
       const row = rawData[i];
-      let foundProduct = false;
-      let tempColMap = { product: -1, qty: -1, serial: -1, price: -1 };
+      let tempColMap = { product: -1, qty: -1, serial: -1 };
       
       for (let j = 0; j < row.length; j++) {
         const cell = cleanStr(row[j]).toUpperCase();
         if (PRODUCT_ALIASES.includes(cell)) tempColMap.product = j;
         else if (QTY_ALIASES.includes(cell)) tempColMap.qty = j;
         else if (SERIAL_ALIASES.includes(cell)) tempColMap.serial = j;
-        else if (PRICE_ALIASES.includes(cell)) tempColMap.price = j;
       }
       
-      if (tempColMap.product !== -1) {
+      // We need at least PRODUCT and QTY to consider it a valid header
+      if (tempColMap.product !== -1 && tempColMap.qty !== -1) {
         headerRowIdx = i;
         colMap = tempColMap;
         break;
       }
     }
     
-    if (headerRowIdx === -1) continue; // Skip sheet if no product column found
+    if (headerRowIdx === -1) continue; // Skip sheet if no header found
     
-    const department = normalizeSheetName(sheetName);
+    let baseDepartment = normalizeSheetName(sheetName);
+    let currentDepartment = baseDepartment;
+    let currentSection = '';
+    
     const validRows = [];
     const invalidRows = [];
     
@@ -97,40 +155,62 @@ const parseWorkbook = (buffer) => {
       // Skip totally empty rows
       if (!row || row.length === 0 || row.every(cell => cleanStr(cell) === '')) continue;
       
-      const productName = cleanStr(row[colMap.product]);
-      if (!productName || productName.toLowerCase().includes('total') || productName.length < 2) {
-        // Assume it's a subtotal or blank invalid row
-        invalidRows.push({ sheet: sheetName, row: i + 1, reason: 'Missing or invalid product name' });
-        continue;
+      const colA = cleanStr(row[colMap.serial]);
+      const productNameRaw = cleanStr(row[colMap.product]);
+      const qtyRaw = cleanStr(row[colMap.qty]);
+      
+      // If product name is empty, skip
+      if (!productNameRaw) continue;
+      
+      // Rule 4: Raaga party Hall section in MAIN INVENTORY
+      if (baseDepartment === 'Main Inventory' && productNameRaw.toUpperCase() === 'RAAGA PARTY HALL') {
+        currentDepartment = 'Raaga Party Hall';
+        continue; // Do not import heading
       }
       
-      const qtyStr = colMap.qty !== -1 ? cleanStr(row[colMap.qty]) : '0';
-      let quantity = parseInt(qtyStr, 10);
-      if (isNaN(quantity) || quantity < 0) quantity = 0;
+      // Rule 5: Section headings in TRUSSFRAMESPANELS
+      if (baseDepartment === 'Truss Frames & Panels' && qtyRaw === '') {
+        currentSection = productNameRaw;
+        continue; // Do not import heading
+      }
       
-      const priceStr = colMap.price !== -1 ? cleanStr(row[colMap.price]) : '0';
-      let price = parseFloat(priceStr);
-      if (isNaN(price) || price < 0) price = 0;
+      // Parse quantity
+      const { quantity, quantityUnit, quantityOriginal, warning } = parseQuantity(qtyRaw);
       
-      const productCodeRaw = colMap.serial !== -1 ? cleanStr(row[colMap.serial]) : '';
+      let finalProductName = productNameRaw;
+      if (currentSection && baseDepartment === 'Truss Frames & Panels') {
+        finalProductName = `${currentSection} - ${productNameRaw}`;
+      }
+      
+      const productCodeRaw = colA; // Sl No
+      
+      const mappedCategory = currentDepartment;
+      const warnings = [];
+      if (warning) warnings.push(warning);
       
       validRows.push({
         sheetName,
-        department,
+        department: currentDepartment,
+        inventorySection: currentSection,
         productCodeRaw,
-        name: productName,
+        nameRaw: productNameRaw,
+        name: finalProductName,
         quantity,
-        price,
-        rowIndex: i + 1
+        quantityUnit,
+        quantityOriginal,
+        categoryName: mappedCategory,
+        rowIndex: i + 1,
+        warnings
       });
       totalRowsFound++;
     }
     
     parsedSheets.push({
       sheetName,
-      department,
+      department: baseDepartment,
       validRows,
-      invalidRows
+      invalidRows,
+      headerRowDetected: headerRowIdx + 1
     });
   }
   
@@ -155,20 +235,16 @@ const generateCodes = async (validRowsArray) => {
   
   for (const r of validRowsArray) {
     let finalCode = r.productCodeRaw;
-    if (!finalCode || finalCode.length < 2) {
+    if (!finalCode || finalCode.length < 2 || /^\d+$/.test(finalCode.trim())) {
       // Generate one
-      const deptPrefix = r.department.split(' ')[0].toUpperCase().replace(/[^A-Z]/g, '').substring(0, 6) || 'INV';
+      const deptPrefix = (r.department || 'INV').split(' ')[0].toUpperCase().replace(/[^A-Z]/g, '').substring(0, 6) || 'INV';
       finalCode = `${deptPrefix}-${currentNum.toString().padStart(4, '0')}`;
       currentNum++;
     }
     
-    // Assign category mapping
-    const categorySuggestion = mapCategory(r.department + ' ' + r.name);
-    
     processed.push({
       ...r,
-      productCode: finalCode,
-      categoryName: categorySuggestion
+      productCode: finalCode
     });
   }
   
@@ -196,26 +272,31 @@ exports.previewInventoryWorkbook = async (req, res) => {
     const finalizedRows = await generateCodes(allValidRows);
     
     // Find possible duplicates in existing DB
-    // To do this efficiently, we gather all codes and names
     const codesToFind = finalizedRows.map(r => r.productCode).filter(c => c);
-    const namesToFind = finalizedRows.map(r => r.name);
-    
     const existingProducts = await Product.find({
       $or: [
         { productCode: { $in: codesToFind } },
-        { name: { $in: namesToFind } }
+        { department: { $exists: true } } // Fetch all to match by name+dept+section
       ]
     }).lean();
     
     let duplicateCandidates = [];
     let previewRows = [];
     
+    // Map to check duplicates inside the same uploaded file
+    const internalDuplicateMap = new Set();
+    
     finalizedRows.forEach((r, idx) => {
-      const matchByCode = existingProducts.find(ep => ep.productCode && ep.productCode.toUpperCase() === r.productCode.toUpperCase());
-      const matchByName = existingProducts.find(ep => ep.name.toLowerCase() === r.name.toLowerCase() && ep.department.toLowerCase() === r.department.toLowerCase());
-      
+      // Check existing DB duplicate
       let isDuplicate = false;
       let matchedProduct = null;
+      
+      const matchByCode = existingProducts.find(ep => ep.productCode && ep.productCode.toUpperCase() === r.productCode.toUpperCase());
+      const matchByName = existingProducts.find(ep => 
+        ep.name.toLowerCase() === r.name.toLowerCase() && 
+        ep.department.toLowerCase() === r.department.toLowerCase() &&
+        (ep.inventorySection || '').toLowerCase() === r.inventorySection.toLowerCase()
+      );
       
       if (matchByCode) {
         isDuplicate = true;
@@ -223,6 +304,14 @@ exports.previewInventoryWorkbook = async (req, res) => {
       } else if (matchByName) {
         isDuplicate = true;
         matchedProduct = matchByName;
+      }
+      
+      // Check internal duplicate
+      const internalKey = `${r.name.toLowerCase()}|${r.department.toLowerCase()}|${r.inventorySection.toLowerCase()}`;
+      if (internalDuplicateMap.has(internalKey)) {
+        r.warnings.push('Duplicate product within the same department and section in upload');
+      } else {
+        internalDuplicateMap.add(internalKey);
       }
       
       const enrichedRow = { ...r, isDuplicate, matchedProduct };
@@ -243,6 +332,7 @@ exports.previewInventoryWorkbook = async (req, res) => {
       sheets: parsedSheets.map(s => ({
         sheetName: s.sheetName,
         department: s.department,
+        headerRowDetected: s.headerRowDetected,
         validRows: s.validRows.length,
         invalidRows: s.invalidRows.length
       })),
@@ -293,67 +383,110 @@ exports.executeInventoryImport = async (req, res) => {
           categoriesCreated++;
           return newCat._id;
         } catch (e) {
-          // Fallback to first available if creation fails
           return existingCategories[0]?._id;
         }
       }
-      return existingCategories[0]?._id; // Fallback
+      return existingCategories[0]?._id; 
     };
     
+    const sheetStats = {};
+    parsedSheets.forEach(s => {
+      sheetStats[s.sheetName] = {
+        sheetName: s.sheetName,
+        department: s.department,
+        scanned: s.validRows.length + s.invalidRows.length,
+        created: 0,
+        updated: 0,
+        skipped: 0,
+        failed: s.invalidRows.length,
+        totalQuantity: 0
+      };
+    });
+
     let created = 0;
     let updated = 0;
     let skipped = 0;
     let failed = 0;
     const errors = [];
-    
     const bulkOps = [];
     
-    // We will do bulk operations in chunks to save memory
+    // Prevent internal duplicates from creating multiple docs
+    const processedInternalKeys = new Set();
+    
     for (const r of finalizedRows) {
       try {
         const catId = await getCategoryId(r.categoryName);
         if (!catId) {
           failed++;
-          errors.push({ sheet: r.sheetName, row: r.rowIndex, reason: 'No category found and auto-create disabled/failed' });
+          sheetStats[r.sheetName].failed++;
+          errors.push({ sheet: r.sheetName, row: r.rowIndex, reason: 'No category found and auto-create disabled' });
           continue;
         }
         
-        const existing = await Product.findOne({
-          $or: [
-            { productCode: r.productCode },
-            { name: { $regex: new RegExp(`^${r.name}$`, 'i') }, department: r.department }
-          ]
+        const internalKey = `${r.name.toLowerCase()}|${r.department.toLowerCase()}|${r.inventorySection.toLowerCase()}`;
+        if (processedInternalKeys.has(internalKey) && duplicateMode !== 'update_quantity' && duplicateMode !== 'update_all') {
+          // For simplicity, skip internal duplicates entirely if duplicateMode is 'skip'
+          if (duplicateMode === 'skip') {
+             skipped++;
+             sheetStats[r.sheetName].skipped++;
+             continue;
+          }
+        }
+        processedInternalKeys.add(internalKey);
+        
+        const escapeRegExp = (string) => {
+          return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+        };
+
+        const existingByCode = await Product.findOne({ productCode: r.productCode });
+        const existingByName = await Product.findOne({ 
+          name: { $regex: new RegExp(`^${escapeRegExp(r.name)}$`, 'i') }, 
+          department: { $regex: new RegExp(`^${escapeRegExp(r.department)}$`, 'i') },
+          inventorySection: r.inventorySection ? { $regex: new RegExp(`^${escapeRegExp(r.inventorySection)}$`, 'i') } : { $in: ['', null] }
         });
         
+        const existing = existingByCode || existingByName;
         const status = r.quantity > 0 ? 'available' : 'out_of_stock';
         
         if (existing) {
           if (duplicateMode === 'skip') {
             skipped++;
+            sheetStats[r.sheetName].skipped++;
             continue;
           } else if (duplicateMode === 'update_quantity') {
             bulkOps.push({
               updateOne: {
                 filter: { _id: existing._id },
-                update: { $set: { quantity: r.quantity, status } }
+                update: { $set: { 
+                  quantity: r.quantity, 
+                  quantityUnit: r.quantityUnit || existing.quantityUnit,
+                  quantityOriginal: r.quantityOriginal || existing.quantityOriginal,
+                  status 
+                } }
               }
             });
             updated++;
+            sheetStats[r.sheetName].updated++;
+            sheetStats[r.sheetName].totalQuantity += r.quantity;
           } else if (duplicateMode === 'update_all') {
             bulkOps.push({
               updateOne: {
                 filter: { _id: existing._id },
                 update: { $set: { 
                   quantity: r.quantity, 
+                  quantityUnit: r.quantityUnit,
+                  quantityOriginal: r.quantityOriginal,
                   status,
                   name: r.name,
                   department: r.department,
-                  price: r.price,
+                  inventorySection: r.inventorySection,
                   category: catId
-                } }
+                } } 
               }
             });
             updated++;
+            sheetStats[r.sheetName].updated++;
+            sheetStats[r.sheetName].totalQuantity += r.quantity;
           }
         } else {
           // Create new
@@ -364,8 +497,11 @@ exports.executeInventoryImport = async (req, res) => {
                 name: r.name,
                 category: catId,
                 department: r.department,
-                price: r.price,
+                inventorySection: r.inventorySection,
+                price: 0,
                 quantity: r.quantity,
+                quantityUnit: r.quantityUnit,
+                quantityOriginal: r.quantityOriginal,
                 status,
                 description: '',
                 size: '',
@@ -374,19 +510,20 @@ exports.executeInventoryImport = async (req, res) => {
             }
           });
           created++;
+          sheetStats[r.sheetName].created++;
+          sheetStats[r.sheetName].totalQuantity += r.quantity;
         }
       } catch (err) {
         failed++;
+        sheetStats[r.sheetName].failed++;
         errors.push({ sheet: r.sheetName, row: r.rowIndex, reason: err.message });
       }
     }
     
-    // Execute bulk write
     if (bulkOps.length > 0) {
-      const result = await Product.bulkWrite(bulkOps, { ordered: false });
+      await Product.bulkWrite(bulkOps, { ordered: false });
     }
     
-    // Save history
     const history = new ImportHistory({
       fileName: req.file.originalname,
       uploadedBy: req.admin._id,
@@ -401,7 +538,7 @@ exports.executeInventoryImport = async (req, res) => {
       errorDetails: [
         ...allInvalidRows.map(ir => ({ sheet: ir.sheetName, row: ir.row, reason: ir.reason })),
         ...errors
-      ].slice(0, 100) // limit error array size
+      ].slice(0, 100)
     });
     
     await history.save();
@@ -409,13 +546,8 @@ exports.executeInventoryImport = async (req, res) => {
     res.json({
       success: true,
       message: 'Inventory import completed',
-      summary: {
-        created,
-        updated,
-        skipped,
-        failed: failed + allInvalidRows.length,
-        categoriesCreated
-      },
+      summary: { created, updated, skipped, failed: failed + allInvalidRows.length, categoriesCreated },
+      sheetSummaries: Object.values(sheetStats),
       errors: history.errorDetails
     });
     
@@ -425,51 +557,35 @@ exports.executeInventoryImport = async (req, res) => {
   }
 };
 
-// @desc    Download inventory template
-// @route   GET /api/inventory-import/template
 exports.downloadInventoryTemplate = (req, res) => {
   const ws = xlsx.utils.aoa_to_sheet([
-    ['PRODUCT CODE', 'PRODUCT NAME', 'QUANTITY', 'PRICE'],
-    ['MAIN-0001', 'Example Sofa 3 Seater', 5, 1200]
+    ['SL NO', 'PARTICULARS', 'QNTY'],
+    ['MAIN-0001', 'Example Sofa 3 Seater', 5]
   ]);
-  
   const wb = xlsx.utils.book_new();
-  xlsx.utils.book_append_sheet(wb, ws, 'Template');
-  
+  xlsx.utils.book_append_sheet(wb, ws, 'MAIN INVENTORY');
   const buffer = xlsx.write(wb, { type: 'buffer', bookType: 'xlsx' });
-  
   res.setHeader('Content-Disposition', 'attachment; filename="Inventory_Template.xlsx"');
   res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
   res.send(buffer);
 };
 
-// @desc    Export current inventory
-// @route   GET /api/inventory-import/export
 exports.exportInventory = async (req, res) => {
   try {
     const products = await Product.find().populate('category', 'name').lean();
-    
     const data = products.map(p => ({
-      'Product Code': p.productCode || '',
-      'Product Name': p.name,
+      'SL NO': p.productCode || '',
+      'PARTICULARS': p.name,
+      'QNTY': p.quantityOriginal || p.quantity || 0,
       'Category': p.category?.name || 'Uncategorized',
       'Department': p.department,
-      'Description': p.description,
-      'Size': p.size,
-      'Price': p.price,
-      'Quantity': p.quantity,
-      'Status': p.status,
-      'Image URL': p.image?.url || '',
-      'Created At': p.createdAt,
-      'Updated At': p.updatedAt
+      'Section': p.inventorySection,
+      'Status': p.status
     }));
-    
     const ws = xlsx.utils.json_to_sheet(data);
     const wb = xlsx.utils.book_new();
     xlsx.utils.book_append_sheet(wb, ws, 'Current Inventory');
-    
     const buffer = xlsx.write(wb, { type: 'buffer', bookType: 'xlsx' });
-    
     res.setHeader('Content-Disposition', 'attachment; filename="CRM_Inventory_Export.xlsx"');
     res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
     res.send(buffer);

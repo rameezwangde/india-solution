@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react';
-import { Upload, FileSpreadsheet, X, AlertTriangle, CheckCircle, Info, Download, ArrowRight, Loader2 } from 'lucide-react';
+import { Upload, FileSpreadsheet, X, AlertTriangle, CheckCircle, Info, Download, ArrowRight, Loader2, Trash2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { previewInventory, executeInventory, downloadTemplate, exportInventory } from '../../api/importService';
+import { clearInventory, clearTestData } from '../../api/productService';
 import { useToast } from '../../context/ToastContext';
 import { Link } from 'react-router-dom';
 
@@ -14,6 +15,10 @@ const AdminInventoryImportPage = () => {
   const [duplicateMode, setDuplicateMode] = useState('skip');
   const [createMissingCategories, setCreateMissingCategories] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [showClearModal, setShowClearModal] = useState(false);
+  const [clearConfirmText, setClearConfirmText] = useState('');
+  const [isClearing, setIsClearing] = useState(false);
+  const [clearMode, setClearMode] = useState('products'); // 'products' or 'all'
   
   const fileInputRef = useRef(null);
   const { addToast } = useToast();
@@ -85,7 +90,7 @@ const AdminInventoryImportPage = () => {
       const data = await executeInventory(file, duplicateMode, createMissingCategories);
       if (data.success) {
         setResult(data);
-        addToast('success', data.message || 'Import completed successfully');
+        addToast('success', data.message || 'Success! The Excel sheet has been imported successfully.');
       }
     } catch (err) {
       addToast('error', err.response?.data?.message || 'Failed to execute import');
@@ -136,6 +141,43 @@ const AdminInventoryImportPage = () => {
     handleRemoveFile();
   };
 
+  const handleClearInventory = async () => {
+    if (clearMode === 'products' && clearConfirmText !== 'DELETE INVENTORY') return;
+    if (clearMode === 'all' && clearConfirmText !== 'RESET TEST DATA') return;
+
+    const confirmPrompt = window.confirm(
+      clearMode === 'all' 
+      ? "Are you absolutely sure you want to permanently delete ALL test data (products, enquiries, history)? This action cannot be undone."
+      : "Are you absolutely sure you want to permanently delete all inventory products? This action cannot be undone."
+    );
+    
+    if (!confirmPrompt) return;
+
+    setIsClearing(true);
+    try {
+      if (clearMode === 'all') {
+        const data = await clearTestData();
+        addToast('success', `Test data cleared! Products: ${data.deletedCounts.products}, Enquiries: ${data.deletedCounts.enquiries}`);
+        window.alert(`Success: ${data.deletedCounts.products} products and ${data.deletedCounts.enquiries} enquiries deleted.`);
+        
+        // Reset query params and local state
+        localStorage.removeItem('adminFilters');
+        sessionStorage.clear();
+      } else {
+        const data = await clearInventory();
+        addToast('success', `Inventory cleared! ${data.deletedCount} items were deleted.`);
+        window.alert(`Success: ${data.deletedCount} items were successfully deleted.`);
+      }
+      
+      setShowClearModal(false);
+      setClearConfirmText('');
+    } catch (err) {
+      addToast('error', err.response?.data?.message || 'Failed to clear data');
+    } finally {
+      setIsClearing(false);
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -143,20 +185,27 @@ const AdminInventoryImportPage = () => {
           <h1 className="text-3xl font-bold text-white mb-2">Import Inventory</h1>
           <p className="text-gray-400">Bulk import products using an Excel workbook.</p>
         </div>
-        <div className="flex gap-3">
+        <div className="flex flex-wrap gap-3">
+          <button 
+            onClick={() => setShowClearModal(true)}
+            className="px-4 py-2 border border-red-500/50 hover:bg-red-500/20 text-red-500 rounded-lg transition-colors flex items-center gap-2 font-medium"
+          >
+            <Trash2 size={18} />
+            Clear Inventory
+          </button>
           <button 
             onClick={handleDownloadTemplate}
             className="px-4 py-2 bg-white/5 hover:bg-white/10 text-white rounded-lg transition-colors flex items-center gap-2 font-medium"
           >
-            <Download size={18} />
+            <FileSpreadsheet size={18} />
             Template
           </button>
           <button 
             onClick={handleExport}
-            className="px-4 py-2 bg-white/5 hover:bg-white/10 text-white rounded-lg transition-colors flex items-center gap-2 font-medium"
+            className="px-4 py-2 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-500 rounded-lg transition-colors flex items-center gap-2 font-medium"
           >
-            <FileSpreadsheet size={18} />
-            Export Current
+            <Download size={18} />
+            Export Data
           </button>
         </div>
       </div>
@@ -192,6 +241,46 @@ const AdminInventoryImportPage = () => {
               <div className="text-xs text-gray-400 uppercase tracking-wider">Categories Created</div>
             </div>
           </div>
+
+          {result.sheetSummaries && result.sheetSummaries.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8 text-left">
+              {result.sheetSummaries.map((sheet, index) => (
+                <div key={index} className="bg-white/5 border border-white/10 rounded-xl p-5 flex flex-col h-full">
+                  <h3 className="text-xl font-bold text-white mb-2">{sheet.sheetName}</h3>
+                  <div className="flex items-center gap-2 text-sm text-gray-400 mb-4">
+                    <span>Mapped Department:</span>
+                    <span className="text-magenta font-medium">{sheet.department || 'Main Inventory'}</span>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-y-2 text-sm mb-6 flex-grow">
+                    <div className="text-gray-400">Rows Scanned:</div>
+                    <div className="text-white font-medium text-right">{sheet.scanned}</div>
+                    
+                    <div className="text-gray-400">Created:</div>
+                    <div className="text-green-400 font-medium text-right">{sheet.created}</div>
+                    
+                    <div className="text-gray-400">Updated:</div>
+                    <div className="text-blue-400 font-medium text-right">{sheet.updated}</div>
+                    
+                    <div className="text-gray-400">Skipped/Failed:</div>
+                    <div className="text-red-400 font-medium text-right">{sheet.skipped} / {sheet.failed}</div>
+                    
+                    <div className="text-gray-400 pt-2 border-t border-white/10 mt-2">Total Quantity:</div>
+                    <div className="text-magenta font-bold text-right pt-2 border-t border-white/10 mt-2">
+                      {sheet.totalQuantity.toLocaleString()}
+                    </div>
+                  </div>
+                  
+                  <Link 
+                    to={`/admin/inventory-departments/${(sheet.department || 'Main Inventory').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`} 
+                    className="w-full py-2 bg-white/5 hover:bg-white/10 text-white font-medium rounded-lg text-center transition-colors"
+                  >
+                    View Department
+                  </Link>
+                </div>
+              ))}
+            </div>
+          )}
           
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link to="/admin/products" className="px-6 py-3 bg-gradient-to-r from-magenta to-orange hover:glow-magenta text-white font-medium rounded-xl transition-all">
@@ -446,26 +535,139 @@ const AdminInventoryImportPage = () => {
                 </div>
               </div>
 
-              <div className="flex gap-4">
-                <button
-                  onClick={() => setShowConfirmModal(false)}
-                  disabled={isExecuting}
-                  className="flex-1 py-3 px-4 bg-white/5 hover:bg-white/10 text-white rounded-xl transition-colors font-medium disabled:opacity-50"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={handleExecute}
-                  disabled={isExecuting}
-                  className="flex-1 py-3 px-4 bg-gradient-to-r from-magenta to-orange hover:glow-magenta text-white rounded-xl transition-all font-bold disabled:opacity-50 flex justify-center items-center gap-2"
-                >
-                  {isExecuting ? <><Loader2 size={18} className="animate-spin" /> Importing...</> : 'Import Now'}
-                </button>
+              <div className="flex flex-col gap-4">
+                {isExecuting ? (
+                  <div className="w-full text-center py-2">
+                    <div className="mb-4 text-magenta font-semibold flex justify-center items-center gap-2">
+                      <Loader2 size={20} className="animate-spin" /> Processing Workbook...
+                    </div>
+                    <div className="w-full bg-white/10 rounded-full h-2.5 mb-2 overflow-hidden relative">
+                      <div className="absolute inset-0 bg-gradient-to-r from-magenta to-orange h-full w-[50%] animate-pulse" style={{ animationDuration: '1s' }}></div>
+                    </div>
+                    <p className="text-xs text-gray-400 mt-3">Please do not close or refresh this window. This may take a few moments depending on the file size.</p>
+                  </div>
+                ) : (
+                  <div className="flex gap-4 w-full">
+                    <button
+                      onClick={() => setShowConfirmModal(false)}
+                      className="flex-1 py-3 px-4 bg-white/5 hover:bg-white/10 text-white rounded-xl transition-colors font-medium"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      onClick={handleExecute}
+                      className="flex-1 py-3 px-4 bg-gradient-to-r from-magenta to-orange hover:glow-magenta text-white rounded-xl transition-all font-bold flex justify-center items-center gap-2"
+                    >
+                      Import Now
+                    </button>
+                  </div>
+                )}
               </div>
             </motion.div>
           </div>
         )}
       </AnimatePresence>
+      {/* Clear Inventory Confirmation Modal */}
+      <AnimatePresence>
+        {showClearModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+              onClick={() => setShowClearModal(false)}
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative bg-[#1e293b] border border-white/10 rounded-2xl w-full max-w-md overflow-hidden shadow-2xl"
+            >
+              <div className="p-6">
+                <div className="flex items-center gap-4 mb-4 text-red-400">
+                  <div className="p-3 bg-red-500/10 rounded-full">
+                    <AlertTriangle size={24} />
+                  </div>
+                  <h3 className="text-xl font-bold text-white">Clear Entire Inventory?</h3>
+                </div>
+                
+                <p className="text-gray-300 mb-6 text-sm leading-relaxed">
+                  This will permanently delete <span className="font-bold text-white">all products</span> from the inventory. 
+                  Categories, admin accounts, and enquiries will not be deleted.
+                  <br/><br/>
+                  <span className="text-gray-400 text-xs italic">
+                    Note: Unused Cloudinary assets are preserved and can be cleaned separately to prevent accidental deletion of shared media.
+                  </span>
+                </p>
+
+                <div className="space-y-4 mb-6">
+                  <div className="flex gap-4 p-1 bg-white/5 rounded-lg border border-white/10">
+                    <button
+                      className={`flex-1 py-2 text-sm font-medium rounded-md transition-colors ${clearMode === 'products' ? 'bg-white/10 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'}`}
+                      onClick={() => { setClearMode('products'); setClearConfirmText(''); }}
+                    >
+                      Products Only
+                    </button>
+                    <button
+                      className={`flex-1 py-2 text-sm font-medium rounded-md transition-colors ${clearMode === 'all' ? 'bg-red-500/20 text-red-400 border border-red-500/30' : 'text-gray-400 hover:text-red-400 hover:bg-white/5'}`}
+                      onClick={() => { setClearMode('all'); setClearConfirmText(''); }}
+                    >
+                      All Test Data
+                    </button>
+                  </div>
+                
+                  {clearMode === 'all' && (
+                    <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-sm text-red-300">
+                      <strong>Warning:</strong> This will delete ALL Products, Enquiries, Import History, and Notifications. Admins and Categories will be preserved.
+                    </div>
+                  )}
+
+                  <div className="space-y-2 mt-4">
+                    <label className="text-sm text-gray-400">
+                      Type <span className="font-bold text-red-400 select-none">{clearMode === 'all' ? 'RESET TEST DATA' : 'DELETE INVENTORY'}</span> to confirm:
+                    </label>
+                    <input 
+                      type="text" 
+                      value={clearConfirmText}
+                      onChange={(e) => setClearConfirmText(e.target.value)}
+                      className="w-full bg-[#0f172a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-red-500 transition-colors"
+                      placeholder={clearMode === 'all' ? 'RESET TEST DATA' : 'DELETE INVENTORY'}
+                    />
+                  </div>
+                </div>
+
+                <div className="flex gap-3 mt-8">
+                  <button
+                    onClick={() => setShowClearModal(false)}
+                    disabled={isClearing}
+                    className="flex-1 px-4 py-3 bg-white/5 hover:bg-white/10 text-white rounded-xl transition-colors font-medium"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={handleClearInventory}
+                    disabled={
+                      (clearMode === 'products' && clearConfirmText !== 'DELETE INVENTORY') || 
+                      (clearMode === 'all' && clearConfirmText !== 'RESET TEST DATA') || 
+                      isClearing
+                    }
+                    className="flex-1 px-4 py-3 bg-red-500 hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-xl transition-colors font-medium flex items-center justify-center gap-2"
+                  >
+                    {isClearing ? (
+                      <>
+                        <Loader2 size={18} className="animate-spin" />
+                        Clearing...
+                      </>
+                    ) : (
+                      'Delete'
+                    )}
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
     </div>
   );
 };
