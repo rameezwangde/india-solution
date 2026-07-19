@@ -1,9 +1,27 @@
 const mongoose = require('mongoose');
 
+let cachedConnection = null;
+let connectionPromise = null;
+
 const connectDB = async () => {
+  if (cachedConnection) {
+    return cachedConnection;
+  }
+
+  if (connectionPromise) {
+    await connectionPromise;
+    return cachedConnection;
+  }
+
+  if (!process.env.MONGODB_URI) {
+    throw new Error('Please define the MONGODB_URI environment variable inside .env');
+  }
+
   try {
-    const conn = await mongoose.connect(process.env.MONGODB_URI);
-    console.log(`✓ MongoDB Connected Successfully: ${conn.connection.host}`);
+    connectionPromise = mongoose.connect(process.env.MONGODB_URI);
+    
+    cachedConnection = await connectionPromise;
+    console.log(`✓ MongoDB Connected Successfully: ${cachedConnection.connection.host}`);
 
     mongoose.connection.on('disconnected', () => {
       console.warn('⚠ MongoDB Disconnected');
@@ -13,9 +31,11 @@ const connectDB = async () => {
       console.log('✓ MongoDB Reconnected');
     });
 
+    return cachedConnection;
   } catch (error) {
     console.error(`Error connecting to MongoDB: ${error.message}`);
-    process.exit(1);
+    connectionPromise = null;
+    throw error;
   }
 };
 
