@@ -1,5 +1,7 @@
 const Enquiry = require('../models/Enquiry');
 const Product = require('../models/Product');
+const InventoryActivity = require('../models/InventoryActivity');
+const { ACTIVITY_TYPES } = require('../services/activityLogger');
 
 // @desc    Create a new enquiry (Public)
 // @route   POST /api/enquiries
@@ -152,7 +154,7 @@ exports.updateEnquiry = async (req, res) => {
     const { status, notes } = req.body;
     
     // We need to fetch the enquiry first to compare status and handle stock
-    const enquiry = await Enquiry.findById(req.params.id).populate('products.product', 'quantity status name');
+    const enquiry = await Enquiry.findById(req.params.id).populate('products.product', 'quantity status name productCode department category');
     
     if (!enquiry) {
       return res.status(404).json({ success: false, message: 'Enquiry not found' });
@@ -193,6 +195,9 @@ exports.updateEnquiry = async (req, res) => {
         }
 
         const bulkOps = [];
+        const activityDocs = [];
+        const performedBy = req.admin ? (req.admin.email || req.admin._id) : 'System';
+
         for (const item of enquiry.products) {
           const newQty = item.product.quantity - item.quantity;
           const finalStatus = (newQty === 0 && item.product.status !== 'hidden') ? 'out_of_stock' : item.product.status;
@@ -202,8 +207,26 @@ exports.updateEnquiry = async (req, res) => {
               update: { $inc: { quantity: -item.quantity }, $set: { status: finalStatus } }
             }
           });
+          activityDocs.push({
+            productId: item.product._id,
+            productCode: item.product.productCode || 'N/A',
+            productName: item.productName,
+            department: item.product.department || 'Unassigned',
+            category: item.product.category ? item.product.category.toString() : '',
+            activityType: ACTIVITY_TYPES.STOCK_RESERVED,
+            performedBy,
+            referenceType: 'Enquiry',
+            referenceId: enquiry.referenceNumber,
+            newQuantity: newQty,
+            previousQuantity: item.product.quantity,
+            quantityDifference: -item.quantity,
+            remarks: `Stock deducted for Confirmed Enquiry ${enquiry.referenceNumber}`
+          });
         }
-        if (bulkOps.length > 0) await Product.bulkWrite(bulkOps);
+        if (bulkOps.length > 0) {
+          await Product.bulkWrite(bulkOps);
+          await InventoryActivity.insertMany(activityDocs).catch(console.error);
+        }
 
         enquiry.stockProcessed = true;
         enquiry.stockProcessedAt = new Date();
@@ -214,6 +237,9 @@ exports.updateEnquiry = async (req, res) => {
       // 3. Cancelling (Confirmed -> Cancelled)
       if (status === 'Cancelled' && enquiry.stockProcessed && !enquiry.stockRestored) {
         const bulkOps = [];
+        const activityDocs = [];
+        const performedBy = req.admin ? (req.admin.email || req.admin._id) : 'System';
+
         for (const item of enquiry.products) {
           if (!item.product) continue;
           const newQty = item.product.quantity + item.quantity;
@@ -224,8 +250,26 @@ exports.updateEnquiry = async (req, res) => {
               update: { $inc: { quantity: item.quantity }, $set: { status: finalStatus } }
             }
           });
+          activityDocs.push({
+            productId: item.product._id,
+            productCode: item.product.productCode || 'N/A',
+            productName: item.productName,
+            department: item.product.department || 'Unassigned',
+            category: item.product.category ? item.product.category.toString() : '',
+            activityType: ACTIVITY_TYPES.STOCK_RESTORED,
+            performedBy,
+            referenceType: 'Enquiry',
+            referenceId: enquiry.referenceNumber,
+            newQuantity: newQty,
+            previousQuantity: item.product.quantity,
+            quantityDifference: item.quantity,
+            remarks: `Stock restored from Cancelled Enquiry ${enquiry.referenceNumber}`
+          });
         }
-        if (bulkOps.length > 0) await Product.bulkWrite(bulkOps);
+        if (bulkOps.length > 0) {
+          await Product.bulkWrite(bulkOps);
+          await InventoryActivity.insertMany(activityDocs).catch(console.error);
+        }
 
         enquiry.stockRestored = true;
         enquiry.stockRestoredAt = new Date();

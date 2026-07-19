@@ -1,5 +1,6 @@
 const Product = require('../models/Product');
 const Category = require('../models/Category');
+const { ACTIVITY_TYPES, logActivity } = require('../services/activityLogger');
 
 const generateSlug = (name) => {
   return name
@@ -170,6 +171,18 @@ exports.createProduct = async (req, res) => {
 
     await product.save();
 
+    await logActivity({
+      productId: product._id,
+      productCode: product.productCode || 'N/A',
+      productName: product.name,
+      department: product.department || 'Unassigned',
+      category: product.category.toString(),
+      activityType: ACTIVITY_TYPES.PRODUCT_CREATED,
+      performedBy: req.user ? (req.user.email || req.user._id) : 'System',
+      newQuantity: product.quantity,
+      remarks: 'Product created'
+    });
+
     res.status(201).json({
       success: true,
       message: 'Product created successfully',
@@ -190,6 +203,9 @@ exports.updateProduct = async (req, res) => {
 
     const product = await Product.findById(id);
     if (!product) return res.status(404).json({ success: false, message: 'Product not found' });
+
+    const originalProduct = product.toObject();
+    const changes = [];
 
     const { name, category, quantity, productCode, department, description, size, price, image, status, isFeatured } = req.body;
 
@@ -237,6 +253,66 @@ exports.updateProduct = async (req, res) => {
 
     await product.save();
 
+    // Log Activity for updates
+    const performedBy = req.user ? (req.user.email || req.user._id) : 'System';
+    const baseLogData = {
+      productId: product._id,
+      productCode: product.productCode || 'N/A',
+      productName: product.name,
+      department: product.department || 'Unassigned',
+      category: product.category.toString(),
+      performedBy,
+      referenceType: 'Manual'
+    };
+
+    if (quantity !== undefined && quantity !== originalProduct.quantity) {
+      await logActivity({
+        ...baseLogData,
+        activityType: quantity > originalProduct.quantity ? ACTIVITY_TYPES.QUANTITY_INCREASED : ACTIVITY_TYPES.QUANTITY_DECREASED,
+        previousQuantity: originalProduct.quantity,
+        newQuantity: quantity,
+        remarks: 'Manual quantity adjustment'
+      });
+    }
+
+    if (category && category !== originalProduct.category.toString()) {
+      await logActivity({
+        ...baseLogData,
+        activityType: ACTIVITY_TYPES.CATEGORY_CHANGED,
+        metadata: { oldCategory: originalProduct.category.toString(), newCategory: category },
+        remarks: 'Category changed manually'
+      });
+    }
+
+    if (department !== undefined && department !== originalProduct.department) {
+      await logActivity({
+        ...baseLogData,
+        activityType: ACTIVITY_TYPES.DEPARTMENT_CHANGED,
+        metadata: { oldDepartment: originalProduct.department, newDepartment: department },
+        remarks: 'Department changed manually'
+      });
+    }
+
+    if (status && status !== originalProduct.status) {
+      let type = ACTIVITY_TYPES.STATUS_CHANGED;
+      if (status === 'available' && originalProduct.status !== 'available') type = ACTIVITY_TYPES.PRODUCT_UPDATED; // or status changed
+      await logActivity({
+        ...baseLogData,
+        activityType: type,
+        metadata: { oldStatus: originalProduct.status, newStatus: status },
+        remarks: `Status changed from ${originalProduct.status} to ${status}`
+      });
+    }
+
+    // If there are other changes, but no qty/cat/dept/status, just log generic update
+    if (name && name !== originalProduct.name || productCode && productCode !== originalProduct.productCode) {
+      await logActivity({
+        ...baseLogData,
+        activityType: ACTIVITY_TYPES.PRODUCT_UPDATED,
+        remarks: 'Product details updated'
+      });
+    }
+
     res.status(200).json({
       success: true,
       message: 'Product updated successfully',
@@ -263,7 +339,21 @@ exports.deleteProduct = async (req, res) => {
       await deleteCloudinaryImage(product.image.publicId);
     }
 
+    const baseLogData = {
+      productId: product._id,
+      productCode: product.productCode || 'N/A',
+      productName: product.name,
+      department: product.department || 'Unassigned',
+      category: product.category.toString(),
+      activityType: ACTIVITY_TYPES.PRODUCT_DELETED,
+      performedBy: req.user ? (req.user.email || req.user._id) : 'System',
+      previousQuantity: product.quantity,
+      newQuantity: 0,
+      remarks: 'Product deleted'
+    };
+
     await product.deleteOne();
+    await logActivity(baseLogData);
 
     res.status(200).json({
       success: true,

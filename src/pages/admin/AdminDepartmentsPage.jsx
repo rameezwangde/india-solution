@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Package, AlertTriangle, Box, Loader2, Info, Trash2 } from 'lucide-react';
 import { getDepartments, clearDepartmentInventory } from '../../api/productService';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useToast } from '../../context/ToastContext';
 
 const AdminDepartmentsPage = () => {
   const [departments, setDepartments] = useState([]);
@@ -11,6 +12,7 @@ const AdminDepartmentsPage = () => {
   
   // Dashboard totals (mocked for now, or we can fetch dashboard stats)
   const [totals, setTotals] = useState({ products: 0, quantity: 0 });
+  const { success: showSuccess, error: showError } = useToast();
 
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [departmentToDelete, setDepartmentToDelete] = useState(null);
@@ -49,10 +51,11 @@ const AdminDepartmentsPage = () => {
         const totalQty = data.departments.reduce((acc, d) => acc + d.totalQuantity, 0);
         setTotals({ products: totalProds, quantity: totalQty });
       }
+      showSuccess(`Inventory for ${departmentToDelete} has been deleted successfully.`);
       setDeleteModalOpen(false);
       setDepartmentToDelete(null);
     } catch (err) {
-      alert(err.response?.data?.message || 'Failed to clear department');
+      showError(err.response?.data?.message || 'Failed to clear department');
     } finally {
       setIsDeleting(false);
     }

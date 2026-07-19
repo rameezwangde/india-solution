@@ -75,6 +75,7 @@ const authRoutes = require('./routes/authRoutes');
 const enquiryRoutes = require('./routes/enquiryRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');
 const inventoryImportRoutes = require('./routes/inventoryImportRoutes');
+const activityRoutes = require('./routes/activityRoutes');
 
 // Mount routers
 app.use('/api/products', productRoutes);
@@ -83,6 +84,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/enquiries', enquiryRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/inventory-import', inventoryImportRoutes);
+app.use('/api/inventory/activity', activityRoutes);
 
 // Health endpoint
 app.get('/health', (req, res) => {

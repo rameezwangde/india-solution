@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { 
   Plus, Search, Filter, RefreshCw, Edit, Trash2, 
   Image as ImageIcon, Package, CheckCircle, AlertTriangle, XCircle,
@@ -420,7 +420,9 @@ const AdminProductsPage = () => {
                             </div>
                           )}
                           <div>
-                            <p className="font-medium text-white">{p.name}</p>
+                            <Link to={`/admin/products/${p.id}`} className="font-medium text-white hover:text-magenta transition-colors">
+                              {p.name}
+                            </Link>
                             {p.size && <p className="text-xs text-gray-500 mt-0.5">{p.size}</p>}
                           </div>
                         </div>
@@ -457,6 +459,9 @@ const AdminProductsPage = () => {
                       </td>
                       <td className="px-6 py-4 text-right">
                         <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <Link to={`/admin/products/${p.id}`} className="p-2 bg-white/5 hover:bg-white/10 rounded-lg text-magenta transition-colors" title="View Details">
+                            <CheckCircle size={16} />
+                          </Link>
                           <button onClick={() => openImage(p)} className="p-2 bg-white/5 hover:bg-white/10 rounded-lg text-gray-300 transition-colors" title="Manage Image">
                             <ImageIcon size={16} />
                           </button>

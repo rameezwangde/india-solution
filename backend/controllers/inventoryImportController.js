@@ -2,6 +2,9 @@ const xlsx = require('xlsx');
 const Product = require('../models/Product');
 const Category = require('../models/Category');
 const ImportHistory = require('../models/ImportHistory');
+const InventoryActivity = require('../models/InventoryActivity');
+const { ACTIVITY_TYPES } = require('../services/activityLogger');
+const mongoose = require('mongoose');
 
 // Utility to normalize sheet name based on strict mapping rules
 const normalizeSheetName = (name) => {
@@ -409,6 +412,9 @@ exports.executeInventoryImport = async (req, res) => {
     let failed = 0;
     const errors = [];
     const bulkOps = [];
+    const activityDocs = [];
+    const performedBy = req.admin ? (req.admin.email || req.admin._id) : 'System';
+    const fileName = req.file.originalname;
     
     // Prevent internal duplicates from creating multiple docs
     const processedInternalKeys = new Set();
@@ -465,6 +471,21 @@ exports.executeInventoryImport = async (req, res) => {
                 } }
               }
             });
+            activityDocs.push({
+               productId: existing._id,
+               productCode: existing.productCode || r.productCode,
+               productName: existing.name || r.name,
+               department: existing.department || r.department,
+               category: existing.category,
+               activityType: ACTIVITY_TYPES.EXCEL_IMPORT,
+               performedBy,
+               referenceType: 'Import',
+               referenceId: fileName,
+               newQuantity: r.quantity,
+               previousQuantity: existing.quantity,
+               quantityDifference: r.quantity - existing.quantity,
+               remarks: `Imported from ${fileName} (Worksheet: ${r.sheetName})`
+            });
             updated++;
             sheetStats[r.sheetName].updated++;
             sheetStats[r.sheetName].totalQuantity += r.quantity;
@@ -484,15 +505,32 @@ exports.executeInventoryImport = async (req, res) => {
                 } } 
               }
             });
+            activityDocs.push({
+               productId: existing._id,
+               productCode: r.productCode,
+               productName: r.name,
+               department: r.department,
+               category: catId,
+               activityType: ACTIVITY_TYPES.EXCEL_IMPORT,
+               performedBy,
+               referenceType: 'Import',
+               referenceId: fileName,
+               newQuantity: r.quantity,
+               previousQuantity: existing.quantity,
+               quantityDifference: r.quantity - existing.quantity,
+               remarks: `Imported from ${fileName} (Worksheet: ${r.sheetName})`
+            });
             updated++;
             sheetStats[r.sheetName].updated++;
             sheetStats[r.sheetName].totalQuantity += r.quantity;
           }
         } else {
           // Create new
+          const newId = new mongoose.Types.ObjectId();
           bulkOps.push({
             insertOne: {
               document: {
+                _id: newId,
                 productCode: r.productCode,
                 name: r.name,
                 category: catId,
@@ -509,6 +547,21 @@ exports.executeInventoryImport = async (req, res) => {
               }
             }
           });
+          activityDocs.push({
+               productId: newId,
+               productCode: r.productCode,
+               productName: r.name,
+               department: r.department,
+               category: catId,
+               activityType: ACTIVITY_TYPES.EXCEL_IMPORT,
+               performedBy,
+               referenceType: 'Import',
+               referenceId: fileName,
+               newQuantity: r.quantity,
+               previousQuantity: 0,
+               quantityDifference: r.quantity,
+               remarks: `Imported from ${fileName} (Worksheet: ${r.sheetName})`
+          });
           created++;
           sheetStats[r.sheetName].created++;
           sheetStats[r.sheetName].totalQuantity += r.quantity;
@@ -522,6 +575,10 @@ exports.executeInventoryImport = async (req, res) => {
     
     if (bulkOps.length > 0) {
       await Product.bulkWrite(bulkOps, { ordered: false });
+    }
+    
+    if (activityDocs.length > 0) {
+      await InventoryActivity.insertMany(activityDocs, { ordered: false }).catch(err => console.error('Failed inserting activities:', err));
     }
     
     const history = new ImportHistory({

@@ -3,9 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { 
   Package, Tags, AlertCircle, TrendingDown, Loader2, 
   MessageSquare, FileText, Upload, Clock, CheckCircle, XCircle,
-  Bell, Calendar, ChevronDown, ChevronRight, BarChart2, PieChart as PieChartIcon
+  Bell, Calendar, ChevronDown, ChevronRight, BarChart2, PieChart as PieChartIcon, Activity
 } from 'lucide-react';
 import { getDashboardData } from '../../api/dashboardService';
+import { getRecentActivity } from '../../api/activityService';
+import { format } from 'date-fns';
 import { 
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, 
   PieChart, Pie, Cell, Legend
@@ -53,14 +55,19 @@ const AdminDashboardPage = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [activities, setActivities] = useState([]);
 
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
         setLoading(true);
-        const res = await getDashboardData();
+        const [res, actRes] = await Promise.all([
+          getDashboardData(),
+          getRecentActivity(5).catch(() => ({ activities: [] }))
+        ]);
         if (res.success) {
           setData(res);
+          setActivities(actRes.activities || []);
         } else {
           setError('Failed to load dashboard data');
         }
@@ -234,6 +241,43 @@ const AdminDashboardPage = () => {
             <div className="flex-1 min-h-[250px] flex items-center justify-center text-gray-500 text-sm">No enquiry data available</div>
           )}
         </div>
+      </div>
+
+      {/* Recent Activity Widget */}
+      <div className="bg-[#12121A] border border-white/5 rounded-2xl p-6 shadow-lg">
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-sm font-semibold text-white flex items-center gap-2">
+            <Activity className="w-4 h-4 text-magenta" /> Recent Activity
+          </h2>
+          <Link to="/admin/inventory-activity" className="text-xs text-gray-400 hover:text-white flex items-center gap-1 bg-white/5 border border-white/10 px-3 py-1.5 rounded-lg transition-colors">
+            View All <ChevronRight size={14} />
+          </Link>
+        </div>
+        
+        {activities.length > 0 ? (
+          <div className="space-y-4">
+            {activities.map(activity => (
+              <div key={activity._id} className="flex items-center gap-4 p-3 hover:bg-white/5 rounded-xl transition-colors border border-transparent hover:border-white/5">
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium text-white truncate">{activity.productName}</p>
+                  <p className="text-xs text-gray-400 truncate">{activity.remarks}</p>
+                </div>
+                <div className="text-right shrink-0">
+                  <p className="text-xs font-medium text-gray-300">
+                    {activity.quantityDifference !== 0 && (
+                      <span className={activity.quantityDifference > 0 ? "text-green-400" : "text-red-400"}>
+                        {activity.quantityDifference > 0 ? '+' : ''}{activity.quantityDifference} qty
+                      </span>
+                    )}
+                  </p>
+                  <p className="text-[10px] text-gray-500 mt-1">{format(new Date(activity.performedAt), 'MMM dd, hh:mm a')}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="py-8 text-center text-gray-500 text-sm">No recent activity</div>
+        )}
       </div>
       
       {/* Footer */}
