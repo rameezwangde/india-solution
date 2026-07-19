@@ -1,3 +1,4 @@
+// Frontend Vercel Redeployment Trigger
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AdminAuthProvider } from './context/AdminAuthContext';
 import { ToastProvider } from './context/ToastContext';
