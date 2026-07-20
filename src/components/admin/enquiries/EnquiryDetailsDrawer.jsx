@@ -96,22 +96,22 @@ const EnquiryDetailsDrawer = ({ isOpen, onClose, enquiry, onStatusUpdated }) => 
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed inset-y-0 right-0 z-50 w-full max-w-2xl bg-navy-900 border-l border-white/10 shadow-2xl flex flex-col"
+            className="fixed inset-y-0 right-0 z-50 w-full max-w-2xl bg-white border-l border-[#E8DFD5] shadow-2xl flex flex-col"
           >
             {/* Header */}
-            <div className="flex items-center justify-between p-6 border-b border-white/10 bg-white/5">
+            <div className="flex items-center justify-between p-6 border-b border-[#E8DFD5] bg-[#FAF7F2]">
               <div>
                 <div className="flex items-center gap-3 mb-1">
-                  <h2 className="text-xl font-bold text-white">{enquiry.referenceNumber}</h2>
+                  <h2 className="text-xl font-bold text-[#4A2F1D]">{enquiry.referenceNumber}</h2>
                   <StatusBadge status={enquiry.status} />
                 </div>
-                <p className="text-sm text-gray-400">
+                <p className="text-sm text-[#A67C65]">
                   Created {new Date(enquiry.createdAt).toLocaleString()}
                 </p>
               </div>
               <button
                 onClick={onClose}
-                className="p-2 text-gray-400 hover:text-white hover:bg-white/10 rounded-full transition-colors"
+                className="p-2 text-[#A67C65] hover:text-[#4A2F1D] hover:bg-[#E8DFD5] rounded-full transition-colors"
               >
                 <X size={24} />
               </button>
@@ -120,16 +120,16 @@ const EnquiryDetailsDrawer = ({ isOpen, onClose, enquiry, onStatusUpdated }) => 
             <div className="flex-1 overflow-y-auto p-6 space-y-8">
               
               {/* Management Section */}
-              <div className="bg-white/5 rounded-2xl p-5 border border-white/10">
+              <div className="bg-[#FAF7F2] rounded-2xl p-5 border border-[#E8DFD5]">
                 <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider">Manage Status & Notes</h3>
+                  <h3 className="text-sm font-bold text-[#A67C65] uppercase tracking-wider">Manage Status & Notes</h3>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs text-gray-500 uppercase font-bold">Stock Status:</span>
+                    <span className="text-xs text-[#A67C65] uppercase font-bold">Stock Status:</span>
                     {enquiry.stockProcessed && !enquiry.stockRestored && (
                       <span className="px-2 py-1 bg-blue-500/10 text-blue-400 text-[10px] rounded uppercase font-bold border border-blue-500/20">Deducted</span>
                     )}
                     {enquiry.stockRestored && (
-                      <span className="px-2 py-1 bg-gray-500/10 text-gray-400 text-[10px] rounded uppercase font-bold border border-gray-500/20">Restored</span>
+                      <span className="px-2 py-1 bg-gray-500/10 text-[#A67C65] text-[10px] rounded uppercase font-bold border border-gray-500/20">Restored</span>
                     )}
                     {!enquiry.stockProcessed && (
                       <span className="px-2 py-1 bg-yellow-500/10 text-yellow-500 text-[10px] rounded uppercase font-bold border border-yellow-500/20">Not Processed</span>
@@ -139,11 +139,11 @@ const EnquiryDetailsDrawer = ({ isOpen, onClose, enquiry, onStatusUpdated }) => 
                 
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">Enquiry Status</label>
+                    <label className="block text-sm font-medium text-[#7C5A48] mb-2">Enquiry Status</label>
                     <select
                       value={status}
                       onChange={(e) => setStatus(e.target.value)}
-                      className="w-full bg-navy-900 border border-white/10 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-magenta"
+                      className="w-full bg-white border border-[#E8DFD5] rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:outline-none focus:border-magenta"
                     >
                       <option value="Pending">Pending</option>
                       <option value="Contacted">Contacted</option>
@@ -155,13 +155,13 @@ const EnquiryDetailsDrawer = ({ isOpen, onClose, enquiry, onStatusUpdated }) => 
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">Admin Notes (Internal)</label>
+                    <label className="block text-sm font-medium text-[#7C5A48] mb-2">Admin Notes (Internal)</label>
                     <textarea
                       value={notes}
                       onChange={(e) => setNotes(e.target.value)}
                       rows={3}
                       placeholder="Add internal notes here..."
-                      className="w-full bg-navy-900 border border-white/10 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-magenta resize-none"
+                      className="w-full bg-white border border-[#E8DFD5] rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:outline-none focus:border-magenta resize-none"
                     />
                   </div>
 
@@ -169,7 +169,7 @@ const EnquiryDetailsDrawer = ({ isOpen, onClose, enquiry, onStatusUpdated }) => 
                     <button
                       onClick={handleUpdate}
                       disabled={isUpdating}
-                      className="w-full bg-magenta hover:bg-magenta-600 text-white font-medium py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2"
+                      className="w-full bg-[#9A424E] hover:bg-[#9A424E]-600 text-[#4A2F1D] font-medium py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2"
                     >
                       {isUpdating ? <Loader2 size={18} className="animate-spin" /> : <Save size={18} />}
                       Save Changes
@@ -180,34 +180,34 @@ const EnquiryDetailsDrawer = ({ isOpen, onClose, enquiry, onStatusUpdated }) => 
 
               {/* Customer Details */}
               <div>
-                <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+                <h3 className="text-sm font-bold text-[#A67C65] uppercase tracking-wider mb-4 flex items-center gap-2">
                   <User size={16} /> Customer Information
                 </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-white/5 rounded-2xl p-5 border border-white/10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-[#FAF7F2] rounded-2xl p-5 border border-[#E8DFD5]">
                   <div>
-                    <p className="text-xs text-gray-500 mb-1">Full Name</p>
-                    <p className="text-white font-medium">{enquiry.customerName}</p>
+                    <p className="text-xs text-[#A67C65] mb-1">Full Name</p>
+                    <p className="text-[#4A2F1D] font-medium">{enquiry.customerName}</p>
                   </div>
                   <div>
-                    <p className="text-xs text-gray-500 mb-1">Company</p>
-                    <div className="flex items-center gap-2 text-white font-medium">
-                      <Building2 size={14} className="text-gray-400" />
+                    <p className="text-xs text-[#A67C65] mb-1">Company</p>
+                    <div className="flex items-center gap-2 text-[#4A2F1D] font-medium">
+                      <Building2 size={14} className="text-[#A67C65]" />
                       {enquiry.companyName || '-'}
                     </div>
                   </div>
                   <div>
-                    <p className="text-xs text-gray-500 mb-1">Phone</p>
-                    <div className="flex items-center gap-2 text-white font-medium">
-                      <Phone size={14} className="text-gray-400" />
-                      <a href={`tel:${enquiry.phone}`} className="hover:text-magenta transition-colors">{enquiry.phone}</a>
+                    <p className="text-xs text-[#A67C65] mb-1">Phone</p>
+                    <div className="flex items-center gap-2 text-[#4A2F1D] font-medium">
+                      <Phone size={14} className="text-[#A67C65]" />
+                      <a href={`tel:${enquiry.phone}`} className="hover:text-[#9A424E] transition-colors">{enquiry.phone}</a>
                     </div>
                   </div>
                   <div>
-                    <p className="text-xs text-gray-500 mb-1">Email</p>
-                    <div className="flex items-center gap-2 text-white font-medium">
-                      <Mail size={14} className="text-gray-400" />
+                    <p className="text-xs text-[#A67C65] mb-1">Email</p>
+                    <div className="flex items-center gap-2 text-[#4A2F1D] font-medium">
+                      <Mail size={14} className="text-[#A67C65]" />
                       {enquiry.email ? (
-                        <a href={`mailto:${enquiry.email}`} className="hover:text-magenta transition-colors break-all">{enquiry.email}</a>
+                        <a href={`mailto:${enquiry.email}`} className="hover:text-[#9A424E] transition-colors break-all">{enquiry.email}</a>
                       ) : (
                         '-'
                       )}
@@ -218,37 +218,37 @@ const EnquiryDetailsDrawer = ({ isOpen, onClose, enquiry, onStatusUpdated }) => 
 
               {/* Event Details */}
               <div>
-                <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+                <h3 className="text-sm font-bold text-[#A67C65] uppercase tracking-wider mb-4 flex items-center gap-2">
                   <Calendar size={16} /> Event Details
                 </h3>
-                <div className="bg-white/5 rounded-2xl p-5 border border-white/10 space-y-4">
+                <div className="bg-[#FAF7F2] rounded-2xl p-5 border border-[#E8DFD5] space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <p className="text-xs text-gray-500 mb-1">Event Date</p>
-                      <div className="flex items-center gap-2 text-white font-medium">
-                        <Clock size={14} className="text-gray-400" />
+                      <p className="text-xs text-[#A67C65] mb-1">Event Date</p>
+                      <div className="flex items-center gap-2 text-[#4A2F1D] font-medium">
+                        <Clock size={14} className="text-[#A67C65]" />
                         {enquiry.eventDate ? new Date(enquiry.eventDate).toLocaleDateString() : '-'}
                       </div>
                     </div>
                     <div>
-                      <p className="text-xs text-gray-500 mb-1">City</p>
-                      <p className="text-white font-medium">{enquiry.city || '-'}</p>
+                      <p className="text-xs text-[#A67C65] mb-1">City</p>
+                      <p className="text-[#4A2F1D] font-medium">{enquiry.city || '-'}</p>
                     </div>
                   </div>
                   
                   <div>
-                    <p className="text-xs text-gray-500 mb-1">Location / Venue</p>
-                    <div className="flex items-center gap-2 text-white font-medium">
-                      <MapPin size={14} className="text-gray-400" />
+                    <p className="text-xs text-[#A67C65] mb-1">Location / Venue</p>
+                    <div className="flex items-center gap-2 text-[#4A2F1D] font-medium">
+                      <MapPin size={14} className="text-[#A67C65]" />
                       {enquiry.eventLocation || '-'}
                     </div>
                   </div>
 
                   {enquiry.message && (
                     <div>
-                      <p className="text-xs text-gray-500 mb-1">Message from Customer</p>
-                      <div className="bg-black/20 p-4 rounded-xl text-gray-300 text-sm mt-1 whitespace-pre-wrap flex items-start gap-3">
-                        <MessageSquare size={16} className="text-gray-500 flex-shrink-0 mt-0.5" />
+                      <p className="text-xs text-[#A67C65] mb-1">Message from Customer</p>
+                      <div className="bg-black/20 p-4 rounded-xl text-[#7C5A48] text-sm mt-1 whitespace-pre-wrap flex items-start gap-3">
+                        <MessageSquare size={16} className="text-[#A67C65] flex-shrink-0 mt-0.5" />
                         {enquiry.message}
                       </div>
                     </div>
@@ -258,26 +258,26 @@ const EnquiryDetailsDrawer = ({ isOpen, onClose, enquiry, onStatusUpdated }) => 
 
               {/* Products */}
               <div>
-                <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+                <h3 className="text-sm font-bold text-[#A67C65] uppercase tracking-wider mb-4 flex items-center gap-2">
                   <Package size={16} /> Requested Items ({enquiry.totalItems})
                 </h3>
                 <div className="space-y-3">
                   {enquiry.products.map((item, idx) => (
-                    <div key={idx} className="flex items-center gap-4 bg-white/5 border border-white/10 rounded-xl p-3">
+                    <div key={idx} className="flex items-center gap-4 bg-[#FAF7F2] border border-[#E8DFD5] rounded-xl p-3">
                       {item.product?.image?.url ? (
                         <img src={item.product.image.url} alt={item.productName} className="w-16 h-16 object-cover rounded-lg bg-black/20" />
                       ) : (
-                        <div className="w-16 h-16 bg-navy-900 rounded-lg flex items-center justify-center border border-white/10">
-                          <Package size={20} className="text-gray-500" />
+                        <div className="w-16 h-16 bg-white rounded-lg flex items-center justify-center border border-[#E8DFD5]">
+                          <Package size={20} className="text-[#A67C65]" />
                         </div>
                       )}
                       <div className="flex-1">
-                        <div className="text-xs text-magenta mb-0.5">{item.product?.productCode || item.product?.code || 'N/A'}</div>
-                        <h4 className="font-bold text-white text-sm">{item.productName}</h4>
+                        <div className="text-xs text-[#9A424E] mb-0.5">{item.product?.productCode || item.product?.code || 'N/A'}</div>
+                        <h4 className="font-bold text-[#4A2F1D] text-sm">{item.productName}</h4>
                       </div>
-                      <div className="px-4 py-2 bg-navy-900 rounded-lg border border-white/10 text-center min-w-[80px]">
-                        <p className="text-[10px] text-gray-500 mb-0.5">QTY</p>
-                        <p className="font-bold text-white">{item.quantity}</p>
+                      <div className="px-4 py-2 bg-white rounded-lg border border-[#E8DFD5] text-center min-w-[80px]">
+                        <p className="text-[10px] text-[#A67C65] mb-0.5">QTY</p>
+                        <p className="font-bold text-[#4A2F1D]">{item.quantity}</p>
                       </div>
                     </div>
                   ))}
@@ -292,11 +292,11 @@ const EnquiryDetailsDrawer = ({ isOpen, onClose, enquiry, onStatusUpdated }) => 
           {showConfirmModal && (
             <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
               <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setShowConfirmModal(null)} />
-              <div className="relative bg-navy-900 border border-white/10 rounded-2xl p-6 max-w-lg w-full shadow-2xl">
-                <h3 className="text-xl font-bold text-white mb-2">
+              <div className="relative bg-white border border-[#E8DFD5] rounded-2xl p-6 max-w-lg w-full shadow-2xl">
+                <h3 className="text-xl font-bold text-[#4A2F1D] mb-2">
                   {showConfirmModal === 'confirm' ? 'Confirm Enquiry' : 'Cancel Confirmed Enquiry'}
                 </h3>
-                <p className="text-gray-400 mb-6 text-sm">
+                <p className="text-[#A67C65] mb-6 text-sm">
                   {showConfirmModal === 'confirm' 
                     ? 'Confirming this enquiry will reduce the available inventory quantities.'
                     : 'Cancelling this enquiry will restore the deducted inventory quantities.'}
@@ -310,7 +310,7 @@ const EnquiryDetailsDrawer = ({ isOpen, onClose, enquiry, onStatusUpdated }) => 
                     <div className="space-y-2">
                       {insufficientItems.map((item, idx) => (
                         <div key={idx} className="flex justify-between items-center bg-black/20 p-2 rounded-lg text-sm">
-                          <span className="text-gray-300 truncate pr-2">{item.productName}</span>
+                          <span className="text-[#7C5A48] truncate pr-2">{item.productName}</span>
                           <span className="text-red-400 font-mono whitespace-nowrap">Need {item.requested} (Have {item.available})</span>
                         </div>
                       ))}
@@ -321,15 +321,15 @@ const EnquiryDetailsDrawer = ({ isOpen, onClose, enquiry, onStatusUpdated }) => 
                 {!insufficientItems.length && showConfirmModal === 'confirm' && (
                   <div className="mb-6 space-y-2 max-h-60 overflow-y-auto pr-2">
                     {enquiry.products.map((item, idx) => (
-                      <div key={idx} className="flex justify-between items-center bg-white/5 p-3 rounded-lg text-sm border border-white/5">
-                        <span className="text-gray-300 truncate pr-2 font-medium">{item.productName}</span>
+                      <div key={idx} className="flex justify-between items-center bg-[#FAF7F2] p-3 rounded-lg text-sm border border-[#E8DFD5]">
+                        <span className="text-[#7C5A48] truncate pr-2 font-medium">{item.productName}</span>
                         <div className="flex gap-4 text-right">
                           <div>
-                            <div className="text-[10px] text-gray-500">Request</div>
-                            <div className="text-white font-bold">{item.quantity}</div>
+                            <div className="text-[10px] text-[#A67C65]">Request</div>
+                            <div className="text-[#4A2F1D] font-bold">{item.quantity}</div>
                           </div>
                           <div>
-                            <div className="text-[10px] text-gray-500">Available</div>
+                            <div className="text-[10px] text-[#A67C65]">Available</div>
                             <div className={`font-bold ${item.product?.quantity >= item.quantity ? 'text-green-400' : 'text-red-400'}`}>
                               {item.product?.quantity || 0}
                             </div>
@@ -344,7 +344,7 @@ const EnquiryDetailsDrawer = ({ isOpen, onClose, enquiry, onStatusUpdated }) => 
                   <button
                     onClick={() => setShowConfirmModal(null)}
                     disabled={isUpdating}
-                    className="flex-1 py-2.5 px-4 bg-white/5 hover:bg-white/10 text-white rounded-lg transition-colors font-medium"
+                    className="flex-1 py-2.5 px-4 bg-[#FAF7F2] hover:bg-[#E8DFD5] text-[#4A2F1D] rounded-lg transition-colors font-medium"
                   >
                     Close
                   </button>
@@ -352,7 +352,7 @@ const EnquiryDetailsDrawer = ({ isOpen, onClose, enquiry, onStatusUpdated }) => 
                     <button
                       onClick={executeSave}
                       disabled={isUpdating}
-                      className="flex-1 py-2.5 px-4 bg-gradient-to-r from-magenta to-orange hover:glow-magenta text-white rounded-lg transition-all font-bold flex justify-center items-center gap-2"
+                      className="flex-1 py-2.5 px-4 bg-gradient-to-r from-magenta to-orange hover:glow-magenta text-[#4A2F1D] rounded-lg transition-all font-bold flex justify-center items-center gap-2"
                     >
                       {isUpdating ? <Loader2 size={18} className="animate-spin" /> : null}
                       {showConfirmModal === 'confirm' ? 'Confirm and Update Inventory' : 'Cancel and Restore Inventory'}

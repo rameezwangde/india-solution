@@ -37,27 +37,43 @@ const iconMap = {
 
 const Services = () => {
   return (
-    <section className="services-showcase relative overflow-hidden px-5 pb-20 pt-40 text-white lg:px-10 lg:pt-44">
-      <div className="services-dots services-dots-left" />
-      <div className="services-dots services-dots-right" />
-      <div className="services-wave services-wave-left" />
-      <div className="services-wave services-wave-right" />
+    <section className="relative overflow-hidden bg-[#FAF7F2] px-5 pb-24 pt-32 text-[#5c4033] lg:px-10 lg:pt-44 min-h-screen font-sans">
+      {/* Global Background Watermarks */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <img 
+          src="/hero-bg.png" 
+          alt="" 
+          className="absolute -right-20 top-0 w-full md:w-[60%] h-[120%] object-cover object-left opacity-30 mix-blend-multiply" 
+          style={{ transform: 'scaleX(-1)'}} 
+        />
+        <img 
+          src="/hero-bg.png" 
+          alt="" 
+          className="absolute -left-20 top-1/4 w-full md:w-[60%] h-[120%] object-cover object-left opacity-20 mix-blend-multiply" 
+        />
+      </div>
 
-      <div className="relative z-10 mx-auto max-w-7xl">
+      <div className="relative z-10 mx-auto max-w-[1300px]">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mx-auto mb-10 max-w-2xl text-center"
+          className="mx-auto mb-16 max-w-2xl text-center"
         >
-          <div className="mx-auto mb-3 flex items-center justify-center gap-3 text-magenta">
-            <span className="h-px w-10 bg-gradient-to-r from-transparent to-magenta" />
-            <span className="h-1.5 w-1.5 rotate-45 bg-magenta shadow-[0_0_12px_rgba(233,30,99,0.9)]" />
-            <span className="h-px w-10 bg-gradient-to-r from-magenta to-orange" />
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <span className="h-[1px] w-12 bg-gradient-to-r from-transparent to-[#D5C5B9]"></span>
+            <span className="text-[#A67C65] text-[10px]">❖</span>
+            <span className="text-[#A67C65] text-xs font-bold tracking-[0.25em] uppercase">Services</span>
+            <span className="text-[#A67C65] text-[10px]">❖</span>
+            <span className="h-[1px] w-12 bg-gradient-to-l from-transparent to-[#D5C5B9]"></span>
           </div>
-          <h1 className="site-heading text-4xl font-bold leading-none tracking-[0.14em] md:text-5xl">
-            Our <span className="text-gradient">Services</span>
+          <h1 className="font-['Playfair_Display',serif] text-5xl md:text-6xl font-bold text-[#4A2F1D] tracking-wide mb-6">
+            OUR <span className="text-[#A67C65]">SERVICES</span>
           </h1>
-          <p className="mx-auto mt-3 max-w-md text-xs leading-5 text-gray-300 md:text-sm">
+          <div className="flex items-center justify-center gap-2 mb-6">
+            <span className="text-[#A67C65] text-sm">❖</span>
+          </div>
+          <p className="mx-auto mt-3 max-w-md text-sm md:text-base font-medium leading-relaxed text-[#7C5A48]">
             Comprehensive event solutions tailored to create unforgettable experiences.
           </p>
         </motion.div>
@@ -67,46 +83,45 @@ const Services = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
-          className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3"
+          className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3"
         >
           {serviceCatalog.map((service, index) => {
             const Icon = iconMap[service.icon] ?? Sparkles;
-            const accentClass = index % 3 === 2 ? 'service-card-gold' : 'service-card-magenta';
 
             return (
               <motion.article
                 key={service.slug}
                 variants={fadeUp}
-                className={`service-card group relative flex min-h-[315px] flex-col overflow-hidden rounded-xl p-5 ${accentClass}`}
+                className="group relative flex min-h-[350px] flex-col overflow-hidden rounded-[1.5rem] bg-white p-8 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E8DFD5] transition-all hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:border-[#D5C5B9]"
               >
-                <div className="mb-4 flex items-start gap-3">
+                <div className="mb-6 flex items-start gap-4 flex-col sm:flex-row">
                   <Link
                     to={`/services/${service.slug}`}
-                    className="service-icon flex h-10 w-10 shrink-0 items-center justify-center rounded-full border text-magenta transition-colors group-hover:text-gold"
+                    className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#FAF7F2] border-[1.5px] border-[#D5C5B9] text-[#A67C65] transition-all group-hover:border-[#A67C65] group-hover:bg-[#A67C65] group-hover:text-white"
                     aria-label={service.title}
                   >
-                    <Icon size={19} strokeWidth={1.8} />
+                    <Icon size={24} strokeWidth={1.5} />
                   </Link>
-                  <div>
+                  <div className="pt-1">
                     <Link to={`/services/${service.slug}`}>
-                      <h2 className="site-heading service-title text-lg font-bold leading-tight text-gold transition-colors hover:text-orange md:text-xl">
+                      <h2 className="font-['Playfair_Display',serif] text-xl font-bold leading-tight text-[#4A2F1D] transition-colors hover:text-[#A67C65] md:text-2xl mb-2">
                         {service.title}
                       </h2>
                     </Link>
-                    <p className="mt-1 max-w-[18rem] text-[11px] leading-4 text-gray-400">
+                    <p className="max-w-[18rem] text-[12.5px] font-medium leading-relaxed text-[#7C5A48]">
                       {service.description}
                     </p>
                   </div>
                 </div>
 
-                <div className="mt-auto grid gap-2">
+                <div className="mt-auto grid gap-3">
                   {service.items.map((item) => (
                     <Link
                       key={item}
                       to={`/services/${service.slug}/${slugifyServiceItem(item)}`}
-                      className="service-point flex items-center gap-2 rounded border px-3 py-2 text-[11px] font-medium leading-tight text-gray-200 transition-all hover:translate-x-1 hover:text-gold md:text-xs"
+                      className="flex items-center gap-3 rounded-lg border border-[#E8DFD5] bg-[#FAF7F2]/50 px-4 py-3 text-[12.5px] font-semibold leading-tight text-[#5c4033] transition-all hover:-translate-y-0.5 hover:border-[#A67C65] hover:shadow-sm"
                     >
-                      <ChevronRight size={12} className="shrink-0 text-magenta" strokeWidth={2.2} />
+                      <ChevronRight size={14} className="shrink-0 text-[#A67C65]" strokeWidth={2.5} />
                       <span>{item}</span>
                     </Link>
                   ))}

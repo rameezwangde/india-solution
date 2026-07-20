@@ -32,7 +32,7 @@ import AdminHelpPage from './pages/admin/AdminHelpPage';
 import AdminNotFoundPage from './pages/admin/AdminNotFoundPage';
 
 const PublicLayout = ({ children }) => (
-  <div className="min-h-screen flex flex-col bg-navy-900 text-white font-sans selection:bg-magenta selection:text-white overflow-x-hidden">
+  <div className="min-h-screen flex flex-col bg-[#FAF7F2] text-[#4A2F1D] font-sans selection:bg-[#A67C65] selection:text-white overflow-x-hidden">
     <Navbar />
     <main className="flex-grow">
       {children}

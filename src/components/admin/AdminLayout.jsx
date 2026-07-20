@@ -35,17 +35,17 @@ const AdminLayout = () => {
   ];
 
   const SidebarContent = () => (
-    <div className="flex flex-col h-full bg-[#0B0A10] border-r border-white/5 relative z-20">
+    <div className="flex flex-col h-full bg-white border-r border-[#E8DFD5] relative z-20 shadow-[4px_0_24px_rgba(74,47,29,0.02)]">
       <div className="p-8 pb-4 flex items-center justify-center">
         <Link to="/admin">
           <img src="/FULL LOGO COLOUR (1)-1.png" alt="India Solution" className="h-16 object-contain" onError={(e) => { e.target.onerror = null; e.target.src="/india-solution-logo.png" }} />
         </Link>
-        <button className="md:hidden absolute right-4 top-8 text-gray-400" onClick={() => setSidebarOpen(false)}>
+        <button className="md:hidden absolute right-4 top-8 text-[#A67C65]" onClick={() => setSidebarOpen(false)}>
           <X size={24} />
         </button>
       </div>
 
-      <nav className="flex-1 px-4 py-6 space-y-3 overflow-y-auto mt-4">
+      <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto mt-4">
         {navItems.map((item) => (
           <NavLink
             key={item.name}
@@ -53,35 +53,35 @@ const AdminLayout = () => {
             end={item.path === '/admin'}
             onClick={() => setSidebarOpen(false)}
             className={({ isActive }) =>
-              `flex items-center gap-4 px-5 py-3.5 rounded-xl transition-all font-medium ${
+              `flex items-center gap-4 px-5 py-3.5 rounded-xl transition-all font-semibold ${
                 isActive 
-                  ? 'bg-gradient-to-r from-magenta to-orange/80 text-white shadow-[0_0_15px_rgba(233,30,99,0.3)] border border-white/10' 
-                  : 'text-gray-400 hover:bg-white/5 hover:text-white'
+                  ? 'bg-gradient-to-r from-[#9A424E] to-[#C0602F] text-[#4A2F1D] shadow-md' 
+                  : 'text-[#7C5A48] hover:bg-[#FAF7F2] hover:text-[#4A2F1D]'
               }`
             }
           >
             {item.icon}
-            <span>{item.name}</span>
+            <span className="text-[13px] tracking-wide">{item.name}</span>
           </NavLink>
         ))}
       </nav>
 
       <div className="p-4 mb-4">
-        <div className="bg-white/5 border border-white/10 rounded-2xl p-4 flex flex-col gap-4">
+        <div className="bg-[#FAF7F2] border border-[#E8DFD5] rounded-2xl p-4 flex flex-col gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-r from-magenta to-orange flex items-center justify-center text-white font-bold text-sm shrink-0">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-r from-[#9A424E] to-[#C0602F] flex items-center justify-center text-[#4A2F1D] font-bold text-sm shrink-0 shadow-sm">
               IS
             </div>
             <div className="overflow-hidden">
-              <p className="text-sm font-semibold text-white truncate">{admin?.name || 'India Solution Admin'}</p>
-              <p className="text-[10px] text-gray-400 truncate">{admin?.email || 'indiasolutionscrm@gmail.com'}</p>
+              <p className="text-[13px] font-bold text-[#4A2F1D] truncate">{admin?.name || 'India Solution Admin'}</p>
+              <p className="text-[11px] font-medium text-[#A67C65] truncate">{admin?.email || 'indiasolutionscrm@gmail.com'}</p>
             </div>
           </div>
           <button
             onClick={logout}
-            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-transparent border border-white/10 hover:border-red-500/50 hover:bg-red-500/10 text-red-400 rounded-xl transition-colors text-sm font-medium"
+            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-white border border-[#E8DFD5] hover:border-[#9A424E]/50 hover:bg-[#9A424E]/5 text-[#9A424E] rounded-xl transition-colors text-xs font-bold uppercase tracking-wider"
           >
-            <LogOut size={16} />
+            <LogOut size={16} strokeWidth={2.5} />
             <span>Logout</span>
           </button>
         </div>
@@ -90,21 +90,23 @@ const AdminLayout = () => {
   );
 
   return (
-    <div 
-      className="min-h-screen bg-[#0B0A10] flex text-gray-100 font-sans selection:bg-magenta selection:text-white relative overflow-hidden"
-    >
+    <div className="min-h-screen bg-[#FAF7F2] flex text-[#4A2F1D] font-sans selection:bg-[#C0602F] selection:text-[#4A2F1D] relative overflow-hidden">
       {/* Background Graphic */}
-      <div 
-        className="fixed inset-0 z-0 pointer-events-none"
-        style={{
-          backgroundImage: "url('/bg image.png')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          opacity: 0.4
-        }}
-      ></div>
+      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <img 
+          src="/hero-bg.png" 
+          alt="" 
+          className="absolute -right-20 top-0 w-full md:w-[60%] h-[120%] object-cover object-left opacity-10 mix-blend-multiply" 
+          style={{ transform: 'scaleX(-1)'}} 
+        />
+        <img 
+          src="/hero-bg.png" 
+          alt="" 
+          className="absolute -left-20 top-1/4 w-full md:w-[60%] h-[120%] object-cover object-left opacity-[0.07] mix-blend-multiply" 
+        />
+      </div>
 
-      <aside className="hidden md:block w-72 fixed inset-y-0 z-20 shadow-[10px_0_30px_rgba(0,0,0,0.5)]">
+      <aside className="hidden md:block w-72 fixed inset-y-0 z-20">
         <SidebarContent />
       </aside>
 
@@ -116,7 +118,7 @@ const AdminLayout = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSidebarOpen(false)}
-              className="fixed inset-0 bg-black/80 z-30 md:hidden backdrop-blur-sm"
+              className="fixed inset-0 bg-[#4A2F1D]/40 z-30 md:hidden backdrop-blur-sm"
             />
             <motion.aside
               initial={{ x: '-100%' }}
@@ -132,13 +134,13 @@ const AdminLayout = () => {
       </AnimatePresence>
 
       <main className="flex-1 md:pl-72 flex flex-col min-h-screen relative z-10 bg-transparent">
-        <header className="md:hidden bg-[#0B0A10]/80 backdrop-blur-md border-b border-white/10 p-4 flex items-center justify-between sticky top-0 z-10">
-          <Link to="/admin" className="text-lg font-bold text-white">
-            India <span className="text-magenta">Admin</span>
+        <header className="md:hidden bg-white/80 backdrop-blur-md border-b border-[#E8DFD5] p-4 flex items-center justify-between sticky top-0 z-10">
+          <Link to="/admin" className="text-lg font-bold text-[#4A2F1D] font-['Playfair_Display',serif]">
+            India <span className="text-[#9A424E]">Admin</span>
           </Link>
           <button 
             onClick={() => setSidebarOpen(true)}
-            className="p-2 text-gray-400 hover:text-white bg-white/5 rounded-lg border border-white/10"
+            className="p-2 text-[#7C5A48] hover:text-[#C0602F] bg-[#FAF7F2] rounded-lg border border-[#E8DFD5]"
           >
             <Menu size={24} />
           </button>

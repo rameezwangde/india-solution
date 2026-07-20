@@ -17,9 +17,9 @@ const ActivityTimeline = ({ activities }) => {
       case 'EXCEL_IMPORT': return <FileSpreadsheet size={16} className="text-green-400" />;
       case 'QUANTITY_INCREASED': return <ArrowUpRight size={16} className="text-green-400" />;
       case 'QUANTITY_DECREASED': return <ArrowDownRight size={16} className="text-red-400" />;
-      case 'STOCK_RESERVED': return <ArrowDownRight size={16} className="text-orange-400" />;
+      case 'STOCK_RESERVED': return <ArrowDownRight size={16} className="text-[#C0602F]-400" />;
       case 'STOCK_RESTORED': return <ArrowUpRight size={16} className="text-blue-400" />;
-      default: return <Activity size={16} className="text-gray-400" />;
+      default: return <Activity size={16} className="text-[#A67C65]" />;
     }
   };
 
@@ -29,17 +29,17 @@ const ActivityTimeline = ({ activities }) => {
 
   if (!activities || activities.length === 0) {
     return (
-      <div className="bg-white/5 border border-white/10 rounded-2xl p-8 text-center">
-        <Activity size={48} className="mx-auto mb-4 opacity-20 text-gray-400" />
-        <p className="text-gray-400">No activity recorded for this product yet.</p>
+      <div className="bg-[#FAF7F2] border border-[#E8DFD5] rounded-2xl p-8 text-center">
+        <Activity size={48} className="mx-auto mb-4 opacity-20 text-[#A67C65]" />
+        <p className="text-[#A67C65]">No activity recorded for this product yet.</p>
       </div>
     );
   }
 
   return (
-    <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
-      <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-        <Activity size={24} className="text-magenta" />
+    <div className="bg-[#FAF7F2] border border-[#E8DFD5] rounded-2xl p-6">
+      <h3 className="text-xl font-bold text-[#4A2F1D] mb-6 flex items-center gap-2">
+        <Activity size={24} className="text-[#9A424E]" />
         Activity Timeline
       </h3>
       
@@ -49,26 +49,26 @@ const ActivityTimeline = ({ activities }) => {
             <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-[#0B0A10] bg-navy-800 text-slate-500 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
               {getActivityIcon(activity.activityType)}
             </div>
-            <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white/5 border border-white/10 p-4 rounded-xl shadow">
+            <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-[#FAF7F2] border border-[#E8DFD5] p-4 rounded-xl shadow">
               <div className="flex items-center justify-between mb-1">
-                <h4 className="font-bold text-white text-sm">{formatActivityName(activity.activityType)}</h4>
-                <time className="text-xs font-medium text-magenta">
+                <h4 className="font-bold text-[#4A2F1D] text-sm">{formatActivityName(activity.activityType)}</h4>
+                <time className="text-xs font-medium text-[#9A424E]">
                   {format(new Date(activity.performedAt), 'MMM dd, yyyy hh:mm a')}
                 </time>
               </div>
-              <p className="text-sm text-gray-400 mb-2">{activity.remarks}</p>
+              <p className="text-sm text-[#A67C65] mb-2">{activity.remarks}</p>
               
               {activity.quantityDifference !== 0 && (
-                <div className="inline-flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-lg text-sm border border-white/5">
-                  <span className="text-gray-400 line-through">Qty {activity.previousQuantity}</span>
-                  <ArrowRight size={14} className="text-gray-500" />
+                <div className="inline-flex items-center gap-2 bg-[#FAF7F2] px-3 py-1.5 rounded-lg text-sm border border-[#E8DFD5]">
+                  <span className="text-[#A67C65] line-through">Qty {activity.previousQuantity}</span>
+                  <ArrowRight size={14} className="text-[#A67C65]" />
                   <span className={activity.quantityDifference > 0 ? "text-green-400 font-bold" : "text-red-400 font-bold"}>
                     Qty {activity.newQuantity}
                   </span>
                 </div>
               )}
               
-              <div className="mt-2 text-xs text-gray-500 flex justify-between items-center">
+              <div className="mt-2 text-xs text-[#A67C65] flex justify-between items-center">
                 <span>By: {activity.performedBy}</span>
                 {activity.referenceType !== 'None' && (
                   <span>Ref: {activity.referenceId} ({activity.referenceType})</span>
@@ -122,14 +122,14 @@ const AdminProductDetailsPage = () => {
   }, [id]);
 
   if (loading) {
-    return <div className="p-8 text-center text-gray-400">Loading product details...</div>;
+    return <div className="p-8 text-center text-[#A67C65]">Loading product details...</div>;
   }
 
   if (!product) {
     return (
       <div className="p-8 text-center">
-        <h2 className="text-2xl font-bold text-white mb-4">Product Not Found</h2>
-        <Link to="/admin/products" className="text-magenta hover:underline">Return to Products</Link>
+        <h2 className="text-2xl font-bold text-[#4A2F1D] mb-4">Product Not Found</h2>
+        <Link to="/admin/products" className="text-[#9A424E] hover:underline">Return to Products</Link>
       </div>
     );
   }
@@ -137,13 +137,13 @@ const AdminProductDetailsPage = () => {
   return (
     <div className="space-y-6 pb-20">
       <div className="flex items-center gap-4">
-        <Link to="/admin/products" className="p-2 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors">
-          <ArrowLeft size={20} className="text-white" />
+        <Link to="/admin/products" className="p-2 bg-[#FAF7F2] border border-[#E8DFD5] rounded-lg hover:bg-[#E8DFD5] transition-colors">
+          <ArrowLeft size={20} className="text-[#4A2F1D]" />
         </Link>
         <div>
-          <h1 className="text-3xl font-bold text-white mb-1">{product.name}</h1>
-          <p className="text-gray-400 flex items-center gap-2">
-            <span className="text-magenta">{product.productCode}</span>
+          <h1 className="text-3xl font-bold text-[#4A2F1D] mb-1">{product.name}</h1>
+          <p className="text-[#A67C65] flex items-center gap-2">
+            <span className="text-[#9A424E]">{product.productCode}</span>
             <span>•</span>
             <span>{product.department}</span>
           </p>
@@ -151,13 +151,13 @@ const AdminProductDetailsPage = () => {
         <div className="ml-auto flex gap-3">
           <button 
             onClick={() => setIsQtyOpen(true)}
-            className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white hover:bg-white/10 transition-colors flex items-center gap-2"
+            className="px-4 py-2 bg-[#FAF7F2] border border-[#E8DFD5] rounded-lg text-[#4A2F1D] hover:bg-[#E8DFD5] transition-colors flex items-center gap-2"
           >
             <Box size={16} /> Update Stock
           </button>
           <button 
             onClick={() => setIsEditOpen(true)}
-            className="px-4 py-2 bg-gradient-to-r from-magenta to-orange text-white rounded-lg hover:shadow-lg hover:shadow-magenta/20 transition-all flex items-center gap-2"
+            className="px-4 py-2 bg-gradient-to-r from-magenta to-orange text-[#4A2F1D] rounded-lg hover:shadow-sm hover:shadow-md hover:shadow-magenta/20 transition-all flex items-center gap-2"
           >
             <Edit size={16} /> Edit Product
           </button>
@@ -167,7 +167,7 @@ const AdminProductDetailsPage = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-1 space-y-6">
           {/* Product Overview Card */}
-          <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
+          <div className="bg-[#FAF7F2] border border-[#E8DFD5] rounded-2xl overflow-hidden">
             <div className="h-48 bg-navy-800 relative">
               {product.image?.url ? (
                 <img src={product.image.url} alt={product.name} className="w-full h-full object-cover" />
@@ -180,7 +180,7 @@ const AdminProductDetailsPage = () => {
                 <span className={`px-3 py-1 rounded-full text-xs font-bold ${
                   product.status === 'available' ? 'bg-green-500/20 text-green-400 border border-green-500/20' : 
                   product.status === 'out_of_stock' ? 'bg-red-500/20 text-red-400 border border-red-500/20' : 
-                  'bg-gray-500/20 text-gray-400 border border-gray-500/20'
+                  'bg-gray-500/20 text-[#A67C65] border border-gray-500/20'
                 }`}>
                   {product.status.replace('_', ' ').toUpperCase()}
                 </span>
@@ -189,21 +189,21 @@ const AdminProductDetailsPage = () => {
             
             <div className="p-6 space-y-4">
               <div>
-                <p className="text-xs text-gray-500 mb-1">Current Quantity</p>
+                <p className="text-xs text-[#A67C65] mb-1">Current Quantity</p>
                 <div className="flex items-end gap-2">
-                  <span className="text-4xl font-bold text-white">{product.quantity}</span>
-                  <span className="text-gray-400 mb-1">{product.quantityUnit || 'units'}</span>
+                  <span className="text-4xl font-bold text-[#4A2F1D]">{product.quantity}</span>
+                  <span className="text-[#A67C65] mb-1">{product.quantityUnit || 'units'}</span>
                 </div>
               </div>
               
-              <div className="pt-4 border-t border-white/5 space-y-3">
+              <div className="pt-4 border-t border-[#E8DFD5] space-y-3">
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-400 text-sm flex items-center gap-2"><Tag size={16}/> Category</span>
-                  <span className="text-white font-medium">{product.category?.name || '-'}</span>
+                  <span className="text-[#A67C65] text-sm flex items-center gap-2"><Tag size={16}/> Category</span>
+                  <span className="text-[#4A2F1D] font-medium">{product.category?.name || '-'}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-400 text-sm flex items-center gap-2"><Box size={16}/> Department</span>
-                  <span className="text-white font-medium">{product.department || '-'}</span>
+                  <span className="text-[#A67C65] text-sm flex items-center gap-2"><Box size={16}/> Department</span>
+                  <span className="text-[#4A2F1D] font-medium">{product.department || '-'}</span>
                 </div>
               </div>
             </div>

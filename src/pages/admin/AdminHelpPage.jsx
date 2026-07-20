@@ -2,14 +2,14 @@ import React from 'react';
 import { Info, HelpCircle, Package, Database, Download, LifeBuoy } from 'lucide-react';
 
 const HelpSection = ({ title, icon: Icon, children }) => (
-  <div className="bg-[#12121A] border border-white/5 rounded-2xl p-6 shadow-lg mb-6 hover:border-white/10 transition-colors">
-    <div className="flex items-center gap-3 mb-4 border-b border-gray-800 pb-4">
-      <div className="p-2 bg-magenta/10 text-magenta rounded-lg">
+  <div className="bg-white border border-[#E8DFD5] rounded-2xl p-6 shadow-sm hover:shadow-md mb-6 hover:border-[#E8DFD5] transition-colors">
+    <div className="flex items-center gap-3 mb-4 border-b border-[#E8DFD5] pb-4">
+      <div className="p-2 bg-[#9A424E]/10 text-[#9A424E] rounded-lg">
         <Icon size={20} />
       </div>
-      <h2 className="text-xl font-bold text-white">{title}</h2>
+      <h2 className="text-xl font-bold text-[#4A2F1D]">{title}</h2>
     </div>
-    <div className="text-gray-400 text-sm space-y-4">
+    <div className="text-[#A67C65] text-sm space-y-4">
       {children}
     </div>
   </div>
@@ -20,14 +20,14 @@ const AdminHelpPage = () => {
     <div className="space-y-6 pb-20 max-w-4xl">
       <div className="flex justify-between items-start">
         <div>
-          <h1 className="text-3xl font-bold text-white mb-2">System Information & Help</h1>
-          <p className="text-gray-400">Quick guides for managing your inventory.</p>
+          <h1 className="text-3xl font-bold text-[#4A2F1D] mb-2">System Information & Help</h1>
+          <p className="text-[#A67C65]">Quick guides for managing your inventory.</p>
         </div>
         <div className="flex flex-col items-end">
-          <span className="text-xs font-bold text-magenta tracking-widest uppercase bg-magenta/10 px-3 py-1 rounded-full border border-magenta/20 mb-1">
+          <span className="text-xs font-bold text-[#9A424E] tracking-widest uppercase bg-[#9A424E]/10 px-3 py-1 rounded-full border border-magenta/20 mb-1">
             India Solutions CRM
           </span>
-          <span className="text-gray-500 text-xs font-medium">Version 1.0.0</span>
+          <span className="text-[#A67C65] text-xs font-medium">Version 1.0.0</span>
         </div>
       </div>
 

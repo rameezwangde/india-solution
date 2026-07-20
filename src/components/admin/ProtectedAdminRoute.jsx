@@ -9,9 +9,9 @@ const ProtectedAdminRoute = ({ children }) => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-navy-900 flex flex-col items-center justify-center">
-        <Loader2 className="animate-spin text-magenta w-12 h-12 mb-4" />
-        <p className="text-gray-400 font-medium tracking-wide animate-pulse">Verifying Access...</p>
+      <div className="min-h-screen bg-white flex flex-col items-center justify-center">
+        <Loader2 className="animate-spin text-[#9A424E] w-12 h-12 mb-4" />
+        <p className="text-[#A67C65] font-medium tracking-wide animate-pulse">Verifying Access...</p>
       </div>
     );
   }

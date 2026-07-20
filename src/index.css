@@ -5,10 +5,15 @@
 
 @layer base {
   body {
-    @apply bg-navy-900 text-white font-sans antialiased;
+    @apply bg-[#FAF7F2] text-[#4A2F1D] font-sans antialiased;
   }
-  
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-display;
   }
 }
@@ -17,13 +22,15 @@
   .glass {
     @apply bg-navy-800/55 backdrop-blur-md border border-white/10;
   }
-  
+
   .glass-card {
     @apply bg-navy-800/65 backdrop-blur-lg border border-white/15 rounded-2xl shadow-xl;
   }
-.text-gradient {
+
+  .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-magenta via-gold to-orange;
   }
+
   .site-eyebrow {
     @apply text-xs font-bold uppercase tracking-[0.32em] text-gold;
   }
@@ -39,18 +46,20 @@
   .site-gold-text {
     @apply text-gold;
   }
+
   .contact-input {
     @apply w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition-colors placeholder:text-gray-500 focus:border-magenta/70 focus:bg-white/10;
   }
-  
+
   .glow-magenta {
     @apply shadow-[0_0_20px_rgba(233,30,99,0.4)];
   }
-  
+
   .glow-orange {
     @apply shadow-[0_0_20px_rgba(255,152,0,0.4)];
   }
 }
+
 @keyframes client-logo-flow {
   from {
     transform: translateX(0);
@@ -80,11 +89,9 @@
 
 .ibm-wordmark {
   display: inline-block;
-  background: repeating-linear-gradient(
-    to bottom,
-    #1f73b7 0 5px,
-    transparent 5px 9px
-  );
+  background: repeating-linear-gradient(to bottom,
+      #1f73b7 0 5px,
+      transparent 5px 9px);
   background-clip: text;
   color: transparent;
   font-family: Georgia, serif;
@@ -98,7 +105,7 @@
   position: relative;
   display: inline-block;
   padding-bottom: 0.4rem;
-  color: #f8fafc;
+  color: #1a1a1a;
   font-size: clamp(2.5rem, 4vw, 4rem);
   font-weight: 800;
   line-height: 1;
@@ -115,6 +122,7 @@
   border-radius: 50%;
   transform: rotate(-4deg);
 }
+
 .stats-glow-panel {
   background:
     radial-gradient(circle at 5% 10%, rgba(233, 30, 99, 0.28), transparent 30%),
@@ -155,6 +163,7 @@
   color: rgba(255, 152, 0, 0.58);
   transform: rotate(-13deg) skewX(18deg);
 }
+
 .about-showcase {
   background:
     radial-gradient(circle at 10% 6%, rgba(233, 30, 99, 0.16), transparent 26%),
@@ -219,6 +228,7 @@
   border-radius: 9999px;
   background: rgba(255, 255, 255, 0.035);
 }
+
 .brand-collage-section {
   background:
     radial-gradient(circle at 7% 18%, rgba(233, 30, 99, 0.18), transparent 24%),
@@ -315,6 +325,7 @@
 .brand-collage-slice-three img {
   object-position: right center;
 }
+
 .hero-showcase {
   background:
     linear-gradient(180deg, rgba(5, 9, 23, 0.08) 0%, rgba(6, 13, 26, 0.04) 48%, rgba(5, 9, 23, 0.18) 100%),
@@ -460,6 +471,7 @@
 }
 
 @media (max-width: 767px) {
+
   .hero-photo-card-one,
   .hero-photo-card-five {
     display: none;
@@ -485,6 +497,7 @@
   from {
     transform: translateX(0);
   }
+
   to {
     transform: translateX(calc(-50% - 0.75rem));
   }
@@ -526,6 +539,7 @@
     animation: none;
   }
 }
+
 .happy-clients-panel {
   border: 1px solid rgba(233, 30, 99, 0.5);
   background:
@@ -598,6 +612,7 @@
   background: #F4C430;
   box-shadow: 0 0 10px rgba(244, 196, 48, 0.55);
 }
+
 .services-showcase {
   background:
     radial-gradient(circle at 7% 6%, rgba(233, 30, 99, 0.2), transparent 25%),
@@ -733,11 +748,13 @@
 }
 
 @media (max-width: 767px) {
+
   .services-dots,
   .services-wave {
     opacity: 0.28;
   }
 }
+
 .service-detail-page {
   background:
     radial-gradient(circle at 7% 5%, rgba(233, 30, 99, 0.18), transparent 25%),

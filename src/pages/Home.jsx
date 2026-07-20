@@ -5,7 +5,7 @@ const happyClients = ['Google', 'Capgemini', 'DHL', 'IBM', 'Bajaj', 'Audi', 'Ama
 const stats = [
   {
     value: '5,600+',
-    label: 'Events Completed',
+    label: 'Events\nCompleted',
     icon: CalendarDays,
     ring: 'border-[#E91E63] shadow-[0_0_28px_rgba(233,30,99,0.58)]',
     dot: 'bg-[#E91E63]',
@@ -90,36 +90,43 @@ const Home = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="hero-showcase relative min-h-[680px] overflow-hidden px-5 pb-6 pt-28 text-white sm:px-8 lg:px-12 lg:pt-32">
-        <div className="hero-showcase-glow hero-showcase-glow-left" />
-        <div className="hero-showcase-glow hero-showcase-glow-right" />
+      <section className="relative min-h-[900px] overflow-hidden px-5 pt-32 pb-20 sm:px-8 lg:px-12 lg:pt-40 bg-[#FAF7F2] font-sans">
+        {/* Background Layer */}
+        <div className="absolute inset-0 z-0 bg-[#FAF7F2] overflow-hidden">
+          {/* Display the subtle floral texture across the entire background */}
+          <img 
+            src="/hero-bg.png" 
+            alt="Background Floral Texture" 
+            className="w-full h-full object-cover object-center opacity-90 mix-blend-multiply"
+          />
+          {/* Bottom fade for smooth transition */}
+          <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#FAF7F2] via-[#FAF7F2]/90 to-transparent z-10" />
+        </div>
 
-        <div className="container relative z-10 mx-auto max-w-[1340px]">
+        <div className="container relative z-20 mx-auto max-w-[1200px] text-center">
           <motion.div
             variants={staggerContainer}
             initial="hidden"
             animate="visible"
-            className="mx-auto max-w-4xl text-center"
+            className="mx-auto flex flex-col items-center"
           >
-            <motion.div variants={fadeUp} className="mb-3 flex items-center justify-center gap-4 text-[10px] font-bold uppercase tracking-[0.36em] text-gold">
-              <span className="h-px w-8 bg-gradient-to-r from-transparent to-magenta" />
-              <span>Crafting Unforgettable Moments</span>
-              <span className="h-px w-8 bg-gradient-to-r from-orange to-transparent" />
+            <motion.div variants={fadeUp} className="mb-6 flex items-center justify-center gap-4 text-[11px] font-bold tracking-[0.2em] text-[#A67C65]">
+              <span className="text-[#8B5E45] text-sm">❖</span>
+              <span className="uppercase">Crafting Unforgettable Moments</span>
+              <span className="text-[#8B5E45] text-sm">❖</span>
             </motion.div>
 
-            <motion.h1 variants={fadeUp} className="site-heading text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">
-              Designed,
-              <span className="site-heading-accent block italic">Produced & Delivered</span>
-              <span className="block text-2xl tracking-[0.36em] sm:text-3xl lg:text-4xl">Under One Roof.</span>
+            <motion.h1 variants={fadeUp} className="font-['Playfair_Display',serif] text-[#4A2F1D]">
+              <span className="block font-bold text-6xl sm:text-7xl lg:text-[90px] tracking-wide mb-1 leading-none">DESIGNED,</span>
+              <span className="block italic font-medium text-[54px] sm:text-[64px] lg:text-[78px] text-[#A67C65] tracking-wide leading-[1.1]">PRODUCED & DELIVERED</span>
+              <span className="block font-bold tracking-[0.2em] text-3xl sm:text-4xl lg:text-[40px] mt-5 text-[#4A2F1D]">UNDER ONE ROOF.</span>
             </motion.h1>
 
-            <motion.div variants={fadeUp} className="mx-auto my-3 flex w-52 items-center justify-center gap-4">
-              <span className="h-px flex-1 bg-gradient-to-r from-transparent to-magenta" />
-              <span className="text-gold">&#10022;</span>
-              <span className="h-px flex-1 bg-gradient-to-r from-magenta to-transparent" />
+            <motion.div variants={fadeUp} className="mx-auto my-7 flex items-center justify-center">
+              <span className="text-[#8B5E45] text-lg">❖</span>
             </motion.div>
 
-            <motion.p variants={fadeUp} className="mx-auto max-w-xl text-sm leading-6 text-gray-300 md:text-base">
+            <motion.p variants={fadeUp} className="mx-auto max-w-2xl text-[14px] leading-[1.8] text-[#5c4033] md:text-[15px] font-medium">
               At India Solution, we bring your vision to life, from intimate celebrations to grand corporate gatherings. Trust us to handle the details while you enjoy the moment.
             </motion.p>
           </motion.div>
@@ -128,148 +135,153 @@ const Home = () => {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.35 }}
-            className="hero-stat-bar mx-auto mt-5 max-w-[860px]"
+            className="mx-auto mt-12 max-w-[1000px]"
           >
-            <div className="grid grid-cols-2 gap-y-5 md:grid-cols-4 md:gap-y-0">
-              {stats.map((stat, index) => (
-                <div key={stat.label} className={`flex items-center justify-center gap-4 px-5 ${index > 0 ? 'md:border-l md:border-white/10' : ''}`}>
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-magenta/35 bg-magenta/10 text-magenta shadow-[0_0_18px_rgba(233,30,99,0.2)]">
-                    <stat.icon size={20} strokeWidth={1.7} />
+            <div className="bg-[#FAF6F2] rounded-[2rem] shadow-[0_8px_30px_rgb(139,94,69,0.08)] border border-[#EBE3DC] p-6 sm:p-7">
+              <div className="grid grid-cols-2 md:grid-cols-4 relative gap-y-6 md:gap-y-0">
+                {stats.map((stat, index) => (
+                  <div key={stat.label} className="flex flex-row items-center justify-center gap-5 px-2 relative">
+                    {index > 0 && (
+                       <div className="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 w-px h-[60%] bg-[#DFD3C8]"></div>
+                    )}
+                    <div className="flex h-[56px] w-[56px] shrink-0 items-center justify-center rounded-full border-[1.5px] border-[#D5C5B9] bg-transparent text-[#946247]">
+                      <stat.icon size={24} strokeWidth={1.5} />
+                    </div>
+                    <div className="flex flex-col text-left justify-center">
+                      <h3 className="text-[28px] font-bold text-[#4A2F1D] font-['Playfair_Display',serif] leading-none mb-1">{stat.value}</h3>
+                      <p className="text-[11.5px] font-medium text-[#5c4033] leading-tight whitespace-pre-line">{stat.label}</p>
+                    </div>
                   </div>
-                  <div className="text-left">
-                    <h3 className="text-2xl font-bold leading-none text-white">{stat.value}</h3>
-                    <p className="mt-1 text-xs text-gray-300">{stat.label}</p>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="mt-12 mb-14 flex justify-center items-center gap-6 relative"
+          >
+             <div className="flex items-center gap-4">
+               <span className="text-[#A67C65] text-sm">❖</span>
+               <button className="bg-[#A87455] hover:bg-[#8F6145] text-white px-9 py-3.5 rounded-[4px] font-bold tracking-widest text-[12px] transition-all flex items-center gap-3 shadow-[0_8px_20px_rgb(148,98,71,0.25)] hover:shadow-[0_8px_20px_rgb(148,98,71,0.4)]">
+                  CONTACT US <ArrowRight size={15} strokeWidth={2.5} />
+               </button>
+               <span className="text-[#A67C65] text-sm">❖</span>
+             </div>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 34 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.45 }}
-            className="hero-photo-stage relative mx-auto mt-5 h-[300px] max-w-[1200px] sm:h-[340px] lg:h-[360px]"
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 lg:gap-5"
           >
-            <div className="hero-photo-card hero-photo-card-one">
-              <img src="/about-us.png" alt="Wedding floral aisle decor" />
-            </div>
-            <div className="hero-photo-card hero-photo-card-two">
-              <img src="/hero-stage.png" alt="Candlelit event table" />
-            </div>
-            <div className="hero-photo-card hero-photo-card-main">
-              <img src="/about-us.png" alt="Grand stage celebration" />
-            </div>
-            <div className="hero-photo-card hero-photo-card-four">
-              <img src="/hero-stage.png" alt="Corporate event stage" />
-            </div>
-            <div className="hero-photo-card hero-photo-card-five">
-              <img src="/about-us.png" alt="Evening celebration lounge" />
-            </div>
-
-            <div className="hero-years-badge">
-              <span className="text-gold">&#9819;</span>
-              <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-magenta">Celebrating</span>
-              <span className="font-display text-5xl font-semibold leading-none text-white">15+</span>
-              <span className="text-xs font-bold uppercase tracking-widest text-white">Years of Excellence</span>
-              <span className="mt-1 h-0.5 w-9 bg-orange" />
-            </div>
+            {[
+              { img: '/about-us.png', alt: 'Wedding floral aisle decor' },
+              { img: '/hero-stage.png', alt: 'Candlelit event table' },
+              { img: '/about-us.png', alt: 'Grand stage celebration' },
+              { img: '/hero-stage.png', alt: 'Corporate event stage' },
+              { img: '/about-us.png', alt: 'Evening celebration lounge' }
+            ].map((item, idx) => (
+              <div key={idx} className={`relative overflow-hidden rounded-[2.5rem] aspect-[4/5] sm:aspect-[3/4] shadow-[0_10px_30px_rgb(0,0,0,0.08)] border-[6px] border-white bg-white group ${idx === 4 ? 'hidden lg:block' : ''}`}>
+                <img src={item.img} alt={item.alt} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              </div>
+            ))}
           </motion.div>
         </div>
       </section>
       {/* About Us Section */}
-      <section className="about-showcase relative overflow-hidden px-5 py-16 text-white sm:px-8 lg:px-12 lg:py-20">
-        <div className="about-showcase-wave about-showcase-wave-left" />
-        <div className="about-showcase-wave about-showcase-wave-right" />
+      <section className="relative overflow-hidden px-5 py-24 sm:px-8 lg:px-12 bg-[#FAF7F2] font-sans">
+        {/* Subtle left-aligned floral watermark */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+           <img src="/hero-bg.png" alt="" className="absolute -left-10 top-0 w-full md:w-[60%] h-full object-cover object-left opacity-70 mix-blend-multiply" style={{ maskImage: 'linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)'}} />
+        </div>
 
-        <div className="container relative z-10 mx-auto">
-          <div className="grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr] xl:gap-14">
+        <div className="container relative z-10 mx-auto max-w-[1300px]">
+          <div className="grid items-start gap-12 lg:grid-cols-[1.1fr_0.9fr] xl:gap-16">
+            
+            {/* Left Column: Text Content */}
             <motion.div
               variants={staggerContainer}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="max-w-2xl"
+              className="max-w-2xl pt-4"
             >
-              <motion.span variants={fadeUp} className="mb-3 block text-xs font-bold uppercase tracking-widest text-gold">
-                About India Solution
-              </motion.span>
-              <motion.span variants={fadeUp} className="mb-5 block h-0.5 w-10 bg-[#FF4B64]" />
-              <motion.h2 variants={fadeUp} className="site-heading text-4xl font-semibold leading-tight md:text-5xl">
-                Designed, Produced & Delivered
-                <span className="site-heading-accent block text-3xl mt-2">Under One Roof.</span>
-              </motion.h2>
-              <motion.div variants={fadeUp} className="my-6 flex items-center gap-5 text-magenta/70">
-                <span className="h-px w-24 bg-gradient-to-r from-magenta to-orange/70" />
-                <span className="text-sm text-gold">&#10022;</span>
-                <span className="h-px w-24 bg-gradient-to-r from-orange/70 to-transparent" />
+              <motion.div variants={fadeUp} className="mb-6 flex items-center gap-3 text-[11px] font-bold tracking-[0.2em] text-[#A67C65]">
+                <span className="text-[#8B5E45] text-xs">❖</span>
+                <span className="uppercase">Crafting Unforgettable Moments</span>
+                <span className="text-[#8B5E45] text-xs">❖</span>
               </motion.div>
-              <motion.p variants={fadeUp} className="mb-5 text-sm leading-7 text-gray-300 md:text-base">
-                For over 15 years, <strong className="site-gold-text">India Solution</strong> has been one of Bengaluru’s trusted names in Event Management and In-House Event Production, delivering seamless, premium-quality experiences for events of every scale.
-              </motion.p>
-              <motion.p variants={fadeUp} className="mb-5 text-sm leading-7 text-gray-300 md:text-base">
-                What truly sets us apart is that everything you see at an event is produced and managed in-house. From concept development, stage production, LED walls, sound, lighting, trussing, fabrication, décor, branding, artist management, technical execution, logistics, and on-ground operations—we handle it all under one roof.
-              </motion.p>
-              <motion.p variants={fadeUp} className="mb-7 text-sm leading-7 text-gray-300 md:text-base">
-                That means no middlemen, no multiple vendors, no communication gaps—just one dedicated point of contact for your entire event.
-              </motion.p>
-              <motion.p variants={fadeUp} className="mb-7 text-sm leading-7 text-gray-300 md:text-base">
-                Because our entire team works together as one unit, every department is perfectly synchronized. The result is better coordination, faster execution, consistent quality, and cost-effective solutions without compromising on creativity or premium standards.
-              </motion.p>
+
+              <motion.h2 variants={fadeUp} className="font-['Playfair_Display',serif] text-[#4A2F1D] mb-8">
+                <span className="block font-bold text-5xl md:text-6xl tracking-wide mb-1 leading-[1.1]">DESIGNED, PRODUCED</span>
+                <span className="block font-medium text-4xl md:text-5xl text-[#A67C65] tracking-wide leading-[1.2]">& DELIVERED</span>
+                <span className="block font-bold tracking-[0.2em] text-2xl md:text-3xl mt-4 text-[#4A2F1D]">UNDER ONE ROOF.</span>
+              </motion.h2>
+
+              <div className="space-y-6 text-[#5c4033] text-[14.5px] leading-[1.8] font-medium">
+                <motion.p variants={fadeUp}>
+                  At <strong className="text-[#A67C65] font-bold">India Solution</strong>, we blend creativity, precision, and passion to craft events that leave a lasting impression. From intimate celebrations to grand corporate gatherings, every detail is thoughtfully planned and flawlessly executed.
+                </motion.p>
+                <motion.p variants={fadeUp}>
+                  With years of experience and a dedicated team of experts, we offer end-to-end event solutions tailored to your unique vision. Our commitment to excellence, innovation, and elegance ensures that your event is not just well-managed — but truly unforgettable.
+                </motion.p>
+                <motion.p variants={fadeUp}>
+                  Trust us to handle the details while you enjoy the moment. At <strong className="text-[#A67C65] font-bold">India Solution</strong>, we don't just organize events — we create memories that last a lifetime.
+                </motion.p>
+              </div>
             </motion.div>
 
+            {/* Right Column: Image and Stats */}
             <motion.div
               initial={{ opacity: 0, x: 40 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
-              className="space-y-0"
+              className="space-y-6"
             >
-              <div className="overflow-hidden rounded-[38px] border border-white/10 shadow-[0_0_40px_rgba(233,30,99,0.12)]">
-                <img src="/hero-stage.png" alt="India Solution event decor" className="h-[300px] w-full object-cover md:h-[420px]" />
+              <div className="overflow-hidden rounded-[2rem] shadow-[0_12px_40px_rgba(139,94,69,0.15)] border border-[#E8DFD5]">
+                <img src="/hero-stage.png" alt="India Solution event decor" className="h-[350px] md:h-[450px] w-full object-cover" />
               </div>
 
-              <div className="stats-glow-panel relative -mt-1 overflow-hidden rounded-[22px] border border-magenta/50 px-5 py-8 shadow-[0_0_32px_rgba(233,30,99,0.18)] md:px-7 md:py-9">
-                <div className="stats-wave stats-wave-purple" />
-                <div className="stats-wave stats-wave-orange" />
-                <div className="relative z-10 grid grid-cols-2 gap-y-10 md:grid-cols-4 md:gap-y-0">
+              <div className="bg-[#FAF6F2] rounded-[1.5rem] shadow-sm border border-[#EBE3DC] py-6 px-4">
+                <div className="grid grid-cols-4 relative">
                   {stats.map((stat, index) => (
-                    <div key={stat.label} className={`relative flex flex-col items-center text-center ${index > 0 ? 'md:border-l md:border-white/20' : ''}`}>
-                      <div className={`relative mb-6 flex h-16 w-16 items-center justify-center rounded-full border-2 bg-white/5 ${stat.ring}`}>
-                        <stat.icon size={28} className="text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.75)]" strokeWidth={1.7} />
-                        <span className={`absolute -right-1 bottom-2 h-3 w-3 rounded-full shadow-[0_0_12px_currentColor] ${stat.dot}`} />
+                    <div key={stat.label} className="flex flex-col items-center justify-center text-center px-1 relative">
+                      {index > 0 && (
+                         <div className="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 w-px h-[60%] bg-[#DFD3C8]"></div>
+                      )}
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-[1.5px] border-[#D5C5B9] bg-transparent text-[#A67C65] mb-4">
+                        <stat.icon size={20} strokeWidth={1.5} />
                       </div>
-                      <h4 className="font-display text-3xl font-semibold leading-none text-white drop-shadow-[0_4px_10px_rgba(255,255,255,0.18)] md:text-4xl">{stat.value}</h4>
-                      <p className="mt-2 text-xs font-medium text-gray-300 md:text-sm">{stat.label}</p>
-                      <span className={`mt-4 h-1 w-10 rounded-full ${stat.bar}`} />
+                      <h3 className="text-[22px] font-bold text-[#4A2F1D] font-['Playfair_Display',serif] leading-none mb-2">{stat.value}</h3>
+                      <p className="text-[10px] font-bold text-[#A67C65] leading-[1.3] whitespace-pre-line">{stat.label}</p>
                     </div>
                   ))}
                 </div>
               </div>
             </motion.div>
           </div>
-
-          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mt-16 mx-auto max-w-5xl text-center space-y-6">
-            <p className="text-gray-300 text-sm md:text-base leading-7">
-              Whether you’re planning an intimate celebration for 15 guests or a large-scale production for 15,000 attendees, we deliver the same attention to detail, professionalism, and world-class execution.
-            </p>
-            <p className="text-gray-300 text-sm md:text-base leading-7">
-              Over the years, we have proudly served as official production and event partners for leading event management companies, premium venues, corporate organizations, educational institutions, government bodies, brands, and private clients across Karnataka and beyond. Our experience spans both B2B and B2C projects, earning us long-term relationships built on trust, reliability, and exceptional delivery.
-            </p>
-          </motion.div>
         </div>
       </section>
       {/* Brand Statement Section */}
-      <section className="brand-collage-section relative overflow-hidden px-5 py-16 text-white sm:px-8 lg:px-12 lg:py-20">
-        <div className="brand-collage-dots" />
-        <div className="container relative z-10 mx-auto max-w-[1320px]">
-          <div className="grid items-center gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:gap-16">
+      <section className="relative overflow-hidden px-5 py-24 sm:px-8 lg:px-12 bg-[#FAF7F2] font-sans">
+        {/* Subtle right-aligned floral watermark */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+           <img src="/hero-bg.png" alt="" className="absolute -right-10 top-0 w-full md:w-[60%] h-full object-cover object-right opacity-60 mix-blend-multiply" style={{ transform: 'scaleX(-1)', maskImage: 'linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)'}} />
+        </div>
+        <div className="container relative z-10 mx-auto max-w-[1250px]">
+          <div className="grid items-center gap-16 lg:grid-cols-[1.2fr_0.8fr] lg:gap-20">
             <motion.div
               initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
-              className="brand-collage-frame"
+              className="relative h-[clamp(320px,35vw,500px)] overflow-hidden rounded-[2.5rem] border border-[#D5C5B9] shadow-[0_12px_40px_rgba(139,94,69,0.15)]"
             >
               <div className="brand-collage-slice brand-collage-slice-one">
                 <img src="/about-us.png" alt="Wedding aisle decor" />
@@ -289,23 +301,23 @@ const Home = () => {
               transition={{ duration: 0.7, delay: 0.08 }}
               className="max-w-xl"
             >
-              <h2 className="site-heading text-4xl font-semibold italic leading-tight md:text-5xl lg:text-6xl">
-                Creating
-                <span className="site-heading-accent block">Unforgettable</span>
-                <span className="block">Events</span>
+              <h2 className="font-['Playfair_Display',serif] text-5xl md:text-[62px] lg:text-[72px] leading-[1.1] text-[#4A2F1D]">
+                <span className="block mb-1">CREATING</span>
+                <span className="block italic text-[#A67C65]">UNFORGETTABLE</span>
+                <span className="block mt-1">EVENTS</span>
               </h2>
 
-              <div className="my-7 flex items-center gap-4">
-                <span className="h-px w-24 bg-gradient-to-r from-magenta to-gold" />
-                <span className="text-[#FF7A59]">&#10022;</span>
-                <span className="h-px w-24 bg-gradient-to-r from-gold to-orange" />
+              <div className="my-8 flex items-center gap-4">
+                <span className="h-[1.5px] w-16 bg-[#D5C5B9]" />
+                <span className="text-[#A67C65] text-sm">❖</span>
+                <span className="h-[1.5px] w-16 bg-[#D5C5B9]" />
               </div>
 
-              <p className="site-heading text-3xl font-semibold italic tracking-[0.18em] md:text-4xl">
-                Since <span className="bg-gradient-to-r from-gold to-orange bg-clip-text text-transparent">2010</span>
+              <p className="font-['Playfair_Display',serif] text-[26px] md:text-[32px] italic tracking-widest text-[#4A2F1D] mb-6">
+                SINCE <span className="text-[#A67C65]">2010</span>
               </p>
 
-              <p className="mt-8 max-w-lg text-lg leading-8 text-gray-300">
+              <p className="text-[14px] leading-[1.8] font-medium text-[#5c4033] max-w-[400px]">
                 At India Solution, we bring your vision to life, from intimate celebrations to grand corporate gatherings. Trust us to handle the details while you enjoy the moment.
               </p>
             </motion.div>
@@ -313,110 +325,134 @@ const Home = () => {
         </div>
       </section>
       {/* Why Choose Us & Expertise */}
-      <section className="relative overflow-hidden bg-[#10172A] px-5 py-16 text-white sm:px-8 lg:px-12">
-        <div className="container mx-auto max-w-[1460px]">
-          <div className="mb-20">
-            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-10 text-center">
-              <h3 className="font-display text-3xl font-semibold text-gold md:text-4xl">Our Expertise</h3>
-              <div className="mx-auto mt-4 flex w-24 items-center gap-2">
-                <span className="h-px flex-1 bg-gradient-to-r from-transparent to-magenta" />
-                <span className="text-xs text-magenta">&#10022;</span>
-                <span className="h-px flex-1 bg-gradient-to-r from-magenta to-transparent" />
+      <section className="relative overflow-hidden bg-[#FAF7F2] px-5 py-24 sm:px-8 lg:px-12 font-sans">
+        {/* Floral watermarks on both sides */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <img src="/hero-bg.png" alt="" className="absolute -left-20 top-0 w-[40%] h-[120%] object-cover object-left opacity-40 mix-blend-multiply" style={{ maskImage: 'linear-gradient(to right, black 20%, transparent)'}} />
+          <img src="/hero-bg.png" alt="" className="absolute -right-20 top-0 w-[40%] h-[120%] object-cover object-left opacity-40 mix-blend-multiply" style={{ transform: 'scaleX(-1)', maskImage: 'linear-gradient(to right, black 20%, transparent)'}} />
+        </div>
+
+        <div className="container relative z-10 mx-auto max-w-[1300px]">
+          {/* Our Expertise Section */}
+          <div className="mb-24">
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-12 text-center">
+              <div className="mb-6 flex items-center justify-center gap-3 text-[11px] font-bold tracking-[0.2em] text-[#A67C65]">
+                <span className="text-[#8B5E45] text-xs">❖</span>
+                <span className="uppercase">Our Expertise</span>
+                <span className="text-[#8B5E45] text-xs">❖</span>
+              </div>
+              <h3 className="font-['Playfair_Display',serif] text-4xl md:text-5xl lg:text-[54px] font-semibold text-[#4A2F1D]">
+                Crafting Experiences. <span className="italic text-[#A67C65]">Creating Memories.</span>
+              </h3>
+              <div className="mt-8 flex items-center justify-center">
+                <span className="text-[#8B5E45] text-sm">❖</span>
               </div>
             </motion.div>
-            
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+
+            <div className="grid gap-x-6 gap-y-4 sm:grid-cols-2 lg:grid-cols-4 max-w-[1100px] mx-auto">
               {[
-                "Corporate Events & Conferences", "Product Launches & Brand Activations", 
-                "Award Ceremonies & Annual Days", "Weddings & Reception Productions", 
-                "Fashion Shows & Lifestyle Events", "Concerts & Live Entertainment", 
-                "Store & Business Launches", "Inaugurations & Groundbreaking Ceremonies", 
-                "Exhibitions & Trade Shows", "Cultural & Community Events", 
-                "College Festivals & Graduation Ceremonies", "Birthday Celebrations & Private Parties", 
-                "Social & Family Events", "Government & Public Events", 
-                "Sports Events & Tournaments", "Roadshows & Promotional Campaigns"
+                "Corporate Events &\nConferences", "Product Launches &\nBrand Activations",
+                "Award Ceremonies &\nAnnual Days", "Weddings & Reception\nProductions",
+                "Fashion Shows &\nLifestyle Events", "Concerts & Live\nEntertainment",
+                "Store & Business\nLaunches", "Inaugurations &\nGroundbreaking Ceremonies",
+                "Exhibitions &\nTrade Shows", "Cultural & Community\nEvents",
+                "College Festivals &\nGraduation Ceremonies", "Birthday Celebrations &\nPrivate Parties",
+                "Social &\nFamily Events", "Government &\nPublic Events",
+                "Sports Events &\nTournaments", "Roadshows &\nPromotional Campaigns"
               ].map((item, i) => (
-                <motion.div 
-                  key={i} 
+                <motion.div
+                  key={i}
                   initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.03 }}
-                  className="flex items-start gap-3 rounded-xl bg-white/[0.03] p-5 border border-white/5 hover:border-magenta/40 hover:bg-white/[0.06] transition-all"
+                  className="flex items-center gap-4 rounded-[1.2rem] bg-[#FAF4F0]/80 p-3.5 border border-[#E8DFD5] shadow-sm hover:border-[#D5C5B9] hover:shadow-md transition-all"
                 >
-                  <Star className="text-magenta shrink-0 mt-0.5 drop-shadow-[0_0_8px_rgba(233,30,99,0.5)]" size={18} />
-                  <span className="text-sm font-medium text-gray-200">{item}</span>
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#8A563C] to-[#603A28] shadow-inner">
+                    <Star className="text-white drop-shadow-sm" size={16} strokeWidth={2} />
+                  </div>
+                  <span className="text-[11px] leading-[1.3] font-bold text-[#5c4033] whitespace-pre-line">{item}</span>
                 </motion.div>
               ))}
             </div>
           </div>
 
-          <div className="mb-20">
-            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-10 text-center">
-              <h3 className="font-display text-3xl font-semibold text-orange md:text-4xl">Why Choose India Solution?</h3>
-              <div className="mx-auto mt-4 flex w-24 items-center gap-2">
-                <span className="h-px flex-1 bg-gradient-to-r from-transparent to-orange" />
-                <span className="text-xs text-gold">&#10022;</span>
-                <span className="h-px flex-1 bg-gradient-to-r from-gold to-transparent" />
+          {/* Why Choose India Solution Section */}
+          <div className="mb-10">
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-12 text-center">
+              <div className="mb-6 flex items-center justify-center gap-3 text-[11px] font-bold tracking-[0.2em] text-[#A67C65]">
+                <span className="text-[#8B5E45] text-xs">❖</span>
+                <span className="uppercase">Why Choose India Solution?</span>
+                <span className="text-[#8B5E45] text-xs">❖</span>
               </div>
+              <h3 className="font-['Playfair_Display',serif] text-4xl md:text-5xl lg:text-[54px] font-semibold text-[#4A2F1D]">
+                Excellence in <span className="italic text-[#A67C65]">Every Detail</span>
+              </h3>
             </motion.div>
-            
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+
+            <div className="flex flex-wrap justify-center gap-6 lg:gap-8 max-w-[1200px] mx-auto">
               {[
-                "15+ Years of Industry Experience", "Complete In-House Production", 
-                "No Middlemen or Third-Party Dependencies", "Single Point of Contact", 
-                "Premium Quality at Every Scale", "Cost-Effective Solutions", 
-                "Highly Experienced Technical & Creative Team", "End-to-End Event Management", 
-                "Reliable Execution & On-Time Delivery", "Customized Concepts & Innovative Designs", 
-                "Trusted by Event Companies, Venues, Brands & Corporates"
+                { title: "15+ Years of\nIndustry Experience", desc: "A legacy of trust, creativity\nand flawless execution." },
+                { title: "Complete In-House\nProduction", desc: "End to end solutions under\none roof for seamless delivery." },
+                { title: "No Middlemen or\nThird-Party Dependencies", desc: "Direct communication,\ntransparent processes." },
+                { title: "Single Point\nof Contact", desc: "One dedicated partner\nyou can rely on." },
+                { title: "Premium Quality\nat Every Scale", desc: "Uncompromising quality\nwhether intimate or grand." },
+                { title: "Cost-Effective\nSolutions", desc: "Maximum value without\ncompromising on quality." },
+                { title: "Highly Experienced\nTechnical & Creative Team", desc: "Passionate professionals bringing\nyour vision to life." },
+                { title: "End-to-End Event\nManagement", desc: "From concept to completion,\nwe handle it all." },
+                { title: "Reliable Execution &\nOn-Time Delivery", desc: "Your deadlines are our\ncommitment." },
+                { title: "Customized Concepts &\nInnovative Designs", desc: "Unique ideas tailored\njust for you." },
+                { title: "Trusted by Event Companies,\nVenues, Brands & Corporates", desc: "Long-term partnerships built\non trust and excellence." }
               ].map((item, i) => (
-                <motion.div 
-                  key={i} 
-                  initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}
-                  className="flex items-start gap-3 rounded-xl bg-white/[0.03] p-5 border border-white/5 hover:border-orange/40 hover:bg-white/[0.06] transition-all"
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}
+                  className="flex flex-col items-center text-center rounded-[2rem] bg-transparent py-4 px-2 w-[100%] sm:w-[calc(50%-1.5rem)] lg:w-[calc(25%-2rem)]"
                 >
-                  <Star className="text-orange shrink-0 mt-0.5 drop-shadow-[0_0_8px_rgba(255,152,0,0.5)]" size={18} />
-                  <span className="text-sm font-medium text-gray-200">{item}</span>
+                  <div className="flex h-14 w-14 mb-4 shrink-0 items-center justify-center rounded-full border-[1.5px] border-[#D5C5B9] bg-transparent">
+                    <Star className="text-[#A67C65]" size={22} strokeWidth={1.5} />
+                  </div>
+                  <h4 className="text-[12.5px] leading-snug font-bold text-[#4A2F1D] whitespace-pre-line mb-2">{item.title}</h4>
+                  <p className="text-[10.5px] leading-relaxed font-medium text-[#7C5A48] whitespace-pre-line">{item.desc}</p>
                 </motion.div>
               ))}
             </div>
           </div>
 
-          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mx-auto max-w-4xl text-center">
-            <p className="text-gray-300 text-sm md:text-base leading-7 mb-10">
-              At India Solution, we don’t just organize events—we design experiences, produce excellence, and execute with precision. Every event reflects our commitment to quality, creativity, innovation, and flawless execution, ensuring every client receives the same premium service, regardless of the event size or budget.
+          {/* Missing Text & Headings */}
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mx-auto max-w-4xl text-center mt-12 mb-16">
+            <p className="text-[13px] font-medium text-[#5c4033] leading-relaxed mb-10">
+              At India Solution, we don’t just organize events—we design experiences, produce excellence,<br/>and execute with precision. Every event reflects our commitment to quality, creativity,<br/>innovation, and flawless execution, ensuring every client receives the same premium service,<br/>regardless of the event size or budget.
             </p>
-            <h4 className="text-xl md:text-3xl font-display font-bold tracking-[0.15em] uppercase">
-              <span className="bg-gradient-to-r from-magenta via-gold to-orange bg-clip-text text-transparent">One Team. One Partner. Endless Possibilities.</span>
+            <div className="flex justify-center mb-8"><span className="text-[#A67C65] text-sm">❖</span></div>
+            <h4 className="font-['Playfair_Display',serif] text-4xl md:text-[42px] lg:text-[48px] font-semibold text-[#4A2F1D]">
+              ONE TEAM. ONE PARTNER.<br/>
+              <span className="italic text-[#A67C65] mt-2 block tracking-wide">ENDLESS POSSIBILITIES.</span>
             </h4>
+            <div className="flex justify-center mt-8 mb-4"><span className="text-[#A67C65] text-sm">❖</span></div>
           </motion.div>
         </div>
       </section>
+      
       {/* Happy Clients */}
-      <section className="bg-[#10172A] px-5 py-16 text-white sm:px-8 lg:px-12">
-        <div className="happy-clients-panel relative mx-auto max-w-[1320px] overflow-hidden rounded-[22px] px-5 py-8 sm:px-8 lg:px-12">
-          <div className="happy-clients-dots happy-clients-dots-left" />
-          <div className="happy-clients-dots happy-clients-dots-right" />
-
+      <section className="bg-[#FAF7F2] px-5 pb-24 sm:px-8 lg:px-12 font-sans relative z-10">
+        <div className="relative mx-auto max-w-[1050px] overflow-hidden rounded-[2rem] border border-[#E8DFD5] bg-[#FAF6F2] shadow-sm px-5 py-12 sm:px-8 lg:px-12">
+          
           <div className="relative z-10 text-center">
-            <div className="mx-auto mb-4 flex max-w-xl items-center justify-center gap-4">
-              <span className="h-px flex-1 bg-gradient-to-r from-transparent to-magenta" />
-              <span className="text-gold">&#10022;</span>
-              <span className="h-px flex-1 bg-gradient-to-r from-orange to-transparent" />
-            </div>
-            <h2 className="site-heading text-4xl font-semibold md:text-5xl">
-              Our <span className="site-heading-accent">Happy</span> Clients
+            <h2 className="font-['Playfair_Display',serif] text-3xl md:text-4xl font-semibold text-[#4A2F1D] tracking-wide">
+              OUR <span className="italic text-[#A67C65]">HAPPY</span> CLIENTS
             </h2>
-            <div className="mx-auto mt-4 flex max-w-4xl items-center justify-center gap-4">
-              <span className="h-px flex-1 bg-gradient-to-r from-transparent via-white/10 to-magenta/40" />
-              <span className="text-gold">&#10022;</span>
-              <span className="h-px flex-1 bg-gradient-to-r from-orange/40 via-white/10 to-transparent" />
+            <div className="mx-auto mt-6 flex justify-center">
+              <span className="text-[#A67C65] text-sm">❖</span>
             </div>
           </div>
 
-          <div className="relative z-10 mt-9 overflow-hidden py-5">
+          <div className="relative z-10 mt-12 overflow-hidden py-5" style={{ maskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)'}}>
             <div className="client-logo-track flex items-center gap-0">
               {[...happyClients, ...happyClients].map((brand, index) => (
-                <div key={`${brand}-${index}`} className="client-logo-item happy-client-logo-item" aria-hidden={index >= happyClients.length}>
+                <div key={`${brand}-${index}`} className="relative flex flex-col items-center justify-center min-w-[260px] px-8" aria-hidden={index >= happyClients.length}>
                   <ClientLogo brand={brand} />
-                  <span className="happy-client-logo-divider" />
+                  {/* Small diamond below the logo */}
+                  <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[#D5C5B9] text-[10px]">❖</div>
+                  {/* Vertical separator between items */}
+                  <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[1px] h-16 bg-[#E8DFD5]"></div>
                 </div>
               ))}
             </div>

@@ -17,9 +17,9 @@ const DeleteConfirmModal = ({ isOpen, onClose, onConfirm, product, isDeleting })
           initial={{ scale: 0.95, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.95, opacity: 0 }}
-          className="bg-navy-800 border border-white/10 rounded-2xl p-6 w-full max-w-md shadow-2xl relative"
+          className="bg-navy-800 border border-[#E8DFD5] rounded-2xl p-6 w-full max-w-md shadow-2xl relative"
         >
-          <button onClick={onClose} disabled={isDeleting} className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors disabled:opacity-50">
+          <button onClick={onClose} disabled={isDeleting} className="absolute top-4 right-4 text-[#A67C65] hover:text-[#4A2F1D] transition-colors disabled:opacity-50">
             <X size={20} />
           </button>
           
@@ -27,9 +27,9 @@ const DeleteConfirmModal = ({ isOpen, onClose, onConfirm, product, isDeleting })
             <div className="w-12 h-12 bg-red-500/20 text-red-500 rounded-full flex items-center justify-center mb-4">
               <AlertTriangle size={24} />
             </div>
-            <h3 className="text-xl font-bold text-white mb-2">Delete Product?</h3>
-            <p className="text-gray-400 text-sm mb-6">
-              Are you sure you want to delete <span className="text-white font-medium">{product.name} ({product.code})</span>? 
+            <h3 className="text-xl font-bold text-[#4A2F1D] mb-2">Delete Product?</h3>
+            <p className="text-[#A67C65] text-sm mb-6">
+              Are you sure you want to delete <span className="text-[#4A2F1D] font-medium">{product.name} ({product.code})</span>? 
               This action cannot be undone.
             </p>
 
@@ -37,14 +37,14 @@ const DeleteConfirmModal = ({ isOpen, onClose, onConfirm, product, isDeleting })
               <button
                 onClick={onClose}
                 disabled={isDeleting}
-                className="flex-1 px-4 py-2 bg-white/5 hover:bg-white/10 text-white rounded-lg transition-colors font-medium disabled:opacity-50"
+                className="flex-1 px-4 py-2 bg-[#FAF7F2] hover:bg-[#E8DFD5] text-[#4A2F1D] rounded-lg transition-colors font-medium disabled:opacity-50"
               >
                 Cancel
               </button>
               <button
                 onClick={onConfirm}
                 disabled={isDeleting}
-                className="flex-1 px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors font-medium flex items-center justify-center gap-2 disabled:opacity-50"
+                className="flex-1 px-4 py-2 bg-red-500 hover:bg-red-600 text-[#4A2F1D] rounded-lg transition-colors font-medium flex items-center justify-center gap-2 disabled:opacity-50"
               >
                 {isDeleting ? <Loader2 className="animate-spin" size={18} /> : 'Delete'}
               </button>

@@ -766,7 +766,7 @@ const DetailTitle = ({ title, accent }) => {
   const [before, after] = title.split(accent);
   return (
     <>
-      {before}<span className="text-gradient">{accent}</span>{after}
+      {before}<span className="text-[#A67C65]">{accent}</span>{after}
     </>
   );
 };
@@ -780,18 +780,18 @@ const ServiceGallery = ({ title, mediaFiles }) => {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="mt-12"
+      className="mt-16 pt-12 border-t border-[#E8DFD5]"
     >
-      <h3 className="site-heading mb-6 text-2xl font-bold md:text-3xl">{title} Gallery</h3>
+      <h3 className="font-['Playfair_Display',serif] mb-8 text-3xl font-bold md:text-4xl text-[#4A2F1D] uppercase tracking-wide">{title} Gallery</h3>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {mediaFiles.map((file, i) => {
           const isVideo = file.endsWith('.mp4');
           return (
-            <div key={i} className="relative aspect-square overflow-hidden rounded-xl bg-gray-900 border border-white/10 group cursor-pointer" onClick={() => setSelectedMedia(file)}>
+            <div key={i} className="relative aspect-square overflow-hidden rounded-[1rem] bg-[#FAF7F2] border border-[#E8DFD5] shadow-sm group cursor-pointer hover:shadow-md hover:border-[#D5C5B9] transition-all" onClick={() => setSelectedMedia(file)}>
               {isVideo ? (
                 <video src={file} className="w-full h-full object-cover pointer-events-none" />
               ) : (
-                <img src={file} alt={`${title} ${i}`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 pointer-events-none" loading="lazy" />
+                <img src={file} alt={`${title} ${i}`} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 pointer-events-none" loading="lazy" />
               )}
               {isVideo && (
                 <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/10 transition-colors pointer-events-none">
@@ -847,16 +847,15 @@ const ImageGridServiceContent = ({ items, serviceSlug }) => {
       className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3"
     >
       {items.map((item) => (
-        <motion.div key={item} variants={fadeUp} className="group relative overflow-hidden rounded-2xl bg-gray-900 border border-white/10 shadow-lg cursor-pointer hover:shadow-magenta/20 transition-all duration-300">
+        <motion.div key={item} variants={fadeUp} className="group relative overflow-hidden rounded-[1.5rem] bg-white border border-[#E8DFD5] shadow-sm cursor-pointer hover:shadow-md hover:border-[#D5C5B9] transition-all duration-300">
           <Link to={`/services/${serviceSlug}/${slugifyServiceItem(item)}`} className="block h-full">
-            <div className="aspect-[4/3] overflow-hidden relative">
-               <img src={serviceImageMapping[item] || 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'} alt={item} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
-               <div className="absolute inset-0 bg-gradient-to-t from-[#12182a]/95 via-[#12182a]/40 to-transparent pointer-events-none" />
+            <div className="aspect-[4/3] overflow-hidden relative p-3 pb-0">
+               <img src={serviceImageMapping[item] || 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'} alt={item} className="w-full h-full object-cover rounded-t-[1rem] transition-transform duration-700 group-hover:scale-105" loading="lazy" />
             </div>
-            <div className="absolute bottom-0 left-0 right-0 p-5 z-10">
-               <h3 className="site-heading text-[15px] font-bold text-white mb-2 group-hover:text-gold transition-colors leading-snug">{item}</h3>
-               <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-magenta flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0 duration-300">
-                 Explore Detail <ChevronRight size={12} strokeWidth={3} />
+            <div className="p-6 bg-white relative z-10">
+               <h3 className="font-['Playfair_Display',serif] text-lg font-bold text-[#4A2F1D] mb-3 group-hover:text-[#A67C65] transition-colors leading-snug">{item}</h3>
+               <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#A67C65] flex items-center gap-2">
+                 Explore Detail <ChevronRight size={14} strokeWidth={2.5} className="group-hover:translate-x-1 transition-transform" />
                </span>
             </div>
           </Link>
@@ -872,36 +871,35 @@ const ServiceContentSections = ({ sections }) => (
     initial="hidden"
     whileInView="visible"
     viewport={{ once: true }}
-    className="mt-8 grid gap-6"
+    className="mt-8 grid gap-8"
   >
     {sections.map((section) => (
-      <motion.article key={section.title} variants={fadeUp} className="service-detail-section relative overflow-hidden rounded-xl p-6 md:p-7">
-        <div className="service-detail-section-glow" />
-        <div className="relative grid gap-7 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+      <motion.article key={section.title} variants={fadeUp} className="relative overflow-hidden rounded-[1.5rem] bg-white p-8 md:p-10 shadow-sm border border-[#E8DFD5]">
+        <div className="relative grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
           <div>
-            <span className="service-detail-eyebrow mb-2 block">{section.eyebrow}</span>
-            <h2 className="site-heading mb-4 text-3xl font-bold leading-tight md:text-5xl">
+            <span className="text-[#A67C65] text-[11px] font-bold tracking-[0.25em] uppercase mb-4 block">{section.eyebrow}</span>
+            <h2 className="font-['Playfair_Display',serif] mb-6 text-4xl font-bold leading-tight md:text-[42px] text-[#4A2F1D]">
               <DetailTitle title={section.title} accent={section.accent} />
             </h2>
             {section.description && (
-              <p className="max-w-2xl text-sm leading-7 text-gray-300 md:text-base">{section.description}</p>
+              <p className="max-w-2xl text-[14.5px] font-medium leading-[1.8] text-[#7C5A48]">{section.description}</p>
             )}
-            <Link to="/contact" className="service-detail-cta mt-6 inline-flex items-center gap-2">
+            <Link to="/contact" className="mt-8 inline-flex items-center gap-3 rounded-full bg-[#A67C65] px-8 py-3.5 text-xs font-bold uppercase tracking-widest text-white transition-all hover:bg-[#8B5E45]">
               <Mail size={15} />
-              Contact us
+              Contact Us
             </Link>
           </div>
 
-          <div>
+          <div className="pt-2 lg:pt-0">
             {section.listTitle && (
-              <h3 className="site-heading mb-5 text-2xl font-bold leading-tight md:text-3xl">
+              <h3 className="font-['Playfair_Display',serif] mb-6 text-2xl font-bold leading-tight text-[#4A2F1D]">
                 {section.listTitle}
               </h3>
             )}
-            <div className="grid gap-3 sm:grid-cols-2">
+            <div className="grid gap-4 sm:grid-cols-2">
               {section.items.map((item) => (
-                <div key={item} className="service-detail-check-item">
-                  <span className="service-detail-check-icon"><CheckCircle2 size={14} strokeWidth={2.2} /></span>
+                <div key={item} className="flex items-start gap-3 rounded-xl border border-[#E8DFD5] bg-[#FAF7F2]/50 px-4 py-4 text-[13px] font-semibold leading-tight text-[#5c4033]">
+                  <span className="shrink-0 text-[#A67C65] mt-0.5"><CheckCircle2 size={16} strokeWidth={2.5} /></span>
                   <span>{item}</span>
                 </div>
               ))}
@@ -1124,51 +1122,60 @@ const ServiceDetail = () => {
   const isSportingEventsService = service.slug === 'sporting-events';
 
   return (
-    <section className="service-detail-page relative overflow-hidden px-5 pb-20 pt-40 text-white lg:px-10 lg:pt-44">
-      <div className="services-dots services-dots-left" />
-      <div className="services-dots services-dots-right" />
-      <div className="services-wave services-wave-left" />
-      <div className="services-wave services-wave-right" />
+    <section className="relative overflow-hidden bg-[#FAF7F2] font-sans px-5 pb-24 pt-32 text-[#5c4033] lg:px-10 lg:pt-44 min-h-screen">
+      {/* Global Background Watermarks */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <img 
+          src="/hero-bg.png" 
+          alt="" 
+          className="absolute -right-20 top-0 w-[60%] h-[120%] object-cover object-left opacity-30 mix-blend-multiply" 
+          style={{ transform: 'scaleX(-1)'}} 
+        />
+        <img 
+          src="/hero-bg.png" 
+          alt="" 
+          className="absolute -left-20 top-1/4 w-[60%] h-[120%] object-cover object-left opacity-20 mix-blend-multiply" 
+        />
+      </div>
 
-      <div className="relative z-10 mx-auto max-w-7xl">
-        <Link to="/services" className="mb-5 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.22em] text-gray-300 transition-colors hover:text-gold">
+      <div className="relative z-10 mx-auto max-w-[1300px]">
+        <Link to="/services" className="mb-8 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.22em] text-[#7C5A48] transition-colors hover:text-[#A67C65]">
           <ArrowLeft size={14} />
           All Services
         </Link>
 
-        <div className="grid gap-6 lg:grid-cols-[1fr_0.95fr]">
+        <div className="grid gap-8 lg:grid-cols-[1fr_0.95fr]">
           <motion.section
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            className="service-detail-hero-card relative overflow-hidden rounded-xl p-7 md:p-8"
+            className="relative overflow-hidden rounded-[1.5rem] bg-white p-8 md:p-10 shadow-sm border border-[#E8DFD5]"
           >
-            <div className="service-detail-hero-grid" />
             <div className="relative">
-              <div className="mb-7 flex h-16 w-16 items-center justify-center rounded-full border border-magenta/55 bg-magenta/10 text-magenta shadow-[0_0_24px_rgba(233,30,99,0.22)]">
-                <Icon size={29} strokeWidth={1.7} />
+              <div className="mb-7 flex h-16 w-16 items-center justify-center rounded-full bg-[#FAF7F2] border-[1.5px] border-[#D5C5B9] text-[#A67C65]">
+                <Icon size={26} strokeWidth={1.5} />
               </div>
-              <span className="service-detail-eyebrow mb-3 block">{service.title}</span>
-              <h1 className="site-heading max-w-3xl text-4xl font-bold leading-tight md:text-6xl">
+              <span className="text-[#A67C65] text-[11px] font-bold tracking-[0.25em] uppercase mb-4 block">{service.title}</span>
+              <h1 className="font-['Playfair_Display',serif] max-w-3xl text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-[#4A2F1D]">
                 {selectedItem ? (
                   <>
                     {selectedItem}
-                    <span className="text-gradient block text-3xl md:text-5xl">Service</span>
+                    <span className="block text-[#A67C65] italic font-normal mt-2">Service</span>
                   </>
                 ) : (
                   <>
                     {service.title}
-                    <span className="text-gradient block text-3xl md:text-5xl">Planning</span>
+                    <span className="block text-[#A67C65] italic font-normal mt-2">Planning</span>
                   </>
                 )}
               </h1>
-              <p className="mt-5 max-w-2xl text-sm leading-7 text-gray-300 md:text-base">
+              <p className="mt-6 max-w-2xl text-[14.5px] font-medium leading-[1.8] text-[#7C5A48]">
                 {selectedItem
                   ? `India Solution handles ${selectedItem.toLowerCase()} as part of our ${service.title.toLowerCase()} service, with careful planning, polished execution, and attention to every guest-facing detail.`
                   : service.description}
               </p>
-              <Link to="/contact" className="service-detail-cta mt-7 inline-flex items-center gap-2">
+              <Link to="/contact" className="mt-8 inline-flex items-center gap-3 rounded-full bg-[#A67C65] px-8 py-3.5 text-xs font-bold uppercase tracking-widest text-white transition-all hover:bg-[#8B5E45]">
                 Enquire Now
-                <ChevronRight size={15} />
+                <ChevronRight size={15} strokeWidth={2.5} />
               </Link>
             </div>
           </motion.section>
@@ -1177,10 +1184,10 @@ const ServiceDetail = () => {
             variants={staggerContainer}
             initial="hidden"
             animate="visible"
-            className="service-detail-chooser relative overflow-hidden rounded-xl p-6 md:p-7"
+            className="relative overflow-hidden rounded-[1.5rem] bg-[#FAF7F2] p-8 md:p-10 shadow-inner border border-[#E8DFD5]"
           >
-            <span className="service-detail-eyebrow mb-2 block">Service Points</span>
-            <h2 className="site-heading mb-5 text-3xl font-semibold">Choose A Detail</h2>
+            <span className="text-[#A67C65] text-[11px] font-bold tracking-[0.25em] uppercase mb-3 block">Service Points</span>
+            <h2 className="font-['Playfair_Display',serif] mb-6 text-3xl font-bold text-[#4A2F1D]">Choose A Detail</h2>
             <div className="grid gap-3">
               {service.items.map((item) => {
                 const isActive = item === selectedItem;
@@ -1188,9 +1195,13 @@ const ServiceDetail = () => {
                   <motion.div key={item} variants={fadeUp}>
                     <Link
                       to={`/services/${service.slug}/${slugifyServiceItem(item)}`}
-                      className={`service-detail-choice ${isActive ? 'service-detail-choice-active' : ''}`}
+                      className={`flex items-center gap-3 rounded-lg border px-4 py-3.5 text-[13px] font-semibold leading-tight transition-all ${
+                        isActive 
+                          ? 'border-[#A67C65] bg-white text-[#4A2F1D] shadow-sm' 
+                          : 'border-[#E8DFD5] bg-transparent text-[#7C5A48] hover:border-[#D5C5B9] hover:bg-white/60 hover:text-[#4A2F1D]'
+                      }`}
                     >
-                      <ChevronRight size={13} className="shrink-0" />
+                      <ChevronRight size={14} className={`shrink-0 ${isActive ? 'text-[#A67C65]' : 'text-[#D5C5B9]'}`} strokeWidth={2.5} />
                       <span>{item}</span>
                     </Link>
                   </motion.div>
@@ -1231,28 +1242,30 @@ const ServiceDetail = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="mt-10"
+          className="mt-16 pt-12 border-t border-[#E8DFD5]"
         >
-          <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+          <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
             <div>
-              <span className="service-detail-eyebrow mb-2 block">Related Services</span>
-              <h2 className="site-heading text-3xl font-semibold">Explore More</h2>
+              <span className="text-[#A67C65] text-[11px] font-bold tracking-[0.25em] uppercase mb-2 block">Related Services</span>
+              <h2 className="font-['Playfair_Display',serif] text-3xl font-bold text-[#4A2F1D]">Explore More</h2>
             </div>
-            <Link to="/services" className="text-xs font-semibold uppercase tracking-[0.18em] text-gold transition-colors hover:text-orange">
+            <Link to="/services" className="text-xs font-bold uppercase tracking-[0.18em] text-[#A67C65] transition-colors hover:text-[#8B5E45]">
               View All
             </Link>
           </div>
 
-          <div className="grid gap-5 md:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-3">
             {relatedServices.map((item) => {
               const RelatedIcon = iconMap[item.icon] ?? Sparkles;
               return (
-                <motion.article key={item.slug} variants={fadeUp} className="service-related-card rounded-xl p-5">
-                  <RelatedIcon className="mb-4 text-magenta" size={26} strokeWidth={1.7} />
-                  <h3 className="site-heading mb-2 text-lg font-semibold">{item.title}</h3>
-                  <p className="mb-4 text-xs leading-5 text-gray-400">{item.description}</p>
-                  <Link to={`/services/${item.slug}`} className="text-xs font-semibold text-gold transition-colors hover:text-orange">
-                    Explore Service
+                <motion.article key={item.slug} variants={fadeUp} className="rounded-[1.5rem] bg-white p-8 shadow-sm border border-[#E8DFD5] transition-shadow hover:shadow-md">
+                  <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-[#FAF7F2] border border-[#D5C5B9] text-[#A67C65]">
+                    <RelatedIcon size={20} strokeWidth={1.5} />
+                  </div>
+                  <h3 className="font-['Playfair_Display',serif] mb-3 text-xl font-bold text-[#4A2F1D]">{item.title}</h3>
+                  <p className="mb-6 text-[12.5px] font-medium leading-relaxed text-[#7C5A48]">{item.description}</p>
+                  <Link to={`/services/${item.slug}`} className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#A67C65] transition-colors hover:text-[#8B5E45]">
+                    Explore Service <ChevronRight size={14} />
                   </Link>
                 </motion.article>
               );

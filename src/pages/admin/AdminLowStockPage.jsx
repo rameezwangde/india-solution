@@ -9,7 +9,7 @@ import { generateExport } from '../../api/exportService';
 const StockBadge = ({ status }) => {
   const styles = {
     'OUT_OF_STOCK': 'bg-red-500/10 text-red-500 border-red-500/20',
-    'CRITICAL_STOCK': 'bg-orange-500/10 text-orange-500 border-orange-500/20',
+    'CRITICAL_STOCK': 'bg-orange-500/10 text-[#C0602F]-500 border-orange-500/20',
     'LOW_STOCK': 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20',
     'IN_STOCK': 'bg-green-500/10 text-green-500 border-green-500/20',
   };
@@ -143,16 +143,16 @@ export default function AdminLowStockPage() {
     <div className="p-6">
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-white flex items-center gap-2">
+          <h1 className="text-2xl font-bold text-[#4A2F1D] flex items-center gap-2">
             <AlertTriangle className="text-yellow-500" /> Low Stock Centre
           </h1>
-          <p className="text-gray-400 mt-1">Monitor and manage inventory shortages</p>
+          <p className="text-[#A67C65] mt-1">Monitor and manage inventory shortages</p>
         </div>
         <div className="flex gap-2">
-          <button onClick={() => setIsExportModalOpen(true)} className="px-4 py-2 bg-gray-800 rounded-lg text-white font-medium hover:bg-gray-700 transition-colors flex items-center gap-2 border border-gray-700">
+          <button onClick={() => setIsExportModalOpen(true)} className="px-4 py-2 bg-white rounded-lg text-[#4A2F1D] font-medium hover:bg-gray-700 transition-colors flex items-center gap-2 border border-gray-700">
             <Download size={18} /> Export
           </button>
-          <button onClick={() => { fetchSummary(); fetchProducts(); }} className="p-2 bg-gray-800 rounded-lg text-gray-400 hover:text-white hover:bg-gray-700 transition-colors border border-gray-700">
+          <button onClick={() => { fetchSummary(); fetchProducts(); }} className="p-2 bg-white rounded-lg text-[#A67C65] hover:text-[#4A2F1D] hover:bg-gray-700 transition-colors border border-gray-700">
             <RefreshCw size={20} />
           </button>
         </div>
@@ -161,36 +161,36 @@ export default function AdminLowStockPage() {
       {/* Summary Cards */}
       {summary && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <div className="bg-gray-800/50 backdrop-blur border border-gray-700/50 p-4 rounded-xl flex items-center justify-between">
+          <div className="bg-white/50 backdrop-blur border border-gray-700/50 p-4 rounded-xl flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-400 mb-1">Attention Required</p>
-              <h3 className="text-2xl font-bold text-white">{summary.totalAttentionRequired}</h3>
+              <p className="text-sm text-[#A67C65] mb-1">Attention Required</p>
+              <h3 className="text-2xl font-bold text-[#4A2F1D]">{summary.totalAttentionRequired}</h3>
             </div>
             <div className="p-3 bg-blue-500/10 text-blue-500 rounded-lg">
               <Activity size={24} />
             </div>
           </div>
-          <div className="bg-gray-800/50 backdrop-blur border border-gray-700/50 p-4 rounded-xl flex items-center justify-between">
+          <div className="bg-white/50 backdrop-blur border border-gray-700/50 p-4 rounded-xl flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-400 mb-1">Out of Stock</p>
+              <p className="text-sm text-[#A67C65] mb-1">Out of Stock</p>
               <h3 className="text-2xl font-bold text-red-500">{summary.outOfStock}</h3>
             </div>
             <div className="p-3 bg-red-500/10 text-red-500 rounded-lg">
               <XCircle size={24} />
             </div>
           </div>
-          <div className="bg-gray-800/50 backdrop-blur border border-gray-700/50 p-4 rounded-xl flex items-center justify-between">
+          <div className="bg-white/50 backdrop-blur border border-gray-700/50 p-4 rounded-xl flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-400 mb-1">Critical Stock</p>
-              <h3 className="text-2xl font-bold text-orange-500">{summary.criticalStock}</h3>
+              <p className="text-sm text-[#A67C65] mb-1">Critical Stock</p>
+              <h3 className="text-2xl font-bold text-[#C0602F]-500">{summary.criticalStock}</h3>
             </div>
-            <div className="p-3 bg-orange-500/10 text-orange-500 rounded-lg">
+            <div className="p-3 bg-orange-500/10 text-[#C0602F]-500 rounded-lg">
               <AlertTriangle size={24} />
             </div>
           </div>
-          <div className="bg-gray-800/50 backdrop-blur border border-gray-700/50 p-4 rounded-xl flex items-center justify-between">
+          <div className="bg-white/50 backdrop-blur border border-gray-700/50 p-4 rounded-xl flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-400 mb-1">Low Stock</p>
+              <p className="text-sm text-[#A67C65] mb-1">Low Stock</p>
               <h3 className="text-2xl font-bold text-yellow-500">{summary.lowStock}</h3>
             </div>
             <div className="p-3 bg-yellow-500/10 text-yellow-500 rounded-lg">
@@ -205,18 +205,18 @@ export default function AdminLowStockPage() {
         <div className="mb-8 overflow-x-auto pb-2">
           <div className="flex gap-4 min-w-max">
             {departments.map(dept => (
-              <div key={dept.department} className="bg-gray-800/30 border border-gray-700 p-3 rounded-lg min-w-[200px]">
-                <h4 className="text-white font-medium mb-2">{dept.department}</h4>
+              <div key={dept.department} className="bg-white/30 border border-gray-700 p-3 rounded-lg min-w-[200px]">
+                <h4 className="text-[#4A2F1D] font-medium mb-2">{dept.department}</h4>
                 <div className="flex justify-between text-xs mb-1">
-                  <span className="text-gray-400">Low:</span>
+                  <span className="text-[#A67C65]">Low:</span>
                   <span className="text-yellow-500">{dept.lowStock}</span>
                 </div>
                 <div className="flex justify-between text-xs mb-1">
-                  <span className="text-gray-400">Critical:</span>
-                  <span className="text-orange-500">{dept.criticalStock}</span>
+                  <span className="text-[#A67C65]">Critical:</span>
+                  <span className="text-[#C0602F]-500">{dept.criticalStock}</span>
                 </div>
                 <div className="flex justify-between text-xs">
-                  <span className="text-gray-400">OOS:</span>
+                  <span className="text-[#A67C65]">OOS:</span>
                   <span className="text-red-500">{dept.outOfStock}</span>
                 </div>
               </div>
@@ -226,21 +226,21 @@ export default function AdminLowStockPage() {
       )}
 
       {/* Filters & Table */}
-      <div className="bg-gray-800/30 border border-gray-700/50 rounded-xl overflow-hidden">
+      <div className="bg-white/30 border border-gray-700/50 rounded-xl overflow-hidden">
         <div className="p-4 border-b border-gray-700/50 flex flex-wrap gap-4 items-center justify-between">
           <div className="flex items-center gap-2 flex-1 min-w-[200px]">
-            <Search className="text-gray-400" size={20} />
+            <Search className="text-[#A67C65]" size={20} />
             <input 
               type="text" 
               placeholder="Search products..." 
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="bg-transparent border-none focus:ring-0 text-white placeholder-gray-500 w-full"
+              className="bg-transparent border-none focus:ring-0 text-[#4A2F1D] placeholder-gray-500 w-full"
             />
           </div>
           <div className="flex gap-2">
             <select 
-              className="bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:border-blue-500 outline-none"
+              className="bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-[#4A2F1D] text-sm focus:border-blue-500 outline-none"
               value={filters.status}
               onChange={(e) => setFilters(prev => ({...prev, status: e.target.value}))}
             >
@@ -250,7 +250,7 @@ export default function AdminLowStockPage() {
               <option value="OUT_OF_STOCK">Out of Stock</option>
             </select>
             <select 
-              className="bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:border-blue-500 outline-none"
+              className="bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-[#4A2F1D] text-sm focus:border-blue-500 outline-none"
               value={filters.acknowledged}
               onChange={(e) => setFilters(prev => ({...prev, acknowledged: e.target.value}))}
             >
@@ -264,7 +264,7 @@ export default function AdminLowStockPage() {
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="border-b border-gray-700/50 bg-gray-800/20 text-gray-400 text-sm">
+              <tr className="border-b border-gray-700/50 bg-white/20 text-[#A67C65] text-sm">
                 <th className="p-4 font-medium">Product</th>
                 <th className="p-4 font-medium">Department</th>
                 <th className="p-4 font-medium">Quantity</th>
@@ -275,29 +275,29 @@ export default function AdminLowStockPage() {
             </thead>
             <tbody className="text-sm">
               {loading ? (
-                <tr><td colSpan="6" className="p-8 text-center text-gray-500">Loading...</td></tr>
+                <tr><td colSpan="6" className="p-8 text-center text-[#A67C65]">Loading...</td></tr>
               ) : products.length === 0 ? (
-                <tr><td colSpan="6" className="p-8 text-center text-gray-500">No products match the selected filters.</td></tr>
+                <tr><td colSpan="6" className="p-8 text-center text-[#A67C65]">No products match the selected filters.</td></tr>
               ) : (
                 products.map(p => (
-                  <tr key={p._id} className="border-b border-gray-800 hover:bg-gray-800/30 transition-colors">
+                  <tr key={p._id} className="border-b border-[#E8DFD5] hover:bg-white/30 transition-colors">
                     <td className="p-4">
-                      <div className="text-white font-medium">{p.name}</div>
-                      <div className="text-xs text-gray-500">{p.productCode}</div>
+                      <div className="text-[#4A2F1D] font-medium">{p.name}</div>
+                      <div className="text-xs text-[#A67C65]">{p.productCode}</div>
                     </td>
-                    <td className="p-4 text-gray-400">{p.department}</td>
+                    <td className="p-4 text-[#A67C65]">{p.department}</td>
                     <td className="p-4">
-                      <div className="text-white font-medium">{p.quantity} {p.quantityUnit}</div>
+                      <div className="text-[#4A2F1D] font-medium">{p.quantity} {p.quantityUnit}</div>
                     </td>
                     <td className="p-4">
                       <StockBadge status={p.stockStatus} />
                       {p.stockAlertAcknowledged && (
-                        <div className="text-[10px] text-gray-500 mt-1 flex items-center gap-1">
+                        <div className="text-[10px] text-[#A67C65] mt-1 flex items-center gap-1">
                           <CheckCircle size={10} /> Acknowledged
                         </div>
                       )}
                     </td>
-                    <td className="p-4 text-gray-400 text-xs">
+                    <td className="p-4 text-[#A67C65] text-xs">
                       <div>Low: {p.lowStockThreshold}</div>
                       <div>Crit: {p.criticalStockThreshold}</div>
                     </td>
@@ -311,14 +311,14 @@ export default function AdminLowStockPage() {
                         </button>
                         <button 
                           onClick={() => setThresholdModal({ isOpen: true, product: p, low: p.lowStockThreshold, critical: p.criticalStockThreshold })}
-                          className="p-1.5 bg-gray-800 text-gray-400 rounded-lg hover:text-white transition-colors"
+                          className="p-1.5 bg-white text-[#A67C65] rounded-lg hover:text-[#4A2F1D] transition-colors"
                           title="Edit Thresholds"
                         >
                           <Edit size={16} />
                         </button>
                         <button 
                           onClick={() => toggleAcknowledge(p)}
-                          className={`p-1.5 rounded-lg transition-colors ${p.stockAlertAcknowledged ? 'bg-green-500/10 text-green-500 hover:bg-green-500/20' : 'bg-gray-800 text-gray-400 hover:text-white'}`}
+                          className={`p-1.5 rounded-lg transition-colors ${p.stockAlertAcknowledged ? 'bg-green-500/10 text-green-500 hover:bg-green-500/20' : 'bg-white text-[#A67C65] hover:text-[#4A2F1D]'}`}
                           title={p.stockAlertAcknowledged ? "Unacknowledge" : "Acknowledge"}
                         >
                           {p.stockAlertAcknowledged ? <CheckCircle size={16} /> : <Clock size={16} />}
@@ -338,15 +338,15 @@ export default function AdminLowStockPage() {
             <button 
               disabled={page === 1}
               onClick={() => setPage(p => Math.max(1, p - 1))}
-              className="px-3 py-1 bg-gray-800 text-white rounded-lg disabled:opacity-50"
+              className="px-3 py-1 bg-white text-[#4A2F1D] rounded-lg disabled:opacity-50"
             >
               Prev
             </button>
-            <span className="text-gray-400 px-3 py-1">{page} / {totalPages}</span>
+            <span className="text-[#A67C65] px-3 py-1">{page} / {totalPages}</span>
             <button 
               disabled={page === totalPages}
               onClick={() => setPage(p => Math.min(totalPages, p + 1))}
-              className="px-3 py-1 bg-gray-800 text-white rounded-lg disabled:opacity-50"
+              className="px-3 py-1 bg-white text-[#4A2F1D] rounded-lg disabled:opacity-50"
             >
               Next
             </button>
@@ -357,23 +357,23 @@ export default function AdminLowStockPage() {
       {/* Quick Update Modal */}
       {updateModal.isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-          <div className="bg-gray-900 border border-gray-800 rounded-2xl w-full max-w-md overflow-hidden shadow-2xl">
-            <div className="p-4 border-b border-gray-800 flex justify-between items-center bg-gray-800/30">
-              <h3 className="text-lg font-bold text-white">Quick Update</h3>
-              <button onClick={() => setUpdateModal({isOpen: false, product: null})} className="text-gray-400 hover:text-white">
+          <div className="bg-gray-900 border border-[#E8DFD5] rounded-2xl w-full max-w-md overflow-hidden shadow-2xl">
+            <div className="p-4 border-b border-[#E8DFD5] flex justify-between items-center bg-white/30">
+              <h3 className="text-lg font-bold text-[#4A2F1D]">Quick Update</h3>
+              <button onClick={() => setUpdateModal({isOpen: false, product: null})} className="text-[#A67C65] hover:text-[#4A2F1D]">
                 <X size={20} />
               </button>
             </div>
             <form onSubmit={handleQuickUpdate} className="p-6">
-              <div className="mb-4 text-gray-400 text-sm">
-                Updating: <span className="text-white font-medium">{updateModal.product?.name}</span>
-                <div className="mt-1">Current: <span className="text-white">{updateModal.product?.quantity}</span></div>
+              <div className="mb-4 text-[#A67C65] text-sm">
+                Updating: <span className="text-[#4A2F1D] font-medium">{updateModal.product?.name}</span>
+                <div className="mt-1">Current: <span className="text-[#4A2F1D]">{updateModal.product?.quantity}</span></div>
               </div>
               
               <div className="mb-4">
-                <label className="block text-sm text-gray-400 mb-2">Mode</label>
+                <label className="block text-sm text-[#A67C65] mb-2">Mode</label>
                 <select 
-                  className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:border-blue-500 outline-none"
+                  className="w-full bg-white border border-gray-700 rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-blue-500 outline-none"
                   value={updateModal.mode}
                   onChange={e => setUpdateModal({...updateModal, mode: e.target.value})}
                 >
@@ -384,33 +384,33 @@ export default function AdminLowStockPage() {
               </div>
 
               <div className="mb-4">
-                <label className="block text-sm text-gray-400 mb-2">Quantity</label>
+                <label className="block text-sm text-[#A67C65] mb-2">Quantity</label>
                 <input 
                   type="number"
                   min="0"
                   required
-                  className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:border-blue-500 outline-none"
+                  className="w-full bg-white border border-gray-700 rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-blue-500 outline-none"
                   value={updateModal.value}
                   onChange={e => setUpdateModal({...updateModal, value: e.target.value})}
                 />
               </div>
 
               <div className="mb-6">
-                <label className="block text-sm text-gray-400 mb-2">Remarks</label>
+                <label className="block text-sm text-[#A67C65] mb-2">Remarks</label>
                 <input 
                   type="text"
                   placeholder="e.g. Added from warehouse"
-                  className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:border-blue-500 outline-none"
+                  className="w-full bg-white border border-gray-700 rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-blue-500 outline-none"
                   value={updateModal.remarks}
                   onChange={e => setUpdateModal({...updateModal, remarks: e.target.value})}
                 />
               </div>
 
               <div className="flex gap-3">
-                <button type="button" onClick={() => setUpdateModal({isOpen: false, product: null})} className="flex-1 px-4 py-2.5 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors">
+                <button type="button" onClick={() => setUpdateModal({isOpen: false, product: null})} className="flex-1 px-4 py-2.5 bg-white text-[#4A2F1D] rounded-lg hover:bg-gray-700 transition-colors">
                   Cancel
                 </button>
-                <button type="submit" className="flex-1 px-4 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium">
+                <button type="submit" className="flex-1 px-4 py-2.5 bg-blue-600 text-[#4A2F1D] rounded-lg hover:bg-blue-700 transition-colors font-medium">
                   Update Stock
                 </button>
               </div>
@@ -422,47 +422,47 @@ export default function AdminLowStockPage() {
       {/* Threshold Modal */}
       {thresholdModal.isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-          <div className="bg-gray-900 border border-gray-800 rounded-2xl w-full max-w-md overflow-hidden shadow-2xl">
-            <div className="p-4 border-b border-gray-800 flex justify-between items-center bg-gray-800/30">
-              <h3 className="text-lg font-bold text-white">Update Thresholds</h3>
-              <button onClick={() => setThresholdModal({isOpen: false, product: null})} className="text-gray-400 hover:text-white">
+          <div className="bg-gray-900 border border-[#E8DFD5] rounded-2xl w-full max-w-md overflow-hidden shadow-2xl">
+            <div className="p-4 border-b border-[#E8DFD5] flex justify-between items-center bg-white/30">
+              <h3 className="text-lg font-bold text-[#4A2F1D]">Update Thresholds</h3>
+              <button onClick={() => setThresholdModal({isOpen: false, product: null})} className="text-[#A67C65] hover:text-[#4A2F1D]">
                 <X size={20} />
               </button>
             </div>
             <form onSubmit={handleThresholdUpdate} className="p-6">
-              <div className="mb-6 text-gray-400 text-sm">
-                Updating: <span className="text-white font-medium">{thresholdModal.product?.name}</span>
+              <div className="mb-6 text-[#A67C65] text-sm">
+                Updating: <span className="text-[#4A2F1D] font-medium">{thresholdModal.product?.name}</span>
               </div>
               
               <div className="mb-4">
-                <label className="block text-sm text-gray-400 mb-2">Low Stock Threshold</label>
+                <label className="block text-sm text-[#A67C65] mb-2">Low Stock Threshold</label>
                 <input 
                   type="number"
                   min="0"
                   required
-                  className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:border-blue-500 outline-none"
+                  className="w-full bg-white border border-gray-700 rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-blue-500 outline-none"
                   value={thresholdModal.low}
                   onChange={e => setThresholdModal({...thresholdModal, low: e.target.value})}
                 />
               </div>
 
               <div className="mb-6">
-                <label className="block text-sm text-gray-400 mb-2">Critical Stock Threshold</label>
+                <label className="block text-sm text-[#A67C65] mb-2">Critical Stock Threshold</label>
                 <input 
                   type="number"
                   min="0"
                   required
-                  className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:border-blue-500 outline-none"
+                  className="w-full bg-white border border-gray-700 rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-blue-500 outline-none"
                   value={thresholdModal.critical}
                   onChange={e => setThresholdModal({...thresholdModal, critical: e.target.value})}
                 />
               </div>
 
               <div className="flex gap-3">
-                <button type="button" onClick={() => setThresholdModal({isOpen: false, product: null})} className="flex-1 px-4 py-2.5 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors">
+                <button type="button" onClick={() => setThresholdModal({isOpen: false, product: null})} className="flex-1 px-4 py-2.5 bg-white text-[#4A2F1D] rounded-lg hover:bg-gray-700 transition-colors">
                   Cancel
                 </button>
-                <button type="submit" className="flex-1 px-4 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium">
+                <button type="submit" className="flex-1 px-4 py-2.5 bg-blue-600 text-[#4A2F1D] rounded-lg hover:bg-blue-700 transition-colors font-medium">
                   Save Settings
                 </button>
               </div>

@@ -80,41 +80,41 @@ const CategoryFormModal = ({ isOpen, onClose, category, onSuccess }) => {
           initial={{ scale: 0.95, opacity: 0, y: 20 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.95, opacity: 0, y: 20 }}
-          className="bg-navy-800 border border-white/10 rounded-2xl w-full max-w-lg shadow-2xl relative"
+          className="bg-navy-800 border border-[#E8DFD5] rounded-2xl w-full max-w-lg shadow-2xl relative"
         >
-          <div className="border-b border-white/10 p-6 flex items-center justify-between">
-            <h3 className="text-xl font-bold text-white">{category ? 'Edit Category' : 'Add New Category'}</h3>
-            <button onClick={onClose} disabled={loading} className="text-gray-400 hover:text-white transition-colors">
+          <div className="border-b border-[#E8DFD5] p-6 flex items-center justify-between">
+            <h3 className="text-xl font-bold text-[#4A2F1D]">{category ? 'Edit Category' : 'Add New Category'}</h3>
+            <button onClick={onClose} disabled={loading} className="text-[#A67C65] hover:text-[#4A2F1D] transition-colors">
               <X size={24} />
             </button>
           </div>
 
           <form onSubmit={handleSubmit} className="p-6 space-y-6">
             <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-300">Category Name *</label>
-              <input required type="text" name="name" value={formData.name} onChange={handleChange} className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white focus:border-magenta focus:outline-none" />
+              <label className="text-sm font-medium text-[#7C5A48]">Category Name *</label>
+              <input required type="text" name="name" value={formData.name} onChange={handleChange} className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-magenta focus:outline-none" />
             </div>
             
             <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-300">Description</label>
-              <textarea rows="3" name="description" value={formData.description} onChange={handleChange} className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white focus:border-magenta focus:outline-none resize-none"></textarea>
+              <label className="text-sm font-medium text-[#7C5A48]">Description</label>
+              <textarea rows="3" name="description" value={formData.description} onChange={handleChange} className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-magenta focus:outline-none resize-none"></textarea>
             </div>
 
-            <div className="flex items-center gap-3 bg-white/5 p-4 rounded-lg border border-white/10">
-              <input type="checkbox" id="isActive" name="isActive" checked={formData.isActive} onChange={handleChange} className="w-5 h-5 rounded border-white/20 text-magenta focus:ring-magenta focus:ring-offset-navy-800 bg-transparent" />
+            <div className="flex items-center gap-3 bg-[#FAF7F2] p-4 rounded-lg border border-[#E8DFD5]">
+              <input type="checkbox" id="isActive" name="isActive" checked={formData.isActive} onChange={handleChange} className="w-5 h-5 rounded border-white/20 text-[#9A424E] focus:ring-magenta focus:ring-offset-navy-800 bg-transparent" />
               <div>
-                <label htmlFor="isActive" className="text-sm font-medium text-white cursor-pointer select-none block">
+                <label htmlFor="isActive" className="text-sm font-medium text-[#4A2F1D] cursor-pointer select-none block">
                   Active Category
                 </label>
-                <p className="text-xs text-gray-400 mt-1">If unchecked, the category and its products will be hidden from the public website.</p>
+                <p className="text-xs text-[#A67C65] mt-1">If unchecked, the category and its products will be hidden from the public website.</p>
               </div>
             </div>
 
-            <div className="flex gap-4 pt-4 border-t border-white/10">
-              <button type="button" onClick={onClose} disabled={loading} className="flex-1 px-4 py-3 bg-white/5 hover:bg-white/10 text-white rounded-lg transition-colors font-medium">
+            <div className="flex gap-4 pt-4 border-t border-[#E8DFD5]">
+              <button type="button" onClick={onClose} disabled={loading} className="flex-1 px-4 py-3 bg-[#FAF7F2] hover:bg-[#E8DFD5] text-[#4A2F1D] rounded-lg transition-colors font-medium">
                 Cancel
               </button>
-              <button type="submit" disabled={loading} className="flex-1 px-4 py-3 bg-gradient-to-r from-magenta to-orange hover:from-magenta-600 hover:to-orange-600 text-white rounded-lg transition-all font-medium flex items-center justify-center gap-2 disabled:opacity-50">
+              <button type="submit" disabled={loading} className="flex-1 px-4 py-3 bg-gradient-to-r from-magenta to-orange hover:from-magenta-600 hover:to-orange-600 text-[#4A2F1D] rounded-lg transition-all font-medium flex items-center justify-center gap-2 disabled:opacity-50">
                 {loading ? <Loader2 className="animate-spin" size={20} /> : 'Save Category'}
               </button>
             </div>

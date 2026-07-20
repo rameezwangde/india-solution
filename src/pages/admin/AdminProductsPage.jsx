@@ -24,13 +24,13 @@ import {
 import { generateExport } from '../../api/exportService';
 
 const StatCard = ({ title, value, icon: Icon, color }) => (
-  <div className="bg-white/5 border border-white/10 rounded-2xl p-5 flex items-center gap-4">
+  <div className="bg-[#FAF7F2] border border-[#E8DFD5] rounded-2xl p-5 flex items-center gap-4">
     <div className={`p-3 rounded-xl ${color}`}>
-      <Icon size={20} className="text-white" />
+      <Icon size={20} className="text-[#4A2F1D]" />
     </div>
     <div>
-      <p className="text-gray-400 text-xs font-medium mb-1">{title}</p>
-      <h3 className="text-xl font-bold text-white">{value}</h3>
+      <p className="text-[#A67C65] text-xs font-medium mb-1">{title}</p>
+      <h3 className="text-xl font-bold text-[#4A2F1D]">{value}</h3>
     </div>
   </div>
 );
@@ -327,19 +327,19 @@ const AdminProductsPage = () => {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-white mb-2">Products</h1>
-          <p className="text-gray-400">Manage inventory products, quantities, pricing and images.</p>
+          <h1 className="text-3xl font-bold text-[#4A2F1D] mb-2">Products</h1>
+          <p className="text-[#A67C65]">Manage inventory products, quantities, pricing and images.</p>
         </div>
         <div className="flex items-center gap-3">
           <button 
             onClick={() => setIsExportModalOpen(true)}
-            className="bg-gray-800 border border-gray-700 hover:bg-gray-700 text-white px-4 py-2.5 rounded-lg font-medium flex items-center gap-2 transition-all"
+            className="bg-white border border-[#E8DFD5] hover:bg-[#FAF7F2] text-[#4A2F1D] px-4 py-2.5 rounded-lg font-medium flex items-center gap-2 transition-all"
           >
             Export
           </button>
           <button 
             onClick={() => openForm()}
-            className="bg-gradient-to-r from-magenta to-orange hover:from-magenta-600 hover:to-orange-600 text-white px-5 py-2.5 rounded-lg font-medium flex items-center gap-2 transition-all shadow-lg shadow-magenta/20"
+            className="bg-gradient-to-r from-magenta to-orange hover:from-magenta-600 hover:to-orange-600 text-[#4A2F1D] px-5 py-2.5 rounded-lg font-medium flex items-center gap-2 transition-all shadow-sm hover:shadow-md shadow-magenta/20"
           >
             <Plus size={20} />
             Add Product
@@ -351,31 +351,31 @@ const AdminProductsPage = () => {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard title="Total Products" value={stats.total} icon={Package} color="bg-blue-500/20 text-blue-500" />
         <StatCard title="Available" value={stats.available} icon={CheckCircle} color="bg-green-500/20 text-green-500" />
-        <StatCard title="Low Stock" value={stats.lowStock} icon={AlertTriangle} color="bg-orange-500/20 text-orange-500" />
+        <StatCard title="Low Stock" value={stats.lowStock} icon={AlertTriangle} color="bg-orange-500/20 text-[#C0602F]-500" />
         <StatCard title="Out of Stock" value={stats.outOfStock} icon={XCircle} color="bg-red-500/20 text-red-500" />
       </div>
 
       {/* Toolbar */}
-      <div className="bg-white/5 border border-white/10 rounded-2xl p-4 flex flex-col xl:flex-row gap-4 xl:items-center">
+      <div className="bg-[#FAF7F2] border border-[#E8DFD5] rounded-2xl p-4 flex flex-col xl:flex-row gap-4 xl:items-center">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#A67C65]" size={18} />
           <input 
             type="text" 
             placeholder="Search by name or code..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full bg-navy-900 border border-white/10 rounded-lg pl-10 pr-4 py-2.5 text-white focus:outline-none focus:border-magenta"
+            className="w-full bg-white border border-[#E8DFD5] rounded-lg pl-10 pr-4 py-2.5 text-[#4A2F1D] focus:outline-none focus:border-magenta"
           />
         </div>
         
         <div className="flex flex-wrap items-center gap-3">
           {!lockedDepartment && (
-            <div className="flex items-center gap-2 bg-navy-900 border border-white/10 rounded-lg px-3 py-1">
-              <Package size={16} className="text-gray-400" />
+            <div className="flex items-center gap-2 bg-white border border-[#E8DFD5] rounded-lg px-3 py-1">
+              <Package size={16} className="text-[#A67C65]" />
               <select 
                 value={filters.department} 
                 onChange={(e) => handleFilterChange('department', e.target.value)}
-                className="bg-transparent text-sm text-white py-1.5 focus:outline-none w-36 truncate"
+                className="bg-transparent text-sm text-[#4A2F1D] py-1.5 focus:outline-none w-36 truncate"
               >
                 <option value="">All Departments</option>
                 {departmentsList.map(d => (
@@ -385,12 +385,12 @@ const AdminProductsPage = () => {
             </div>
           )}
 
-          <div className="flex items-center gap-2 bg-navy-900 border border-white/10 rounded-lg px-3 py-1">
-            <Filter size={16} className="text-gray-400" />
+          <div className="flex items-center gap-2 bg-white border border-[#E8DFD5] rounded-lg px-3 py-1">
+            <Filter size={16} className="text-[#A67C65]" />
             <select 
               value={filters.category} 
               onChange={(e) => handleFilterChange('category', e.target.value)}
-              className="bg-transparent text-sm text-white py-1.5 focus:outline-none w-32"
+              className="bg-transparent text-sm text-[#4A2F1D] py-1.5 focus:outline-none w-32"
             >
               <option value="">All Categories</option>
               {categories.map(c => (
@@ -402,7 +402,7 @@ const AdminProductsPage = () => {
           <select 
             value={filters.status} 
             onChange={(e) => handleFilterChange('status', e.target.value)}
-            className="bg-navy-900 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-magenta"
+            className="bg-white border border-[#E8DFD5] rounded-lg px-3 py-2.5 text-sm text-[#4A2F1D] focus:outline-none focus:border-magenta"
           >
             <option value="">All Statuses</option>
             <option value="available">Available</option>
@@ -413,7 +413,7 @@ const AdminProductsPage = () => {
           <select 
             value={filters.sort} 
             onChange={(e) => handleFilterChange('sort', e.target.value)}
-            className="bg-navy-900 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-magenta"
+            className="bg-white border border-[#E8DFD5] rounded-lg px-3 py-2.5 text-sm text-[#4A2F1D] focus:outline-none focus:border-magenta"
           >
             <option value="-createdAt">Newest First</option>
             <option value="createdAt">Oldest First</option>
@@ -427,7 +427,7 @@ const AdminProductsPage = () => {
 
           <button 
             onClick={resetFilters}
-            className="p-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-gray-400 hover:text-white transition-colors"
+            className="p-2.5 bg-[#FAF7F2] hover:bg-[#E8DFD5] border border-[#E8DFD5] rounded-lg text-[#A67C65] hover:text-[#4A2F1D] transition-colors"
             title="Reset Filters"
           >
             <RefreshCw size={18} />
@@ -439,15 +439,15 @@ const AdminProductsPage = () => {
       {error ? (
         <div className="bg-red-500/10 border border-red-500/20 rounded-2xl p-8 flex flex-col items-center text-center">
           <AlertTriangle size={48} className="text-red-500 mb-4" />
-          <h3 className="text-xl font-bold text-white mb-2">Unable to load products</h3>
-          <p className="text-gray-400 mb-6">{error}</p>
-          <button onClick={() => fetchProducts()} className="bg-white/5 hover:bg-white/10 px-6 py-2 rounded-lg text-white transition-colors">
+          <h3 className="text-xl font-bold text-[#4A2F1D] mb-2">Unable to load products</h3>
+          <p className="text-[#A67C65] mb-6">{error}</p>
+          <button onClick={() => fetchProducts()} className="bg-[#FAF7F2] hover:bg-[#E8DFD5] px-6 py-2 rounded-lg text-[#4A2F1D] transition-colors">
             Retry
           </button>
         </div>
       ) : (
         <div 
-          className="bg-white/5 border border-white/10 rounded-2xl flex flex-col max-h-[calc(100vh-280px)] overflow-y-auto custom-scrollbar relative"
+          className="bg-[#FAF7F2] border border-[#E8DFD5] rounded-2xl flex flex-col max-h-[calc(100vh-280px)] overflow-y-auto custom-scrollbar relative"
           onScroll={(e) => {
             const { scrollTop, scrollHeight, clientHeight } = e.target;
             // Fetch more when scrolled near the bottom (within 100px)
@@ -462,13 +462,13 @@ const AdminProductsPage = () => {
           <div className="hidden md:block">
             <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="border-b border-white/10 bg-white/5 text-gray-400 text-sm">
+              <tr className="border-b border-[#E8DFD5] bg-[#FAF7F2] text-[#A67C65] text-sm">
                 <th className="p-4 w-12">
                   <input 
                     type="checkbox" 
                     checked={products.length > 0 && selectedProductIds.size === products.length}
                     onChange={toggleSelectAll}
-                    className="w-4 h-4 rounded bg-gray-900 border-gray-700 text-magenta focus:ring-magenta focus:ring-offset-gray-900"
+                    className="w-4 h-4 rounded bg-gray-900 border-[#E8DFD5] text-[#9A424E] focus:ring-magenta focus:ring-offset-gray-900"
                   />
                 </th>
                 <th className="px-6 py-4 font-medium">Product</th>
@@ -483,12 +483,12 @@ const AdminProductsPage = () => {
                 {loading && products.length === 0 ? (
                   Array.from({ length: 5 }).map((_, i) => (
                     <tr key={i} className="animate-pulse">
-                      <td className="px-6 py-4"><div className="h-10 w-48 bg-white/5 rounded"></div></td>
-                      <td className="px-6 py-4"><div className="h-4 w-24 bg-white/5 rounded"></div></td>
-                      <td className="px-6 py-4"><div className="h-4 w-16 bg-white/5 rounded"></div></td>
-                      <td className="px-6 py-4"><div className="h-4 w-12 bg-white/5 rounded"></div></td>
-                      <td className="px-6 py-4"><div className="h-6 w-20 bg-white/5 rounded-full"></div></td>
-                      <td className="px-6 py-4"><div className="h-8 w-24 bg-white/5 rounded ml-auto"></div></td>
+                      <td className="px-6 py-4"><div className="h-10 w-48 bg-[#FAF7F2] rounded"></div></td>
+                      <td className="px-6 py-4"><div className="h-4 w-24 bg-[#FAF7F2] rounded"></div></td>
+                      <td className="px-6 py-4"><div className="h-4 w-16 bg-[#FAF7F2] rounded"></div></td>
+                      <td className="px-6 py-4"><div className="h-4 w-12 bg-[#FAF7F2] rounded"></div></td>
+                      <td className="px-6 py-4"><div className="h-6 w-20 bg-[#FAF7F2] rounded-full"></div></td>
+                      <td className="px-6 py-4"><div className="h-8 w-24 bg-[#FAF7F2] rounded ml-auto"></div></td>
                     </tr>
                   ))
                 ) : products.length === 0 ? (
@@ -496,56 +496,56 @@ const AdminProductsPage = () => {
                     <td colSpan="7" className="px-6 py-12 text-center">
                       <div className="flex flex-col items-center">
                         <Package size={48} className="text-gray-600 mb-4" />
-                        <h4 className="text-lg font-medium text-white mb-2">No products found</h4>
-                        <p className="text-gray-400 mb-4">Try adjusting your search or filters.</p>
-                        <button onClick={resetFilters} className="text-magenta hover:text-magenta-400 font-medium">Clear Filters</button>
+                        <h4 className="text-lg font-medium text-[#4A2F1D] mb-2">No products found</h4>
+                        <p className="text-[#A67C65] mb-4">Try adjusting your search or filters.</p>
+                        <button onClick={resetFilters} className="text-[#9A424E] hover:text-[#9A424E]-400 font-medium">Clear Filters</button>
                       </div>
                     </td>
                   </tr>
                 ) : (
                   products.map(p => (
-                    <tr key={p.id} className="border-b border-white/5 hover:bg-white/5 transition-colors group">
+                    <tr key={p.id} className="border-b border-[#E8DFD5] hover:bg-[#FAF7F2] transition-colors group">
                     <td className="p-4 w-12">
                       <input 
                         type="checkbox" 
                         checked={selectedProductIds.has(p.id)}
                         onChange={() => toggleSelectProduct(p.id)}
-                        className="w-4 h-4 rounded bg-gray-900 border-gray-700 text-magenta focus:ring-magenta focus:ring-offset-gray-900"
+                        className="w-4 h-4 rounded bg-gray-900 border-[#E8DFD5] text-[#9A424E] focus:ring-magenta focus:ring-offset-gray-900"
                       />
                     </td>
                     <td className="p-4">
                         <div className="flex items-center gap-4">
                           {p.image ? (
-                            <img src={p.image} alt={p.name} className="w-12 h-12 rounded-lg object-cover bg-navy-900 border border-white/10" />
+                            <img src={p.image} alt={p.name} className="w-12 h-12 rounded-lg object-cover bg-white border border-[#E8DFD5]" />
                           ) : (
-                            <div className="w-12 h-12 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-500">
+                            <div className="w-12 h-12 rounded-lg bg-[#FAF7F2] border border-[#E8DFD5] flex items-center justify-center text-[#A67C65]">
                               <ImageIcon size={20} />
                             </div>
                           )}
                           <div>
-                            <Link to={`/admin/products/${p.id}`} className="font-medium text-white hover:text-magenta transition-colors">
+                            <Link to={`/admin/products/${p.id}`} className="font-medium text-[#4A2F1D] hover:text-[#9A424E] transition-colors">
                               {p.name}
                             </Link>
-                            {p.size && <p className="text-xs text-gray-500 mt-0.5">{p.size}</p>}
+                            {p.size && <p className="text-xs text-[#A67C65] mt-0.5">{p.size}</p>}
                           </div>
                         </div>
                       </td>
                       <td className="px-6 py-4">
-                        <div className="flex items-center gap-1.5 text-gray-300">
-                          <Hash size={14} className="text-gray-500" />
+                        <div className="flex items-center gap-1.5 text-[#7C5A48]">
+                          <Hash size={14} className="text-[#A67C65]" />
                           <span>{p.code || 'N/A'}</span>
                         </div>
-                        <p className="text-xs text-magenta mt-1">{p.category}</p>
+                        <p className="text-xs text-[#9A424E] mt-1">{p.category}</p>
                       </td>
-                      <td className="px-6 py-4 font-medium text-white">
+                      <td className="px-6 py-4 font-medium text-[#4A2F1D]">
                         ₹{p.price?.toLocaleString()}
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
-                          <span className={`font-bold ${p.quantity === 0 ? 'text-red-400' : p.quantity <= 5 ? 'text-orange-400' : 'text-white'}`}>
+                          <span className={`font-bold ${p.quantity === 0 ? 'text-red-400' : p.quantity <= 5 ? 'text-[#C0602F]-400' : 'text-[#4A2F1D]'}`}>
                             {p.quantity}
                           </span>
-                          <button onClick={() => openQuantity(p)} className="p-1 rounded hover:bg-white/10 text-gray-400 hover:text-white transition-colors" title="Quick Update">
+                          <button onClick={() => openQuantity(p)} className="p-1 rounded hover:bg-[#E8DFD5] text-[#A67C65] hover:text-[#4A2F1D] transition-colors" title="Quick Update">
                             <Edit size={14} />
                           </button>
                         </div>
@@ -553,22 +553,22 @@ const AdminProductsPage = () => {
                       <td className="px-6 py-4">
                         <span className={`px-2.5 py-1 rounded-full text-xs font-medium border ${
                           p.quantity === 0 ? 'bg-red-500/10 border-red-500/20 text-red-400' : 
-                          p.status === 'hidden' ? 'bg-gray-500/10 border-gray-500/20 text-gray-400' : 
+                          p.status === 'hidden' ? 'bg-gray-500/10 border-gray-500/20 text-[#A67C65]' : 
                           'bg-green-500/10 border-green-500/20 text-green-400'
                         }`}>
                           {p.quantity === 0 ? 'Out of Stock' : p.status === 'hidden' ? 'Hidden' : 'Available'}
                         </span>
-                        {p.isFeatured && <span className="ml-2 text-xs text-orange-400" title="Featured">★</span>}
+                        {p.isFeatured && <span className="ml-2 text-xs text-[#C0602F]-400" title="Featured">★</span>}
                       </td>
                       <td className="px-6 py-4 text-right">
                         <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <Link to={`/admin/products/${p.id}`} className="p-2 bg-white/5 hover:bg-white/10 rounded-lg text-magenta transition-colors" title="View Details">
+                          <Link to={`/admin/products/${p.id}`} className="p-2 bg-[#FAF7F2] hover:bg-[#E8DFD5] rounded-lg text-[#9A424E] transition-colors" title="View Details">
                             <CheckCircle size={16} />
                           </Link>
-                          <button onClick={() => openImage(p)} className="p-2 bg-white/5 hover:bg-white/10 rounded-lg text-gray-300 transition-colors" title="Manage Image">
+                          <button onClick={() => openImage(p)} className="p-2 bg-[#FAF7F2] hover:bg-[#E8DFD5] rounded-lg text-[#7C5A48] transition-colors" title="Manage Image">
                             <ImageIcon size={16} />
                           </button>
-                          <button onClick={() => openForm(p)} className="p-2 bg-white/5 hover:bg-white/10 rounded-lg text-blue-400 transition-colors" title="Edit Product">
+                          <button onClick={() => openForm(p)} className="p-2 bg-[#FAF7F2] hover:bg-[#E8DFD5] rounded-lg text-blue-400 transition-colors" title="Edit Product">
                             <Edit size={16} />
                           </button>
                           <button onClick={() => openDelete(p)} className="p-2 bg-red-500/10 hover:bg-red-500/20 rounded-lg text-red-400 transition-colors" title="Delete Product">
@@ -588,46 +588,46 @@ const AdminProductsPage = () => {
              {loading && products.length === 0 ? (
                 Array.from({ length: 3 }).map((_, i) => (
                   <div key={i} className="p-4 animate-pulse flex gap-4">
-                    <div className="w-16 h-16 bg-white/5 rounded-lg"></div>
+                    <div className="w-16 h-16 bg-[#FAF7F2] rounded-lg"></div>
                     <div className="flex-1 space-y-2">
-                      <div className="h-4 bg-white/5 rounded w-3/4"></div>
-                      <div className="h-3 bg-white/5 rounded w-1/2"></div>
+                      <div className="h-4 bg-[#FAF7F2] rounded w-3/4"></div>
+                      <div className="h-3 bg-[#FAF7F2] rounded w-1/2"></div>
                     </div>
                   </div>
                 ))
               ) : products.length === 0 ? (
-                <div className="p-8 text-center text-gray-400">No products found.</div>
+                <div className="p-8 text-center text-[#A67C65]">No products found.</div>
               ) : (
                 products.map(p => (
                   <div key={p.id} className="p-4 flex flex-col gap-3">
                     <div className="flex items-start gap-4">
                       {p.image ? (
-                        <img src={p.image} alt={p.name} className="w-16 h-16 rounded-lg object-cover bg-navy-900 border border-white/10" />
+                        <img src={p.image} alt={p.name} className="w-16 h-16 rounded-lg object-cover bg-white border border-[#E8DFD5]" />
                       ) : (
-                        <div className="w-16 h-16 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-500">
+                        <div className="w-16 h-16 rounded-lg bg-[#FAF7F2] border border-[#E8DFD5] flex items-center justify-center text-[#A67C65]">
                           <ImageIcon size={24} />
                         </div>
                       )}
                       <div className="flex-1">
-                        <h4 className="font-bold text-white text-sm line-clamp-1">{p.name}</h4>
-                        <p className="text-xs text-magenta my-1">{p.category}</p>
+                        <h4 className="font-bold text-[#4A2F1D] text-sm line-clamp-1">{p.name}</h4>
+                        <p className="text-xs text-[#9A424E] my-1">{p.category}</p>
                         <div className="flex items-center gap-2 mt-1">
                           <span className={`text-xs px-2 py-0.5 rounded-md ${p.quantity === 0 ? 'bg-red-500/20 text-red-400' : 'bg-green-500/20 text-green-400'}`}>
                             Qty: {p.quantity}
                           </span>
-                          <span className="text-sm font-bold text-white">₹{p.price?.toLocaleString()}</span>
+                          <span className="text-sm font-bold text-[#4A2F1D]">₹{p.price?.toLocaleString()}</span>
                         </div>
                       </div>
                     </div>
                     
-                    <div className="grid grid-cols-4 gap-2 pt-2 border-t border-white/5">
-                      <button onClick={() => openQuantity(p)} className="flex flex-col items-center justify-center py-2 bg-white/5 rounded-lg text-gray-400 hover:text-white text-xs gap-1">
+                    <div className="grid grid-cols-4 gap-2 pt-2 border-t border-[#E8DFD5]">
+                      <button onClick={() => openQuantity(p)} className="flex flex-col items-center justify-center py-2 bg-[#FAF7F2] rounded-lg text-[#A67C65] hover:text-[#4A2F1D] text-xs gap-1">
                         <Hash size={14} /> Qty
                       </button>
-                      <button onClick={() => openImage(p)} className="flex flex-col items-center justify-center py-2 bg-white/5 rounded-lg text-gray-400 hover:text-white text-xs gap-1">
+                      <button onClick={() => openImage(p)} className="flex flex-col items-center justify-center py-2 bg-[#FAF7F2] rounded-lg text-[#A67C65] hover:text-[#4A2F1D] text-xs gap-1">
                         <ImageIcon size={14} /> Image
                       </button>
-                      <button onClick={() => openForm(p)} className="flex flex-col items-center justify-center py-2 bg-white/5 rounded-lg text-blue-400 text-xs gap-1">
+                      <button onClick={() => openForm(p)} className="flex flex-col items-center justify-center py-2 bg-[#FAF7F2] rounded-lg text-blue-400 text-xs gap-1">
                         <Edit size={14} /> Edit
                       </button>
                       <button onClick={() => openDelete(p)} className="flex flex-col items-center justify-center py-2 bg-red-500/10 rounded-lg text-red-400 text-xs gap-1">
@@ -643,12 +643,12 @@ const AdminProductsPage = () => {
           {products.length > 0 && (
             <div className="p-6 flex justify-center items-center text-sm font-medium">
               {loadingMore ? (
-                <div className="text-magenta flex items-center gap-2">
+                <div className="text-[#9A424E] flex items-center gap-2">
                   <div className="w-4 h-4 rounded-full border-2 border-magenta border-t-transparent animate-spin"></div>
                   Loading more products...
                 </div>
               ) : page >= totalPages ? (
-                <div className="text-gray-500">All inventory products loaded</div>
+                <div className="text-[#A67C65]">All inventory products loaded</div>
               ) : null}
             </div>
           )}

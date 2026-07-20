@@ -54,7 +54,7 @@ const testimonials = [
 ];
 
 const StarRow = ({ className = '' }) => (
-  <div className={`flex items-center gap-1 text-gold ${className}`}>
+  <div className={`flex items-center gap-1 text-[#A67C65] ${className}`}>
     {[1, 2, 3, 4, 5].map((star) => (
       <Star key={star} size={18} fill="currentColor" strokeWidth={1.5} />
     ))}
@@ -63,105 +63,120 @@ const StarRow = ({ className = '' }) => (
 
 const Testimonials = () => {
   return (
-    <div className="bg-navy-900 text-white">
-      <section className="services-showcase relative overflow-hidden px-5 pb-20 pt-40 text-white lg:px-10 lg:pt-44">
-        <div className="services-dots services-dots-left" />
-      <div className="services-dots services-dots-right" />
-      <div className="services-wave services-wave-left" />
-      <div className="services-wave services-wave-right" />
+    <div className="bg-[#FAF7F2] text-[#5c4033] font-sans relative overflow-hidden">
+      {/* Global Background Watermarks */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <img 
+          src="/hero-bg.png" 
+          alt="" 
+          className="absolute -right-20 top-0 w-full md:w-[60%] h-[120%] object-cover object-left opacity-30 mix-blend-multiply" 
+          style={{ transform: 'scaleX(-1)'}} 
+        />
+        <img 
+          src="/hero-bg.png" 
+          alt="" 
+          className="absolute -left-20 top-1/4 w-full md:w-[60%] h-[120%] object-cover object-left opacity-20 mix-blend-multiply" 
+        />
+      </div>
 
-      <div className="relative z-10 mx-auto max-w-7xl">
+      <section className="relative z-10 px-5 pb-24 pt-32 lg:px-10 lg:pt-44 max-w-[1300px] mx-auto min-h-screen">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mx-auto mb-16 max-w-2xl text-center"
+          className="mx-auto mb-16 max-w-3xl text-center"
         >
-          <div className="mx-auto mb-3 flex items-center justify-center gap-3 text-magenta">
-            <span className="h-px w-10 bg-gradient-to-r from-transparent to-magenta" />
-            <span className="h-1.5 w-1.5 rotate-45 bg-magenta shadow-[0_0_12px_rgba(233,30,99,0.9)]" />
-            <span className="h-px w-10 bg-gradient-to-r from-magenta to-orange" />
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <span className="h-[1px] w-12 bg-gradient-to-r from-transparent to-[#D5C5B9]"></span>
+            <span className="text-[#A67C65] text-[10px]">❖</span>
+            <span className="text-[#A67C65] text-xs font-bold tracking-[0.25em] uppercase">Testimonials</span>
+            <span className="text-[#A67C65] text-[10px]">❖</span>
+            <span className="h-[1px] w-12 bg-gradient-to-l from-transparent to-[#D5C5B9]"></span>
           </div>
-          <h1 className="site-heading mb-6 text-4xl font-bold leading-none tracking-[0.14em] md:text-5xl lg:text-6xl">
-            What People <span className="text-gradient">Say</span>
+          <h1 className="font-['Playfair_Display',serif] text-5xl md:text-6xl lg:text-[70px] font-bold text-[#4A2F1D] tracking-wide mb-6">
+            WHAT PEOPLE SAY
           </h1>
-          <p className="text-gray-300">
+          <div className="flex items-center justify-center gap-2 mb-6">
+            <span className="text-[#A67C65] text-sm">❖</span>
+          </div>
+          <p className="text-[#5c4033] font-medium text-lg tracking-wide max-w-xl mx-auto">
             Don't just take our word for it. Here's what our clients have to say about their experience with India Solution Events.
           </p>
         </motion.div>
-      </div>
-        <div className="absolute left-0 top-24 h-72 w-72 rounded-full bg-magenta/10 blur-3xl" />
-        <div className="absolute right-0 bottom-20 h-80 w-80 rounded-full bg-orange/10 blur-3xl" />
 
-        <div className="container relative z-10 mx-auto max-w-7xl">
-          <div className="mb-14 grid items-center gap-6 lg:grid-cols-[0.65fr_1.35fr]">
+        <div className="container relative mx-auto max-w-7xl">
+          {/* Featured Testimonial Blocks */}
+          <div className="mb-20 grid items-stretch gap-6 lg:grid-cols-[0.7fr_1.3fr]">
             <motion.div
               initial={{ opacity: 0, x: -24 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="glass-card p-7 text-center lg:text-left"
+              className="bg-white rounded-[2rem] p-10 text-center lg:text-left shadow-sm border border-[#E8DFD5] flex flex-col justify-center"
             >
-              <div className="mb-3 flex items-center justify-center gap-3 lg:justify-start">
-                <Star size={30} fill="currentColor" className="text-gold" />
-                <span className="font-display text-6xl font-semibold leading-none text-white">4.2</span>
+              <div className="mb-4 flex items-center justify-center gap-3 lg:justify-start">
+                <Star size={36} fill="currentColor" className="text-[#A67C65]" />
+                <span className="font-['Playfair_Display',serif] text-7xl font-bold leading-none text-[#4A2F1D]">4.8</span>
               </div>
-              <p className="text-lg font-semibold text-gray-200">out of 5</p>
-              <StarRow className="mt-5 justify-center lg:justify-start" />
+              <p className="text-xl font-bold text-[#7C5A48]">out of 5</p>
+              <StarRow className="mt-6 justify-center lg:justify-start" />
             </motion.div>
 
             <motion.div
               initial={{ opacity: 0, x: 24 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="glass-card relative overflow-hidden p-8 md:p-10"
+              className="bg-white rounded-[2rem] relative overflow-hidden p-10 md:p-14 shadow-sm border border-[#E8DFD5]"
             >
-              <Quote className="absolute -right-8 -top-8 h-36 w-36 text-white/[0.04]" />
-              <StarRow className="mb-6" />
-              <p className="relative max-w-3xl font-display text-2xl italic leading-relaxed text-white md:text-3xl">
-                India Solution Events redefined excellence for us. Their seamless execution and eye for detail turned our vision into reality. Truly the go-to team for any high-profile event.
+              <Quote className="absolute -right-6 -top-6 h-40 w-40 text-[#FAF7F2]" />
+              <StarRow className="mb-8" />
+              <p className="relative max-w-3xl font-['Playfair_Display',serif] text-[26px] italic leading-relaxed text-[#4A2F1D] md:text-3xl">
+                "India Solution Events redefined excellence for us. Their seamless execution and eye for detail turned our vision into reality. Truly the go-to team for any high-profile event."
               </p>
-              <div className="relative mt-7 flex items-center gap-4">
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-magenta to-orange text-sm font-bold text-white">AD</div>
+              <div className="relative mt-10 flex items-center gap-5">
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#FAF7F2] border-[1.5px] border-[#D5C5B9] text-base font-bold text-[#A67C65]">
+                  AD
+                </div>
                 <div>
-                  <p className="font-semibold text-white">Amit Desai</p>
-                  <p className="text-sm text-gray-400">Managing Director, GlobalTech Corp</p>
+                  <p className="font-bold text-[#4A2F1D] text-lg">Amit Desai</p>
+                  <p className="text-sm font-medium text-[#7C5A48]">Managing Director, GlobalTech Corp</p>
                 </div>
               </div>
             </motion.div>
           </div>
 
+          {/* Testimonial Marquee / Scroll */}
           <div className="testimonial-scroll-viewport">
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="testimonial-scroll-wrap"
-          >
-            {[...testimonials, ...testimonials].map((item, index) => (
-              <motion.article
-                key={`${item.title}-${index}`}
-                variants={fadeUp}
-                className="testimonial-scroll-item" aria-hidden={index >= testimonials.length}
-              >
-                <div className={`glass-card relative h-full overflow-hidden p-7`}>
-                  <Quote className="absolute -right-6 -bottom-8 h-32 w-32 text-white/[0.035]" />
-                  <StarRow className="mb-6" />
-                  <h2 className="site-heading mb-5 text-xl font-semibold leading-snug text-white">{item.title}</h2>
-                  <p className="relative text-base italic leading-8 text-gray-300">{item.quote}</p>
-                  <div className="relative mt-8 flex items-center gap-4">
-                    <div className="flex h-13 w-13 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-magenta via-gold to-orange text-sm font-bold text-white shadow-[0_0_22px_rgba(233,30,99,0.22)]">
-                      {item.initials}
-                    </div>
-                    <div>
-                      <p className="font-semibold text-white">{item.name}</p>
-                      <p className="text-sm text-gray-400">{item.role}</p>
+            <motion.div
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="testimonial-scroll-wrap"
+            >
+              {[...testimonials, ...testimonials].map((item, index) => (
+                <motion.article
+                  key={`${item.title}-${index}`}
+                  variants={fadeUp}
+                  className="testimonial-scroll-item" aria-hidden={index >= testimonials.length}
+                >
+                  <div className={`bg-white rounded-[2rem] border border-[#E8DFD5] shadow-sm relative h-full overflow-hidden p-8 flex flex-col transition-shadow hover:shadow-md`}>
+                    <Quote className="absolute -right-6 -bottom-6 h-36 w-36 text-[#FAF7F2]" />
+                    <StarRow className="mb-6" />
+                    <h2 className="font-['Playfair_Display',serif] mb-5 text-[22px] font-bold leading-snug text-[#4A2F1D]">{item.title}</h2>
+                    <p className="relative text-[14.5px] font-medium leading-relaxed text-[#7C5A48] flex-grow">{item.quote}</p>
+                    <div className="relative mt-8 flex items-center gap-4">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#FAF7F2] border-[1.5px] border-[#D5C5B9] text-sm font-bold text-[#A67C65]">
+                        {item.initials}
+                      </div>
+                      <div>
+                        <p className="font-bold text-[#4A2F1D]">{item.name}</p>
+                        <p className="text-xs font-medium text-[#A67C65]">{item.role}</p>
+                      </div>
                     </div>
                   </div>
-                  <span className={`absolute left-7 top-0 h-1 w-16 rounded-full ${index % 2 === 0 ? 'bg-magenta' : 'bg-orange'}`} />
-                </div>
-              </motion.article>
-            ))}
-          </motion.div>
+                </motion.article>
+              ))}
+            </motion.div>
           </div>
         </div>
       </section>
