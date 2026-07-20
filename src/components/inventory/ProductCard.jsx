@@ -30,7 +30,6 @@ const ProductCard = ({ product, cartItem, onUpdateQuantity }) => {
       </div>
       
       <div className="p-6 flex flex-col flex-grow">
-        <div className="text-[11px] text-[#A67C65] font-bold tracking-widest uppercase mb-2">{product.code}</div>
         <h3 className="text-xl font-bold text-[#4A2F1D] mb-2 leading-tight font-['Playfair_Display',serif]">{product.name}</h3>
         
         <div className="flex justify-between items-center mb-5">
