@@ -14,7 +14,7 @@ const {
   uploadProductImage,
   deleteProductImage
 } = require('../controllers/productImageController');
-const { protect } = require('../middleware/authMiddleware');
+const { protect, optionalAuth } = require('../middleware/authMiddleware');
 const { uploadMiddleware } = require('../middleware/uploadMiddleware');
 const rateLimit = require('express-rate-limit');
 
@@ -28,8 +28,8 @@ router.delete('/clear-inventory', protect, clearInventoryLimiter, clearInventory
 router.delete('/clear-department', protect, clearInventoryLimiter, require('../controllers/productController').clearDepartmentInventory);
 router.delete('/clear-test-data', protect, clearInventoryLimiter, clearTestData);
 
-router.get('/departments', getDepartments);
-router.get('/', getProducts);
+router.get('/departments', optionalAuth, getDepartments);
+router.get('/', optionalAuth, getProducts);
 router.post('/', protect, createProduct);
 
 router.get('/:id', getProductById);

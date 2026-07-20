@@ -34,6 +34,11 @@ exports.getCategories = async (req, res) => {
       matchStage.isActive = true;
     }
 
+    if (!req.admin) {
+      const hiddenCategories = [/^rj inventory$/i, /^raaga inventory$/i, /^raaga party hall$/i, /^cable inventory$/i];
+      matchStage.name = { $nin: hiddenCategories };
+    }
+
     if (search) {
       matchStage.$or = [
         { name: { $regex: search, $options: 'i' } },

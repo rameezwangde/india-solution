@@ -40,6 +40,18 @@ exports.getProducts = async (req, res) => {
       query.status = { $ne: 'hidden' };
     }
 
+    // Hide specific departments/categories from public users
+    if (!req.admin) {
+      const hiddenNames = [/^rj inventory$/i, /^raaga inventory$/i, /^raaga party hall$/i, /^cable inventory$/i];
+      query.department = { $nin: hiddenNames };
+      
+      // Also exclude products that belong to categories with these names
+      const hiddenCategories = await Category.find({ name: { $in: hiddenNames } }).select('_id');
+      if (hiddenCategories.length > 0) {
+        query.category = { $nin: hiddenCategories.map(c => c._id) };
+      }
+    }
+
     if (search) {
       query.$or = [
         { name: { $regex: search, $options: 'i' } },
@@ -50,17 +62,34 @@ exports.getProducts = async (req, res) => {
     }
 
     if (category) {
+      let targetCatId = null;
       if (category.match(/^[0-9a-fA-F]{24}$/)) {
-        query.category = category;
+        targetCatId = category;
       } else {
         const cat = await Category.findOne({ slug: category });
-        if (cat) query.category = cat._id;
-        else return res.status(200).json({ success: true, count: 0, total: 0, page: 1, pages: 1, products: [] });
+        if (cat) targetCatId = cat._id;
       }
+
+      if (!targetCatId) {
+        return res.status(200).json({ success: true, count: 0, total: 0, page: 1, pages: 1, products: [] });
+      }
+
+      if (query.category && query.category.$nin) {
+        // If the requested category is hidden, return 0 products
+        const isHidden = query.category.$nin.some(id => id.toString() === targetCatId.toString());
+        if (isHidden) {
+          return res.status(200).json({ success: true, count: 0, total: 0, page: 1, pages: 1, products: [] });
+        }
+      }
+      query.category = targetCatId;
     }
 
     if (department) {
-      query.department = { $regex: new RegExp(`^${department}$`, 'i') };
+      if (query.department && query.department.$nin) {
+        query.department = { ...query.department, $regex: new RegExp(`^${department}$`, 'i') };
+      } else {
+        query.department = { $regex: new RegExp(`^${department}$`, 'i') };
+      }
     }
 
     if (featured === 'true' || featured === 'false') {
@@ -450,7 +479,20 @@ exports.clearTestData = async (req, res) => {
 // @access  Public/Admin
 exports.getDepartments = async (req, res) => {
   try {
-    const departments = await Product.aggregate([
+    let matchStage = {};
+    
+    // Hide specific departments from public users
+    if (!req.admin) {
+      const hiddenDepartments = [/^rj inventory$/i, /^raaga inventory$/i, /^raaga party hall$/i, /^cable inventory$/i];
+      matchStage = { department: { $nin: hiddenDepartments } };
+    }
+
+    const pipeline = [];
+    if (Object.keys(matchStage).length > 0) {
+      pipeline.push({ $match: matchStage });
+    }
+
+    pipeline.push(
       {
         $group: {
           _id: "$department",
@@ -476,7 +518,9 @@ exports.getDepartments = async (req, res) => {
       {
         $sort: { _id: 1 }
       }
-    ]);
+    );
+
+    const departments = await Product.aggregate(pipeline);
 
     const formatted = departments.map(d => {
       const name = d._id || 'Main Inventory';
