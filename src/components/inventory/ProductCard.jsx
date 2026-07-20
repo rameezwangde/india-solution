@@ -23,7 +23,7 @@ const ProductCard = ({ product, cartItem, onUpdateQuantity }) => {
     >
       <div className="relative aspect-[4/3] overflow-hidden">
         <img 
-          src={product.image} 
+          src={product.image || null} 
           alt={product.name} 
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
         />

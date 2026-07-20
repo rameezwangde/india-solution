@@ -44,7 +44,7 @@ const InventoryDemo = () => {
       try {
         setLoading(true);
         const [fetchedProducts, fetchedCategories] = await Promise.all([
-          getProducts({ limit: 100 }),
+          getProducts({ limit: 2000 }),
           getCategories()
         ]);
         if (isMounted) {
@@ -69,7 +69,11 @@ const InventoryDemo = () => {
     return products.filter(product => {
       const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
                             product.code.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesCategory = activeCategory === 'All' || product.category === activeCategory;
+      const matchesCategory = activeCategory === 'All' || 
+        (product.category && activeCategory && 
+         product.category.trim().toLowerCase() === activeCategory.trim().toLowerCase()) ||
+        (product.department && activeCategory && 
+         product.department.trim().toLowerCase() === activeCategory.trim().toLowerCase());
       return matchesSearch && matchesCategory;
     });
   }, [searchQuery, activeCategory, products]);

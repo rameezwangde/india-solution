@@ -84,7 +84,7 @@ exports.getProducts = async (req, res) => {
 
     const pageNum = parseInt(page, 10) || 1;
     let limitNum = parseInt(limit, 10) || 12;
-    if (limitNum > 100) limitNum = 100;
+    if (limitNum > 5000) limitNum = 5000;
     const skip = (pageNum - 1) * limitNum;
 
     const total = await Product.countDocuments(query);
