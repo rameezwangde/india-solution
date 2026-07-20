@@ -68,7 +68,7 @@ const Navbar = () => {
               src="/text-logo-new.png"
               alt="India Solution"
               className="h-4 w-auto object-contain sm:h-5 mt-1 relative z-20"
-              style={{ filter: 'brightness(0) saturate(100%) invert(75%) sepia(74%) saturate(769%) hue-rotate(355deg) brightness(102%) contrast(106%)' }}
+              style={{ filter: 'brightness(0) saturate(100%) invert(51%) sepia(16%) saturate(1022%) hue-rotate(339deg) brightness(90%) contrast(85%)' }}
             />
             <img
               src="/text-logo-2.png"

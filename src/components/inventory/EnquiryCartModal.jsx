@@ -100,22 +100,22 @@ const EnquiryCartModal = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemo
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={handleClose}
-          className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+          className="absolute inset-0 bg-black/40 backdrop-blur-sm"
         />
         
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          className="relative w-full max-w-4xl bg-navy-900 border border-white/10 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
+          className="relative w-full max-w-4xl bg-white border border-[#E8DFD5] rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
         >
           {/* Header */}
-          <div className="flex items-center justify-between p-6 border-b border-white/5 bg-white/5">
-            <h2 className="text-2xl font-bold text-white">Enquiry Cart</h2>
+          <div className="flex items-center justify-between p-6 border-b border-[#E8DFD5] bg-[#FAF7F2]">
+            <h2 className="text-2xl font-bold text-[#4A2F1D]">Enquiry Cart</h2>
             <button
               onClick={handleClose}
               disabled={isSubmitting}
-              className="text-gray-400 hover:text-white transition-colors p-2 hover:bg-white/10 rounded-full disabled:opacity-50"
+              className="text-[#7C5A48] hover:text-[#4A2F1D] transition-colors p-2 hover:bg-[#FAF7F2] rounded-full disabled:opacity-50"
             >
               <X size={24} />
             </button>
@@ -128,17 +128,17 @@ const EnquiryCartModal = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemo
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <h3 className="text-3xl font-bold text-white mb-2">Enquiry Submitted Successfully</h3>
-              <p className="text-gray-400 mb-6 text-lg">Your reference number is:</p>
-              <div className="bg-white/5 border border-white/10 rounded-xl px-8 py-4 mb-8">
-                <span className="text-4xl font-mono font-bold text-magenta tracking-wider">{referenceNumber}</span>
+              <h3 className="text-3xl font-bold text-[#4A2F1D] mb-2">Enquiry Submitted Successfully</h3>
+              <p className="text-[#7C5A48] mb-6 text-lg">Your reference number is:</p>
+              <div className="bg-[#FAF7F2] border border-[#E8DFD5] rounded-xl px-8 py-4 mb-8">
+                <span className="text-4xl font-mono font-bold text-[#A67C65] tracking-wider">{referenceNumber}</span>
               </div>
-              <p className="text-gray-400 max-w-md">
+              <p className="text-[#7C5A48] max-w-md">
                 Our team will review your requirements and get back to you shortly with a formal quotation.
               </p>
               <button 
                 onClick={handleClose}
-                className="mt-8 px-8 py-3 bg-white/10 hover:bg-white/20 text-white rounded-xl transition-colors font-medium"
+                className="mt-8 px-8 py-3 bg-[#FAF7F2] hover:bg-white/20 text-[#4A2F1D] rounded-xl transition-colors font-medium"
               >
                 Close Window
               </button>
@@ -146,44 +146,44 @@ const EnquiryCartModal = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemo
           ) : (
             <div className="flex flex-col md:flex-row flex-grow overflow-hidden">
               {/* Cart Items */}
-              <div className="flex-1 p-6 overflow-y-auto border-r border-white/5 md:border-b-0 border-b">
-                <h3 className="text-lg font-medium text-white mb-4">Selected Items</h3>
+              <div className="flex-1 p-6 overflow-y-auto border-r border-[#E8DFD5] md:border-b-0 border-b">
+                <h3 className="text-lg font-medium text-[#4A2F1D] mb-4">Selected Items</h3>
                 {cartItems.length === 0 ? (
-                  <div className="text-gray-500 text-center py-8">Your enquiry cart is empty.</div>
+                  <div className="text-[#A67C65] text-center py-8">Your enquiry cart is empty.</div>
                 ) : (
                   <div className="space-y-4">
                     {cartItems.map((item) => (
-                      <div key={item.id} className="flex gap-4 p-4 rounded-xl bg-white/5 border border-white/5">
-                        <img src={item.image} alt={item.name} className="w-20 h-20 object-cover rounded-lg bg-black/20" />
+                      <div key={item.id} className="flex gap-4 p-4 rounded-xl bg-[#FAF7F2] border border-[#E8DFD5]">
+                        <img src={item.image} alt={item.name} className="w-20 h-20 object-cover rounded-lg bg-[#FAF7F2]" />
                         <div className="flex-1 flex flex-col">
                           <div className="flex justify-between items-start">
                             <div>
-                              <div className="text-xs text-magenta">{item.code}</div>
-                              <div className="text-white font-medium">{item.name}</div>
-                              <div className="text-sm text-gray-400">{item.price}</div>
+                              <div className="text-xs text-[#A67C65]">{item.code}</div>
+                              <div className="text-[#4A2F1D] font-medium">{item.name}</div>
+                              <div className="text-sm text-[#7C5A48]">{item.price}</div>
                             </div>
                             <button
                               onClick={() => onRemoveItem(item.id)}
-                              className="text-gray-500 hover:text-red-500 transition-colors"
+                              className="text-[#A67C65] hover:text-red-500 transition-colors"
                             >
                               <Trash2 size={18} />
                             </button>
                           </div>
                           
                           <div className="mt-auto flex items-center justify-between">
-                            <div className="flex items-center gap-3 bg-white/10 rounded-full p-1 mt-2 w-fit">
+                            <div className="flex items-center gap-3 bg-[#FAF7F2] rounded-full p-1 mt-2 w-fit">
                               <button 
                                 onClick={() => onUpdateQuantity(item, item.selectedQuantity - 1)}
-                                className="w-6 h-6 flex items-center justify-center rounded-full hover:bg-white/20 transition-colors text-white text-sm"
+                                className="w-6 h-6 flex items-center justify-center rounded-full hover:bg-white/20 transition-colors text-[#4A2F1D] text-sm"
                               >
                                 -
                               </button>
-                              <span className="text-white font-medium w-4 text-center text-sm">{item.selectedQuantity}</span>
+                              <span className="text-[#4A2F1D] font-medium w-4 text-center text-sm">{item.selectedQuantity}</span>
                               <button 
                                 onClick={() => {
                                   onUpdateQuantity(item, item.selectedQuantity + 1);
                                 }}
-                                className="w-6 h-6 flex items-center justify-center rounded-full hover:bg-white/20 transition-colors text-white text-sm"
+                                className="w-6 h-6 flex items-center justify-center rounded-full hover:bg-white/20 transition-colors text-[#4A2F1D] text-sm"
                               >
                                 +
                               </button>
@@ -197,8 +197,8 @@ const EnquiryCartModal = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemo
               </div>
 
               {/* Form */}
-              <div className="w-full md:w-[350px] lg:w-[400px] p-6 overflow-y-auto bg-black/20">
-                <h3 className="text-lg font-medium text-white mb-4">Customer Details</h3>
+              <div className="w-full md:w-[350px] lg:w-[400px] p-6 overflow-y-auto bg-[#FAF7F2]">
+                <h3 className="text-lg font-medium text-[#4A2F1D] mb-4">Customer Details</h3>
                 
                 {error && (
                   <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
@@ -215,7 +215,7 @@ const EnquiryCartModal = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemo
                       required
                       value={formData.customerName}
                       onChange={handleChange}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:border-magenta transition-colors"
+                      className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-xl px-4 py-3 text-[#4A2F1D] placeholder:text-[#A67C65] focus:outline-none focus:border-[#A67C65] focus:ring-1 focus:ring-[#A67C65] transition-colors"
                     />
                   </div>
                   <div>
@@ -225,7 +225,7 @@ const EnquiryCartModal = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemo
                       placeholder="Company Name"
                       value={formData.companyName}
                       onChange={handleChange}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:border-magenta transition-colors"
+                      className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-xl px-4 py-3 text-[#4A2F1D] placeholder:text-[#A67C65] focus:outline-none focus:border-[#A67C65] focus:ring-1 focus:ring-[#A67C65] transition-colors"
                     />
                   </div>
                   <div>
@@ -236,7 +236,7 @@ const EnquiryCartModal = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemo
                       required
                       value={formData.phone}
                       onChange={handleChange}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:border-magenta transition-colors"
+                      className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-xl px-4 py-3 text-[#4A2F1D] placeholder:text-[#A67C65] focus:outline-none focus:border-[#A67C65] focus:ring-1 focus:ring-[#A67C65] transition-colors"
                     />
                   </div>
                   <div>
@@ -246,7 +246,7 @@ const EnquiryCartModal = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemo
                       placeholder="Email Address"
                       value={formData.email}
                       onChange={handleChange}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:border-magenta transition-colors"
+                      className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-xl px-4 py-3 text-[#4A2F1D] placeholder:text-[#A67C65] focus:outline-none focus:border-[#A67C65] focus:ring-1 focus:ring-[#A67C65] transition-colors"
                     />
                   </div>
                   
@@ -257,7 +257,7 @@ const EnquiryCartModal = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemo
                         name="eventDate"
                         value={formData.eventDate}
                         onChange={handleChange}
-                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-gray-400 focus:text-white focus:outline-none focus:border-magenta transition-colors [color-scheme:dark]"
+                        className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-xl px-4 py-3 text-[#7C5A48] focus:text-[#4A2F1D] focus:outline-none focus:border-[#A67C65] focus:ring-1 focus:ring-[#A67C65] transition-colors "
                       />
                     </div>
                   </div>
@@ -270,7 +270,7 @@ const EnquiryCartModal = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemo
                         placeholder="City"
                         value={formData.city}
                         onChange={handleChange}
-                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:border-magenta transition-colors"
+                        className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-xl px-4 py-3 text-[#4A2F1D] placeholder:text-[#A67C65] focus:outline-none focus:border-[#A67C65] focus:ring-1 focus:ring-[#A67C65] transition-colors"
                       />
                     </div>
                     <div className="flex-1">
@@ -280,7 +280,7 @@ const EnquiryCartModal = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemo
                         placeholder="Venue / Area"
                         value={formData.eventLocation}
                         onChange={handleChange}
-                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:border-magenta transition-colors"
+                        className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-xl px-4 py-3 text-[#4A2F1D] placeholder:text-[#A67C65] focus:outline-none focus:border-[#A67C65] focus:ring-1 focus:ring-[#A67C65] transition-colors"
                       />
                     </div>
                   </div>
@@ -292,14 +292,14 @@ const EnquiryCartModal = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemo
                       rows={3}
                       value={formData.notes}
                       onChange={handleChange}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:border-magenta transition-colors resize-none"
+                      className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-xl px-4 py-3 text-[#4A2F1D] placeholder:text-[#A67C65] focus:outline-none focus:border-[#A67C65] focus:ring-1 focus:ring-[#A67C65] transition-colors resize-none"
                     ></textarea>
                   </div>
                   
                   <button
                     type="submit"
                     disabled={cartItems.length === 0 || isSubmitting}
-                    className="w-full bg-gradient-to-r from-magenta to-orange hover:glow-magenta text-white font-bold py-4 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-4 flex items-center justify-center gap-2"
+                    className="w-full bg-[#A67C65] text-white hover:bg-[#8B5E45] hover:shadow-md text-[#4A2F1D] font-bold py-4 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-4 flex items-center justify-center gap-2"
                   >
                     {isSubmitting ? (
                       <>

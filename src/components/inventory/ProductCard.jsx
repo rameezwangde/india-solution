@@ -38,9 +38,7 @@ const ProductCard = ({ product, cartItem, onUpdateQuantity }) => {
           <p className="text-[13px] font-bold text-[#A67C65]">Available: {product.quantity - currentQuantity}</p>
         </div>
         
-        <div className="mt-auto flex items-center justify-between pt-4 border-t border-[#E8DFD5]">
-          <div className="font-bold text-[#4A2F1D]">{product.price}</div>
-          
+        <div className="mt-auto flex items-center justify-end pt-4 border-t border-[#E8DFD5]">
           {product.quantity === 0 ? (
             <button 
               disabled

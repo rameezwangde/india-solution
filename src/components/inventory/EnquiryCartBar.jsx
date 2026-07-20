@@ -14,21 +14,21 @@ const EnquiryCartBar = ({ cartItems, onViewCart }) => {
           className="fixed bottom-0 left-0 right-0 z-50 p-4 pointer-events-none"
         >
           <div className="container mx-auto max-w-4xl">
-            <div className="bg-[#12182A]/95 backdrop-blur-xl border border-magenta/30 rounded-2xl p-4 shadow-[0_0_40px_rgba(233,30,99,0.3)] flex items-center justify-between pointer-events-auto">
+            <div className="bg-white/95 backdrop-blur-xl border border-[#E8DFD5] rounded-2xl p-4 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] flex items-center justify-between pointer-events-auto">
               <div className="flex items-center gap-4">
-                <div className="bg-magenta/20 p-3 rounded-xl text-magenta">
+                <div className="bg-[#FAF7F2] border border-[#E8DFD5] p-3 rounded-xl text-[#A67C65]">
                   <ShoppingBag size={24} />
                 </div>
                 <div>
-                  <div className="text-gray-300 text-sm">Enquiry Cart</div>
-                  <div className="text-white font-bold text-lg">
+                  <div className="text-[#A67C65] text-sm">Enquiry Cart</div>
+                  <div className="text-[#4A2F1D] font-bold text-lg">
                     {totalItems} {totalItems === 1 ? 'Item' : 'Items'} Selected
                   </div>
                 </div>
               </div>
               <button
                 onClick={onViewCart}
-                className="bg-gradient-to-r from-magenta to-orange hover:glow-magenta text-white px-6 py-3 rounded-full font-medium transition-all"
+                className="bg-[#A67C65] text-white hover:bg-[#8B5E45] hover:shadow-md text-[#4A2F1D] px-6 py-3 rounded-full font-medium transition-all"
               >
                 View Enquiry Cart
               </button>

@@ -15,7 +15,7 @@ const Footer = () => {
 
           {/* Brand */}
           <div>
-            <Link to="/" className="mb-6 inline-flex flex-col items-start gap-1" aria-label="India Solution home">
+            <Link to="/" className="mb-6 inline-flex flex-col items-center justify-center gap-0" aria-label="India Solution home">
               <img
                 src="/logo-only.png"
                 alt="India Solution Logo"
@@ -25,7 +25,7 @@ const Footer = () => {
                 src="/text-logo-new.png"
                 alt="India Solution"
                 className="h-4 w-auto object-contain relative z-20"
-                style={{ filter: 'brightness(0) sepia(1) hue-rotate(330deg) saturate(3) opacity(0.85)' }}
+                style={{ filter: 'brightness(0) saturate(100%) invert(51%) sepia(16%) saturate(1022%) hue-rotate(339deg) brightness(90%) contrast(85%)' }}
               />
               <img
                 src="/text-logo-2.png"

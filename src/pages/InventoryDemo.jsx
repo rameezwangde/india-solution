@@ -126,14 +126,14 @@ const InventoryDemo = () => {
         <div className="max-w-3xl mb-12">
           <div className="flex items-center gap-3 mb-6">
             <span className="h-[1px] w-12 bg-gradient-to-r from-transparent to-[#D5C5B9]"></span>
-            <span className="text-[#A67C65] text-xs font-bold tracking-[0.25em] uppercase">Inventory Demo</span>
+            <span className="text-[#A67C65] text-xs font-bold tracking-[0.25em] uppercase">Our Catalog</span>
           </div>
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="font-['Playfair_Display',serif] text-5xl md:text-6xl font-bold text-[#4A2F1D] tracking-wide mb-6 uppercase"
           >
-            Inventory Enquiry <span className="text-[#A67C65]">Demo</span>
+            Our <span className="text-[#A67C65]">Products</span>
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}

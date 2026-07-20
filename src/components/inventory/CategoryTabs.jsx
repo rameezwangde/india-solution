@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 
 const CategoryTabs = ({ categories, activeCategory, onSelectCategory }) => {
   return (
-    <div className="flex flex-wrap gap-3 mb-10">
+    <div className="flex flex-wrap justify-center gap-3 mb-10">
       {categories.map((category) => {
         const isActive = activeCategory === category;
         return (

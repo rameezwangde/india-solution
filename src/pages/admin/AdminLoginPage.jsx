@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useNavigate, useLocation, Navigate } from 'react-router-dom';
+import { useNavigate, useLocation, Navigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Eye, EyeOff, Loader2, Mail, Lock, ShieldCheck, Box, MessageSquare, BarChart2 } from 'lucide-react';
+import { Eye, EyeOff, Loader2, Mail, Lock, ShieldCheck, Box, MessageSquare, BarChart2, ArrowLeft } from 'lucide-react';
 import { useAdminAuth } from '../../context/AdminAuthContext';
 
 const AdminLoginPage = () => {
@@ -81,6 +81,17 @@ const AdminLoginPage = () => {
           transition={{ duration: 0.6 }}
           className="text-center xl:text-left flex flex-col items-center xl:items-start"
         >
+          {/* Back Button */}
+          <Link 
+            to="/" 
+            className="flex items-center gap-2 text-[#A67C65] hover:text-[#C0602F] font-bold text-sm tracking-wider uppercase mb-8 transition-colors group"
+          >
+            <span className="p-2 rounded-full bg-white border border-[#E8DFD5] group-hover:border-[#C0602F]/50 group-hover:shadow-sm transition-all shadow-sm">
+              <ArrowLeft size={16} strokeWidth={2.5} />
+            </span>
+            Back to Website
+          </Link>
+
           {/* Logo Kept As Is */}
           <img src="/FULL LOGO COLOUR (1)-1.png" alt="India Solution" className="h-24 md:h-28 mb-12 object-contain" onError={(e) => { e.target.onerror = null; e.target.src="/india-solution-logo.png" }} />
           
