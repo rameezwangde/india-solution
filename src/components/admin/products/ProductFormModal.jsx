@@ -116,9 +116,9 @@ const ProductFormModal = ({ isOpen, onClose, product, onSuccess }) => {
           initial={{ scale: 0.95, opacity: 0, y: 20 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.95, opacity: 0, y: 20 }}
-          className="bg-navy-800 border border-[#E8DFD5] rounded-2xl w-full max-w-2xl shadow-2xl relative my-8"
+          className="bg-white border border-[#E8DFD5] rounded-2xl w-full max-w-2xl shadow-2xl relative my-8"
         >
-          <div className="sticky top-0 bg-navy-800 border-b border-[#E8DFD5] p-6 rounded-t-2xl flex items-center justify-between z-10">
+          <div className="sticky top-0 bg-white border-b border-[#E8DFD5] p-6 rounded-t-2xl flex items-center justify-between z-10">
             <h3 className="text-xl font-bold text-[#4A2F1D]">{product ? 'Edit Product' : 'Add New Product'}</h3>
             <button onClick={onClose} disabled={loading} className="text-[#A67C65] hover:text-[#4A2F1D] transition-colors">
               <X size={24} />
@@ -129,16 +129,16 @@ const ProductFormModal = ({ isOpen, onClose, product, onSuccess }) => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
                 <label className="text-sm font-medium text-[#7C5A48]">Product Name *</label>
-                <input required type="text" name="name" value={formData.name} onChange={handleChange} className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-magenta focus:outline-none" />
+                <input required type="text" name="name" value={formData.name} onChange={handleChange} className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-[#A67C65] focus:outline-none" />
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium text-[#7C5A48]">Product Code</label>
-                <input type="text" name="productCode" value={formData.productCode} onChange={handleChange} className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-magenta focus:outline-none" />
+                <input type="text" name="productCode" value={formData.productCode} onChange={handleChange} className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-[#A67C65] focus:outline-none" />
               </div>
               
               <div className="space-y-2">
                 <label className="text-sm font-medium text-[#7C5A48]">Category *</label>
-                <select required name="category" value={formData.category} onChange={handleChange} className="w-full bg-white border border-[#E8DFD5] rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-magenta focus:outline-none">
+                <select required name="category" value={formData.category} onChange={handleChange} className="w-full bg-white border border-[#E8DFD5] rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-[#A67C65] focus:outline-none">
                   <option value="">Select Category</option>
                   {categories.map(c => (
                     <option key={c._id} value={c._id}>{c.name}</option>
@@ -147,16 +147,16 @@ const ProductFormModal = ({ isOpen, onClose, product, onSuccess }) => {
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium text-[#7C5A48]">Department</label>
-                <input type="text" name="department" value={formData.department} onChange={handleChange} className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-magenta focus:outline-none" />
+                <input type="text" name="department" value={formData.department} onChange={handleChange} className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-[#A67C65] focus:outline-none" />
               </div>
 
               <div className="space-y-2">
                 <label className="text-sm font-medium text-[#7C5A48]">Size / Specifications</label>
-                <input type="text" name="size" value={formData.size} onChange={handleChange} className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-magenta focus:outline-none" />
+                <input type="text" name="size" value={formData.size} onChange={handleChange} className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-[#A67C65] focus:outline-none" />
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium text-[#7C5A48]">Status</label>
-                <select name="status" value={formData.status} onChange={handleChange} className="w-full bg-white border border-[#E8DFD5] rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-magenta focus:outline-none">
+                <select name="status" value={formData.status} onChange={handleChange} className="w-full bg-white border border-[#E8DFD5] rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-[#A67C65] focus:outline-none">
                   <option value="available">Available</option>
                   <option value="out_of_stock">Out of Stock</option>
                   <option value="hidden">Hidden</option>
@@ -165,21 +165,21 @@ const ProductFormModal = ({ isOpen, onClose, product, onSuccess }) => {
 
               <div className="space-y-2">
                 <label className="text-sm font-medium text-[#7C5A48]">Price (₹) *</label>
-                <input required type="number" min="0" name="price" value={formData.price} onChange={handleChange} className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-magenta focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" />
+                <input required type="number" min="0" name="price" value={formData.price} onChange={handleChange} className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-[#A67C65] focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" />
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium text-[#7C5A48]">Quantity *</label>
-                <input required type="number" min="0" name="quantity" value={formData.quantity} onChange={handleChange} className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-magenta focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" />
+                <input required type="number" min="0" name="quantity" value={formData.quantity} onChange={handleChange} className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-[#A67C65] focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" />
               </div>
             </div>
 
             <div className="space-y-2">
               <label className="text-sm font-medium text-[#7C5A48]">Description</label>
-              <textarea rows="3" name="description" value={formData.description} onChange={handleChange} className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-magenta focus:outline-none resize-none"></textarea>
+              <textarea rows="3" name="description" value={formData.description} onChange={handleChange} className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-[#A67C65] focus:outline-none resize-none"></textarea>
             </div>
 
             <div className="flex items-center gap-3 bg-[#FAF7F2] p-4 rounded-lg border border-[#E8DFD5]">
-              <input type="checkbox" id="isFeatured" name="isFeatured" checked={formData.isFeatured} onChange={handleChange} className="w-5 h-5 rounded border-white/20 text-[#9A424E] focus:ring-magenta focus:ring-offset-navy-800 bg-transparent" />
+              <input type="checkbox" id="isFeatured" name="isFeatured" checked={formData.isFeatured} onChange={handleChange} className="w-5 h-5 rounded border-[#E8DFD5] text-[#9A424E] focus:ring-[#A67C65] focus:ring-offset-white bg-transparent" />
               <label htmlFor="isFeatured" className="text-sm font-medium text-[#4A2F1D] cursor-pointer select-none">
                 Mark as Featured Product
               </label>
