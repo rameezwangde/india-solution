@@ -7,8 +7,7 @@ import EnquiryCartBar from '../components/inventory/EnquiryCartBar';
 import EnquiryCartModal from '../components/inventory/EnquiryCartModal';
 import { useCart } from '../context/CartContext';
 
-import { getProducts } from '../api/productService';
-import { getCategories } from '../api/categoryService';
+import { getProducts, getDepartments } from '../api/productService';
 
 const ProductSkeleton = () => (
   <div className="bg-white border border-[#E8DFD5] shadow-sm rounded-[1.5rem] overflow-hidden flex flex-col h-full animate-pulse">
@@ -45,13 +44,15 @@ const InventoryDemo = () => {
     const fetchInventory = async () => {
       try {
         setLoading(true);
-        const [fetchedProducts, fetchedCategories] = await Promise.all([
+        const [fetchedProducts, fetchedDepartments] = await Promise.all([
           getProducts({ limit: 2000 }),
-          getCategories()
+          getDepartments()
         ]);
         if (isMounted) {
           setProducts(fetchedProducts.products);
-          setCategories(['All', ...fetchedCategories.map(c => c.name)]);
+          // Filter out hidden departments just in case (though backend already filters for non-admins)
+          const visibleDepts = (fetchedDepartments.departments || []).filter(d => !d.isHidden);
+          setCategories(['All', ...visibleDepts.map(d => d.name)]);
         }
       } catch (err) {
         if (isMounted) {
@@ -66,19 +67,17 @@ const InventoryDemo = () => {
     return () => { isMounted = false; };
   }, []);
 
-  // Filter products based on search and category
+  // Filter products based on active department tab and search query
   const filteredProducts = useMemo(() => {
     return products.filter(product => {
       const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                            product.code.toLowerCase().includes(searchQuery.toLowerCase());
+                          (product.productCode && product.productCode.toLowerCase().includes(searchQuery.toLowerCase()));
       const matchesCategory = activeCategory === 'All' || 
-        (product.category && activeCategory && 
-         product.category.trim().toLowerCase() === activeCategory.trim().toLowerCase()) ||
-        (product.department && activeCategory && 
-         product.department.trim().toLowerCase() === activeCategory.trim().toLowerCase());
+                              (product.department && product.department.toLowerCase() === activeCategory.toLowerCase());
+      
       return matchesSearch && matchesCategory;
     });
-  }, [searchQuery, activeCategory, products]);
+  }, [products, searchQuery, activeCategory]);
 
   useEffect(() => {
     setDisplayLimit(20);

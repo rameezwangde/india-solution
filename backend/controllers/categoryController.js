@@ -1,5 +1,6 @@
 const Category = require('../models/Category');
 const Product = require('../models/Product');
+const DepartmentConfig = require('../models/DepartmentConfig');
 
 const generateSlug = (name) => {
   return name
@@ -35,8 +36,11 @@ exports.getCategories = async (req, res) => {
     }
 
     if (!req.admin) {
-      const hiddenCategories = [/^rj inventory$/i, /^raaga inventory$/i, /^raaga party hall$/i, /^cable inventory$/i];
-      matchStage.name = { $nin: hiddenCategories };
+      const hiddenConfigs = await DepartmentConfig.find({ isHidden: true }).lean();
+      const hiddenCategories = hiddenConfigs.map(c => new RegExp(`^${c.name}$`, 'i'));
+      if (hiddenCategories.length > 0) {
+        matchStage.name = { $nin: hiddenCategories };
+      }
     }
 
     if (search) {

@@ -108,7 +108,7 @@ const QTY_ALIASES = ['QNTY', 'QTY'];
 const SERIAL_ALIASES = ['SL NO', 'SL NO.'];
 
 // Main parsing logic
-const parseWorkbook = (buffer) => {
+const parseWorkbook = (buffer, fileName) => {
   const workbook = xlsx.read(buffer, { type: 'buffer' });
   const parsedSheets = [];
   let totalRowsFound = 0;
@@ -148,6 +148,17 @@ const parseWorkbook = (buffer) => {
     if (headerRowIdx === -1) continue; // Skip sheet if no header found
     
     let baseDepartment = normalizeSheetName(sheetName);
+    
+    if (fileName && (baseDepartment === 'Main Inventory' || sheetName.toUpperCase().startsWith('SHEET'))) {
+       const baseName = fileName.replace(/\.[^/.]+$/, "").trim(); // remove extension
+       const fileMappedName = normalizeSheetName(baseName);
+       if (fileMappedName !== 'Main Inventory') {
+           baseDepartment = fileMappedName;
+       } else if (baseName.length > 0) {
+           baseDepartment = baseName.replace(/\s+/g, ' ').split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
+       }
+    }
+    
     let currentDepartment = baseDepartment;
     let currentSection = '';
     
@@ -188,13 +199,22 @@ const parseWorkbook = (buffer) => {
       
       const productCodeRaw = colA; // Sl No
       
-      const mappedCategory = currentDepartment;
+      let mappedCategory = currentDepartment;
+      if (currentDepartment === 'Main Inventory' || currentDepartment.startsWith('Sheet')) {
+        mappedCategory = mapCategory(productNameRaw);
+      }
+      
+      // Update department to match category if it was auto-detected from generic sheet
+      const finalDepartment = (currentDepartment === 'Main Inventory' && mappedCategory !== 'Decor') 
+        ? `${mappedCategory} Inventory` 
+        : currentDepartment;
+
       const warnings = [];
       if (warning) warnings.push(warning);
       
       validRows.push({
         sheetName,
-        department: currentDepartment,
+        department: finalDepartment,
         inventorySection: currentSection,
         productCodeRaw,
         nameRaw: productNameRaw,
@@ -261,7 +281,7 @@ exports.previewInventoryWorkbook = async (req, res) => {
   try {
     if (!req.file) return res.status(400).json({ success: false, message: 'No file uploaded' });
     
-    const { parsedSheets, totalRowsFound } = parseWorkbook(req.file.buffer);
+    const { parsedSheets, totalRowsFound } = parseWorkbook(req.file.buffer, req.file.originalname);
     
     // Flatten valid rows
     let allValidRows = [];
@@ -360,7 +380,7 @@ exports.executeInventoryImport = async (req, res) => {
     const duplicateMode = req.body.duplicateMode || 'skip'; // skip, update_quantity, update_all
     const createMissingCategories = req.body.createMissingCategories === 'true';
     
-    const { parsedSheets } = parseWorkbook(req.file.buffer);
+    const { parsedSheets } = parseWorkbook(req.file.buffer, req.file.originalname);
     
     let allValidRows = [];
     let allInvalidRows = [];

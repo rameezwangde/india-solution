@@ -1,5 +1,6 @@
 const Product = require('../models/Product');
 const Category = require('../models/Category');
+const DepartmentConfig = require('../models/DepartmentConfig');
 const { ACTIVITY_TYPES, logActivity } = require('../services/activityLogger');
 
 const generateSlug = (name) => {
@@ -42,13 +43,17 @@ exports.getProducts = async (req, res) => {
 
     // Hide specific departments/categories from public users
     if (!req.admin) {
-      const hiddenNames = [/^rj inventory$/i, /^raaga inventory$/i, /^raaga party hall$/i, /^cable inventory$/i];
-      query.department = { $nin: hiddenNames };
+      const hiddenConfigs = await DepartmentConfig.find({ isHidden: true }).lean();
+      const hiddenNames = hiddenConfigs.map(c => new RegExp(`^${c.name}$`, 'i'));
       
-      // Also exclude products that belong to categories with these names
-      const hiddenCategories = await Category.find({ name: { $in: hiddenNames } }).select('_id');
-      if (hiddenCategories.length > 0) {
-        query.category = { $nin: hiddenCategories.map(c => c._id) };
+      if (hiddenNames.length > 0) {
+        query.department = { $nin: hiddenNames };
+        
+        // Also exclude products that belong to categories with these names
+        const hiddenCategories = await Category.find({ name: { $in: hiddenNames } }).select('_id');
+        if (hiddenCategories.length > 0) {
+          query.category = { $nin: hiddenCategories.map(c => c._id) };
+        }
       }
     }
 
@@ -483,8 +488,11 @@ exports.getDepartments = async (req, res) => {
     
     // Hide specific departments from public users
     if (!req.admin) {
-      const hiddenDepartments = [/^rj inventory$/i, /^raaga inventory$/i, /^raaga party hall$/i, /^cable inventory$/i];
-      matchStage = { department: { $nin: hiddenDepartments } };
+      const hiddenConfigs = await DepartmentConfig.find({ isHidden: true }).lean();
+      const hiddenDepartments = hiddenConfigs.map(c => new RegExp(`^${c.name}$`, 'i'));
+      if (hiddenDepartments.length > 0) {
+        matchStage = { department: { $nin: hiddenDepartments } };
+      }
     }
 
     const pipeline = [];
@@ -522,6 +530,13 @@ exports.getDepartments = async (req, res) => {
 
     const departments = await Product.aggregate(pipeline);
 
+    // Fetch configurations to attach isHidden flag
+    const allConfigs = await DepartmentConfig.find().lean();
+    const configMap = allConfigs.reduce((acc, curr) => {
+      acc[curr.name] = curr.isHidden;
+      return acc;
+    }, {});
+
     const formatted = departments.map(d => {
       const name = d._id || 'Main Inventory';
       return {
@@ -533,7 +548,8 @@ exports.getDepartments = async (req, res) => {
         outOfStock: d.outOfStock,
         lowStock: d.lowStock,
         activeProducts: d.activeProducts,
-        inactiveProducts: d.inactiveProducts
+        inactiveProducts: d.inactiveProducts,
+        isHidden: configMap[name] || false
       };
     });
 
@@ -544,5 +560,32 @@ exports.getDepartments = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// @desc    Toggle department visibility
+// @route   PUT /api/products/departments/visibility
+// @access  Private/Admin
+exports.toggleDepartmentVisibility = async (req, res) => {
+  try {
+    const { department, isHidden } = req.body;
+    
+    if (!department) {
+      return res.status(400).json({ success: false, message: 'Department name is required' });
+    }
+
+    const config = await DepartmentConfig.findOneAndUpdate(
+      { name: department },
+      { name: department, isHidden },
+      { new: true, upsert: true }
+    );
+
+    res.status(200).json({
+      success: true,
+      message: `Department ${department} is now ${isHidden ? 'hidden' : 'visible'}`,
+      config
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Failed to update department visibility: ' + error.message });
   }
 };

@@ -53,6 +53,11 @@ export const getDepartments = async () => {
   return response.data;
 };
 
+export const toggleDepartmentVisibility = async (department, isHidden) => {
+  const response = await api.put('/products/departments/visibility', { department, isHidden });
+  return response.data;
+};
+
 export const getProductById = async (id) => {
   const response = await api.get(`/products/${id}`);
   return response.data;

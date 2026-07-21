@@ -8,7 +8,8 @@ const {
   deleteProduct,
   clearInventory,
   getDepartments,
-  clearTestData
+  clearTestData,
+  toggleDepartmentVisibility
 } = require('../controllers/productController');
 const {
   uploadProductImage,
@@ -29,6 +30,7 @@ router.delete('/clear-department', protect, clearInventoryLimiter, require('../c
 router.delete('/clear-test-data', protect, clearInventoryLimiter, clearTestData);
 
 router.get('/departments', optionalAuth, getDepartments);
+router.put('/departments/visibility', protect, toggleDepartmentVisibility);
 router.get('/', optionalAuth, getProducts);
 router.post('/', protect, createProduct);
 

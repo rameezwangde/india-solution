@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Package, AlertTriangle, Box, Loader2, Info, Trash2 } from 'lucide-react';
-import { getDepartments, clearDepartmentInventory } from '../../api/productService';
+import { Package, AlertTriangle, Box, Loader2, Info, Trash2, Eye, EyeOff } from 'lucide-react';
+import { getDepartments, clearDepartmentInventory, toggleDepartmentVisibility } from '../../api/productService';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useToast } from '../../context/ToastContext';
 import ExportModal from '../../components/admin/products/ExportModal';
@@ -21,6 +21,7 @@ const AdminDepartmentsPage = () => {
   const [isDeleting, setIsDeleting] = useState(false);
 
   const [isExportModalOpen, setIsExportModalOpen] = useState(false);
+  const [toggling, setToggling] = useState(null);
 
   useEffect(() => {
     const fetchDepartments = async () => {
@@ -62,6 +63,27 @@ const AdminDepartmentsPage = () => {
       showError(err.response?.data?.message || 'Failed to clear department');
     } finally {
       setIsDeleting(false);
+    }
+  };
+
+  const handleToggleVisibility = async (departmentName, currentIsHidden) => {
+    setToggling(departmentName);
+    try {
+      const res = await toggleDepartmentVisibility(departmentName, !currentIsHidden);
+      if (res.success) {
+        setDepartments(prev => 
+          prev.map(dept => 
+            dept.name === departmentName 
+              ? { ...dept, isHidden: !currentIsHidden } 
+              : dept
+          )
+        );
+        showSuccess(res.message);
+      }
+    } catch (err) {
+      showError(err.response?.data?.message || 'Failed to toggle visibility');
+    } finally {
+      setToggling(null);
     }
   };
 
@@ -153,13 +175,33 @@ const AdminDepartmentsPage = () => {
                     <Package size={20} />
                   </div>
                   <h3 className="text-xl font-bold text-[#4A2F1D] flex-grow">{dept.name}</h3>
-                  <button 
-                    onClick={() => { setDepartmentToDelete(dept.name); setDeleteModalOpen(true); }}
-                    className="w-8 h-8 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-[#4A2F1D] flex items-center justify-center transition-colors"
-                    title="Clear Department Inventory"
-                  >
-                    <Trash2 size={16} />
-                  </button>
+                  <div className="flex items-center gap-2">
+                    <button 
+                      onClick={() => handleToggleVisibility(dept.name, dept.isHidden)}
+                      disabled={toggling === dept.name}
+                      className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${
+                        dept.isHidden 
+                          ? 'bg-gray-500/10 text-gray-500 hover:bg-gray-500/20' 
+                          : 'bg-green-500/10 text-green-600 hover:bg-green-500/20'
+                      }`}
+                      title={dept.isHidden ? "Currently hidden. Click to show." : "Currently visible. Click to hide."}
+                    >
+                      {toggling === dept.name ? (
+                        <Loader2 size={16} className="animate-spin" />
+                      ) : dept.isHidden ? (
+                        <EyeOff size={16} />
+                      ) : (
+                        <Eye size={16} />
+                      )}
+                    </button>
+                    <button 
+                      onClick={() => { setDepartmentToDelete(dept.name); setDeleteModalOpen(true); }}
+                      className="w-8 h-8 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white flex items-center justify-center transition-colors"
+                      title="Clear Department Inventory"
+                    >
+                      <Trash2 size={16} />
+                    </button>
+                  </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4 mb-6">
