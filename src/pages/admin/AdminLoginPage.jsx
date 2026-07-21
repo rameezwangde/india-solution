@@ -68,8 +68,8 @@ const AdminLoginPage = () => {
     <div className="min-h-screen bg-[#FAF7F2] flex items-center justify-center p-4 md:p-8 relative overflow-hidden font-sans">
       {/* Background Watermarks */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <img src="/hero-bg.png" alt="" className="absolute -left-40 top-0 w-[60%] h-full object-cover object-left opacity-30 mix-blend-multiply" />
-        <img src="/hero-bg.png" alt="" className="absolute -right-40 top-0 w-[60%] h-full object-cover object-right opacity-30 mix-blend-multiply" style={{ transform: 'scaleX(-1)'}} />
+        <img src="/hero-bg.png" alt="" className="absolute -left-40 top-0 w-[60%] h-full object-cover object-left opacity-[0.03]" />
+        <img src="/hero-bg.png" alt="" className="absolute -right-40 top-0 w-[60%] h-full object-cover object-right opacity-[0.03]" style={{ transform: 'scaleX(-1)'}} />
       </div>
 
       <div className="max-w-7xl w-full mx-auto grid grid-cols-1 xl:grid-cols-2 gap-12 lg:gap-24 z-10 items-center">

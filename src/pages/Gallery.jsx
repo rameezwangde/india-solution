@@ -177,7 +177,7 @@ const Gallery = () => {
         <img 
           src="/hero-bg.png" 
           alt="" 
-          className="w-full h-full object-cover object-center opacity-40 mix-blend-multiply"
+          className="w-full h-full object-cover object-center opacity-[0.03]"
         />
       </div>
 

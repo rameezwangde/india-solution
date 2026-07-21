@@ -97,7 +97,7 @@ const Home = () => {
           <img 
             src="/hero-bg.png" 
             alt="Background Floral Texture" 
-            className="w-full h-full object-cover object-center opacity-90 mix-blend-multiply"
+            className="w-full h-full object-cover object-center opacity-[0.03]"
           />
           {/* Bottom fade for smooth transition */}
           <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#FAF7F2] via-[#FAF7F2]/90 to-transparent z-10" />
@@ -197,7 +197,7 @@ const Home = () => {
       <section className="relative overflow-hidden px-5 py-24 sm:px-8 lg:px-12 bg-[#FAF7F2] font-sans">
         {/* Subtle left-aligned floral watermark */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-           <img src="/hero-bg.png" alt="" className="absolute -left-10 top-0 w-full md:w-[60%] h-full object-cover object-left opacity-70 mix-blend-multiply" style={{ maskImage: 'linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)'}} />
+           <img src="/hero-bg.png" alt="" className="absolute -left-10 top-0 w-full md:w-[60%] h-full object-cover object-left opacity-[0.03]" style={{ maskImage: 'linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)'}} />
         </div>
 
         <div className="container relative z-10 mx-auto max-w-[1300px]">
@@ -272,7 +272,7 @@ const Home = () => {
       <section className="relative overflow-hidden px-5 py-24 sm:px-8 lg:px-12 bg-[#FAF7F2] font-sans">
         {/* Subtle right-aligned floral watermark */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-           <img src="/hero-bg.png" alt="" className="absolute -right-10 top-0 w-full md:w-[60%] h-full object-cover object-right opacity-60 mix-blend-multiply" style={{ transform: 'scaleX(-1)', maskImage: 'linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)'}} />
+           <img src="/hero-bg.png" alt="" className="absolute -right-10 top-0 w-full md:w-[60%] h-full object-cover object-right opacity-[0.03]" style={{ transform: 'scaleX(-1)', maskImage: 'linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)'}} />
         </div>
         <div className="container relative z-10 mx-auto max-w-[1250px]">
           <div className="grid items-center gap-16 lg:grid-cols-[1.2fr_0.8fr] lg:gap-20">
@@ -328,8 +328,8 @@ const Home = () => {
       <section className="relative overflow-hidden bg-[#FAF7F2] px-5 py-24 sm:px-8 lg:px-12 font-sans">
         {/* Floral watermarks on both sides */}
         <div className="absolute inset-0 z-0 pointer-events-none">
-          <img src="/hero-bg.png" alt="" className="absolute -left-20 top-0 w-[40%] h-[120%] object-cover object-left opacity-40 mix-blend-multiply" style={{ maskImage: 'linear-gradient(to right, black 20%, transparent)'}} />
-          <img src="/hero-bg.png" alt="" className="absolute -right-20 top-0 w-[40%] h-[120%] object-cover object-left opacity-40 mix-blend-multiply" style={{ transform: 'scaleX(-1)', maskImage: 'linear-gradient(to right, black 20%, transparent)'}} />
+          <img src="/hero-bg.png" alt="" className="absolute -left-20 top-0 w-[40%] h-[120%] object-cover object-left opacity-[0.03]" style={{ maskImage: 'linear-gradient(to right, black 20%, transparent)'}} />
+          <img src="/hero-bg.png" alt="" className="absolute -right-20 top-0 w-[40%] h-[120%] object-cover object-left opacity-[0.03]" style={{ transform: 'scaleX(-1)', maskImage: 'linear-gradient(to right, black 20%, transparent)'}} />
         </div>
 
         <div className="container relative z-10 mx-auto max-w-[1300px]">

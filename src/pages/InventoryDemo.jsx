@@ -91,13 +91,13 @@ const InventoryDemo = () => {
         <img 
           src="/hero-bg.png" 
           alt="" 
-          className="absolute -right-20 top-0 w-full md:w-[60%] h-[120%] object-cover object-left opacity-30 mix-blend-multiply" 
+          className="absolute -right-20 top-0 w-full md:w-[60%] h-[120%] object-cover object-left opacity-[0.03]" 
           style={{ transform: 'scaleX(-1)'}} 
         />
         <img 
           src="/hero-bg.png" 
           alt="" 
-          className="absolute -left-20 top-1/4 w-full md:w-[60%] h-[120%] object-cover object-left opacity-20 mix-blend-multiply" 
+          className="absolute -left-20 top-1/4 w-full md:w-[60%] h-[120%] object-cover object-left opacity-[0.02]" 
         />
       </div>
 

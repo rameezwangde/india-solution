@@ -7,7 +7,7 @@ const Footer = () => {
     <footer className="bg-[#F3EAE0] pt-16 pb-8 relative overflow-hidden font-sans border-t border-[#E8DFD5]/50">
       {/* Subtle right-aligned floral watermark */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <img src="/hero-bg.png" alt="" className="absolute -right-20 bottom-0 w-[40%] h-[120%] object-cover object-left opacity-30 mix-blend-multiply" style={{ transform: 'scaleX(-1)'}} />
+        <img src="/hero-bg.png" alt="" className="absolute -right-20 bottom-0 w-[40%] h-[120%] object-cover object-left opacity-[0.03]" style={{ transform: 'scaleX(-1)'}} />
       </div>
 
       <div className="container relative z-10 mx-auto px-6 lg:px-12 max-w-[1300px]">
