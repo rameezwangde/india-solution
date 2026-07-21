@@ -32,32 +32,81 @@ const InventoryDemo = () => {
   const [activeCategory, setActiveCategory] = useState('All');
   const { cartItems, handleUpdateQuantity, handleRemoveItem, clearCart } = useCart();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [displayLimit, setDisplayLimit] = useState(20);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [debouncedSearchQuery, setDebouncedSearchQuery] = useState('');
   
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState(['All']);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Debounce search query
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearchQuery(searchQuery);
+    }, 500);
+    return () => clearTimeout(handler);
+  }, [searchQuery]);
+
+  // Reset page when filters change
+  useEffect(() => {
+    setPage(1);
+  }, [debouncedSearchQuery, activeCategory]);
+
+  // Fetch departments only once on mount
   useEffect(() => {
     let isMounted = true;
-    const fetchInventory = async () => {
+    const fetchDepts = async () => {
       try {
-        setLoading(true);
-        const [fetchedProducts, fetchedDepartments] = await Promise.all([
-          getProducts({ limit: 2000 }),
-          getDepartments()
-        ]);
+        const fetchedDepartments = await getDepartments();
         if (isMounted) {
-          setProducts(fetchedProducts.products);
-          // Filter out hidden departments just in case (though backend already filters for non-admins)
           const visibleDepts = (fetchedDepartments.departments || []).filter(d => !d.isHidden);
           setCategories(['All', ...visibleDepts.map(d => d.name)]);
         }
       } catch (err) {
+        console.error("Failed to load departments", err);
+      }
+    };
+    fetchDepts();
+    return () => { isMounted = false; };
+  }, []);
+
+  // Fetch products when page or filters change
+  useEffect(() => {
+    let isMounted = true;
+    const fetchInventory = async () => {
+      try {
+        if (page === 1) setLoading(true);
+        const params = {
+          limit: 20,
+          page: page,
+        };
+        if (activeCategory !== 'All') {
+          params.department = activeCategory;
+        }
+        if (debouncedSearchQuery.trim()) {
+          params.search = debouncedSearchQuery.trim();
+        }
+
+        const fetchedProducts = await getProducts(params);
+        if (isMounted) {
+          if (page === 1) {
+            setProducts(fetchedProducts.products);
+          } else {
+            setProducts(prev => {
+              const existingIds = new Set(prev.map(p => p.id));
+              const newProducts = fetchedProducts.products.filter(p => !existingIds.has(p.id));
+              return [...prev, ...newProducts];
+            });
+          }
+          setTotalPages(fetchedProducts.pagination?.totalPages || 1);
+          setError(null);
+        }
+      } catch (err) {
         if (isMounted) {
           console.error(err);
-          setError('Unable to load inventory');
+          if (page === 1) setError('Unable to load inventory');
         }
       } finally {
         if (isMounted) setLoading(false);
@@ -65,25 +114,7 @@ const InventoryDemo = () => {
     };
     fetchInventory();
     return () => { isMounted = false; };
-  }, []);
-
-  // Filter products based on active department tab and search query
-  const filteredProducts = useMemo(() => {
-    return products.filter(product => {
-      const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          (product.productCode && product.productCode.toLowerCase().includes(searchQuery.toLowerCase()));
-      const matchesCategory = activeCategory === 'All' || 
-                              (product.department && product.department.toLowerCase() === activeCategory.toLowerCase());
-      
-      return matchesSearch && matchesCategory;
-    });
-  }, [products, searchQuery, activeCategory]);
-
-  useEffect(() => {
-    setDisplayLimit(20);
-  }, [searchQuery, activeCategory]);
-
-  const displayedProducts = filteredProducts.slice(0, displayLimit);
+  }, [page, activeCategory, debouncedSearchQuery]);
   return (
     <div className="pt-32 min-h-screen bg-[#FAF7F2] font-sans flex flex-col relative pb-40 lg:pt-44">
       {/* Global Background Watermarks */}
@@ -193,7 +224,7 @@ const InventoryDemo = () => {
         {!loading && !error && (
           <>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-              {displayedProducts.map((product) => (
+              {products.map((product) => (
                 <ProductCard 
                   key={product.id} 
                   product={product} 
@@ -204,10 +235,10 @@ const InventoryDemo = () => {
             </div>
             
             {/* Load More Button */}
-            {displayLimit < filteredProducts.length && (
+            {page < totalPages && (
               <div className="flex justify-center mt-12">
                 <button
-                  onClick={() => setDisplayLimit(prev => prev + 20)}
+                  onClick={() => setPage(prev => prev + 1)}
                   className="bg-white border border-[#E8DFD5] hover:border-[#A67C65] text-[#4A2F1D] px-8 py-3 rounded-full text-sm font-bold uppercase tracking-widest shadow-sm hover:shadow-md transition-all duration-300"
                 >
                   Load More Inventory
@@ -218,7 +249,7 @@ const InventoryDemo = () => {
         )}
         
         {/* Empty State */}
-        {!loading && !error && filteredProducts.length === 0 && (
+        {!loading && !error && products.length === 0 && (
           <div className="text-center py-20 bg-white border border-[#E8DFD5] rounded-[1.5rem] shadow-sm mt-8">
             <p className="text-[#A67C65] font-semibold text-lg">No Inventory Available</p>
           </div>
