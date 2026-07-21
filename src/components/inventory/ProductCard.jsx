@@ -21,11 +21,11 @@ const ProductCard = ({ product, cartItem, onUpdateQuantity }) => {
       animate={{ opacity: 1, y: 0 }}
       className="bg-white border border-[#E8DFD5] shadow-sm rounded-[1.5rem] overflow-hidden hover:border-[#D5C5B9] hover:shadow-md transition-all duration-300 group flex flex-col"
     >
-      <div className="relative aspect-[4/3] overflow-hidden border-b border-[#E8DFD5]">
+      <div className="relative aspect-[4/3] overflow-hidden border-b border-[#E8DFD5] bg-[#FFFDF9] p-4 flex items-center justify-center">
         <img 
           src={product.image || null} 
           alt={product.name} 
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
         />
       </div>
       
