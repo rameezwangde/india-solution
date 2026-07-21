@@ -36,9 +36,9 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-[#FAF7F2]/90 backdrop-blur-md shadow-sm' : 'bg-transparent'}`}>
+    <nav className="absolute w-full z-50 bg-transparent">
       {/* Top Contact Strip */}
-      <div className={`hidden lg:block border-b border-[#8B5E45]/10 transition-all duration-300 ${isScrolled ? 'hidden' : 'block'}`}>
+      <div className="hidden lg:block border-b border-[#8B5E45]/10">
         <div className="container mx-auto px-6 lg:px-12 py-1.5 flex justify-between items-center text-[11px] text-[#5c4033] font-medium">
           <div className="flex items-center gap-6">
             <a href="tel:+916360181932" className="flex items-center gap-2 hover:text-[#946247] transition-colors">
@@ -63,19 +63,19 @@ const Navbar = () => {
             <img
               src="/logo-only.png"
               alt="India Solution Logo"
-              className="h-14 w-auto object-contain sm:h-16 relative z-10"
+              className="w-auto object-contain relative z-10 h-14 sm:h-16"
               style={{ filter: 'brightness(1)' }}
             />
             <img
               src="/text-logo-new.png"
               alt="India Solution"
-              className="h-5 w-auto object-contain sm:h-6 mt-1 relative z-20"
+              className="w-auto object-contain mt-1 relative z-20 h-5 sm:h-6"
               style={{ filter: 'brightness(0) saturate(100%) invert(51%) sepia(16%) saturate(1022%) hue-rotate(339deg) brightness(90%) contrast(85%)' }}
             />
             <img
               src="/text-logo-2.png"
               alt="Experience anything and everything"
-              className="h-3 w-auto object-contain sm:h-3.5 mt-0.5 relative z-30 opacity-70"
+              className="w-auto object-contain mt-0.5 relative z-30 opacity-70 h-3 sm:h-3.5"
               style={{ filter: 'brightness(0)' }}
             />
           </Link>
