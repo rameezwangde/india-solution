@@ -1,10 +1,10 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, lazy, Suspense } from 'react';
 import { Search, ChevronDown } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ProductCard from '../components/inventory/ProductCard';
 import CategoryTabs from '../components/inventory/CategoryTabs';
 import EnquiryCartBar from '../components/inventory/EnquiryCartBar';
-import EnquiryCartModal from '../components/inventory/EnquiryCartModal';
+const EnquiryCartModal = lazy(() => import('../components/inventory/EnquiryCartModal'));
 import { useCart } from '../context/CartContext';
 
 import { getProducts, getDepartments } from '../api/productService';
@@ -265,14 +265,18 @@ const InventoryDemo = () => {
       />
 
       {/* Modal */}
-      <EnquiryCartModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
-        cartItems={cartItems}
-        onUpdateQuantity={handleUpdateQuantity}
-        onRemoveItem={handleRemoveItem}
-        onClearCart={clearCart}
-      />
+      <Suspense fallback={null}>
+        {isModalOpen && (
+          <EnquiryCartModal 
+            isOpen={isModalOpen} 
+            onClose={() => setIsModalOpen(false)} 
+            cartItems={cartItems}
+            onUpdateQuantity={handleUpdateQuantity}
+            onRemoveItem={handleRemoveItem}
+            onClearCart={clearCart}
+          />
+        )}
+      </Suspense>
     </div>
   );
 };
