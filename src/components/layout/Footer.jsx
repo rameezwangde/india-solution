@@ -14,24 +14,24 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
 
           {/* Brand */}
-          <div>
-            <Link to="/" className="mb-6 inline-flex flex-col items-center justify-center gap-0" aria-label="India Solution home">
+          <div className="md:col-span-1 lg:col-span-3">
+            <Link to="/" className="flex flex-col items-start gap-0 mb-6 inline-block">
               <img
                 src="/logo-only.png"
                 alt="India Solution Logo"
-                className="h-9 w-auto object-contain relative z-10"
+                className="h-14 w-auto object-contain sm:h-16"
               />
               <img
                 src="/text-logo-new.png"
                 alt="India Solution"
-                className="h-4 w-auto object-contain relative z-20"
+                className="h-5 w-auto object-contain sm:h-6 mt-1"
                 style={{ filter: 'brightness(0) saturate(100%) invert(51%) sepia(16%) saturate(1022%) hue-rotate(339deg) brightness(90%) contrast(85%)' }}
               />
               <img
                 src="/text-logo-2.png"
                 alt="Experience anything and everything"
-                className="h-2 w-auto object-contain relative z-30"
-                style={{ filter: 'brightness(0) opacity(0.6)' }}
+                className="h-3 w-auto object-contain sm:h-3.5 mt-0.5 opacity-70"
+                style={{ filter: 'brightness(0)' }}
               />
             </Link>
             <p className="text-[#5c4033] text-[11.5px] font-medium leading-relaxed mb-6">
