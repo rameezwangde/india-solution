@@ -73,14 +73,14 @@ const ProductImageModal = ({ isOpen, onClose, product, onUpdate }) => {
           initial={{ scale: 0.95, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.95, opacity: 0 }}
-          className="bg-navy-800 border border-[#E8DFD5] rounded-2xl p-6 w-full max-w-md shadow-2xl relative"
+          className="bg-[#FFFDF9] border border-[#E2D6C7] rounded-2xl p-6 w-full max-w-md shadow-2xl relative"
         >
           <button onClick={onClose} disabled={isUploading || isDeleting} className="absolute top-4 right-4 text-[#A67C65] hover:text-[#4A2F1D] transition-colors">
             <X size={20} />
           </button>
           
-          <h3 className="text-xl font-bold text-[#4A2F1D] mb-1">Manage Image</h3>
-          <p className="text-sm text-[#A67C65] mb-6">{product.name}</p>
+          <h3 className="text-xl font-bold text-[#2E241C] mb-1">Manage Image</h3>
+          <p className="text-sm text-[#6A5847] mb-6">{product.name}</p>
 
           <div className="mb-6 flex flex-col items-center">
             {currentImage ? (
@@ -88,7 +88,7 @@ const ProductImageModal = ({ isOpen, onClose, product, onUpdate }) => {
                 <img src={currentImage} alt="Product" className="w-full h-full object-contain" />
               </div>
             ) : (
-              <div className="w-full aspect-video rounded-xl border border-dashed border-white/20 bg-[#FAF7F2] flex flex-col items-center justify-center text-[#A67C65]">
+              <div className="w-full aspect-video rounded-xl border border-dashed border-[#D8CAB7] bg-[#F6F1E8] flex flex-col items-center justify-center text-[#6A5847]">
                 <ImageIcon size={48} className="mb-2 opacity-50" />
                 <p>No image available</p>
               </div>
@@ -107,7 +107,7 @@ const ProductImageModal = ({ isOpen, onClose, product, onUpdate }) => {
               />
               <label 
                 htmlFor="image-upload"
-                className={`w-full flex items-center justify-center gap-2 px-4 py-3 border border-dashed border-white/20 rounded-lg text-[#4A2F1D] hover:bg-[#FAF7F2] transition-colors cursor-pointer ${isUploading || isDeleting ? 'opacity-50 pointer-events-none' : ''}`}
+                className={`w-full flex items-center justify-center gap-2 px-4 py-3 border border-dashed border-[#D8CAB7] rounded-lg text-[#6A5847] hover:bg-[#F3ECE2] transition-colors cursor-pointer ${isUploading || isDeleting ? 'opacity-50 pointer-events-none' : ''}`}
               >
                 <Upload size={18} />
                 {file ? 'Choose Different File' : 'Select Image File'}
@@ -118,7 +118,7 @@ const ProductImageModal = ({ isOpen, onClose, product, onUpdate }) => {
               <button
                 onClick={handleUpload}
                 disabled={isUploading || isDeleting}
-                className="w-full bg-gradient-to-r from-magenta to-orange hover:from-magenta-600 hover:to-orange-600 text-[#4A2F1D] font-medium py-3 rounded-lg flex items-center justify-center gap-2 disabled:opacity-50"
+                className="w-full bg-[#B56E3D] hover:bg-[#98572C] text-white font-medium py-3 rounded-lg flex items-center justify-center gap-2 disabled:opacity-50 transition-colors shadow-sm"
               >
                 {isUploading ? <Loader2 className="animate-spin" size={18} /> : 'Upload Image'}
               </button>
