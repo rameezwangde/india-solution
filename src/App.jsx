@@ -2,6 +2,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AdminAuthProvider } from './context/AdminAuthContext';
 import { ToastProvider } from './context/ToastContext';
+import { CartProvider } from './context/CartContext';
 import ErrorBoundary from './components/common/ErrorBoundary';
 import Navbar from './components/layout/Navbar';
 import Home from './pages/Home';
@@ -45,6 +46,7 @@ function App() {
   return (
     <ToastProvider>
       <AdminAuthProvider>
+        <CartProvider>
         <ErrorBoundary>
           <Router>
             <Routes>
@@ -94,6 +96,7 @@ function App() {
             </Routes>
           </Router>
         </ErrorBoundary>
+        </CartProvider>
       </AdminAuthProvider>
     </ToastProvider>
   );

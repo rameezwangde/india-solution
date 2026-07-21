@@ -5,6 +5,7 @@ import ProductCard from '../components/inventory/ProductCard';
 import CategoryTabs from '../components/inventory/CategoryTabs';
 import EnquiryCartBar from '../components/inventory/EnquiryCartBar';
 import EnquiryCartModal from '../components/inventory/EnquiryCartModal';
+import { useCart } from '../context/CartContext';
 
 import { getProducts } from '../api/productService';
 import { getCategories } from '../api/categoryService';
@@ -30,7 +31,7 @@ const ProductSkeleton = () => (
 const InventoryDemo = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('All');
-  const [cartItems, setCartItems] = useState([]);
+  const { cartItems, handleUpdateQuantity, handleRemoveItem, clearCart } = useCart();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [displayLimit, setDisplayLimit] = useState(20);
   
@@ -84,26 +85,6 @@ const InventoryDemo = () => {
   }, [searchQuery, activeCategory]);
 
   const displayedProducts = filteredProducts.slice(0, displayLimit);
-
-  const handleUpdateQuantity = (product, quantity) => {
-    setCartItems(prev => {
-      const existing = prev.find(item => item.id === product.id);
-      if (quantity === 0) {
-        return prev.filter(item => item.id !== product.id);
-      }
-      if (existing) {
-        return prev.map(item => 
-          item.id === product.id ? { ...item, selectedQuantity: quantity } : item
-        );
-      }
-      return [...prev, { ...product, selectedQuantity: quantity }];
-    });
-  };
-
-  const handleRemoveItem = (productId) => {
-    setCartItems(prev => prev.filter(item => item.id !== productId));
-  };
-
   return (
     <div className="pt-32 min-h-screen bg-[#FAF7F2] font-sans flex flex-col relative pb-40 lg:pt-44">
       {/* Global Background Watermarks */}
@@ -238,17 +219,18 @@ const InventoryDemo = () => {
       {/* Sticky Cart Bar */}
       <EnquiryCartBar 
         cartItems={cartItems} 
-        onViewCart={() => setIsModalOpen(true)} 
+        onViewCart={() => setIsModalOpen(true)}
+        onClearCart={clearCart}
       />
 
       {/* Modal */}
       <EnquiryCartModal 
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
         cartItems={cartItems}
         onUpdateQuantity={handleUpdateQuantity}
         onRemoveItem={handleRemoveItem}
-        onClearCart={() => setCartItems([])}
+        onClearCart={clearCart}
       />
     </div>
   );

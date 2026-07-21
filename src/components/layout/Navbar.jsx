@@ -3,11 +3,13 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Phone, Mail, MapPin, Download, ShoppingCart, User } from 'lucide-react';
 import { FaFacebookF, FaInstagram, FaYoutube, FaLinkedinIn } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useCart } from '../../context/CartContext';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { totalItems } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -101,7 +103,7 @@ const Navbar = () => {
           <div className="hidden lg:flex items-center gap-6">
             <div className="flex items-center gap-5">
               <Link to="/inventory-demo" className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#C0602F] text-white font-medium text-[15px] hover:bg-[#A05025] transition-colors shadow-sm">
-                <ShoppingCart size={18} strokeWidth={2.5} /> Cart
+                <ShoppingCart size={18} strokeWidth={2.5} /> Cart {totalItems > 0 && `(${totalItems})`}
               </Link>
               <Link to="/admin" className="flex items-center gap-2 text-[#C0602F] font-medium text-[15px] hover:text-[#A05025] transition-colors">
                 <User size={20} strokeWidth={2.5} /> Login
@@ -145,7 +147,7 @@ const Navbar = () => {
               ))}
               <div className="flex items-center gap-4 py-4">
                  <Link to="/inventory-demo" className="flex-1 flex justify-center items-center gap-2 px-4 py-3 rounded-md bg-[#C0602F] text-white font-semibold text-[14px]">
-                   <ShoppingCart size={16} strokeWidth={2.5} /> Cart
+                   <ShoppingCart size={16} strokeWidth={2.5} /> Cart {totalItems > 0 && `(${totalItems})`}
                  </Link>
                  <Link to="/admin" className="flex-1 flex justify-center items-center gap-2 px-4 py-3 rounded-md border border-[#C0602F] text-[#C0602F] font-semibold text-[14px]">
                    <User size={16} strokeWidth={2.5} /> Login

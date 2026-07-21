@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShoppingBag } from 'lucide-react';
 
-const EnquiryCartBar = ({ cartItems, onViewCart }) => {
+const EnquiryCartBar = ({ cartItems, onViewCart, onClearCart }) => {
   const totalItems = cartItems.reduce((sum, item) => sum + item.selectedQuantity, 0);
 
   return (
@@ -26,12 +26,20 @@ const EnquiryCartBar = ({ cartItems, onViewCart }) => {
                   </div>
                 </div>
               </div>
-              <button
-                onClick={onViewCart}
-                className="bg-[#A67C65] text-white hover:bg-[#8B5E45] hover:shadow-md text-[#4A2F1D] px-6 py-3 rounded-full font-medium transition-all"
-              >
-                View Enquiry Cart
-              </button>
+              <div className="flex gap-3">
+                <button
+                  onClick={onClearCart}
+                  className="bg-transparent border border-[#E8DFD5] text-[#A67C65] hover:bg-red-50 hover:border-red-200 hover:text-red-600 px-6 py-3 rounded-full font-medium transition-all"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={onViewCart}
+                  className="bg-[#A67C65] text-white hover:bg-[#8B5E45] hover:shadow-md px-6 py-3 rounded-full font-medium transition-all"
+                >
+                  View Enquiry Cart
+                </button>
+              </div>
             </div>
           </div>
         </motion.div>
