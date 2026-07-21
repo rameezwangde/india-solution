@@ -1,5 +1,5 @@
-// Frontend Vercel Redeployment Trigger
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AdminAuthProvider } from './context/AdminAuthContext';
 import { ToastProvider } from './context/ToastContext';
 import { CartProvider } from './context/CartContext';
@@ -42,9 +42,19 @@ const PublicLayout = ({ children }) => (
   </div>
 );
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5, // 5 minutes
+      refetchOnWindowFocus: false,
+    },
+  },
+});
+
 function App() {
   return (
-    <ToastProvider>
+    <QueryClientProvider client={queryClient}>
+      <ToastProvider>
       <AdminAuthProvider>
         <CartProvider>
         <ErrorBoundary>
@@ -99,6 +109,7 @@ function App() {
         </CartProvider>
       </AdminAuthProvider>
     </ToastProvider>
+    </QueryClientProvider>
   );
 }
 

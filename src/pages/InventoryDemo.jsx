@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect, lazy, Suspense } from 'react';
+import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
 import { Search, ChevronDown } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ProductCard from '../components/inventory/ProductCard';
@@ -32,14 +33,7 @@ const InventoryDemo = () => {
   const [activeCategory, setActiveCategory] = useState('All');
   const { cartItems, handleUpdateQuantity, handleRemoveItem, clearCart } = useCart();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState('');
-  
-  const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState(['All']);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   // Debounce search query
   useEffect(() => {
@@ -49,72 +43,49 @@ const InventoryDemo = () => {
     return () => clearTimeout(handler);
   }, [searchQuery]);
 
-  // Reset page when filters change
-  useEffect(() => {
-    setPage(1);
-  }, [debouncedSearchQuery, activeCategory]);
+  // Fetch departments
+  const { data: departmentsData } = useQuery({
+    queryKey: ['departments'],
+    queryFn: getDepartments,
+    staleTime: 1000 * 60 * 60, // cache for 1 hour
+  });
 
-  // Fetch departments only once on mount
-  useEffect(() => {
-    let isMounted = true;
-    const fetchDepts = async () => {
-      try {
-        const fetchedDepartments = await getDepartments();
-        if (isMounted) {
-          const visibleDepts = (fetchedDepartments.departments || []).filter(d => !d.isHidden);
-          setCategories(['All', ...visibleDepts.map(d => d.name)]);
-        }
-      } catch (err) {
-        console.error("Failed to load departments", err);
+  const categories = useMemo(() => {
+    const visibleDepts = (departmentsData?.departments || []).filter(d => !d.isHidden);
+    return ['All', ...visibleDepts.map(d => d.name)];
+  }, [departmentsData]);
+
+  // Fetch products with infinite scroll
+  const {
+    data: productsData,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isError
+  } = useInfiniteQuery({
+    queryKey: ['products', activeCategory, debouncedSearchQuery],
+    queryFn: ({ pageParam = 1 }) => {
+      const params = { limit: 20, page: pageParam };
+      if (activeCategory !== 'All') params.department = activeCategory;
+      if (debouncedSearchQuery.trim()) params.search = debouncedSearchQuery.trim();
+      return getProducts(params);
+    },
+    getNextPageParam: (lastPage) => {
+      if (lastPage.pagination && lastPage.pagination.page < lastPage.pagination.totalPages) {
+        return lastPage.pagination.page + 1;
       }
-    };
-    fetchDepts();
-    return () => { isMounted = false; };
-  }, []);
+      return undefined;
+    },
+    keepPreviousData: true,
+  });
 
-  // Fetch products when page or filters change
-  useEffect(() => {
-    let isMounted = true;
-    const fetchInventory = async () => {
-      try {
-        if (page === 1) setLoading(true);
-        const params = {
-          limit: 20,
-          page: page,
-        };
-        if (activeCategory !== 'All') {
-          params.department = activeCategory;
-        }
-        if (debouncedSearchQuery.trim()) {
-          params.search = debouncedSearchQuery.trim();
-        }
+  // Flatten the pages array into a single array of products
+  const products = useMemo(() => {
+    return productsData?.pages.flatMap(page => page.products) || [];
+  }, [productsData]);
 
-        const fetchedProducts = await getProducts(params);
-        if (isMounted) {
-          if (page === 1) {
-            setProducts(fetchedProducts.products);
-          } else {
-            setProducts(prev => {
-              const existingIds = new Set(prev.map(p => p.id));
-              const newProducts = fetchedProducts.products.filter(p => !existingIds.has(p.id));
-              return [...prev, ...newProducts];
-            });
-          }
-          setTotalPages(fetchedProducts.pagination?.totalPages || 1);
-          setError(null);
-        }
-      } catch (err) {
-        if (isMounted) {
-          console.error(err);
-          if (page === 1) setError('Unable to load inventory');
-        }
-      } finally {
-        if (isMounted) setLoading(false);
-      }
-    };
-    fetchInventory();
-    return () => { isMounted = false; };
-  }, [page, activeCategory, debouncedSearchQuery]);
+  const loading = isFetching && products.length === 0;
+  const error = isError ? 'Unable to load inventory' : null;
   return (
     <div className="pt-32 min-h-screen bg-[#FAF7F2] font-sans flex flex-col relative pb-40 lg:pt-44">
       {/* Global Background Watermarks */}
@@ -235,13 +206,14 @@ const InventoryDemo = () => {
             </div>
             
             {/* Load More Button */}
-            {page < totalPages && (
+            {hasNextPage && (
               <div className="flex justify-center mt-12">
                 <button
-                  onClick={() => setPage(prev => prev + 1)}
-                  className="bg-white border border-[#E8DFD5] hover:border-[#A67C65] text-[#4A2F1D] px-8 py-3 rounded-full text-sm font-bold uppercase tracking-widest shadow-sm hover:shadow-md transition-all duration-300"
+                  onClick={() => fetchNextPage()}
+                  disabled={isFetching}
+                  className="bg-white border border-[#E8DFD5] hover:border-[#A67C65] text-[#4A2F1D] px-8 py-3 rounded-full text-sm font-bold uppercase tracking-widest shadow-sm hover:shadow-md transition-all duration-300 disabled:opacity-50"
                 >
-                  Load More Inventory
+                  {isFetching ? 'Loading...' : 'Load More Inventory'}
                 </button>
               </div>
             )}
