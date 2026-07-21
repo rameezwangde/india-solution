@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
-import { Search, Mic } from 'lucide-react';
+import { Search, ChevronDown } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ProductCard from '../components/inventory/ProductCard';
 import CategoryTabs from '../components/inventory/CategoryTabs';
@@ -130,9 +130,9 @@ const InventoryDemo = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="relative max-w-xl mb-12"
+          className="relative max-w-2xl mb-12 flex bg-white border border-[#E8DFD5] shadow-sm rounded-full overflow-hidden focus-within:border-[#A67C65] transition-colors"
         >
-          <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+          <div className="pl-5 flex items-center pointer-events-none">
             <Search className="text-[#A67C65]" size={20} strokeWidth={2.5} />
           </div>
           <input
@@ -140,11 +140,22 @@ const InventoryDemo = () => {
             placeholder="Search by product name or code"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-white border border-[#E8DFD5] shadow-sm rounded-full py-4 pl-14 pr-14 text-[14.5px] font-semibold text-[#4A2F1D] placeholder:text-[#A67C65]/70 focus:outline-none focus:border-[#A67C65] transition-colors"
+            className="flex-grow bg-transparent py-4 pl-3 pr-3 text-[14.5px] font-semibold text-[#4A2F1D] placeholder:text-[#A67C65]/70 focus:outline-none min-w-0"
           />
-          <button className="absolute inset-y-0 right-0 pr-5 flex items-center text-[#A67C65]/70 hover:text-[#A67C65] transition-colors">
-            <Mic size={20} strokeWidth={2.5} />
-          </button>
+          <div className="border-l border-[#E8DFD5] flex items-center bg-[#FAF7F2] shrink-0 relative">
+            <select
+              value={activeCategory}
+              onChange={(e) => setActiveCategory(e.target.value)}
+              className="bg-transparent py-4 pl-4 pr-10 text-[13px] font-bold text-[#4A2F1D] focus:outline-none cursor-pointer uppercase appearance-none max-w-[150px] sm:max-w-[200px] text-ellipsis overflow-hidden whitespace-nowrap"
+            >
+              {categories.map((cat, idx) => (
+                <option key={idx} value={cat}>{cat}</option>
+              ))}
+            </select>
+            <div className="absolute right-3 pointer-events-none text-[#A67C65]">
+              <ChevronDown size={16} strokeWidth={2.5} />
+            </div>
+          </div>
         </motion.div>
 
         {/* Category Tabs */}
