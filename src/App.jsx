@@ -15,6 +15,7 @@ import Testimonials from './pages/Testimonials';
 import InventoryDemo from './pages/InventoryDemo';
 import Gallery from './pages/Gallery';
 import Footer from './components/layout/Footer';
+import GlobalPrefetcher from './components/layout/GlobalPrefetcher';
 
 import AdminLoginPage from './pages/admin/AdminLoginPage';
 import AdminLayout from './components/admin/AdminLayout';
@@ -34,6 +35,7 @@ import AdminNotFoundPage from './pages/admin/AdminNotFoundPage';
 
 const PublicLayout = ({ children }) => (
   <div className="min-h-screen flex flex-col bg-[#FAF7F2] text-[#4A2F1D] font-sans selection:bg-[#A67C65] selection:text-white overflow-x-hidden">
+    <GlobalPrefetcher />
     <Navbar />
     <main className="flex-grow">
       {children}
