@@ -11,10 +11,10 @@ const Footer = () => {
       </div>
 
       <div className="container relative z-10 mx-auto px-6 lg:px-12 max-w-[1300px]">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 lg:gap-8 mb-12">
 
           {/* Brand */}
-          <div className="md:col-span-1 lg:col-span-3">
+          <div className="flex flex-col">
             <Link to="/" className="flex flex-col items-start gap-0 mb-6 inline-block">
               <img
                 src="/logo-only.png"
@@ -56,7 +56,7 @@ const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div className="lg:ml-8">
+          <div>
             <h4 className="text-[12px] text-[#A67C65] font-bold tracking-widest mb-3">QUICK LINKS</h4>
             <div className="flex items-center gap-2 mb-6">
               <span className="h-[1px] w-4 bg-[#D5C5B9]" />
