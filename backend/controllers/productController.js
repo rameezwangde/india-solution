@@ -3,6 +3,14 @@ const Category = require('../models/Category');
 const DepartmentConfig = require('../models/DepartmentConfig');
 const { ACTIVITY_TYPES, logActivity } = require('../services/activityLogger');
 
+// Simple in-memory cache for departments
+let departmentsCache = {
+  data: null,
+  timestamp: 0
+};
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+
+
 const generateSlug = (name) => {
   return name
     .toLowerCase()
@@ -459,6 +467,7 @@ exports.clearTestData = async (req, res) => {
     
     // Attempt to clear optional collections without failing
     const mongoose = require('mongoose');
+
     let smCount = 0, notifCount = 0;
     try { smCount = (await mongoose.model('StockMovement').deleteMany({})).deletedCount; } catch(e){}
     try { notifCount = (await mongoose.model('Notification').deleteMany({})).deletedCount; } catch(e){}
@@ -484,6 +493,17 @@ exports.clearTestData = async (req, res) => {
 // @access  Public/Admin
 exports.getDepartments = async (req, res) => {
   try {
+    const now = Date.now();
+    
+    // Use cache if it is less than 5 minutes old and user is public
+    if (!req.admin && departmentsCache.data && (now - departmentsCache.timestamp < CACHE_TTL)) {
+      return res.status(200).json({
+        success: true,
+        count: departmentsCache.data.length,
+        departments: departmentsCache.data
+      });
+    }
+
     let matchStage = {};
     
     // Hide specific departments from public users
@@ -552,6 +572,12 @@ exports.getDepartments = async (req, res) => {
         isHidden: configMap[name] || false
       };
     });
+
+    // Save to cache if public request
+    if (!req.admin) {
+      departmentsCache.data = formatted;
+      departmentsCache.timestamp = now;
+    }
 
     res.status(200).json({
       success: true,
