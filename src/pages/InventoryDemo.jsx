@@ -1,11 +1,9 @@
-import { useState, useMemo, useEffect, lazy, Suspense } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
 import { Search, ChevronDown } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ProductCard from '../components/inventory/ProductCard';
 import CategoryTabs from '../components/inventory/CategoryTabs';
-import EnquiryCartBar from '../components/inventory/EnquiryCartBar';
-const EnquiryCartModal = lazy(() => import('../components/inventory/EnquiryCartModal'));
 import { useCart } from '../context/CartContext';
 
 import { getProducts, getDepartments } from '../api/productService';
@@ -31,8 +29,7 @@ const ProductSkeleton = () => (
 const InventoryDemo = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('All');
-  const { cartItems, handleUpdateQuantity, handleRemoveItem, clearCart } = useCart();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { cartItems, handleUpdateQuantity } = useCart();
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState('');
 
   // Debounce search query
@@ -227,28 +224,6 @@ const InventoryDemo = () => {
           </div>
         )}
       </section>
-
-
-      {/* Sticky Cart Bar */}
-      <EnquiryCartBar 
-        cartItems={cartItems} 
-        onViewCart={() => setIsModalOpen(true)}
-        onClearCart={clearCart}
-      />
-
-      {/* Modal */}
-      <Suspense fallback={null}>
-        {isModalOpen && (
-          <EnquiryCartModal 
-            isOpen={isModalOpen} 
-            onClose={() => setIsModalOpen(false)} 
-            cartItems={cartItems}
-            onUpdateQuantity={handleUpdateQuantity}
-            onRemoveItem={handleRemoveItem}
-            onClearCart={clearCart}
-          />
-        )}
-      </Suspense>
     </div>
   );
 };

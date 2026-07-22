@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { Suspense, lazy, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AdminAuthProvider } from './context/AdminAuthContext';
 import { ToastProvider } from './context/ToastContext';
@@ -16,6 +17,9 @@ import InventoryDemo from './pages/InventoryDemo';
 import Gallery from './pages/Gallery';
 import Footer from './components/layout/Footer';
 import GlobalPrefetcher from './components/layout/GlobalPrefetcher';
+import EnquiryCartBar from './components/inventory/EnquiryCartBar';
+const EnquiryCartModal = lazy(() => import('./components/inventory/EnquiryCartModal'));
+import { useCart } from './context/CartContext';
 
 import AdminLoginPage from './pages/admin/AdminLoginPage';
 import AdminLayout from './components/admin/AdminLayout';
@@ -33,16 +37,42 @@ import AdminBackupsPage from './pages/admin/AdminBackupsPage';
 import AdminHelpPage from './pages/admin/AdminHelpPage';
 import AdminNotFoundPage from './pages/admin/AdminNotFoundPage';
 
-const PublicLayout = ({ children }) => (
-  <div className="min-h-screen flex flex-col bg-[#FAF7F2] text-[#4A2F1D] font-sans selection:bg-[#A67C65] selection:text-white overflow-x-hidden">
-    <GlobalPrefetcher />
-    <Navbar />
-    <main className="flex-grow">
-      {children}
-    </main>
-    <Footer />
-  </div>
-);
+const PublicLayout = ({ children }) => {
+  const { cartItems, handleUpdateQuantity, handleRemoveItem, clearCart } = useCart();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  return (
+    <div className="min-h-screen flex flex-col bg-[#FAF7F2] text-[#4A2F1D] font-sans selection:bg-[#A67C65] selection:text-white overflow-x-hidden">
+      <GlobalPrefetcher />
+      <Navbar />
+      <main className="flex-grow">
+        {children}
+      </main>
+      <Footer />
+
+      {/* Global Sticky Cart Bar */}
+      <EnquiryCartBar 
+        cartItems={cartItems} 
+        onViewCart={() => setIsModalOpen(true)}
+        onClearCart={clearCart}
+      />
+
+      {/* Global Modal */}
+      <Suspense fallback={null}>
+        {isModalOpen && (
+          <EnquiryCartModal 
+            isOpen={isModalOpen} 
+            onClose={() => setIsModalOpen(false)} 
+            cartItems={cartItems}
+            onUpdateQuantity={handleUpdateQuantity}
+            onRemoveItem={handleRemoveItem}
+            onClearCart={clearCart}
+          />
+        )}
+      </Suspense>
+    </div>
+  );
+};
 
 const queryClient = new QueryClient({
   defaultOptions: {
