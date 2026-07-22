@@ -139,4 +139,15 @@ productSchema.index({ stockStatus: 1 });
 productSchema.index({ stockAlertAcknowledged: 1 });
 productSchema.index({ department: 1, stockStatus: 1 });
 
+// Critical index for default sorting
+productSchema.index({ createdAt: -1 });
+
+// Text index for fast searching across multiple fields
+productSchema.index({ 
+  name: 'text', 
+  productCode: 'text', 
+  department: 'text',
+  description: 'text' 
+});
+
 module.exports = mongoose.model('Product', productSchema);
