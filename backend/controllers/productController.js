@@ -91,9 +91,9 @@ exports.getProducts = async (req, res) => {
 
     if (department) {
       if (query.department && query.department.$nin) {
-        query.department = { ...query.department, $regex: new RegExp(`^${department}$`, 'i') };
+        query.department = { ...query.department, $eq: department };
       } else {
-        query.department = { $regex: new RegExp(`^${department}$`, 'i') };
+        query.department = department;
       }
     }
 
