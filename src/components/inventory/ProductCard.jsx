@@ -1,12 +1,17 @@
 import { motion } from 'framer-motion';
 import { optimizeCloudinaryUrl } from '../../utils/cloudinary';
+import { useToast } from '../../context/ToastContext';
 
 const ProductCard = ({ product, cartItem, onUpdateQuantity }) => {
   const currentQuantity = cartItem ? cartItem.selectedQuantity : 0;
+  const { success } = useToast();
   
   const handleAdd = () => {
     if (currentQuantity < product.quantity) {
       onUpdateQuantity(product, currentQuantity + 1);
+      if (currentQuantity === 0) {
+        success(`Added ${product.name} to your Enquiry`);
+      }
     }
   };
 
