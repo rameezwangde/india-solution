@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
 import { Search, ChevronDown } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -63,7 +63,7 @@ const InventoryDemo = () => {
   } = useInfiniteQuery({
     queryKey: ['products', activeCategory, debouncedSearchQuery],
     queryFn: ({ pageParam = 1 }) => {
-      const params = { limit: 20, page: pageParam };
+      const params = { limit: 12, page: pageParam };
       if (activeCategory !== 'All') params.department = activeCategory;
       if (debouncedSearchQuery.trim()) params.search = debouncedSearchQuery.trim();
       return getProducts(params);
@@ -81,6 +81,30 @@ const InventoryDemo = () => {
   const products = useMemo(() => {
     return productsData?.pages.flatMap(page => page.products) || [];
   }, [productsData]);
+
+  // Infinite Scroll Observer
+  const observerTarget = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      entries => {
+        if (entries[0].isIntersecting && hasNextPage && !isFetching) {
+          fetchNextPage();
+        }
+      },
+      { threshold: 1.0 }
+    );
+
+    if (observerTarget.current) {
+      observer.observe(observerTarget.current);
+    }
+
+    return () => {
+      if (observerTarget.current) {
+        observer.unobserve(observerTarget.current);
+      }
+    };
+  }, [observerTarget, hasNextPage, isFetching, fetchNextPage]);
 
   const loading = isFetching && products.length === 0;
   const error = isError ? 'Unable to load inventory' : null;
@@ -208,18 +232,15 @@ const InventoryDemo = () => {
               ))}
             </div>
             
-            {/* Load More Button */}
-            {hasNextPage && (
-              <div className="flex justify-center mt-12">
-                <button
-                  onClick={() => fetchNextPage()}
-                  disabled={isFetching}
-                  className="bg-white border border-[#E8DFD5] hover:border-[#A67C65] text-[#4A2F1D] px-8 py-3 rounded-full text-sm font-bold uppercase tracking-widest shadow-sm hover:shadow-md transition-all duration-300 disabled:opacity-50"
-                >
-                  {isFetching ? 'Loading...' : 'Load More Inventory'}
-                </button>
-              </div>
-            )}
+            {/* Infinite Scroll Trigger & Spinner */}
+            <div ref={observerTarget} className="flex justify-center mt-12 py-4">
+              {isFetching && hasNextPage && (
+                <div className="flex flex-col items-center gap-3">
+                  <div className="w-8 h-8 border-4 border-[#E8DFD5] border-t-[#A67C65] rounded-full animate-spin"></div>
+                  <span className="text-sm font-semibold text-[#A67C65] tracking-widest uppercase">Loading More...</span>
+                </div>
+              )}
+            </div>
           </>
         )}
         
