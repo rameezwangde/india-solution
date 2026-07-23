@@ -63,7 +63,7 @@ const InventoryDemo = () => {
   } = useInfiniteQuery({
     queryKey: ['products', activeCategory, debouncedSearchQuery],
     queryFn: ({ pageParam = 1 }) => {
-      const params = { limit: 12, page: pageParam };
+      const params = { limit: 8, page: pageParam };
       if (activeCategory !== 'All') params.department = activeCategory;
       if (debouncedSearchQuery.trim()) params.search = debouncedSearchQuery.trim();
       return getProducts(params);
@@ -75,6 +75,7 @@ const InventoryDemo = () => {
       return undefined;
     },
     keepPreviousData: true,
+    staleTime: 5 * 60 * 1000, // Cache category data for 5 minutes
   });
 
   // Flatten the pages array into a single array of products
