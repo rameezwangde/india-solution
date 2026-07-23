@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
-import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
+import { useQuery, useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
 import { Search, ChevronDown } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ProductCard from '../components/inventory/ProductCard';
@@ -48,6 +48,20 @@ const InventoryDemo = () => {
   const [activeCategory, setActiveCategory] = useState('All');
   const { cartItems, handleUpdateQuantity } = useCart();
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState('');
+  const queryClient = useQueryClient();
+
+  const handleHoverCategory = (category) => {
+    queryClient.prefetchInfiniteQuery({
+      queryKey: ['products', category, debouncedSearchQuery],
+      queryFn: ({ pageParam = 1 }) => {
+        const params = { limit: 8, page: pageParam };
+        if (category !== 'All') params.department = category;
+        if (debouncedSearchQuery.trim()) params.search = debouncedSearchQuery.trim();
+        return getProducts(params);
+      },
+      staleTime: 5 * 60 * 1000,
+    });
+  };
 
   // Debounce search query
   useEffect(() => {
@@ -216,6 +230,7 @@ const InventoryDemo = () => {
               categories={categories} 
               activeCategory={activeCategory}
               onSelectCategory={setActiveCategory}
+              onHoverCategory={handleHoverCategory}
             />
           )}
         </motion.div>

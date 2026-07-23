@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-const CategoryTabs = ({ categories, activeCategory, onSelectCategory }) => {
+const CategoryTabs = ({ categories, activeCategory, onSelectCategory, onHoverCategory }) => {
   return (
     <div className="flex flex-wrap justify-center gap-3 mb-10">
       {categories.map((category) => {
@@ -9,6 +9,7 @@ const CategoryTabs = ({ categories, activeCategory, onSelectCategory }) => {
           <button
             key={category}
             onClick={() => onSelectCategory(category)}
+            onMouseEnter={() => onHoverCategory && onHoverCategory(category)}
             className={`relative px-5 py-2.5 rounded-full text-[13px] font-bold tracking-wide uppercase transition-all z-10 whitespace-nowrap shrink-0 flex items-center justify-center border ${
               isActive 
                 ? 'text-white border-transparent' 

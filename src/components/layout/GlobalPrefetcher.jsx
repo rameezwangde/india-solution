@@ -17,7 +17,7 @@ const GlobalPrefetcher = () => {
     queryClient.prefetchInfiniteQuery({
       queryKey: ['products', 'All', ''],
       queryFn: ({ pageParam = 1 }) => {
-        return getProducts({ limit: 20, page: pageParam });
+        return getProducts({ limit: 8, page: pageParam });
       },
       getNextPageParam: (lastPage) => {
         if (lastPage.pagination && lastPage.pagination.page < lastPage.pagination.totalPages) {
