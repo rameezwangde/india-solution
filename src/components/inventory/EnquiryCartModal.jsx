@@ -134,7 +134,7 @@ const EnquiryCartModal = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemo
         >
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b border-[#E8DFD5] bg-[#FAF7F2]">
-            <h2 className="text-2xl font-bold text-[#4A2F1D]">Enquiry Cart</h2>
+            <h2 className="text-2xl font-bold text-[#4A2F1D]">Cart</h2>
             <button
               onClick={handleClose}
               disabled={isSubmitting}
@@ -192,10 +192,9 @@ const EnquiryCartModal = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemo
                         <img src={item.image} alt={item.name} className="w-20 h-20 object-cover rounded-lg bg-[#FAF7F2]" />
                         <div className="flex-1 flex flex-col">
                           <div className="flex justify-between items-start">
-                            <div>
-                              <div className="text-xs text-[#A67C65]">{item.code}</div>
-                              <div className="text-[#4A2F1D] font-medium">{item.name}</div>
-                              <div className="text-sm text-[#7C5A48]">{item.price}</div>
+                            <div className="flex-1">
+                              <p className="text-xs text-[#A67C65] uppercase tracking-wider mb-1">{item.code}</p>
+                              <h4 className="font-bold text-[#4A2F1D] text-lg leading-tight mb-2">{item.name}</h4>
                             </div>
                             <button
                               onClick={() => onRemoveItem(item.id)}
