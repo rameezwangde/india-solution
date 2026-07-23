@@ -9,6 +9,22 @@ import SEO from '../components/layout/SEO';
 
 import { getProducts, getDepartments } from '../api/productService';
 
+const INITIAL_DEPARTMENTS = {
+  departments: [
+    { name: 'Artist', isHidden: false },
+    { name: 'Fabrication', isHidden: false },
+    { name: 'Generators', isHidden: false },
+    { name: 'Lighting', isHidden: false },
+    { name: 'Photographer and Videographer', isHidden: false },
+    { name: 'Printing', isHidden: false },
+    { name: 'Projectors', isHidden: false },
+    { name: 'Sound', isHidden: false },
+    { name: 'Stalls', isHidden: false },
+    { name: 'Tenthouse', isHidden: false },
+    { name: 'Visuals', isHidden: false },
+  ]
+};
+
 const ProductSkeleton = () => (
   <div className="bg-white border border-[#E8DFD5] shadow-sm rounded-[1.5rem] overflow-hidden flex flex-col h-full animate-pulse">
     <div className="relative aspect-[4/3] bg-[#E8DFD5]/50 w-full" />
@@ -41,11 +57,12 @@ const InventoryDemo = () => {
     return () => clearTimeout(handler);
   }, [searchQuery]);
 
-  // Fetch departments
+  // Fetch departments (With Ghost Load / initialData)
   const { data: departmentsData } = useQuery({
     queryKey: ['departments'],
     queryFn: getDepartments,
     staleTime: 1000 * 60 * 60, // cache for 1 hour
+    initialData: INITIAL_DEPARTMENTS,
   });
 
   const categories = useMemo(() => {
