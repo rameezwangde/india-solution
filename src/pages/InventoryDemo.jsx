@@ -8,6 +8,7 @@ import { useCart } from '../context/CartContext';
 import SEO from '../components/layout/SEO';
 
 import { getProducts, getDepartments } from '../api/productService';
+import { INITIAL_PRODUCTS } from '../data/initialProducts';
 
 const INITIAL_DEPARTMENTS = {
   departments: [
@@ -107,6 +108,15 @@ const InventoryDemo = () => {
     },
     keepPreviousData: true,
     staleTime: 5 * 60 * 1000, // Cache category data for 5 minutes
+    initialData: () => {
+      if (activeCategory === 'All' && !debouncedSearchQuery) {
+        return {
+          pages: [INITIAL_PRODUCTS],
+          pageParams: [1],
+        };
+      }
+      return undefined;
+    }
   });
 
   // Flatten the pages array into a single array of products
