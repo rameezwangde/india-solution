@@ -516,9 +516,9 @@ const AdminProductsPage = () => {
                     <td className="p-4">
                         <div className="flex items-center gap-4">
                           {p.image ? (
-                            <img src={p.image} alt={p.name} className="w-12 h-12 rounded-lg object-cover bg-white border border-[#E8DFD5]" />
+                            <img src={p.image} alt={p.name} onClick={() => openImage(p)} className="w-12 h-12 rounded-lg object-cover bg-white border border-[#E8DFD5] cursor-pointer hover:opacity-80 transition-opacity" title="Manage Image" />
                           ) : (
-                            <div className="w-12 h-12 rounded-lg bg-[#FAF7F2] border border-[#E8DFD5] flex items-center justify-center text-[#A67C65]">
+                            <div onClick={() => openImage(p)} className="w-12 h-12 rounded-lg bg-[#FAF7F2] border border-[#E8DFD5] flex items-center justify-center text-[#A67C65] cursor-pointer hover:bg-[#E8DFD5] transition-colors" title="Manage Image">
                               <ImageIcon size={20} />
                             </div>
                           )}
@@ -602,9 +602,9 @@ const AdminProductsPage = () => {
                   <div key={p.id} className="p-4 flex flex-col gap-3">
                     <div className="flex items-start gap-4">
                       {p.image ? (
-                        <img src={p.image} alt={p.name} className="w-16 h-16 rounded-lg object-cover bg-white border border-[#E8DFD5]" />
+                        <img src={p.image} alt={p.name} onClick={() => openImage(p)} className="w-16 h-16 rounded-lg object-cover bg-white border border-[#E8DFD5] cursor-pointer hover:opacity-80 transition-opacity" title="Manage Image" />
                       ) : (
-                        <div className="w-16 h-16 rounded-lg bg-[#FAF7F2] border border-[#E8DFD5] flex items-center justify-center text-[#A67C65]">
+                        <div onClick={() => openImage(p)} className="w-16 h-16 rounded-lg bg-[#FAF7F2] border border-[#E8DFD5] flex items-center justify-center text-[#A67C65] cursor-pointer hover:bg-[#E8DFD5] transition-colors" title="Manage Image">
                           <ImageIcon size={24} />
                         </div>
                       )}
