@@ -40,10 +40,10 @@ const Footer = () => {
               experiences with flawless execution.
             </p>
             <div className="flex gap-3">
-              <a href="#" className="w-8 h-8 rounded-full border border-[#D5C5B9] flex items-center justify-center text-[#A67C65] hover:bg-[#A67C65] hover:text-white transition-all">
+              <a href="https://www.facebook.com/indiasolutionblr/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full border border-[#D5C5B9] flex items-center justify-center text-[#A67C65] hover:bg-[#A67C65] hover:text-white transition-all">
                 <FaFacebookF size={12} />
               </a>
-              <a href="#" className="w-8 h-8 rounded-full border border-[#D5C5B9] flex items-center justify-center text-[#A67C65] hover:bg-[#A67C65] hover:text-white transition-all">
+              <a href="https://www.instagram.com/indiasolutionevents?igsh=MTVtbDJ5cW4zZjRq" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full border border-[#D5C5B9] flex items-center justify-center text-[#A67C65] hover:bg-[#A67C65] hover:text-white transition-all">
                 <FaInstagram size={12} />
               </a>
               <a href="#" className="w-8 h-8 rounded-full border border-[#D5C5B9] flex items-center justify-center text-[#A67C65] hover:bg-[#A67C65] hover:text-white transition-all">

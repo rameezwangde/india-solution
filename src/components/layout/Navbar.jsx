@@ -111,8 +111,8 @@ const Navbar = () => {
             </div>
             
             <div className="flex gap-3 ml-2 text-[#8B5E45]/70 border-l border-[#8B5E45]/20 pl-6">
-              <a href="#" className="hover:text-[#946247] transition-colors"><FaFacebookF size={14} /></a>
-              <a href="#" className="hover:text-[#946247] transition-colors"><FaInstagram size={14} /></a>
+              <a href="https://www.facebook.com/indiasolutionblr/" target="_blank" rel="noopener noreferrer" className="hover:text-[#946247] transition-colors"><FaFacebookF size={14} /></a>
+              <a href="https://www.instagram.com/indiasolutionevents?igsh=MTVtbDJ5cW4zZjRq" target="_blank" rel="noopener noreferrer" className="hover:text-[#946247] transition-colors"><FaInstagram size={14} /></a>
               <a href="#" className="hover:text-[#946247] transition-colors"><FaYoutube size={14} /></a>
               <a href="#" className="hover:text-[#946247] transition-colors"><FaLinkedinIn size={14} /></a>
             </div>
