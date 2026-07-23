@@ -90,12 +90,51 @@ const ClientLogo = ({ brand }) => {
 };
 
 const Home = () => {
+  const homeSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "EventVenue",
+        "@id": "https://www.india-solution.com/#organization",
+        "name": "India Solution Events",
+        "url": "https://www.india-solution.com/",
+        "logo": "https://www.india-solution.com/logo-only.png",
+        "telephone": "+916360181932",
+        "email": "info@india-solution.com",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "India Solution Production House, Railway Mens Employees layout, Jnananjyothinagar",
+          "addressLocality": "Bengaluru",
+          "addressRegion": "Karnataka",
+          "postalCode": "560056",
+          "addressCountry": "IN"
+        },
+        "sameAs": [
+          "https://www.facebook.com/indiasolutionevents",
+          "https://www.instagram.com/indiasolutionevents"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.india-solution.com/#website",
+        "url": "https://www.india-solution.com/",
+        "name": "India Solution",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://www.india-solution.com/inventory-demo?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    ]
+  };
+
   return (
     <div className="bg-[#FAF7F2] font-sans selection:bg-[#A67C65] selection:text-white relative">
       <SEO 
         title="Premium Event Management in Bengaluru"
         description="India Solution provides world-class event management, wedding planning, corporate events, and staging across Bengaluru and India. Turn your vision into extraordinary experiences with flawless execution."
         keywords="event management bengaluru, wedding planners india, corporate events, stage fabrication, premium event planners"
+        schema={homeSchema}
       />
       {/* Hero Section */}
       <section className="relative min-h-[900px] overflow-hidden px-5 pt-32 pb-20 sm:px-8 lg:px-12 lg:pt-40 bg-[#FAF7F2] font-sans">

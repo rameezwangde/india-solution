@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
-const SEO = ({ title, description, keywords, image, url }) => {
+const SEO = ({ title, description, keywords, image, url, schema }) => {
   const siteName = "India Solution Events";
   const fullTitle = title ? `${title} | ${siteName}` : siteName;
   const defaultDescription = "India Solution provides premium event management, wedding planning, corporate events, and staging across Bengaluru and India.";
@@ -26,6 +26,13 @@ const SEO = ({ title, description, keywords, image, url }) => {
       <meta property="twitter:title" content={fullTitle} />
       <meta property="twitter:description" content={description || defaultDescription} />
       {image && <meta property="twitter:image" content={image} />}
+
+      {/* Schema Markup (JSON-LD) */}
+      {schema && (
+        <script type="application/ld+json">
+          {JSON.stringify(schema)}
+        </script>
+      )}
     </Helmet>
   );
 };

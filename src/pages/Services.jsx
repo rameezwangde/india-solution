@@ -37,12 +37,51 @@ const iconMap = {
 };
 
 const Services = () => {
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Event Management and Planning",
+    "provider": {
+      "@type": "EventVenue",
+      "name": "India Solution Events"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Bengaluru"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Event Services",
+      "itemListElement": [
+        {
+          "@type": "OfferCatalog",
+          "name": "Corporate Events",
+          "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Corporate Conferences" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Product Launches" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Networking Events" } }
+          ]
+        },
+        {
+          "@type": "OfferCatalog",
+          "name": "Weddings",
+          "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Wedding Planning" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Stage Fabrication" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Special Entries" } }
+          ]
+        }
+      ]
+    }
+  };
+
   return (
     <section className="relative overflow-hidden bg-[#FAF7F2] px-5 pb-24 pt-32 text-[#5c4033] lg:px-10 lg:pt-44 min-h-screen font-sans">
       <SEO 
         title="Our Services & Event Planning"
         description="Explore India Solution's comprehensive event services including corporate conferences, luxury weddings, stage fabrication, and product launches in Bengaluru."
         keywords="event services, wedding planning packages, corporate event management, stage fabrication bengaluru"
+        schema={serviceSchema}
       />
       {/* Global Background Watermarks */}
       <div className="absolute inset-0 z-0 pointer-events-none">

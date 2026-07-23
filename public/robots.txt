@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Prevent indexing of admin and backend paths
+Disallow: /admin/
+Disallow: /api/
+
+Sitemap: https://www.india-solution.com/sitemap.xml
