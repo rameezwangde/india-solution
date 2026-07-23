@@ -1,5 +1,5 @@
 import React, { Suspense, lazy, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AdminAuthProvider } from './context/AdminAuthContext';
@@ -25,18 +25,20 @@ import { useCart } from './context/CartContext';
 import AdminLoginPage from './pages/admin/AdminLoginPage';
 import AdminLayout from './components/admin/AdminLayout';
 import ProtectedAdminRoute from './components/admin/ProtectedAdminRoute';
-import AdminDashboardPage from './pages/admin/AdminDashboardPage';
-import AdminProductsPage from './pages/admin/AdminProductsPage';
-import AdminCategoriesPage from './pages/admin/AdminCategoriesPage';
-import AdminEnquiriesPage from './pages/admin/AdminEnquiriesPage';
-import AdminInventoryImportPage from './pages/admin/AdminInventoryImportPage';
-import AdminDepartmentsPage from './pages/admin/AdminDepartmentsPage';
-import AdminInventoryActivityPage from './pages/admin/AdminInventoryActivityPage';
-import AdminProductDetailsPage from './pages/admin/AdminProductDetailsPage';
-import AdminLowStockPage from './pages/admin/AdminLowStockPage';
-import AdminBackupsPage from './pages/admin/AdminBackupsPage';
-import AdminHelpPage from './pages/admin/AdminHelpPage';
-import AdminNotFoundPage from './pages/admin/AdminNotFoundPage';
+
+// Lazy loaded Admin Pages (Code Splitting)
+const AdminDashboardPage = lazy(() => import('./pages/admin/AdminDashboardPage'));
+const AdminProductsPage = lazy(() => import('./pages/admin/AdminProductsPage'));
+const AdminCategoriesPage = lazy(() => import('./pages/admin/AdminCategoriesPage'));
+const AdminEnquiriesPage = lazy(() => import('./pages/admin/AdminEnquiriesPage'));
+const AdminInventoryImportPage = lazy(() => import('./pages/admin/AdminInventoryImportPage'));
+const AdminDepartmentsPage = lazy(() => import('./pages/admin/AdminDepartmentsPage'));
+const AdminInventoryActivityPage = lazy(() => import('./pages/admin/AdminInventoryActivityPage'));
+const AdminProductDetailsPage = lazy(() => import('./pages/admin/AdminProductDetailsPage'));
+const AdminLowStockPage = lazy(() => import('./pages/admin/AdminLowStockPage'));
+const AdminBackupsPage = lazy(() => import('./pages/admin/AdminBackupsPage'));
+const AdminHelpPage = lazy(() => import('./pages/admin/AdminHelpPage'));
+const AdminNotFoundPage = lazy(() => import('./pages/admin/AdminNotFoundPage'));
 
 const PublicLayout = ({ children }) => {
   const { cartItems, handleUpdateQuantity, handleRemoveItem, clearCart } = useCart();
@@ -102,19 +104,32 @@ function App() {
                   <AdminLayout />
                 </ProtectedAdminRoute>
               }>
-                <Route index element={<AdminDashboardPage />} />
-                <Route path="products" element={<AdminProductsPage />} />
-                <Route path="products/:id" element={<AdminProductDetailsPage />} />
-                <Route path="low-stock" element={<AdminLowStockPage />} />
-                <Route path="inventory-departments" element={<AdminDepartmentsPage />} />
-                <Route path="inventory-departments/:departmentSlug" element={<AdminProductsPage />} />
-                <Route path="categories" element={<AdminCategoriesPage />} />
-                <Route path="enquiries" element={<AdminEnquiriesPage />} />
-                <Route path="inventory-activity" element={<AdminInventoryActivityPage />} />
-                <Route path="import-inventory" element={<AdminInventoryImportPage />} />
-                <Route path="backups" element={<AdminBackupsPage />} />
-                <Route path="help" element={<AdminHelpPage />} />
-                <Route path="*" element={<AdminNotFoundPage />} />
+                <Route element={
+                  <Suspense fallback={
+                    <div className="min-h-screen bg-[#FAF7F2] flex items-center justify-center">
+                      <div className="flex flex-col items-center gap-4">
+                        <div className="w-12 h-12 border-4 border-[#E8DFD5] border-t-[#A67C65] rounded-full animate-spin"></div>
+                        <p className="text-[#A67C65] font-semibold text-sm tracking-widest uppercase">Loading Workspace...</p>
+                      </div>
+                    </div>
+                  }>
+                    <Outlet />
+                  </Suspense>
+                }>
+                  <Route index element={<AdminDashboardPage />} />
+                  <Route path="products" element={<AdminProductsPage />} />
+                  <Route path="products/:id" element={<AdminProductDetailsPage />} />
+                  <Route path="low-stock" element={<AdminLowStockPage />} />
+                  <Route path="inventory-departments" element={<AdminDepartmentsPage />} />
+                  <Route path="inventory-departments/:departmentSlug" element={<AdminProductsPage />} />
+                  <Route path="categories" element={<AdminCategoriesPage />} />
+                  <Route path="enquiries" element={<AdminEnquiriesPage />} />
+                  <Route path="inventory-activity" element={<AdminInventoryActivityPage />} />
+                  <Route path="import-inventory" element={<AdminInventoryImportPage />} />
+                  <Route path="backups" element={<AdminBackupsPage />} />
+                  <Route path="help" element={<AdminHelpPage />} />
+                  <Route path="*" element={<AdminNotFoundPage />} />
+                </Route>
               </Route>
 
               {/* Public Routes */}
