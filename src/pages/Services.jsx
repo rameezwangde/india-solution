@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { staggerContainer, fadeUp } from '../utils/animations';
 import { serviceCatalog, slugifyServiceItem } from '../data/serviceCatalog';
+import SEO from '../components/layout/SEO';
 
 const iconMap = {
   BriefcaseBusiness,
@@ -38,6 +39,11 @@ const iconMap = {
 const Services = () => {
   return (
     <section className="relative overflow-hidden bg-[#FAF7F2] px-5 pb-24 pt-32 text-[#5c4033] lg:px-10 lg:pt-44 min-h-screen font-sans">
+      <SEO 
+        title="Our Services & Event Planning"
+        description="Explore India Solution's comprehensive event services including corporate conferences, luxury weddings, stage fabrication, and product launches in Bengaluru."
+        keywords="event services, wedding planning packages, corporate event management, stage fabrication bengaluru"
+      />
       {/* Global Background Watermarks */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <img 

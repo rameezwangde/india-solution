@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
 import { fadeUp, staggerContainer } from '../utils/animations';
 import { Link } from 'react-router-dom';
+import SEO from '../components/layout/SEO';
 
 const Gallery = () => {
   const [filter, setFilter] = useState('All');
@@ -172,6 +173,11 @@ const Gallery = () => {
 
   return (
     <section className="relative min-h-screen overflow-hidden px-5 pb-20 pt-32 lg:px-12 lg:pt-40 font-sans bg-[#FAF7F2]">
+      <SEO 
+        title="Event Gallery & Portfolio"
+        description="Browse India Solution's extensive gallery of corporate events, weddings, conferences, product launches, and professional gatherings in Bengaluru."
+        keywords="event gallery, wedding portfolio, corporate event photos, india solution past events, bengaluru event setups"
+      />
       {/* Background Layer */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <img 

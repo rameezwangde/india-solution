@@ -1,5 +1,8 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, CalendarDays, Users, Award, Briefcase, Clock, Sparkles, Crosshair, Heart, Star } from 'lucide-react';
+import { ArrowRight, CalendarDays, Users, Award, Star, Quote, ChevronLeft, ChevronRight, Play } from 'lucide-react';
+import Navbar from '../components/layout/Navbar';
+import Footer from '../components/layout/Footer';
+import SEO from '../components/layout/SEO';
 import { fadeUp, staggerContainer } from '../utils/animations';
 const happyClients = ['Google', 'Capgemini', 'DHL', 'IBM', 'Bajaj', 'Audi', 'Amazon'];
 const stats = [
@@ -88,7 +91,12 @@ const ClientLogo = ({ brand }) => {
 
 const Home = () => {
   return (
-    <div>
+    <div className="bg-[#FAF7F2] font-sans selection:bg-[#A67C65] selection:text-white relative">
+      <SEO 
+        title="Premium Event Management in Bengaluru"
+        description="India Solution provides world-class event management, wedding planning, corporate events, and staging across Bengaluru and India. Turn your vision into extraordinary experiences with flawless execution."
+        keywords="event management bengaluru, wedding planners india, corporate events, stage fabrication, premium event planners"
+      />
       {/* Hero Section */}
       <section className="relative min-h-[900px] overflow-hidden px-5 pt-32 pb-20 sm:px-8 lg:px-12 lg:pt-40 bg-[#FAF7F2] font-sans">
         {/* Background Layer */}

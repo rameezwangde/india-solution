@@ -1,5 +1,6 @@
 import React, { Suspense, lazy, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AdminAuthProvider } from './context/AdminAuthContext';
 import { ToastProvider } from './context/ToastContext';
@@ -85,7 +86,8 @@ const queryClient = new QueryClient({
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
       <ToastProvider>
       <AdminAuthProvider>
         <CartProvider>
@@ -138,10 +140,11 @@ function App() {
             </Routes>
           </Router>
         </ErrorBoundary>
-        </CartProvider>
-      </AdminAuthProvider>
-    </ToastProvider>
-    </QueryClientProvider>
+            </CartProvider>
+          </AdminAuthProvider>
+        </ToastProvider>
+      </QueryClientProvider>
+    </HelmetProvider>
   );
 }
 

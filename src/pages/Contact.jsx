@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Mail, MapPin, Phone, Send, Star } from 'lucide-react';
 import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
 import { fadeUp, staggerContainer } from '../utils/animations';
+import SEO from '../components/layout/SEO';
 
 const contactCards = [
   {
@@ -41,6 +42,11 @@ const Contact = () => {
 
   return (
     <div className="bg-navy-900 text-white">
+      <SEO 
+        title="Contact Us"
+        description="Get in touch with India Solution Events. Call +91 6360181932 or visit our production house in Bengaluru to plan your next extraordinary event."
+        keywords="contact india solution, event planners contact bengaluru, hire event management company"
+      />
       <section className="relative overflow-hidden px-6 pb-14 pt-40 lg:px-12 lg:pt-44">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_10%,rgba(233,30,99,0.22),transparent_30%),radial-gradient(circle_at_86%_14%,rgba(255,152,0,0.18),transparent_28%)]" />
         <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-magenta/50 to-transparent" />

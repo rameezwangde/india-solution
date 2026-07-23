@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Award, Clock, Crosshair, Eye, Handshake, Lightbulb, Target, Users, Calendar, Trophy, MapPin, ChevronRight, Star } from 'lucide-react';
 import { fadeUp, staggerContainer } from '../utils/animations';
+import SEO from '../components/layout/SEO';
 
 const highlights = [
   {
@@ -45,6 +46,11 @@ const stats = [
 const About = () => {
   return (
     <div className="bg-[#FAF7F2] font-sans text-[#5c4033] relative overflow-hidden">
+      <SEO 
+        title="About Us"
+        description="Learn about India Solution, Bengaluru's premier event management company. We specialize in bringing bold ideas to life with unparalleled precision and creativity since 2010."
+        keywords="about india solution, best event planners bengaluru, event management company history, corporate event planners"
+      />
       {/* Global Background Watermarks */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <img 

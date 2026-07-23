@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import ProductCard from '../components/inventory/ProductCard';
 import CategoryTabs from '../components/inventory/CategoryTabs';
 import { useCart } from '../context/CartContext';
+import SEO from '../components/layout/SEO';
 
 import { getProducts, getDepartments } from '../api/productService';
 
@@ -85,6 +86,11 @@ const InventoryDemo = () => {
   const error = isError ? 'Unable to load inventory' : null;
   return (
     <div className="pt-32 min-h-screen bg-[#FAF7F2] font-sans flex flex-col relative pb-40 lg:pt-44">
+      <SEO 
+        title="Event Equipment & Inventory Catalog"
+        description="Browse our extensive catalog of event equipment, stage decor, lighting, AV, and luxury furniture available for rent in Bengaluru."
+        keywords="event equipment rental bengaluru, stage decor, av rental, luxury event furniture"
+      />
       {/* Global Background Watermarks */}
       <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
         <img 
