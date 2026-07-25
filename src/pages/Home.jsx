@@ -157,23 +157,23 @@ const Home = () => {
             animate="visible"
             className="mx-auto flex flex-col items-center"
           >
-            <motion.div variants={fadeUp} className="mb-6 flex items-center justify-center gap-4 text-[11px] font-bold tracking-[0.2em] text-[#A67C65]">
+            <motion.div variants={fadeUp} className="mb-6 flex items-center justify-center gap-4 text-[11px] font-bold tracking-[0.2em] text-[#4A2F1D]">
               <span className="text-[#8B5E45] text-sm">❖</span>
               <span className="uppercase">Crafting Unforgettable Moments</span>
               <span className="text-[#8B5E45] text-sm">❖</span>
             </motion.div>
 
             <motion.h1 variants={fadeUp} className="font-['Playfair_Display',serif] text-[#4A2F1D]">
-              <span className="block font-bold text-6xl sm:text-7xl lg:text-[90px] tracking-wide mb-1 leading-none">DESIGNED,</span>
-              <span className="block italic font-medium text-[54px] sm:text-[64px] lg:text-[78px] text-[#A67C65] tracking-wide leading-[1.1]">PRODUCED & DELIVERED</span>
-              <span className="block font-bold tracking-[0.2em] text-3xl sm:text-4xl lg:text-[40px] mt-5 text-[#4A2F1D]">UNDER ONE ROOF.</span>
+              <span className="block font-black text-6xl sm:text-7xl lg:text-[90px] tracking-wide mb-1 leading-none text-[#2A1810]">DESIGNED,</span>
+              <span className="block italic font-bold text-[54px] sm:text-[64px] lg:text-[78px] text-[#4A2F1D] tracking-wide leading-[1.1]">PRODUCED & DELIVERED</span>
+              <span className="block font-black tracking-[0.2em] text-3xl sm:text-4xl lg:text-[40px] mt-5 text-[#2A1810]">UNDER ONE ROOF.</span>
             </motion.h1>
 
             <motion.div variants={fadeUp} className="mx-auto my-7 flex items-center justify-center">
               <span className="text-[#8B5E45] text-lg">❖</span>
             </motion.div>
 
-            <motion.p variants={fadeUp} className="mx-auto max-w-2xl text-[14px] leading-[1.8] text-[#5c4033] md:text-[15px] font-medium">
+            <motion.p variants={fadeUp} className="mx-auto max-w-2xl text-[15px] leading-[1.8] text-[#2A1810] md:text-[16px] font-semibold">
               At India Solution, we bring your vision to life, from intimate celebrations to grand corporate gatherings. Trust us to handle the details while you enjoy the moment.
             </motion.p>
           </motion.div>
@@ -196,7 +196,7 @@ const Home = () => {
                     </div>
                     <div className="flex flex-col text-left justify-center">
                       <h3 className="text-[28px] font-bold text-[#4A2F1D] font-['Playfair_Display',serif] leading-none mb-1">{stat.value}</h3>
-                      <p className="text-[11.5px] font-medium text-[#5c4033] leading-tight whitespace-pre-line">{stat.label}</p>
+                      <p className="text-[11.5px] font-medium text-[#2A1810] leading-tight whitespace-pre-line">{stat.label}</p>
                     </div>
                   </div>
                 ))}
@@ -211,11 +211,11 @@ const Home = () => {
             className="mt-12 mb-14 flex justify-center items-center gap-6 relative"
           >
              <div className="flex items-center gap-4">
-               <span className="text-[#A67C65] text-sm">❖</span>
+               <span className="text-[#4A2F1D] text-sm">❖</span>
                <button className="bg-[#A87455] hover:bg-[#8F6145] text-white px-9 py-3.5 rounded-[4px] font-bold tracking-widest text-[12px] transition-all flex items-center gap-3 shadow-[0_8px_20px_rgb(148,98,71,0.25)] hover:shadow-[0_8px_20px_rgb(148,98,71,0.4)]">
                   CONTACT US <ArrowRight size={15} strokeWidth={2.5} />
                </button>
-               <span className="text-[#A67C65] text-sm">❖</span>
+               <span className="text-[#4A2F1D] text-sm">❖</span>
              </div>
           </motion.div>
 
@@ -258,27 +258,27 @@ const Home = () => {
               viewport={{ once: true }}
               className="max-w-2xl pt-4"
             >
-              <motion.div variants={fadeUp} className="mb-6 flex items-center gap-3 text-[11px] font-bold tracking-[0.2em] text-[#A67C65]">
+              <motion.div variants={fadeUp} className="mb-6 flex items-center gap-3 text-[11px] font-bold tracking-[0.2em] text-[#4A2F1D]">
                 <span className="text-[#8B5E45] text-xs">❖</span>
                 <span className="uppercase">Crafting Unforgettable Moments</span>
                 <span className="text-[#8B5E45] text-xs">❖</span>
               </motion.div>
 
-              <motion.h2 variants={fadeUp} className="font-['Playfair_Display',serif] text-[#4A2F1D] mb-8">
-                <span className="block font-bold text-5xl md:text-6xl tracking-wide mb-1 leading-[1.1]">DESIGNED, PRODUCED</span>
-                <span className="block font-medium text-4xl md:text-5xl text-[#A67C65] tracking-wide leading-[1.2]">& DELIVERED</span>
-                <span className="block font-bold tracking-[0.2em] text-2xl md:text-3xl mt-4 text-[#4A2F1D]">UNDER ONE ROOF.</span>
+              <motion.h2 variants={fadeUp} className="font-['Playfair_Display',serif] text-[#2A1810] mb-8">
+                <span className="block font-black text-5xl md:text-6xl tracking-wide mb-1 leading-[1.1]">DESIGNED, PRODUCED</span>
+                <span className="block font-bold text-4xl md:text-5xl text-[#4A2F1D] tracking-wide leading-[1.2]">& DELIVERED</span>
+                <span className="block font-black tracking-[0.2em] text-2xl md:text-3xl mt-4 text-[#2A1810]">UNDER ONE ROOF.</span>
               </motion.h2>
 
-              <div className="space-y-6 text-[#5c4033] text-[14.5px] leading-[1.8] font-medium">
+              <div className="space-y-6 text-[#2A1810] text-[15.5px] leading-[1.8] font-semibold">
                 <motion.p variants={fadeUp}>
-                  At <strong className="text-[#A67C65] font-bold">India Solution</strong>, we blend creativity, precision, and passion to craft events that leave a lasting impression. From intimate celebrations to grand corporate gatherings, every detail is thoughtfully planned and flawlessly executed.
+                  At <strong className="text-[#4A2F1D] font-black">India Solution</strong>, we blend creativity, precision, and passion to craft events that leave a lasting impression. From intimate celebrations to grand corporate gatherings, every detail is thoughtfully planned and flawlessly executed.
                 </motion.p>
                 <motion.p variants={fadeUp}>
                   With years of experience and a dedicated team of experts, we offer end-to-end event solutions tailored to your unique vision. Our commitment to excellence, innovation, and elegance ensures that your event is not just well-managed — but truly unforgettable.
                 </motion.p>
                 <motion.p variants={fadeUp}>
-                  Trust us to handle the details while you enjoy the moment. At <strong className="text-[#A67C65] font-bold">India Solution</strong>, we don't just organize events — we create memories that last a lifetime.
+                  Trust us to handle the details while you enjoy the moment. At <strong className="text-[#4A2F1D] font-bold">India Solution</strong>, we don't just organize events — we create memories that last a lifetime.
                 </motion.p>
               </div>
             </motion.div>
@@ -302,11 +302,11 @@ const Home = () => {
                       {index > 0 && (
                          <div className="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 w-px h-[60%] bg-[#DFD3C8]"></div>
                       )}
-                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-[1.5px] border-[#D5C5B9] bg-transparent text-[#A67C65] mb-4">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-[1.5px] border-[#D5C5B9] bg-transparent text-[#4A2F1D] mb-4">
                         <stat.icon size={20} strokeWidth={1.5} />
                       </div>
                       <h3 className="text-[22px] font-bold text-[#4A2F1D] font-['Playfair_Display',serif] leading-none mb-2">{stat.value}</h3>
-                      <p className="text-[10px] font-bold text-[#A67C65] leading-[1.3] whitespace-pre-line">{stat.label}</p>
+                      <p className="text-[10px] font-bold text-[#4A2F1D] leading-[1.3] whitespace-pre-line">{stat.label}</p>
                     </div>
                   ))}
                 </div>
@@ -350,21 +350,21 @@ const Home = () => {
             >
               <h2 className="font-['Playfair_Display',serif] text-5xl md:text-[62px] lg:text-[72px] leading-[1.1] text-[#4A2F1D]">
                 <span className="block mb-1">CREATING</span>
-                <span className="block italic text-[#A67C65]">UNFORGETTABLE</span>
+                <span className="block italic text-[#4A2F1D]">UNFORGETTABLE</span>
                 <span className="block mt-1">EVENTS</span>
               </h2>
 
               <div className="my-8 flex items-center gap-4">
                 <span className="h-[1.5px] w-16 bg-[#D5C5B9]" />
-                <span className="text-[#A67C65] text-sm">❖</span>
+                <span className="text-[#4A2F1D] text-sm">❖</span>
                 <span className="h-[1.5px] w-16 bg-[#D5C5B9]" />
               </div>
 
               <p className="font-['Playfair_Display',serif] text-[26px] md:text-[32px] italic tracking-widest text-[#4A2F1D] mb-6">
-                SINCE <span className="text-[#A67C65]">2010</span>
+                SINCE <span className="text-[#4A2F1D]">2010</span>
               </p>
 
-              <p className="text-[14px] leading-[1.8] font-medium text-[#5c4033] max-w-[400px]">
+              <p className="text-[15px] leading-[1.8] font-bold text-[#2A1810] max-w-[400px]">
                 At India Solution, we bring your vision to life, from intimate celebrations to grand corporate gatherings. Trust us to handle the details while you enjoy the moment.
               </p>
             </motion.div>
@@ -383,13 +383,13 @@ const Home = () => {
           {/* Our Expertise Section */}
           <div className="mb-24">
             <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-12 text-center">
-              <div className="mb-6 flex items-center justify-center gap-3 text-[11px] font-bold tracking-[0.2em] text-[#A67C65]">
+              <div className="mb-6 flex items-center justify-center gap-3 text-[11px] font-bold tracking-[0.2em] text-[#4A2F1D]">
                 <span className="text-[#8B5E45] text-xs">❖</span>
                 <span className="uppercase">Our Expertise</span>
                 <span className="text-[#8B5E45] text-xs">❖</span>
               </div>
               <h3 className="font-['Playfair_Display',serif] text-4xl md:text-5xl lg:text-[54px] font-semibold text-[#4A2F1D]">
-                Crafting Experiences. <span className="italic text-[#A67C65]">Creating Memories.</span>
+                Crafting Experiences. <span className="italic text-[#4A2F1D]">Creating Memories.</span>
               </h3>
               <div className="mt-8 flex items-center justify-center">
                 <span className="text-[#8B5E45] text-sm">❖</span>
@@ -415,7 +415,7 @@ const Home = () => {
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#8A563C] to-[#603A28] shadow-inner">
                     <Star className="text-white drop-shadow-sm" size={16} strokeWidth={2} />
                   </div>
-                  <span className="text-[11px] leading-[1.3] font-bold text-[#5c4033] whitespace-pre-line">{item}</span>
+                  <span className="text-[11px] leading-[1.3] font-bold text-[#2A1810] whitespace-pre-line">{item}</span>
                 </motion.div>
               ))}
             </div>
@@ -424,13 +424,13 @@ const Home = () => {
           {/* Why Choose India Solution Section */}
           <div className="mb-10">
             <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-12 text-center">
-              <div className="mb-6 flex items-center justify-center gap-3 text-[11px] font-bold tracking-[0.2em] text-[#A67C65]">
+              <div className="mb-6 flex items-center justify-center gap-3 text-[11px] font-bold tracking-[0.2em] text-[#4A2F1D]">
                 <span className="text-[#8B5E45] text-xs">❖</span>
                 <span className="uppercase">Why Choose India Solution?</span>
                 <span className="text-[#8B5E45] text-xs">❖</span>
               </div>
               <h3 className="font-['Playfair_Display',serif] text-4xl md:text-5xl lg:text-[54px] font-semibold text-[#4A2F1D]">
-                Excellence in <span className="italic text-[#A67C65]">Every Detail</span>
+                Excellence in <span className="italic text-[#4A2F1D]">Every Detail</span>
               </h3>
             </motion.div>
 
@@ -454,10 +454,10 @@ const Home = () => {
                   className="flex flex-col items-center text-center rounded-[2rem] bg-transparent py-4 px-2 w-[100%] sm:w-[calc(50%-1.5rem)] lg:w-[calc(25%-2rem)]"
                 >
                   <div className="flex h-14 w-14 mb-4 shrink-0 items-center justify-center rounded-full border-[1.5px] border-[#D5C5B9] bg-transparent">
-                    <Star className="text-[#A67C65]" size={22} strokeWidth={1.5} />
+                    <Star className="text-[#4A2F1D]" size={22} strokeWidth={1.5} />
                   </div>
-                  <h4 className="text-[12.5px] leading-snug font-bold text-[#4A2F1D] whitespace-pre-line mb-2">{item.title}</h4>
-                  <p className="text-[10.5px] leading-relaxed font-medium text-[#7C5A48] whitespace-pre-line">{item.desc}</p>
+                  <h4 className="text-[14px] leading-snug font-black text-[#2A1810] whitespace-pre-line mb-2">{item.title}</h4>
+                  <p className="text-[12px] leading-relaxed font-semibold text-[#4A2F1D] whitespace-pre-line">{item.desc}</p>
                 </motion.div>
               ))}
             </div>
@@ -465,15 +465,15 @@ const Home = () => {
 
           {/* Missing Text & Headings */}
           <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mx-auto max-w-4xl text-center mt-12 mb-16">
-            <p className="text-[13px] font-medium text-[#5c4033] leading-relaxed mb-10">
+            <p className="text-[15px] font-semibold text-[#2A1810] leading-relaxed mb-10">
               At India Solution, we don’t just organize events—we design experiences, produce excellence,<br/>and execute with precision. Every event reflects our commitment to quality, creativity,<br/>innovation, and flawless execution, ensuring every client receives the same premium service,<br/>regardless of the event size or budget.
             </p>
-            <div className="flex justify-center mb-8"><span className="text-[#A67C65] text-sm">❖</span></div>
+            <div className="flex justify-center mb-8"><span className="text-[#4A2F1D] text-sm">❖</span></div>
             <h4 className="font-['Playfair_Display',serif] text-4xl md:text-[42px] lg:text-[48px] font-semibold text-[#4A2F1D]">
               ONE TEAM. ONE PARTNER.<br/>
-              <span className="italic text-[#A67C65] mt-2 block tracking-wide">ENDLESS POSSIBILITIES.</span>
+              <span className="italic text-[#4A2F1D] mt-2 block tracking-wide">ENDLESS POSSIBILITIES.</span>
             </h4>
-            <div className="flex justify-center mt-8 mb-4"><span className="text-[#A67C65] text-sm">❖</span></div>
+            <div className="flex justify-center mt-8 mb-4"><span className="text-[#4A2F1D] text-sm">❖</span></div>
           </motion.div>
         </div>
       </section>
@@ -484,10 +484,10 @@ const Home = () => {
           
           <div className="relative z-10 text-center">
             <h2 className="font-['Playfair_Display',serif] text-3xl md:text-4xl font-semibold text-[#4A2F1D] tracking-wide">
-              OUR <span className="italic text-[#A67C65]">HAPPY</span> CLIENTS
+              OUR <span className="italic text-[#4A2F1D]">HAPPY</span> CLIENTS
             </h2>
             <div className="mx-auto mt-6 flex justify-center">
-              <span className="text-[#A67C65] text-sm">❖</span>
+              <span className="text-[#4A2F1D] text-sm">❖</span>
             </div>
           </div>
 

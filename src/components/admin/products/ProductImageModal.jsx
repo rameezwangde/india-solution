@@ -75,7 +75,7 @@ const ProductImageModal = ({ isOpen, onClose, product, onUpdate }) => {
           exit={{ scale: 0.95, opacity: 0 }}
           className="bg-[#FFFDF9] border border-[#E2D6C7] rounded-2xl p-6 w-full max-w-md shadow-2xl relative"
         >
-          <button onClick={onClose} disabled={isUploading || isDeleting} className="absolute top-4 right-4 text-[#A67C65] hover:text-[#4A2F1D] transition-colors">
+          <button onClick={onClose} disabled={isUploading || isDeleting} className="absolute top-4 right-4 text-[#4A2F1D] hover:text-[#4A2F1D] transition-colors">
             <X size={20} />
           </button>
           

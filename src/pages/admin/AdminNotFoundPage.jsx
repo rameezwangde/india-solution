@@ -12,8 +12,8 @@ const AdminNotFoundPage = () => {
           </div>
         </div>
         <h1 className="text-4xl font-bold text-[#4A2F1D] mb-2">404</h1>
-        <h2 className="text-xl font-medium text-[#7C5A48] mb-6">Page Not Found</h2>
-        <p className="text-[#A67C65] text-sm mb-8">
+        <h2 className="text-xl font-medium text-[#4A2F1D] mb-6">Page Not Found</h2>
+        <p className="text-[#4A2F1D] text-sm mb-8">
           The page you are looking for doesn't exist or has been moved.
         </p>
         <Link 

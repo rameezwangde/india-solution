@@ -195,12 +195,12 @@ const Gallery = () => {
           className="mx-auto mb-10 max-w-3xl text-center"
         >
           <div className="mx-auto mb-4 flex justify-center">
-            <span className="text-[#A67C65] text-sm">❖</span>
+            <span className="text-[#4A2F1D] text-sm">❖</span>
           </div>
           <h1 className="font-['Playfair_Display',serif] text-5xl md:text-6xl font-bold tracking-wide mb-6">
-            <span className="text-[#4A2F1D]">OUR</span> <span className="text-[#A67C65]">GALLERY</span>
+            <span className="text-[#4A2F1D]">OUR</span> <span className="text-[#4A2F1D]">GALLERY</span>
           </h1>
-          <p className="mx-auto max-w-lg text-[13.5px] font-medium leading-relaxed text-[#5c4033]">
+          <p className="mx-auto max-w-lg text-[15px] font-semibold leading-relaxed text-[#2A1810]">
             Explore our extensive gallery of corporate events, conferences, product launches, and professional gatherings.
           </p>
         </motion.div>
@@ -215,10 +215,10 @@ const Gallery = () => {
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={`px-6 py-2 rounded-full text-[13px] font-semibold tracking-wide transition-all duration-300 ${
+              className={`px-6 py-2.5 rounded-full text-[14px] font-extrabold tracking-wider transition-all duration-300 ${
                 filter === f
-                  ? 'bg-[#5c4033] text-white border-transparent shadow-md'
-                  : 'bg-transparent border-[1.5px] border-[#D5C5B9] text-[#7C5A48] hover:border-[#A67C65] hover:text-[#5c4033]'
+                  ? 'bg-[#4A2F1D] text-white border-transparent shadow-md'
+                  : 'bg-transparent border-[1.5px] border-[#D5C5B9] text-[#4A2F1D] hover:border-[#A67C65] hover:text-[#2A1810] hover:bg-[#FAF7F2]'
               }`}
             >
               {f}
@@ -229,7 +229,7 @@ const Gallery = () => {
         {/* Gallery Grid */}
         <AnimatePresence mode="wait">
           {displayedCards.length === 0 ? (
-            <div className="text-center py-20 text-[#A67C65]">
+            <div className="text-center py-20 text-[#4A2F1D]">
               <p className="text-lg">No items found.</p>
             </div>
           ) : (
@@ -256,15 +256,15 @@ const Gallery = () => {
                     />
                   </div>
                   <div className="px-6 py-5 flex flex-col flex-grow">
-                    <h3 className="font-serif text-[15px] font-bold text-[#4A2F1D] mb-2 leading-snug">
+                    <h3 className="font-serif text-[17px] font-black text-[#2A1810] mb-2 leading-snug">
                       {item.title}
                     </h3>
-                    <p className="text-[11.5px] text-[#7C5A48] font-medium leading-relaxed mb-5 flex-grow">
+                    <p className="text-[13px] text-[#4A2F1D] font-semibold leading-relaxed mb-5 flex-grow">
                       {item.description}
                     </p>
                     <Link 
                       to={`/services/${item.category}/${item.slug}`} 
-                      className="inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-widest text-[#A67C65] transition-colors hover:text-[#5c4033]"
+                      className="inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-widest text-[#4A2F1D] transition-colors hover:text-[#2A1810]"
                     >
                       View More <ChevronRight size={13} strokeWidth={2.5} />
                     </Link>

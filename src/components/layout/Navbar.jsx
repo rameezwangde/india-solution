@@ -39,7 +39,7 @@ const Navbar = () => {
     <nav className="absolute w-full z-50 bg-transparent">
       {/* Top Contact Strip */}
       <div className="hidden lg:block border-b border-[#8B5E45]/10">
-        <div className="container mx-auto px-6 lg:px-12 py-1.5 flex justify-between items-center text-[11px] text-[#5c4033] font-medium">
+        <div className="container mx-auto px-6 lg:px-12 py-1.5 flex justify-between items-center text-[11px] text-[#2A1810] font-medium">
           <div className="flex items-center gap-6">
             <a href="tel:+916360181932" className="flex items-center gap-2 hover:text-[#946247] transition-colors">
               <Phone size={12} className="text-[#946247]" /> +91 6360181932

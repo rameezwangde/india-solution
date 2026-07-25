@@ -39,7 +39,7 @@ const CategoryDeleteModal = ({ isOpen, onClose, onConfirm, category, isDeleting 
           exit={{ scale: 0.95, opacity: 0 }}
           className="bg-navy-800 border border-[#E8DFD5] rounded-2xl p-6 w-full max-w-md shadow-2xl relative"
         >
-          <button onClick={onClose} disabled={isDeleting || isDeactivating} className="absolute top-4 right-4 text-[#A67C65] hover:text-[#4A2F1D] transition-colors disabled:opacity-50">
+          <button onClick={onClose} disabled={isDeleting || isDeactivating} className="absolute top-4 right-4 text-[#4A2F1D] hover:text-[#4A2F1D] transition-colors disabled:opacity-50">
             <X size={20} />
           </button>
           
@@ -50,7 +50,7 @@ const CategoryDeleteModal = ({ isOpen, onClose, onConfirm, category, isDeleting 
                   <Info size={24} />
                 </div>
                 <h3 className="text-xl font-bold text-[#4A2F1D] mb-2">Deletion Blocked</h3>
-                <div className="text-[#A67C65] text-sm mb-6 space-y-2">
+                <div className="text-[#4A2F1D] text-sm mb-6 space-y-2">
                   <p>
                     <span className="text-[#4A2F1D] font-medium">{category.name}</span> cannot be deleted because <strong className="text-[#C0602F]-400">{category.productCount} {category.productCount === 1 ? 'product is' : 'products are'}</strong> linked to it.
                   </p>
@@ -82,7 +82,7 @@ const CategoryDeleteModal = ({ isOpen, onClose, onConfirm, category, isDeleting 
                   <AlertTriangle size={24} />
                 </div>
                 <h3 className="text-xl font-bold text-[#4A2F1D] mb-2">Delete Category?</h3>
-                <p className="text-[#A67C65] text-sm mb-6">
+                <p className="text-[#4A2F1D] text-sm mb-6">
                   Are you sure you want to delete <span className="text-[#4A2F1D] font-medium">{category.name}</span>? 
                   This action cannot be undone.
                 </p>

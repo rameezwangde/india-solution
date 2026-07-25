@@ -120,7 +120,7 @@ const ProductFormModal = ({ isOpen, onClose, product, onSuccess }) => {
         >
           <div className="sticky top-0 bg-white border-b border-[#E8DFD5] p-6 rounded-t-2xl flex items-center justify-between z-10">
             <h3 className="text-xl font-bold text-[#4A2F1D]">{product ? 'Edit Product' : 'Add New Product'}</h3>
-            <button onClick={onClose} disabled={loading} className="text-[#A67C65] hover:text-[#4A2F1D] transition-colors">
+            <button onClick={onClose} disabled={loading} className="text-[#4A2F1D] hover:text-[#4A2F1D] transition-colors">
               <X size={24} />
             </button>
           </div>
@@ -128,16 +128,16 @@ const ProductFormModal = ({ isOpen, onClose, product, onSuccess }) => {
           <form onSubmit={handleSubmit} className="p-6 space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <label className="text-sm font-medium text-[#7C5A48]">Product Name *</label>
+                <label className="text-sm font-medium text-[#4A2F1D]">Product Name *</label>
                 <input required type="text" name="name" value={formData.name} onChange={handleChange} className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-[#A67C65] focus:outline-none" />
               </div>
               <div className="space-y-2">
-                <label className="text-sm font-medium text-[#7C5A48]">Product Code</label>
+                <label className="text-sm font-medium text-[#4A2F1D]">Product Code</label>
                 <input type="text" name="productCode" value={formData.productCode} onChange={handleChange} className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-[#A67C65] focus:outline-none" />
               </div>
               
               <div className="space-y-2">
-                <label className="text-sm font-medium text-[#7C5A48]">Category *</label>
+                <label className="text-sm font-medium text-[#4A2F1D]">Category *</label>
                 <select required name="category" value={formData.category} onChange={handleChange} className="w-full bg-white border border-[#E8DFD5] rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-[#A67C65] focus:outline-none">
                   <option value="">Select Category</option>
                   {categories.map(c => (
@@ -146,16 +146,16 @@ const ProductFormModal = ({ isOpen, onClose, product, onSuccess }) => {
                 </select>
               </div>
               <div className="space-y-2">
-                <label className="text-sm font-medium text-[#7C5A48]">Department</label>
+                <label className="text-sm font-medium text-[#4A2F1D]">Department</label>
                 <input type="text" name="department" value={formData.department} onChange={handleChange} className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-[#A67C65] focus:outline-none" />
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-medium text-[#7C5A48]">Size / Specifications</label>
+                <label className="text-sm font-medium text-[#4A2F1D]">Size / Specifications</label>
                 <input type="text" name="size" value={formData.size} onChange={handleChange} className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-[#A67C65] focus:outline-none" />
               </div>
               <div className="space-y-2">
-                <label className="text-sm font-medium text-[#7C5A48]">Status</label>
+                <label className="text-sm font-medium text-[#4A2F1D]">Status</label>
                 <select name="status" value={formData.status} onChange={handleChange} className="w-full bg-white border border-[#E8DFD5] rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-[#A67C65] focus:outline-none">
                   <option value="available">Available</option>
                   <option value="out_of_stock">Out of Stock</option>
@@ -164,17 +164,17 @@ const ProductFormModal = ({ isOpen, onClose, product, onSuccess }) => {
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-medium text-[#7C5A48]">Price (₹) *</label>
+                <label className="text-sm font-medium text-[#4A2F1D]">Price (₹) *</label>
                 <input required type="number" min="0" name="price" value={formData.price} onChange={handleChange} className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-[#A67C65] focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" />
               </div>
               <div className="space-y-2">
-                <label className="text-sm font-medium text-[#7C5A48]">Quantity *</label>
+                <label className="text-sm font-medium text-[#4A2F1D]">Quantity *</label>
                 <input required type="number" min="0" name="quantity" value={formData.quantity} onChange={handleChange} className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-[#A67C65] focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" />
               </div>
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium text-[#7C5A48]">Description</label>
+              <label className="text-sm font-medium text-[#4A2F1D]">Description</label>
               <textarea rows="3" name="description" value={formData.description} onChange={handleChange} className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-[#A67C65] focus:outline-none resize-none"></textarea>
             </div>
 

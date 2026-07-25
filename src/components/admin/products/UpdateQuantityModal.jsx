@@ -29,18 +29,18 @@ const UpdateQuantityModal = ({ isOpen, onClose, onConfirm, product, isUpdating }
           exit={{ scale: 0.95, opacity: 0 }}
           className="bg-navy-800 border border-[#E8DFD5] rounded-2xl p-6 w-full max-w-sm shadow-2xl relative"
         >
-          <button onClick={onClose} disabled={isUpdating} className="absolute top-4 right-4 text-[#A67C65] hover:text-[#4A2F1D] transition-colors">
+          <button onClick={onClose} disabled={isUpdating} className="absolute top-4 right-4 text-[#4A2F1D] hover:text-[#4A2F1D] transition-colors">
             <X size={20} />
           </button>
           
           <h3 className="text-xl font-bold text-[#4A2F1D] mb-1">Update Quantity</h3>
-          <p className="text-sm text-[#A67C65] mb-6">{product.name} ({product.code})</p>
+          <p className="text-sm text-[#4A2F1D] mb-6">{product.name} ({product.code})</p>
 
           <div className="bg-white rounded-xl p-4 mb-6 border border-[#E8DFD5]">
-            <div className="text-center mb-4 text-sm text-[#A67C65]">Current Stock: <span className="text-[#4A2F1D] font-bold">{product.quantity}</span></div>
+            <div className="text-center mb-4 text-sm text-[#4A2F1D]">Current Stock: <span className="text-[#4A2F1D] font-bold">{product.quantity}</span></div>
             
             <div className="flex items-center justify-center gap-4">
-              <button type="button" onClick={() => handleAdjust(-5)} className="w-8 h-8 rounded-full bg-[#FAF7F2] flex items-center justify-center text-[#A67C65] hover:text-[#4A2F1D] hover:bg-[#E8DFD5] transition-colors" title="-5">-5</button>
+              <button type="button" onClick={() => handleAdjust(-5)} className="w-8 h-8 rounded-full bg-[#FAF7F2] flex items-center justify-center text-[#4A2F1D] hover:text-[#4A2F1D] hover:bg-[#E8DFD5] transition-colors" title="-5">-5</button>
               <button type="button" onClick={() => handleAdjust(-1)} className="w-10 h-10 rounded-full bg-[#E8DFD5] flex items-center justify-center text-[#4A2F1D] hover:bg-white/20 transition-colors"><Minus size={18} /></button>
               
               <input 
@@ -52,7 +52,7 @@ const UpdateQuantityModal = ({ isOpen, onClose, onConfirm, product, isUpdating }
               />
               
               <button type="button" onClick={() => handleAdjust(1)} className="w-10 h-10 rounded-full bg-[#E8DFD5] flex items-center justify-center text-[#4A2F1D] hover:bg-white/20 transition-colors"><Plus size={18} /></button>
-              <button type="button" onClick={() => handleAdjust(5)} className="w-8 h-8 rounded-full bg-[#FAF7F2] flex items-center justify-center text-[#A67C65] hover:text-[#4A2F1D] hover:bg-[#E8DFD5] transition-colors" title="+5">+5</button>
+              <button type="button" onClick={() => handleAdjust(5)} className="w-8 h-8 rounded-full bg-[#FAF7F2] flex items-center justify-center text-[#4A2F1D] hover:text-[#4A2F1D] hover:bg-[#E8DFD5] transition-colors" title="+5">+5</button>
             </div>
           </div>
 

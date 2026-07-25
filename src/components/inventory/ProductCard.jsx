@@ -32,19 +32,19 @@ const ProductCard = ({ product, cartItem, onUpdateQuantity }) => {
       </div>
       
       <div className="p-6 flex flex-col flex-grow">
-        <h3 className="text-xl font-bold text-[#4A2F1D] mb-2 leading-tight font-['Playfair_Display',serif]">{product.name}</h3>
+        <h3 className="text-2xl font-black text-[#2A1810] mb-3 leading-tight font-['Playfair_Display',serif]">{product.name}</h3>
         
         {product.size && (
-          <p className="text-sm text-[#A67C65] mb-2 font-medium">{product.size}</p>
+          <p className="text-sm text-[#4A2F1D] mb-2 font-bold">{product.size}</p>
         )}
         
-        <p className="text-sm text-[#7C5A48] mb-6 flex-grow leading-relaxed">
+        <p className="text-base text-[#4A2F1D] font-medium mb-6 flex-grow leading-relaxed">
           {product.description || 'Professional event equipment available for rent.'}
         </p>
         
         <div className="flex items-end justify-between mt-auto">
           <div>
-            <p className="text-xs text-[#A67C65] uppercase tracking-wider font-bold mb-1">Status</p>
+            <p className="text-xs text-[#4A2F1D] uppercase tracking-wider font-bold mb-1">Status</p>
             {product.quantity > 0 ? (
               <p className="text-sm font-bold text-green-600 flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span>
@@ -63,7 +63,7 @@ const ProductCard = ({ product, cartItem, onUpdateQuantity }) => {
               <div className="flex items-center bg-[#FAF7F2] rounded-full p-1 border border-[#E8DFD5]">
                 <button 
                   onClick={handleDecrease}
-                  className="w-8 h-8 rounded-full flex items-center justify-center text-[#7C5A48] hover:bg-white hover:shadow-sm transition-all"
+                  className="w-8 h-8 rounded-full flex items-center justify-center text-[#4A2F1D] hover:bg-white hover:shadow-sm transition-all"
                 >
                   -
                 </button>
@@ -71,7 +71,7 @@ const ProductCard = ({ product, cartItem, onUpdateQuantity }) => {
                 <button 
                   onClick={handleAdd}
                   disabled={currentQuantity >= product.quantity}
-                  className="w-8 h-8 rounded-full flex items-center justify-center text-[#7C5A48] hover:bg-white hover:shadow-sm transition-all disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:shadow-none"
+                  className="w-8 h-8 rounded-full flex items-center justify-center text-[#4A2F1D] hover:bg-white hover:shadow-sm transition-all disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:shadow-none"
                 >
                   +
                 </button>

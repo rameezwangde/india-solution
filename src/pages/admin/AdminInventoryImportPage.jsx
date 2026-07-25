@@ -183,7 +183,7 @@ const AdminInventoryImportPage = () => {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
           <h1 className="text-3xl font-bold text-[#4A2F1D] mb-2">Import Inventory</h1>
-          <p className="text-[#A67C65]">Bulk import products using an Excel workbook.</p>
+          <p className="text-[#4A2F1D]">Bulk import products using an Excel workbook.</p>
         </div>
         <div className="flex flex-wrap gap-3">
           <button 
@@ -217,28 +217,28 @@ const AdminInventoryImportPage = () => {
             {result.summary.failed === 0 ? <CheckCircle size={40} /> : <AlertTriangle size={40} />}
           </div>
           <h2 className="text-3xl font-bold text-[#4A2F1D] mb-2">Import Complete</h2>
-          <p className="text-[#A67C65] mb-8">Your Excel workbook has been processed.</p>
+          <p className="text-[#4A2F1D] mb-8">Your Excel workbook has been processed.</p>
           
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
             <div className="bg-[#FAF7F2] rounded-xl p-4">
               <div className="text-3xl font-bold text-green-400 mb-1">{result.summary.created}</div>
-              <div className="text-xs text-[#A67C65] uppercase tracking-wider">Created</div>
+              <div className="text-xs text-[#4A2F1D] uppercase tracking-wider">Created</div>
             </div>
             <div className="bg-[#FAF7F2] rounded-xl p-4">
               <div className="text-3xl font-bold text-blue-400 mb-1">{result.summary.updated}</div>
-              <div className="text-xs text-[#A67C65] uppercase tracking-wider">Updated</div>
+              <div className="text-xs text-[#4A2F1D] uppercase tracking-wider">Updated</div>
             </div>
             <div className="bg-[#FAF7F2] rounded-xl p-4">
-              <div className="text-3xl font-bold text-[#A67C65] mb-1">{result.summary.skipped}</div>
-              <div className="text-xs text-[#A67C65] uppercase tracking-wider">Skipped</div>
+              <div className="text-3xl font-bold text-[#4A2F1D] mb-1">{result.summary.skipped}</div>
+              <div className="text-xs text-[#4A2F1D] uppercase tracking-wider">Skipped</div>
             </div>
             <div className="bg-[#FAF7F2] rounded-xl p-4">
               <div className="text-3xl font-bold text-red-400 mb-1">{result.summary.failed}</div>
-              <div className="text-xs text-[#A67C65] uppercase tracking-wider">Failed</div>
+              <div className="text-xs text-[#4A2F1D] uppercase tracking-wider">Failed</div>
             </div>
             <div className="bg-[#FAF7F2] rounded-xl p-4">
               <div className="text-3xl font-bold text-[#9A424E] mb-1">{result.summary.categoriesCreated}</div>
-              <div className="text-xs text-[#A67C65] uppercase tracking-wider">Categories Created</div>
+              <div className="text-xs text-[#4A2F1D] uppercase tracking-wider">Categories Created</div>
             </div>
           </div>
 
@@ -247,25 +247,25 @@ const AdminInventoryImportPage = () => {
               {result.sheetSummaries.map((sheet, index) => (
                 <div key={index} className="bg-[#FAF7F2] border border-[#E8DFD5] rounded-xl p-5 flex flex-col h-full">
                   <h3 className="text-xl font-bold text-[#4A2F1D] mb-2">{sheet.sheetName}</h3>
-                  <div className="flex items-center gap-2 text-sm text-[#A67C65] mb-4">
+                  <div className="flex items-center gap-2 text-sm text-[#4A2F1D] mb-4">
                     <span>Mapped Department:</span>
                     <span className="text-[#9A424E] font-medium">{sheet.department || 'Main Inventory'}</span>
                   </div>
                   
                   <div className="grid grid-cols-2 gap-y-2 text-sm mb-6 flex-grow">
-                    <div className="text-[#A67C65]">Rows Scanned:</div>
+                    <div className="text-[#4A2F1D]">Rows Scanned:</div>
                     <div className="text-[#4A2F1D] font-medium text-right">{sheet.scanned}</div>
                     
-                    <div className="text-[#A67C65]">Created:</div>
+                    <div className="text-[#4A2F1D]">Created:</div>
                     <div className="text-green-400 font-medium text-right">{sheet.created}</div>
                     
-                    <div className="text-[#A67C65]">Updated:</div>
+                    <div className="text-[#4A2F1D]">Updated:</div>
                     <div className="text-blue-400 font-medium text-right">{sheet.updated}</div>
                     
-                    <div className="text-[#A67C65]">Skipped/Failed:</div>
+                    <div className="text-[#4A2F1D]">Skipped/Failed:</div>
                     <div className="text-red-400 font-medium text-right">{sheet.skipped} / {sheet.failed}</div>
                     
-                    <div className="text-[#A67C65] pt-2 border-t border-[#E8DFD5] mt-2">Total Quantity:</div>
+                    <div className="text-[#4A2F1D] pt-2 border-t border-[#E8DFD5] mt-2">Total Quantity:</div>
                     <div className="text-[#9A424E] font-bold text-right pt-2 border-t border-[#E8DFD5] mt-2">
                       {sheet.totalQuantity.toLocaleString()}
                     </div>
@@ -311,9 +311,9 @@ const AdminInventoryImportPage = () => {
                   onDrop={handleDrop}
                   onClick={() => fileInputRef.current?.click()}
                 >
-                  <Upload size={32} className="text-[#A67C65] mx-auto mb-4" />
+                  <Upload size={32} className="text-[#4A2F1D] mx-auto mb-4" />
                   <p className="text-[#4A2F1D] font-medium mb-1">Click or drag file to this area to upload</p>
-                  <p className="text-xs text-[#A67C65] mb-4">Strictly .xlsx or .xls format up to 15MB.</p>
+                  <p className="text-xs text-[#4A2F1D] mb-4">Strictly .xlsx or .xls format up to 15MB.</p>
                   <input 
                     type="file" 
                     className="hidden" 
@@ -329,10 +329,10 @@ const AdminInventoryImportPage = () => {
                     <FileSpreadsheet className="text-[#9A424E] flex-shrink-0" size={24} />
                     <div className="truncate">
                       <p className="text-[#4A2F1D] font-medium truncate">{file.name}</p>
-                      <p className="text-xs text-[#A67C65]">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+                      <p className="text-xs text-[#4A2F1D]">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
                     </div>
                   </div>
-                  <button onClick={handleRemoveFile} className="text-[#A67C65] hover:text-red-400 p-2">
+                  <button onClick={handleRemoveFile} className="text-[#4A2F1D] hover:text-red-400 p-2">
                     <X size={20} />
                   </button>
                 </div>
@@ -353,27 +353,27 @@ const AdminInventoryImportPage = () => {
                 <h3 className="text-xl font-bold text-[#4A2F1D] mb-4">2. Import Settings</h3>
                 
                 <div className="mb-6">
-                  <label className="block text-sm font-medium text-[#7C5A48] mb-3">Duplicate Handling Strategy</label>
+                  <label className="block text-sm font-medium text-[#4A2F1D] mb-3">Duplicate Handling Strategy</label>
                   <div className="space-y-2">
                     <label className="flex items-start gap-3 p-3 rounded-xl border border-[#E8DFD5] hover:bg-[#FAF7F2] cursor-pointer transition-colors">
                       <input type="radio" name="duplicateMode" value="skip" checked={duplicateMode === 'skip'} onChange={() => setDuplicateMode('skip')} className="mt-1 text-[#9A424E] bg-[#FAF7F2] border-white/20 focus:ring-magenta" />
                       <div>
                         <div className="text-[#4A2F1D] font-medium">Skip Existing Products</div>
-                        <div className="text-xs text-[#A67C65]">Ignore rows that match an existing product code or name.</div>
+                        <div className="text-xs text-[#4A2F1D]">Ignore rows that match an existing product code or name.</div>
                       </div>
                     </label>
                     <label className="flex items-start gap-3 p-3 rounded-xl border border-[#E8DFD5] hover:bg-[#FAF7F2] cursor-pointer transition-colors">
                       <input type="radio" name="duplicateMode" value="update_quantity" checked={duplicateMode === 'update_quantity'} onChange={() => setDuplicateMode('update_quantity')} className="mt-1 text-[#9A424E] bg-[#FAF7F2] border-white/20 focus:ring-magenta" />
                       <div>
                         <div className="text-[#4A2F1D] font-medium">Update Quantity Only</div>
-                        <div className="text-xs text-[#A67C65]">Update stock levels. Do not overwrite pricing or descriptions.</div>
+                        <div className="text-xs text-[#4A2F1D]">Update stock levels. Do not overwrite pricing or descriptions.</div>
                       </div>
                     </label>
                     <label className="flex items-start gap-3 p-3 rounded-xl border border-[#E8DFD5] hover:bg-[#FAF7F2] cursor-pointer transition-colors">
                       <input type="radio" name="duplicateMode" value="update_all" checked={duplicateMode === 'update_all'} onChange={() => setDuplicateMode('update_all')} className="mt-1 text-[#9A424E] bg-[#FAF7F2] border-white/20 focus:ring-magenta" />
                       <div>
                         <div className="text-[#4A2F1D] font-medium">Update All Details</div>
-                        <div className="text-xs text-[#A67C65]">Overwrite price, category, name, and quantity (preserves images).</div>
+                        <div className="text-xs text-[#4A2F1D]">Overwrite price, category, name, and quantity (preserves images).</div>
                       </div>
                     </label>
                   </div>
@@ -389,7 +389,7 @@ const AdminInventoryImportPage = () => {
                     />
                     <span className="text-[#4A2F1D] font-medium">Create missing categories automatically</span>
                   </label>
-                  <p className="text-xs text-[#A67C65] mt-1 pl-8">If unchecked, uncategorized products will fallback to standard defaults.</p>
+                  <p className="text-xs text-[#4A2F1D] mt-1 pl-8">If unchecked, uncategorized products will fallback to standard defaults.</p>
                 </div>
                 
                 <button 
@@ -408,26 +408,26 @@ const AdminInventoryImportPage = () => {
               <div className="bg-white border border-[#E8DFD5] rounded-2xl p-6 h-full flex flex-col items-center justify-center text-center">
                 <FileSpreadsheet size={64} className="text-[#4A2F1D]/10 mb-4" />
                 <h3 className="text-xl font-bold text-[#4A2F1D] mb-2">Workbook Preview</h3>
-                <p className="text-[#A67C65] max-w-md">Upload an Excel file and click preview to see detected sheets, valid rows, and potential duplicates before making any changes.</p>
+                <p className="text-[#4A2F1D] max-w-md">Upload an Excel file and click preview to see detected sheets, valid rows, and potential duplicates before making any changes.</p>
               </div>
             ) : (
               <div className="space-y-6">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div className="bg-white border border-[#E8DFD5] rounded-xl p-4">
                     <div className="text-2xl font-bold text-[#4A2F1D] mb-1">{previewData.summary.sheetsDetected}</div>
-                    <div className="text-xs text-[#A67C65] uppercase">Sheets Found</div>
+                    <div className="text-xs text-[#4A2F1D] uppercase">Sheets Found</div>
                   </div>
                   <div className="bg-white border border-[#E8DFD5] rounded-xl p-4">
                     <div className="text-2xl font-bold text-green-400 mb-1">{previewData.summary.validRows}</div>
-                    <div className="text-xs text-[#A67C65] uppercase">Valid Rows</div>
+                    <div className="text-xs text-[#4A2F1D] uppercase">Valid Rows</div>
                   </div>
                   <div className="bg-white border border-[#E8DFD5] rounded-xl p-4">
                     <div className="text-2xl font-bold text-red-400 mb-1">{previewData.summary.invalidRows}</div>
-                    <div className="text-xs text-[#A67C65] uppercase">Invalid Rows</div>
+                    <div className="text-xs text-[#4A2F1D] uppercase">Invalid Rows</div>
                   </div>
                   <div className="bg-white border border-[#E8DFD5] rounded-xl p-4">
                     <div className="text-2xl font-bold text-[#C0602F]-400 mb-1">{previewData.summary.possibleDuplicates}</div>
-                    <div className="text-xs text-[#A67C65] uppercase">Duplicates</div>
+                    <div className="text-xs text-[#4A2F1D] uppercase">Duplicates</div>
                   </div>
                 </div>
 
@@ -439,7 +439,7 @@ const AdminInventoryImportPage = () => {
                   <div className="overflow-x-auto">
                     <table className="w-full text-left border-collapse">
                       <thead>
-                        <tr className="bg-[#FAF7F2] text-xs uppercase tracking-wider text-[#A67C65]">
+                        <tr className="bg-[#FAF7F2] text-xs uppercase tracking-wider text-[#4A2F1D]">
                           <th className="p-4 font-medium">Sheet Name</th>
                           <th className="p-4 font-medium">Mapped Department</th>
                           <th className="p-4 font-medium">Valid</th>
@@ -450,7 +450,7 @@ const AdminInventoryImportPage = () => {
                         {previewData.sheets.map((s, i) => (
                           <tr key={i} className="hover:bg-[#FAF7F2]">
                             <td className="p-4 text-sm text-[#4A2F1D] font-medium">{s.sheetName}</td>
-                            <td className="p-4 text-sm text-[#7C5A48]">{s.department}</td>
+                            <td className="p-4 text-sm text-[#4A2F1D]">{s.department}</td>
                             <td className="p-4 text-sm text-green-400">{s.validRows}</td>
                             <td className="p-4 text-sm text-red-400">{s.invalidRows}</td>
                           </tr>
@@ -468,7 +468,7 @@ const AdminInventoryImportPage = () => {
                   <div className="overflow-x-auto max-h-[500px]">
                     <table className="w-full text-left border-collapse relative">
                       <thead className="sticky top-0 bg-white shadow-md">
-                        <tr className="bg-[#FAF7F2] text-xs uppercase tracking-wider text-[#A67C65]">
+                        <tr className="bg-[#FAF7F2] text-xs uppercase tracking-wider text-[#4A2F1D]">
                           <th className="p-4 font-medium whitespace-nowrap">Code</th>
                           <th className="p-4 font-medium">Product Name</th>
                           <th className="p-4 font-medium">Category Map</th>
@@ -479,13 +479,13 @@ const AdminInventoryImportPage = () => {
                       <tbody className="divide-y divide-white/10">
                         {previewData.previewRows.map((r, i) => (
                           <tr key={i} className={`hover:bg-[#FAF7F2] ${r.isDuplicate ? 'bg-orange-500/5' : ''}`}>
-                            <td className="p-4 text-sm text-[#7C5A48] font-mono">{r.productCode}</td>
+                            <td className="p-4 text-sm text-[#4A2F1D] font-mono">{r.productCode}</td>
                             <td className="p-4 text-sm text-[#4A2F1D] font-medium">
                               {r.name}
                               {r.isDuplicate && <span className="ml-2 inline-block px-2 py-0.5 bg-orange-500/20 text-[#C0602F]-400 text-[10px] rounded uppercase font-bold">Duplicate</span>}
                             </td>
-                            <td className="p-4 text-sm text-[#A67C65]">{r.categoryName}</td>
-                            <td className="p-4 text-sm text-[#7C5A48]">{r.quantity}</td>
+                            <td className="p-4 text-sm text-[#4A2F1D]">{r.categoryName}</td>
+                            <td className="p-4 text-sm text-[#4A2F1D]">{r.quantity}</td>
                             <td className="p-4 text-sm">
                               <span className={`px-2 py-1 rounded-md text-xs font-medium ${r.quantity > 0 ? 'bg-green-500/10 text-green-400' : 'bg-red-500/10 text-red-400'}`}>
                                 {r.quantity > 0 ? 'Available' : 'Out of Stock'}
@@ -522,15 +522,15 @@ const AdminInventoryImportPage = () => {
               className="relative bg-white border border-[#E8DFD5] rounded-2xl p-8 max-w-md w-full shadow-2xl"
             >
               <h2 className="text-2xl font-bold text-[#4A2F1D] mb-4">Execute Import?</h2>
-              <p className="text-[#A67C65] mb-6">You are about to process <strong className="text-[#4A2F1D]">{previewData?.summary.validRows}</strong> products from <strong>{file?.name}</strong>.</p>
+              <p className="text-[#4A2F1D] mb-6">You are about to process <strong className="text-[#4A2F1D]">{previewData?.summary.validRows}</strong> products from <strong>{file?.name}</strong>.</p>
               
               <div className="bg-[#FAF7F2] rounded-xl p-4 mb-6 space-y-2 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-[#A67C65]">Duplicate Mode:</span>
+                  <span className="text-[#4A2F1D]">Duplicate Mode:</span>
                   <span className="text-[#4A2F1D] font-medium">{duplicateMode === 'skip' ? 'Skip Existing' : duplicateMode === 'update_quantity' ? 'Update Quantity' : 'Update All'}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-[#A67C65]">Missing Categories:</span>
+                  <span className="text-[#4A2F1D]">Missing Categories:</span>
                   <span className="text-[#4A2F1D] font-medium">{createMissingCategories ? 'Auto-Create' : 'Use Default'}</span>
                 </div>
               </div>
@@ -544,7 +544,7 @@ const AdminInventoryImportPage = () => {
                     <div className="w-full bg-[#E8DFD5] rounded-full h-2.5 mb-2 overflow-hidden relative">
                       <div className="absolute inset-0 bg-gradient-to-r from-magenta to-orange h-full w-[50%] animate-pulse" style={{ animationDuration: '1s' }}></div>
                     </div>
-                    <p className="text-xs text-[#A67C65] mt-3">Please do not close or refresh this window. This may take a few moments depending on the file size.</p>
+                    <p className="text-xs text-[#4A2F1D] mt-3">Please do not close or refresh this window. This may take a few moments depending on the file size.</p>
                   </div>
                 ) : (
                   <div className="flex gap-4 w-full">
@@ -590,11 +590,11 @@ const AdminInventoryImportPage = () => {
                   <h3 className="text-xl font-bold text-[#4A2F1D]">Clear Entire Inventory?</h3>
                 </div>
                 
-                <p className="text-[#7C5A48] mb-6 text-sm leading-relaxed">
+                <p className="text-[#4A2F1D] mb-6 text-sm leading-relaxed">
                   This will permanently delete <span className="font-bold text-[#4A2F1D]">all products</span> from the inventory. 
                   Categories, admin accounts, and enquiries will not be deleted.
                   <br/><br/>
-                  <span className="text-[#A67C65] text-xs italic">
+                  <span className="text-[#4A2F1D] text-xs italic">
                     Note: Unused Cloudinary assets are preserved and can be cleaned separately to prevent accidental deletion of shared media.
                   </span>
                 </p>
@@ -602,13 +602,13 @@ const AdminInventoryImportPage = () => {
                 <div className="space-y-4 mb-6">
                   <div className="flex gap-4 p-1 bg-[#FAF7F2] rounded-lg border border-[#E8DFD5]">
                     <button
-                      className={`flex-1 py-2 text-sm font-medium rounded-md transition-colors ${clearMode === 'products' ? 'bg-[#E8DFD5] text-[#4A2F1D]' : 'text-[#A67C65] hover:text-[#4A2F1D] hover:bg-[#FAF7F2]'}`}
+                      className={`flex-1 py-2 text-sm font-medium rounded-md transition-colors ${clearMode === 'products' ? 'bg-[#E8DFD5] text-[#4A2F1D]' : 'text-[#4A2F1D] hover:text-[#4A2F1D] hover:bg-[#FAF7F2]'}`}
                       onClick={() => { setClearMode('products'); setClearConfirmText(''); }}
                     >
                       Products Only
                     </button>
                     <button
-                      className={`flex-1 py-2 text-sm font-medium rounded-md transition-colors ${clearMode === 'all' ? 'bg-red-500/20 text-red-400 border border-red-500/30' : 'text-[#A67C65] hover:text-red-400 hover:bg-[#FAF7F2]'}`}
+                      className={`flex-1 py-2 text-sm font-medium rounded-md transition-colors ${clearMode === 'all' ? 'bg-red-500/20 text-red-400 border border-red-500/30' : 'text-[#4A2F1D] hover:text-red-400 hover:bg-[#FAF7F2]'}`}
                       onClick={() => { setClearMode('all'); setClearConfirmText(''); }}
                     >
                       All Test Data
@@ -622,7 +622,7 @@ const AdminInventoryImportPage = () => {
                   )}
 
                   <div className="space-y-2 mt-4">
-                    <label className="text-sm text-[#A67C65]">
+                    <label className="text-sm text-[#4A2F1D]">
                       Type <span className="font-bold text-red-400 select-none">{clearMode === 'all' ? 'RESET TEST DATA' : 'DELETE INVENTORY'}</span> to confirm:
                     </label>
                     <input 

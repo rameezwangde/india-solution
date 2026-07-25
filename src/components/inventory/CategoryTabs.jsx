@@ -10,10 +10,10 @@ const CategoryTabs = ({ categories, activeCategory, onSelectCategory, onHoverCat
             key={category}
             onClick={() => onSelectCategory(category)}
             onMouseEnter={() => onHoverCategory && onHoverCategory(category)}
-            className={`relative px-5 py-2.5 rounded-full text-[13px] font-bold tracking-wide uppercase transition-all z-10 whitespace-nowrap shrink-0 flex items-center justify-center border ${
+            className={`relative px-6 py-3 rounded-full text-[14px] font-extrabold tracking-wider uppercase transition-all z-10 whitespace-nowrap shrink-0 flex items-center justify-center border ${
               isActive 
                 ? 'text-white border-transparent' 
-                : 'text-[#A67C65] bg-white border-[#E8DFD5] hover:border-[#D5C5B9] hover:text-[#8B5E45] shadow-sm'
+                : 'text-[#4A2F1D] bg-white border-[#E8DFD5] hover:border-[#A67C65] hover:text-[#2A1810] hover:bg-[#FAF7F2] shadow-sm'
             }`}
           >
             {isActive && (

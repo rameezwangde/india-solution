@@ -51,7 +51,7 @@ const BulkActionModal = ({
       case 'delete':
         return { icon: Trash2, color: 'text-red-500', title: 'Delete Products', button: 'Delete Permanently' };
       default:
-        return { icon: AlertTriangle, color: 'text-[#A67C65]', title: 'Bulk Action', button: 'Confirm' };
+        return { icon: AlertTriangle, color: 'text-[#4A2F1D]', title: 'Bulk Action', button: 'Confirm' };
     }
   };
 
@@ -65,13 +65,13 @@ const BulkActionModal = ({
           <h3 className={`text-lg font-bold flex items-center gap-2 ${config.color}`}>
             <Icon size={20} /> {config.title}
           </h3>
-          <button onClick={onClose} className="text-[#A67C65] hover:text-[#4A2F1D] transition-colors">
+          <button onClick={onClose} className="text-[#4A2F1D] hover:text-[#4A2F1D] transition-colors">
             <X size={20} />
           </button>
         </div>
 
         <form onSubmit={handleSubmit} className="p-6">
-          <div className="mb-6 p-3 bg-white/50 rounded-lg text-sm text-[#7C5A48]">
+          <div className="mb-6 p-3 bg-white/50 rounded-lg text-sm text-[#4A2F1D]">
             You are about to apply this action to <strong className="text-[#4A2F1D]">{selectedCount} selected products</strong>.
             {mode === 'delete' && (
               <div className="mt-2 text-red-400 flex gap-2 items-start">
@@ -83,7 +83,7 @@ const BulkActionModal = ({
 
           {mode === 'department' && (
             <div className="mb-4">
-              <label className="block text-sm font-medium text-[#A67C65] mb-2">New Department</label>
+              <label className="block text-sm font-medium text-[#4A2F1D] mb-2">New Department</label>
               <select
                 required
                 className="w-full bg-white border border-gray-700 rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-blue-500 outline-none"
@@ -100,7 +100,7 @@ const BulkActionModal = ({
 
           {mode === 'category' && (
             <div className="mb-4">
-              <label className="block text-sm font-medium text-[#A67C65] mb-2">New Category</label>
+              <label className="block text-sm font-medium text-[#4A2F1D] mb-2">New Category</label>
               <select
                 required
                 className="w-full bg-white border border-gray-700 rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-blue-500 outline-none"
@@ -118,7 +118,7 @@ const BulkActionModal = ({
           {mode === 'thresholds' && (
             <div className="space-y-4 mb-4">
               <div>
-                <label className="block text-sm font-medium text-[#A67C65] mb-2">Low Stock Threshold</label>
+                <label className="block text-sm font-medium text-[#4A2F1D] mb-2">Low Stock Threshold</label>
                 <input
                   type="number"
                   min="0"
@@ -129,7 +129,7 @@ const BulkActionModal = ({
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-[#A67C65] mb-2">Critical Stock Threshold</label>
+                <label className="block text-sm font-medium text-[#4A2F1D] mb-2">Critical Stock Threshold</label>
                 <input
                   type="number"
                   min="0"

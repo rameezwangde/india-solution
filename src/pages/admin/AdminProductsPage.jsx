@@ -29,7 +29,7 @@ const StatCard = ({ title, value, icon: Icon, color }) => (
       <Icon size={20} className="text-[#4A2F1D]" />
     </div>
     <div>
-      <p className="text-[#A67C65] text-xs font-medium mb-1">{title}</p>
+      <p className="text-[#4A2F1D] text-xs font-medium mb-1">{title}</p>
       <h3 className="text-xl font-bold text-[#4A2F1D]">{value}</h3>
     </div>
   </div>
@@ -328,7 +328,7 @@ const AdminProductsPage = () => {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold text-[#4A2F1D] mb-2">Products</h1>
-          <p className="text-[#A67C65]">Manage inventory products, quantities, pricing and images.</p>
+          <p className="text-[#4A2F1D]">Manage inventory products, quantities, pricing and images.</p>
         </div>
         <div className="flex items-center gap-3">
           <button 
@@ -358,7 +358,7 @@ const AdminProductsPage = () => {
       {/* Toolbar */}
       <div className="bg-[#FAF7F2] border border-[#E8DFD5] rounded-2xl p-4 flex flex-col xl:flex-row gap-4 xl:items-center">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#A67C65]" size={18} />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#4A2F1D]" size={18} />
           <input 
             type="text" 
             placeholder="Search by name or code..."
@@ -371,7 +371,7 @@ const AdminProductsPage = () => {
         <div className="flex flex-wrap items-center gap-3">
           {!lockedDepartment && (
             <div className="flex items-center gap-2 bg-white border border-[#E8DFD5] rounded-lg px-3 py-1">
-              <Package size={16} className="text-[#A67C65]" />
+              <Package size={16} className="text-[#4A2F1D]" />
               <select 
                 value={filters.department} 
                 onChange={(e) => handleFilterChange('department', e.target.value)}
@@ -386,7 +386,7 @@ const AdminProductsPage = () => {
           )}
 
           <div className="flex items-center gap-2 bg-white border border-[#E8DFD5] rounded-lg px-3 py-1">
-            <Filter size={16} className="text-[#A67C65]" />
+            <Filter size={16} className="text-[#4A2F1D]" />
             <select 
               value={filters.category} 
               onChange={(e) => handleFilterChange('category', e.target.value)}
@@ -427,7 +427,7 @@ const AdminProductsPage = () => {
 
           <button 
             onClick={resetFilters}
-            className="p-2.5 bg-[#FAF7F2] hover:bg-[#E8DFD5] border border-[#E8DFD5] rounded-lg text-[#A67C65] hover:text-[#4A2F1D] transition-colors"
+            className="p-2.5 bg-[#FAF7F2] hover:bg-[#E8DFD5] border border-[#E8DFD5] rounded-lg text-[#4A2F1D] hover:text-[#4A2F1D] transition-colors"
             title="Reset Filters"
           >
             <RefreshCw size={18} />
@@ -440,7 +440,7 @@ const AdminProductsPage = () => {
         <div className="bg-red-500/10 border border-red-500/20 rounded-2xl p-8 flex flex-col items-center text-center">
           <AlertTriangle size={48} className="text-red-500 mb-4" />
           <h3 className="text-xl font-bold text-[#4A2F1D] mb-2">Unable to load products</h3>
-          <p className="text-[#A67C65] mb-6">{error}</p>
+          <p className="text-[#4A2F1D] mb-6">{error}</p>
           <button onClick={() => fetchProducts()} className="bg-[#FAF7F2] hover:bg-[#E8DFD5] px-6 py-2 rounded-lg text-[#4A2F1D] transition-colors">
             Retry
           </button>
@@ -462,7 +462,7 @@ const AdminProductsPage = () => {
           <div className="hidden md:block">
             <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="border-b border-[#E8DFD5] bg-[#FAF7F2] text-[#A67C65] text-sm">
+              <tr className="border-b border-[#E8DFD5] bg-[#FAF7F2] text-[#4A2F1D] text-sm">
                 <th className="p-4 w-12">
                   <input 
                     type="checkbox" 
@@ -497,7 +497,7 @@ const AdminProductsPage = () => {
                       <div className="flex flex-col items-center">
                         <Package size={48} className="text-gray-600 mb-4" />
                         <h4 className="text-lg font-medium text-[#4A2F1D] mb-2">No products found</h4>
-                        <p className="text-[#A67C65] mb-4">Try adjusting your search or filters.</p>
+                        <p className="text-[#4A2F1D] mb-4">Try adjusting your search or filters.</p>
                         <button onClick={resetFilters} className="text-[#9A424E] hover:text-[#9A424E]-400 font-medium">Clear Filters</button>
                       </div>
                     </td>
@@ -518,7 +518,7 @@ const AdminProductsPage = () => {
                           {p.image ? (
                             <img src={p.image} alt={p.name} onClick={() => openImage(p)} className="w-12 h-12 rounded-lg object-cover bg-white border border-[#E8DFD5] cursor-pointer hover:opacity-80 transition-opacity" title="Manage Image" />
                           ) : (
-                            <div onClick={() => openImage(p)} className="w-12 h-12 rounded-lg bg-[#FAF7F2] border border-[#E8DFD5] flex items-center justify-center text-[#A67C65] cursor-pointer hover:bg-[#E8DFD5] transition-colors" title="Manage Image">
+                            <div onClick={() => openImage(p)} className="w-12 h-12 rounded-lg bg-[#FAF7F2] border border-[#E8DFD5] flex items-center justify-center text-[#4A2F1D] cursor-pointer hover:bg-[#E8DFD5] transition-colors" title="Manage Image">
                               <ImageIcon size={20} />
                             </div>
                           )}
@@ -526,13 +526,13 @@ const AdminProductsPage = () => {
                             <Link to={`/admin/products/${p.id}`} className="font-medium text-[#4A2F1D] hover:text-[#9A424E] transition-colors">
                               {p.name}
                             </Link>
-                            {p.size && <p className="text-xs text-[#A67C65] mt-0.5">{p.size}</p>}
+                            {p.size && <p className="text-xs text-[#4A2F1D] mt-0.5">{p.size}</p>}
                           </div>
                         </div>
                       </td>
                       <td className="px-6 py-4">
-                        <div className="flex items-center gap-1.5 text-[#7C5A48]">
-                          <Hash size={14} className="text-[#A67C65]" />
+                        <div className="flex items-center gap-1.5 text-[#4A2F1D]">
+                          <Hash size={14} className="text-[#4A2F1D]" />
                           <span>{p.code || 'N/A'}</span>
                         </div>
                         <p className="text-xs text-[#9A424E] mt-1">{p.category}</p>
@@ -545,7 +545,7 @@ const AdminProductsPage = () => {
                           <span className={`font-bold ${p.quantity === 0 ? 'text-red-400' : p.quantity <= 5 ? 'text-[#C0602F]-400' : 'text-[#4A2F1D]'}`}>
                             {p.quantity}
                           </span>
-                          <button onClick={() => openQuantity(p)} className="p-1 rounded hover:bg-[#E8DFD5] text-[#A67C65] hover:text-[#4A2F1D] transition-colors" title="Quick Update">
+                          <button onClick={() => openQuantity(p)} className="p-1 rounded hover:bg-[#E8DFD5] text-[#4A2F1D] hover:text-[#4A2F1D] transition-colors" title="Quick Update">
                             <Edit size={14} />
                           </button>
                         </div>
@@ -553,7 +553,7 @@ const AdminProductsPage = () => {
                       <td className="px-6 py-4">
                         <span className={`px-2.5 py-1 rounded-full text-xs font-medium border ${
                           p.quantity === 0 ? 'bg-red-500/10 border-red-500/20 text-red-400' : 
-                          p.status === 'hidden' ? 'bg-gray-500/10 border-gray-500/20 text-[#A67C65]' : 
+                          p.status === 'hidden' ? 'bg-gray-500/10 border-gray-500/20 text-[#4A2F1D]' : 
                           'bg-green-500/10 border-green-500/20 text-green-400'
                         }`}>
                           {p.quantity === 0 ? 'Out of Stock' : p.status === 'hidden' ? 'Hidden' : 'Available'}
@@ -565,7 +565,7 @@ const AdminProductsPage = () => {
                           <Link to={`/admin/products/${p.id}`} className="p-2 bg-[#FAF7F2] hover:bg-[#E8DFD5] rounded-lg text-[#9A424E] transition-colors" title="View Details">
                             <CheckCircle size={16} />
                           </Link>
-                          <button onClick={() => openImage(p)} className="p-2 bg-[#FAF7F2] hover:bg-[#E8DFD5] rounded-lg text-[#7C5A48] transition-colors" title="Manage Image">
+                          <button onClick={() => openImage(p)} className="p-2 bg-[#FAF7F2] hover:bg-[#E8DFD5] rounded-lg text-[#4A2F1D] transition-colors" title="Manage Image">
                             <ImageIcon size={16} />
                           </button>
                           <button onClick={() => openForm(p)} className="p-2 bg-[#FAF7F2] hover:bg-[#E8DFD5] rounded-lg text-blue-400 transition-colors" title="Edit Product">
@@ -596,7 +596,7 @@ const AdminProductsPage = () => {
                   </div>
                 ))
               ) : products.length === 0 ? (
-                <div className="p-8 text-center text-[#A67C65]">No products found.</div>
+                <div className="p-8 text-center text-[#4A2F1D]">No products found.</div>
               ) : (
                 products.map(p => (
                   <div key={p.id} className="p-4 flex flex-col gap-3">
@@ -604,7 +604,7 @@ const AdminProductsPage = () => {
                       {p.image ? (
                         <img src={p.image} alt={p.name} onClick={() => openImage(p)} className="w-16 h-16 rounded-lg object-cover bg-white border border-[#E8DFD5] cursor-pointer hover:opacity-80 transition-opacity" title="Manage Image" />
                       ) : (
-                        <div onClick={() => openImage(p)} className="w-16 h-16 rounded-lg bg-[#FAF7F2] border border-[#E8DFD5] flex items-center justify-center text-[#A67C65] cursor-pointer hover:bg-[#E8DFD5] transition-colors" title="Manage Image">
+                        <div onClick={() => openImage(p)} className="w-16 h-16 rounded-lg bg-[#FAF7F2] border border-[#E8DFD5] flex items-center justify-center text-[#4A2F1D] cursor-pointer hover:bg-[#E8DFD5] transition-colors" title="Manage Image">
                           <ImageIcon size={24} />
                         </div>
                       )}
@@ -621,10 +621,10 @@ const AdminProductsPage = () => {
                     </div>
                     
                     <div className="grid grid-cols-4 gap-2 pt-2 border-t border-[#E8DFD5]">
-                      <button onClick={() => openQuantity(p)} className="flex flex-col items-center justify-center py-2 bg-[#FAF7F2] rounded-lg text-[#A67C65] hover:text-[#4A2F1D] text-xs gap-1">
+                      <button onClick={() => openQuantity(p)} className="flex flex-col items-center justify-center py-2 bg-[#FAF7F2] rounded-lg text-[#4A2F1D] hover:text-[#4A2F1D] text-xs gap-1">
                         <Hash size={14} /> Qty
                       </button>
-                      <button onClick={() => openImage(p)} className="flex flex-col items-center justify-center py-2 bg-[#FAF7F2] rounded-lg text-[#A67C65] hover:text-[#4A2F1D] text-xs gap-1">
+                      <button onClick={() => openImage(p)} className="flex flex-col items-center justify-center py-2 bg-[#FAF7F2] rounded-lg text-[#4A2F1D] hover:text-[#4A2F1D] text-xs gap-1">
                         <ImageIcon size={14} /> Image
                       </button>
                       <button onClick={() => openForm(p)} className="flex flex-col items-center justify-center py-2 bg-[#FAF7F2] rounded-lg text-blue-400 text-xs gap-1">
@@ -648,7 +648,7 @@ const AdminProductsPage = () => {
                   Loading more products...
                 </div>
               ) : page >= totalPages ? (
-                <div className="text-[#A67C65]">All inventory products loaded</div>
+                <div className="text-[#4A2F1D]">All inventory products loaded</div>
               ) : null}
             </div>
           )}

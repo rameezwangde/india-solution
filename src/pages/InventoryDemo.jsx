@@ -51,6 +51,38 @@ const InventoryDemo = () => {
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState('');
   const queryClient = useQueryClient();
 
+  // Anti-Theft Protection
+  useEffect(() => {
+    const handleContextMenu = (e) => e.preventDefault();
+    
+    const handleKeyDown = (e) => {
+      if (
+        e.key === 'PrintScreen' ||
+        (e.ctrlKey && ['p', 's', 'c', 'u'].includes(e.key.toLowerCase())) ||
+        (e.metaKey && ['p', 's', 'c', 'u'].includes(e.key.toLowerCase())) ||
+        (e.metaKey && e.shiftKey && ['3', '4', '5'].includes(e.key))
+      ) {
+        e.preventDefault();
+      }
+    };
+
+    const handleDragStart = (e) => {
+      if (e.target.tagName === 'IMG') {
+        e.preventDefault();
+      }
+    };
+
+    document.addEventListener('contextmenu', handleContextMenu);
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('dragstart', handleDragStart);
+
+    return () => {
+      document.removeEventListener('contextmenu', handleContextMenu);
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('dragstart', handleDragStart);
+    };
+  }, []);
+
   const handleHoverCategory = (category) => {
     queryClient.prefetchInfiniteQuery({
       queryKey: ['products', category, debouncedSearchQuery],
@@ -151,11 +183,10 @@ const InventoryDemo = () => {
   const loading = isFetching && products.length === 0;
   const error = isError ? 'Unable to load inventory' : null;
   return (
-    <div className="pt-32 min-h-screen bg-[#FAF7F2] font-sans flex flex-col relative pb-40 lg:pt-44">
+    <div className="min-h-screen flex flex-col relative select-none bg-[#FAF7F2] font-sans pt-32 pb-40 lg:pt-44">
       <SEO 
-        title="Event Equipment & Inventory Catalog"
-        description="Browse our extensive catalog of event equipment, stage decor, lighting, AV, and luxury furniture available for rent in Bengaluru."
-        keywords="event equipment rental bengaluru, stage decor, av rental, luxury event furniture"
+        title="Products & Inventory | India Solution"
+        description="Browse our extensive collection of professional event equipment, including artist services, fabrication, lighting, sound, and visual displays available for rent."
       />
       {/* Global Background Watermarks */}
       <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
@@ -177,20 +208,20 @@ const InventoryDemo = () => {
         <div className="max-w-3xl mb-12">
           <div className="flex items-center gap-3 mb-6">
             <span className="h-[1px] w-12 bg-gradient-to-r from-transparent to-[#D5C5B9]"></span>
-            <span className="text-[#A67C65] text-xs font-bold tracking-[0.25em] uppercase">Our Catalog</span>
+            <span className="text-[#4A2F1D] text-xs font-bold tracking-[0.25em] uppercase">Our Catalog</span>
           </div>
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="font-['Playfair_Display',serif] text-5xl md:text-6xl font-bold text-[#4A2F1D] tracking-wide mb-6 uppercase"
           >
-            Our <span className="text-[#A67C65]">Products</span>
+            Our <span className="text-[#4A2F1D]">Products</span>
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-[#7C5A48] text-[14.5px] font-medium leading-[1.8] max-w-2xl"
+            className="text-[#4A2F1D] text-[14.5px] font-medium leading-[1.8] max-w-2xl"
           >
             Browse available rental inventory, add items to your enquiry cart, and send an enquiry without online payment.
           </motion.p>
@@ -204,14 +235,14 @@ const InventoryDemo = () => {
           className="relative max-w-2xl mb-12 flex bg-white border border-[#E8DFD5] shadow-sm rounded-full overflow-hidden focus-within:border-[#A67C65] transition-colors"
         >
           <div className="pl-5 flex items-center pointer-events-none">
-            <Search className="text-[#A67C65]" size={20} strokeWidth={2.5} />
+            <Search className="text-[#4A2F1D]" size={20} strokeWidth={2.5} />
           </div>
           <input
             type="text"
             placeholder="Search by product name or code"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="flex-grow bg-transparent py-4 pl-3 pr-3 text-[14.5px] font-semibold text-[#4A2F1D] placeholder:text-[#A67C65]/70 focus:outline-none min-w-0"
+            className="flex-grow bg-transparent py-4 pl-3 pr-3 text-[14.5px] font-semibold text-[#4A2F1D] placeholder:text-[#4A2F1D]/70 focus:outline-none min-w-0"
           />
           <div className="border-l border-[#E8DFD5] flex items-center bg-[#FAF7F2] shrink-0 relative">
             <select
@@ -223,7 +254,7 @@ const InventoryDemo = () => {
                 <option key={idx} value={cat}>{cat}</option>
               ))}
             </select>
-            <div className="absolute right-3 pointer-events-none text-[#A67C65]">
+            <div className="absolute right-3 pointer-events-none text-[#4A2F1D]">
               <ChevronDown size={16} strokeWidth={2.5} />
             </div>
           </div>
@@ -280,7 +311,7 @@ const InventoryDemo = () => {
               {isFetching && hasNextPage && (
                 <div className="flex flex-col items-center gap-3">
                   <div className="w-8 h-8 border-4 border-[#E8DFD5] border-t-[#A67C65] rounded-full animate-spin"></div>
-                  <span className="text-sm font-semibold text-[#A67C65] tracking-widest uppercase">Loading More...</span>
+                  <span className="text-sm font-semibold text-[#4A2F1D] tracking-widest uppercase">Loading More...</span>
                 </div>
               )}
             </div>
@@ -290,7 +321,7 @@ const InventoryDemo = () => {
         {/* Empty State */}
         {!loading && !error && products.length === 0 && (
           <div className="text-center py-20 bg-white border border-[#E8DFD5] rounded-[1.5rem] shadow-sm mt-8">
-            <p className="text-[#A67C65] font-semibold text-lg">No Inventory Available</p>
+            <p className="text-[#4A2F1D] font-semibold text-lg">No Inventory Available</p>
           </div>
         )}
       </section>

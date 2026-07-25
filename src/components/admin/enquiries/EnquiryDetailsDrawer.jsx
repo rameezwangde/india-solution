@@ -105,13 +105,13 @@ const EnquiryDetailsDrawer = ({ isOpen, onClose, enquiry, onStatusUpdated }) => 
                   <h2 className="text-xl font-bold text-[#4A2F1D]">{enquiry.referenceNumber}</h2>
                   <StatusBadge status={enquiry.status} />
                 </div>
-                <p className="text-sm text-[#A67C65]">
+                <p className="text-sm text-[#4A2F1D]">
                   Created {new Date(enquiry.createdAt).toLocaleString()}
                 </p>
               </div>
               <button
                 onClick={onClose}
-                className="p-2 text-[#A67C65] hover:text-[#4A2F1D] hover:bg-[#E8DFD5] rounded-full transition-colors"
+                className="p-2 text-[#4A2F1D] hover:text-[#4A2F1D] hover:bg-[#E8DFD5] rounded-full transition-colors"
               >
                 <X size={24} />
               </button>
@@ -122,14 +122,14 @@ const EnquiryDetailsDrawer = ({ isOpen, onClose, enquiry, onStatusUpdated }) => 
               {/* Management Section */}
               <div className="bg-[#FAF7F2] rounded-2xl p-5 border border-[#E8DFD5]">
                 <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-sm font-bold text-[#A67C65] uppercase tracking-wider">Manage Status & Notes</h3>
+                  <h3 className="text-sm font-bold text-[#4A2F1D] uppercase tracking-wider">Manage Status & Notes</h3>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs text-[#A67C65] uppercase font-bold">Stock Status:</span>
+                    <span className="text-xs text-[#4A2F1D] uppercase font-bold">Stock Status:</span>
                     {enquiry.stockProcessed && !enquiry.stockRestored && (
                       <span className="px-2 py-1 bg-blue-500/10 text-blue-400 text-[10px] rounded uppercase font-bold border border-blue-500/20">Deducted</span>
                     )}
                     {enquiry.stockRestored && (
-                      <span className="px-2 py-1 bg-gray-500/10 text-[#A67C65] text-[10px] rounded uppercase font-bold border border-gray-500/20">Restored</span>
+                      <span className="px-2 py-1 bg-gray-500/10 text-[#4A2F1D] text-[10px] rounded uppercase font-bold border border-gray-500/20">Restored</span>
                     )}
                     {!enquiry.stockProcessed && (
                       <span className="px-2 py-1 bg-yellow-500/10 text-yellow-500 text-[10px] rounded uppercase font-bold border border-yellow-500/20">Not Processed</span>
@@ -139,7 +139,7 @@ const EnquiryDetailsDrawer = ({ isOpen, onClose, enquiry, onStatusUpdated }) => 
                 
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-[#7C5A48] mb-2">Enquiry Status</label>
+                    <label className="block text-sm font-medium text-[#4A2F1D] mb-2">Enquiry Status</label>
                     <select
                       value={status}
                       onChange={(e) => setStatus(e.target.value)}
@@ -155,7 +155,7 @@ const EnquiryDetailsDrawer = ({ isOpen, onClose, enquiry, onStatusUpdated }) => 
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-[#7C5A48] mb-2">Admin Notes (Internal)</label>
+                    <label className="block text-sm font-medium text-[#4A2F1D] mb-2">Admin Notes (Internal)</label>
                     <textarea
                       value={notes}
                       onChange={(e) => setNotes(e.target.value)}
@@ -180,32 +180,32 @@ const EnquiryDetailsDrawer = ({ isOpen, onClose, enquiry, onStatusUpdated }) => 
 
               {/* Customer Details */}
               <div>
-                <h3 className="text-sm font-bold text-[#A67C65] uppercase tracking-wider mb-4 flex items-center gap-2">
+                <h3 className="text-sm font-bold text-[#4A2F1D] uppercase tracking-wider mb-4 flex items-center gap-2">
                   <User size={16} /> Customer Information
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-[#FAF7F2] rounded-2xl p-5 border border-[#E8DFD5]">
                   <div>
-                    <p className="text-xs text-[#A67C65] mb-1">Full Name</p>
+                    <p className="text-xs text-[#4A2F1D] mb-1">Full Name</p>
                     <p className="text-[#4A2F1D] font-medium">{enquiry.customerName}</p>
                   </div>
                   <div>
-                    <p className="text-xs text-[#A67C65] mb-1">Company</p>
+                    <p className="text-xs text-[#4A2F1D] mb-1">Company</p>
                     <div className="flex items-center gap-2 text-[#4A2F1D] font-medium">
-                      <Building2 size={14} className="text-[#A67C65]" />
+                      <Building2 size={14} className="text-[#4A2F1D]" />
                       {enquiry.companyName || '-'}
                     </div>
                   </div>
                   <div>
-                    <p className="text-xs text-[#A67C65] mb-1">Phone</p>
+                    <p className="text-xs text-[#4A2F1D] mb-1">Phone</p>
                     <div className="flex items-center gap-2 text-[#4A2F1D] font-medium">
-                      <Phone size={14} className="text-[#A67C65]" />
+                      <Phone size={14} className="text-[#4A2F1D]" />
                       <a href={`tel:${enquiry.phone}`} className="hover:text-[#9A424E] transition-colors">{enquiry.phone}</a>
                     </div>
                   </div>
                   <div>
-                    <p className="text-xs text-[#A67C65] mb-1">Email</p>
+                    <p className="text-xs text-[#4A2F1D] mb-1">Email</p>
                     <div className="flex items-center gap-2 text-[#4A2F1D] font-medium">
-                      <Mail size={14} className="text-[#A67C65]" />
+                      <Mail size={14} className="text-[#4A2F1D]" />
                       {enquiry.email ? (
                         <a href={`mailto:${enquiry.email}`} className="hover:text-[#9A424E] transition-colors break-all">{enquiry.email}</a>
                       ) : (
@@ -218,37 +218,37 @@ const EnquiryDetailsDrawer = ({ isOpen, onClose, enquiry, onStatusUpdated }) => 
 
               {/* Event Details */}
               <div>
-                <h3 className="text-sm font-bold text-[#A67C65] uppercase tracking-wider mb-4 flex items-center gap-2">
+                <h3 className="text-sm font-bold text-[#4A2F1D] uppercase tracking-wider mb-4 flex items-center gap-2">
                   <Calendar size={16} /> Event Details
                 </h3>
                 <div className="bg-[#FAF7F2] rounded-2xl p-5 border border-[#E8DFD5] space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <p className="text-xs text-[#A67C65] mb-1">Event Date</p>
+                      <p className="text-xs text-[#4A2F1D] mb-1">Event Date</p>
                       <div className="flex items-center gap-2 text-[#4A2F1D] font-medium">
-                        <Clock size={14} className="text-[#A67C65]" />
+                        <Clock size={14} className="text-[#4A2F1D]" />
                         {enquiry.eventDate ? new Date(enquiry.eventDate).toLocaleDateString() : '-'}
                       </div>
                     </div>
                     <div>
-                      <p className="text-xs text-[#A67C65] mb-1">City</p>
+                      <p className="text-xs text-[#4A2F1D] mb-1">City</p>
                       <p className="text-[#4A2F1D] font-medium">{enquiry.city || '-'}</p>
                     </div>
                   </div>
                   
                   <div>
-                    <p className="text-xs text-[#A67C65] mb-1">Location / Venue</p>
+                    <p className="text-xs text-[#4A2F1D] mb-1">Location / Venue</p>
                     <div className="flex items-center gap-2 text-[#4A2F1D] font-medium">
-                      <MapPin size={14} className="text-[#A67C65]" />
+                      <MapPin size={14} className="text-[#4A2F1D]" />
                       {enquiry.eventLocation || '-'}
                     </div>
                   </div>
 
                   {enquiry.message && (
                     <div>
-                      <p className="text-xs text-[#A67C65] mb-1">Message from Customer</p>
-                      <div className="bg-black/20 p-4 rounded-xl text-[#7C5A48] text-sm mt-1 whitespace-pre-wrap flex items-start gap-3">
-                        <MessageSquare size={16} className="text-[#A67C65] flex-shrink-0 mt-0.5" />
+                      <p className="text-xs text-[#4A2F1D] mb-1">Message from Customer</p>
+                      <div className="bg-black/20 p-4 rounded-xl text-[#4A2F1D] text-sm mt-1 whitespace-pre-wrap flex items-start gap-3">
+                        <MessageSquare size={16} className="text-[#4A2F1D] flex-shrink-0 mt-0.5" />
                         {enquiry.message}
                       </div>
                     </div>
@@ -258,7 +258,7 @@ const EnquiryDetailsDrawer = ({ isOpen, onClose, enquiry, onStatusUpdated }) => 
 
               {/* Products */}
               <div>
-                <h3 className="text-sm font-bold text-[#A67C65] uppercase tracking-wider mb-4 flex items-center gap-2">
+                <h3 className="text-sm font-bold text-[#4A2F1D] uppercase tracking-wider mb-4 flex items-center gap-2">
                   <Package size={16} /> Requested Items ({enquiry.totalItems})
                 </h3>
                 <div className="space-y-3">
@@ -268,7 +268,7 @@ const EnquiryDetailsDrawer = ({ isOpen, onClose, enquiry, onStatusUpdated }) => 
                         <img src={item.product.image.url} alt={item.productName} className="w-16 h-16 object-cover rounded-lg bg-black/20" />
                       ) : (
                         <div className="w-16 h-16 bg-white rounded-lg flex items-center justify-center border border-[#E8DFD5]">
-                          <Package size={20} className="text-[#A67C65]" />
+                          <Package size={20} className="text-[#4A2F1D]" />
                         </div>
                       )}
                       <div className="flex-1">
@@ -276,7 +276,7 @@ const EnquiryDetailsDrawer = ({ isOpen, onClose, enquiry, onStatusUpdated }) => 
                         <h4 className="font-bold text-[#4A2F1D] text-sm">{item.productName}</h4>
                       </div>
                       <div className="px-4 py-2 bg-white rounded-lg border border-[#E8DFD5] text-center min-w-[80px]">
-                        <p className="text-[10px] text-[#A67C65] mb-0.5">QTY</p>
+                        <p className="text-[10px] text-[#4A2F1D] mb-0.5">QTY</p>
                         <p className="font-bold text-[#4A2F1D]">{item.quantity}</p>
                       </div>
                     </div>
@@ -296,7 +296,7 @@ const EnquiryDetailsDrawer = ({ isOpen, onClose, enquiry, onStatusUpdated }) => 
                 <h3 className="text-xl font-bold text-[#4A2F1D] mb-2">
                   {showConfirmModal === 'confirm' ? 'Confirm Enquiry' : 'Cancel Confirmed Enquiry'}
                 </h3>
-                <p className="text-[#A67C65] mb-6 text-sm">
+                <p className="text-[#4A2F1D] mb-6 text-sm">
                   {showConfirmModal === 'confirm' 
                     ? 'Confirming this enquiry will reduce the available inventory quantities.'
                     : 'Cancelling this enquiry will restore the deducted inventory quantities.'}
@@ -310,7 +310,7 @@ const EnquiryDetailsDrawer = ({ isOpen, onClose, enquiry, onStatusUpdated }) => 
                     <div className="space-y-2">
                       {insufficientItems.map((item, idx) => (
                         <div key={idx} className="flex justify-between items-center bg-black/20 p-2 rounded-lg text-sm">
-                          <span className="text-[#7C5A48] truncate pr-2">{item.productName}</span>
+                          <span className="text-[#4A2F1D] truncate pr-2">{item.productName}</span>
                           <span className="text-red-400 font-mono whitespace-nowrap">Need {item.requested} (Have {item.available})</span>
                         </div>
                       ))}
@@ -322,14 +322,14 @@ const EnquiryDetailsDrawer = ({ isOpen, onClose, enquiry, onStatusUpdated }) => 
                   <div className="mb-6 space-y-2 max-h-60 overflow-y-auto pr-2">
                     {enquiry.products.map((item, idx) => (
                       <div key={idx} className="flex justify-between items-center bg-[#FAF7F2] p-3 rounded-lg text-sm border border-[#E8DFD5]">
-                        <span className="text-[#7C5A48] truncate pr-2 font-medium">{item.productName}</span>
+                        <span className="text-[#4A2F1D] truncate pr-2 font-medium">{item.productName}</span>
                         <div className="flex gap-4 text-right">
                           <div>
-                            <div className="text-[10px] text-[#A67C65]">Request</div>
+                            <div className="text-[10px] text-[#4A2F1D]">Request</div>
                             <div className="text-[#4A2F1D] font-bold">{item.quantity}</div>
                           </div>
                           <div>
-                            <div className="text-[10px] text-[#A67C65]">Available</div>
+                            <div className="text-[10px] text-[#4A2F1D]">Available</div>
                             <div className={`font-bold ${item.product?.quantity >= item.quantity ? 'text-green-400' : 'text-red-400'}`}>
                               {item.product?.quantity || 0}
                             </div>

@@ -45,7 +45,7 @@ const stats = [
 
 const About = () => {
   return (
-    <div className="bg-[#FAF7F2] font-sans text-[#5c4033] relative overflow-hidden">
+    <div className="bg-[#FAF7F2] font-sans text-[#2A1810] relative overflow-hidden">
       <SEO 
         title="About Us"
         description="Learn about India Solution, Bengaluru's premier event management company. We specialize in bringing bold ideas to life with unparalleled precision and creativity since 2010."
@@ -75,18 +75,18 @@ const About = () => {
         >
           <div className="flex items-center justify-center gap-3 mb-6">
             <span className="h-[1px] w-12 bg-gradient-to-r from-transparent to-[#D5C5B9]"></span>
-            <span className="text-[#A67C65] text-[10px]">❖</span>
-            <span className="text-[#A67C65] text-xs font-bold tracking-[0.25em] uppercase">Who We Are</span>
-            <span className="text-[#A67C65] text-[10px]">❖</span>
+            <span className="text-[#4A2F1D] text-[10px]">❖</span>
+            <span className="text-[#4A2F1D] text-xs font-bold tracking-[0.25em] uppercase">Who We Are</span>
+            <span className="text-[#4A2F1D] text-[10px]">❖</span>
             <span className="h-[1px] w-12 bg-gradient-to-l from-transparent to-[#D5C5B9]"></span>
           </div>
           <h1 className="font-['Playfair_Display',serif] text-6xl md:text-7xl lg:text-[90px] font-bold text-[#4A2F1D] tracking-wide mb-6">
             ABOUT US
           </h1>
           <div className="flex items-center justify-center gap-2 mb-6">
-            <span className="text-[#A67C65] text-sm">❖</span>
+            <span className="text-[#4A2F1D] text-sm">❖</span>
           </div>
-          <p className="text-[#5c4033] font-medium text-lg tracking-wide">
+          <p className="text-[#2A1810] font-bold text-[20px] tracking-wide">
             Crafting experiences. Building relationships.
           </p>
         </motion.div>
@@ -104,26 +104,26 @@ const About = () => {
           {/* Left Text Column */}
           <motion.div variants={fadeUp} className="flex flex-col items-start text-left">
             <div className="flex items-center gap-2 mb-6">
-              <span className="text-[#A67C65] text-sm">❖</span>
+              <span className="text-[#4A2F1D] text-sm">❖</span>
             </div>
             
-            <p className="font-['Playfair_Display',serif] text-2xl md:text-[28px] font-bold text-[#4A2F1D] leading-[1.4] mb-8">
-              For over 15 years, <span className="text-[#A67C65]">India Solution</span> has been one of Bengaluru's trusted names in Event Management and In-House Event Production, delivering seamless, premium-quality experiences for events of every scale.
+            <p className="font-['Playfair_Display',serif] text-2xl md:text-[28px] font-black text-[#2A1810] leading-[1.4] mb-8">
+              For over 15 years, <span className="text-[#4A2F1D]">India Solution</span> has been one of Bengaluru's trusted names in Event Management and In-House Event Production, delivering seamless, premium-quality experiences for events of every scale.
             </p>
             
             <div className="flex items-center gap-2 mb-8">
               <span className="text-[#D5C5B9] text-xs">❖</span>
             </div>
             
-            <p className="text-[13.5px] font-medium leading-[1.8] text-[#5c4033] mb-6">
+            <p className="text-[15px] font-semibold leading-[1.8] text-[#2A1810] mb-6">
               What truly sets us apart is that everything you see at an event is produced and managed in-house. From concept development, stage production, LED walls, sound, lighting, trussing, fabrication, décor, branding, artist management, technical execution to on-site management — we handle it all under one roof.
             </p>
             
-            <p className="text-[13.5px] font-medium leading-[1.8] text-[#5c4033] mb-10">
+            <p className="text-[15px] font-semibold leading-[1.8] text-[#2A1810] mb-10">
               Our passionate team and state-of-the-art infrastructure allow us to maintain the highest standards of quality, creativity, and reliability, ensuring every detail is perfect and every experience is unforgettable.
             </p>
             
-            <button className="inline-flex items-center gap-3 px-8 py-3 rounded-full border border-[#D5C5B9] bg-transparent text-[#5c4033] font-bold text-xs uppercase tracking-widest hover:bg-[#A67C65] hover:text-white hover:border-[#A67C65] transition-all">
+            <button className="inline-flex items-center gap-3 px-8 py-3 rounded-full border border-[#D5C5B9] bg-transparent text-[#2A1810] font-bold text-xs uppercase tracking-widest hover:bg-[#A67C65] hover:text-white hover:border-[#A67C65] transition-all">
               Our Journey <ChevronRight size={14} strokeWidth={2.5} />
             </button>
           </motion.div>
@@ -138,9 +138,9 @@ const About = () => {
             <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 lg:translate-x-0 lg:-left-6 bg-[#FAF7F2] rounded-[1.5rem] shadow-[0_10px_40px_rgba(0,0,0,0.08)] border border-[#E8DFD5] px-6 py-5 flex items-center justify-between gap-6 md:gap-8 z-10 whitespace-nowrap">
               {stats.map((stat, i) => (
                 <div key={i} className="flex flex-col items-center text-center">
-                  <stat.icon size={22} strokeWidth={1.5} className="text-[#A67C65] mb-2" />
+                  <stat.icon size={22} strokeWidth={1.5} className="text-[#4A2F1D] mb-2" />
                   <span className="font-bold text-[#4A2F1D] text-[17px] leading-none mb-1">{stat.value}</span>
-                  <span className="text-[9px] text-[#7C5A48] font-bold uppercase tracking-wider leading-tight whitespace-pre-line">
+                  <span className="text-[9px] text-[#4A2F1D] font-bold uppercase tracking-wider leading-tight whitespace-pre-line">
                     {stat.label}
                   </span>
                 </div>
@@ -160,23 +160,23 @@ const About = () => {
           className="grid gap-8 md:grid-cols-2"
         >
           <motion.div variants={fadeUp} className="bg-white rounded-[2rem] p-10 lg:p-12 shadow-sm border border-[#E8DFD5] flex flex-col items-center text-center hover:shadow-md transition-shadow">
-            <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-[#D5C5B9] bg-[#FAF7F2] text-[#A67C65]">
+            <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-[#D5C5B9] bg-[#FAF7F2] text-[#4A2F1D]">
               <Target size={28} strokeWidth={1.5} />
             </div>
             <h2 className="font-['Playfair_Display',serif] text-3xl font-bold text-[#4A2F1D] mb-4">Our Mission</h2>
             <div className="mb-6 text-[#D5C5B9] text-xs">❖</div>
-            <p className="text-[13.5px] font-medium leading-[1.8] text-[#5c4033] max-w-sm">
+            <p className="text-[15px] font-semibold leading-[1.8] text-[#2A1810] max-w-sm">
               To deliver exceptional event solutions by blending creativity, precision, and personalized service, ensuring every event reflects the unique personality and aspirations of our clients.
             </p>
           </motion.div>
 
           <motion.div variants={fadeUp} className="bg-white rounded-[2rem] p-10 lg:p-12 shadow-sm border border-[#E8DFD5] flex flex-col items-center text-center hover:shadow-md transition-shadow">
-            <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-[#D5C5B9] bg-[#FAF7F2] text-[#A67C65]">
+            <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-[#D5C5B9] bg-[#FAF7F2] text-[#4A2F1D]">
               <Eye size={28} strokeWidth={1.5} />
             </div>
             <h2 className="font-['Playfair_Display',serif] text-3xl font-bold text-[#4A2F1D] mb-4">Our Vision</h2>
             <div className="mb-6 text-[#D5C5B9] text-xs">❖</div>
-            <p className="text-[13.5px] font-medium leading-[1.8] text-[#5c4033] max-w-sm">
+            <p className="text-[15px] font-semibold leading-[1.8] text-[#2A1810] max-w-sm">
               To be the most trusted and innovative event management company in India, redefining celebrations and creating unforgettable experiences for our clients.
             </p>
           </motion.div>
@@ -192,18 +192,18 @@ const About = () => {
             viewport={{ once: true }}
             className="mx-auto mb-16 max-w-4xl text-center"
           >
-            <div className="mb-6 flex items-center justify-center gap-3 text-[11px] font-bold tracking-[0.2em] text-[#A67C65]">
+            <div className="mb-6 flex items-center justify-center gap-3 text-[11px] font-bold tracking-[0.2em] text-[#4A2F1D]">
               <span className="text-[#8B5E45] text-xs">❖</span>
               <span className="uppercase">Why Choose Us</span>
               <span className="text-[#8B5E45] text-xs">❖</span>
             </div>
             <h2 className="font-['Playfair_Display',serif] text-4xl md:text-[42px] font-semibold text-[#4A2F1D] mb-6">
-              Why Should You <span className="italic text-[#A67C65]">Hire Us</span>
+              Why Should You <span className="italic text-[#4A2F1D]">Hire Us</span>
             </h2>
             <div className="mx-auto mb-6 flex justify-center">
-              <span className="text-[#A67C65] text-sm">❖</span>
+              <span className="text-[#4A2F1D] text-sm">❖</span>
             </div>
-            <p className="text-[13.5px] font-medium leading-relaxed text-[#5c4033] max-w-2xl mx-auto">
+            <p className="text-[15px] font-semibold leading-relaxed text-[#2A1810] max-w-2xl mx-auto">
               At India Solution, we don't just plan events; we create experiences that leave lasting impressions. Here's why we are the perfect choice for your event management needs:
             </p>
           </motion.div>
@@ -223,10 +223,10 @@ const About = () => {
                   className="flex flex-col items-center text-center rounded-[2rem] bg-transparent py-4 px-2 w-[100%] sm:w-[calc(50%-1.5rem)] md:w-[calc(33.333%-1.5rem)]"
                 >
                   <div className="flex h-14 w-14 mb-4 shrink-0 items-center justify-center rounded-full border-[1.5px] border-[#D5C5B9] bg-white shadow-sm transition-all duration-300 hover:border-[#A67C65] hover:shadow-md">
-                    <Star className="text-[#A67C65]" size={22} strokeWidth={1.5} />
+                    <Star className="text-[#4A2F1D]" size={22} strokeWidth={1.5} />
                   </div>
-                  <h4 className="text-[14px] leading-snug font-bold text-[#4A2F1D] whitespace-pre-line mb-3">{item.title}</h4>
-                  <p className="text-[11px] leading-relaxed font-medium text-[#7C5A48] whitespace-pre-line">{item.description}</p>
+                  <h4 className="text-[15px] leading-snug font-black text-[#2A1810] whitespace-pre-line mb-3">{item.title}</h4>
+                  <p className="text-[13px] leading-relaxed font-semibold text-[#4A2F1D] whitespace-pre-line">{item.description}</p>
                 </motion.div>
               );
             })}

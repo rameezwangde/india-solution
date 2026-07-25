@@ -766,7 +766,7 @@ const DetailTitle = ({ title, accent }) => {
   const [before, after] = title.split(accent);
   return (
     <>
-      {before}<span className="text-[#A67C65]">{accent}</span>{after}
+      {before}<span className="text-[#4A2F1D]">{accent}</span>{after}
     </>
   );
 };
@@ -853,8 +853,8 @@ const ImageGridServiceContent = ({ items, serviceSlug }) => {
                <img src={serviceImageMapping[item] || 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'} alt={item} className="w-full h-full object-cover rounded-t-[1rem] transition-transform duration-700 group-hover:scale-105" loading="lazy" />
             </div>
             <div className="p-6 bg-white relative z-10">
-               <h3 className="font-['Playfair_Display',serif] text-lg font-bold text-[#4A2F1D] mb-3 group-hover:text-[#A67C65] transition-colors leading-snug">{item}</h3>
-               <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#A67C65] flex items-center gap-2">
+               <h3 className="font-['Playfair_Display',serif] text-lg font-bold text-[#4A2F1D] mb-3 group-hover:text-[#4A2F1D] transition-colors leading-snug">{item}</h3>
+               <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#4A2F1D] flex items-center gap-2">
                  Explore Detail <ChevronRight size={14} strokeWidth={2.5} className="group-hover:translate-x-1 transition-transform" />
                </span>
             </div>
@@ -877,12 +877,12 @@ const ServiceContentSections = ({ sections }) => (
       <motion.article key={section.title} variants={fadeUp} className="relative overflow-hidden rounded-[1.5rem] bg-white p-8 md:p-10 shadow-sm border border-[#E8DFD5]">
         <div className="relative grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
           <div>
-            <span className="text-[#A67C65] text-[11px] font-bold tracking-[0.25em] uppercase mb-4 block">{section.eyebrow}</span>
+            <span className="text-[#4A2F1D] text-[11px] font-bold tracking-[0.25em] uppercase mb-4 block">{section.eyebrow}</span>
             <h2 className="font-['Playfair_Display',serif] mb-6 text-4xl font-bold leading-tight md:text-[42px] text-[#4A2F1D]">
               <DetailTitle title={section.title} accent={section.accent} />
             </h2>
             {section.description && (
-              <p className="max-w-2xl text-[14.5px] font-medium leading-[1.8] text-[#7C5A48]">{section.description}</p>
+              <p className="max-w-2xl text-[14.5px] font-medium leading-[1.8] text-[#4A2F1D]">{section.description}</p>
             )}
             <Link to="/contact" className="mt-8 inline-flex items-center gap-3 rounded-full bg-[#A67C65] px-8 py-3.5 text-xs font-bold uppercase tracking-widest text-white transition-all hover:bg-[#8B5E45]">
               <Mail size={15} />
@@ -898,8 +898,8 @@ const ServiceContentSections = ({ sections }) => (
             )}
             <div className="grid gap-4 sm:grid-cols-2">
               {section.items.map((item) => (
-                <div key={item} className="flex items-start gap-3 rounded-xl border border-[#E8DFD5] bg-[#FAF7F2]/50 px-4 py-4 text-[13px] font-semibold leading-tight text-[#5c4033]">
-                  <span className="shrink-0 text-[#A67C65] mt-0.5"><CheckCircle2 size={16} strokeWidth={2.5} /></span>
+                <div key={item} className="flex items-start gap-3 rounded-xl border border-[#E8DFD5] bg-[#FAF7F2]/50 px-4 py-4 text-[13px] font-semibold leading-tight text-[#2A1810]">
+                  <span className="shrink-0 text-[#4A2F1D] mt-0.5"><CheckCircle2 size={16} strokeWidth={2.5} /></span>
                   <span>{item}</span>
                 </div>
               ))}
@@ -1122,7 +1122,7 @@ const ServiceDetail = () => {
   const isSportingEventsService = service.slug === 'sporting-events';
 
   return (
-    <section className="relative overflow-hidden bg-[#FAF7F2] font-sans px-5 pb-24 pt-32 text-[#5c4033] lg:px-10 lg:pt-44 min-h-screen">
+    <section className="relative overflow-hidden bg-[#FAF7F2] font-sans px-5 pb-24 pt-32 text-[#2A1810] lg:px-10 lg:pt-44 min-h-screen">
       {/* Global Background Watermarks */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <img 
@@ -1139,7 +1139,7 @@ const ServiceDetail = () => {
       </div>
 
       <div className="relative z-10 mx-auto max-w-[1300px]">
-        <Link to="/services" className="mb-8 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.22em] text-[#7C5A48] transition-colors hover:text-[#A67C65]">
+        <Link to="/services" className="mb-8 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.22em] text-[#4A2F1D] transition-colors hover:text-[#4A2F1D]">
           <ArrowLeft size={14} />
           All Services
         </Link>
@@ -1151,24 +1151,24 @@ const ServiceDetail = () => {
             className="relative overflow-hidden rounded-[1.5rem] bg-white p-8 md:p-10 shadow-sm border border-[#E8DFD5]"
           >
             <div className="relative">
-              <div className="mb-7 flex h-16 w-16 items-center justify-center rounded-full bg-[#FAF7F2] border-[1.5px] border-[#D5C5B9] text-[#A67C65]">
+              <div className="mb-7 flex h-16 w-16 items-center justify-center rounded-full bg-[#FAF7F2] border-[1.5px] border-[#D5C5B9] text-[#4A2F1D]">
                 <Icon size={26} strokeWidth={1.5} />
               </div>
-              <span className="text-[#A67C65] text-[11px] font-bold tracking-[0.25em] uppercase mb-4 block">{service.title}</span>
+              <span className="text-[#4A2F1D] text-[11px] font-bold tracking-[0.25em] uppercase mb-4 block">{service.title}</span>
               <h1 className="font-['Playfair_Display',serif] max-w-3xl text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-[#4A2F1D]">
                 {selectedItem ? (
                   <>
                     {selectedItem}
-                    <span className="block text-[#A67C65] italic font-normal mt-2">Service</span>
+                    <span className="block text-[#4A2F1D] italic font-normal mt-2">Service</span>
                   </>
                 ) : (
                   <>
                     {service.title}
-                    <span className="block text-[#A67C65] italic font-normal mt-2">Planning</span>
+                    <span className="block text-[#4A2F1D] italic font-normal mt-2">Planning</span>
                   </>
                 )}
               </h1>
-              <p className="mt-6 max-w-2xl text-[14.5px] font-medium leading-[1.8] text-[#7C5A48]">
+              <p className="mt-6 max-w-2xl text-[14.5px] font-medium leading-[1.8] text-[#4A2F1D]">
                 {selectedItem
                   ? `India Solution handles ${selectedItem.toLowerCase()} as part of our ${service.title.toLowerCase()} service, with careful planning, polished execution, and attention to every guest-facing detail.`
                   : service.description}
@@ -1186,7 +1186,7 @@ const ServiceDetail = () => {
             animate="visible"
             className="relative overflow-hidden rounded-[1.5rem] bg-[#FAF7F2] p-8 md:p-10 shadow-inner border border-[#E8DFD5]"
           >
-            <span className="text-[#A67C65] text-[11px] font-bold tracking-[0.25em] uppercase mb-3 block">Service Points</span>
+            <span className="text-[#4A2F1D] text-[11px] font-bold tracking-[0.25em] uppercase mb-3 block">Service Points</span>
             <h2 className="font-['Playfair_Display',serif] mb-6 text-3xl font-bold text-[#4A2F1D]">Choose A Detail</h2>
             <div className="grid gap-3">
               {service.items.map((item) => {
@@ -1198,10 +1198,10 @@ const ServiceDetail = () => {
                       className={`flex items-center gap-3 rounded-lg border px-4 py-3.5 text-[13px] font-semibold leading-tight transition-all ${
                         isActive 
                           ? 'border-[#A67C65] bg-white text-[#4A2F1D] shadow-sm' 
-                          : 'border-[#E8DFD5] bg-transparent text-[#7C5A48] hover:border-[#D5C5B9] hover:bg-white/60 hover:text-[#4A2F1D]'
+                          : 'border-[#E8DFD5] bg-transparent text-[#4A2F1D] hover:border-[#D5C5B9] hover:bg-white/60 hover:text-[#4A2F1D]'
                       }`}
                     >
-                      <ChevronRight size={14} className={`shrink-0 ${isActive ? 'text-[#A67C65]' : 'text-[#D5C5B9]'}`} strokeWidth={2.5} />
+                      <ChevronRight size={14} className={`shrink-0 ${isActive ? 'text-[#4A2F1D]' : 'text-[#D5C5B9]'}`} strokeWidth={2.5} />
                       <span>{item}</span>
                     </Link>
                   </motion.div>
@@ -1246,10 +1246,10 @@ const ServiceDetail = () => {
         >
           <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
             <div>
-              <span className="text-[#A67C65] text-[11px] font-bold tracking-[0.25em] uppercase mb-2 block">Related Services</span>
+              <span className="text-[#4A2F1D] text-[11px] font-bold tracking-[0.25em] uppercase mb-2 block">Related Services</span>
               <h2 className="font-['Playfair_Display',serif] text-3xl font-bold text-[#4A2F1D]">Explore More</h2>
             </div>
-            <Link to="/services" className="text-xs font-bold uppercase tracking-[0.18em] text-[#A67C65] transition-colors hover:text-[#8B5E45]">
+            <Link to="/services" className="text-xs font-bold uppercase tracking-[0.18em] text-[#4A2F1D] transition-colors hover:text-[#8B5E45]">
               View All
             </Link>
           </div>
@@ -1259,12 +1259,12 @@ const ServiceDetail = () => {
               const RelatedIcon = iconMap[item.icon] ?? Sparkles;
               return (
                 <motion.article key={item.slug} variants={fadeUp} className="rounded-[1.5rem] bg-white p-8 shadow-sm border border-[#E8DFD5] transition-shadow hover:shadow-md">
-                  <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-[#FAF7F2] border border-[#D5C5B9] text-[#A67C65]">
+                  <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-[#FAF7F2] border border-[#D5C5B9] text-[#4A2F1D]">
                     <RelatedIcon size={20} strokeWidth={1.5} />
                   </div>
                   <h3 className="font-['Playfair_Display',serif] mb-3 text-xl font-bold text-[#4A2F1D]">{item.title}</h3>
-                  <p className="mb-6 text-[12.5px] font-medium leading-relaxed text-[#7C5A48]">{item.description}</p>
-                  <Link to={`/services/${item.slug}`} className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#A67C65] transition-colors hover:text-[#8B5E45]">
+                  <p className="mb-6 text-[12.5px] font-medium leading-relaxed text-[#4A2F1D]">{item.description}</p>
+                  <Link to={`/services/${item.slug}`} className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#4A2F1D] transition-colors hover:text-[#8B5E45]">
                     Explore Service <ChevronRight size={14} />
                   </Link>
                 </motion.article>

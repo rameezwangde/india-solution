@@ -120,7 +120,7 @@ const AdminBackupsPage = () => {
       <div className="flex justify-between items-start">
         <div>
           <h1 className="text-3xl font-bold text-[#4A2F1D] mb-2">Backups & Restore</h1>
-          <p className="text-[#A67C65]">Manage database backups and restore application state.</p>
+          <p className="text-[#4A2F1D]">Manage database backups and restore application state.</p>
         </div>
       </div>
 
@@ -134,15 +134,15 @@ const AdminBackupsPage = () => {
             </div>
             <div>
               <h2 className="text-xl font-bold text-[#4A2F1D]">Create Backup</h2>
-              <p className="text-sm text-[#A67C65]">Download a full application state snapshot</p>
+              <p className="text-sm text-[#4A2F1D]">Download a full application state snapshot</p>
             </div>
           </div>
           
           <div className="bg-white/30 border border-gray-700/50 p-4 rounded-xl mb-6">
             <h3 className="text-sm font-medium text-[#4A2F1D] mb-2 flex items-center gap-2">
-              <Database size={16} className="text-[#A67C65]" /> Included in Backup
+              <Database size={16} className="text-[#4A2F1D]" /> Included in Backup
             </h3>
-            <ul className="grid grid-cols-2 gap-2 text-sm text-[#A67C65]">
+            <ul className="grid grid-cols-2 gap-2 text-sm text-[#4A2F1D]">
               <li className="flex items-center gap-2"><CheckCircle size={14} className="text-green-500" /> Products & Categories</li>
               <li className="flex items-center gap-2"><CheckCircle size={14} className="text-green-500" /> Enquiries</li>
               <li className="flex items-center gap-2"><CheckCircle size={14} className="text-green-500" /> Import History</li>
@@ -168,7 +168,7 @@ const AdminBackupsPage = () => {
             </div>
             <div>
               <h2 className="text-xl font-bold text-[#4A2F1D]">Restore Backup</h2>
-              <p className="text-sm text-[#A67C65]">Upload a JSON backup file to restore</p>
+              <p className="text-sm text-[#4A2F1D]">Upload a JSON backup file to restore</p>
             </div>
           </div>
 
@@ -184,13 +184,13 @@ const AdminBackupsPage = () => {
               {isPreviewing ? (
                 <div className="flex flex-col items-center gap-2">
                   <Loader2 className="animate-spin text-[#C0602F]-500" size={32} />
-                  <p className="text-[#A67C65] text-sm mt-2">Parsing backup file...</p>
+                  <p className="text-[#4A2F1D] text-sm mt-2">Parsing backup file...</p>
                 </div>
               ) : (
                 <div className="flex flex-col items-center gap-2 pointer-events-none">
-                  <FileJson className="text-[#A67C65] mb-2" size={32} />
+                  <FileJson className="text-[#4A2F1D] mb-2" size={32} />
                   <p className="text-[#4A2F1D] font-medium">Click or drag a .json backup file here</p>
-                  <p className="text-[#A67C65] text-xs">Maximum file size: 50MB</p>
+                  <p className="text-[#4A2F1D] text-xs">Maximum file size: 50MB</p>
                 </div>
               )}
             </div>
@@ -200,27 +200,27 @@ const AdminBackupsPage = () => {
                 <div className="flex justify-between items-start mb-4 border-b border-gray-700 pb-4">
                   <div>
                     <h3 className="text-[#4A2F1D] font-medium">{previewData.metadata.application}</h3>
-                    <p className="text-xs text-[#A67C65]">Created: {format(new Date(previewData.metadata.createdAt), 'PPpp')}</p>
+                    <p className="text-xs text-[#4A2F1D]">Created: {format(new Date(previewData.metadata.createdAt), 'PPpp')}</p>
                   </div>
-                  <button type="button" onClick={() => setPreviewData(null)} className="text-[#A67C65] hover:text-[#4A2F1D] text-xs underline">
+                  <button type="button" onClick={() => setPreviewData(null)} className="text-[#4A2F1D] hover:text-[#4A2F1D] text-xs underline">
                     Cancel
                   </button>
                 </div>
                 
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
-                    <p className="text-[#A67C65] mb-1">Products in Backup</p>
+                    <p className="text-[#4A2F1D] mb-1">Products in Backup</p>
                     <p className="text-[#4A2F1D] font-medium">{previewData.metadata.recordCounts?.products || 0}</p>
                   </div>
                   <div>
-                    <p className="text-[#A67C65] mb-1">Existing Products</p>
+                    <p className="text-[#4A2F1D] mb-1">Existing Products</p>
                     <p className="text-[#4A2F1D] font-medium">{previewData.existingCounts?.products || 0}</p>
                   </div>
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-[#A67C65] mb-2">Restore Mode</label>
+                <label className="block text-sm font-medium text-[#4A2F1D] mb-2">Restore Mode</label>
                 <select 
                   value={mode} 
                   onChange={(e) => setMode(e.target.value)}
@@ -240,7 +240,7 @@ const AdminBackupsPage = () => {
                       DANGER: This will delete all current operational data before restoring the backup.
                     </p>
                   </div>
-                  <label className="block text-xs font-medium text-[#A67C65] mb-2 mt-2">Type "RESTORE AND REPLACE" to confirm</label>
+                  <label className="block text-xs font-medium text-[#4A2F1D] mb-2 mt-2">Type "RESTORE AND REPLACE" to confirm</label>
                   <input 
                     type="text" 
                     value={confirmation}
@@ -271,7 +271,7 @@ const AdminBackupsPage = () => {
           <h2 className="text-lg font-bold text-[#4A2F1D] flex items-center gap-2">
             <History size={18} className="text-[#9A424E]" /> Backup History
           </h2>
-          <button onClick={fetchHistory} className="text-[#A67C65] hover:text-[#4A2F1D] transition-colors">
+          <button onClick={fetchHistory} className="text-[#4A2F1D] hover:text-[#4A2F1D] transition-colors">
             <RefreshCw size={18} />
           </button>
         </div>
@@ -281,14 +281,14 @@ const AdminBackupsPage = () => {
             <Loader2 className="animate-spin text-[#9A424E] mx-auto" size={24} />
           </div>
         ) : history.length === 0 ? (
-          <div className="p-8 text-center text-[#A67C65]">
+          <div className="p-8 text-center text-[#4A2F1D]">
             No backup history found.
           </div>
         ) : (
           <div className="overflow-x-auto custom-scrollbar">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b border-[#E8DFD5] bg-[#FAF7F2] text-[#A67C65] text-sm">
+                <tr className="border-b border-[#E8DFD5] bg-[#FAF7F2] text-[#4A2F1D] text-sm">
                   <th className="p-4 font-medium">Filename</th>
                   <th className="p-4 font-medium">Type</th>
                   <th className="p-4 font-medium">Size</th>
@@ -302,10 +302,10 @@ const AdminBackupsPage = () => {
                 {history.map(item => (
                   <tr key={item._id} className="hover:bg-[#FAF7F2] transition-colors text-sm">
                     <td className="p-4 text-[#4A2F1D] font-medium">{item.fileName}</td>
-                    <td className="p-4 text-[#7C5A48] capitalize">{item.backupType}</td>
-                    <td className="p-4 text-[#A67C65]">{(item.fileSize / 1024 / 1024).toFixed(2)} MB</td>
-                    <td className="p-4 text-[#7C5A48]">{item.recordCounts?.products || 0}</td>
-                    <td className="p-4 text-[#A67C65]">{item.createdBy}</td>
+                    <td className="p-4 text-[#4A2F1D] capitalize">{item.backupType}</td>
+                    <td className="p-4 text-[#4A2F1D]">{(item.fileSize / 1024 / 1024).toFixed(2)} MB</td>
+                    <td className="p-4 text-[#4A2F1D]">{item.recordCounts?.products || 0}</td>
+                    <td className="p-4 text-[#4A2F1D]">{item.createdBy}</td>
                     <td className="p-4">
                       <span className={`px-2 py-1 rounded text-xs font-medium border ${
                         item.status === 'completed' ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' : 
@@ -315,7 +315,7 @@ const AdminBackupsPage = () => {
                         {item.status}
                       </span>
                     </td>
-                    <td className="p-4 text-[#A67C65]">
+                    <td className="p-4 text-[#4A2F1D]">
                       {format(new Date(item.createdAt), 'PP p')}
                     </td>
                   </tr>

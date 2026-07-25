@@ -19,7 +19,7 @@ const ActivityTimeline = ({ activities }) => {
       case 'QUANTITY_DECREASED': return <ArrowDownRight size={16} className="text-red-400" />;
       case 'STOCK_RESERVED': return <ArrowDownRight size={16} className="text-[#C0602F]-400" />;
       case 'STOCK_RESTORED': return <ArrowUpRight size={16} className="text-blue-400" />;
-      default: return <Activity size={16} className="text-[#A67C65]" />;
+      default: return <Activity size={16} className="text-[#4A2F1D]" />;
     }
   };
 
@@ -30,8 +30,8 @@ const ActivityTimeline = ({ activities }) => {
   if (!activities || activities.length === 0) {
     return (
       <div className="bg-[#FAF7F2] border border-[#E8DFD5] rounded-2xl p-8 text-center">
-        <Activity size={48} className="mx-auto mb-4 opacity-20 text-[#A67C65]" />
-        <p className="text-[#A67C65]">No activity recorded for this product yet.</p>
+        <Activity size={48} className="mx-auto mb-4 opacity-20 text-[#4A2F1D]" />
+        <p className="text-[#4A2F1D]">No activity recorded for this product yet.</p>
       </div>
     );
   }
@@ -56,19 +56,19 @@ const ActivityTimeline = ({ activities }) => {
                   {format(new Date(activity.performedAt), 'MMM dd, yyyy hh:mm a')}
                 </time>
               </div>
-              <p className="text-sm text-[#A67C65] mb-2">{activity.remarks}</p>
+              <p className="text-sm text-[#4A2F1D] mb-2">{activity.remarks}</p>
               
               {activity.quantityDifference !== 0 && (
                 <div className="inline-flex items-center gap-2 bg-[#FAF7F2] px-3 py-1.5 rounded-lg text-sm border border-[#E8DFD5]">
-                  <span className="text-[#A67C65] line-through">Qty {activity.previousQuantity}</span>
-                  <ArrowRight size={14} className="text-[#A67C65]" />
+                  <span className="text-[#4A2F1D] line-through">Qty {activity.previousQuantity}</span>
+                  <ArrowRight size={14} className="text-[#4A2F1D]" />
                   <span className={activity.quantityDifference > 0 ? "text-green-400 font-bold" : "text-red-400 font-bold"}>
                     Qty {activity.newQuantity}
                   </span>
                 </div>
               )}
               
-              <div className="mt-2 text-xs text-[#A67C65] flex justify-between items-center">
+              <div className="mt-2 text-xs text-[#4A2F1D] flex justify-between items-center">
                 <span>By: {activity.performedBy}</span>
                 {activity.referenceType !== 'None' && (
                   <span>Ref: {activity.referenceId} ({activity.referenceType})</span>
@@ -122,7 +122,7 @@ const AdminProductDetailsPage = () => {
   }, [id]);
 
   if (loading) {
-    return <div className="p-8 text-center text-[#A67C65]">Loading product details...</div>;
+    return <div className="p-8 text-center text-[#4A2F1D]">Loading product details...</div>;
   }
 
   if (!product) {
@@ -142,7 +142,7 @@ const AdminProductDetailsPage = () => {
         </Link>
         <div>
           <h1 className="text-3xl font-bold text-[#4A2F1D] mb-1">{product.name}</h1>
-          <p className="text-[#A67C65] flex items-center gap-2">
+          <p className="text-[#4A2F1D] flex items-center gap-2">
             <span className="text-[#9A424E]">{product.productCode}</span>
             <span>•</span>
             <span>{product.department}</span>
@@ -180,7 +180,7 @@ const AdminProductDetailsPage = () => {
                 <span className={`px-3 py-1 rounded-full text-xs font-bold ${
                   product.status === 'available' ? 'bg-green-500/20 text-green-400 border border-green-500/20' : 
                   product.status === 'out_of_stock' ? 'bg-red-500/20 text-red-400 border border-red-500/20' : 
-                  'bg-gray-500/20 text-[#A67C65] border border-gray-500/20'
+                  'bg-gray-500/20 text-[#4A2F1D] border border-gray-500/20'
                 }`}>
                   {product.status.replace('_', ' ').toUpperCase()}
                 </span>
@@ -189,20 +189,20 @@ const AdminProductDetailsPage = () => {
             
             <div className="p-6 space-y-4">
               <div>
-                <p className="text-xs text-[#A67C65] mb-1">Current Quantity</p>
+                <p className="text-xs text-[#4A2F1D] mb-1">Current Quantity</p>
                 <div className="flex items-end gap-2">
                   <span className="text-4xl font-bold text-[#4A2F1D]">{product.quantity}</span>
-                  <span className="text-[#A67C65] mb-1">{product.quantityUnit || 'units'}</span>
+                  <span className="text-[#4A2F1D] mb-1">{product.quantityUnit || 'units'}</span>
                 </div>
               </div>
               
               <div className="pt-4 border-t border-[#E8DFD5] space-y-3">
                 <div className="flex justify-between items-center">
-                  <span className="text-[#A67C65] text-sm flex items-center gap-2"><Tag size={16}/> Category</span>
+                  <span className="text-[#4A2F1D] text-sm flex items-center gap-2"><Tag size={16}/> Category</span>
                   <span className="text-[#4A2F1D] font-medium">{product.category?.name || '-'}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-[#A67C65] text-sm flex items-center gap-2"><Box size={16}/> Department</span>
+                  <span className="text-[#4A2F1D] text-sm flex items-center gap-2"><Box size={16}/> Department</span>
                   <span className="text-[#4A2F1D] font-medium">{product.department || '-'}</span>
                 </div>
               </div>

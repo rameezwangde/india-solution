@@ -115,14 +115,14 @@ exports.getProducts = async (req, res) => {
       if (maxPrice) query.price.$lte = Number(maxPrice);
     }
 
-    let sortObj = { createdAt: -1 };
-    if (sort === 'oldest') sortObj = { createdAt: 1 };
-    else if (sort === 'name_asc') sortObj = { name: 1 };
-    else if (sort === 'name_desc') sortObj = { name: -1 };
-    else if (sort === 'price_asc') sortObj = { price: 1 };
-    else if (sort === 'price_desc') sortObj = { price: -1 };
-    else if (sort === 'quantity_asc') sortObj = { quantity: 1 };
-    else if (sort === 'quantity_desc') sortObj = { quantity: -1 };
+    let sortObj = { createdAt: -1, _id: 1 };
+    if (sort === 'oldest') sortObj = { createdAt: 1, _id: 1 };
+    else if (sort === 'name_asc') sortObj = { name: 1, _id: 1 };
+    else if (sort === 'name_desc') sortObj = { name: -1, _id: 1 };
+    else if (sort === 'price_asc') sortObj = { price: 1, _id: 1 };
+    else if (sort === 'price_desc') sortObj = { price: -1, _id: 1 };
+    else if (sort === 'quantity_asc') sortObj = { quantity: 1, _id: 1 };
+    else if (sort === 'quantity_desc') sortObj = { quantity: -1, _id: 1 };
 
     const pageNum = parseInt(page, 10) || 1;
     let limitNum = parseInt(limit, 10) || 12;

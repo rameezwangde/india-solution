@@ -109,7 +109,7 @@ function App() {
                     <div className="min-h-screen bg-[#FAF7F2] flex items-center justify-center">
                       <div className="flex flex-col items-center gap-4">
                         <div className="w-12 h-12 border-4 border-[#E8DFD5] border-t-[#A67C65] rounded-full animate-spin"></div>
-                        <p className="text-[#A67C65] font-semibold text-sm tracking-widest uppercase">Loading Workspace...</p>
+                        <p className="text-[#4A2F1D] font-semibold text-sm tracking-widest uppercase">Loading Workspace...</p>
                       </div>
                     </div>
                   }>

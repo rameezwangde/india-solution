@@ -15,7 +15,7 @@ const StatCard = ({ title, value, icon: Icon, color }) => (
       <Icon size={20} className="text-[#4A2F1D]" />
     </div>
     <div>
-      <p className="text-[#A67C65] text-xs font-medium mb-1">{title}</p>
+      <p className="text-[#4A2F1D] text-xs font-medium mb-1">{title}</p>
       <h3 className="text-xl font-bold text-[#4A2F1D]">{value}</h3>
     </div>
   </div>
@@ -159,7 +159,7 @@ const AdminEnquiriesPage = () => {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold text-[#4A2F1D] mb-2">Enquiries</h1>
-          <p className="text-[#A67C65]">Manage incoming inventory rental requests.</p>
+          <p className="text-[#4A2F1D]">Manage incoming inventory rental requests.</p>
         </div>
       </div>
 
@@ -173,7 +173,7 @@ const AdminEnquiriesPage = () => {
 
       <div className="bg-[#FAF7F2] border border-[#E8DFD5] rounded-2xl p-4 flex flex-col xl:flex-row gap-4 xl:items-center">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#A67C65]" size={18} />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#4A2F1D]" size={18} />
           <input 
             type="text" 
             placeholder="Search by Ref #, Name, Phone, Email..."
@@ -209,7 +209,7 @@ const AdminEnquiriesPage = () => {
 
           <button 
             onClick={resetFilters}
-            className="p-2.5 bg-[#FAF7F2] hover:bg-[#E8DFD5] border border-[#E8DFD5] rounded-lg text-[#A67C65] hover:text-[#4A2F1D] transition-colors"
+            className="p-2.5 bg-[#FAF7F2] hover:bg-[#E8DFD5] border border-[#E8DFD5] rounded-lg text-[#4A2F1D] hover:text-[#4A2F1D] transition-colors"
             title="Reset Filters"
           >
             <RefreshCw size={18} />
@@ -221,7 +221,7 @@ const AdminEnquiriesPage = () => {
         <div className="bg-red-500/10 border border-red-500/20 rounded-2xl p-8 flex flex-col items-center text-center">
           <AlertTriangle size={48} className="text-red-500 mb-4" />
           <h3 className="text-xl font-bold text-[#4A2F1D] mb-2">Unable to load enquiries</h3>
-          <p className="text-[#A67C65] mb-6">{error}</p>
+          <p className="text-[#4A2F1D] mb-6">{error}</p>
           <button onClick={() => fetchEnquiriesList(true)} className="bg-[#FAF7F2] hover:bg-[#E8DFD5] px-6 py-2 rounded-lg text-[#4A2F1D] transition-colors">
             Retry
           </button>
@@ -229,8 +229,8 @@ const AdminEnquiriesPage = () => {
       ) : (
         <div className="bg-[#FAF7F2] border border-[#E8DFD5] rounded-2xl overflow-hidden flex flex-col">
           <div className="hidden lg:block overflow-x-auto">
-            <table className="w-full text-left text-sm text-[#7C5A48]">
-              <thead className="bg-white text-[#A67C65] border-b border-[#E8DFD5]">
+            <table className="w-full text-left text-sm text-[#4A2F1D]">
+              <thead className="bg-white text-[#4A2F1D] border-b border-[#E8DFD5]">
                 <tr>
                   <th className="px-6 py-4 font-medium">Reference</th>
                   <th className="px-6 py-4 font-medium">Customer Details</th>
@@ -258,7 +258,7 @@ const AdminEnquiriesPage = () => {
                       <div className="flex flex-col items-center">
                         <Inbox size={48} className="text-gray-600 mb-4" />
                         <h4 className="text-lg font-medium text-[#4A2F1D] mb-2">No enquiries found</h4>
-                        <p className="text-[#A67C65] mb-4">You have no enquiries matching your criteria.</p>
+                        <p className="text-[#4A2F1D] mb-4">You have no enquiries matching your criteria.</p>
                         <button onClick={resetFilters} className="text-[#9A424E] hover:text-[#9A424E]-400 font-medium">Clear Filters</button>
                       </div>
                     </td>
@@ -268,15 +268,15 @@ const AdminEnquiriesPage = () => {
                     <tr key={enq._id} className="hover:bg-[#FAF7F2] transition-colors group">
                       <td className="px-6 py-4 whitespace-nowrap">
                         <span className="font-mono text-[#9A424E] font-bold">{enq.referenceNumber}</span>
-                        <span className="block text-[10px] text-[#A67C65] mt-1">{new Date(enq.createdAt).toLocaleDateString()}</span>
+                        <span className="block text-[10px] text-[#4A2F1D] mt-1">{new Date(enq.createdAt).toLocaleDateString()}</span>
                       </td>
                       <td className="px-6 py-4 max-w-[200px] truncate">
                         <p className="font-bold text-[#4A2F1D] text-base truncate">{enq.customerName}</p>
-                        <span className="text-xs text-[#A67C65]">{enq.phone}</span>
+                        <span className="text-xs text-[#4A2F1D]">{enq.phone}</span>
                       </td>
                       <td className="px-6 py-4">
                         <p className="text-[#4A2F1D] text-sm">{enq.eventDate ? new Date(enq.eventDate).toLocaleDateString() : 'No date'}</p>
-                        <span className="text-xs text-[#A67C65] max-w-[150px] truncate block">{enq.city || 'No city'}</span>
+                        <span className="text-xs text-[#4A2F1D] max-w-[150px] truncate block">{enq.city || 'No city'}</span>
                       </td>
                       <td className="px-6 py-4 text-center">
                         <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#E8DFD5] text-[#4A2F1D]">
@@ -313,7 +313,7 @@ const AdminEnquiriesPage = () => {
                   </div>
                 ))
               ) : enquiries.length === 0 ? (
-                <div className="p-8 text-center text-[#A67C65]">No enquiries found.</div>
+                <div className="p-8 text-center text-[#4A2F1D]">No enquiries found.</div>
               ) : (
                 enquiries.map(enq => (
                   <div key={enq._id} className="p-4 flex flex-col gap-3">
@@ -325,12 +325,12 @@ const AdminEnquiriesPage = () => {
                       <StatusBadge status={enq.status} />
                     </div>
                     
-                    <div className="flex justify-between text-sm text-[#A67C65]">
+                    <div className="flex justify-between text-sm text-[#4A2F1D]">
                       <span>{enq.phone}</span>
                       <span>Items: {enq.totalItems}</span>
                     </div>
 
-                    <div className="text-xs text-[#A67C65] flex justify-between">
+                    <div className="text-xs text-[#4A2F1D] flex justify-between">
                       <span>Event: {enq.eventDate ? new Date(enq.eventDate).toLocaleDateString() : '-'}</span>
                       <span>{new Date(enq.createdAt).toLocaleDateString()}</span>
                     </div>

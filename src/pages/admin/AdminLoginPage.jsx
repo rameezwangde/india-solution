@@ -84,7 +84,7 @@ const AdminLoginPage = () => {
           {/* Back Button */}
           <Link 
             to="/" 
-            className="flex items-center gap-2 text-[#A67C65] hover:text-[#C0602F] font-bold text-sm tracking-wider uppercase mb-8 transition-colors group"
+            className="flex items-center gap-2 text-[#4A2F1D] hover:text-[#C0602F] font-bold text-sm tracking-wider uppercase mb-8 transition-colors group"
           >
             <span className="p-2 rounded-full bg-white border border-[#E8DFD5] group-hover:border-[#C0602F]/50 group-hover:shadow-sm transition-all shadow-sm">
               <ArrowLeft size={16} strokeWidth={2.5} />
@@ -114,7 +114,7 @@ const AdminLoginPage = () => {
             <div className="h-px bg-gradient-to-r from-transparent via-[#D5C5B9] to-transparent flex-1 max-w-[150px]"></div>
           </div>
           
-          <p className="text-[#7C5A48] text-lg md:text-xl mb-12 max-w-lg leading-relaxed">
+          <p className="text-[#4A2F1D] text-lg md:text-xl mb-12 max-w-lg leading-relaxed">
             Secure access to manage products, inventory, categories and enquiries seamlessly.
           </p>
 
@@ -125,7 +125,7 @@ const AdminLoginPage = () => {
                   {feature.icon}
                 </div>
                 <h3 className="text-[#4A2F1D] font-bold text-sm mb-1">{feature.title}</h3>
-                <p className="text-[#7C5A48] text-xs">{feature.desc}</p>
+                <p className="text-[#4A2F1D] text-xs">{feature.desc}</p>
               </div>
             ))}
           </div>
@@ -150,7 +150,7 @@ const AdminLoginPage = () => {
               <h2 className="text-3xl md:text-4xl font-['Playfair_Display',serif] font-bold text-[#4A2F1D] mb-3">
                 Welcome <span className="text-[#C0602F]">Back</span>
               </h2>
-              <p className="text-[#7C5A48] text-sm">Please sign in to your admin account</p>
+              <p className="text-[#4A2F1D] text-sm">Please sign in to your admin account</p>
             </div>
 
             {error && (
@@ -168,13 +168,13 @@ const AdminLoginPage = () => {
                 <label className="block text-[11px] font-bold text-[#9A424E] tracking-wider mb-2 uppercase">Email Address</label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                    <Mail className="h-5 w-5 text-[#A67C65]" strokeWidth={1.5} />
+                    <Mail className="h-5 w-5 text-[#4A2F1D]" strokeWidth={1.5} />
                   </div>
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-xl pl-12 pr-4 py-3.5 text-[#4A2F1D] font-medium placeholder:text-[#A67C65]/50 focus:outline-none focus:border-[#C0602F] focus:ring-1 focus:ring-[#C0602F] transition-all"
+                    className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-xl pl-12 pr-4 py-3.5 text-[#4A2F1D] font-medium placeholder:text-[#4A2F1D]/50 focus:outline-none focus:border-[#C0602F] focus:ring-1 focus:ring-[#C0602F] transition-all"
                     placeholder="admin@indiasolutions.com"
                     required
                   />
@@ -185,20 +185,20 @@ const AdminLoginPage = () => {
                 <label className="block text-[11px] font-bold text-[#9A424E] tracking-wider mb-2 uppercase">Password</label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                    <Lock className="h-5 w-5 text-[#A67C65]" strokeWidth={1.5} />
+                    <Lock className="h-5 w-5 text-[#4A2F1D]" strokeWidth={1.5} />
                   </div>
                   <input
                     type={showPassword ? 'text' : 'password'}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-xl pl-12 pr-12 py-3.5 text-[#4A2F1D] font-medium placeholder:text-[#A67C65]/50 focus:outline-none focus:border-[#C0602F] focus:ring-1 focus:ring-[#C0602F] transition-all"
+                    className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-xl pl-12 pr-12 py-3.5 text-[#4A2F1D] font-medium placeholder:text-[#4A2F1D]/50 focus:outline-none focus:border-[#C0602F] focus:ring-1 focus:ring-[#C0602F] transition-all"
                     placeholder="••••••••"
                     required
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-[#A67C65] hover:text-[#C0602F] transition-colors"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-[#4A2F1D] hover:text-[#C0602F] transition-colors"
                   >
                     {showPassword ? <EyeOff size={18} strokeWidth={1.5} /> : <Eye size={18} strokeWidth={1.5} />}
                   </button>
@@ -220,7 +220,7 @@ const AdminLoginPage = () => {
                       </svg>
                     </div>
                   </div>
-                  <span className="ml-3 text-[#7C5A48] group-hover:text-[#4A2F1D] font-medium transition-colors">Remember me</span>
+                  <span className="ml-3 text-[#4A2F1D] group-hover:text-[#4A2F1D] font-medium transition-colors">Remember me</span>
                 </label>
                 <a href="#" className="text-[#9A424E] hover:text-[#7A323E] transition-colors font-bold">Forgot Password?</a>
               </div>
@@ -235,7 +235,7 @@ const AdminLoginPage = () => {
               </button>
             </form>
 
-            <div className="mt-10 pt-8 border-t border-[#E8DFD5] flex items-center justify-center gap-5 text-[#A67C65] text-xs font-bold uppercase tracking-wider">
+            <div className="mt-10 pt-8 border-t border-[#E8DFD5] flex items-center justify-center gap-5 text-[#4A2F1D] text-xs font-bold uppercase tracking-wider">
               <div className="flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4 text-[#9A424E]" strokeWidth={2} /> Secure
               </div>

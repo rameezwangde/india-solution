@@ -22,7 +22,7 @@ const ExportModal = ({ isOpen, onClose, onExport, totalProducts, hasSelection })
           <h3 className="text-lg font-bold text-[#4A2F1D] flex items-center gap-2">
             <Download size={20} className="text-[#9A424E]" /> Export Inventory
           </h3>
-          <button onClick={onClose} className="text-[#A67C65] hover:text-[#4A2F1D] transition-colors">
+          <button onClick={onClose} className="text-[#4A2F1D] hover:text-[#4A2F1D] transition-colors">
             <X size={20} />
           </button>
         </div>
@@ -30,7 +30,7 @@ const ExportModal = ({ isOpen, onClose, onExport, totalProducts, hasSelection })
         <div className="p-6 space-y-6">
           {/* Format Selection */}
           <div>
-            <label className="block text-sm font-medium text-[#A67C65] mb-3">Export Format</label>
+            <label className="block text-sm font-medium text-[#4A2F1D] mb-3">Export Format</label>
             <div className="grid grid-cols-3 gap-3">
               <button
                 type="button"
@@ -38,7 +38,7 @@ const ExportModal = ({ isOpen, onClose, onExport, totalProducts, hasSelection })
                 className={`p-3 rounded-xl border flex flex-col items-center gap-2 transition-colors ${
                   format === 'excel' 
                     ? 'bg-green-500/10 border-green-500/50 text-green-500' 
-                    : 'bg-white border-transparent text-[#A67C65] hover:bg-gray-700'
+                    : 'bg-white border-transparent text-[#4A2F1D] hover:bg-gray-700'
                 }`}
               >
                 <FileSpreadsheet size={24} />
@@ -51,7 +51,7 @@ const ExportModal = ({ isOpen, onClose, onExport, totalProducts, hasSelection })
                 className={`p-3 rounded-xl border flex flex-col items-center gap-2 transition-colors ${
                   format === 'csv' 
                     ? 'bg-blue-500/10 border-blue-500/50 text-blue-500' 
-                    : 'bg-white border-transparent text-[#A67C65] hover:bg-gray-700'
+                    : 'bg-white border-transparent text-[#4A2F1D] hover:bg-gray-700'
                 }`}
               >
                 <FileText size={24} />
@@ -64,7 +64,7 @@ const ExportModal = ({ isOpen, onClose, onExport, totalProducts, hasSelection })
                 className={`p-3 rounded-xl border flex flex-col items-center gap-2 transition-colors ${
                   format === 'pdf' 
                     ? 'bg-red-500/10 border-red-500/50 text-red-500' 
-                    : 'bg-white border-transparent text-[#A67C65] hover:bg-gray-700'
+                    : 'bg-white border-transparent text-[#4A2F1D] hover:bg-gray-700'
                 }`}
               >
                 <FileText size={24} />
@@ -75,7 +75,7 @@ const ExportModal = ({ isOpen, onClose, onExport, totalProducts, hasSelection })
 
           {/* Scope Selection */}
           <div>
-            <label className="block text-sm font-medium text-[#A67C65] mb-3">Export Scope</label>
+            <label className="block text-sm font-medium text-[#4A2F1D] mb-3">Export Scope</label>
             <div className="space-y-2">
               {hasSelection && (
                 <label className="flex items-center gap-3 p-3 rounded-xl bg-white/50 border border-transparent hover:border-gray-700 cursor-pointer transition-colors">
@@ -89,7 +89,7 @@ const ExportModal = ({ isOpen, onClose, onExport, totalProducts, hasSelection })
                   />
                   <div>
                     <div className="text-sm font-medium text-[#4A2F1D]">Selected Products</div>
-                    <div className="text-xs text-[#A67C65]">Export only the currently selected items</div>
+                    <div className="text-xs text-[#4A2F1D]">Export only the currently selected items</div>
                   </div>
                 </label>
               )}
@@ -105,7 +105,7 @@ const ExportModal = ({ isOpen, onClose, onExport, totalProducts, hasSelection })
                 />
                 <div>
                   <div className="text-sm font-medium text-[#4A2F1D]">Current View / Filters</div>
-                  <div className="text-xs text-[#A67C65]">Export exactly what matches your active search and filters</div>
+                  <div className="text-xs text-[#4A2F1D]">Export exactly what matches your active search and filters</div>
                 </div>
               </label>
 
@@ -120,7 +120,7 @@ const ExportModal = ({ isOpen, onClose, onExport, totalProducts, hasSelection })
                 />
                 <div>
                   <div className="text-sm font-medium text-[#4A2F1D]">Entire Inventory</div>
-                  <div className="text-xs text-[#A67C65]">Export all {totalProducts} products across all departments</div>
+                  <div className="text-xs text-[#4A2F1D]">Export all {totalProducts} products across all departments</div>
                 </div>
               </label>
             </div>

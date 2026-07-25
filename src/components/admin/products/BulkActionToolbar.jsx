@@ -28,7 +28,7 @@ const BulkActionToolbar = ({
           </div>
           <div>
             <div className="text-[#4A2F1D] font-medium text-sm">Products Selected</div>
-            <div className="text-[#A67C65] text-xs">Ready for bulk action</div>
+            <div className="text-[#4A2F1D] text-xs">Ready for bulk action</div>
           </div>
         </div>
 
@@ -44,7 +44,7 @@ const BulkActionToolbar = ({
           
           <button 
             onClick={onClearSelection}
-            className="p-1.5 text-[#A67C65] hover:text-[#4A2F1D] rounded-lg hover:bg-[#E8DFD5] transition-colors"
+            className="p-1.5 text-[#4A2F1D] hover:text-[#4A2F1D] rounded-lg hover:bg-[#E8DFD5] transition-colors"
             title="Clear Selection"
           >
             <X size={18} />

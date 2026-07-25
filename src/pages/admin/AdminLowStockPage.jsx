@@ -146,13 +146,13 @@ export default function AdminLowStockPage() {
           <h1 className="text-2xl font-bold text-[#4A2F1D] flex items-center gap-2">
             <AlertTriangle className="text-yellow-500" /> Low Stock Centre
           </h1>
-          <p className="text-[#A67C65] mt-1">Monitor and manage inventory shortages</p>
+          <p className="text-[#4A2F1D] mt-1">Monitor and manage inventory shortages</p>
         </div>
         <div className="flex gap-2">
           <button onClick={() => setIsExportModalOpen(true)} className="px-4 py-2 bg-white rounded-lg text-[#4A2F1D] font-medium hover:bg-gray-700 transition-colors flex items-center gap-2 border border-gray-700">
             <Download size={18} /> Export
           </button>
-          <button onClick={() => { fetchSummary(); fetchProducts(); }} className="p-2 bg-white rounded-lg text-[#A67C65] hover:text-[#4A2F1D] hover:bg-gray-700 transition-colors border border-gray-700">
+          <button onClick={() => { fetchSummary(); fetchProducts(); }} className="p-2 bg-white rounded-lg text-[#4A2F1D] hover:text-[#4A2F1D] hover:bg-gray-700 transition-colors border border-gray-700">
             <RefreshCw size={20} />
           </button>
         </div>
@@ -163,7 +163,7 @@ export default function AdminLowStockPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           <div className="bg-white/50 backdrop-blur border border-gray-700/50 p-4 rounded-xl flex items-center justify-between">
             <div>
-              <p className="text-sm text-[#A67C65] mb-1">Attention Required</p>
+              <p className="text-sm text-[#4A2F1D] mb-1">Attention Required</p>
               <h3 className="text-2xl font-bold text-[#4A2F1D]">{summary.totalAttentionRequired}</h3>
             </div>
             <div className="p-3 bg-blue-500/10 text-blue-500 rounded-lg">
@@ -172,7 +172,7 @@ export default function AdminLowStockPage() {
           </div>
           <div className="bg-white/50 backdrop-blur border border-gray-700/50 p-4 rounded-xl flex items-center justify-between">
             <div>
-              <p className="text-sm text-[#A67C65] mb-1">Out of Stock</p>
+              <p className="text-sm text-[#4A2F1D] mb-1">Out of Stock</p>
               <h3 className="text-2xl font-bold text-red-500">{summary.outOfStock}</h3>
             </div>
             <div className="p-3 bg-red-500/10 text-red-500 rounded-lg">
@@ -181,7 +181,7 @@ export default function AdminLowStockPage() {
           </div>
           <div className="bg-white/50 backdrop-blur border border-gray-700/50 p-4 rounded-xl flex items-center justify-between">
             <div>
-              <p className="text-sm text-[#A67C65] mb-1">Critical Stock</p>
+              <p className="text-sm text-[#4A2F1D] mb-1">Critical Stock</p>
               <h3 className="text-2xl font-bold text-[#C0602F]-500">{summary.criticalStock}</h3>
             </div>
             <div className="p-3 bg-orange-500/10 text-[#C0602F]-500 rounded-lg">
@@ -190,7 +190,7 @@ export default function AdminLowStockPage() {
           </div>
           <div className="bg-white/50 backdrop-blur border border-gray-700/50 p-4 rounded-xl flex items-center justify-between">
             <div>
-              <p className="text-sm text-[#A67C65] mb-1">Low Stock</p>
+              <p className="text-sm text-[#4A2F1D] mb-1">Low Stock</p>
               <h3 className="text-2xl font-bold text-yellow-500">{summary.lowStock}</h3>
             </div>
             <div className="p-3 bg-yellow-500/10 text-yellow-500 rounded-lg">
@@ -208,15 +208,15 @@ export default function AdminLowStockPage() {
               <div key={dept.department} className="bg-white/30 border border-gray-700 p-3 rounded-lg min-w-[200px]">
                 <h4 className="text-[#4A2F1D] font-medium mb-2">{dept.department}</h4>
                 <div className="flex justify-between text-xs mb-1">
-                  <span className="text-[#A67C65]">Low:</span>
+                  <span className="text-[#4A2F1D]">Low:</span>
                   <span className="text-yellow-500">{dept.lowStock}</span>
                 </div>
                 <div className="flex justify-between text-xs mb-1">
-                  <span className="text-[#A67C65]">Critical:</span>
+                  <span className="text-[#4A2F1D]">Critical:</span>
                   <span className="text-[#C0602F]-500">{dept.criticalStock}</span>
                 </div>
                 <div className="flex justify-between text-xs">
-                  <span className="text-[#A67C65]">OOS:</span>
+                  <span className="text-[#4A2F1D]">OOS:</span>
                   <span className="text-red-500">{dept.outOfStock}</span>
                 </div>
               </div>
@@ -229,7 +229,7 @@ export default function AdminLowStockPage() {
       <div className="bg-white/30 border border-gray-700/50 rounded-xl overflow-hidden">
         <div className="p-4 border-b border-gray-700/50 flex flex-wrap gap-4 items-center justify-between">
           <div className="flex items-center gap-2 flex-1 min-w-[200px]">
-            <Search className="text-[#A67C65]" size={20} />
+            <Search className="text-[#4A2F1D]" size={20} />
             <input 
               type="text" 
               placeholder="Search products..." 
@@ -264,7 +264,7 @@ export default function AdminLowStockPage() {
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="border-b border-gray-700/50 bg-white/20 text-[#A67C65] text-sm">
+              <tr className="border-b border-gray-700/50 bg-white/20 text-[#4A2F1D] text-sm">
                 <th className="p-4 font-medium">Product</th>
                 <th className="p-4 font-medium">Department</th>
                 <th className="p-4 font-medium">Quantity</th>
@@ -275,29 +275,29 @@ export default function AdminLowStockPage() {
             </thead>
             <tbody className="text-sm">
               {loading ? (
-                <tr><td colSpan="6" className="p-8 text-center text-[#A67C65]">Loading...</td></tr>
+                <tr><td colSpan="6" className="p-8 text-center text-[#4A2F1D]">Loading...</td></tr>
               ) : products.length === 0 ? (
-                <tr><td colSpan="6" className="p-8 text-center text-[#A67C65]">No products match the selected filters.</td></tr>
+                <tr><td colSpan="6" className="p-8 text-center text-[#4A2F1D]">No products match the selected filters.</td></tr>
               ) : (
                 products.map(p => (
                   <tr key={p._id} className="border-b border-[#E8DFD5] hover:bg-white/30 transition-colors">
                     <td className="p-4">
                       <div className="text-[#4A2F1D] font-medium">{p.name}</div>
-                      <div className="text-xs text-[#A67C65]">{p.productCode}</div>
+                      <div className="text-xs text-[#4A2F1D]">{p.productCode}</div>
                     </td>
-                    <td className="p-4 text-[#A67C65]">{p.department}</td>
+                    <td className="p-4 text-[#4A2F1D]">{p.department}</td>
                     <td className="p-4">
                       <div className="text-[#4A2F1D] font-medium">{p.quantity} {p.quantityUnit}</div>
                     </td>
                     <td className="p-4">
                       <StockBadge status={p.stockStatus} />
                       {p.stockAlertAcknowledged && (
-                        <div className="text-[10px] text-[#A67C65] mt-1 flex items-center gap-1">
+                        <div className="text-[10px] text-[#4A2F1D] mt-1 flex items-center gap-1">
                           <CheckCircle size={10} /> Acknowledged
                         </div>
                       )}
                     </td>
-                    <td className="p-4 text-[#A67C65] text-xs">
+                    <td className="p-4 text-[#4A2F1D] text-xs">
                       <div>Low: {p.lowStockThreshold}</div>
                       <div>Crit: {p.criticalStockThreshold}</div>
                     </td>
@@ -311,14 +311,14 @@ export default function AdminLowStockPage() {
                         </button>
                         <button 
                           onClick={() => setThresholdModal({ isOpen: true, product: p, low: p.lowStockThreshold, critical: p.criticalStockThreshold })}
-                          className="p-1.5 bg-white text-[#A67C65] rounded-lg hover:text-[#4A2F1D] transition-colors"
+                          className="p-1.5 bg-white text-[#4A2F1D] rounded-lg hover:text-[#4A2F1D] transition-colors"
                           title="Edit Thresholds"
                         >
                           <Edit size={16} />
                         </button>
                         <button 
                           onClick={() => toggleAcknowledge(p)}
-                          className={`p-1.5 rounded-lg transition-colors ${p.stockAlertAcknowledged ? 'bg-green-500/10 text-green-500 hover:bg-green-500/20' : 'bg-white text-[#A67C65] hover:text-[#4A2F1D]'}`}
+                          className={`p-1.5 rounded-lg transition-colors ${p.stockAlertAcknowledged ? 'bg-green-500/10 text-green-500 hover:bg-green-500/20' : 'bg-white text-[#4A2F1D] hover:text-[#4A2F1D]'}`}
                           title={p.stockAlertAcknowledged ? "Unacknowledge" : "Acknowledge"}
                         >
                           {p.stockAlertAcknowledged ? <CheckCircle size={16} /> : <Clock size={16} />}
@@ -342,7 +342,7 @@ export default function AdminLowStockPage() {
             >
               Prev
             </button>
-            <span className="text-[#A67C65] px-3 py-1">{page} / {totalPages}</span>
+            <span className="text-[#4A2F1D] px-3 py-1">{page} / {totalPages}</span>
             <button 
               disabled={page === totalPages}
               onClick={() => setPage(p => Math.min(totalPages, p + 1))}
@@ -360,18 +360,18 @@ export default function AdminLowStockPage() {
           <div className="bg-gray-900 border border-[#E8DFD5] rounded-2xl w-full max-w-md overflow-hidden shadow-2xl">
             <div className="p-4 border-b border-[#E8DFD5] flex justify-between items-center bg-white/30">
               <h3 className="text-lg font-bold text-[#4A2F1D]">Quick Update</h3>
-              <button onClick={() => setUpdateModal({isOpen: false, product: null})} className="text-[#A67C65] hover:text-[#4A2F1D]">
+              <button onClick={() => setUpdateModal({isOpen: false, product: null})} className="text-[#4A2F1D] hover:text-[#4A2F1D]">
                 <X size={20} />
               </button>
             </div>
             <form onSubmit={handleQuickUpdate} className="p-6">
-              <div className="mb-4 text-[#A67C65] text-sm">
+              <div className="mb-4 text-[#4A2F1D] text-sm">
                 Updating: <span className="text-[#4A2F1D] font-medium">{updateModal.product?.name}</span>
                 <div className="mt-1">Current: <span className="text-[#4A2F1D]">{updateModal.product?.quantity}</span></div>
               </div>
               
               <div className="mb-4">
-                <label className="block text-sm text-[#A67C65] mb-2">Mode</label>
+                <label className="block text-sm text-[#4A2F1D] mb-2">Mode</label>
                 <select 
                   className="w-full bg-white border border-gray-700 rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-blue-500 outline-none"
                   value={updateModal.mode}
@@ -384,7 +384,7 @@ export default function AdminLowStockPage() {
               </div>
 
               <div className="mb-4">
-                <label className="block text-sm text-[#A67C65] mb-2">Quantity</label>
+                <label className="block text-sm text-[#4A2F1D] mb-2">Quantity</label>
                 <input 
                   type="number"
                   min="0"
@@ -396,7 +396,7 @@ export default function AdminLowStockPage() {
               </div>
 
               <div className="mb-6">
-                <label className="block text-sm text-[#A67C65] mb-2">Remarks</label>
+                <label className="block text-sm text-[#4A2F1D] mb-2">Remarks</label>
                 <input 
                   type="text"
                   placeholder="e.g. Added from warehouse"
@@ -425,17 +425,17 @@ export default function AdminLowStockPage() {
           <div className="bg-gray-900 border border-[#E8DFD5] rounded-2xl w-full max-w-md overflow-hidden shadow-2xl">
             <div className="p-4 border-b border-[#E8DFD5] flex justify-between items-center bg-white/30">
               <h3 className="text-lg font-bold text-[#4A2F1D]">Update Thresholds</h3>
-              <button onClick={() => setThresholdModal({isOpen: false, product: null})} className="text-[#A67C65] hover:text-[#4A2F1D]">
+              <button onClick={() => setThresholdModal({isOpen: false, product: null})} className="text-[#4A2F1D] hover:text-[#4A2F1D]">
                 <X size={20} />
               </button>
             </div>
             <form onSubmit={handleThresholdUpdate} className="p-6">
-              <div className="mb-6 text-[#A67C65] text-sm">
+              <div className="mb-6 text-[#4A2F1D] text-sm">
                 Updating: <span className="text-[#4A2F1D] font-medium">{thresholdModal.product?.name}</span>
               </div>
               
               <div className="mb-4">
-                <label className="block text-sm text-[#A67C65] mb-2">Low Stock Threshold</label>
+                <label className="block text-sm text-[#4A2F1D] mb-2">Low Stock Threshold</label>
                 <input 
                   type="number"
                   min="0"
@@ -447,7 +447,7 @@ export default function AdminLowStockPage() {
               </div>
 
               <div className="mb-6">
-                <label className="block text-sm text-[#A67C65] mb-2">Critical Stock Threshold</label>
+                <label className="block text-sm text-[#4A2F1D] mb-2">Critical Stock Threshold</label>
                 <input 
                   type="number"
                   min="0"

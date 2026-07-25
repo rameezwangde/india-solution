@@ -76,7 +76,7 @@ const Services = () => {
   };
 
   return (
-    <section className="relative overflow-hidden bg-[#FAF7F2] px-5 pb-24 pt-32 text-[#5c4033] lg:px-10 lg:pt-44 min-h-screen font-sans">
+    <section className="relative overflow-hidden bg-[#FAF7F2] px-5 pb-24 pt-32 text-[#2A1810] lg:px-10 lg:pt-44 min-h-screen font-sans">
       <SEO 
         title="Our Services & Event Planning"
         description="Explore India Solution's comprehensive event services including corporate conferences, luxury weddings, stage fabrication, and product launches in Bengaluru."
@@ -107,18 +107,18 @@ const Services = () => {
         >
           <div className="flex items-center justify-center gap-3 mb-6">
             <span className="h-[1px] w-12 bg-gradient-to-r from-transparent to-[#D5C5B9]"></span>
-            <span className="text-[#A67C65] text-[10px]">❖</span>
-            <span className="text-[#A67C65] text-xs font-bold tracking-[0.25em] uppercase">Services</span>
-            <span className="text-[#A67C65] text-[10px]">❖</span>
+            <span className="text-[#4A2F1D] text-[10px]">❖</span>
+            <span className="text-[#4A2F1D] text-xs font-bold tracking-[0.25em] uppercase">Services</span>
+            <span className="text-[#4A2F1D] text-[10px]">❖</span>
             <span className="h-[1px] w-12 bg-gradient-to-l from-transparent to-[#D5C5B9]"></span>
           </div>
           <h1 className="font-['Playfair_Display',serif] text-5xl md:text-6xl font-bold text-[#4A2F1D] tracking-wide mb-6">
-            OUR <span className="text-[#A67C65]">SERVICES</span>
+            OUR <span className="text-[#4A2F1D]">SERVICES</span>
           </h1>
           <div className="flex items-center justify-center gap-2 mb-6">
-            <span className="text-[#A67C65] text-sm">❖</span>
+            <span className="text-[#4A2F1D] text-sm">❖</span>
           </div>
-          <p className="mx-auto mt-3 max-w-md text-sm md:text-base font-medium leading-relaxed text-[#7C5A48]">
+          <p className="mx-auto mt-3 max-w-md text-base md:text-lg font-semibold leading-relaxed text-[#2A1810]">
             Comprehensive event solutions tailored to create unforgettable experiences.
           </p>
         </motion.div>
@@ -142,18 +142,18 @@ const Services = () => {
                 <div className="mb-6 flex items-start gap-4 flex-col sm:flex-row">
                   <Link
                     to={`/services/${service.slug}`}
-                    className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#FAF7F2] border-[1.5px] border-[#D5C5B9] text-[#A67C65] transition-all group-hover:border-[#A67C65] group-hover:bg-[#A67C65] group-hover:text-white"
+                    className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#FAF7F2] border-[1.5px] border-[#D5C5B9] text-[#4A2F1D] transition-all group-hover:border-[#A67C65] group-hover:bg-[#A67C65] group-hover:text-white"
                     aria-label={service.title}
                   >
                     <Icon size={24} strokeWidth={1.5} />
                   </Link>
                   <div className="pt-1">
                     <Link to={`/services/${service.slug}`}>
-                      <h2 className="font-['Playfair_Display',serif] text-xl font-bold leading-tight text-[#4A2F1D] transition-colors hover:text-[#A67C65] md:text-2xl mb-2">
+                      <h2 className="font-['Playfair_Display',serif] text-xl font-black leading-tight text-[#2A1810] transition-colors hover:text-[#4A2F1D] md:text-2xl mb-2">
                         {service.title}
                       </h2>
                     </Link>
-                    <p className="max-w-[18rem] text-[12.5px] font-medium leading-relaxed text-[#7C5A48]">
+                    <p className="max-w-[18rem] text-[14px] font-semibold leading-relaxed text-[#4A2F1D]">
                       {service.description}
                     </p>
                   </div>
@@ -164,9 +164,9 @@ const Services = () => {
                     <Link
                       key={item}
                       to={`/services/${service.slug}/${slugifyServiceItem(item)}`}
-                      className="flex items-center gap-3 rounded-lg border border-[#E8DFD5] bg-[#FAF7F2]/50 px-4 py-3 text-[12.5px] font-semibold leading-tight text-[#5c4033] transition-all hover:-translate-y-0.5 hover:border-[#A67C65] hover:shadow-sm"
+                      className="flex items-center gap-3 rounded-lg border border-[#E8DFD5] bg-[#FAF7F2]/50 px-4 py-3 text-[13px] font-bold leading-tight text-[#2A1810] transition-all hover:-translate-y-0.5 hover:border-[#A67C65] hover:shadow-sm"
                     >
-                      <ChevronRight size={14} className="shrink-0 text-[#A67C65]" strokeWidth={2.5} />
+                      <ChevronRight size={14} className="shrink-0 text-[#4A2F1D]" strokeWidth={2.5} />
                       <span>{item}</span>
                     </Link>
                   ))}

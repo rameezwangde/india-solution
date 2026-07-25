@@ -40,7 +40,7 @@ const AdminLayout = () => {
         <Link to="/admin">
           <img src="/FULL LOGO COLOUR (1)-1.png" alt="India Solution" className="h-16 object-contain" onError={(e) => { e.target.onerror = null; e.target.src="/india-solution-logo.png" }} />
         </Link>
-        <button className="md:hidden absolute right-4 top-8 text-[#A67C65]" onClick={() => setSidebarOpen(false)}>
+        <button className="md:hidden absolute right-4 top-8 text-[#4A2F1D]" onClick={() => setSidebarOpen(false)}>
           <X size={24} />
         </button>
       </div>
@@ -56,7 +56,7 @@ const AdminLayout = () => {
               `flex items-center gap-4 px-5 py-3.5 rounded-xl transition-all font-semibold ${
                 isActive 
                   ? 'bg-gradient-to-r from-[#9A424E] to-[#C0602F] text-[#4A2F1D] shadow-md' 
-                  : 'text-[#7C5A48] hover:bg-[#FAF7F2] hover:text-[#4A2F1D]'
+                  : 'text-[#4A2F1D] hover:bg-[#FAF7F2] hover:text-[#4A2F1D]'
               }`
             }
           >
@@ -74,7 +74,7 @@ const AdminLayout = () => {
             </div>
             <div className="overflow-hidden">
               <p className="text-[13px] font-bold text-[#4A2F1D] truncate">{admin?.name || 'India Solution Admin'}</p>
-              <p className="text-[11px] font-medium text-[#A67C65] truncate">{admin?.email || 'indiasolutionscrm@gmail.com'}</p>
+              <p className="text-[11px] font-medium text-[#4A2F1D] truncate">{admin?.email || 'indiasolutionscrm@gmail.com'}</p>
             </div>
           </div>
           <button
@@ -140,7 +140,7 @@ const AdminLayout = () => {
           </Link>
           <button 
             onClick={() => setSidebarOpen(true)}
-            className="p-2 text-[#7C5A48] hover:text-[#C0602F] bg-[#FAF7F2] rounded-lg border border-[#E8DFD5]"
+            className="p-2 text-[#4A2F1D] hover:text-[#C0602F] bg-[#FAF7F2] rounded-lg border border-[#E8DFD5]"
           >
             <Menu size={24} />
           </button>

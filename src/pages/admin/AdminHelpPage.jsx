@@ -9,7 +9,7 @@ const HelpSection = ({ title, icon: Icon, children }) => (
       </div>
       <h2 className="text-xl font-bold text-[#4A2F1D]">{title}</h2>
     </div>
-    <div className="text-[#A67C65] text-sm space-y-4">
+    <div className="text-[#4A2F1D] text-sm space-y-4">
       {children}
     </div>
   </div>
@@ -21,13 +21,13 @@ const AdminHelpPage = () => {
       <div className="flex justify-between items-start">
         <div>
           <h1 className="text-3xl font-bold text-[#4A2F1D] mb-2">System Information & Help</h1>
-          <p className="text-[#A67C65]">Quick guides for managing your inventory.</p>
+          <p className="text-[#4A2F1D]">Quick guides for managing your inventory.</p>
         </div>
         <div className="flex flex-col items-end">
           <span className="text-xs font-bold text-[#9A424E] tracking-widest uppercase bg-[#9A424E]/10 px-3 py-1 rounded-full border border-magenta/20 mb-1">
             India Solutions CRM
           </span>
-          <span className="text-[#A67C65] text-xs font-medium">Version 1.0.0</span>
+          <span className="text-[#4A2F1D] text-xs font-medium">Version 1.0.0</span>
         </div>
       </div>
 

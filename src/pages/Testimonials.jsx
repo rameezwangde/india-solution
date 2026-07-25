@@ -54,7 +54,7 @@ const testimonials = [
 ];
 
 const StarRow = ({ className = '' }) => (
-  <div className={`flex items-center gap-1 text-[#A67C65] ${className}`}>
+  <div className={`flex items-center gap-1 text-[#4A2F1D] ${className}`}>
     {[1, 2, 3, 4, 5].map((star) => (
       <Star key={star} size={18} fill="currentColor" strokeWidth={1.5} />
     ))}
@@ -63,7 +63,7 @@ const StarRow = ({ className = '' }) => (
 
 const Testimonials = () => {
   return (
-    <div className="bg-[#FAF7F2] text-[#5c4033] font-sans relative overflow-hidden">
+    <div className="bg-[#FAF7F2] text-[#2A1810] font-sans relative overflow-hidden">
       {/* Global Background Watermarks */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <img 
@@ -88,18 +88,18 @@ const Testimonials = () => {
         >
           <div className="flex items-center justify-center gap-3 mb-6">
             <span className="h-[1px] w-12 bg-gradient-to-r from-transparent to-[#D5C5B9]"></span>
-            <span className="text-[#A67C65] text-[10px]">❖</span>
-            <span className="text-[#A67C65] text-xs font-bold tracking-[0.25em] uppercase">Testimonials</span>
-            <span className="text-[#A67C65] text-[10px]">❖</span>
+            <span className="text-[#4A2F1D] text-[10px]">❖</span>
+            <span className="text-[#4A2F1D] text-xs font-bold tracking-[0.25em] uppercase">Testimonials</span>
+            <span className="text-[#4A2F1D] text-[10px]">❖</span>
             <span className="h-[1px] w-12 bg-gradient-to-l from-transparent to-[#D5C5B9]"></span>
           </div>
           <h1 className="font-['Playfair_Display',serif] text-5xl md:text-6xl lg:text-[70px] font-bold text-[#4A2F1D] tracking-wide mb-6">
             WHAT PEOPLE SAY
           </h1>
           <div className="flex items-center justify-center gap-2 mb-6">
-            <span className="text-[#A67C65] text-sm">❖</span>
+            <span className="text-[#4A2F1D] text-sm">❖</span>
           </div>
-          <p className="text-[#5c4033] font-medium text-lg tracking-wide max-w-xl mx-auto">
+          <p className="text-[#2A1810] font-medium text-lg tracking-wide max-w-xl mx-auto">
             Don't just take our word for it. Here's what our clients have to say about their experience with India Solution Events.
           </p>
         </motion.div>
@@ -114,10 +114,10 @@ const Testimonials = () => {
               className="bg-white rounded-[2rem] p-10 text-center lg:text-left shadow-sm border border-[#E8DFD5] flex flex-col justify-center"
             >
               <div className="mb-4 flex items-center justify-center gap-3 lg:justify-start">
-                <Star size={36} fill="currentColor" className="text-[#A67C65]" />
+                <Star size={36} fill="currentColor" className="text-[#4A2F1D]" />
                 <span className="font-['Playfair_Display',serif] text-7xl font-bold leading-none text-[#4A2F1D]">4.8</span>
               </div>
-              <p className="text-xl font-bold text-[#7C5A48]">out of 5</p>
+              <p className="text-xl font-bold text-[#4A2F1D]">out of 5</p>
               <StarRow className="mt-6 justify-center lg:justify-start" />
             </motion.div>
 
@@ -133,12 +133,12 @@ const Testimonials = () => {
                 "India Solution Events redefined excellence for us. Their seamless execution and eye for detail turned our vision into reality. Truly the go-to team for any high-profile event."
               </p>
               <div className="relative mt-10 flex items-center gap-5">
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#FAF7F2] border-[1.5px] border-[#D5C5B9] text-base font-bold text-[#A67C65]">
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#FAF7F2] border-[1.5px] border-[#D5C5B9] text-base font-bold text-[#4A2F1D]">
                   AD
                 </div>
                 <div>
                   <p className="font-bold text-[#4A2F1D] text-lg">Amit Desai</p>
-                  <p className="text-sm font-medium text-[#7C5A48]">Managing Director, GlobalTech Corp</p>
+                  <p className="text-sm font-medium text-[#4A2F1D]">Managing Director, GlobalTech Corp</p>
                 </div>
               </div>
             </motion.div>
@@ -163,14 +163,14 @@ const Testimonials = () => {
                     <Quote className="absolute -right-6 -bottom-6 h-36 w-36 text-[#FAF7F2]" />
                     <StarRow className="mb-6" />
                     <h2 className="font-['Playfair_Display',serif] mb-5 text-[22px] font-bold leading-snug text-[#4A2F1D]">{item.title}</h2>
-                    <p className="relative text-[14.5px] font-medium leading-relaxed text-[#7C5A48] flex-grow">{item.quote}</p>
+                    <p className="relative text-[14.5px] font-medium leading-relaxed text-[#4A2F1D] flex-grow">{item.quote}</p>
                     <div className="relative mt-8 flex items-center gap-4">
-                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#FAF7F2] border-[1.5px] border-[#D5C5B9] text-sm font-bold text-[#A67C65]">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#FAF7F2] border-[1.5px] border-[#D5C5B9] text-sm font-bold text-[#4A2F1D]">
                         {item.initials}
                       </div>
                       <div>
                         <p className="font-bold text-[#4A2F1D]">{item.name}</p>
-                        <p className="text-xs font-medium text-[#A67C65]">{item.role}</p>
+                        <p className="text-xs font-medium text-[#4A2F1D]">{item.role}</p>
                       </div>
                     </div>
                   </div>

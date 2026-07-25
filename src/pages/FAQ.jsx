@@ -30,7 +30,7 @@ const FAQ = () => {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
-    <div className="bg-[#FAF7F2] text-[#5c4033] font-sans relative overflow-hidden min-h-screen">
+    <div className="bg-[#FAF7F2] text-[#2A1810] font-sans relative overflow-hidden min-h-screen">
       {/* Global Background Watermarks */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <img 
@@ -55,18 +55,18 @@ const FAQ = () => {
         >
           <div className="flex items-center justify-center gap-3 mb-6">
             <span className="h-[1px] w-12 bg-gradient-to-r from-transparent to-[#D5C5B9]"></span>
-            <span className="text-[#A67C65] text-[10px]">❖</span>
-            <span className="text-[#A67C65] text-xs font-bold tracking-[0.25em] uppercase">FAQ</span>
-            <span className="text-[#A67C65] text-[10px]">❖</span>
+            <span className="text-[#4A2F1D] text-[10px]">❖</span>
+            <span className="text-[#4A2F1D] text-xs font-bold tracking-[0.25em] uppercase">FAQ</span>
+            <span className="text-[#4A2F1D] text-[10px]">❖</span>
             <span className="h-[1px] w-12 bg-gradient-to-l from-transparent to-[#D5C5B9]"></span>
           </div>
           <h1 className="font-['Playfair_Display',serif] text-5xl md:text-6xl font-bold text-[#4A2F1D] tracking-wide mb-6">
-            FREQUENTLY ASKED<br/> <span className="text-[#A67C65] italic font-normal">Questions</span>
+            FREQUENTLY ASKED<br/> <span className="text-[#4A2F1D] italic font-normal">Questions</span>
           </h1>
           <div className="flex items-center justify-center gap-2 mb-6">
-            <span className="text-[#A67C65] text-sm">❖</span>
+            <span className="text-[#4A2F1D] text-sm">❖</span>
           </div>
-          <p className="text-[#5c4033] font-medium text-lg tracking-wide max-w-2xl mx-auto">
+          <p className="text-[#2A1810] font-medium text-lg tracking-wide max-w-2xl mx-auto">
             Find answers to common questions about our event planning services, process, and capabilities.
           </p>
         </motion.div>
@@ -90,7 +90,7 @@ const FAQ = () => {
                     className="flex w-full items-center justify-between gap-5 px-6 py-6 text-left md:px-8"
                   >
                     <span className="font-['Playfair_Display',serif] text-[20px] font-bold leading-snug text-[#4A2F1D] pr-4">{faq.question}</span>
-                    <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full border-[1.5px] transition-all duration-300 ${isOpen ? 'border-[#A67C65] bg-[#FAF7F2] text-[#A67C65] rotate-180' : 'border-[#D5C5B9] bg-transparent text-[#7C5A48] hover:border-[#A67C65] hover:text-[#A67C65]'}`}>
+                    <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full border-[1.5px] transition-all duration-300 ${isOpen ? 'border-[#A67C65] bg-[#FAF7F2] text-[#4A2F1D] rotate-180' : 'border-[#D5C5B9] bg-transparent text-[#4A2F1D] hover:border-[#A67C65] hover:text-[#4A2F1D]'}`}>
                       {isOpen ? <Minus size={22} strokeWidth={1.5} /> : <Plus size={22} strokeWidth={1.5} />}
                     </span>
                   </button>
@@ -105,7 +105,7 @@ const FAQ = () => {
                       >
                         <div className="px-6 pb-8 pt-2 md:px-8">
                           <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-[#E8DFD5] to-transparent mb-6"></div>
-                          <p className="text-[14.5px] font-medium leading-[1.8] text-[#7C5A48]">{faq.answer}</p>
+                          <p className="text-[14.5px] font-medium leading-[1.8] text-[#4A2F1D]">{faq.answer}</p>
                         </div>
                       </motion.div>
                     )}

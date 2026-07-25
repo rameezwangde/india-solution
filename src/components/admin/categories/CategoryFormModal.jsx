@@ -84,19 +84,19 @@ const CategoryFormModal = ({ isOpen, onClose, category, onSuccess }) => {
         >
           <div className="border-b border-[#E8DFD5] p-6 flex items-center justify-between">
             <h3 className="text-xl font-bold text-[#4A2F1D]">{category ? 'Edit Category' : 'Add New Category'}</h3>
-            <button onClick={onClose} disabled={loading} className="text-[#A67C65] hover:text-[#4A2F1D] transition-colors">
+            <button onClick={onClose} disabled={loading} className="text-[#4A2F1D] hover:text-[#4A2F1D] transition-colors">
               <X size={24} />
             </button>
           </div>
 
           <form onSubmit={handleSubmit} className="p-6 space-y-6">
             <div className="space-y-2">
-              <label className="text-sm font-medium text-[#7C5A48]">Category Name *</label>
+              <label className="text-sm font-medium text-[#4A2F1D]">Category Name *</label>
               <input required type="text" name="name" value={formData.name} onChange={handleChange} className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-magenta focus:outline-none" />
             </div>
             
             <div className="space-y-2">
-              <label className="text-sm font-medium text-[#7C5A48]">Description</label>
+              <label className="text-sm font-medium text-[#4A2F1D]">Description</label>
               <textarea rows="3" name="description" value={formData.description} onChange={handleChange} className="w-full bg-[#FAF7F2] border border-[#E8DFD5] rounded-lg px-4 py-2.5 text-[#4A2F1D] focus:border-magenta focus:outline-none resize-none"></textarea>
             </div>
 
@@ -106,7 +106,7 @@ const CategoryFormModal = ({ isOpen, onClose, category, onSuccess }) => {
                 <label htmlFor="isActive" className="text-sm font-medium text-[#4A2F1D] cursor-pointer select-none block">
                   Active Category
                 </label>
-                <p className="text-xs text-[#A67C65] mt-1">If unchecked, the category and its products will be hidden from the public website.</p>
+                <p className="text-xs text-[#4A2F1D] mt-1">If unchecked, the category and its products will be hidden from the public website.</p>
               </div>
             </div>
 

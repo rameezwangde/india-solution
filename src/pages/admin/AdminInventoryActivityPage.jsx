@@ -75,7 +75,7 @@ const AdminInventoryActivityPage = () => {
       case 'QUANTITY_DECREASED': return <ArrowDownRight size={16} className="text-red-400" />;
       case 'STOCK_RESERVED': return <ArrowDownRight size={16} className="text-[#C0602F]-400" />;
       case 'STOCK_RESTORED': return <ArrowUpRight size={16} className="text-blue-400" />;
-      default: return <Activity size={16} className="text-[#A67C65]" />;
+      default: return <Activity size={16} className="text-[#4A2F1D]" />;
     }
   };
 
@@ -88,14 +88,14 @@ const AdminInventoryActivityPage = () => {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
           <h1 className="text-3xl font-bold text-[#4A2F1D] mb-2">Inventory Activity</h1>
-          <p className="text-[#A67C65]">Track all inventory changes, imports, and stock movements.</p>
+          <p className="text-[#4A2F1D]">Track all inventory changes, imports, and stock movements.</p>
         </div>
       </div>
 
       <div className="bg-white border border-[#E8DFD5] rounded-2xl p-4 lg:p-6">
         <form onSubmit={handleSearch} className="flex flex-col lg:flex-row gap-4 mb-6">
           <div className="flex-grow relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[#A67C65]" size={20} />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[#4A2F1D]" size={20} />
             <input 
               type="text" 
               placeholder="Search product name, code, or reference..." 
@@ -142,7 +142,7 @@ const AdminInventoryActivityPage = () => {
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="border-b border-[#E8DFD5] text-[#A67C65] text-sm">
+              <tr className="border-b border-[#E8DFD5] text-[#4A2F1D] text-sm">
                 <th className="py-4 px-4 font-medium">Date</th>
                 <th className="py-4 px-4 font-medium">Product</th>
                 <th className="py-4 px-4 font-medium">Department</th>
@@ -161,7 +161,7 @@ const AdminInventoryActivityPage = () => {
                 </tr>
               ) : activities.length === 0 ? (
                 <tr>
-                  <td colSpan="7" className="py-12 text-center text-[#A67C65]">
+                  <td colSpan="7" className="py-12 text-center text-[#4A2F1D]">
                     <div className="flex flex-col items-center justify-center">
                       <Activity size={48} className="mb-4 opacity-20" />
                       <p>No activity found matching your criteria</p>
@@ -171,17 +171,17 @@ const AdminInventoryActivityPage = () => {
               ) : (
                 activities.map(activity => (
                   <tr key={activity._id} className="border-b border-[#E8DFD5] hover:bg-[#FAF7F2] transition-colors">
-                    <td className="py-4 px-4 whitespace-nowrap text-[#7C5A48]">
+                    <td className="py-4 px-4 whitespace-nowrap text-[#4A2F1D]">
                       <div>{format(new Date(activity.performedAt), 'MMM dd, yyyy')}</div>
-                      <div className="text-xs text-[#A67C65]">{format(new Date(activity.performedAt), 'hh:mm a')}</div>
+                      <div className="text-xs text-[#4A2F1D]">{format(new Date(activity.performedAt), 'hh:mm a')}</div>
                     </td>
                     <td className="py-4 px-4">
                       <Link to={`/admin/products/${activity.productId}`} className="font-medium text-[#4A2F1D] hover:text-[#9A424E] transition-colors">
                         {activity.productName}
                       </Link>
-                      <div className="text-xs text-[#A67C65]">{activity.productCode}</div>
+                      <div className="text-xs text-[#4A2F1D]">{activity.productCode}</div>
                     </td>
-                    <td className="py-4 px-4 text-[#7C5A48]">
+                    <td className="py-4 px-4 text-[#4A2F1D]">
                       {activity.department}
                     </td>
                     <td className="py-4 px-4">
@@ -189,32 +189,32 @@ const AdminInventoryActivityPage = () => {
                         {getActivityIcon(activity.activityType)}
                         <span className="font-medium text-gray-200">{formatActivityName(activity.activityType)}</span>
                       </div>
-                      <div className="text-xs text-[#A67C65] truncate max-w-[200px]" title={activity.remarks}>{activity.remarks}</div>
+                      <div className="text-xs text-[#4A2F1D] truncate max-w-[200px]" title={activity.remarks}>{activity.remarks}</div>
                     </td>
                     <td className="py-4 px-4 text-center">
                       {activity.quantityDifference !== 0 ? (
                         <div className="inline-flex items-center gap-2 bg-[#FAF7F2] px-3 py-1 rounded-full">
-                          <span className="text-[#A67C65] line-through">{activity.previousQuantity}</span>
-                          <ArrowRight size={12} className="text-[#A67C65]" />
+                          <span className="text-[#4A2F1D] line-through">{activity.previousQuantity}</span>
+                          <ArrowRight size={12} className="text-[#4A2F1D]" />
                           <span className={activity.quantityDifference > 0 ? "text-green-400 font-bold" : "text-red-400 font-bold"}>
                             {activity.newQuantity}
                           </span>
                         </div>
                       ) : (
-                        <span className="text-[#A67C65]">-</span>
+                        <span className="text-[#4A2F1D]">-</span>
                       )}
                     </td>
                     <td className="py-4 px-4">
                       {activity.referenceType !== 'None' ? (
                         <div>
-                          <span className="text-xs text-[#A67C65] block">{activity.referenceType}</span>
+                          <span className="text-xs text-[#4A2F1D] block">{activity.referenceType}</span>
                           <span className="text-[#4A2F1D] text-sm">{activity.referenceId}</span>
                         </div>
                       ) : (
-                        <span className="text-[#A67C65]">-</span>
+                        <span className="text-[#4A2F1D]">-</span>
                       )}
                     </td>
-                    <td className="py-4 px-4 text-[#7C5A48]">
+                    <td className="py-4 px-4 text-[#4A2F1D]">
                       {activity.performedBy}
                     </td>
                   </tr>
@@ -227,7 +227,7 @@ const AdminInventoryActivityPage = () => {
         {/* Pagination */}
         {!loading && pagination.pages > 1 && (
           <div className="flex justify-between items-center mt-6 pt-6 border-t border-[#E8DFD5]">
-            <div className="text-sm text-[#A67C65]">
+            <div className="text-sm text-[#4A2F1D]">
               Showing page {pagination.page} of {pagination.pages} ({pagination.total} total records)
             </div>
             <div className="flex gap-2">

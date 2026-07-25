@@ -5,7 +5,7 @@ const PlaceholderPage = ({ title }) => {
     <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
       <div className="bg-[#FAF7F2] border border-[#E8DFD5] rounded-2xl p-12 max-w-lg w-full">
         <h1 className="text-2xl font-bold text-[#4A2F1D] mb-4">{title}</h1>
-        <p className="text-[#A67C65]">Module coming next.</p>
+        <p className="text-[#4A2F1D]">Module coming next.</p>
       </div>
     </div>
   );
