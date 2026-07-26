@@ -39,18 +39,18 @@ const Navbar = () => {
     <nav className="absolute w-full z-50 bg-transparent">
       {/* Top Contact Strip */}
       <div className="hidden lg:block border-b border-[#8B5E45]/10">
-        <div className="container mx-auto px-6 lg:px-12 py-1.5 flex justify-between items-center text-[11px] text-[#2A1810] font-medium">
+        <div className="container mx-auto px-6 lg:px-12 py-1.5 flex justify-between items-center text-[12px] text-[#1A0F0A] font-bold tracking-wide">
           <div className="flex items-center gap-6">
-            <a href="tel:+916360181932" className="flex items-center gap-2 hover:text-[#946247] transition-colors">
-              <Phone size={12} className="text-[#946247]" /> +91 6360181932
+            <a href="tel:+916360181932" className="flex items-center gap-2 hover:text-[#4A2F1D] transition-colors">
+              <Phone size={14} className="text-[#4A2F1D]" /> +91 6360181932
             </a>
-            <span className="text-[#8B5E45]/30">|</span>
-            <a href="mailto:info@india-solution.com" className="flex items-center gap-2 hover:text-[#946247] transition-colors">
-              <Mail size={12} className="text-[#946247]" /> info@india-solution.com
+            <span className="text-[#8B5E45]/50">|</span>
+            <a href="mailto:info@india-solution.com" className="flex items-center gap-2 hover:text-[#4A2F1D] transition-colors">
+              <Mail size={14} className="text-[#4A2F1D]" /> info@india-solution.com
             </a>
           </div>
           <div className="flex items-center gap-2">
-             <MapPin size={12} className="text-[#946247]" />
+             <MapPin size={14} className="text-[#4A2F1D]" />
              <span>Battahalasur, Bangalore — Karnataka 560001</span>
           </div>
         </div>
@@ -61,35 +61,22 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex flex-col items-center justify-center shrink-0 gap-0" aria-label="India Solution home">
             <img
-              src="/logo-only.png"
+              src="/new logo.png"
               alt="India Solution Logo"
-              className="w-auto object-contain relative z-10 h-14 sm:h-16"
-              style={{ filter: 'brightness(1)' }}
-            />
-            <img
-              src="/text-logo-new.png"
-              alt="India Solution"
-              className="w-auto object-contain mt-1 relative z-20 h-5 sm:h-6"
-              style={{ filter: 'brightness(0) saturate(100%) invert(51%) sepia(16%) saturate(1022%) hue-rotate(339deg) brightness(90%) contrast(85%)' }}
-            />
-            <img
-              src="/text-logo-2.png"
-              alt="Experience anything and everything"
-              className="w-auto object-contain mt-0.5 relative z-30 opacity-70 h-3 sm:h-3.5"
-              style={{ filter: 'brightness(0)' }}
+              className="w-auto object-contain relative z-10 h-24 sm:h-32"
             />
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden xl:flex items-center gap-5 lg:gap-6">
+          <div className="hidden xl:flex items-center gap-4 lg:gap-5 xl:mr-8">
             {navLinks.map((link) => {
               const active = isActiveLink(link.path);
               return (
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`text-[11px] font-bold tracking-wider transition-colors relative group
-                    ${active ? 'text-[#C0602F]' : 'text-[#8B5E45]/70 hover:text-[#946247]'}`}
+                  className={`text-[12px] font-black tracking-wider transition-colors relative group whitespace-nowrap
+                    ${active ? 'text-[#C0602F]' : 'text-[#4A2F1D] hover:text-[#1A0F0A]'}`}
                 >
                   {link.name}
                   {active && (
@@ -110,11 +97,11 @@ const Navbar = () => {
               </Link>
             </div>
             
-            <div className="flex gap-3 ml-2 text-[#8B5E45]/70 border-l border-[#8B5E45]/20 pl-6">
-              <a href="https://www.facebook.com/indiasolutionblr/" target="_blank" rel="noopener noreferrer" className="hover:text-[#946247] transition-colors"><FaFacebookF size={14} /></a>
-              <a href="https://www.instagram.com/indiasolutionevents?igsh=MTVtbDJ5cW4zZjRq" target="_blank" rel="noopener noreferrer" className="hover:text-[#946247] transition-colors"><FaInstagram size={14} /></a>
-              <a href="#" className="hover:text-[#946247] transition-colors"><FaYoutube size={14} /></a>
-              <a href="#" className="hover:text-[#946247] transition-colors"><FaLinkedinIn size={14} /></a>
+            <div className="flex gap-3 ml-2 text-[#4A2F1D] border-l border-[#8B5E45]/20 pl-6">
+              <a href="https://www.facebook.com/indiasolutionblr/" target="_blank" rel="noopener noreferrer" className="hover:text-[#1A0F0A] transition-colors"><FaFacebookF size={16} /></a>
+              <a href="https://www.instagram.com/indiasolutionevents?igsh=MTVtbDJ5cW4zZjRq" target="_blank" rel="noopener noreferrer" className="hover:text-[#1A0F0A] transition-colors"><FaInstagram size={16} /></a>
+              <a href="#" className="hover:text-[#1A0F0A] transition-colors"><FaYoutube size={16} /></a>
+              <a href="#" className="hover:text-[#1A0F0A] transition-colors"><FaLinkedinIn size={16} /></a>
             </div>
           </div>
 
