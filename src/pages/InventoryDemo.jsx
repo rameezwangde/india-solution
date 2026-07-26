@@ -4,6 +4,7 @@ import { Search, ChevronDown } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ProductCard from '../components/inventory/ProductCard';
 import CategoryTabs from '../components/inventory/CategoryTabs';
+import LeadCaptureModal from '../components/inventory/LeadCaptureModal';
 import { useCart } from '../context/CartContext';
 import SEO from '../components/layout/SEO';
 
@@ -184,6 +185,7 @@ const InventoryDemo = () => {
   const error = isError ? 'Unable to load inventory' : null;
   return (
     <div className="min-h-screen flex flex-col relative select-none bg-[#FAF7F2] font-sans pt-32 pb-40 lg:pt-44">
+      <LeadCaptureModal />
       <SEO 
         title="Products & Inventory | India Solution"
         description="Browse our extensive collection of professional event equipment, including artist services, fabrication, lighting, sound, and visual displays available for rent."

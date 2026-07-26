@@ -14,14 +14,21 @@ exports.createEnquiry = async (req, res) => {
       message, notes, products 
     } = req.body;
 
-    if (!customerName || !phone || !products || !Array.isArray(products) || products.length === 0) {
-      return res.status(400).json({ success: false, message: 'Customer name, phone, and at least one product are required' });
+    const isSystemAlert = message && message.includes('[SYSTEM ALERT]');
+    
+    if (!customerName || !phone) {
+      return res.status(400).json({ success: false, message: 'Customer name and phone are required' });
+    }
+    
+    if (!isSystemAlert && (!products || !Array.isArray(products) || products.length === 0)) {
+      return res.status(400).json({ success: false, message: 'At least one product is required' });
     }
 
     let totalItems = 0;
     const processedProducts = [];
 
-    for (const item of products) {
+    const productList = Array.isArray(products) ? products : [];
+    for (const item of productList) {
       const qty = Number(item.quantity) || 0;
       if (qty <= 0) {
         return res.status(400).json({ success: false, message: 'Product quantities must be > 0' });
