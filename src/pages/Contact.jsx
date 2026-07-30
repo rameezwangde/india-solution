@@ -108,6 +108,21 @@ const Contact = () => {
                 </motion.label>
 
                 <motion.label variants={fadeUp} className="block">
+                  <span className="mb-2 block text-[13px] font-bold text-[#4A2F1D]">Type of Event</span>
+                  <input className="w-full rounded-[0.8rem] border border-[#EBE3DC] bg-white px-4 py-3.5 text-[15px] font-medium text-[#2A1810] outline-none transition-all placeholder:text-[#A69C96] focus:border-[#A87455] focus:ring-1 focus:ring-[#A87455] shadow-sm" type="text" placeholder="e.g. Wedding, Corporate Event" />
+                </motion.label>
+
+                <motion.label variants={fadeUp} className="block">
+                  <span className="mb-2 block text-[13px] font-bold text-[#4A2F1D]">Date of the Event</span>
+                  <input className="w-full rounded-[0.8rem] border border-[#EBE3DC] bg-white px-4 py-3.5 text-[15px] font-medium text-[#2A1810] outline-none transition-all placeholder:text-[#A69C96] focus:border-[#A87455] focus:ring-1 focus:ring-[#A87455] shadow-sm text-[#A69C96] focus:text-[#2A1810]" type="date" />
+                </motion.label>
+
+                <motion.label variants={fadeUp} className="block">
+                  <span className="mb-2 block text-[13px] font-bold text-[#4A2F1D]">Event Location</span>
+                  <input className="w-full rounded-[0.8rem] border border-[#EBE3DC] bg-white px-4 py-3.5 text-[15px] font-medium text-[#2A1810] outline-none transition-all placeholder:text-[#A69C96] focus:border-[#A87455] focus:ring-1 focus:ring-[#A87455] shadow-sm" type="text" placeholder="e.g. Bengaluru, Karnataka" />
+                </motion.label>
+
+                <motion.label variants={fadeUp} className="block">
                   <span className="mb-2 block text-[13px] font-bold text-[#4A2F1D]">Message</span>
                   <textarea className="w-full rounded-[0.8rem] border border-[#EBE3DC] bg-white px-4 py-3.5 text-[15px] font-medium text-[#2A1810] outline-none transition-all placeholder:text-[#A69C96] focus:border-[#A87455] focus:ring-1 focus:ring-[#A87455] shadow-sm min-h-32 resize-y" placeholder="Enter your message here..." maxLength={180} />
                   <span className="mt-1 block text-right text-[11px] font-bold text-[#A69C96]">0 / 180</span>
