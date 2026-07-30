@@ -22,7 +22,61 @@ const faqs = [
   },
   {
     question: 'What services does India Solution offer?',
-    answer: 'India Solution is a premier event management company specializing in personalized parties and professional corporate events across Bengaluru, Goa, Mumbai, Delhi, and Malaysia. Our expert services include luxury wedding planning, themed housewarming celebrations, milestone birthday parties, bride-to-be and groom-to-be events, corporate gatherings, stage decorations, professional security services, DJ parties, and customized catering solutions. With over 15 years of experience, we ensure unforgettable experiences through creative event design, flawless execution, and personalized attention to detail.',
+    answer: [
+      'Wedding Decoration',
+      'Wedding Venue',
+      'Wedding Photographers',
+      'Makeup & Hairstyle',
+      'Wedding Transportation',
+      'Hotels',
+      'Wedding Videography',
+      'Wedding Music',
+      'Bands & Musicians',
+      'Marriage Garden',
+      'Ceremony Music',
+      'Wedding Entertainment',
+      'Costume Designer',
+      'Bouncers',
+      'Wedding DJ',
+      'Wedding choreographers',
+      'Kalyana Mantapa',
+      'Wedding Dress & Attire',
+      'Lighting Decoration',
+      'Mehandi Artist',
+      'Flower Decoration',
+      'Banquet Hall',
+      'Welcome Dance',
+      'LED Display',
+      'Videography',
+      'Wedding Gifts',
+      'Cakes & Sweets',
+      'Astrologers',
+      'Party Lounge',
+      'Wedding Cakes',
+      'Artist Management',
+      'Sound Systems',
+      'Boutique',
+      'Photography',
+      'Wedding Sangeet',
+      'DJs',
+      'Rental Jewellery',
+      'Wedding Lawns & Farmhouse',
+      'Wedding Invitations',
+      'Resort & Destination Wedding',
+      'Bachelor & Bachelorette Parties',
+      'Beauty & Makeup',
+      'Purohits',
+      'Venues',
+      'Transportation',
+      'Caterers',
+      'Return Gifts',
+      'Guest Accommodations',
+      'Photo Booths',
+      'Rentals',
+      'Anchor',
+      'Tent House',
+      'Honeymoon & Travel'
+    ],
   },
 ];
 
@@ -104,8 +158,15 @@ const FAQ = () => {
                         transition={{ duration: 0.3, ease: 'easeInOut' }}
                       >
                         <div className="px-6 pb-8 pt-2 md:px-8">
-                          <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-[#E8DFD5] to-transparent mb-6"></div>
-                          <p className="text-[14.5px] font-medium leading-[1.8] text-[#4A2F1D]">{faq.answer}</p>
+                          {Array.isArray(faq.answer) ? (
+                            <ul className="list-disc pl-5 text-[14.5px] font-medium leading-[1.8] text-[#4A2F1D] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-1">
+                              {faq.answer.map((item, i) => (
+                                <li key={i}>{item}</li>
+                              ))}
+                            </ul>
+                          ) : (
+                            <p className="text-[14.5px] font-medium leading-[1.8] text-[#4A2F1D]">{faq.answer}</p>
+                          )}
                         </div>
                       </motion.div>
                     )}
