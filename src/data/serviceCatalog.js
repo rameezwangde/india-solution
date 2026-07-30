@@ -37,6 +37,12 @@ export const serviceCatalog = [
     icon: 'BriefcaseBusiness',
     description: 'Professional event execution for business gatherings and brand moments.',
     items: [
+      'Meetings and conferences',
+      'Employee events',
+      'Training and development',
+      'Marketing and promotional activities',
+      'Networking and relationships events',
+      'Special corporate celebrations',
       'Networking Events',
       'Conferences',
       'Product Launches',

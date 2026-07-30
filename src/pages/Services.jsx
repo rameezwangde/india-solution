@@ -159,7 +159,7 @@ const Services = () => {
                   </div>
                 </div>
 
-                <div className="mt-auto grid gap-3">
+                <div className="mt-4 grid gap-3">
                   {service.items.map((item) => (
                     <Link
                       key={item}
