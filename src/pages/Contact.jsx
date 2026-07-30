@@ -39,6 +39,35 @@ const socials = [
 
 const Contact = () => {
   const [rating, setRating] = useState(0);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    eventType: '',
+    eventDate: '',
+    eventLocation: '',
+    message: ''
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!formData.name || !formData.phone) return;
+    
+    let text = `*New Contact Inquiry*\n\n*Name:* ${formData.name}\n*Phone:* ${formData.phone}`;
+    if (formData.email) text += `\n*Email:* ${formData.email}`;
+    if (formData.eventType) text += `\n*Event Type:* ${formData.eventType}`;
+    if (formData.eventDate) text += `\n*Event Date:* ${formData.eventDate}`;
+    if (formData.eventLocation) text += `\n*Location:* ${formData.eventLocation}`;
+    if (formData.message) text += `\n*Message:* ${formData.message}`;
+    if (rating > 0) text += `\n*Website Rating:* ${rating}/5`;
+    
+    const whatsappUrl = `https://wa.me/916360181932?text=${encodeURIComponent(text)}`;
+    window.open(whatsappUrl, '_blank');
+  };
 
   return (
     <div className="bg-[#FAF7F2] font-sans selection:bg-[#A67C65] selection:text-white relative">
@@ -83,6 +112,7 @@ const Contact = () => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
+              onSubmit={handleSubmit}
               className="bg-[#FAF6F2] rounded-[2rem] shadow-[0_8px_30px_rgb(139,94,69,0.08)] border border-[#EBE3DC] p-6 md:p-8"
             >
               <motion.div variants={fadeUp} className="mb-7">
@@ -93,39 +123,39 @@ const Contact = () => {
               <div className="grid gap-5">
                 <motion.label variants={fadeUp} className="block">
                   <span className="mb-2 block text-[13px] font-bold text-[#4A2F1D]">Name</span>
-                  <input className="w-full rounded-[0.8rem] border border-[#EBE3DC] bg-white px-4 py-3.5 text-[15px] font-medium text-[#2A1810] outline-none transition-all placeholder:text-[#A69C96] focus:border-[#A87455] focus:ring-1 focus:ring-[#A87455] shadow-sm" type="text" placeholder="Your Name" />
+                  <input name="name" value={formData.name} onChange={handleChange} required className="w-full rounded-[0.8rem] border border-[#EBE3DC] bg-white px-4 py-3.5 text-[15px] font-medium text-[#2A1810] outline-none transition-all placeholder:text-[#A69C96] focus:border-[#A87455] focus:ring-1 focus:ring-[#A87455] shadow-sm" type="text" placeholder="Your Name" />
                 </motion.label>
 
                 <motion.label variants={fadeUp} className="block">
                   <span className="mb-2 block text-[13px] font-bold text-[#4A2F1D]">Email Address</span>
-                  <input className="w-full rounded-[0.8rem] border border-[#EBE3DC] bg-white px-4 py-3.5 text-[15px] font-medium text-[#2A1810] outline-none transition-all placeholder:text-[#A69C96] focus:border-[#A87455] focus:ring-1 focus:ring-[#A87455] shadow-sm" type="email" placeholder="Your E mail" />
+                  <input name="email" value={formData.email} onChange={handleChange} className="w-full rounded-[0.8rem] border border-[#EBE3DC] bg-white px-4 py-3.5 text-[15px] font-medium text-[#2A1810] outline-none transition-all placeholder:text-[#A69C96] focus:border-[#A87455] focus:ring-1 focus:ring-[#A87455] shadow-sm" type="email" placeholder="Your E mail" />
                 </motion.label>
 
                 <motion.label variants={fadeUp} className="block">
                   <span className="mb-2 block text-[13px] font-bold text-[#4A2F1D]">Phone Number <span className="text-[#A87455]">*</span></span>
-                  <input className="w-full rounded-[0.8rem] border border-[#EBE3DC] bg-white px-4 py-3.5 text-[15px] font-medium text-[#2A1810] outline-none transition-all placeholder:text-[#A69C96] focus:border-[#A87455] focus:ring-1 focus:ring-[#A87455] shadow-sm" type="tel" placeholder="Your Contact Number" maxLength={10} />
-                  <span className="mt-1 block text-right text-[11px] font-bold text-[#A69C96]">0 / 10</span>
+                  <input name="phone" value={formData.phone} onChange={handleChange} required className="w-full rounded-[0.8rem] border border-[#EBE3DC] bg-white px-4 py-3.5 text-[15px] font-medium text-[#2A1810] outline-none transition-all placeholder:text-[#A69C96] focus:border-[#A87455] focus:ring-1 focus:ring-[#A87455] shadow-sm" type="tel" placeholder="Your Contact Number" maxLength={10} />
+                  <span className="mt-1 block text-right text-[11px] font-bold text-[#A69C96]">{formData.phone.length} / 10</span>
                 </motion.label>
 
                 <motion.label variants={fadeUp} className="block">
                   <span className="mb-2 block text-[13px] font-bold text-[#4A2F1D]">Type of Event</span>
-                  <input className="w-full rounded-[0.8rem] border border-[#EBE3DC] bg-white px-4 py-3.5 text-[15px] font-medium text-[#2A1810] outline-none transition-all placeholder:text-[#A69C96] focus:border-[#A87455] focus:ring-1 focus:ring-[#A87455] shadow-sm" type="text" placeholder="e.g. Wedding, Corporate Event" />
+                  <input name="eventType" value={formData.eventType} onChange={handleChange} className="w-full rounded-[0.8rem] border border-[#EBE3DC] bg-white px-4 py-3.5 text-[15px] font-medium text-[#2A1810] outline-none transition-all placeholder:text-[#A69C96] focus:border-[#A87455] focus:ring-1 focus:ring-[#A87455] shadow-sm" type="text" placeholder="e.g. Wedding, Corporate Event" />
                 </motion.label>
 
                 <motion.label variants={fadeUp} className="block">
                   <span className="mb-2 block text-[13px] font-bold text-[#4A2F1D]">Date of the Event</span>
-                  <input className="w-full rounded-[0.8rem] border border-[#EBE3DC] bg-white px-4 py-3.5 text-[15px] font-medium text-[#2A1810] outline-none transition-all placeholder:text-[#A69C96] focus:border-[#A87455] focus:ring-1 focus:ring-[#A87455] shadow-sm text-[#A69C96] focus:text-[#2A1810]" type="date" />
+                  <input name="eventDate" value={formData.eventDate} onChange={handleChange} className="w-full rounded-[0.8rem] border border-[#EBE3DC] bg-white px-4 py-3.5 text-[15px] font-medium text-[#2A1810] outline-none transition-all placeholder:text-[#A69C96] focus:border-[#A87455] focus:ring-1 focus:ring-[#A87455] shadow-sm text-[#A69C96] focus:text-[#2A1810]" type="date" />
                 </motion.label>
 
                 <motion.label variants={fadeUp} className="block">
                   <span className="mb-2 block text-[13px] font-bold text-[#4A2F1D]">Event Location</span>
-                  <input className="w-full rounded-[0.8rem] border border-[#EBE3DC] bg-white px-4 py-3.5 text-[15px] font-medium text-[#2A1810] outline-none transition-all placeholder:text-[#A69C96] focus:border-[#A87455] focus:ring-1 focus:ring-[#A87455] shadow-sm" type="text" placeholder="e.g. Bengaluru, Karnataka" />
+                  <input name="eventLocation" value={formData.eventLocation} onChange={handleChange} className="w-full rounded-[0.8rem] border border-[#EBE3DC] bg-white px-4 py-3.5 text-[15px] font-medium text-[#2A1810] outline-none transition-all placeholder:text-[#A69C96] focus:border-[#A87455] focus:ring-1 focus:ring-[#A87455] shadow-sm" type="text" placeholder="e.g. Bengaluru, Karnataka" />
                 </motion.label>
 
                 <motion.label variants={fadeUp} className="block">
                   <span className="mb-2 block text-[13px] font-bold text-[#4A2F1D]">Message</span>
-                  <textarea className="w-full rounded-[0.8rem] border border-[#EBE3DC] bg-white px-4 py-3.5 text-[15px] font-medium text-[#2A1810] outline-none transition-all placeholder:text-[#A69C96] focus:border-[#A87455] focus:ring-1 focus:ring-[#A87455] shadow-sm min-h-32 resize-y" placeholder="Enter your message here..." maxLength={180} />
-                  <span className="mt-1 block text-right text-[11px] font-bold text-[#A69C96]">0 / 180</span>
+                  <textarea name="message" value={formData.message} onChange={handleChange} className="w-full rounded-[0.8rem] border border-[#EBE3DC] bg-white px-4 py-3.5 text-[15px] font-medium text-[#2A1810] outline-none transition-all placeholder:text-[#A69C96] focus:border-[#A87455] focus:ring-1 focus:ring-[#A87455] shadow-sm min-h-32 resize-y" placeholder="Enter your message here..." maxLength={180} />
+                  <span className="mt-1 block text-right text-[11px] font-bold text-[#A69C96]">{formData.message.length} / 180</span>
                 </motion.label>
 
                 <motion.div variants={fadeUp}>
@@ -149,7 +179,7 @@ const Contact = () => {
 
                 <motion.button
                   variants={fadeUp}
-                  type="button"
+                  type="submit"
                   className="mt-3 inline-flex w-fit items-center gap-3 bg-[#A87455] hover:bg-[#8F6145] text-white px-9 py-3.5 rounded-[4px] font-bold tracking-widest text-[12px] transition-all shadow-[0_8px_20px_rgb(148,98,71,0.25)] hover:shadow-[0_8px_20px_rgb(148,98,71,0.4)]"
                 >
                   SEND MESSAGE
