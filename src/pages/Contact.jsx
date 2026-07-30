@@ -41,34 +41,40 @@ const Contact = () => {
   const [rating, setRating] = useState(0);
 
   return (
-    <div className="bg-navy-900 text-white">
+    <div className="bg-[#FAF7F2] font-sans selection:bg-[#A67C65] selection:text-white relative">
       <SEO 
         title="Contact Us"
         description="Get in touch with India Solution Events. Call +91 6360181932 or visit our production house in Bengaluru to plan your next extraordinary event."
         keywords="contact india solution, event planners contact bengaluru, hire event management company"
       />
-      <section className="relative overflow-hidden px-6 pb-14 pt-40 lg:px-12 lg:pt-44">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_10%,rgba(233,30,99,0.22),transparent_30%),radial-gradient(circle_at_86%_14%,rgba(255,152,0,0.18),transparent_28%)]" />
-        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-magenta/50 to-transparent" />
+      <section className="relative overflow-hidden px-5 pb-14 pt-32 lg:px-12 lg:pt-40">
+        <div className="absolute inset-0 z-0 bg-[#FAF7F2] overflow-hidden pointer-events-none">
+          <img src="/hero-bg.png" alt="" className="w-full h-full object-cover object-center opacity-[0.03]" />
+          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#FAF7F2] to-transparent z-10" />
+        </div>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="container relative z-10 mx-auto max-w-5xl text-center"
+          className="container relative z-10 mx-auto max-w-5xl text-center flex flex-col items-center"
         >
-          <span className="mb-4 block text-xs font-bold uppercase tracking-[0.35em] text-gold">Contact Us</span>
-          <h1 className="site-heading text-4xl font-semibold leading-tight md:text-6xl">
-            Let&apos;s Plan Your <span className="site-heading-accent">Next Event</span>
+          <motion.div variants={fadeUp} className="mb-6 flex items-center justify-center gap-4 text-[11px] font-bold tracking-[0.2em] text-[#4A2F1D]">
+            <span className="text-[#8B5E45] text-sm">❖</span>
+            <span className="uppercase">Contact Us</span>
+            <span className="text-[#8B5E45] text-sm">❖</span>
+          </motion.div>
+          <h1 className="font-['Playfair_Display',serif] text-[#4A2F1D] text-5xl font-semibold leading-tight md:text-6xl mb-4">
+            Let&apos;s Plan Your <span className="italic">Next Event</span>
           </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-gray-300 md:text-lg">
+          <p className="mx-auto mt-5 max-w-2xl text-[15px] font-semibold leading-[1.8] text-[#2A1810]">
             Share your event details with us, or reach out directly through phone, email, or our Bengaluru office.
           </p>
         </motion.div>
       </section>
 
-      <section className="relative overflow-hidden px-6 py-16 lg:px-12">
-        <div className="absolute inset-0 bg-[#10172A]" />
-        <div className="absolute left-0 top-24 h-72 w-72 rounded-full bg-magenta/10 blur-3xl" />
-        <div className="absolute right-0 bottom-20 h-80 w-80 rounded-full bg-orange/10 blur-3xl" />
+      <section className="relative overflow-hidden px-5 py-16 lg:px-12">
+        <div className="absolute inset-0 z-0 bg-[#FAF7F2] overflow-hidden pointer-events-none">
+          <img src="/hero-bg.png" alt="" className="w-full h-full object-cover object-center opacity-[0.03] scale-110" />
+        </div>
 
         <div className="container relative z-10 mx-auto max-w-7xl">
           <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
@@ -77,38 +83,38 @@ const Contact = () => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="glass-card p-6 md:p-8"
+              className="bg-[#FAF6F2] rounded-[2rem] shadow-[0_8px_30px_rgb(139,94,69,0.08)] border border-[#EBE3DC] p-6 md:p-8"
             >
               <motion.div variants={fadeUp} className="mb-7">
-                <span className="site-eyebrow mb-3 block">Send Message</span>
-                <h2 className="site-heading text-3xl font-semibold md:text-4xl">Tell Us About Your Event</h2>
+                <span className="mb-3 block text-[11px] font-bold tracking-[0.2em] text-[#8B5E45] uppercase">Send Message</span>
+                <h2 className="font-['Playfair_Display',serif] text-3xl font-semibold text-[#4A2F1D] md:text-4xl">Tell Us About Your Event</h2>
               </motion.div>
 
               <div className="grid gap-5">
                 <motion.label variants={fadeUp} className="block">
-                  <span className="mb-2 block text-sm font-medium text-gray-200">Name</span>
-                  <input className="contact-input" type="text" placeholder="Your Name" />
+                  <span className="mb-2 block text-[13px] font-bold text-[#4A2F1D]">Name</span>
+                  <input className="w-full rounded-[0.8rem] border border-[#EBE3DC] bg-white px-4 py-3.5 text-[15px] font-medium text-[#2A1810] outline-none transition-all placeholder:text-[#A69C96] focus:border-[#A87455] focus:ring-1 focus:ring-[#A87455] shadow-sm" type="text" placeholder="Your Name" />
                 </motion.label>
 
                 <motion.label variants={fadeUp} className="block">
-                  <span className="mb-2 block text-sm font-medium text-gray-200">Email Address</span>
-                  <input className="contact-input" type="email" placeholder="Your E mail" />
+                  <span className="mb-2 block text-[13px] font-bold text-[#4A2F1D]">Email Address</span>
+                  <input className="w-full rounded-[0.8rem] border border-[#EBE3DC] bg-white px-4 py-3.5 text-[15px] font-medium text-[#2A1810] outline-none transition-all placeholder:text-[#A69C96] focus:border-[#A87455] focus:ring-1 focus:ring-[#A87455] shadow-sm" type="email" placeholder="Your E mail" />
                 </motion.label>
 
                 <motion.label variants={fadeUp} className="block">
-                  <span className="mb-2 block text-sm font-medium text-gray-200">Phone Number <span className="text-magenta">*</span></span>
-                  <input className="contact-input" type="tel" placeholder="Your Contact Number" maxLength={10} />
-                  <span className="mt-1 block text-right text-xs text-gray-500">0 / 10</span>
+                  <span className="mb-2 block text-[13px] font-bold text-[#4A2F1D]">Phone Number <span className="text-[#A87455]">*</span></span>
+                  <input className="w-full rounded-[0.8rem] border border-[#EBE3DC] bg-white px-4 py-3.5 text-[15px] font-medium text-[#2A1810] outline-none transition-all placeholder:text-[#A69C96] focus:border-[#A87455] focus:ring-1 focus:ring-[#A87455] shadow-sm" type="tel" placeholder="Your Contact Number" maxLength={10} />
+                  <span className="mt-1 block text-right text-[11px] font-bold text-[#A69C96]">0 / 10</span>
                 </motion.label>
 
                 <motion.label variants={fadeUp} className="block">
-                  <span className="mb-2 block text-sm font-medium text-gray-200">Message</span>
-                  <textarea className="contact-input min-h-32 resize-y" placeholder="Enter your message here..." maxLength={180} />
-                  <span className="mt-1 block text-right text-xs text-gray-500">0 / 180</span>
+                  <span className="mb-2 block text-[13px] font-bold text-[#4A2F1D]">Message</span>
+                  <textarea className="w-full rounded-[0.8rem] border border-[#EBE3DC] bg-white px-4 py-3.5 text-[15px] font-medium text-[#2A1810] outline-none transition-all placeholder:text-[#A69C96] focus:border-[#A87455] focus:ring-1 focus:ring-[#A87455] shadow-sm min-h-32 resize-y" placeholder="Enter your message here..." maxLength={180} />
+                  <span className="mt-1 block text-right text-[11px] font-bold text-[#A69C96]">0 / 180</span>
                 </motion.label>
 
                 <motion.div variants={fadeUp}>
-                  <span className="mb-2 block text-sm font-medium text-gray-200">Rating</span>
+                  <span className="mb-2 block text-[13px] font-bold text-[#4A2F1D]">Rating</span>
                   <div className="flex items-center gap-2">
                     {[1, 2, 3, 4, 5].map((value) => (
                       <button
@@ -116,23 +122,23 @@ const Contact = () => {
                         type="button"
                         aria-label={`Rate ${value}`}
                         onClick={() => setRating(value)}
-                        className="text-gray-500 transition-colors hover:text-gold"
+                        className="text-[#D5C5B9] transition-colors hover:text-[#A87455]"
                       >
-                        <Star size={30} fill={value <= rating ? 'currentColor' : 'none'} className={value <= rating ? 'text-gold' : ''} />
+                        <Star size={28} fill={value <= rating ? 'currentColor' : 'none'} className={value <= rating ? 'text-[#A87455]' : ''} />
                       </button>
                     ))}
-                    <span className="ml-2 text-sm text-gray-400">({rating}/5)</span>
+                    <span className="ml-2 text-[12px] font-bold text-[#A69C96]">({rating}/5)</span>
                   </div>
-                  <p className="mt-2 text-sm text-gray-400">Rate Our Website How it helps you</p>
+                  <p className="mt-2 text-[12px] font-semibold text-[#A69C96]">Rate Our Website How it helps you</p>
                 </motion.div>
 
                 <motion.button
                   variants={fadeUp}
                   type="button"
-                  className="mt-3 inline-flex w-fit items-center gap-3 rounded-full bg-gradient-to-r from-magenta via-gold to-orange px-7 py-3 text-sm font-bold uppercase text-white shadow-[0_0_26px_rgba(233,30,99,0.28)] transition-transform hover:-translate-y-0.5"
+                  className="mt-3 inline-flex w-fit items-center gap-3 bg-[#A87455] hover:bg-[#8F6145] text-white px-9 py-3.5 rounded-[4px] font-bold tracking-widest text-[12px] transition-all shadow-[0_8px_20px_rgb(148,98,71,0.25)] hover:shadow-[0_8px_20px_rgb(148,98,71,0.4)]"
                 >
-                  Send Message
-                  <Send size={17} />
+                  SEND MESSAGE
+                  <Send size={15} strokeWidth={2.5} />
                 </motion.button>
               </div>
             </motion.form>
@@ -147,14 +153,14 @@ const Contact = () => {
               {contactCards.map((card) => {
                 const Icon = card.icon;
                 return (
-                  <motion.div key={card.title} variants={fadeUp} className="glass-card p-6">
-                    <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full border border-magenta/35 bg-magenta/10 text-magenta shadow-[0_0_20px_rgba(233,30,99,0.2)]">
-                      <Icon size={25} />
+                  <motion.div key={card.title} variants={fadeUp} className="bg-[#FAF6F2] rounded-[2rem] shadow-[0_8px_30px_rgb(139,94,69,0.08)] border border-[#EBE3DC] p-6">
+                    <div className="mb-4 flex h-14 w-14 shrink-0 items-center justify-center rounded-full border-[1.5px] border-[#D5C5B9] bg-transparent text-[#946247]">
+                      <Icon size={24} strokeWidth={1.5} />
                     </div>
-                    <h3 className="site-heading mb-4 text-xl font-semibold">{card.title}</h3>
-                    <div className="space-y-2 text-base leading-7 text-gray-300">
+                    <h3 className="font-['Playfair_Display',serif] text-2xl font-semibold text-[#4A2F1D] mb-4">{card.title}</h3>
+                    <div className="space-y-2 text-[15px] font-semibold leading-[1.8] text-[#2A1810]">
                       {card.lines.map((line, index) => card.hrefs?.[index] ? (
-                        <a key={line} href={card.hrefs[index]} className="block hover:text-gold">{line}</a>
+                        <a key={line} href={card.hrefs[index]} className="block hover:text-[#A87455] transition-colors">{line}</a>
                       ) : (
                         <p key={line}>{line}</p>
                       ))}
@@ -163,13 +169,13 @@ const Contact = () => {
                 );
               })}
 
-              <motion.div variants={fadeUp} className="glass-card p-6">
-                <h3 className="site-heading mb-5 text-xl font-semibold">Follow Us</h3>
+              <motion.div variants={fadeUp} className="bg-[#FAF6F2] rounded-[2rem] shadow-[0_8px_30px_rgb(139,94,69,0.08)] border border-[#EBE3DC] p-6">
+                <h3 className="font-['Playfair_Display',serif] text-2xl font-semibold text-[#4A2F1D] mb-5">Follow Us</h3>
                 <div className="flex flex-wrap gap-3">
                   {socials.map((social) => {
                     const Icon = social.icon;
                     return (
-                      <a key={social.label} href="#" aria-label={social.label} className={`flex h-11 w-11 items-center justify-center rounded-lg text-white shadow-lg transition-transform hover:-translate-y-1 ${social.className}`}>
+                      <a key={social.label} href="#" aria-label={social.label} className={`flex h-11 w-11 items-center justify-center rounded-[0.8rem] text-white shadow-md transition-transform hover:-translate-y-1 ${social.className}`}>
                         <Icon size={18} />
                       </a>
                     );
@@ -183,7 +189,7 @@ const Contact = () => {
             initial={{ opacity: 0, y: 22 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mt-8 overflow-hidden rounded-2xl border border-white/10 bg-navy-800/65 shadow-[0_24px_70px_rgba(0,0,0,0.35)]"
+            className="mt-12 overflow-hidden rounded-[2rem] border border-[#EBE3DC] shadow-[0_12px_40px_rgba(139,94,69,0.12)] bg-[#FAF6F2]"
           >
             <iframe
               title="India Solution location map"

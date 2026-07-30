@@ -4,6 +4,7 @@ import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
 import SEO from '../components/layout/SEO';
 import { fadeUp, staggerContainer } from '../utils/animations';
+import { Link } from 'react-router-dom';
 const happyClients = ['Google', 'Capgemini', 'DHL', 'IBM', 'Bajaj', 'Audi', 'Amazon'];
 const stats = [
   {
@@ -212,9 +213,9 @@ const Home = () => {
           >
              <div className="flex items-center gap-4">
                <span className="text-[#4A2F1D] text-sm">❖</span>
-               <button className="bg-[#A87455] hover:bg-[#8F6145] text-white px-9 py-3.5 rounded-[4px] font-bold tracking-widest text-[12px] transition-all flex items-center gap-3 shadow-[0_8px_20px_rgb(148,98,71,0.25)] hover:shadow-[0_8px_20px_rgb(148,98,71,0.4)]">
+               <Link to="/contact" className="bg-[#A87455] hover:bg-[#8F6145] text-white px-9 py-3.5 rounded-[4px] font-bold tracking-widest text-[12px] transition-all flex items-center gap-3 shadow-[0_8px_20px_rgb(148,98,71,0.25)] hover:shadow-[0_8px_20px_rgb(148,98,71,0.4)]">
                   CONTACT US <ArrowRight size={15} strokeWidth={2.5} />
-               </button>
+               </Link>
                <span className="text-[#4A2F1D] text-sm">❖</span>
              </div>
           </motion.div>
