@@ -5,6 +5,7 @@ import Footer from '../components/layout/Footer';
 import SEO from '../components/layout/SEO';
 import { fadeUp, staggerContainer } from '../utils/animations';
 import { Link } from 'react-router-dom';
+import { serviceCatalog } from '../data/serviceCatalog';
 const happyClients = ['Google', 'Capgemini', 'DHL', 'IBM', 'Bajaj', 'Audi', 'Amazon'];
 const stats = [
   {
@@ -397,25 +398,20 @@ const Home = () => {
             </motion.div>
 
             <div className="grid gap-x-6 gap-y-4 sm:grid-cols-2 lg:grid-cols-4 max-w-[1100px] mx-auto">
-              {[
-                "Corporate Events &\nConferences", "Product Launches &\nBrand Activations",
-                "Award Ceremonies &\nAnnual Days", "Weddings & Reception\nProductions",
-                "Fashion Shows &\nLifestyle Events", "Concerts & Live\nEntertainment",
-                "Store & Business\nLaunches", "Inaugurations &\nGroundbreaking Ceremonies",
-                "Exhibitions &\nTrade Shows", "Cultural & Community\nEvents",
-                "College Festivals &\nGraduation Ceremonies", "Birthday Celebrations &\nPrivate Parties",
-                "Social &\nFamily Events", "Government &\nPublic Events",
-                "Sports Events &\nTournaments", "Roadshows &\nPromotional Campaigns"
-              ].map((item, i) => (
+              {serviceCatalog.map((service, i) => (
                 <motion.div
-                  key={i}
+                  key={service.slug}
                   initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.03 }}
-                  className="flex items-center gap-4 rounded-[1.2rem] bg-[#FAF4F0]/80 p-3.5 border border-[#E8DFD5] shadow-sm hover:border-[#D5C5B9] hover:shadow-md transition-all"
                 >
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#8A563C] to-[#603A28] shadow-inner">
-                    <Star className="text-white drop-shadow-sm" size={16} strokeWidth={2} />
-                  </div>
-                  <span className="text-[11px] leading-[1.3] font-bold text-[#2A1810] whitespace-pre-line">{item}</span>
+                  <Link
+                    to={`/services/${service.slug}`}
+                    className="flex items-center gap-4 rounded-[1.2rem] bg-[#FAF4F0]/80 p-3.5 border border-[#E8DFD5] shadow-sm hover:border-[#D5C5B9] hover:shadow-md transition-all h-full group"
+                  >
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#8A563C] to-[#603A28] shadow-inner group-hover:scale-110 transition-transform duration-300">
+                      <Star className="text-white drop-shadow-sm" size={16} strokeWidth={2} />
+                    </div>
+                    <span className="text-[11px] leading-[1.3] font-bold text-[#2A1810] whitespace-pre-line group-hover:text-[#4A2F1D]">{service.title}</span>
+                  </Link>
                 </motion.div>
               ))}
             </div>
