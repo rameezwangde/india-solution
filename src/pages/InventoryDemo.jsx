@@ -140,16 +140,7 @@ const InventoryDemo = () => {
       return undefined;
     },
     keepPreviousData: true,
-    staleTime: 5 * 60 * 1000, // Cache category data for 5 minutes
-    initialData: () => {
-      if (activeCategory === 'All' && !debouncedSearchQuery) {
-        return {
-          pages: [INITIAL_PRODUCTS],
-          pageParams: [1],
-        };
-      }
-      return undefined;
-    }
+    staleTime: 5 * 60 * 1000 // Cache category data for 5 minutes
   });
 
   // Flatten the pages array into a single array of products
