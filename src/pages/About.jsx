@@ -67,7 +67,7 @@ const About = () => {
       </div>
 
       {/* Hero Header */}
-      <section className="relative pt-32 pb-16 lg:pt-44 lg:pb-24 z-10 text-center">
+      <section className="relative pt-32 pb-6 lg:pt-44 lg:pb-10 z-10 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
