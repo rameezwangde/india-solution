@@ -93,7 +93,7 @@ const Testimonials = () => {
             <span className="text-[#4A2F1D] text-[10px]">❖</span>
             <span className="h-[1px] w-12 bg-gradient-to-l from-transparent to-[#D5C5B9]"></span>
           </div>
-          <h1 className="font-['Playfair_Display',serif] text-5xl md:text-6xl lg:text-[70px] font-bold text-[#4A2F1D] tracking-wide mb-6">
+          <h1 className="font-['Playfair_Display',serif] text-5xl md:text-6xl font-bold text-[#4A2F1D] tracking-wide mb-6">
             WHAT PEOPLE SAY
           </h1>
           <div className="flex items-center justify-center gap-2 mb-6">
