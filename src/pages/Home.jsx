@@ -446,7 +446,8 @@ const Home = () => {
                 { title: "End-to-End Event\nManagement", desc: "From concept to completion,\nwe handle it all." },
                 { title: "Reliable Execution &\nOn-Time Delivery", desc: "Your deadlines are our\ncommitment." },
                 { title: "Customized Concepts &\nInnovative Designs", desc: "Unique ideas tailored\njust for you." },
-                { title: "Trusted by Event Companies,\nVenues, Brands & Corporates", desc: "Long-term partnerships built\non trust and excellence." }
+                { title: "Trusted by Event Companies,\nVenues, Brands & Corporates", desc: "Long-term partnerships built\non trust and excellence." },
+                { title: "Stress-Free\nExperience", desc: "Everything in one place so you\ncan enjoy time with family." }
               ].map((item, i) => (
                 <motion.div
                   key={i}
