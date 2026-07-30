@@ -34,7 +34,9 @@ const JobDetail = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert('Thank you for your interest! Your application has been submitted.');
+    const message = `*New Job Application*\n*Role:* ${job.title}\n\n*Name:* ${formData.name}\n*Email:* ${formData.email}\n*Phone:* ${formData.phone}\n*City:* ${formData.city}\n*Comment:* ${formData.comment}`;
+    const whatsappUrl = `https://wa.me/916360181932?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
     setFormData({ name: '', email: '', phone: '', city: '', comment: '' });
   };
 

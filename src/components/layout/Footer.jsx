@@ -52,9 +52,11 @@ const Footer = () => {
               <span className="h-[1px] w-4 bg-[#D5C5B9]" />
             </div>
             <ul className="space-y-3.5">
+              <li><Link to="/" className="text-[#1A0F0A] font-bold hover:text-[#4A2F1D] text-[12px] transition-colors">Home</Link></li>
               <li><Link to="/about" className="text-[#1A0F0A] font-bold hover:text-[#4A2F1D] text-[12px] transition-colors">About Us</Link></li>
               <li><Link to="/services" className="text-[#1A0F0A] font-bold hover:text-[#4A2F1D] text-[12px] transition-colors">Our Services</Link></li>
               <li><Link to="/gallery" className="text-[#1A0F0A] font-bold hover:text-[#4A2F1D] text-[12px] transition-colors">Gallery</Link></li>
+              <li><Link to="/faq" className="text-[#1A0F0A] font-bold hover:text-[#4A2F1D] text-[12px] transition-colors">FAQ</Link></li>
               <li><Link to="/why-choose-us" className="text-[#1A0F0A] font-bold hover:text-[#4A2F1D] text-[12px] transition-colors">Why Choose Us</Link></li>
               <li><Link to="/contact" className="text-[#1A0F0A] font-bold hover:text-[#4A2F1D] text-[12px] transition-colors">Contact Us</Link></li>
             </ul>

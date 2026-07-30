@@ -81,16 +81,23 @@ export const jobsData = [
     jobType: 'Full-Time',
     companyDescription: `India Solution Events is a leading Professional Conference Organiser (PCO) and has vast experience of organising and managing a wide range of conventions, conferences, symposiums and seminars on a global level. We cater to end-to-end conferences concerning solutions pan India basis. We consult, collaborate and communicate with associations, societies and organisations to define and deliver tailor made conference management solutions.`,
     mandatoryCriteria: [
-      'Minimum 3-4 years of professional graphic design experience.',
-      'Proficiency in Adobe Creative Suite (Illustrator, Photoshop, InDesign).',
-      'Strong visual portfolio.'
+      'Have a customer-centric and design-first mindset.',
+      'Having a degree in graphic design would be preferred.',
+      'Should have a great portfolio with design projects.',
+      'Amazing aesthetic skills and a keen eye for visual details.',
+      'Should have extensive knowledge of graphic design styles, tools, and latest techniques.',
+      'Excellent communication, interpersonal, and presentation skills.',
+      'Strong communication, conceptual thinking, typography and design skills.'
     ],
     responsibilities: [
-      'Design marketing collateral, brochures, banners, and digital assets for events.',
-      'Ensure all designs adhere to brand guidelines.',
-      'Collaborate with the marketing and events team to create engaging visuals.',
-      'Prepare print-ready files and coordinate with printers/vendors.',
-      'Manage multiple design projects simultaneously.'
+      'Actively participate in brainstorming meetings, conceptualisation, ideation, and work with internal team as well as per client\'s requirement.',
+      'Create stunning designs and will be working closely with leadership team and ensure all creative work is done on timely manner.',
+      'Managing all graphic design tasks, refining projects and drafts, and generating creative ideas.',
+      'Designing graphic content, illustrations, and infographics for pitch presentations/Bids.',
+      'Managing graphic designs from conception to delivery for Conference collaterals.',
+      'Reviewing & Proof Reading.',
+      'Ensuring brand consistency throughout various event projects.',
+      'Staying up-to-date with industry developments.'
     ],
     workingConditions: []
   }
