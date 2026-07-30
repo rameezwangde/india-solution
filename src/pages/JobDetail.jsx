@@ -169,13 +169,14 @@ const JobDetail = () => {
                 <h2 className="text-3xl font-bold text-[#4A2F1D] uppercase">LOCATIONS</h2>
               </div>
               
-              <div className="bg-white rounded-[2rem] p-8 lg:p-10 shadow-sm border border-[#E8DFD5] relative overflow-visible">
-                <div className="absolute -right-6 top-10 bg-[#1A0F0A] w-14 h-14 rounded-full flex items-center justify-center shadow-lg border-[3px] border-[#FAF7F2]">
-                  <MapPin className="text-white" size={20} />
+              <div className="bg-white rounded-[2rem] p-8 lg:p-10 shadow-sm border border-[#E8DFD5]">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="bg-[#1A0F0A] w-12 h-12 rounded-full flex items-center justify-center shadow-md shrink-0">
+                    <MapPin className="text-white" size={20} />
+                  </div>
+                  <h3 className="font-bold text-[#4A2F1D] text-lg">India Solution Production House</h3>
                 </div>
-                
-                <h3 className="font-bold text-[#4A2F1D] text-lg mb-4">India Solution Production House</h3>
-                <p className="text-[#2A1810] text-[15px] leading-relaxed max-w-[250px]">
+                <p className="text-[#2A1810] text-[15px] leading-relaxed max-w-[250px] pl-16">
                   Railway Mens Employees layout,<br/>
                   50, 10th Cross, Ullal Main Road,<br/>
                   Bengaluru, Karnataka 560056
@@ -184,14 +185,15 @@ const JobDetail = () => {
             </div>
 
             <div>
-              <div className="bg-white rounded-[2rem] p-8 lg:p-10 shadow-sm border border-[#E8DFD5] relative overflow-visible">
-                <div className="absolute -right-6 top-10 bg-[#1A0F0A] w-14 h-14 rounded-full flex items-center justify-center shadow-lg border-[3px] border-[#FAF7F2]">
-                  <Phone className="text-white" size={20} />
+              <div className="bg-white rounded-[2rem] p-8 lg:p-10 shadow-sm border border-[#E8DFD5]">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="bg-[#1A0F0A] w-12 h-12 rounded-full flex items-center justify-center shadow-md shrink-0">
+                    <Phone className="text-white" size={20} />
+                  </div>
+                  <h3 className="font-bold text-[#4A2F1D] text-lg">Contact Info</h3>
                 </div>
                 
-                <h3 className="font-bold text-[#4A2F1D] text-lg mb-8">Contact Info</h3>
-                
-                <div className="space-y-6">
+                <div className="space-y-6 pl-16">
                   <div>
                     <p className="font-bold text-[#2A1810] text-sm mb-1">Email:</p>
                     <a href="mailto:info@india-solution.com" className="text-[#4CA7CD] hover:text-[#3B82A0] font-medium transition-colors text-[15px]">
