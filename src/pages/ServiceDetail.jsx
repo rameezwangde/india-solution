@@ -835,7 +835,12 @@ const serviceImageMapping = {
   'Photography and Videography Services': '/images/wedding_photography.png',
   'Catering Services': '/images/wedding_catering.png',
   'Decorations': '/images/wedding_decor.png',
-  'Theme Based Parties': '/images/wedding_theme.png'
+  'Theme Based Parties': '/images/wedding_theme.png',
+  'Mandap / Stage': 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+  'Floral Backdrop': 'https://images.unsplash.com/photo-1505944357431-27579db47558?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+  'Lighting Setup': 'https://images.unsplash.com/photo-1478146896981-b80fe463b330?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+  'Couple Seating': 'https://images.unsplash.com/photo-1520854221256-17451cc331bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+  'Entrance Decoration': 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
 };
 
 const ImageGridServiceContent = ({ items, serviceSlug }) => {
