@@ -224,16 +224,15 @@ const Home = () => {
             initial={{ opacity: 0, y: 34 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 lg:gap-5"
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-5"
           >
             {[
               { img: '/about-us.png', alt: 'Wedding floral aisle decor' },
-              { img: '/hero-stage.png', alt: 'Candlelit event table' },
-              { img: '/about-us.png', alt: 'Grand stage celebration' },
-              { img: '/hero-stage.png', alt: 'Corporate event stage' },
-              { img: '/about-us.png', alt: 'Evening celebration lounge' }
+              { img: '/images/wedding_theme.png', alt: 'Candlelit event table' },
+              { img: '/hero-stage.png', alt: 'Grand stage celebration' },
+              { img: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', alt: 'Corporate event stage' }
             ].map((item, idx) => (
-              <div key={idx} className={`relative overflow-hidden rounded-[2.5rem] aspect-[4/5] sm:aspect-[3/4] shadow-[0_10px_30px_rgb(0,0,0,0.08)] border-[6px] border-white bg-white group ${idx === 4 ? 'hidden lg:block' : ''}`}>
+              <div key={idx} className="relative overflow-hidden rounded-[2.5rem] aspect-[4/5] sm:aspect-[3/4] shadow-[0_10px_30px_rgb(0,0,0,0.08)] border-[6px] border-white bg-white group">
                 <img src={item.img} alt={item.alt} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </div>
