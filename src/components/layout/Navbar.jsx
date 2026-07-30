@@ -56,26 +56,26 @@ const Navbar = () => {
         </div>
       </div>
 
-      <div className="container mx-auto px-6 lg:px-12 py-4">
+      <div className="container mx-auto px-6 lg:px-4 xl:px-12 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex flex-col items-center justify-center shrink-0 gap-0" aria-label="India Solution home">
+          <Link to="/" className="flex flex-col items-center justify-center shrink-0 gap-0 mr-2 xl:mr-0" aria-label="India Solution home">
             <img
               src="/new logo.png"
               alt="India Solution Logo"
-              className="w-auto object-contain relative z-10 h-24 sm:h-32"
+              className="w-auto object-contain relative z-10 h-20 sm:h-24 xl:h-32"
             />
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-3 xl:gap-5 xl:mr-8">
+          <div className="hidden lg:flex items-center gap-2 xl:gap-5 xl:mr-8">
             {navLinks.map((link) => {
               const active = isActiveLink(link.path);
               return (
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`text-[12px] font-black tracking-wider transition-colors relative group whitespace-nowrap
+                  className={`text-[10.5px] xl:text-[12px] font-black tracking-wider transition-colors relative group whitespace-nowrap
                     ${active ? 'text-[#C0602F]' : 'text-[#4A2F1D] hover:text-[#1A0F0A]'}`}
                 >
                   {link.name}
@@ -97,7 +97,7 @@ const Navbar = () => {
               </Link>
             </div>
             
-            <div className="flex gap-2 xl:gap-3 ml-1 xl:ml-2 text-[#4A2F1D] border-l border-[#8B5E45]/20 pl-3 xl:pl-6">
+            <div className="hidden xl:flex gap-2 xl:gap-3 ml-1 xl:ml-2 text-[#4A2F1D] border-l border-[#8B5E45]/20 pl-3 xl:pl-6">
               <a href="https://www.facebook.com/indiasolutionblr/" target="_blank" rel="noopener noreferrer" className="hover:text-[#1A0F0A] transition-colors"><FaFacebookF size={16} /></a>
               <a href="https://www.instagram.com/indiasolutionevents?igsh=MTVtbDJ5cW4zZjRq" target="_blank" rel="noopener noreferrer" className="hover:text-[#1A0F0A] transition-colors"><FaInstagram size={16} /></a>
               <a href="#" className="hover:text-[#1A0F0A] transition-colors"><FaYoutube size={16} /></a>
