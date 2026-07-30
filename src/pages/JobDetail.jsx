@@ -174,11 +174,11 @@ const JobDetail = () => {
                   <MapPin className="text-white" size={20} />
                 </div>
                 
-                <h3 className="font-bold text-[#4A2F1D] text-lg mb-4">India Solution Events</h3>
-                <p className="font-bold text-[#4A2F1D] mb-4">Bengaluru</p>
-                <p className="text-[#2A1810] text-[15px] leading-relaxed max-w-[200px]">
-                  Battahalasur,<br/>
-                  Bangalore — Karnataka 560001
+                <h3 className="font-bold text-[#4A2F1D] text-lg mb-4">India Solution Production House</h3>
+                <p className="text-[#2A1810] text-[15px] leading-relaxed max-w-[250px]">
+                  Railway Mens Employees layout,<br/>
+                  50, 10th Cross, Ullal Main Road,<br/>
+                  Bengaluru, Karnataka 560056
                 </p>
               </div>
             </div>
