@@ -54,15 +54,22 @@ export const jobsData = [
     jobType: 'Full-Time',
     companyDescription: `India Solution Events is a leading Professional Conference Organiser (PCO) and has vast experience of organising and managing a wide range of conventions, conferences, symposiums and seminars on a global level. We cater to end-to-end conferences concerning solutions pan India basis. We consult, collaborate and communicate with associations, societies and organisations to define and deliver tailor made conference management solutions.`,
     mandatoryCriteria: [
-      'Proven experience in 3D designing for exhibitions & events.',
-      'Strong portfolio demonstrating stall design capabilities.'
+      'Proficiency in design software: 3ds Max, CoralDraw, AutoCAD, Adobe Photoshop, Illustrator, Photoshop, AI.',
+      'Strong sense of space, color, materials and branding aesthetics.',
+      'Ability to handle multiple projects under tight deadlines.',
+      'Experience in designing for exhibition stalls, trade show booths, retail spaces and event setups.',
+      'Good communication skills to collaborate with cross-functional teams and present concepts to clients.',
+      'Diploma or Degree in Interior Design, Exhibition Design, Architecture or related fields.'
     ],
     responsibilities: [
-      'Create high-quality 3D models and renders for event spaces and exhibition stalls.',
-      'Work closely with the events team to understand client requirements.',
-      'Develop creative concepts into functional designs.',
-      'Ensure designs meet safety and technical standards for fabrication.',
-      'Coordinate with production teams to ensure accurate execution of designs.'
+      'Conceptualize and create innovative 3D stall designs based on client briefs and brand guidelines.',
+      'Develop 3D models and renderings for exhibition stands, retail kiosks, event setups and branding spaces.',
+      'Translate client requirements and functional needs into visually impactful designs.',
+      'Work closely with sales, client servicing, and fabrication team to ensure designs are practical and executable within budgets and timelines.',
+      'Prepare detailed 3D views, elevations and layout plans.',
+      'Modify designs based on client feedback and internal team inputs.',
+      'Ensure designs align with structural feasibility and on-ground fabrication constraints.',
+      'Maintain a design library and stay updated with global trends in stall and exhibition design.'
     ],
     workingConditions: []
   },
