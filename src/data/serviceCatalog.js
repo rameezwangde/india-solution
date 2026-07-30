@@ -237,6 +237,11 @@ export const serviceCatalog = [
       'Audio-Visual Equipment & Live Streaming',
       'Security & Crowd Control',
       'Transportation & Logistics',
+      'complete planning and management of the event',
+      'Arranging metals trophies and certificates',
+      'Power backup and technical support',
+      'Customized solutions',
+      'Timely and reliable service',
     ],
   },
 ];

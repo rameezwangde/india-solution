@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail } from 'lucide-react';
 import { FaFacebookF, FaInstagram, FaYoutube, FaLinkedinIn } from 'react-icons/fa';
+import { serviceCatalog } from '../../data/serviceCatalog';
 
 const Footer = () => {
   return (
@@ -11,10 +12,10 @@ const Footer = () => {
       </div>
 
       <div className="container relative z-10 mx-auto px-6 lg:px-12 max-w-[1300px]">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 lg:gap-8 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 mb-12">
 
           {/* Brand */}
-          <div className="flex flex-col">
+          <div className="flex flex-col lg:col-span-3">
             <Link to="/" className="flex flex-col items-start gap-0 mb-6 inline-block">
               <img
                 src="/new logo.png"
@@ -44,7 +45,7 @@ const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div>
+          <div className="lg:col-span-2">
             <h4 className="text-[15px] text-[#1A0F0A] font-black tracking-widest mb-3">QUICK LINKS</h4>
             <div className="flex items-center gap-2 mb-6">
               <span className="h-[1px] w-4 bg-[#D5C5B9]" />
@@ -62,24 +63,26 @@ const Footer = () => {
           </div>
 
           {/* Services */}
-          <div>
+          <div className="lg:col-span-4">
             <h4 className="text-[15px] text-[#1A0F0A] font-black tracking-widest mb-3">OUR SERVICES</h4>
             <div className="flex items-center gap-2 mb-6">
               <span className="h-[1px] w-4 bg-[#D5C5B9]" />
               <span className="text-[#4A2F1D] text-[10px]">❖</span>
               <span className="h-[1px] w-4 bg-[#D5C5B9]" />
             </div>
-            <ul className="space-y-3.5">
-              <li><Link to="/services" className="text-[#1A0F0A] font-bold hover:text-[#4A2F1D] text-[12px] transition-colors">Corporate Events</Link></li>
-              <li><Link to="/services" className="text-[#1A0F0A] font-bold hover:text-[#4A2F1D] text-[12px] transition-colors">Weddings & Pre-Wedding</Link></li>
-              <li><Link to="/services" className="text-[#1A0F0A] font-bold hover:text-[#4A2F1D] text-[12px] transition-colors">Trade Shows</Link></li>
-              <li><Link to="/services" className="text-[#1A0F0A] font-bold hover:text-[#4A2F1D] text-[12px] transition-colors">Birthday Parties</Link></li>
-              <li><Link to="/services" className="text-[#1A0F0A] font-bold hover:text-[#4A2F1D] text-[12px] transition-colors">Special Entries</Link></li>
+            <ul className="grid grid-cols-2 gap-x-4 gap-y-3.5">
+              {serviceCatalog.map((service) => (
+                <li key={service.slug}>
+                  <Link to={`/services/${service.slug}`} className="text-[#1A0F0A] font-bold hover:text-[#4A2F1D] text-[12px] transition-colors line-clamp-1" title={service.title}>
+                    {service.title}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* Contact */}
-          <div>
+          <div className="lg:col-span-3">
             <h4 className="text-[15px] text-[#1A0F0A] font-black tracking-widest mb-3">CONTACT INFO</h4>
             <div className="flex items-center gap-2 mb-6">
               <span className="h-[1px] w-4 bg-[#D5C5B9]" />

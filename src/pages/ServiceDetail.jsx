@@ -915,7 +915,12 @@ const serviceImageMapping = {
   'Theme Parties': 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
   'Pool & Terrace Parties': 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
   "Kids' Parties": 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Private Parties': 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+  'Private Parties': 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+  'complete planning and management of the event': 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+  'Arranging metals trophies and certificates': 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+  'Power backup and technical support': 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+  'Customized solutions': 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+  'Timely and reliable service': 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
 };
 
 const ImageGridServiceContent = ({ items, serviceSlug }) => {
@@ -1219,7 +1224,11 @@ const ServiceDetail = () => {
       </div>
 
       <div className="relative z-10 mx-auto max-w-[1300px]">
-        <Link to="/services" className="mb-8 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.22em] text-[#4A2F1D] transition-colors hover:text-[#4A2F1D]">
+        <Link 
+          to="/services" 
+          onClick={() => window.scrollTo(0,0)}
+          className="relative z-20 mb-8 inline-flex w-fit cursor-pointer items-center gap-2 text-xs font-bold uppercase tracking-[0.22em] text-[#4A2F1D] transition-colors hover:text-[#8B5E45]"
+        >
           <ArrowLeft size={14} />
           All Services
         </Link>
