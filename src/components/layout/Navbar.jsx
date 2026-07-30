@@ -68,7 +68,7 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-2 xl:gap-5 xl:mr-8">
+          <div className="hidden lg:flex items-center gap-4 xl:gap-6 xl:mr-8">
             {navLinks.map((link) => {
               const active = isActiveLink(link.path);
               return (
