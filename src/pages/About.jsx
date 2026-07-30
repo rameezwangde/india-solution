@@ -103,17 +103,9 @@ const About = () => {
         >
           {/* Left Text Column */}
           <motion.div variants={fadeUp} className="flex flex-col items-start text-left">
-            <div className="flex items-center gap-2 mb-6">
-              <span className="text-[#4A2F1D] text-sm">❖</span>
-            </div>
-            
-            <p className="text-base md:text-lg font-semibold leading-relaxed text-[#2A1810] mb-8">
+            <p className="text-base md:text-lg font-semibold leading-relaxed text-[#2A1810] mb-5">
               For over 15 years, <span className="text-[#4A2F1D] font-bold">India Solution</span> has been one of Bengaluru's trusted names in Event Management and In-House Event Production, delivering seamless, premium-quality experiences for events of every scale.
             </p>
-            
-            <div className="flex items-center gap-2 mb-8">
-              <span className="text-[#D5C5B9] text-xs">❖</span>
-            </div>
             
             <p className="text-[15px] font-semibold leading-[1.8] text-[#2A1810] mb-6">
               What truly sets us apart is that everything you see at an event is produced and managed in-house. From concept development, stage production, LED walls, sound, lighting, trussing, fabrication, décor, branding, artist management, technical execution to on-site management — we handle it all under one roof.
