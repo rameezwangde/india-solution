@@ -80,7 +80,7 @@ const About = () => {
             <span className="text-[#4A2F1D] text-[10px]">❖</span>
             <span className="h-[1px] w-12 bg-gradient-to-l from-transparent to-[#D5C5B9]"></span>
           </div>
-          <h1 className="font-['Playfair_Display',serif] text-6xl md:text-7xl lg:text-[90px] font-bold text-[#4A2F1D] tracking-wide mb-6">
+          <h1 className="font-['Playfair_Display',serif] text-5xl md:text-6xl font-bold text-[#4A2F1D] tracking-wide mb-6">
             ABOUT US
           </h1>
           <div className="flex items-center justify-center gap-2 mb-6">
@@ -107,8 +107,8 @@ const About = () => {
               <span className="text-[#4A2F1D] text-sm">❖</span>
             </div>
             
-            <p className="font-['Playfair_Display',serif] text-2xl md:text-[28px] font-black text-[#2A1810] leading-[1.4] mb-8">
-              For over 15 years, <span className="text-[#4A2F1D]">India Solution</span> has been one of Bengaluru's trusted names in Event Management and In-House Event Production, delivering seamless, premium-quality experiences for events of every scale.
+            <p className="text-base md:text-lg font-semibold leading-relaxed text-[#2A1810] mb-8">
+              For over 15 years, <span className="text-[#4A2F1D] font-bold">India Solution</span> has been one of Bengaluru's trusted names in Event Management and In-House Event Production, delivering seamless, premium-quality experiences for events of every scale.
             </p>
             
             <div className="flex items-center gap-2 mb-8">
