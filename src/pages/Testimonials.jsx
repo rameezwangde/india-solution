@@ -115,7 +115,7 @@ const Testimonials = () => {
             >
               <div className="mb-4 flex items-center justify-center gap-3 lg:justify-start">
                 <Star size={36} fill="currentColor" className="text-[#4A2F1D]" />
-                <span className="font-['Playfair_Display',serif] text-7xl font-bold leading-none text-[#4A2F1D]">4.8</span>
+                <span className="font-['Playfair_Display',serif] text-6xl font-bold leading-none text-[#4A2F1D]">4.8</span>
               </div>
               <p className="text-xl font-bold text-[#4A2F1D]">out of 5</p>
               <StarRow className="mt-6 justify-center lg:justify-start" />
@@ -129,7 +129,7 @@ const Testimonials = () => {
             >
               <Quote className="absolute -right-6 -top-6 h-40 w-40 text-[#FAF7F2]" />
               <StarRow className="mb-8" />
-              <p className="relative max-w-3xl font-['Playfair_Display',serif] text-[26px] italic leading-relaxed text-[#4A2F1D] md:text-3xl">
+              <p className="relative max-w-3xl font-['Playfair_Display',serif] text-xl italic leading-relaxed text-[#4A2F1D] md:text-2xl">
                 "India Solution Events redefined excellence for us. Their seamless execution and eye for detail turned our vision into reality. Truly the go-to team for any high-profile event."
               </p>
               <div className="relative mt-10 flex items-center gap-5">
