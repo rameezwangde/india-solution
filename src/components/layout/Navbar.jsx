@@ -106,7 +106,7 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Toggle */}
-          <button className="lg:hidden text-[#8B5E45]" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label="Toggle menu">
+          <button className="xl:hidden text-[#8B5E45]" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label="Toggle menu">
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
@@ -119,7 +119,7 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-[#FAF7F2] border-t border-[#8B5E45]/10 overflow-hidden"
+            className="xl:hidden bg-[#FAF7F2] border-t border-[#8B5E45]/10 overflow-hidden"
           >
             <div className="flex flex-col px-6 py-4 gap-2">
               {navLinks.map((link) => (
