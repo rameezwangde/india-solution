@@ -76,7 +76,7 @@ const Gallery = () => {
       category: 'pre-wedding-ceremony'
     },
     {
-      src: '/images/wedding_decor.png',
+      src: 'https://www.theknot.com/tk-media/images/b0e84a56-db35-4752-acdd-c8d39c2743cc',
       title: 'Haldi Celebrations',
       description: 'Vibrant rituals brought to life with thoughtful planning, decor, and guest experiences.',
       slug: 'haldi-celebration',
@@ -97,14 +97,14 @@ const Gallery = () => {
       category: 'pre-wedding-ceremony'
     },
     {
-      src: '/images/wedding_catering.png',
+      src: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       title: 'Cocktail Evening',
       description: 'Sophisticated social experiences with curated entertainment, music, and elevated hospitality.',
       slug: 'cocktail-evening',
       category: 'pre-wedding-ceremony'
     },
     {
-      src: '/images/wedding_theme.png',
+      src: 'https://tse1.mm.bing.net/th/id/OIP.Mo9UQ-g_fQOxqflIPyCIigHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3',
       title: 'Poolside Celebrations',
       description: 'Relaxed daytime festivities with themed styling, music, refreshments, and guest engagement.',
       slug: 'poolside-celebration',
@@ -262,12 +262,6 @@ const Gallery = () => {
                     <p className="text-[13px] text-[#4A2F1D] font-semibold leading-relaxed mb-5 flex-grow">
                       {item.description}
                     </p>
-                    <Link 
-                      to={`/services/${item.category}/${item.slug}`} 
-                      className="inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-widest text-[#4A2F1D] transition-colors hover:text-[#2A1810]"
-                    >
-                      View More <ChevronRight size={13} strokeWidth={2.5} />
-                    </Link>
                   </div>
                 </motion.div>
               ))}
