@@ -138,7 +138,7 @@ const Home = () => {
         schema={homeSchema}
       />
       {/* Hero Section */}
-      <section className="relative min-h-[900px] overflow-hidden px-5 pt-32 pb-20 sm:px-8 lg:px-12 lg:pt-40 bg-[#FAF7F2] font-sans">
+      <section className="relative min-h-[900px] overflow-hidden px-5 pt-32 pb-10 sm:px-8 lg:px-12 lg:pt-40 bg-[#FAF7F2] font-sans">
         {/* Background Layer */}
         <div className="absolute inset-0 z-0 bg-[#FAF7F2] overflow-hidden">
           {/* Display the subtle floral texture across the entire background */}
@@ -241,7 +241,7 @@ const Home = () => {
         </div>
       </section>
       {/* About Us Section */}
-      <section className="relative overflow-hidden px-5 py-24 sm:px-8 lg:px-12 bg-[#FAF7F2] font-sans">
+      <section className="relative overflow-hidden px-5 py-10 sm:px-8 lg:px-12 bg-[#FAF7F2] font-sans">
         {/* Subtle left-aligned floral watermark */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
            <img src="/hero-bg.png" alt="" className="absolute -left-10 top-0 w-full md:w-[60%] h-full object-cover object-left opacity-[0.03]" style={{ maskImage: 'linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)'}} />
@@ -316,7 +316,7 @@ const Home = () => {
         </div>
       </section>
       {/* Brand Statement Section */}
-      <section className="relative overflow-hidden px-5 py-24 sm:px-8 lg:px-12 bg-[#FAF7F2] font-sans">
+      <section className="relative overflow-hidden px-5 py-10 sm:px-8 lg:px-12 bg-[#FAF7F2] font-sans">
         {/* Subtle right-aligned floral watermark */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
            <img src="/hero-bg.png" alt="" className="absolute -right-10 top-0 w-full md:w-[60%] h-full object-cover object-right opacity-[0.03]" style={{ transform: 'scaleX(-1)', maskImage: 'linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)'}} />
@@ -372,7 +372,7 @@ const Home = () => {
         </div>
       </section>
       {/* Why Choose Us & Expertise */}
-      <section className="relative overflow-hidden bg-[#FAF7F2] px-5 py-24 sm:px-8 lg:px-12 font-sans">
+      <section className="relative overflow-hidden bg-[#FAF7F2] px-5 py-10 sm:px-8 lg:px-12 font-sans">
         {/* Floral watermarks on both sides */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <img src="/hero-bg.png" alt="" className="absolute -left-20 top-0 w-[40%] h-[120%] object-cover object-left opacity-[0.03]" style={{ maskImage: 'linear-gradient(to right, black 20%, transparent)'}} />
@@ -381,7 +381,7 @@ const Home = () => {
 
         <div className="container relative z-10 mx-auto max-w-[1300px]">
           {/* Our Expertise Section */}
-          <div className="mb-24">
+          <div className="mb-14">
             <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-12 text-center">
               <div className="mb-6 flex items-center justify-center gap-3 text-[11px] font-bold tracking-[0.2em] text-[#4A2F1D]">
                 <span className="text-[#8B5E45] text-xs">❖</span>
@@ -465,7 +465,7 @@ const Home = () => {
           </div>
 
           {/* Missing Text & Headings */}
-          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mx-auto max-w-4xl text-center mt-12 mb-16">
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mx-auto max-w-4xl text-center mt-12 mb-6">
             <p className="text-[15px] font-semibold text-[#2A1810] leading-relaxed mb-10">
               At India Solution, we don’t just organize events—we design experiences, produce excellence,<br/>and execute with precision. Every event reflects our commitment to quality, creativity,<br/>innovation, and flawless execution, ensuring every client receives the same premium service,<br/>regardless of the event size or budget.
             </p>
