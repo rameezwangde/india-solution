@@ -16,7 +16,7 @@ const stats = [
     bar: 'bg-[#E91E63]',
   },
   {
-    value: '2,500+',
+    value: '4,300+',
     label: 'Happy Clients',
     icon: Users,
     ring: 'border-[#FF2A85] shadow-[0_0_28px_rgba(255,42,133,0.58)]',
