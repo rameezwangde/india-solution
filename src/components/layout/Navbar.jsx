@@ -96,13 +96,7 @@ const Navbar = () => {
                 <User size={20} strokeWidth={2.5} /> <span className="hidden xl:inline">Login</span>
               </Link>
             </div>
-            
-            <div className="hidden xl:flex gap-2 xl:gap-3 ml-1 xl:ml-2 text-[#4A2F1D] border-l border-[#8B5E45]/20 pl-3 xl:pl-6">
-              <a href="https://www.facebook.com/indiasolutionblr/" target="_blank" rel="noopener noreferrer" className="hover:text-[#1A0F0A] transition-colors"><FaFacebookF size={16} /></a>
-              <a href="https://www.instagram.com/indiasolutionevents?igsh=MTVtbDJ5cW4zZjRq" target="_blank" rel="noopener noreferrer" className="hover:text-[#1A0F0A] transition-colors"><FaInstagram size={16} /></a>
-              <a href="#" className="hover:text-[#1A0F0A] transition-colors"><FaYoutube size={16} /></a>
-              <a href="#" className="hover:text-[#1A0F0A] transition-colors"><FaLinkedinIn size={16} /></a>
-            </div>
+
           </div>
 
           {/* Mobile Toggle */}
