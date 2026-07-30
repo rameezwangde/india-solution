@@ -68,7 +68,7 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden xl:flex items-center gap-4 lg:gap-5 xl:mr-8">
+          <div className="hidden lg:flex items-center gap-3 xl:gap-5 xl:mr-8">
             {navLinks.map((link) => {
               const active = isActiveLink(link.path);
               return (
@@ -87,17 +87,17 @@ const Navbar = () => {
             })}
           </div>
 
-          <div className="hidden lg:flex items-center gap-6">
-            <div className="flex items-center gap-5">
-              <Link to="/inventory-demo" className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#C0602F] text-white font-medium text-[15px] hover:bg-[#A05025] transition-colors shadow-sm">
-                <ShoppingCart size={18} strokeWidth={2.5} /> Cart {totalItems > 0 && `(${totalItems})`}
+          <div className="hidden lg:flex items-center gap-3 xl:gap-6">
+            <div className="flex items-center gap-3 xl:gap-5">
+              <Link to="/inventory-demo" className="flex items-center gap-2 px-4 xl:px-5 py-2.5 rounded-lg bg-[#C0602F] text-white font-medium text-[14px] xl:text-[15px] hover:bg-[#A05025] transition-colors shadow-sm">
+                <ShoppingCart size={18} strokeWidth={2.5} /> <span className="hidden xl:inline">Cart</span> {totalItems > 0 && `(${totalItems})`}
               </Link>
-              <Link to="/admin" className="flex items-center gap-2 text-[#C0602F] font-medium text-[15px] hover:text-[#A05025] transition-colors">
-                <User size={20} strokeWidth={2.5} /> Login
+              <Link to="/admin" className="flex items-center gap-2 text-[#C0602F] font-medium text-[14px] xl:text-[15px] hover:text-[#A05025] transition-colors">
+                <User size={20} strokeWidth={2.5} /> <span className="hidden xl:inline">Login</span>
               </Link>
             </div>
             
-            <div className="flex gap-3 ml-2 text-[#4A2F1D] border-l border-[#8B5E45]/20 pl-6">
+            <div className="flex gap-2 xl:gap-3 ml-1 xl:ml-2 text-[#4A2F1D] border-l border-[#8B5E45]/20 pl-3 xl:pl-6">
               <a href="https://www.facebook.com/indiasolutionblr/" target="_blank" rel="noopener noreferrer" className="hover:text-[#1A0F0A] transition-colors"><FaFacebookF size={16} /></a>
               <a href="https://www.instagram.com/indiasolutionevents?igsh=MTVtbDJ5cW4zZjRq" target="_blank" rel="noopener noreferrer" className="hover:text-[#1A0F0A] transition-colors"><FaInstagram size={16} /></a>
               <a href="#" className="hover:text-[#1A0F0A] transition-colors"><FaYoutube size={16} /></a>
@@ -106,7 +106,7 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Toggle */}
-          <button className="xl:hidden text-[#8B5E45]" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label="Toggle menu">
+          <button className="lg:hidden text-[#8B5E45]" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label="Toggle menu">
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
@@ -119,7 +119,7 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="xl:hidden bg-[#FAF7F2] border-t border-[#8B5E45]/10 overflow-hidden"
+            className="lg:hidden bg-[#FAF7F2] border-t border-[#8B5E45]/10 overflow-hidden"
           >
             <div className="flex flex-col px-6 py-4 gap-2">
               {navLinks.map((link) => (
