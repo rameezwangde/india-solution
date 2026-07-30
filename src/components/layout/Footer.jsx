@@ -114,7 +114,7 @@ const Footer = () => {
           <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#4A2F1D] text-[10px] bg-[#FAF7F2] px-2">❖</div>
           
           <p className="text-[#1A0F0A] text-[12px] font-bold">
-            © {new Date().getFullYear()} India Solution Events. All rights reserved.
+            © 2010 India Solution Events. All rights reserved.
           </p>
           <div className="flex gap-4">
             <Link to="/privacy" className="text-[#1A0F0A] hover:text-[#4A2F1D] text-[12px] font-bold transition-colors">Privacy Policy</Link>
