@@ -175,8 +175,124 @@ const About = () => {
         </motion.div>
       </section>
 
+      {/* Founder Section */}
+      <section className="relative z-10 px-6 pt-20 pb-10 lg:px-12 max-w-[1300px] mx-auto border-t border-[#E8DFD5]">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mx-auto mb-16 max-w-4xl text-center"
+        >
+          <div className="mb-6 flex items-center justify-center gap-3 text-[11px] font-bold tracking-[0.2em] text-[#4A2F1D]">
+            <span className="text-[#8B5E45] text-xs">❖</span>
+            <span className="uppercase">Our Leadership</span>
+            <span className="text-[#8B5E45] text-xs">❖</span>
+          </div>
+          <h2 className="font-['Playfair_Display',serif] text-4xl md:text-[42px] font-semibold text-[#4A2F1D] mb-6">
+            Meet the <span className="italic text-[#4A2F1D]">Founder</span>
+          </h2>
+        </motion.div>
+
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start mb-8">
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="w-full lg:w-[40%] shrink-0 lg:sticky lg:top-32"
+          >
+            <div className="rounded-[2rem] overflow-hidden shadow-xl border border-[#E8DFD5] bg-white">
+              <img src="/FOunder.PNG" alt="Reneesh Rajan - CEO & Founder" className="w-full h-auto object-cover object-top aspect-[4/5]" />
+              <div className="px-8 pt-6 pb-6 text-center bg-[#FAF7F2]">
+                <h3 className="font-['Playfair_Display',serif] text-3xl font-bold text-[#4A2F1D] mb-2">Reneesh Rajan</h3>
+                <p className="text-[#8B5E45] font-bold text-sm tracking-widest uppercase">CEO & Founder</p>
+                <p className="text-[#2A1810] text-sm mt-1 font-medium">India Solution, Bangalore</p>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="w-full lg:w-[60%] space-y-10"
+          >
+            <div>
+              <h4 className="text-xl font-bold text-[#4A2F1D] mb-4 uppercase tracking-wide flex items-center gap-2">
+                <span className="h-[2px] w-6 bg-[#C0602F]"></span> About Myself
+              </h4>
+              <div className="space-y-4 text-[15px] leading-[1.8] text-[#2A1810] font-medium">
+                <p>Born and raised in Bangalore, I am very passionate about Events & Production, have a strong root to my Indian culture and am an Engineer by profession. As a business owner, I have strived to find the balance in everyday challenges.</p>
+                <p>Additionally, I love what I do! I can't wait to get started each day and I enjoy working with the amazing and dynamic team I have. I am a trusted partner to all my clients. I treasure seeing an event plan coming to life and getting executed from concept to reality.</p>
+                <p>My hobbies are Playing Guitar, Dancing, Snooker and Racing.</p>
+                <p>Doing social work for a cause and helping the needy has been my passion in recent times. After years in the industry across various platforms, I founded India Solution, an event company established to make a mark in the industry by creating unique experiences for both the public and society while catering to their needs and supporting social causes.</p>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="text-xl font-bold text-[#4A2F1D] mb-4 uppercase tracking-wide flex items-center gap-2">
+                <span className="h-[2px] w-6 bg-[#C0602F]"></span> Expertise
+              </h4>
+              <p className="text-[15px] leading-[1.8] text-[#2A1810] font-medium">
+                Over 13 years of experience in Event Management having worked extensively in Sales, Marketing, Communications, Cultural, Environment, Education & Social Service. Being organized, meticulous, possessing creative imagination, thoughtful communication, remarkable reliability, concept designing skills, and contagious enthusiasm for social activities.
+              </p>
+            </div>
+          </motion.div>
+        </div>
+
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-0 grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 items-start"
+        >
+          <div className="lg:col-span-1">
+            <h4 className="text-xl font-bold text-[#4A2F1D] mb-6 uppercase tracking-wide flex items-center gap-2">
+              <span className="h-[2px] w-6 bg-[#C0602F]"></span> Membership Credentials
+            </h4>
+            <ul className="list-disc pl-5 space-y-3 text-[14.5px] leading-[1.6] text-[#2A1810] font-medium">
+              <li>Founder and CEO, Events by INDIA SOLUTION, Bengaluru.</li>
+              <li>General Secretary for Indian National Congress – Labor Cell.</li>
+              <li>Secretary for Y's Men International, Bengaluru, India.</li>
+              <li>Board Member for Karnataka, Indian National Congress – Labor Cell, Karnataka.</li>
+              <li>Business Development Head for Kannada TV Channel.</li>
+              <li>Board Committee Member of Karnataka Press Club Association.</li>
+              <li>Consultant for International Schools – NPS.</li>
+              <li>Concept Designer for Radio Mirchi Bangalore.</li>
+            </ul>
+          </div>
+
+          <div className="lg:col-span-2">
+            <h4 className="text-xl font-bold text-[#4A2F1D] mb-6 uppercase tracking-wide flex items-center gap-2">
+              <span className="h-[2px] w-6 bg-[#C0602F]"></span> Achievements & Awards
+            </h4>
+            <ul className="list-disc pl-5 text-[14.5px] leading-[1.6] text-[#2A1810] font-medium columns-1 md:columns-2 gap-x-12 space-y-3">
+              <li>Bash Event Style Awards (2012) – Best Wedding Planner.</li>
+              <li>ICWF – Best Entertainment Design for Social Award Winner.</li>
+              <li>Silicon India – Award for Professional Excellence in Real Estate.</li>
+              <li>Awarded as Best Event Planner by various schools and colleges.</li>
+              <li>Business Excellence Award – Game Changer of the Year.</li>
+              <li>WOW Awards – Best Infrastructure Provider.</li>
+              <li>Successfully executed event production for 5000+ clients across cultural, fashion, corporate, wedding, and movie events throughout PAN India and abroad.</li>
+              <li>Recognized and awarded by direct clients, event managers, institutions, artist managers, clubs, sports authorities of India, and celebrities.</li>
+              <li>Kala Ratna Kanike from Exide Life.</li>
+              <li>Silicon India – Young Achiever Award.</li>
+              <li>Silicon India – Best Audio-Visual Partner of the Year.</li>
+              <li>Tuborg Award as the Best Event Planning Company.</li>
+              <li>Created the "Save a Life with Bread" initiative for the hungry across Karnataka during 2015–2016.</li>
+              <li>Provided 1000 manpower support for the KPCC Quit India 75 Rally at Freedom Park, Bengaluru.</li>
+              <li>Managed event requirements for the KPCC Rally in Basavanagudi, Bengaluru.</li>
+              <li>Initiated event production for the rally marking the 150th Birth Anniversary of Mahatma Gandhi Ji (2019), Bengaluru.</li>
+              <li>Made all arrangements for various election campaigns.</li>
+              <li>Active participation in Bengaluru party meetings and party initiatives.</li>
+              <li>A rigorous social worker who has stood against anti-social elements in society.</li>
+              <li>Assisted in organizing various CSR events in partnership with multiple colleges and universities in Bengaluru.</li>
+            </ul>
+          </div>
+        </motion.div>
+      </section>
+
       {/* Why Choose Us */}
-      <section className="relative z-10 px-6 py-24 lg:px-12">
+      <section className="relative z-10 px-6 pt-10 pb-24 lg:px-12">
         <div className="max-w-[1200px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
