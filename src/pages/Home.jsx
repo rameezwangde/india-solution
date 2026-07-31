@@ -293,7 +293,7 @@ const Home = () => {
               className="space-y-6"
             >
               <div className="overflow-hidden rounded-[2rem] shadow-[0_12px_40px_rgba(139,94,69,0.15)] border border-[#E8DFD5]">
-                <img src="/hero-stage.png" alt="India Solution event decor" className="h-[350px] md:h-[450px] w-full object-cover" />
+                <img src="/images/premium_event_stage.png" alt="India Solution event decor" className="h-[350px] md:h-[450px] w-full object-cover" />
               </div>
 
               <div className="bg-[#FAF6F2] rounded-[1.5rem] shadow-sm border border-[#EBE3DC] py-6 px-4">
