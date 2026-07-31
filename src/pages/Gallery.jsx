@@ -69,7 +69,7 @@ const Gallery = () => {
       category: 'pre-wedding-ceremony'
     },
     {
-      src: '/images/wedding_welcome.png',
+      src: '/images/welcome_experience.png',
       title: 'Welcome Experience',
       description: 'Creating memorable first impressions through seamless arrivals, hospitality, and guest assistance.',
       slug: 'welcome-experience',
@@ -84,7 +84,7 @@ const Gallery = () => {
     },
     {
       src: '/images/wedding_makeup.png',
-      title: 'Mehndi Celebrations',
+      title: 'Mehandi Celebrations',
       description: 'A colorful celebration filled with artistry, entertainment, and joyful moments.',
       slug: 'mehendi-celebration',
       category: 'pre-wedding-ceremony'
