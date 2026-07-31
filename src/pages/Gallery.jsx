@@ -83,7 +83,7 @@ const Gallery = () => {
       category: 'pre-wedding-ceremony'
     },
     {
-      src: '/images/wedding_makeup.png',
+      src: '/images/mehandi.png',
       title: 'Mehandi Celebrations',
       description: 'A colorful celebration filled with artistry, entertainment, and joyful moments.',
       slug: 'mehendi-celebration',
@@ -146,7 +146,7 @@ const Gallery = () => {
       category: 'wedding'
     },
     {
-      src: '/images/wedding_ceremony.png',
+      src: '/images/wedding_ceremony_new.png',
       title: 'Wedding Ceremony',
       description: 'Beautifully planned ceremonies full of love and tradition.',
       slug: 'wedding-ceremony',
