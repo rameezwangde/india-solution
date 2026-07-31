@@ -403,7 +403,7 @@ const Home = () => {
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#8A563C] to-[#603A28] shadow-inner group-hover:scale-110 transition-transform duration-300">
                       <Star className="text-white drop-shadow-sm" size={16} strokeWidth={2} />
                     </div>
-                    <span className="text-[11px] leading-[1.3] font-bold text-[#2A1810] whitespace-pre-line group-hover:text-[#4A2F1D]">{service.title}</span>
+                    <span className="text-[14px] leading-[1.3] font-bold text-[#2A1810] whitespace-pre-line group-hover:text-[#4A2F1D]">{service.title}</span>
                   </Link>
                 </motion.div>
               ))}
@@ -443,11 +443,11 @@ const Home = () => {
                   initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}
                   className="flex flex-col items-center text-center rounded-[2rem] bg-transparent py-4 px-2 w-[100%] sm:w-[calc(50%-1.5rem)] lg:w-[calc(25%-2rem)]"
                 >
-                  <div className="flex h-14 w-14 mb-4 shrink-0 items-center justify-center rounded-full border-[1.5px] border-[#D5C5B9] bg-transparent">
-                    <Star className="text-[#4A2F1D]" size={22} strokeWidth={1.5} />
+                  <div className="flex h-14 w-14 mb-4 shrink-0 items-center justify-center rounded-full border-[1.5px] border-[#C0602F]/30 bg-transparent transition-colors">
+                    <Star className="text-[#C0602F]" fill="#C0602F" size={22} strokeWidth={1.5} />
                   </div>
-                  <h4 className="text-[14px] leading-snug font-black text-[#2A1810] whitespace-pre-line mb-2">{item.title}</h4>
-                  <p className="text-[12px] leading-relaxed font-semibold text-[#4A2F1D] whitespace-pre-line">{item.desc}</p>
+                  <h4 className="text-[16px] md:text-[18px] leading-snug font-black text-[#2A1810] whitespace-pre-line mb-2">{item.title}</h4>
+                  <p className="text-[14px] leading-relaxed font-medium text-[#4A2F1D] whitespace-pre-line">{item.desc}</p>
                 </motion.div>
               ))}
             </div>
