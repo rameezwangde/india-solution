@@ -39,7 +39,7 @@ const highlights = [
 const stats = [
   { value: '15+', label: 'Years of\nExcellence', icon: Calendar },
   { value: '5000+', label: 'Events\nExecuted', icon: Users },
-  { value: '2500+', label: 'Happy\nClients', icon: Trophy },
+  { value: '4300+', label: 'Happy\nClients', icon: Trophy },
   { value: 'Pan India', label: 'Presence\n', icon: MapPin },
 ];
 

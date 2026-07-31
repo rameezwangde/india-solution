@@ -92,11 +92,15 @@ const Navbar = () => {
               <Link to="/inventory-demo" className="flex items-center gap-2 px-4 xl:px-5 py-2.5 rounded-lg bg-[#C0602F] text-white font-medium text-[14px] xl:text-[15px] hover:bg-[#A05025] transition-colors shadow-sm">
                 <ShoppingCart size={18} strokeWidth={2.5} /> <span className="hidden xl:inline">Cart</span> {totalItems > 0 && `(${totalItems})`}
               </Link>
-              <Link to="/admin" className="flex items-center gap-2 text-[#C0602F] font-medium text-[14px] xl:text-[15px] hover:text-[#A05025] transition-colors">
-                <User size={20} strokeWidth={2.5} /> <span className="hidden xl:inline">Login</span>
-              </Link>
+              <div className="flex flex-col gap-1 items-center ml-1 xl:ml-2">
+                <Link to="/membership" className="flex items-center justify-center gap-1.5 px-3 xl:px-4 py-1.5 rounded-md border border-[#C0602F] text-[#C0602F] font-bold text-[11px] xl:text-[12px] hover:bg-[#C0602F] hover:text-white transition-colors shadow-sm whitespace-nowrap w-full">
+                  <User size={12} strokeWidth={2.5} /> <span>Membership</span>
+                </Link>
+                <Link to="/admin" className="flex items-center justify-center gap-1 px-2 py-1 rounded border border-[#C0602F] bg-[#F5E6DA] text-[#C0602F] font-bold text-[10px] xl:text-[11px] hover:bg-[#C0602F] hover:text-white transition-colors whitespace-nowrap w-full">
+                  <User size={10} strokeWidth={2.5} /> <span>Admin Login</span>
+                </Link>
+              </div>
             </div>
-
           </div>
 
           {/* Mobile Toggle */}
@@ -126,12 +130,15 @@ const Navbar = () => {
                   {link.name}
                 </Link>
               ))}
-              <div className="flex items-center gap-4 py-4">
-                 <Link to="/inventory-demo" className="flex-1 flex justify-center items-center gap-2 px-4 py-3 rounded-md bg-[#C0602F] text-white font-semibold text-[14px]">
+              <div className="flex flex-col gap-3 py-4 border-t border-[#8B5E45]/10 mt-2">
+                 <Link to="/inventory-demo" className="w-full flex justify-center items-center gap-2 px-4 py-3 rounded-md bg-[#C0602F] text-white font-semibold text-[14px]">
                    <ShoppingCart size={16} strokeWidth={2.5} /> Cart {totalItems > 0 && `(${totalItems})`}
                  </Link>
-                 <Link to="/admin" className="flex-1 flex justify-center items-center gap-2 px-4 py-3 rounded-md border border-[#C0602F] text-[#C0602F] font-semibold text-[14px]">
+                 <Link to="/membership" className="w-full flex justify-center items-center gap-2 px-4 py-3 rounded-md border-[1.5px] border-[#C0602F] text-[#C0602F] font-semibold text-[14px] hover:bg-[#C0602F] hover:text-white transition-colors">
                    <User size={16} strokeWidth={2.5} /> Login
+                 </Link>
+                 <Link to="/admin" className="w-full flex justify-center items-center gap-2 px-4 py-3 rounded-md border border-transparent text-[#C0602F] font-semibold text-[14px] hover:bg-[#F5E6DA] transition-colors">
+                   <User size={16} strokeWidth={2.5} /> Admin Login
                  </Link>
               </div>
             </div>
