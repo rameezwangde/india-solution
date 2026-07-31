@@ -41,7 +41,7 @@ const Gallery = () => {
 
   const weddingCards = [
     {
-      src: '/images/wedding_decor.png',
+      src: '/images/event_decor_floral.png',
       title: 'Event Decor and Floral Arrangements',
       description: 'Stunning floral designs and thematic decor to set the perfect mood.',
       slug: 'event-decor-and-floral-arrangements',
@@ -55,7 +55,7 @@ const Gallery = () => {
       category: 'pre-wedding-ceremony'
     },
     {
-      src: '/images/wedding_catering.png',
+      src: '/images/catering_services.png',
       title: 'Catering Services',
       description: 'Exquisite culinary experiences tailored to your taste and theme.',
       slug: 'catering-services',

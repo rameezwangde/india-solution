@@ -331,15 +331,8 @@ const Home = () => {
               transition={{ duration: 0.7 }}
               className="relative h-[clamp(320px,35vw,500px)] overflow-hidden rounded-[2.5rem] border border-[#D5C5B9] shadow-[0_12px_40px_rgba(139,94,69,0.15)]"
             >
-              <div className="brand-collage-slice brand-collage-slice-one">
-                <img src="/about-us.png" alt="Wedding aisle decor" />
-              </div>
-              <div className="brand-collage-slice brand-collage-slice-two">
-                <img src="/hero-stage.png" alt="Event table floral decor" />
-              </div>
-              <div className="brand-collage-slice brand-collage-slice-three">
-                <img src="/about-us.png" alt="Corporate event lighting" />
-              </div>
+              <img src="/images/luxury_wedding_dining.png" alt="India Solution Luxury Event Setup" className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
+              <div className="absolute inset-0 bg-black/10 pointer-events-none" />
             </motion.div>
 
             <motion.div
