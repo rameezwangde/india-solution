@@ -19,6 +19,7 @@ import Gallery from './pages/Gallery';
 import Careers from './pages/Careers';
 import JobDetail from './pages/JobDetail';
 import Membership from './pages/Membership';
+import Franchise from './pages/Franchise';
 import Footer from './components/layout/Footer';
 import GlobalPrefetcher from './components/layout/GlobalPrefetcher';
 import EnquiryCartBar from './components/inventory/EnquiryCartBar';
@@ -150,6 +151,7 @@ function App() {
                     <Route path="/services/:serviceSlug/:itemSlug" element={<ServiceDetail />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/membership" element={<Membership />} />
+                    <Route path="/franchise" element={<Franchise />} />
                     <Route path="/contact-us" element={<Contact />} />
                     <Route path="/faq" element={<FAQ />} />
                     <Route path="/testimonials" element={<Testimonials />} />
