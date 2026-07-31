@@ -836,7 +836,7 @@ const serviceImageMapping = {
   'Catering Services': '/images/wedding_catering.png',
   'Decorations': '/images/wedding_decor.png',
   'Theme Based Parties': '/images/wedding_theme.png',
-  'Mandap / Stage': 'https://saathiya.co/wp-content/uploads/2024/10/Mandap10_Roses-Canva-768x512.jpg',
+  'Mandap / Stage': '/images/mandap.png',
   'Floral Backdrop': 'https://tse2.mm.bing.net/th/id/OIP.sm7xrIKU-pG8hx0_Ook4OwHaJ4?r=0&rs=1&pid=ImgDetMain&o=7&rm=3',
   'Lighting Setup': 'https://tse4.mm.bing.net/th/id/OIP.QtReBInS6C9nrermCGY6tgHaLH?r=0&rs=1&pid=ImgDetMain&o=7&rm=3',
   'Couple Seating': 'https://tse2.mm.bing.net/th/id/OIP.jg8PtxZlH2jiNaWFevzSDAHaJ3?r=0&w=910&h=1213&rs=1&pid=ImgDetMain&o=7&rm=3',
