@@ -181,16 +181,15 @@ const InventoryDemo = () => {
         title="Products & Inventory | India Solution"
         description="Browse our extensive collection of professional event equipment, including artist services, fabrication, lighting, sound, and visual displays available for rent."
       />
-      {/* Global Background Watermarks */}
       <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
         <img 
-          src="/hero-bg.png" 
+          src="/hero-bg.webp" 
           alt="" 
           className="absolute -right-20 top-0 w-full md:w-[60%] h-[120%] object-cover object-left opacity-[0.03]" 
           style={{ transform: 'scaleX(-1)'}} 
         />
         <img 
-          src="/hero-bg.png" 
+          src="/hero-bg.webp" 
           alt="" 
           className="absolute -left-20 top-1/4 w-full md:w-[60%] h-[120%] object-cover object-left opacity-[0.02]" 
         />

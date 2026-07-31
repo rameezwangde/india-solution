@@ -144,8 +144,9 @@ const Home = () => {
         <div className="absolute inset-0 z-0 bg-[#FAF7F2] overflow-hidden">
           {/* Display the subtle floral texture across the entire background */}
           <img 
-            src="/hero-bg.png" 
+            src="/hero-bg.webp" 
             alt="Background Floral Texture" 
+            fetchPriority="high"
             className="w-full h-full object-cover object-center opacity-[0.03]"
           />
           {/* Bottom fade for smooth transition */}
@@ -228,13 +229,13 @@ const Home = () => {
             className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-5"
           >
             {[
-              { img: '/about-us.png', alt: 'Wedding floral aisle decor' },
+              { img: '/about-us.webp', alt: 'Wedding floral aisle decor' },
               { img: '/images/wedding_theme.png', alt: 'Candlelit event table' },
               { img: '/hero-stage.png', alt: 'Grand stage celebration' },
               { img: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', alt: 'Corporate event stage' }
             ].map((item, idx) => (
               <div key={idx} className="relative overflow-hidden rounded-[2.5rem] aspect-[4/5] sm:aspect-[3/4] shadow-[0_10px_30px_rgb(0,0,0,0.08)] border-[6px] border-white bg-white group">
-                <img src={item.img} alt={item.alt} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                <img src={item.img} alt={item.alt} fetchPriority={idx < 2 ? "high" : "auto"} loading={idx < 2 ? "eager" : "lazy"} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </div>
             ))}
@@ -245,7 +246,7 @@ const Home = () => {
       <section className="relative overflow-hidden px-5 py-10 sm:px-8 lg:px-12 bg-[#FAF7F2] font-sans">
         {/* Subtle left-aligned floral watermark */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-           <img src="/hero-bg.png" alt="" className="absolute -left-10 top-0 w-full md:w-[60%] h-full object-cover object-left opacity-[0.03]" style={{ maskImage: 'linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)'}} />
+           <img src="/hero-bg.webp" alt="" className="absolute -left-10 top-0 w-full md:w-[60%] h-full object-cover object-left opacity-[0.03]" style={{ maskImage: 'linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)'}} />
         </div>
 
         <div className="container relative z-10 mx-auto max-w-[1300px]">
@@ -293,7 +294,7 @@ const Home = () => {
               className="space-y-6"
             >
               <div className="overflow-hidden rounded-[2rem] shadow-[0_12px_40px_rgba(139,94,69,0.15)] border border-[#E8DFD5]">
-                <img src="/images/premium_event_stage.png" alt="India Solution event decor" className="h-[350px] md:h-[450px] w-full object-cover" />
+                <img src="/images/premium_event_stage.png" alt="India Solution event decor" loading="lazy" decoding="async" className="h-[350px] md:h-[450px] w-full object-cover" />
               </div>
 
               <div className="bg-[#FAF6F2] rounded-[1.5rem] shadow-sm border border-[#EBE3DC] py-6 px-4">
@@ -320,7 +321,7 @@ const Home = () => {
       <section className="relative overflow-hidden px-5 py-10 sm:px-8 lg:px-12 bg-[#FAF7F2] font-sans">
         {/* Subtle right-aligned floral watermark */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-           <img src="/hero-bg.png" alt="" className="absolute -right-10 top-0 w-full md:w-[60%] h-full object-cover object-right opacity-[0.03]" style={{ transform: 'scaleX(-1)', maskImage: 'linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)'}} />
+           <img src="/hero-bg.webp" alt="" loading="lazy" decoding="async" className="absolute -right-10 top-0 w-full md:w-[60%] h-full object-cover object-right opacity-[0.03]" style={{ transform: 'scaleX(-1)', maskImage: 'linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)'}} />
         </div>
         <div className="container relative z-10 mx-auto max-w-[1250px]">
           <div className="grid items-center gap-16 lg:grid-cols-[1.2fr_0.8fr] lg:gap-20">
@@ -331,7 +332,7 @@ const Home = () => {
               transition={{ duration: 0.7 }}
               className="relative h-[clamp(320px,35vw,500px)] overflow-hidden rounded-[2.5rem] border border-[#D5C5B9] shadow-[0_12px_40px_rgba(139,94,69,0.15)]"
             >
-              <img src="/images/luxury_wedding_dining.png" alt="India Solution Luxury Event Setup" className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
+              <img src="/images/luxury_wedding_dining.png" alt="India Solution Luxury Event Setup" loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
               <div className="absolute inset-0 bg-black/10 pointer-events-none" />
             </motion.div>
 
@@ -369,8 +370,8 @@ const Home = () => {
       <section className="relative overflow-hidden bg-[#FAF7F2] px-5 py-10 sm:px-8 lg:px-12 font-sans">
         {/* Floral watermarks on both sides */}
         <div className="absolute inset-0 z-0 pointer-events-none">
-          <img src="/hero-bg.png" alt="" className="absolute -left-20 top-0 w-[40%] h-[120%] object-cover object-left opacity-[0.03]" style={{ maskImage: 'linear-gradient(to right, black 20%, transparent)'}} />
-          <img src="/hero-bg.png" alt="" className="absolute -right-20 top-0 w-[40%] h-[120%] object-cover object-left opacity-[0.03]" style={{ transform: 'scaleX(-1)', maskImage: 'linear-gradient(to right, black 20%, transparent)'}} />
+          <img src="/hero-bg.webp" alt="" loading="lazy" decoding="async" className="absolute -left-20 top-0 w-[40%] h-[120%] object-cover object-left opacity-[0.03]" style={{ maskImage: 'linear-gradient(to right, black 20%, transparent)'}} />
+          <img src="/hero-bg.webp" alt="" loading="lazy" decoding="async" className="absolute -right-20 top-0 w-[40%] h-[120%] object-cover object-left opacity-[0.03]" style={{ transform: 'scaleX(-1)', maskImage: 'linear-gradient(to right, black 20%, transparent)'}} />
         </div>
 
         <div className="container relative z-10 mx-auto max-w-[1300px]">
