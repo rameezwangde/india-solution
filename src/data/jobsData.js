@@ -100,5 +100,55 @@ export const jobsData = [
       'Staying up-to-date with industry developments.'
     ],
     workingConditions: []
+  },
+  {
+    id: 'sales-manager',
+    title: 'Sales Manager (Event Management)',
+    location: 'India Solution',
+    experience: '5–8 years (2-3 years managerial)',
+    jobType: 'Full-Time',
+    companyDescription: 'The Sales Manager is responsible for driving revenue growth by acquiring new clients, maintaining strong relationships with existing clients, leading the sales team, and achieving monthly and annual sales targets. The role involves selling corporate events, exhibitions, conferences, weddings, brand activations, product launches, and other event solutions while coordinating with the operations team to ensure successful project execution.',
+    mandatoryCriteria: [
+      'Bachelor\'s degree in Business Administration, Marketing, Event Management, or a related field (MBA is an added advantage).',
+      '5–8 years of sales experience, with at least 2–3 years in a managerial role.',
+      'Experience in event management, advertising, hospitality, media, or B2B services industry is preferred.',
+      'Strong leadership and team management skills.',
+      'Excellent communication and negotiation skills.',
+      'Business development and client acquisition skills.',
+      'Proposal preparation and presentation skills.',
+      'CRM software proficiency.',
+      'Strategic planning and problem-solving skills.',
+      'Financial and commercial awareness.',
+      'Time management and multitasking skills.'
+    ],
+    responsibilities: [
+      'Develop and implement sales strategies to achieve business targets.',
+      'Generate new business through cold calling, networking, referrals, and digital platforms.',
+      'Identify new corporate clients, agencies, and business opportunities.',
+      'Conduct client meetings, presentations, and event pitches.',
+      'Prepare event proposals, quotations, and commercial agreements.',
+      'Negotiate pricing and close deals.',
+      'Build and maintain long-term relationships with clients.',
+      'Understand client requirements and recommend suitable event solutions.',
+      'Ensure high customer satisfaction and repeat business.',
+      'Resolve client concerns promptly and professionally.',
+      'Lead, mentor, and motivate the sales team.',
+      'Assign sales targets and monitor daily performance.',
+      'Conduct sales meetings and provide coaching.',
+      'Support recruitment and training of new sales executives.',
+      'Maintain an accurate sales pipeline using CRM.',
+      'Prepare daily, weekly, and monthly sales reports.',
+      'Track sales performance, conversion rates, and revenue forecasts.',
+      'Coordinate with the operations team for smooth event execution.',
+      'Monitor competitors and industry trends.',
+      'Identify emerging market opportunities.',
+      'Develop strategies to expand the company\'s market presence.'
+    ],
+    workingConditions: [
+      'Department: Sales & Business Development',
+      'Reporting To: Sales Head',
+      'Preferred Industry Experience: Event Management, Corporate Events, MICE, Exhibitions, Hospitality, Advertising & Media, Wedding Planning, Brand Activations.',
+      'Key Performance Indicators (KPIs): Monthly and annual sales revenue, Number of new clients acquired, Lead-to-conversion ratio, Client retention rate, Team target achievement, Profit margin on projects, Customer satisfaction score.'
+    ]
   }
 ];
