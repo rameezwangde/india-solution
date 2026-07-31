@@ -22,6 +22,11 @@
     @apply bg-navy-800/55 backdrop-blur-md border border-white/10;
   }
 
+  .content-visibility-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: 1000px;
+  }
+
   .glass-card {
     @apply bg-navy-800/65 backdrop-blur-lg border border-white/15 rounded-2xl shadow-xl;
   }
@@ -61,17 +66,18 @@
 
 @keyframes client-logo-flow {
   from {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
 
   to {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
 .client-logo-track {
   width: max-content;
   animation: client-logo-flow 30s linear infinite;
+  will-change: transform;
 }
 
 .client-logo-track:hover {
@@ -494,11 +500,11 @@
 
 @keyframes testimonialAutoScroll {
   from {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
 
   to {
-    transform: translateX(calc(-50% - 0.75rem));
+    transform: translate3d(calc(-50% - 0.75rem), 0, 0);
   }
 }
 

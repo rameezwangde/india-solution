@@ -228,7 +228,7 @@ const Home = () => {
               { img: '/about-us.webp', alt: 'Wedding floral aisle decor' },
               { img: '/images/wedding_theme.png', alt: 'Candlelit event table' },
               { img: '/hero-stage.png', alt: 'Grand stage celebration' },
-              { img: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', alt: 'Corporate event stage' }
+              { img: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=auto&fm=webp', alt: 'Corporate event stage' }
             ].map((item, idx) => (
               <div key={idx} className="relative overflow-hidden rounded-[2.5rem] aspect-[4/5] sm:aspect-[3/4] shadow-[0_10px_30px_rgb(0,0,0,0.08)] border-[6px] border-white bg-white group">
                 <img src={item.img} alt={item.alt} fetchPriority={idx < 2 ? "high" : "auto"} loading={idx < 2 ? "eager" : "lazy"} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
@@ -363,7 +363,7 @@ const Home = () => {
         </div>
       </section>
       {/* Why Choose Us & Expertise */}
-      <section className="relative overflow-hidden bg-[#FAF7F2] px-5 py-10 sm:px-8 lg:px-12 font-sans">
+      <section className="relative overflow-hidden bg-[#FAF7F2] px-5 py-10 sm:px-8 lg:px-12 font-sans content-visibility-auto">
         {/* Floral watermarks on both sides */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <img src="/hero-bg.webp" alt="" loading="lazy" decoding="async" className="absolute -left-20 top-0 w-[40%] h-[120%] object-cover object-left opacity-[0.03]" style={{ maskImage: 'linear-gradient(to right, black 20%, transparent)'}} />
@@ -466,7 +466,7 @@ const Home = () => {
       </section>
       
       {/* Happy Clients */}
-      <section className="bg-[#FAF7F2] px-5 pb-24 sm:px-8 lg:px-12 font-sans relative z-10">
+      <section className="bg-[#FAF7F2] px-5 pb-24 sm:px-8 lg:px-12 font-sans relative z-10 content-visibility-auto">
         <div className="relative mx-auto max-w-[1050px] overflow-hidden rounded-[2rem] border border-[#E8DFD5] bg-[#FAF6F2] shadow-sm px-5 py-12 sm:px-8 lg:px-12">
           
           <div className="relative z-10 text-center">
