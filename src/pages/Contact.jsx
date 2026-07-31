@@ -22,9 +22,9 @@ const contactCards = [
     title: 'Visit Us',
     icon: MapPin,
     lines: [
-      'India Solution Production House,',
-      'Railway Mens Employees layout,',
-      '50, 10th Cross, Ullal Main Road,',
+      'India Solution events and production,',
+      '83/1A Muddinpalaya, Main Rd,',
+      'Jnananjyothinagar, Railway Layout, Mallathahalli,',
       'Bengaluru, Karnataka 560056',
     ],
   },
@@ -238,7 +238,7 @@ const Contact = () => {
           >
             <iframe
               title="India Solution location map"
-              src="https://www.google.com/maps?q=India%20Solution%20Production%20House%2C%2050%2C%2010th%20Cross%2C%20Ullal%20Main%20Road%2C%20Bengaluru%2C%20Karnataka%20560056&output=embed"
+              src="https://www.google.com/maps?q=India%20Solution%20events%20and%20production%2C%2083%2F1A%20Muddinpalaya%2C%20Main%20Rd%2C%20Jnananjyothinagar%2C%20Railway%20Layout%2C%20Mallathahalli%2C%20Bengaluru%2C%20Karnataka%20560056&output=embed"
               className="h-[360px] w-full border-0 md:h-[480px]"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"

@@ -123,11 +123,11 @@ const Careers = () => {
                   <div className="bg-[#1A0F0A] w-12 h-12 rounded-full flex items-center justify-center shadow-md shrink-0">
                     <MapPin className="text-white" size={20} />
                   </div>
-                  <h3 className="font-bold text-[#4A2F1D] text-lg">India Solution Production House</h3>
+                  <h3 className="font-bold text-[#4A2F1D] text-lg">India Solution events and production</h3>
                 </div>
-                <p className="text-[#2A1810] text-[15px] leading-relaxed max-w-[250px] pl-16">
-                  Railway Mens Employees layout,<br/>
-                  50, 10th Cross, Ullal Main Road,<br/>
+                <p className="text-[#2A1810] text-[15px] leading-relaxed max-w-[300px] pl-16">
+                  83/1A Muddinpalaya, Main Rd,<br/>
+                  Jnananjyothinagar, Railway Layout, Mallathahalli,<br/>
                   Bengaluru, Karnataka 560056
                 </p>
               </div>

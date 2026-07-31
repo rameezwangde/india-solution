@@ -94,7 +94,9 @@ const Footer = () => {
                 <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-[#D5C5B9]">
                   <MapPin size={10} className="text-[#4A2F1D]" />
                 </div>
-                <span className="text-[#1A0F0A] font-bold text-[12px] mt-0.5">Bengaluru, Karnataka, India</span>
+                <span className="text-[#1A0F0A] font-bold text-[12px] mt-0.5 leading-relaxed">
+                  Mallathahalli, Bengaluru — Karnataka 560056
+                </span>
               </li>
               <li className="flex items-center gap-3">
                 <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-[#D5C5B9]">

@@ -51,7 +51,7 @@ const Navbar = () => {
           </div>
           <div className="flex items-center gap-2">
              <MapPin size={14} className="text-[#4A2F1D]" />
-             <span>Battahalasur, Bangalore — Karnataka 560001</span>
+             <span>Mallathahalli, Bengaluru — Karnataka 560056</span>
           </div>
         </div>
       </div>
