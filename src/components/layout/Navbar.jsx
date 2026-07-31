@@ -140,7 +140,7 @@ const Navbar = () => {
                    <ShoppingCart size={16} strokeWidth={2.5} /> Cart {totalItems > 0 && `(${totalItems})`}
                  </Link>
                  <Link to="/membership" className="w-full flex justify-center items-center gap-2 px-4 py-3 rounded-md border-[1.5px] border-[#C0602F] text-[#C0602F] font-semibold text-[14px] hover:bg-[#C0602F] hover:text-white transition-colors">
-                   <User size={16} strokeWidth={2.5} /> Login
+                   <User size={16} strokeWidth={2.5} /> Membership
                  </Link>
                  <Link to="/admin" className="w-full flex justify-center items-center gap-2 px-4 py-3 rounded-md border border-transparent text-[#C0602F] font-semibold text-[14px] hover:bg-[#F5E6DA] transition-colors">
                    <User size={16} strokeWidth={2.5} /> Admin Login
