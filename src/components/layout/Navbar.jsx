@@ -56,10 +56,10 @@ const Navbar = () => {
         </div>
       </div>
 
-      <div className="container mx-auto px-6 lg:px-4 xl:px-12 py-4">
+      <div className="w-full max-w-[1600px] mx-auto px-4 lg:px-6 xl:px-10 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex flex-col items-center justify-center shrink-0 gap-0 mr-2 xl:mr-0" aria-label="India Solution home">
+          <Link to="/" className="flex flex-col items-center justify-center shrink-0 gap-0 mr-2 xl:mr-0 ml-2 lg:ml-4" aria-label="India Solution home">
             <img
               src="/new logo.png"
               alt="India Solution Logo"
@@ -67,38 +67,43 @@ const Navbar = () => {
             />
           </Link>
 
-          {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-8 xl:gap-10 xl:mr-8">
-            {navLinks.map((link) => {
-              const active = isActiveLink(link.path);
-              return (
-                <Link
-                  key={link.name}
-                  to={link.path}
-                  className={`text-[10.5px] xl:text-[12px] font-black tracking-wider transition-colors relative group whitespace-nowrap
-                    ${active ? 'text-[#C0602F]' : 'text-[#4A2F1D] hover:text-[#1A0F0A]'}`}
-                >
-                  {link.name}
-                  {active && (
-                    <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-[#C0602F]" />
-                  )}
-                </Link>
-              );
-            })}
-          </div>
+          {/* Desktop Nav & Buttons Container */}
+          <div className="hidden lg:flex items-center gap-8 xl:gap-12">
+            {/* Desktop Nav */}
+            <div className="flex items-center gap-6 xl:gap-8">
+              {navLinks.map((link) => {
+                const active = isActiveLink(link.path);
+                return (
+                  <Link
+                    key={link.name}
+                    to={link.path}
+                    className={`text-[10.5px] xl:text-[12px] font-black tracking-wider transition-colors relative group whitespace-nowrap
+                      ${active ? 'text-[#C0602F]' : 'text-[#4A2F1D] hover:text-[#1A0F0A]'}`}
+                  >
+                    {link.name}
+                    {active && (
+                      <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-[#C0602F]" />
+                    )}
+                  </Link>
+                );
+              })}
+            </div>
 
-          <div className="hidden lg:flex items-center gap-3 xl:gap-6">
-            <div className="flex items-center gap-3 xl:gap-5">
-              <Link to="/inventory-demo" className="flex items-center gap-2 px-4 xl:px-5 py-2.5 rounded-lg bg-[#C0602F] text-white font-medium text-[14px] xl:text-[15px] hover:bg-[#A05025] transition-colors shadow-sm">
-                <ShoppingCart size={18} strokeWidth={2.5} /> <span className="hidden xl:inline">Cart</span> {totalItems > 0 && `(${totalItems})`}
-              </Link>
-              <div className="flex flex-col gap-1 items-center ml-1 xl:ml-2">
-                <Link to="/membership" className="flex items-center justify-center gap-1.5 px-3 xl:px-4 py-1.5 rounded-md border border-[#C0602F] text-[#C0602F] font-bold text-[11px] xl:text-[12px] hover:bg-[#C0602F] hover:text-white transition-colors shadow-sm whitespace-nowrap w-full">
-                  <User size={12} strokeWidth={2.5} /> <span>Membership</span>
-                </Link>
-                <Link to="/admin" className="flex items-center justify-center gap-1 px-2 py-1 rounded border border-[#C0602F] bg-[#F5E6DA] text-[#C0602F] font-bold text-[10px] xl:text-[11px] hover:bg-[#C0602F] hover:text-white transition-colors whitespace-nowrap w-full">
-                  <User size={10} strokeWidth={2.5} /> <span>Admin Login</span>
-                </Link>
+            <div className="flex items-center gap-3 xl:gap-6">
+              <div className="flex items-center gap-3 xl:gap-5">
+                <div className="flex flex-col gap-1.5 items-stretch w-full">
+                  <Link to="/inventory-demo" className="flex items-center justify-center gap-2 px-4 xl:px-5 py-1.5 rounded-md bg-[#C0602F] text-white font-medium text-[13px] hover:bg-[#A05025] transition-colors shadow-sm w-full">
+                    <ShoppingCart size={16} strokeWidth={2.5} /> <span>Cart</span> {totalItems > 0 && `(${totalItems})`}
+                  </Link>
+                  <Link to="/membership" className="flex items-center justify-center gap-1.5 px-4 xl:px-5 py-1.5 rounded-md border border-[#C0602F] text-[#C0602F] font-bold text-[11px] xl:text-[12px] hover:bg-[#C0602F] hover:text-white transition-colors shadow-sm whitespace-nowrap w-full">
+                    <User size={12} strokeWidth={2.5} /> <span>Membership</span>
+                  </Link>
+                </div>
+                <div className="ml-1 xl:ml-2">
+                  <Link to="/admin" className="flex items-center justify-center gap-1 px-3 py-1.5 rounded border border-[#C0602F] bg-[#F5E6DA] text-[#C0602F] font-bold text-[11px] xl:text-[12px] hover:bg-[#C0602F] hover:text-white transition-colors whitespace-nowrap w-full">
+                    <User size={12} strokeWidth={2.5} /> <span>Admin Login</span>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
