@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m as motion, LazyMotion, domAnimation } from 'framer-motion';
 import { ArrowRight, CalendarDays, Users, Award, Star, Quote, ChevronLeft, ChevronRight, Play } from 'lucide-react';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
@@ -131,6 +131,7 @@ const Home = () => {
   };
 
   return (
+    <LazyMotion features={domAnimation}>
     <div className="bg-[#FAF7F2] font-sans selection:bg-[#A67C65] selection:text-white relative">
       <SEO 
         title="Premium Event Management in Bengaluru"
@@ -154,32 +155,27 @@ const Home = () => {
         </div>
 
         <div className="container relative z-20 mx-auto max-w-[1200px] text-center">
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
-            className="mx-auto flex flex-col items-center"
-          >
-            <motion.div variants={fadeUp} className="mb-6 flex items-center justify-center gap-4 text-[11px] font-bold tracking-[0.2em] text-[#4A2F1D]">
+          <div className="mx-auto flex flex-col items-center">
+            <div className="mb-6 flex items-center justify-center gap-4 text-[11px] font-bold tracking-[0.2em] text-[#4A2F1D]">
               <span className="text-[#8B5E45] text-sm">❖</span>
               <span className="uppercase">Crafting Unforgettable Moments</span>
               <span className="text-[#8B5E45] text-sm">❖</span>
-            </motion.div>
+            </div>
 
-            <motion.h1 variants={fadeUp} className="font-['Playfair_Display',serif] text-[#4A2F1D]">
+            <h1 className="font-['Playfair_Display',serif] text-[#4A2F1D]">
               <span className="block font-black text-6xl sm:text-7xl lg:text-[90px] tracking-wide mb-1 leading-none text-[#2A1810]">DESIGNED,</span>
               <span className="block italic font-bold text-[54px] sm:text-[64px] lg:text-[78px] text-[#4A2F1D] tracking-wide leading-[1.1]">PRODUCED & DELIVERED</span>
               <span className="block font-black tracking-[0.2em] text-3xl sm:text-4xl lg:text-[40px] mt-5 text-[#2A1810]">UNDER ONE ROOF.</span>
-            </motion.h1>
+            </h1>
 
-            <motion.div variants={fadeUp} className="mx-auto my-7 flex items-center justify-center">
+            <div className="mx-auto my-7 flex items-center justify-center">
               <span className="text-[#8B5E45] text-lg">❖</span>
-            </motion.div>
+            </div>
 
-            <motion.p variants={fadeUp} className="mx-auto max-w-2xl text-[15px] leading-[1.8] text-[#2A1810] md:text-[16px] font-semibold">
+            <p className="mx-auto max-w-2xl text-[15px] leading-[1.8] text-[#2A1810] md:text-[16px] font-semibold">
               At India Solution, we bring your vision to life, from intimate celebrations to grand corporate gatherings. Trust us to handle the details while you enjoy the moment.
-            </motion.p>
-          </motion.div>
+            </p>
+          </div>
 
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -498,6 +494,7 @@ const Home = () => {
         </div>
       </section>
     </div>
+    </LazyMotion>
   );
 };
 
