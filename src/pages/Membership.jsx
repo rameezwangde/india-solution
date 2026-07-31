@@ -11,7 +11,12 @@ import { fadeUp, staggerContainer } from '../utils/animations';
 
 const Membership = () => {
   return (
-    <div className="bg-[#FAF7F2] font-sans selection:bg-[#A67C65] selection:text-white relative overflow-hidden">
+    <div 
+      className="bg-[#FAF7F2] font-sans selection:bg-[#A67C65] selection:text-white relative overflow-hidden select-none"
+      onContextMenu={(e) => e.preventDefault()}
+      onCopy={(e) => e.preventDefault()}
+      onDragStart={(e) => e.preventDefault()}
+    >
       <SEO 
         title="Premium Celebration Circle Membership | India Solution"
         description="One trusted partner for every celebration in life. Join the exclusive Celebration Circle for luxury event planning, VIP benefits, and lifelong memories."
