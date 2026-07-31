@@ -134,13 +134,12 @@ productSchema.pre('save', function () {
 productSchema.index({ slug: 1 });
 productSchema.index({ category: 1 });
 productSchema.index({ department: 1 });
-productSchema.index({ status: 1 });
 productSchema.index({ stockStatus: 1 });
 productSchema.index({ stockAlertAcknowledged: 1 });
 productSchema.index({ department: 1, stockStatus: 1 });
 
-// Critical index for default sorting
-productSchema.index({ createdAt: -1 });
+// Compound index for instant default sorting of active products
+productSchema.index({ status: 1, createdAt: -1 });
 
 // Text index for fast searching across multiple fields
 productSchema.index({ 
