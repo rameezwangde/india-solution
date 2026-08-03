@@ -150,5 +150,37 @@ export const jobsData = [
       'Preferred Industry Experience: Event Management, Corporate Events, MICE, Exhibitions, Hospitality, Advertising & Media, Wedding Planning, Brand Activations.',
       'Key Performance Indicators (KPIs): Monthly and annual sales revenue, Number of new clients acquired, Lead-to-conversion ratio, Client retention rate, Team target achievement, Profit margin on projects, Customer satisfaction score.'
     ]
+  },
+  {
+    id: 'sound-technician',
+    title: 'Sound Technician',
+    location: 'India Solution',
+    experience: '3–5 years',
+    jobType: 'Full-Time',
+    companyDescription: 'The Sound Technician is responsible for operating, testing, and managing sound equipment for live events, exhibitions, corporate events, and conferences. This role requires technical expertise in mixing consoles, microphones, and speaker systems to ensure high-quality audio experiences.',
+    mandatoryCriteria: [
+      'Diploma or Degree in Audio Engineering, Sound Technology, or a related field.',
+      '3-5 years of experience as a Sound Technician in event management or live shows.',
+      'Proficiency in operating digital and analog mixing consoles (e.g., Yamaha, Behringer, Midas).',
+      'Deep understanding of acoustics, PA systems, and signal flow.',
+      'Excellent problem-solving skills and ability to troubleshoot audio issues quickly.',
+      'Ability to work flexible hours, including weekends and late nights, as per event requirements.',
+      'Strong physical stamina for lifting and setting up heavy audio equipment.'
+    ],
+    responsibilities: [
+      'Set up, test, and operate sound equipment for live events, corporate meetings, and exhibitions.',
+      'Conduct sound checks and adjust audio levels to ensure optimal sound quality.',
+      'Collaborate with event managers, performers, and speakers to determine audio requirements.',
+      'Troubleshoot technical issues with audio equipment during live events.',
+      'Maintain and repair audio equipment to ensure it remains in good working condition.',
+      'Manage inventory of sound gear, including microphones, cables, speakers, and mixers.',
+      'Ensure compliance with safety standards when setting up and dismantling equipment.',
+      'Record live events and edit audio tracks as required.'
+    ],
+    workingConditions: [
+      'Department: Operations & Technical',
+      'Preferred Industry Experience: Live Events, Event Management, Exhibitions, Corporate Events, Media & Entertainment.',
+      'Key Performance Indicators (KPIs): Flawless audio execution at events, Equipment maintenance and minimal downtime, Positive feedback from clients and performers, Efficient setup and teardown times.'
+    ]
   }
 ];
