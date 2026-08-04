@@ -632,6 +632,7 @@ exports.requestRestock = async (req, res) => {
     }
 
     product.restockRequested = true;
+    product.restockOrdered = false;
     product.restockQuantity = restockQuantity;
     product.restockRequestedAt = new Date();
     await product.save();
@@ -653,11 +654,10 @@ exports.clearRestockRequest = async (req, res) => {
     }
 
     product.restockRequested = false;
-    product.restockQuantity = 0;
-    product.restockRequestedAt = undefined;
+    product.restockOrdered = true;
     await product.save();
 
-    res.status(200).json({ success: true, message: 'Restock request cleared', product });
+    res.status(200).json({ success: true, message: 'Restock marked as ordered', product });
   } catch (error) {
     res.status(500).json({ success: false, message: 'Server Error' });
   }

@@ -18,7 +18,8 @@ export const getProducts = async (params = {}) => {
       department: p.department || '',
       description: p.description || '',
       restockRequested: p.restockRequested || false,
-      restockQuantity: p.restockQuantity || 0
+      restockQuantity: p.restockQuantity || 0,
+      restockOrdered: p.restockOrdered || false
     }));
     return {
       products,

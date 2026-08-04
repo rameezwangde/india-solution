@@ -84,6 +84,7 @@ const productSchema = new mongoose.Schema(
     restockRequested: { type: Boolean, default: false },
     restockQuantity: { type: Number, default: 0 },
     restockRequestedAt: { type: Date },
+    restockOrdered: { type: Boolean, default: false },
     status: {
       type: String,
       enum: ['available', 'out_of_stock', 'hidden'],
