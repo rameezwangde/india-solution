@@ -16,7 +16,9 @@ export const getProducts = async (params = {}) => {
       status: p.status,
       isFeatured: p.isFeatured || false,
       department: p.department || '',
-      description: p.description || ''
+      description: p.description || '',
+      restockRequested: p.restockRequested || false,
+      restockQuantity: p.restockQuantity || 0
     }));
     return {
       products,
