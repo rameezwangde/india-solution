@@ -45,6 +45,7 @@ const AdminProductsPage = () => {
   const [stats, setStats] = useState({ total: 0, available: 0, outOfStock: 0, lowStock: 0 });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [markedAsOrderedId, setMarkedAsOrderedId] = useState(null);
   
   // Pagination & Filters
   const [page, setPage] = useState(1);
@@ -259,10 +260,14 @@ const AdminProductsPage = () => {
 
   const handleClearRestock = async (product) => {
     try {
+      setMarkedAsOrderedId(product.id);
       await api.post(`/products/${product.id}/clear-restock`);
-      success('Restock request cleared');
-      loadProducts();
+      setTimeout(() => {
+        setMarkedAsOrderedId(null);
+        fetchProducts();
+      }, 1500);
     } catch (err) {
+      setMarkedAsOrderedId(null);
       showError('Failed to clear restock request');
     }
   };
@@ -562,15 +567,23 @@ const AdminProductsPage = () => {
                           </div>
                           {p.restockRequested && (
                             <div className="flex flex-col items-start gap-1">
-                              <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-blue-700">
-                                Restock Req: {p.restockQuantity}
-                              </span>
-                              <button 
-                                onClick={() => handleClearRestock(p)}
-                                className="text-[10px] text-blue-600 hover:text-blue-800 underline"
-                              >
-                                Mark as Ordered
-                              </button>
+                              {markedAsOrderedId === p.id ? (
+                                <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-green-100 text-green-700 animate-pulse transition-all duration-300 transform scale-110">
+                                  <CheckCircle size={12} className="mr-1" /> Ordered!
+                                </span>
+                              ) : (
+                                <>
+                                  <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-blue-700">
+                                    Restock Req: {p.restockQuantity}
+                                  </span>
+                                  <button 
+                                    onClick={() => handleClearRestock(p)}
+                                    className="text-[10px] text-blue-600 hover:text-blue-800 underline"
+                                  >
+                                    Mark as Ordered
+                                  </button>
+                                </>
+                              )}
                             </div>
                           )}
                         </div>
