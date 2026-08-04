@@ -9,7 +9,9 @@ const {
   clearInventory,
   getDepartments,
   clearTestData,
-  toggleDepartmentVisibility
+  toggleDepartmentVisibility,
+  requestRestock,
+  clearRestockRequest
 } = require('../controllers/productController');
 const {
   uploadProductImage,
@@ -41,5 +43,9 @@ router.delete('/:id', protect, deleteProduct);
 // Image routes
 router.post('/:id/image', protect, uploadMiddleware, uploadProductImage);
 router.delete('/:id/image', protect, deleteProductImage);
+
+// Restock requests
+router.post('/:id/restock-request', optionalAuth, requestRestock);
+router.post('/:id/clear-restock', protect, clearRestockRequest);
 
 module.exports = router;

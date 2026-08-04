@@ -81,6 +81,9 @@ const productSchema = new mongoose.Schema(
       url: { type: String, default: '' },
       publicId: { type: String, default: '' },
     },
+    restockRequested: { type: Boolean, default: false },
+    restockQuantity: { type: Number, default: 0 },
+    restockRequestedAt: { type: Date },
     status: {
       type: String,
       enum: ['available', 'out_of_stock', 'hidden'],

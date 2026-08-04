@@ -615,3 +615,51 @@ exports.toggleDepartmentVisibility = async (req, res) => {
     res.status(500).json({ success: false, message: 'Failed to update department visibility: ' + error.message });
   }
 };
+
+// @desc    Request a restock for a product
+// @route   POST /api/products/:id/restock-request
+// @access  Public (Production Team)
+exports.requestRestock = async (req, res) => {
+  try {
+    const { restockQuantity } = req.body;
+    if (!restockQuantity || restockQuantity <= 0) {
+      return res.status(400).json({ success: false, message: 'Please provide a valid restock quantity' });
+    }
+
+    const product = await Product.findById(req.params.id);
+    if (!product) {
+      return res.status(404).json({ success: false, message: 'Product not found' });
+    }
+
+    product.restockRequested = true;
+    product.restockQuantity = restockQuantity;
+    product.restockRequestedAt = new Date();
+    await product.save();
+
+    res.status(200).json({ success: true, message: 'Restock requested successfully', product });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Server Error' });
+  }
+};
+
+// @desc    Clear restock request (Admin only)
+// @route   POST /api/products/:id/clear-restock
+// @access  Private/Admin
+exports.clearRestockRequest = async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    if (!product) {
+      return res.status(404).json({ success: false, message: 'Product not found' });
+    }
+
+    product.restockRequested = false;
+    product.restockQuantity = 0;
+    product.restockRequestedAt = undefined;
+    await product.save();
+
+    res.status(200).json({ success: true, message: 'Restock request cleared', product });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Server Error' });
+  }
+};
+

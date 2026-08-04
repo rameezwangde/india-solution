@@ -541,13 +541,28 @@ const AdminProductsPage = () => {
                         ₹{p.price?.toLocaleString()}
                       </td>
                       <td className="px-6 py-4">
-                        <div className="flex items-center gap-3">
-                          <span className={`font-bold ${p.quantity === 0 ? 'text-red-400' : p.quantity <= 5 ? 'text-[#C0602F]-400' : 'text-[#4A2F1D]'}`}>
-                            {p.quantity}
-                          </span>
-                          <button onClick={() => openQuantity(p)} className="p-1 rounded hover:bg-[#E8DFD5] text-[#4A2F1D] hover:text-[#4A2F1D] transition-colors" title="Quick Update">
-                            <Edit size={14} />
-                          </button>
+                        <div className="flex flex-col items-start gap-2">
+                          <div className="flex items-center gap-3">
+                            <span className={`font-bold ${p.quantity === 0 ? 'text-red-400' : p.quantity <= 5 ? 'text-[#C0602F]-400' : 'text-[#4A2F1D]'}`}>
+                              {p.quantity}
+                            </span>
+                            <button onClick={() => openQuantity(p)} className="p-1 rounded hover:bg-[#E8DFD5] text-[#4A2F1D] hover:text-[#4A2F1D] transition-colors" title="Quick Update">
+                              <Edit size={14} />
+                            </button>
+                          </div>
+                          {p.restockRequested && (
+                            <div className="flex flex-col items-start gap-1">
+                              <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-blue-700">
+                                Restock Req: {p.restockQuantity}
+                              </span>
+                              <button 
+                                onClick={() => handleClearRestock(p)}
+                                className="text-[10px] text-blue-600 hover:text-blue-800 underline"
+                              >
+                                Mark as Ordered
+                              </button>
+                            </div>
+                          )}
                         </div>
                       </td>
                       <td className="px-6 py-4">
