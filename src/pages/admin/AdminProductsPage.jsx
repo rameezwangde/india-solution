@@ -257,6 +257,16 @@ const AdminProductsPage = () => {
     }
   };
 
+  const handleClearRestock = async (product) => {
+    try {
+      await api.post(`/products/${product.id}/clear-restock`);
+      success('Restock request cleared');
+      loadProducts();
+    } catch (err) {
+      showError('Failed to clear restock request');
+    }
+  };
+
   // --- BULK ACTION HANDLERS ---
   const toggleSelectAll = () => {
     if (selectedProductIds.size === products.length && products.length > 0) {
