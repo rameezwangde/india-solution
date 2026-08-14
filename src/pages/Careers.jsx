@@ -22,7 +22,7 @@ const Careers = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const message = `*New Job Application*\n\n*Name:* ${formData.name}\n*Email:* ${formData.email}\n*Phone:* ${formData.phone}\n*City:* ${formData.city}\n*Comment:* ${formData.comment}`;
-    const whatsappUrl = `https://wa.me/916360181932?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/919035805165?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
     setFormData({ name: '', email: '', phone: '', city: '', comment: '' });
   };
@@ -151,6 +151,9 @@ const Careers = () => {
                   </div>
                   <div>
                     <p className="font-bold text-[#2A1810] text-sm mb-1">Phone:</p>
+                    <a href="tel:+919035805165" className="flex items-center gap-2 text-[#25D366] hover:text-[#128C7E] font-medium transition-colors text-[15px] mb-2">
+                      <FaWhatsapp size={18} /> +91 9035805165
+                    </a>
                     <a href="tel:+916360181932" className="flex items-center gap-2 text-[#25D366] hover:text-[#128C7E] font-medium transition-colors text-[15px]">
                       <FaWhatsapp size={18} /> +91 6360181932
                     </a>
