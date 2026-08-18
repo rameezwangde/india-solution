@@ -6,90 +6,20 @@ import SEO from '../components/layout/SEO';
 import { fadeUp, staggerContainer } from '../utils/animations';
 import { Link } from 'react-router-dom';
 import { serviceCatalog } from '../data/serviceCatalog';
-const happyClients = ['Google', 'Capgemini', 'DHL', 'IBM', 'Bajaj', 'Audi', 'Amazon'];
-const stats = [
-  {
-    value: '5,600+',
-    label: 'Events\nCompleted',
-    icon: CalendarDays,
-    ring: 'border-[#E91E63] shadow-[0_0_28px_rgba(233,30,99,0.58)]',
-    dot: 'bg-[#E91E63]',
-    bar: 'bg-[#E91E63]',
-  },
-  {
-    value: '4,300+',
-    label: 'Happy Clients',
-    icon: Users,
-    ring: 'border-[#FF2A85] shadow-[0_0_28px_rgba(255,42,133,0.58)]',
-    dot: 'bg-[#FF2A85]',
-    bar: 'bg-[#FF2A85]',
-  },
-  {
-    value: '15+',
-    label: 'Years Experience',
-    icon: Award,
-    ring: 'border-[#E91E63] shadow-[0_0_28px_rgba(233,30,99,0.5)]',
-    dot: 'bg-[#E91E63]',
-    bar: 'bg-[#E91E63]',
-  },
-  {
-    value: '50+',
-    label: 'Event Categories',
-    icon: Star,
-    ring: 'border-[#FF9800] shadow-[0_0_28px_rgba(255,152,0,0.58)]',
-    dot: 'bg-[#FF9800]',
-    bar: 'bg-[#FF9800]',
-  },
-];
+import homeData from '../content/home.json';
 
-const ClientLogo = ({ brand }) => {
-  switch (brand) {
-    case 'Google':
-      return (
-        <span className="text-4xl font-medium tracking-tight md:text-5xl" aria-label="Google">
-          <span className="text-[#4285F4]">G</span><span className="text-[#DB4437]">o</span><span className="text-[#F4B400]">o</span><span className="text-[#4285F4]">g</span><span className="text-[#0F9D58]">l</span><span className="text-[#DB4437]">e</span>
-        </span>
-      );
-    case 'Capgemini':
-      return (
-        <span className="flex items-center gap-2 text-3xl font-semibold italic text-[#0070AD] md:text-4xl" aria-label="Capgemini">
-          Capgemini
-          <span className="h-5 w-7 rounded-full bg-[#12ABDB] [clip-path:ellipse(45%_35%_at_50%_50%)]" />
-        </span>
-      );
-    case 'DHL':
-      return (
-        <span className="flex items-end gap-2 text-[#D40511]" aria-label="DHL Group">
-          <span className="text-4xl font-black italic tracking-tight md:text-5xl">DHL</span>
-          <span className="mb-1 text-sm font-bold">Group</span>
-        </span>
-      );
-    case 'IBM':
-      return <span className="ibm-wordmark" aria-label="IBM">IBM</span>;
-    case 'Bajaj':
-      return (
-        <span className="flex items-center gap-3 text-[#005BAA]" aria-label="Bajaj">
-          <span className="text-4xl font-black leading-none md:text-5xl">B</span>
-          <span className="text-2xl font-black tracking-widest md:text-3xl">BAJAJ</span>
-        </span>
-      );
-    case 'Audi':
-      return (
-        <span className="flex flex-col items-center leading-none" aria-label="Audi">
-          <span className="flex -space-x-2">
-            {[0, 1, 2, 3].map((ring) => (
-              <span key={ring} className="h-8 w-8 rounded-full border-[3px] border-[#9B9B9B] bg-transparent" />
-            ))}
-          </span>
-          <span className="mt-1 text-2xl font-bold text-[#E0001B]">Audi</span>
-        </span>
-      );
-    case 'Amazon':
-      return <span className="amazon-wordmark" aria-label="Amazon">amazon</span>;
-    default:
-      return <span>{brand}</span>;
-  }
+
+const iconMap = {
+  CalendarDays,
+  Users,
+  Award,
+  Star
 };
+
+const stats = homeData.stats.map(stat => ({
+  ...stat,
+  icon: iconMap[stat.iconName] || Star
+}));
 
 const Home = () => {
   const homeSchema = {
@@ -158,14 +88,14 @@ const Home = () => {
             <div className="mx-auto flex flex-col items-center">
               <div className="mb-6 flex items-center justify-center gap-4 text-[11px] font-bold tracking-[0.2em] text-[#4A2F1D]">
                 <span className="text-[#8B5E45] text-sm">❖</span>
-                <span className="uppercase">Crafting Unforgettable Moments</span>
+                <span className="uppercase">{homeData.hero.subtitle}</span>
                 <span className="text-[#8B5E45] text-sm">❖</span>
               </div>
 
               <h1 className="font-['Playfair_Display',serif] text-[#4A2F1D]">
-                <span className="block font-black text-6xl sm:text-7xl lg:text-[90px] tracking-wide mb-1 leading-none text-[#2A1810]">DESIGNED,</span>
-                <span className="block italic font-bold text-[54px] sm:text-[64px] lg:text-[78px] text-[#4A2F1D] tracking-wide leading-[1.1]">PRODUCED & DELIVERED</span>
-                <span className="block font-black tracking-[0.2em] text-3xl sm:text-4xl lg:text-[40px] mt-5 text-[#2A1810]">UNDER ONE ROOF.</span>
+                <span className="block font-black text-6xl sm:text-7xl lg:text-[90px] tracking-wide mb-1 leading-none text-[#2A1810]">{homeData.hero.titleLine1}</span>
+                <span className="block italic font-bold text-[54px] sm:text-[64px] lg:text-[78px] text-[#4A2F1D] tracking-wide leading-[1.1]">{homeData.hero.titleLine2}</span>
+                <span className="block font-black tracking-[0.2em] text-3xl sm:text-4xl lg:text-[40px] mt-5 text-[#2A1810]">{homeData.hero.titleLine3}</span>
               </h1>
 
               <div className="mx-auto my-7 flex items-center justify-center">
@@ -173,7 +103,7 @@ const Home = () => {
               </div>
 
               <p className="mx-auto max-w-2xl text-[15px] leading-[1.8] text-[#2A1810] md:text-[16px] font-semibold">
-                At India Solution, we bring your vision to life, from intimate celebrations to grand corporate gatherings. Trust us to handle the details while you enjoy the moment.
+                {homeData.hero.description}
               </p>
             </div>
 
@@ -258,26 +188,33 @@ const Home = () => {
               >
                 <motion.div variants={fadeUp} className="mb-6 flex items-center gap-3 text-[11px] font-bold tracking-[0.2em] text-[#4A2F1D]">
                   <span className="text-[#8B5E45] text-xs">❖</span>
-                  <span className="uppercase">Crafting Unforgettable Moments</span>
+                  <span className="uppercase">{homeData.about.subtitle}</span>
                   <span className="text-[#8B5E45] text-xs">❖</span>
                 </motion.div>
 
                 <motion.h2 variants={fadeUp} className="font-['Playfair_Display',serif] text-[#2A1810] mb-8">
-                  <span className="block font-black text-5xl md:text-6xl tracking-wide mb-1 leading-[1.1]">DESIGNED, PRODUCED</span>
-                  <span className="block font-bold text-4xl md:text-5xl text-[#4A2F1D] tracking-wide leading-[1.2]">& DELIVERED</span>
-                  <span className="block font-black tracking-[0.2em] text-2xl md:text-3xl mt-4 text-[#2A1810]">UNDER ONE ROOF.</span>
+                  <span className="block font-black text-5xl md:text-6xl tracking-wide mb-1 leading-[1.1]">{homeData.about.titleLine1}</span>
+                  <span className="block font-bold text-4xl md:text-5xl text-[#4A2F1D] tracking-wide leading-[1.2]">{homeData.about.titleLine2}</span>
+                  <span className="block font-black tracking-[0.2em] text-2xl md:text-3xl mt-4 text-[#2A1810]">{homeData.about.titleLine3}</span>
                 </motion.h2>
 
                 <div className="space-y-6 text-[#2A1810] text-[15.5px] leading-[1.8] font-semibold">
-                  <motion.p variants={fadeUp}>
-                    At <strong className="text-[#4A2F1D] font-black">India Solution</strong>, we blend creativity, precision, and passion to craft events that leave a lasting impression. From intimate celebrations to grand corporate gatherings, every detail is thoughtfully planned and flawlessly executed.
-                  </motion.p>
-                  <motion.p variants={fadeUp}>
-                    With years of experience and a dedicated team of experts, we offer end-to-end event solutions tailored to your unique vision. Our commitment to excellence, innovation, and elegance ensures that your event is not just well-managed — but truly unforgettable.
-                  </motion.p>
-                  <motion.p variants={fadeUp}>
-                    Trust us to handle the details while you enjoy the moment. At <strong className="text-[#4A2F1D] font-bold">India Solution</strong>, we don't just organize events — we create memories that last a lifetime.
-                  </motion.p>
+                  {homeData.about.paragraphs.map((paragraph, index) => {
+                    const formatText = (text) => {
+                      const parts = text.split(/(\*\*.*?\*\*)/);
+                      return parts.map((part, i) => {
+                        if (part.startsWith('**') && part.endsWith('**')) {
+                          return <strong key={i} className="text-[#4A2F1D] font-black">{part.slice(2, -2)}</strong>;
+                        }
+                        return part;
+                      });
+                    };
+                    return (
+                      <motion.p key={index} variants={fadeUp}>
+                        {formatText(paragraph)}
+                      </motion.p>
+                    );
+                  })}
                 </div>
               </motion.div>
 
@@ -328,7 +265,7 @@ const Home = () => {
                 transition={{ duration: 0.7 }}
                 className="relative h-[clamp(320px,35vw,500px)] overflow-hidden rounded-[2.5rem] border border-[#D5C5B9] shadow-[0_12px_40px_rgba(139,94,69,0.15)]"
               >
-                <img src="/images/luxury_wedding_dining.png" alt="India Solution Luxury Event Setup" loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
+                <img src={homeData.brandStatement.image} alt="India Solution Luxury Event Setup" loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
                 <div className="absolute inset-0 bg-black/10 pointer-events-none" />
               </motion.div>
 
@@ -340,9 +277,9 @@ const Home = () => {
                 className="max-w-xl"
               >
                 <h2 className="font-['Playfair_Display',serif] text-5xl md:text-[62px] lg:text-[72px] leading-[1.1] text-[#4A2F1D]">
-                  <span className="block mb-1">CREATING</span>
-                  <span className="block italic text-[#4A2F1D]">UNFORGETTABLE</span>
-                  <span className="block mt-1">EVENTS</span>
+                  <span className="block mb-1">{homeData.brandStatement.titleLine1}</span>
+                  <span className="block italic text-[#4A2F1D]">{homeData.brandStatement.titleLine2}</span>
+                  <span className="block mt-1">{homeData.brandStatement.titleLine3}</span>
                 </h2>
 
                 <div className="my-8 flex items-center gap-4">
@@ -352,11 +289,11 @@ const Home = () => {
                 </div>
 
                 <p className="font-['Playfair_Display',serif] text-[26px] md:text-[32px] italic tracking-widest text-[#4A2F1D] mb-6">
-                  SINCE <span className="text-[#4A2F1D]">2010</span>
+                  {homeData.brandStatement.sinceText1} <span className="text-[#4A2F1D]">{homeData.brandStatement.sinceText2}</span>
                 </p>
 
                 <p className="text-[15px] leading-[1.8] font-bold text-[#2A1810] max-w-[400px]">
-                  At India Solution, we bring your vision to life, from intimate celebrations to grand corporate gatherings. Trust us to handle the details while you enjoy the moment.
+                  {homeData.brandStatement.description}
                 </p>
               </motion.div>
             </div>
@@ -376,11 +313,11 @@ const Home = () => {
               <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-12 text-center">
                 <div className="mb-6 flex items-center justify-center gap-3 text-[11px] font-bold tracking-[0.2em] text-[#4A2F1D]">
                   <span className="text-[#8B5E45] text-xs">❖</span>
-                  <span className="uppercase">Our Expertise</span>
+                  <span className="uppercase">{homeData.expertiseSection.subtitle}</span>
                   <span className="text-[#8B5E45] text-xs">❖</span>
                 </div>
                 <h3 className="font-['Playfair_Display',serif] text-4xl md:text-5xl lg:text-[54px] font-semibold text-[#4A2F1D]">
-                  Crafting Experiences. <span className="italic text-[#4A2F1D]">Creating Memories.</span>
+                  {homeData.expertiseSection.titleLine1} <span className="italic text-[#4A2F1D]">{homeData.expertiseSection.titleLine2}</span>
                 </h3>
                 <div className="mt-8 flex items-center justify-center">
                   <span className="text-[#8B5E45] text-sm">❖</span>
@@ -412,29 +349,16 @@ const Home = () => {
               <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-12 text-center">
                 <div className="mb-6 flex items-center justify-center gap-3 text-[11px] font-bold tracking-[0.2em] text-[#4A2F1D]">
                   <span className="text-[#8B5E45] text-xs">❖</span>
-                  <span className="uppercase">Why Choose India Solution?</span>
+                  <span className="uppercase">{homeData.whyChooseUs.subtitle}</span>
                   <span className="text-[#8B5E45] text-xs">❖</span>
                 </div>
                 <h3 className="font-['Playfair_Display',serif] text-4xl md:text-5xl lg:text-[54px] font-semibold text-[#4A2F1D]">
-                  Excellence in <span className="italic text-[#4A2F1D]">Every Detail</span>
+                  {homeData.whyChooseUs.titleLine1} <span className="italic text-[#4A2F1D]">{homeData.whyChooseUs.titleLine2}</span>
                 </h3>
               </motion.div>
 
               <div className="flex flex-wrap justify-center gap-6 lg:gap-8 max-w-[1200px] mx-auto">
-                {[
-                  { title: "15+ Years of\nIndustry Experience", desc: "A legacy of trust, creativity\nand flawless execution." },
-                  { title: "Complete In-House\nProduction", desc: "End to end solutions under\none roof for seamless delivery." },
-                  { title: "No Middlemen or\nThird-Party Dependencies", desc: "Direct communication,\ntransparent processes." },
-                  { title: "Single Point\nof Contact", desc: "One dedicated partner\nyou can rely on." },
-                  { title: "Premium Quality\nat Every Scale", desc: "Uncompromising quality\nwhether intimate or grand." },
-                  { title: "Cost-Effective\nSolutions", desc: "Maximum value without\ncompromising on quality." },
-                  { title: "Highly Experienced\nTechnical & Creative Team", desc: "Passionate professionals bringing\nyour vision to life." },
-                  { title: "End-to-End Event\nManagement", desc: "From concept to completion,\nwe handle it all." },
-                  { title: "Reliable Execution &\nOn-Time Delivery", desc: "Your deadlines are our\ncommitment." },
-                  { title: "Customized Concepts &\nInnovative Designs", desc: "Unique ideas tailored\njust for you." },
-                  { title: "Trusted by Event Companies,\nVenues, Brands & Corporates", desc: "Long-term partnerships built\non trust and excellence." },
-                  { title: "Stress-Free\nExperience", desc: "Everything in one place so you\ncan enjoy time with family." }
-                ].map((item, i) => (
+                {homeData.whyChooseUs.reasons.map((item, i) => (
                   <motion.div
                     key={i}
                     initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}
@@ -452,13 +376,13 @@ const Home = () => {
 
             {/* Missing Text & Headings */}
             <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mx-auto max-w-4xl text-center mt-12 mb-6">
-              <p className="text-[15px] font-semibold text-[#2A1810] leading-relaxed mb-10">
-                At India Solution, we don’t just organize events—we design experiences, produce excellence,<br />and execute with precision. Every event reflects our commitment to quality, creativity,<br />innovation, and flawless execution, ensuring every client receives the same premium service,<br />regardless of the event size or budget.
+              <p className="text-[15px] font-semibold text-[#2A1810] leading-relaxed mb-10 whitespace-pre-line">
+                {homeData.bottomStatement.paragraph}
               </p>
               <div className="flex justify-center mb-8"><span className="text-[#4A2F1D] text-sm">❖</span></div>
               <h4 className="font-['Playfair_Display',serif] text-4xl md:text-[42px] lg:text-[48px] font-semibold text-[#4A2F1D]">
-                ONE TEAM. ONE PARTNER.<br />
-                <span className="italic text-[#4A2F1D] mt-2 block tracking-wide">ENDLESS POSSIBILITIES.</span>
+                {homeData.bottomStatement.titleLine1}<br />
+                <span className="italic text-[#4A2F1D] mt-2 block tracking-wide">{homeData.bottomStatement.titleLine2}</span>
               </h4>
               <div className="flex justify-center mt-8 mb-4"><span className="text-[#4A2F1D] text-sm">❖</span></div>
             </motion.div>
@@ -480,9 +404,9 @@ const Home = () => {
 
             <div className="relative z-10 mt-12 overflow-hidden py-5" style={{ maskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)' }}>
               <div className="client-logo-track flex items-center gap-0">
-                {[...happyClients, ...happyClients].map((brand, index) => (
-                  <div key={`${brand}-${index}`} className="relative flex flex-col items-center justify-center min-w-[260px] px-8" aria-hidden={index >= happyClients.length}>
-                    <ClientLogo brand={brand} />
+                {[...homeData.happyClients, ...homeData.happyClients].map((client, index) => (
+                  <div key={`${client.name}-${index}`} className="relative flex flex-col items-center justify-center min-w-[260px] px-8 h-[80px]" aria-hidden={index >= homeData.happyClients.length}>
+                    <img src={client.logo} alt={client.name} className="h-[45px] object-contain" />
                     {/* Small diamond below the logo */}
                     <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[#D5C5B9] text-[10px]">❖</div>
                     {/* Vertical separator between items */}

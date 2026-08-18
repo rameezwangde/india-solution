@@ -1,0 +1,89 @@
+{
+  "hero": {
+    "subtitle": "Crafting Unforgettable Moments",
+    "titleLine1": "DESIGNED,",
+    "titleLine2": "PRODUCED & DELIVERED",
+    "titleLine3": "UNDER ONE ROOF.",
+    "description": "At India Solution, we bring your vision to life, from intimate celebrations to grand corporate gatherings. Trust us to handle the details while you enjoy the moment."
+  },
+  "about": {
+    "subtitle": "Crafting Unforgettable Moments",
+    "titleLine1": "DESIGNED, PRODUCED",
+    "titleLine2": "& DELIVERED",
+    "titleLine3": "UNDER ONE ROOF.",
+    "paragraphs": [
+      "At **India Solution**, we blend creativity, precision, and passion to craft events that leave a lasting impression. From intimate celebrations to grand corporate gatherings, every detail is thoughtfully planned and flawlessly executed.",
+      "With years of experience and a dedicated team of experts, we offer end-to-end event solutions tailored to your unique vision. Our commitment to excellence, innovation, and elegance ensures that your event is not just well-managed — but truly unforgettable.",
+      "Trust us to handle the details while you enjoy the moment. At **India Solution**, we don't just organize events — we create memories that last a lifetime."
+    ]
+  },
+  "stats": [
+    {
+      "value": "5,600+",
+      "label": "Events\nCompleted",
+      "iconName": "CalendarDays"
+    },
+    {
+      "value": "4,300+",
+      "label": "Happy Clients",
+      "iconName": "Users"
+    },
+    {
+      "value": "15+",
+      "label": "Years Experience",
+      "iconName": "Award"
+    },
+    {
+      "value": "50+",
+      "label": "Event Categories",
+      "iconName": "Star"
+    }
+  ],
+  "brandStatement": {
+    "image": "/images/luxury_wedding_dining.png",
+    "titleLine1": "CREATING",
+    "titleLine2": "UNFORGETTABLE",
+    "titleLine3": "EVENTS",
+    "sinceText1": "SINCE",
+    "sinceText2": "2010",
+    "description": "At India Solution, we bring your vision to life, from intimate celebrations to grand corporate gatherings. Trust us to handle the details while you enjoy the moment."
+  },
+  "expertiseSection": {
+    "subtitle": "Our Expertise",
+    "titleLine1": "Crafting Experiences.",
+    "titleLine2": "Creating Memories."
+  },
+  "whyChooseUs": {
+    "subtitle": "Why Choose India Solution?",
+    "titleLine1": "Excellence in",
+    "titleLine2": "Every Detail",
+    "reasons": [
+      { "title": "15+ Years of\nIndustry Experience", "desc": "A legacy of trust, creativity\nand flawless execution." },
+      { "title": "Complete In-House\nProduction", "desc": "End to end solutions under\none roof for seamless delivery." },
+      { "title": "No Middlemen or\nThird-Party Dependencies", "desc": "Direct communication,\ntransparent processes." },
+      { "title": "Single Point\nof Contact", "desc": "One dedicated partner\nyou can rely on." },
+      { "title": "Premium Quality\nat Every Scale", "desc": "Uncompromising quality\nwhether intimate or grand." },
+      { "title": "Cost-Effective\nSolutions", "desc": "Maximum value without\ncompromising on quality." },
+      { "title": "Highly Experienced\nTechnical & Creative Team", "desc": "Passionate professionals bringing\nyour vision to life." },
+      { "title": "End-to-End Event\nManagement", "desc": "From concept to completion,\nwe handle it all." },
+      { "title": "Reliable Execution &\nOn-Time Delivery", "desc": "Your deadlines are our\ncommitment." },
+      { "title": "Customized Concepts &\nInnovative Designs", "desc": "Unique ideas tailored\njust for you." },
+      { "title": "Trusted by Event Companies,\nVenues, Brands & Corporates", "desc": "Long-term partnerships built\non trust and excellence." },
+      { "title": "Stress-Free\nExperience", "desc": "Everything in one place so you\ncan enjoy time with family." }
+    ]
+  },
+  "bottomStatement": {
+    "paragraph": "At India Solution, we don’t just organize events—we design experiences, produce excellence,\nand execute with precision. Every event reflects our commitment to quality, creativity,\ninnovation, and flawless execution, ensuring every client receives the same premium service,\nregardless of the event size or budget.",
+    "titleLine1": "ONE TEAM. ONE PARTNER.",
+    "titleLine2": "ENDLESS POSSIBILITIES."
+  },
+  "happyClients": [
+    { "name": "Google", "logo": "/images/google-logo.png" },
+    { "name": "Capgemini", "logo": "/images/capgemini-logo.png" },
+    { "name": "DHL", "logo": "/images/dhl-logo.png" },
+    { "name": "IBM", "logo": "/images/ibm-logo.png" },
+    { "name": "Bajaj", "logo": "/images/bajaj-logo.png" },
+    { "name": "Audi", "logo": "/images/audi-logo.png" },
+    { "name": "Amazon", "logo": "/images/amazon-logo.png" }
+  ]
+}
