@@ -17,8 +17,9 @@ import {
   Utensils,
 } from 'lucide-react';
 import { staggerContainer, fadeUp } from '../utils/animations';
-import { serviceCatalog, slugifyServiceItem } from '../data/serviceCatalog';
 import SEO from '../components/layout/SEO';
+import { useTina } from 'tinacms/dist/react';
+import servicesData from '../content/services.json';
 
 const iconMap = {
   BriefcaseBusiness,
@@ -37,6 +38,23 @@ const iconMap = {
 };
 
 const Services = () => {
+  const { data } = useTina({
+    query: `query {
+      services(relativePath: "services.json") {
+        seo { title description keywords }
+        hero { subtitle titleLine1 titleLine2 description }
+        catalog { title slug icon description items { name slug } }
+      }
+    }`,
+    variables: { relativePath: "services.json" },
+    data: { 
+      services: servicesData
+    }
+  });
+
+  const activeData = data.services;
+  const serviceCatalog = activeData.catalog;
+
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -78,9 +96,9 @@ const Services = () => {
   return (
     <section className="relative overflow-hidden bg-[#FAF7F2] px-5 pb-24 pt-32 text-[#2A1810] lg:px-10 lg:pt-44 min-h-screen font-sans">
       <SEO 
-        title="Our Services & Event Planning"
-        description="Explore India Solution's comprehensive event services including corporate conferences, luxury weddings, stage fabrication, and product launches in Bengaluru."
-        keywords="event services, wedding planning packages, corporate event management, stage fabrication bengaluru"
+        title={activeData.seo.title}
+        description={activeData.seo.description}
+        keywords={activeData.seo.keywords}
         schema={serviceSchema}
       />
       {/* Global Background Watermarks */}
@@ -108,18 +126,18 @@ const Services = () => {
           <div className="flex items-center justify-center gap-3 mb-6">
             <span className="h-[1px] w-12 bg-gradient-to-r from-transparent to-[#D5C5B9]"></span>
             <span className="text-[#4A2F1D] text-[10px]">❖</span>
-            <span className="text-[#4A2F1D] text-xs font-bold tracking-[0.25em] uppercase">Services</span>
+            <span className="text-[#4A2F1D] text-xs font-bold tracking-[0.25em] uppercase">{activeData.hero.subtitle}</span>
             <span className="text-[#4A2F1D] text-[10px]">❖</span>
             <span className="h-[1px] w-12 bg-gradient-to-l from-transparent to-[#D5C5B9]"></span>
           </div>
           <h1 className="font-['Playfair_Display',serif] text-5xl md:text-6xl font-bold text-[#4A2F1D] tracking-wide mb-6">
-            OUR <span className="text-[#4A2F1D]">SERVICES</span>
+            {activeData.hero.titleLine1} <span className="text-[#4A2F1D]">{activeData.hero.titleLine2}</span>
           </h1>
           <div className="flex items-center justify-center gap-2 mb-6">
             <span className="text-[#4A2F1D] text-sm">❖</span>
           </div>
           <p className="mx-auto mt-3 max-w-md text-base md:text-lg font-semibold leading-relaxed text-[#2A1810]">
-            Comprehensive event solutions tailored to create unforgettable experiences.
+            {activeData.hero.description}
           </p>
         </motion.div>
 
@@ -160,14 +178,14 @@ const Services = () => {
                 </div>
 
                 <div className="mt-4 grid gap-3">
-                  {service.items.map((item) => (
+                  {service.items && service.items.map((item) => (
                     <Link
-                      key={item}
-                      to={`/services/${service.slug}/${slugifyServiceItem(item)}`}
+                      key={item.slug}
+                      to={`/services/${service.slug}/${item.slug}`}
                       className="flex items-center gap-3 rounded-lg border border-[#E8DFD5] bg-[#FAF7F2]/50 px-4 py-3 text-[13px] font-bold leading-tight text-[#2A1810] transition-all hover:-translate-y-0.5 hover:border-[#A67C65] hover:shadow-sm"
                     >
                       <ChevronRight size={14} className="shrink-0 text-[#4A2F1D]" strokeWidth={2.5} />
-                      <span>{item}</span>
+                      <span>{item.name}</span>
                     </Link>
                   ))}
                 </div>

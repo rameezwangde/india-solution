@@ -56,13 +56,34 @@ type Query {
   document(collection: String, relativePath: String): DocumentNode!
   home(relativePath: String): Home!
   homeConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: HomeFilter): HomeConnection!
+  about(relativePath: String): About!
+  aboutConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: AboutFilter): AboutConnection!
   services(relativePath: String): Services!
   servicesConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ServicesFilter): ServicesConnection!
+  gallery(relativePath: String): Gallery!
+  galleryConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: GalleryFilter): GalleryConnection!
+  testimonials(relativePath: String): Testimonials!
+  testimonialsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: TestimonialsFilter): TestimonialsConnection!
+  careers(relativePath: String): Careers!
+  careersConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: CareersFilter): CareersConnection!
+  contact(relativePath: String): Contact!
+  contactConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ContactFilter): ContactConnection!
+  franchise(relativePath: String): Franchise!
+  franchiseConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: FranchiseFilter): FranchiseConnection!
+  membership(relativePath: String): Membership!
+  membershipConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: MembershipFilter): MembershipConnection!
 }
 
 input DocumentFilter {
   home: HomeFilter
+  about: AboutFilter
   services: ServicesFilter
+  gallery: GalleryFilter
+  testimonials: TestimonialsFilter
+  careers: CareersFilter
+  contact: ContactFilter
+  franchise: FranchiseFilter
+  membership: MembershipFilter
 }
 
 type DocumentConnectionEdges {
@@ -88,7 +109,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Home | Services | Folder
+union DocumentNode = Home | About | Services | Gallery | Testimonials | Careers | Contact | Franchise | Membership | Folder
 
 type HomeSeo {
   title: String
@@ -292,19 +313,272 @@ type HomeConnection implements Connection {
   edges: [HomeConnectionEdges]
 }
 
+type AboutSeo {
+  title: String
+  description: String
+  keywords: String
+}
+
+type AboutHero {
+  subtitle: String
+  title: String
+  description: String
+}
+
+type AboutMainSection {
+  paragraphs: [String]
+  buttonText: String
+  image: String
+}
+
+type AboutStats {
+  value: String
+  label: String
+  iconName: String
+}
+
+type AboutMission {
+  title: String
+  text: String
+}
+
+type AboutVision {
+  title: String
+  text: String
+}
+
+type AboutFounder {
+  sectionSubtitle: String
+  sectionTitleLine1: String
+  sectionTitleLine2: String
+  image: String
+  name: String
+  role: String
+  location: String
+  aboutMyselfText: [String]
+  expertiseText: String
+}
+
+type AboutCredentials {
+  title: String
+  items: [String]
+}
+
+type AboutAchievements {
+  title: String
+  items: [String]
+}
+
+type AboutWhyChooseUsHighlights {
+  title: String
+  description: String
+  iconName: String
+}
+
+type AboutWhyChooseUs {
+  subtitle: String
+  titleLine1: String
+  titleLine2: String
+  description: String
+  highlights: [AboutWhyChooseUsHighlights]
+}
+
+type About implements Node & Document {
+  seo: AboutSeo
+  hero: AboutHero
+  mainSection: AboutMainSection
+  stats: [AboutStats]
+  mission: AboutMission
+  vision: AboutVision
+  founder: AboutFounder
+  credentials: AboutCredentials
+  achievements: AboutAchievements
+  whyChooseUs: AboutWhyChooseUs
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input AboutSeoFilter {
+  title: StringFilter
+  description: StringFilter
+  keywords: StringFilter
+}
+
+input AboutHeroFilter {
+  subtitle: StringFilter
+  title: StringFilter
+  description: StringFilter
+}
+
+input AboutMainSectionFilter {
+  paragraphs: StringFilter
+  buttonText: StringFilter
+  image: ImageFilter
+}
+
+input AboutStatsFilter {
+  value: StringFilter
+  label: StringFilter
+  iconName: StringFilter
+}
+
+input AboutMissionFilter {
+  title: StringFilter
+  text: StringFilter
+}
+
+input AboutVisionFilter {
+  title: StringFilter
+  text: StringFilter
+}
+
+input AboutFounderFilter {
+  sectionSubtitle: StringFilter
+  sectionTitleLine1: StringFilter
+  sectionTitleLine2: StringFilter
+  image: ImageFilter
+  name: StringFilter
+  role: StringFilter
+  location: StringFilter
+  aboutMyselfText: StringFilter
+  expertiseText: StringFilter
+}
+
+input AboutCredentialsFilter {
+  title: StringFilter
+  items: StringFilter
+}
+
+input AboutAchievementsFilter {
+  title: StringFilter
+  items: StringFilter
+}
+
+input AboutWhyChooseUsHighlightsFilter {
+  title: StringFilter
+  description: StringFilter
+  iconName: StringFilter
+}
+
+input AboutWhyChooseUsFilter {
+  subtitle: StringFilter
+  titleLine1: StringFilter
+  titleLine2: StringFilter
+  description: StringFilter
+  highlights: AboutWhyChooseUsHighlightsFilter
+}
+
+input AboutFilter {
+  seo: AboutSeoFilter
+  hero: AboutHeroFilter
+  mainSection: AboutMainSectionFilter
+  stats: AboutStatsFilter
+  mission: AboutMissionFilter
+  vision: AboutVisionFilter
+  founder: AboutFounderFilter
+  credentials: AboutCredentialsFilter
+  achievements: AboutAchievementsFilter
+  whyChooseUs: AboutWhyChooseUsFilter
+}
+
+type AboutConnectionEdges {
+  cursor: String!
+  node: About
+}
+
+type AboutConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [AboutConnectionEdges]
+}
+
+type ServicesSeo {
+  title: String
+  description: String
+  keywords: String
+}
+
+type ServicesHero {
+  subtitle: String
+  titleLine1: String
+  titleLine2: String
+  description: String
+}
+
+type ServicesCatalogSections {
+  eyebrow: String
+  title: String
+  accent: String
+  description: String
+  listItems: [String]
+}
+
+type ServicesCatalogItemsSections {
+  eyebrow: String
+  title: String
+  accent: String
+  description: String
+  listItems: [String]
+}
+
+type ServicesCatalogItems {
+  name: String
+  slug: String
+  sections: [ServicesCatalogItemsSections]
+}
+
 type ServicesCatalog {
   title: String
   slug: String
   icon: String
   description: String
-  items: [String]
+  sections: [ServicesCatalogSections]
+  items: [ServicesCatalogItems]
 }
 
 type Services implements Node & Document {
+  seo: ServicesSeo
+  hero: ServicesHero
   catalog: [ServicesCatalog]
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
+}
+
+input ServicesSeoFilter {
+  title: StringFilter
+  description: StringFilter
+  keywords: StringFilter
+}
+
+input ServicesHeroFilter {
+  subtitle: StringFilter
+  titleLine1: StringFilter
+  titleLine2: StringFilter
+  description: StringFilter
+}
+
+input ServicesCatalogSectionsFilter {
+  eyebrow: StringFilter
+  title: StringFilter
+  accent: StringFilter
+  description: StringFilter
+  listItems: StringFilter
+}
+
+input ServicesCatalogItemsSectionsFilter {
+  eyebrow: StringFilter
+  title: StringFilter
+  accent: StringFilter
+  description: StringFilter
+  listItems: StringFilter
+}
+
+input ServicesCatalogItemsFilter {
+  name: StringFilter
+  slug: StringFilter
+  sections: ServicesCatalogItemsSectionsFilter
 }
 
 input ServicesCatalogFilter {
@@ -312,10 +586,13 @@ input ServicesCatalogFilter {
   slug: StringFilter
   icon: StringFilter
   description: StringFilter
-  items: StringFilter
+  sections: ServicesCatalogSectionsFilter
+  items: ServicesCatalogItemsFilter
 }
 
 input ServicesFilter {
+  seo: ServicesSeoFilter
+  hero: ServicesHeroFilter
   catalog: ServicesCatalogFilter
 }
 
@@ -330,6 +607,622 @@ type ServicesConnection implements Connection {
   edges: [ServicesConnectionEdges]
 }
 
+type GallerySeo {
+  title: String
+  description: String
+  keywords: String
+}
+
+type GalleryHeader {
+  title: String
+  subtitle: String
+  description: String
+}
+
+type GalleryPhotos {
+  title: String
+  description: String
+  src: String
+  category: String
+}
+
+type Gallery implements Node & Document {
+  seo: GallerySeo
+  header: GalleryHeader
+  categories: [String]
+  photos: [GalleryPhotos]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input GallerySeoFilter {
+  title: StringFilter
+  description: StringFilter
+  keywords: StringFilter
+}
+
+input GalleryHeaderFilter {
+  title: StringFilter
+  subtitle: StringFilter
+  description: StringFilter
+}
+
+input GalleryPhotosFilter {
+  title: StringFilter
+  description: StringFilter
+  src: ImageFilter
+  category: StringFilter
+}
+
+input GalleryFilter {
+  seo: GallerySeoFilter
+  header: GalleryHeaderFilter
+  categories: StringFilter
+  photos: GalleryPhotosFilter
+}
+
+type GalleryConnectionEdges {
+  cursor: String!
+  node: Gallery
+}
+
+type GalleryConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [GalleryConnectionEdges]
+}
+
+type TestimonialsSeo {
+  title: String
+  description: String
+  keywords: String
+}
+
+type TestimonialsHeader {
+  eyebrow: String
+  title: String
+  description: String
+}
+
+type TestimonialsOverallRating {
+  score: String
+  totalReviews: String
+}
+
+type TestimonialsFeatured {
+  quote: String
+  name: String
+  role: String
+  initials: String
+}
+
+type TestimonialsItems {
+  title: String
+  quote: String
+  name: String
+  role: String
+  initials: String
+  offset: String
+}
+
+type Testimonials implements Node & Document {
+  seo: TestimonialsSeo
+  header: TestimonialsHeader
+  overallRating: TestimonialsOverallRating
+  featured: TestimonialsFeatured
+  items: [TestimonialsItems]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input TestimonialsSeoFilter {
+  title: StringFilter
+  description: StringFilter
+  keywords: StringFilter
+}
+
+input TestimonialsHeaderFilter {
+  eyebrow: StringFilter
+  title: StringFilter
+  description: StringFilter
+}
+
+input TestimonialsOverallRatingFilter {
+  score: StringFilter
+  totalReviews: StringFilter
+}
+
+input TestimonialsFeaturedFilter {
+  quote: StringFilter
+  name: StringFilter
+  role: StringFilter
+  initials: StringFilter
+}
+
+input TestimonialsItemsFilter {
+  title: StringFilter
+  quote: StringFilter
+  name: StringFilter
+  role: StringFilter
+  initials: StringFilter
+  offset: StringFilter
+}
+
+input TestimonialsFilter {
+  seo: TestimonialsSeoFilter
+  header: TestimonialsHeaderFilter
+  overallRating: TestimonialsOverallRatingFilter
+  featured: TestimonialsFeaturedFilter
+  items: TestimonialsItemsFilter
+}
+
+type TestimonialsConnectionEdges {
+  cursor: String!
+  node: Testimonials
+}
+
+type TestimonialsConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [TestimonialsConnectionEdges]
+}
+
+type CareersSeo {
+  title: String
+  description: String
+  keywords: String
+}
+
+type CareersHeader {
+  eyebrow: String
+  title: String
+  description: String
+}
+
+type CareersJobs {
+  id: String
+  title: String
+  location: String
+  experience: String
+  jobType: String
+  companyDescription: String
+  mandatoryCriteria: [String]
+  responsibilities: [String]
+  workingConditions: [String]
+}
+
+type Careers implements Node & Document {
+  seo: CareersSeo
+  header: CareersHeader
+  jobs: [CareersJobs]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input CareersSeoFilter {
+  title: StringFilter
+  description: StringFilter
+  keywords: StringFilter
+}
+
+input CareersHeaderFilter {
+  eyebrow: StringFilter
+  title: StringFilter
+  description: StringFilter
+}
+
+input CareersJobsFilter {
+  id: StringFilter
+  title: StringFilter
+  location: StringFilter
+  experience: StringFilter
+  jobType: StringFilter
+  companyDescription: StringFilter
+  mandatoryCriteria: StringFilter
+  responsibilities: StringFilter
+  workingConditions: StringFilter
+}
+
+input CareersFilter {
+  seo: CareersSeoFilter
+  header: CareersHeaderFilter
+  jobs: CareersJobsFilter
+}
+
+type CareersConnectionEdges {
+  cursor: String!
+  node: Careers
+}
+
+type CareersConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [CareersConnectionEdges]
+}
+
+type ContactSeo {
+  title: String
+  description: String
+  keywords: String
+}
+
+type ContactHeader {
+  eyebrow: String
+  titleLine1: String
+  titleLine2: String
+  description: String
+}
+
+type ContactContactCards {
+  title: String
+  icon: String
+  lines: [String]
+  hrefs: [String]
+}
+
+type ContactSocials {
+  label: String
+  url: String
+  icon: String
+  className: String
+}
+
+type Contact implements Node & Document {
+  seo: ContactSeo
+  header: ContactHeader
+  contactCards: [ContactContactCards]
+  socials: [ContactSocials]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input ContactSeoFilter {
+  title: StringFilter
+  description: StringFilter
+  keywords: StringFilter
+}
+
+input ContactHeaderFilter {
+  eyebrow: StringFilter
+  titleLine1: StringFilter
+  titleLine2: StringFilter
+  description: StringFilter
+}
+
+input ContactContactCardsFilter {
+  title: StringFilter
+  icon: StringFilter
+  lines: StringFilter
+  hrefs: StringFilter
+}
+
+input ContactSocialsFilter {
+  label: StringFilter
+  url: StringFilter
+  icon: StringFilter
+  className: StringFilter
+}
+
+input ContactFilter {
+  seo: ContactSeoFilter
+  header: ContactHeaderFilter
+  contactCards: ContactContactCardsFilter
+  socials: ContactSocialsFilter
+}
+
+type ContactConnectionEdges {
+  cursor: String!
+  node: Contact
+}
+
+type ContactConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [ContactConnectionEdges]
+}
+
+type FranchiseSeo {
+  title: String
+  description: String
+}
+
+type FranchiseHeader {
+  eyebrow: String
+  title: String
+  titleItalic: String
+  subtitle: String
+  highlight: String
+}
+
+type FranchiseSections {
+  title: String
+  icon: String
+  items: [String]
+}
+
+type FranchiseModels {
+  name: String
+  investment: String
+}
+
+type FranchiseClosing {
+  line1: String
+  line1Italic: String
+  line2: String
+}
+
+type Franchise implements Node & Document {
+  seo: FranchiseSeo
+  header: FranchiseHeader
+  sections: [FranchiseSections]
+  modelsTitle: String
+  models: [FranchiseModels]
+  visionTitle: String
+  vision: [String]
+  closing: FranchiseClosing
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input FranchiseSeoFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input FranchiseHeaderFilter {
+  eyebrow: StringFilter
+  title: StringFilter
+  titleItalic: StringFilter
+  subtitle: StringFilter
+  highlight: StringFilter
+}
+
+input FranchiseSectionsFilter {
+  title: StringFilter
+  icon: StringFilter
+  items: StringFilter
+}
+
+input FranchiseModelsFilter {
+  name: StringFilter
+  investment: StringFilter
+}
+
+input FranchiseClosingFilter {
+  line1: StringFilter
+  line1Italic: StringFilter
+  line2: StringFilter
+}
+
+input FranchiseFilter {
+  seo: FranchiseSeoFilter
+  header: FranchiseHeaderFilter
+  sections: FranchiseSectionsFilter
+  modelsTitle: StringFilter
+  models: FranchiseModelsFilter
+  visionTitle: StringFilter
+  vision: StringFilter
+  closing: FranchiseClosingFilter
+}
+
+type FranchiseConnectionEdges {
+  cursor: String!
+  node: Franchise
+}
+
+type FranchiseConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [FranchiseConnectionEdges]
+}
+
+type MembershipSeo {
+  title: String
+  description: String
+}
+
+type MembershipHero {
+  eyebrow: String
+  titleLine1: String
+  titleItalic: String
+  titleLine3: String
+  description: String
+  badges: [String]
+}
+
+type MembershipWhySectionCards {
+  icon: String
+  title: String
+  desc: String
+}
+
+type MembershipWhySection {
+  title: String
+  description: String
+  cards: [MembershipWhySectionCards]
+}
+
+type MembershipBenefitsSectionCards {
+  icon: String
+  title: String
+  items: [String]
+  gradient: String
+}
+
+type MembershipBenefitsSection {
+  title: String
+  cards: [MembershipBenefitsSectionCards]
+}
+
+type MembershipMilestoneSectionMilestones {
+  title: String
+  icon: String
+}
+
+type MembershipMilestoneSection {
+  title: String
+  description: String
+  milestones: [MembershipMilestoneSectionMilestones]
+}
+
+type MembershipRewardsSection {
+  title: String
+  rewards: [String]
+}
+
+type MembershipExclusiveOffersSection {
+  title: String
+  offers: [String]
+}
+
+type MembershipPerfectForSectionItems {
+  title: String
+  icon: String
+}
+
+type MembershipPerfectForSection {
+  title: String
+  items: [MembershipPerfectForSectionItems]
+}
+
+type MembershipPromiseSection {
+  title: String
+  text: String
+  signature: String
+}
+
+type MembershipCtaSection {
+  titleLine1: String
+  titleLine2: String
+  description: String
+}
+
+type Membership implements Node & Document {
+  seo: MembershipSeo
+  hero: MembershipHero
+  whySection: MembershipWhySection
+  benefitsSection: MembershipBenefitsSection
+  milestoneSection: MembershipMilestoneSection
+  rewardsSection: MembershipRewardsSection
+  exclusiveOffersSection: MembershipExclusiveOffersSection
+  perfectForSection: MembershipPerfectForSection
+  promiseSection: MembershipPromiseSection
+  ctaSection: MembershipCtaSection
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input MembershipSeoFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input MembershipHeroFilter {
+  eyebrow: StringFilter
+  titleLine1: StringFilter
+  titleItalic: StringFilter
+  titleLine3: StringFilter
+  description: StringFilter
+  badges: StringFilter
+}
+
+input MembershipWhySectionCardsFilter {
+  icon: StringFilter
+  title: StringFilter
+  desc: StringFilter
+}
+
+input MembershipWhySectionFilter {
+  title: StringFilter
+  description: StringFilter
+  cards: MembershipWhySectionCardsFilter
+}
+
+input MembershipBenefitsSectionCardsFilter {
+  icon: StringFilter
+  title: StringFilter
+  items: StringFilter
+  gradient: StringFilter
+}
+
+input MembershipBenefitsSectionFilter {
+  title: StringFilter
+  cards: MembershipBenefitsSectionCardsFilter
+}
+
+input MembershipMilestoneSectionMilestonesFilter {
+  title: StringFilter
+  icon: StringFilter
+}
+
+input MembershipMilestoneSectionFilter {
+  title: StringFilter
+  description: StringFilter
+  milestones: MembershipMilestoneSectionMilestonesFilter
+}
+
+input MembershipRewardsSectionFilter {
+  title: StringFilter
+  rewards: StringFilter
+}
+
+input MembershipExclusiveOffersSectionFilter {
+  title: StringFilter
+  offers: StringFilter
+}
+
+input MembershipPerfectForSectionItemsFilter {
+  title: StringFilter
+  icon: StringFilter
+}
+
+input MembershipPerfectForSectionFilter {
+  title: StringFilter
+  items: MembershipPerfectForSectionItemsFilter
+}
+
+input MembershipPromiseSectionFilter {
+  title: StringFilter
+  text: StringFilter
+  signature: StringFilter
+}
+
+input MembershipCtaSectionFilter {
+  titleLine1: StringFilter
+  titleLine2: StringFilter
+  description: StringFilter
+}
+
+input MembershipFilter {
+  seo: MembershipSeoFilter
+  hero: MembershipHeroFilter
+  whySection: MembershipWhySectionFilter
+  benefitsSection: MembershipBenefitsSectionFilter
+  milestoneSection: MembershipMilestoneSectionFilter
+  rewardsSection: MembershipRewardsSectionFilter
+  exclusiveOffersSection: MembershipExclusiveOffersSectionFilter
+  perfectForSection: MembershipPerfectForSectionFilter
+  promiseSection: MembershipPromiseSectionFilter
+  ctaSection: MembershipCtaSectionFilter
+}
+
+type MembershipConnectionEdges {
+  cursor: String!
+  node: Membership
+}
+
+type MembershipConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [MembershipConnectionEdges]
+}
+
 type Mutation {
   addPendingDocument(collection: String!, relativePath: String!, template: String): DocumentNode!
   updateDocument(collection: String, relativePath: String!, params: DocumentUpdateMutation!): DocumentNode!
@@ -338,19 +1231,47 @@ type Mutation {
   createFolder(collection: String, relativePath: String!): DocumentNode!
   updateHome(relativePath: String!, params: HomeMutation!): Home!
   createHome(relativePath: String!, params: HomeMutation!): Home!
+  updateAbout(relativePath: String!, params: AboutMutation!): About!
+  createAbout(relativePath: String!, params: AboutMutation!): About!
   updateServices(relativePath: String!, params: ServicesMutation!): Services!
   createServices(relativePath: String!, params: ServicesMutation!): Services!
+  updateGallery(relativePath: String!, params: GalleryMutation!): Gallery!
+  createGallery(relativePath: String!, params: GalleryMutation!): Gallery!
+  updateTestimonials(relativePath: String!, params: TestimonialsMutation!): Testimonials!
+  createTestimonials(relativePath: String!, params: TestimonialsMutation!): Testimonials!
+  updateCareers(relativePath: String!, params: CareersMutation!): Careers!
+  createCareers(relativePath: String!, params: CareersMutation!): Careers!
+  updateContact(relativePath: String!, params: ContactMutation!): Contact!
+  createContact(relativePath: String!, params: ContactMutation!): Contact!
+  updateFranchise(relativePath: String!, params: FranchiseMutation!): Franchise!
+  createFranchise(relativePath: String!, params: FranchiseMutation!): Franchise!
+  updateMembership(relativePath: String!, params: MembershipMutation!): Membership!
+  createMembership(relativePath: String!, params: MembershipMutation!): Membership!
 }
 
 input DocumentUpdateMutation {
   home: HomeMutation
+  about: AboutMutation
   services: ServicesMutation
+  gallery: GalleryMutation
+  testimonials: TestimonialsMutation
+  careers: CareersMutation
+  contact: ContactMutation
+  franchise: FranchiseMutation
+  membership: MembershipMutation
   relativePath: String
 }
 
 input DocumentMutation {
   home: HomeMutation
+  about: AboutMutation
   services: ServicesMutation
+  gallery: GalleryMutation
+  testimonials: TestimonialsMutation
+  careers: CareersMutation
+  contact: ContactMutation
+  franchise: FranchiseMutation
+  membership: MembershipMutation
 }
 
 input HomeSeoMutation {
@@ -440,16 +1361,403 @@ input HomeMutation {
   happyClients: [HomeHappyClientsMutation]
 }
 
+input AboutSeoMutation {
+  title: String
+  description: String
+  keywords: String
+}
+
+input AboutHeroMutation {
+  subtitle: String
+  title: String
+  description: String
+}
+
+input AboutMainSectionMutation {
+  paragraphs: [String]
+  buttonText: String
+  image: String
+}
+
+input AboutStatsMutation {
+  value: String
+  label: String
+  iconName: String
+}
+
+input AboutMissionMutation {
+  title: String
+  text: String
+}
+
+input AboutVisionMutation {
+  title: String
+  text: String
+}
+
+input AboutFounderMutation {
+  sectionSubtitle: String
+  sectionTitleLine1: String
+  sectionTitleLine2: String
+  image: String
+  name: String
+  role: String
+  location: String
+  aboutMyselfText: [String]
+  expertiseText: String
+}
+
+input AboutCredentialsMutation {
+  title: String
+  items: [String]
+}
+
+input AboutAchievementsMutation {
+  title: String
+  items: [String]
+}
+
+input AboutWhyChooseUsHighlightsMutation {
+  title: String
+  description: String
+  iconName: String
+}
+
+input AboutWhyChooseUsMutation {
+  subtitle: String
+  titleLine1: String
+  titleLine2: String
+  description: String
+  highlights: [AboutWhyChooseUsHighlightsMutation]
+}
+
+input AboutMutation {
+  seo: AboutSeoMutation
+  hero: AboutHeroMutation
+  mainSection: AboutMainSectionMutation
+  stats: [AboutStatsMutation]
+  mission: AboutMissionMutation
+  vision: AboutVisionMutation
+  founder: AboutFounderMutation
+  credentials: AboutCredentialsMutation
+  achievements: AboutAchievementsMutation
+  whyChooseUs: AboutWhyChooseUsMutation
+}
+
+input ServicesSeoMutation {
+  title: String
+  description: String
+  keywords: String
+}
+
+input ServicesHeroMutation {
+  subtitle: String
+  titleLine1: String
+  titleLine2: String
+  description: String
+}
+
+input ServicesCatalogSectionsMutation {
+  eyebrow: String
+  title: String
+  accent: String
+  description: String
+  listItems: [String]
+}
+
+input ServicesCatalogItemsSectionsMutation {
+  eyebrow: String
+  title: String
+  accent: String
+  description: String
+  listItems: [String]
+}
+
+input ServicesCatalogItemsMutation {
+  name: String
+  slug: String
+  sections: [ServicesCatalogItemsSectionsMutation]
+}
+
 input ServicesCatalogMutation {
   title: String
   slug: String
   icon: String
   description: String
-  items: [String]
+  sections: [ServicesCatalogSectionsMutation]
+  items: [ServicesCatalogItemsMutation]
 }
 
 input ServicesMutation {
+  seo: ServicesSeoMutation
+  hero: ServicesHeroMutation
   catalog: [ServicesCatalogMutation]
+}
+
+input GallerySeoMutation {
+  title: String
+  description: String
+  keywords: String
+}
+
+input GalleryHeaderMutation {
+  title: String
+  subtitle: String
+  description: String
+}
+
+input GalleryPhotosMutation {
+  title: String
+  description: String
+  src: String
+  category: String
+}
+
+input GalleryMutation {
+  seo: GallerySeoMutation
+  header: GalleryHeaderMutation
+  categories: [String]
+  photos: [GalleryPhotosMutation]
+}
+
+input TestimonialsSeoMutation {
+  title: String
+  description: String
+  keywords: String
+}
+
+input TestimonialsHeaderMutation {
+  eyebrow: String
+  title: String
+  description: String
+}
+
+input TestimonialsOverallRatingMutation {
+  score: String
+  totalReviews: String
+}
+
+input TestimonialsFeaturedMutation {
+  quote: String
+  name: String
+  role: String
+  initials: String
+}
+
+input TestimonialsItemsMutation {
+  title: String
+  quote: String
+  name: String
+  role: String
+  initials: String
+  offset: String
+}
+
+input TestimonialsMutation {
+  seo: TestimonialsSeoMutation
+  header: TestimonialsHeaderMutation
+  overallRating: TestimonialsOverallRatingMutation
+  featured: TestimonialsFeaturedMutation
+  items: [TestimonialsItemsMutation]
+}
+
+input CareersSeoMutation {
+  title: String
+  description: String
+  keywords: String
+}
+
+input CareersHeaderMutation {
+  eyebrow: String
+  title: String
+  description: String
+}
+
+input CareersJobsMutation {
+  id: String
+  title: String
+  location: String
+  experience: String
+  jobType: String
+  companyDescription: String
+  mandatoryCriteria: [String]
+  responsibilities: [String]
+  workingConditions: [String]
+}
+
+input CareersMutation {
+  seo: CareersSeoMutation
+  header: CareersHeaderMutation
+  jobs: [CareersJobsMutation]
+}
+
+input ContactSeoMutation {
+  title: String
+  description: String
+  keywords: String
+}
+
+input ContactHeaderMutation {
+  eyebrow: String
+  titleLine1: String
+  titleLine2: String
+  description: String
+}
+
+input ContactContactCardsMutation {
+  title: String
+  icon: String
+  lines: [String]
+  hrefs: [String]
+}
+
+input ContactSocialsMutation {
+  label: String
+  url: String
+  icon: String
+  className: String
+}
+
+input ContactMutation {
+  seo: ContactSeoMutation
+  header: ContactHeaderMutation
+  contactCards: [ContactContactCardsMutation]
+  socials: [ContactSocialsMutation]
+}
+
+input FranchiseSeoMutation {
+  title: String
+  description: String
+}
+
+input FranchiseHeaderMutation {
+  eyebrow: String
+  title: String
+  titleItalic: String
+  subtitle: String
+  highlight: String
+}
+
+input FranchiseSectionsMutation {
+  title: String
+  icon: String
+  items: [String]
+}
+
+input FranchiseModelsMutation {
+  name: String
+  investment: String
+}
+
+input FranchiseClosingMutation {
+  line1: String
+  line1Italic: String
+  line2: String
+}
+
+input FranchiseMutation {
+  seo: FranchiseSeoMutation
+  header: FranchiseHeaderMutation
+  sections: [FranchiseSectionsMutation]
+  modelsTitle: String
+  models: [FranchiseModelsMutation]
+  visionTitle: String
+  vision: [String]
+  closing: FranchiseClosingMutation
+}
+
+input MembershipSeoMutation {
+  title: String
+  description: String
+}
+
+input MembershipHeroMutation {
+  eyebrow: String
+  titleLine1: String
+  titleItalic: String
+  titleLine3: String
+  description: String
+  badges: [String]
+}
+
+input MembershipWhySectionCardsMutation {
+  icon: String
+  title: String
+  desc: String
+}
+
+input MembershipWhySectionMutation {
+  title: String
+  description: String
+  cards: [MembershipWhySectionCardsMutation]
+}
+
+input MembershipBenefitsSectionCardsMutation {
+  icon: String
+  title: String
+  items: [String]
+  gradient: String
+}
+
+input MembershipBenefitsSectionMutation {
+  title: String
+  cards: [MembershipBenefitsSectionCardsMutation]
+}
+
+input MembershipMilestoneSectionMilestonesMutation {
+  title: String
+  icon: String
+}
+
+input MembershipMilestoneSectionMutation {
+  title: String
+  description: String
+  milestones: [MembershipMilestoneSectionMilestonesMutation]
+}
+
+input MembershipRewardsSectionMutation {
+  title: String
+  rewards: [String]
+}
+
+input MembershipExclusiveOffersSectionMutation {
+  title: String
+  offers: [String]
+}
+
+input MembershipPerfectForSectionItemsMutation {
+  title: String
+  icon: String
+}
+
+input MembershipPerfectForSectionMutation {
+  title: String
+  items: [MembershipPerfectForSectionItemsMutation]
+}
+
+input MembershipPromiseSectionMutation {
+  title: String
+  text: String
+  signature: String
+}
+
+input MembershipCtaSectionMutation {
+  titleLine1: String
+  titleLine2: String
+  description: String
+}
+
+input MembershipMutation {
+  seo: MembershipSeoMutation
+  hero: MembershipHeroMutation
+  whySection: MembershipWhySectionMutation
+  benefitsSection: MembershipBenefitsSectionMutation
+  milestoneSection: MembershipMilestoneSectionMutation
+  rewardsSection: MembershipRewardsSectionMutation
+  exclusiveOffersSection: MembershipExclusiveOffersSectionMutation
+  perfectForSection: MembershipPerfectForSectionMutation
+  promiseSection: MembershipPromiseSectionMutation
+  ctaSection: MembershipCtaSectionMutation
 }
 
 schema {

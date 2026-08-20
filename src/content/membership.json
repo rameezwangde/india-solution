@@ -1,0 +1,101 @@
+{
+  "seo": {
+    "title": "Premium Celebration Circle Membership | India Solution",
+    "description": "One trusted partner for every celebration in life. Join the exclusive Celebration Circle for luxury event planning, VIP benefits, and lifelong memories."
+  },
+  "hero": {
+    "eyebrow": "Celebration Circle Membership",
+    "titleLine1": "One Membership.",
+    "titleItalic": "Every Celebration",
+    "titleLine3": "Covered.",
+    "description": "Whether it's your wedding, your child's birthday, a baby shower, an anniversary, or a housewarming, our Celebration Circle Membership ensures every occasion is stress-free, memorable, and more rewarding.",
+    "badges": ["Trusted Event Experts", "Verified Vendors", "Exclusive Savings", "Priority Service"]
+  },
+  "whySection": {
+    "title": "Why Become a Member?",
+    "description": "As a Celebration Circle Member, you're not just booking an event—you become part of an exclusive community that enjoys premium benefits all year round.",
+    "cards": [
+      { "icon": "Percent", "title": "Save More", "desc": "Enjoy exclusive member-only discounts on decorations, photography, catering, cakes, entertainment, and more." },
+      { "icon": "CalendarCheck", "title": "Priority Booking", "desc": "Secure your preferred dates even during peak wedding and festive seasons." },
+      { "icon": "ShieldCheck", "title": "Trusted Vendor Network", "desc": "No more searching for reliable vendors—we connect you with verified professionals at special member rates." },
+      { "icon": "Clock", "title": "Hassle-Free Planning", "desc": "Receive expert event planning guidance so every celebration is smooth and memorable." },
+      { "icon": "Crown", "title": "Exclusive Member Perks", "desc": "Access complimentary upgrades, surprise gifts, and seasonal offers available only to members." }
+    ]
+  },
+  "benefitsSection": {
+    "title": "Membership Benefits",
+    "cards": [
+      {
+        "icon": "Target",
+        "title": "Event Planning Benefits",
+        "items": ["Free event consultation throughout the year", "Dedicated event coordinator", "Customized event planning checklist", "Budget planning assistance", "Theme and décor suggestions"],
+        "gradient": "from-[#FDFBF9] to-[#F5E6DA]/30 border-[#F5E6DA]"
+      },
+      {
+        "icon": "Percent",
+        "title": "Exclusive Savings",
+        "items": ["Up to 15% off décor packages", "Discounts on photography and videography", "Exclusive pricing on catering", "Discounts on cakes and desserts", "Makeup artist and mehendi artist offers", "Return gift discounts", "Invitation design discounts"],
+        "gradient": "from-[#FDFBF9] to-[#E8DFD5]/40 border-[#E8DFD5]"
+      },
+      {
+        "icon": "Crown",
+        "title": "VIP Privileges",
+        "items": ["Priority booking", "VIP customer support", "Faster quotation turnaround", "Early access to festive packages", "Priority vendor scheduling"],
+        "gradient": "from-[#FDFBF9] to-[#F5E6DA]/30 border-[#F5E6DA]"
+      },
+      {
+        "icon": "Gift",
+        "title": "Complimentary Member Perks",
+        "items": ["Free balloon arch or entrance décor", "Complimentary digital invitation design", "Birthday surprise gift", "Anniversary décor upgrade", "Welcome hamper", "Free event consultation for family members"],
+        "gradient": "from-[#FDFBF9] to-[#E8DFD5]/40 border-[#E8DFD5]"
+      }
+    ]
+  },
+  "milestoneSection": {
+    "title": "One Membership for Every Milestone",
+    "description": "Celebrate every chapter of your family's story with us.",
+    "milestones": [
+      { "title": "Wedding", "icon": "Heart" },
+      { "title": "Baby Shower", "icon": "Gift" },
+      { "title": "Naming", "icon": "Star" },
+      { "title": "Birthday", "icon": "Sparkles" },
+      { "title": "Housewarming", "icon": "ShieldCheck" },
+      { "title": "Anniversary", "icon": "Gem" }
+    ]
+  },
+  "rewardsSection": {
+    "title": "Share the Joy. Get Rewarded.",
+    "rewards": ["Celebration Points", "Gift Vouchers", "Free Décor Upgrades", "Cashback", "Complimentary Add-ons"]
+  },
+  "exclusiveOffersSection": {
+    "title": "Member Exclusive Offers",
+    "offers": [
+      "Early access to new event themes",
+      "Festival celebration packages",
+      "Exclusive seasonal discounts",
+      "Last-minute booking assistance",
+      "Partner brand offers"
+    ]
+  },
+  "perfectForSection": {
+    "title": "Perfect For",
+    "items": [
+      { "title": "Couples planning their wedding", "icon": "Heart" },
+      { "title": "Families celebrating birthdays", "icon": "Sparkles" },
+      { "title": "Parents with young children", "icon": "Star" },
+      { "title": "Families hosting multiple events every year", "icon": "CalendarCheck" },
+      { "title": "NRIs planning celebrations in India", "icon": "Users" },
+      { "title": "Anyone looking for a trusted event partner", "icon": "ShieldCheck" }
+    ]
+  },
+  "promiseSection": {
+    "title": "Our Promise",
+    "text": "From your \"Yes\" to your child's first birthday and every milestone beyond, we're here to make every celebration unforgettable.",
+    "signature": "India Solution"
+  },
+  "ctaSection": {
+    "titleLine1": "Ready to Celebrate Every",
+    "titleLine2": "Milestone With Us?",
+    "description": "Join the Celebration Circle today and unlock exclusive savings, priority service, trusted vendors, and unforgettable experiences for every special occasion."
+  }
+}

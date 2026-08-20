@@ -4,7 +4,9 @@ import { fadeUp, staggerContainer } from '../utils/animations';
 import { MapPin, Phone, Navigation } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import { jobsData } from '../data/jobsData';
+import SEO from '../components/layout/SEO';
+import { useTina } from 'tinacms/dist/react';
+import careersDataFallback from '../content/careers.json';
 
 const Careers = () => {
   const [formData, setFormData] = useState({
@@ -14,6 +16,21 @@ const Careers = () => {
     city: '',
     comment: ''
   });
+
+  const { data } = useTina({
+    query: `query {
+      careers(relativePath: "careers.json") {
+        seo { title description keywords }
+        header { eyebrow title description }
+        jobs { id title location experience jobType }
+      }
+    }`,
+    variables: { relativePath: "careers.json" },
+    data: { careers: careersDataFallback }
+  });
+
+  const pageData = data.careers;
+  const jobsData = pageData.jobs || [];
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -29,6 +46,12 @@ const Careers = () => {
 
   return (
     <div className="bg-[#FAF7F2] text-[#2A1810] font-sans relative overflow-hidden">
+      <SEO 
+        title={pageData.seo?.title || "Careers at India Solution"}
+        description={pageData.seo?.description || "Join our team of creative event professionals."}
+        keywords={pageData.seo?.keywords || "event management jobs"}
+      />
+      
       <div className="absolute inset-0 z-0 pointer-events-none">
         <img 
           src="/hero-bg.png" 
@@ -48,18 +71,18 @@ const Careers = () => {
           <div className="flex items-center justify-center gap-3 mb-6">
             <span className="h-[1px] w-12 bg-gradient-to-r from-transparent to-[#D5C5B9]"></span>
             <span className="text-[#4A2F1D] text-[10px]">❖</span>
-            <span className="text-[#4A2F1D] text-xs font-bold tracking-[0.25em] uppercase">Join Our Team</span>
+            <span className="text-[#4A2F1D] text-xs font-bold tracking-[0.25em] uppercase">{pageData.header?.eyebrow}</span>
             <span className="text-[#4A2F1D] text-[10px]">❖</span>
             <span className="h-[1px] w-12 bg-gradient-to-l from-transparent to-[#D5C5B9]"></span>
           </div>
           <h1 className="font-['Playfair_Display',serif] text-5xl md:text-6xl font-bold text-[#4A2F1D] tracking-wide mb-6 uppercase">
-            CAREERS
+            {pageData.header?.title}
           </h1>
           <div className="flex items-center justify-center gap-2 mb-6">
             <span className="text-[#4A2F1D] text-sm">❖</span>
           </div>
           <p className="text-[#2A1810] font-medium text-lg tracking-wide max-w-xl mx-auto">
-            Be part of a team that creates unforgettable experiences. We are always looking for passionate, creative, and driven individuals.
+            {pageData.header?.description}
           </p>
         </motion.div>
 

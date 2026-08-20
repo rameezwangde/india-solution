@@ -21,15 +21,13 @@ import {
   Trophy,
   Utensils,
   X,
+  Camera,
+  Video
 } from 'lucide-react';
 import { fadeUp, staggerContainer } from '../utils/animations';
-import {
-  findServiceBySlug,
-  findServiceItemBySlug,
-  serviceCatalog,
-  slugifyServiceItem,
-} from '../data/serviceCatalog';
 import { corporateMedia } from '../data/corporateMedia';
+import { useTina } from 'tinacms/dist/react';
+import servicesFallbackData from '../content/services.json';
 
 const iconMap = {
   BriefcaseBusiness,
@@ -47,883 +45,128 @@ const iconMap = {
   Utensils,
 };
 
-const invitationSections = [
-  {
-    eyebrow: 'Custom Designs',
-    title: 'Invitations & Stationery',
-    accent: 'Stationery',
-    description: (
-      <>
-        Make your event unforgettable with our <strong>Invitation & Stationery Services</strong>, offering customized, high-quality invitations and stationery to match your unique style. From <strong>luxury invitations</strong> to <strong>RSVP cards, thank-you notes, and event signage</strong>, we ensure every detail is perfect. Our expert designers work closely with you to create personalized designs for <strong>corporate events, personal celebrations</strong>, and more. Let us set the tone for your event with stunning custom stationery that leaves a lasting impression
-      </>
-    ),
-    items: [
-      'Luxury Foil-Stamped Invitations',
-      'Laser-Cut Invitations',
-      'Vintage Letterpress Invitations',
-      'Modern Minimalist Invitations',
-      'Floral Watercolor Invitations',
-      'Rustic Kraft Paper Invitations',
-      'Custom Illustration Invitations',
-      'Destination Wedding Invitations',
-      'Interactive Invitations',
-    ],
-  },
-  {
-    eyebrow: 'Custom Designs',
-    title: 'Digital Invitations',
-    accent: 'Digital',
-    description: (
-      <>
-        Make your event stand out with our <strong>Digital Invitation Services</strong>, offering modern, eco-friendly, and interactive invitations tailored to your style. From <strong>animated e-vites</strong> to <strong>RSVP-integrated invitations, social media invites, and custom digital cards</strong>, we ensure a seamless, engaging experience for your guests. Our expert designers create personalized digital invitations for <strong>corporate events, personal celebrations</strong>, and more, making it easy to share event details instantly. Set the tone for your event with digital invitations that are both stylish and convenient
-      </>
-    ),
-    items: [
-      'Animated Video Invitations',
-      'E-vites with RSVP Integration',
-      'Email Invitations',
-      'Interactive Webpage Invitations',
-      'Social Media Invitations',
-      'QR Code Invitations',
-      'Virtual Event Invitations',
-      'Animated GIF Invitations',
-      'Personalized E-Cards',
-    ],
-  },
-];
+const serviceImageMapping = {
+  'Wedding Planning': 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+  'Stage Fabrication': 'https://images.unsplash.com/photo-1478146896981-b80fe463b330?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+  'Decorations': 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+  'Invitations & Stationery': 'https://images.unsplash.com/photo-1538356111053-748a48e1acb8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+  'Theme-Based Parties': 'https://images.unsplash.com/photo-1530103862676-de8892b12fa7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+  'Event Decor and Floral Arrangements': 'https://images.unsplash.com/photo-1522057385408-161b17a1aee5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+  'Photography and Videography Services': 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+};
 
-const beautySections = [
-  {
-    eyebrow: 'Wedding Ready',
-    title: 'Bridal Makeup Services',
-    accent: 'Makeup',
-    description: 'Transform your bridal look with our expert Bridal Makeup Service, designed to enhance your natural beauty for your big day. Whether you prefer a classic, glamorous, or modern style, our skilled makeup artists use high-quality products and personalized techniques to create a flawless, long-lasting look. Trust our makeup experts to make you feel radiant, from the ceremony to the celebration. Book your bridal makeup consultation today for a perfect, glowing look',
-    items: [
-      'Pre-Wedding Trial Session',
-      'Customizable Makeup Styles',
-      'Flawless Foundation Application',
-      'Eye Makeup & Lashes',
-      'Contouring & Highlighting',
-      'Bridal Hair Styling',
-      'Long-Lasting Makeup',
-      'Touch-Up Services',
-      'Makeup for Bridesmaids & Guests',
-    ],
-  },
-  {
-    eyebrow: 'Wedding Ready',
-    title: 'Mehendi Services for Brides',
-    accent: 'Mehendi',
-    description: 'Enhance your bridal beauty with our expert Mehendi services. Our skilled Mehendi artists create custom, intricate designs that blend tradition and elegance. Whether traditional or modern styles, we craft the perfect design for your bridal look using natural henna for long-lasting, stunning results. Book your bridal Mehendi consultation today for a flawless, personalized experience',
-    items: [
-      'Bridal Mehendi Designs',
-      'Henna Tattoo Services',
-      'Custom Mehendi Designs',
-      'Pre-Wedding Mehendi Trial',
-      'Full-Hand & Foot Mehendi',
-      'Traditional Bridal Mehendi',
-      'Modern & Fusion Mehendi Styles',
-      'Bridal Mehendi for Sangeet or Engagement',
-      'Henna Removal Services',
-    ],
-  },
-];
+const Lightbox = ({ item, onClose, onNext, onPrev }) => {
+  if (!item) return null;
+  return createPortal(
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-4 backdrop-blur-md"
+    >
+      <button
+        onClick={onClose}
+        className="absolute right-6 top-6 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+      >
+        <X size={24} />
+      </button>
 
+      {onPrev && (
+        <button
+          onClick={onPrev}
+          className="absolute left-6 top-1/2 z-10 -translate-y-1/2 flex h-14 w-14 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+        >
+          <ChevronRight size={32} className="rotate-180" />
+        </button>
+      )}
 
-const bridalWearSections = [
-  {
-    eyebrow: 'Elegance For Every Moment',
-    title: 'Bridal Wear Services',
-    accent: 'Bridal',
-    description: 'Our Bridal Wear Services offer luxurious, custom-designed bridal gowns, lehengas, and sarees, crafted with the finest fabrics and intricate embroidery. Whether you desire a classic wedding gown or a traditional lehenga, we provide personalized styles that reflect your unique personality and wedding vision. With expert craftsmanship and attention to detail, we ensure you look your absolute best on your special day',
-    items: [
-      'Custom Bridal Gowns',
-      'Traditional Bridal Lehengas',
-      'Bridal Sarees',
-      'Bridal Ensemble Styling',
-      'Bridal Accessories Consultation',
-      'Bridal Fit and Alterations',
-      'Bridal Footwear Selection',
-      'Bridal Blouse and Dupatta Customization',
-      'Bridal Attire Rental Services',
-    ],
-  },
-  {
-    eyebrow: 'Elegance For Every Moment',
-    title: 'Jewellery Services for Brides and Grooms',
-    accent: 'Jewellery',
-    description: "Our Jewellery Services offer an exquisite selection of bridal and groom Jewellery, designed to complement your attire and enhance your overall wedding look. From traditional gold and diamond Jewellery to modern, custom-designed pieces, we provide a wide range of Jewellery options to suit every bride and groom's taste. Whether you prefer traditional or contemporary styles, our expert jewellers offer personalized designs that make your wedding day even more special.",
-    items: [
-      'Custom Bridal Jewellery Design',
-      'Kundan and Polki Jewellery',
-      'Bridal Necklace Sets',
-      'Bridal Earring Selection',
-      'Groom Jewellery Consultation',
-      'Jewellery Rentals for Weddings',
-      'Bridal Hair Jewellery',
-      'Personalized Wedding Bands',
-      'Matching Jewellery Sets for Bridesmaids and Groomsmen',
-    ],
-  },
-  {
-    eyebrow: 'Elegance For Every Moment',
-    title: 'Groom Wear Services',
-    accent: 'Groom',
-    description: "Our Groom Wear Services offer a range of stylish and elegant options to ensure you look your best on your special day. From classic tuxedos and custom-tailored suits to traditional sherwanis, we provide attire that suits every groom's style and wedding theme. Our expert stylists work closely with you to create a look that perfectly complements the bride's attire, ensuring you stand out in elegance and sophistication",
-    items: [
-      'Custom-Tailored Suits',
-      'Sherwanis',
-      'Tuxedos',
-      'Nehru Jackets',
-      'Bridal Party Coordination',
-      'Groom Footwear Selection',
-      'Accessories Consultation',
-      'Bridal Blouse and Dupatta Customization',
-      'Custom Groom Accessories Design',
-    ],
-  },
-];
+      {onNext && (
+        <button
+          onClick={onNext}
+          className="absolute right-6 top-1/2 z-10 -translate-y-1/2 flex h-14 w-14 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+        >
+          <ChevronRight size={32} />
+        </button>
+      )}
 
-const giftsReturnSections = [
-  {
-    eyebrow: 'Personalized Keepsakes',
-    title: 'Invitations & Stationery',
-    accent: 'Stationery',
-    description: "At India Solution, we specialize in creating custom-made gifts that leave a lasting impression. From unique 'Mini Me' acrylic miniatures to personalized keychains, photo frames, and more, our gifts are crafted with care to match your imagination. Whether it's for birthdays, anniversaries, or just a gesture of love, we bring your ideas to life with top-quality materials and expert craftsmanship. Explore our wide range of personalized gifts, and let us help you create memories that last forever.",
-    items: [
-      '2D Acrylic Mini Me Miniatures',
-      'Custom Keychains',
-      'Photo Frames',
-      'Printed Clocks',
-      'Customized Cups',
-      'Name Plates',
-      'Wall Art Decor',
-      'Customized Lamps',
-      'Event Souvenirs',
-    ],
-  },
-];
-
-const specialEntriesSections = [
-  {
-    eyebrow: 'Grand Arrival Concepts',
-    title: 'Exclusive Special Entries for Couples: Where Dreams Take Center Stage',
-    accent: 'Special',
-    description: 'Make your wedding grander with India Solution\'s Special Entry Services! We specialize in creating jaw-dropping couple entries with pyrotechnics, creative themes, and unforgettable moments that leave your guests mesmerized. From sparkling pyro works to royal chariots, our innovative ideas bring your dream wedding to life. Let us add a touch of magic and grandeur to your big day with customized couple entry options designed to make every moment memorable.',
-    items: [
-      'Grand Firework Displays',
-      'Royal Carriage & Vintage Car Entry',
-      'Cold Pyro and Fog Effects',
-      'Flower Shower Entry',
-      'LED Dance Performances',
-      'Thematic Couple Walkways',
-      'Drone Show Entry',
-      'Live Band',
-      'Sparkling Umbrella Entry',
-    ],
-  },
-];
-
-const transportationSections = [
-  {
-    eyebrow: 'Luxury Mobility',
-    title: 'Premium Event Transportation Services',
-    accent: 'Transportation',
-    description: (
-      <>
-        Experience <strong>seamless and luxurious event transportation</strong> with our premium services, perfect for <strong>weddings, corporate events, and special occasions</strong>. From <strong>luxury bridal cars and groom entries</strong> to <strong>guest shuttle services and vintage car rentals</strong>, we ensure punctuality, comfort, and style. Let our expert team handle <strong>guest logistics, valet services, and premium vehicle arrangements</strong> to make your event stress-free and unforgettable.
-      </>
-    ),
-    items: [
-      'Luxury Cars for Bride & Groom',
-      'Guest Shuttle Services',
-      'Airport Pick-Up & Drop Services',
-      'Vintage Car Rentals',
-      'VIP and Executive Cars',
-      'Valet Parking Services',
-      'Event Logistics Vehicles',
-      'Tempo Travellers & Mini Buses',
-      'Custom Decorated Vehicles',
-    ],
-  },
-];
-
-const birthdayDecorationSections = [
-  {
-    eyebrow: 'Celebration Styling',
-    title: 'Unforgettable Birthday Celebrations Tailored to You',
-    accent: 'Birthday',
-    description: (
-      <>
-        Make every birthday a <strong>memorable experience</strong> with our expert <strong>birthday event planning services</strong>. At <strong>India Solution</strong>, we specialize in crafting <strong>personalized birthday celebrations</strong> that reflect the personality and preferences of the birthday honoree. From <strong>thematic decorations to entertainment arrangements</strong>, we handle every aspect of the event, ensuring a seamless and joyful experience for everyone. Whether it's an intimate gathering or a grand celebration, our team brings creativity, elegance, and attention to detail to make your birthday event truly special. We ensure that each <strong>birthday party</strong> is filled with fun, laughter, and lasting memories.
-      </>
-    ),
-    items: [
-      'Thematic Party Decor',
-      'Birthday Cake & Dessert Table Setup',
-      'Entertainment & Activities',
-      'Customized Invitations & Party Favors',
-      'Venue Selection & Setup',
-      'Personalized Photo Booth',
-      'Music & Sound System Setup',
-      'Lighting & Ambient Effects',
-      'Party Host/Emcee Services',
-    ],
-  },
-];
-
-const funActivitiesSections = [
-  {
-    eyebrow: 'Playful Experiences',
-    title: 'Birthday Fun Activities',
-    accent: 'Fun',
-    description: 'We make birthday celebrations unforgettable with creative and engaging fun activities for all age groups. Our team ensures the perfect blend of entertainment and excitement, making every birthday special and memorable. From interactive games to artistic experiences, we bring fun-filled moments to life, ensuring guests leave with joyful memories',
-    items: [
-      'Magician Show',
-      'Balloon Twisting',
-      'Face Painting',
-      'Photo Booth with Props',
-      'Puppet Show',
-      'Treasure Hunt',
-      'Carnival Games',
-      'DIY Art & Craft Corner',
-      'Live Cartoon Characters',
-    ],
-  },
-  {
-    eyebrow: 'Playful Experiences',
-    title: 'Corporate Fun Activities',
-    accent: 'Corporate',
-    description: (
-      <>
-        Fun activities designed to boost employee engagement, teamwork, and enjoyment. Whether it&rsquo;s a <strong>corporate gathering, annual day, team-building retreat, or product launch</strong>, we ensure every event is filled with excitement while maintaining a professional touch. Our activities are designed to <strong>encourage collaboration, break the ice, and leave a lasting positive impact</strong>
-      </>
-    ),
-    items: [
-      'Team-Building Games',
-      'Escape Room Challenge',
-      'Icebreaker Sessions',
-      'Trivia Quiz Competitions',
-      'Photo Booth with Corporate Branding',
-      'Carnival Games',
-      'Wellness Activities',
-      'Virtual Reality (VR) Booth',
-      'Live Music & Karaoke',
-    ],
-  },
-  {
-    eyebrow: 'Playful Experiences',
-    title: 'School & College Fun Activities',
-    accent: 'Fun',
-    description: 'Fun activities designed for school and college events. Our goal is to create interactive experiences where students can explore new concepts while having fun. These activities encourage curiosity, teamwork, and creativity, making learning enjoyable and memorable.',
-    items: [
-      'Quiz Competitions',
-      'Debate & Elocution Contests',
-      'STEM Workshops',
-      'Science Experiment Booths',
-      'Spelling Bee Contest',
-      'Educational Treasure Hunt',
-      'Storytelling Sessions',
-      'Math Puzzle Stations',
-      'Book Fair with Reading Corners',
-    ],
-  },
-];
-const corporateNetworkingSections = [
-  {
-    eyebrow: 'Business Growth',
-    title: 'Networking Events for Business Growth',
-    accent: 'Networking',
-    description: 'Elevate your business connections with our expertly organized networking events designed to foster meaningful relationships. Whether you\'re hosting a small mixer or a large-scale conference, we ensure every detail is tailored to create an impactful, professional experience. Connect with industry leaders and peers to unlock new opportunities and grow your business',
-    items: [
-      'Executive Networking Summits',
-      'Industry Leadership Panels',
-      'Peer-to-Peer Networking Forums',
-      'Strategic Partnering Events',
-      'Corporate Networking Retreats',
-      'Investor Networking Forums',
-      'Tech & Innovation Networking Sessions',
-      'Global Networking Conclaves',
-      'Product & Service Launch Networking',
-    ],
-  },
-];
-const conferencesSections = [
-  {
-    eyebrow: 'Industry Leaders',
-    title: 'Transformative Conferences for Industry Leaders',
-    accent: 'Conferences',
-    description: 'Host impactful conferences designed to bring together thought leaders, industry experts, and innovators. Our expertly managed conferences foster dynamic discussions, offer valuable insights, and provide unparalleled networking opportunities to help you stay ahead in your field. Whether you\'re focused on innovation, technology, or leadership, we ensure every detail is tailored to make your conference a success',
-    items: [
-      'Leadership & Executive Conferences',
-      'Industry-Specific Conference Series',
-      'Corporate & Business Development Conferences',
-      'Innovation & Technology Conferences',
-      'Networking & Trade Conferences',
-      'Academic & Research Conferences',
-      'Tech & Innovation Networking Sessions',
-      'Product Innovation & Launch Conferences',
-      'Global Industry Conventions',
-    ],
-  },
-];
-const productLaunchSections = [
-  {
-    eyebrow: 'Brand Impact',
-    title: 'Strategic Product Launches to Drive Brand Awareness and Market Impact',
-    accent: 'Product',
-    description: 'Transform your product launch into a memorable experience that excites your target audience and amplifies your brand presence. From pre-launch teasers to post-launch follow-ups, we create end-to-end event strategies that generate buzz, drive media attention, and deliver measurable business results. Let us ensure that your product gets the launch it deserves',
-    items: [
-      'Exclusive Launch Events',
-      'Virtual Product Launches',
-      'Media & Press Launches',
-      'Pop-Up Launch Experiences',
-      'Product Demonstration Sessions',
-      'Launch Parties & Celebrations',
-      'Collaborative Partner Launches',
-      'Investor & Stakeholder Launches',
-      'Interactive Product Launch Tours',
-    ],
-  },
-];
-const corporateMeetingsSections = [
-  {
-    eyebrow: 'Execution Precision',
-    title: 'Streamlined Corporate Meetings to Foster Collaboration and Drive Success',
-    accent: 'Corporate',
-    description: 'Elevate your corporate meetings with meticulously planned and flawlessly executed events designed to boost productivity, collaboration, and decision-making. Whether it\'s a strategic planning session or a team alignment meeting, we tailor each experience to meet your specific business needs, ensuring smooth logistics and optimal outcomes for your company.',
-    items: [
-      'Strategic Planning Meetings',
-      'Executive Leadership Meetings',
-      'Board of Directors Meetings',
-      'Team Building Meetings',
-      'Quarterly Business Review (QBR) Meetings',
-      'Productivity and Innovation Workshops',
-      'Client & Partner Meetings',
-      'Corporate Training & Development Meetings',
-      'Annual General Meetings (AGM)',
-    ],
-  },
-];
-const preWeddingCeremonySections = [
-  {
-    eyebrow: 'Pre-Wedding Ceremony Services',
-    title: 'Pre-Wedding Ceremony Services',
-    accent: 'Ceremony',
-    description: (
-      <>
-        Our <strong>Pre-Wedding Ceremony Services</strong> include a range of celebrations and rituals that set the stage for your wedding day. From <strong>engagement parties</strong> to <strong>Mehendi celebrations and sangeet events</strong>, we help plan and execute each pre-wedding function with creativity and precision. Our expert team ensures everything is taken care of, including the venue, decor, entertainment, and coordination, so you can focus on making memories with your loved ones. Let us help you create a seamless and unforgettable pre-wedding experience that builds excitement for your special day.
-      </>
-    ),
-    items: [
-      'Engagement Party Planning',
-      'Mehendi Ceremony Coordination',
-      'Sangeet Party Planning',
-      'Bridal Shower and Groomâ€™s Party',
-      'Pre-Wedding Photoshoots',
-      'Customized Invitations for Pre-Wedding Events',
-      'Catering and Menu Planning for Pre-Wedding Functions',
-      'Event Decor and Floral Arrangements',
-      'Entertainment and Music Services',
-    ],
-  },
-];
-
-const partySections = [
-  {
-    eyebrow: 'Unforgettable Graduation Party Planning',
-    title: 'Celebrate Your Achievement with a Perfect Graduation Party',
-    accent: 'Graduation Party',
-    description: 'At India Solution, we specialize in creating unforgettable graduation parties that truly celebrate your achievements. Our expert event planners ensure every detail, from themed decorations to personalized entertainment, is tailored to make your graduation day extraordinary. Whether it’s a high school graduation or college convocation, we provide end-to-end services for a seamless and memorable event, blending fun, elegance, and personalization. Let us handle the planning, so you can focus on enjoying the milestone',
-    items: [
-      'Themed Decorations',
-      'Stage Setup & Seating Arrangements',
-      'Catering Services',
-      'Entertainment & Games',
-      'Custom Theme Cakes',
-      'Luxury Festive Cakes',
-      'Photography & Videography',
-      'Themed Invitations & E-invites',
-      'Return Gifts & Keepsakes',
-    ],
-  },
-  {
-    eyebrow: 'Celebrate Your Career Milestones',
-    title: 'Honor a Lifetime of Achievements with an Unforgettable Retirement Celebration',
-    accent: 'Retirement Celebration',
-    description: 'At India Solution, we craft retirement parties that honor a lifetime of hard work and dedication. As experienced event coordinators, we design personalized and memorable celebrations that reflect your career’s journey. From elegant decorations to engaging entertainment, we ensure every detail is carefully planned, creating a joyful and heartfelt event. Celebrate your new chapter with a retirement party that’s as remarkable as your achievements.',
-    items: [
-      'Themed Decorations',
-      'Stage Setup & Seating Arrangements',
-      'Catering Services',
-      'Entertainment & Games',
-      'Custom Theme Cakes',
-      'Toast & Speech Coordination',
-      'Photography & Videography',
-      'Themed Invitations & E-invites',
-      'Return Gifts & Keepsakes',
-    ],
-  },
-  {
-    eyebrow: 'Celebrate Achievements with a Spectacular Event',
-    title: 'Honor Your Successes with an Unforgettable Achievement Celebration',
-    accent: 'Achievement Celebration',
-    description: 'At India Solution, we specialize in creating exceptional achievement celebrations that honor personal and professional milestones. Whether celebrating career achievements, academic successes, or personal goals, we provide end-to-end planning and coordination to ensure your event is memorable and meaningful. From tailored decorations to inspiring entertainment, we craft a celebration that reflects your hard-earned success and makes every moment unforgettable.',
-    items: [
-      'Themed Decorations',
-      'Stage Setup & Seating Arrangements',
-      'Catering Services',
-      'Entertainment & Games',
-      'Custom Theme Cakes',
-      'Toast & Speech Coordination',
-      'Photography & Videography',
-      'Themed Invitations & E-invites',
-      'Return Gifts & Keepsakes',
-    ],
-  },
-];
-
-const sportingEventsSections = [
-  {
-    eyebrow: 'Seamless Event Management for Spectacular Sporting Events',
-    title: 'Unforgettable Sporting Experiences for Major Events & Schools',
-    accent: 'Sporting Experiences',
-    description: (
-      <>
-        for <strong>trade shows, exhibitions</strong>, and <strong>product launches</strong>. Our end-to-end solutions ensure seamless <strong>event coordination, booth design, attendee registration</strong>, and <strong>logistics management</strong>, creating a professional and engaging environment for exhibitors and visitors alike. From pre-event planning to post-event follow-ups, we focus on delivering an exceptional experience that boosts brand visibility, drives lead generation, and enhances attendee engagement
-      </>
-    ),
-    items: [
-      'Venue Selection & Setup',
-      'Ticketing & Registration',
-      'Audio-Visual Equipment & Live Streaming',
-      'Fan Engagement Activities',
-      'Audio-Visual Equipment & Technology Support',
-      'VIP & Media Management',
-      'Security & Crowd Control',
-      'Catering & Concessions',
-      'Transportation & Logistics',
-    ],
-  },
-  {
-    eyebrow: 'Services for Prize-Giving Arrangements in Sporting Events',
-    title: 'Services for Prize-Giving Arrangements in Sporting Events',
-    accent: 'Prize-Giving',
-    description: (
-      <>
-        for <strong>trade shows, exhibitions</strong>, and <strong>product launches</strong>. Our end-to-end solutions ensure seamless <strong>event coordination, booth design, attendee registration</strong>, and <strong>logistics management</strong>, creating a professional and engaging environment for exhibitors and visitors alike. From pre-event planning to post-event follow-ups, we focus on delivering an exceptional experience that boosts brand visibility, drives lead generation, and enhances attendee engagement
-      </>
-    ),
-    items: [
-      'Custom Trophy & Award Designs',
-      'Award Presentation Stage Setup',
-      'Host & Master of Ceremonies',
-      'Photography & Videography',
-      'Audio-Visual Equipment & Technology Support',
-      'VIP & Media Management',
-      'Security & Crowd Control',
-      'Award Distribution Logistics',
-      'Personalized Certificates & Prizes',
-    ],
-  },
-];
-
-const houseWarmingSections = [
-  {
-    eyebrow: 'Griha Pravesh',
-    title: 'Make Your Griha Pravesh Grand with Expert Housewarming Planning',
-    accent: 'Housewarming',
-    description: 'Welcome happiness and prosperity into your new home with India Solution’s premium housewarming services! From traditional rituals to modern celebrations, we take care of every detail to ensure your special day is unforgettable. Our experienced team specializes in creating the perfect ambiance for your Griha Pravesh ceremony, combining cultural traditions with contemporary aesthetics. Whether it’s decor, catering, or entertainment, we offer customized housewarming solutions tailored to your preferences. Let us help you make your housewarming celebration an extraordinary and joyous occasion.',
-    items: [
-      'Traditional Pooja Arrangements',
-      'Floral and Lighting Decor',
-      'Customized Invitations',
-      'Live Music & Instrumental Performances',
-      'House Blessing Ritual Coordination',
-      'Thematic Food Catering',
-      'Welcome Gifts for Guests',
-      'Photo and Video Coverage',
-      'Outdoor Canopy or Seating Arrangements',
-    ],
-  },
-];
-
-const festivalsSections = [
-  {
-    eyebrow: 'Royal Celebration',
-    title: 'Mysuru Dasara - Karnataka’s Grand Royal Celebration',
-    accent: 'Dasara',
-    description: 'India Solution can infuse innovation into tradition, making the festival a mesmerizing experience for locals and visitors alike. By integrating cutting-edge technology, flawless planning, and creative execution, every aspect of the festival can be elevated to match its historic and cultural significance. From elaborate processions to interactive digital experiences, India Solution promises a seamless, spectacular celebration.',
-    items: [
-      'Grand Procession Management',
-      'Cultural Event Coordination',
-      'Decorative Lighting & Visual Aesthetics',
-      'Technology Integration',
-      'Artisan & Handicraft Exhibitions',
-      'Food and Culinary Delights',
-      'Sustainability Initiatives',
-      'Tourism & Hospitality Services',
-      'Media & Publicity Management',
-    ],
-  },
-  {
-    eyebrow: 'Heritage Celebration',
-    title: 'Hampi Utsav - A Celebration of Karnataka’s Heritage',
-    accent: 'Hampi Utsav',
-    description: 'India Solution can transform Hampi Utsav into a world-class cultural spectacle while preserving its historical essence. By combining modern technology with traditional aesthetics, the event can capture the grandeur of the Vijayanagara era. Key elements include immersive storytelling, innovative stage designs, and seamless visitor management to create a flawless celebration.',
-    items: [
-      'Themed stage setups for historical performances.',
-      'Sound and light arrangements for cultural shows.',
-      'Customized tourist packages and guided tours.',
-      'Art installations and interactive exhibits.',
-      'Artist and performer management.',
-      'Security and crowd control services.',
-      'Live streaming and media coverage.',
-      'VIP and media coordination.',
-      'Sustainable event practices in heritage sites.',
-    ],
-  },
-  {
-    eyebrow: 'Devotional Festival',
-    title: 'Ganesha Chaturthi - Festival of Lord Ganesha',
-    accent: 'Ganesha Chaturthi',
-    description: 'India Solution can elevate the celebration of Ganesha Chaturthi by ensuring grandeur and devotion while incorporating eco-friendly practices and community engagement. From aesthetically designed pandals to interactive devotional events, the festival can become a harmonious blend of tradition and innovation.',
-    items: [
-      'Designing and setting up thematic pandals.',
-      'Managing idol installation and decoration.',
-      'Organizing immersion processions.',
-      'Sound systems for devotional music and chants.',
-      'Eco-friendly event solutions for immersions.',
-      'Crowd management and safety protocols.',
-      'Offering catering and prasadam distribution',
-      'Coordinating cultural activities and competitions.',
-      'Providing transportation for idols and devotees.',
-    ],
-  },
-];
-
-const promotionsSections = [
-  {
-    eyebrow: 'Promotional Services',
-    title: 'All-in-One Promotional Services for Products, Events, and Brands',
-    accent: 'Products, Events, and Brands',
-    description: (
-      <>
-        Enhance the visibility of your <strong>products, events, expos, and brands</strong> with our <strong>tailored promotional services</strong> that cater to a wide range of needs. From <strong>product launches and event promotions to brand awareness campaigns and expo marketing</strong>, our strategies are designed to elevate your presence across all platforms. With a combination of traditional and digital tactics, such as <strong>flyers, social media ads, event sponsorship, and PR campaigns</strong>, we create impactful marketing plans that drive engagement and amplify your message. Whatever your promotion goals are, we provide comprehensive solutions that ensure your brand shines, attracts attention, and resonates with your target audience.
-      </>
-    ),
-    items: [
-      'Mobile Van Advertising',
-      'Posters and Banners',
-      'Stickers and Decals',
-      'Flyers and Brochures',
-      'Billboard Advertising',
-      'Digital Screens and Kiosks',
-      'Event Sponsorship and Branded Merchandise',
-      'Public Relations (PR) Campaigns',
-      'Sampling and Demonstrations',
-    ],
-  },
-  {
-    eyebrow: 'Promotional Products',
-    title: 'Custom-Branded Products for Effective Promotion',
-    accent: 'Promotion',
-    description: (
-      <>
-        Elevate your brand visibility with our <strong>custom-made promotional products</strong>, designed to leave a lasting impression. We offer a variety of high-quality items that can be personalized with your logo, message, or QR codes, making them perfect for giveaways, events, and corporate promotions. Whether you want to offer your clients branded <strong>keychains, bags, or water bottles</strong>, we provide a wide range of customizable products to suit every need. These personalized items help increase brand recognition while providing functional, everyday use that keeps your business in mind
-      </>
-    ),
-    items: [
-      'Custom Keychains',
-      'Branded Water Bottles',
-      'Personalized Bags',
-      'Custom Mugs & Cups',
-      'Printed Notebooks & Journals',
-      'Personalized Pens',
-      'Custom USB Drives',
-      'Custom T-Shirts & Apparel',
-      'Printed QR Code Products',
-    ],
-  },
-];
-
-const tradeShowsSections = [
-  {
-    eyebrow: 'Trade Shows',
-    title: 'Trade Shows & Exhibition Events',
-    accent: 'Exhibition',
-    description: (
-      <>
-        for <strong>trade shows, exhibitions</strong>, and <strong>product launches</strong>. Our end-to-end solutions ensure seamless <strong>event coordination, booth design, attendee registration</strong>, and <strong>logistics management</strong>, creating a professional and engaging environment for exhibitors and visitors alike. From pre-event planning to post-event follow-ups, we focus on delivering an exceptional experience that boosts brand visibility, drives lead generation, and enhances attendee engagement
-      </>
-    ),
-    items: [
-      'Attendee Registration & Ticketing',
-      'Logistics & Transportation Services',
-      'Custom Booth Designs & Setup',
-      'Branding & Signage Solutions',
-      'Audio-Visual Equipment & Technology Support',
-      'Staffing & On-Site Assistance',
-      'Marketing & Promotion',
-      'Booth Maintenance & Support',
-      'Post-Event Follow-up & Lead Management',
-    ],
-  },
-];
-
-const cateringSections = [
-  {
-    eyebrow: 'Culinary Experiences',
-    title: 'Exquisite Catering Services Native & Western Flavors for Every Event',
-    accent: 'Catering',
-    description: (
-      <>
-        At <strong>India Solution Event Management</strong>, we offer exceptional catering services that blend the rich flavors of native Indian cuisine with the elegance of Western-style dishes. Our expert chefs focus on delivering the highest quality food, prepared with fresh ingredients and attention to detail. Whether it&apos;s a wedding, corporate event, or private celebration, we ensure a memorable dining experience with delicious food and flawless service.
-      </>
-    ),
-    listTitle: 'We Deal With Various Quality Cuisines',
-    items: [
-      'Pure Vegetarian Cuisine',
-      'Non-Vegetarian Cuisine',
-      'Traditional Indian Cuisine',
-      'Western Cuisine',
-      'Fusion Cuisine',
-      'Premium/Signature Dishes',
-      'Street Food/Chaat Station',
-      'Dessert & Confectionery Station',
-      'Healthy & Diet-Friendly Options',
-    ],
-  },
-  {
-    eyebrow: 'Custom Cakes',
-    title: 'Delight in Our Premium Custom Cakes for Every Celebration',
-    accent: 'Custom Cakes',
-    description: (
-      <>
-        Indulge in our exquisite custom cakes, expertly crafted to make your special moments unforgettable. Whether it&apos;s a wedding, birthday, anniversary, or corporate event, our skilled bakers create personalized cakes using the finest ingredients, ensuring exceptional taste and stunning presentation. From elegant multi-tiered wedding cakes to fun-themed birthday cakes and sophisticated corporate cakes, each design is customized to match your style, theme, and preferences perfectly. Make your celebrations sweeter with our luxury cakes, tailored to impress.
-      </>
-    ),
-    items: [
-      'Designer Wedding Cakes',
-      'Elegant Engagement Cakes',
-      'Personalized Birthday Cakes',
-      'Anniversary Cakes',
-      'Custom Theme Cakes',
-      'Luxury Festive Cakes',
-      'Corporate Event Cakes',
-      'Healthy & Vegan Cakes',
-      'Dessert Tables & Cupcake Towers',
-    ],
-  },
-  {
-    eyebrow: 'Sweet Treats',
-    title: 'Fun Edible Services',
-    accent: 'Edible',
-    description: (
-      <>
-        Bring joy to your events with our delightful fun edibles that add a burst of sweetness and excitement. From cotton candy and fancy candies to cartoon character cakes and novelty treats, we specialize in creating playful and creative edible masterpieces that captivate both kids and adults alike. Perfect for weddings, birthdays, corporate events, and other celebrations, our fun edibles are designed to complement your event&apos;s theme while satisfying everyone&apos;s sweet tooth. Let us turn your celebration into a memorable experience with these unique and delicious treats.
-      </>
-    ),
-    items: [
-      'Cotton Candy Stalls',
-      'Fancy Candies & Lollipops',
-      'Cartoon Character Cakes',
-      'Themed Cake Pops',
-      'Cupcake Decoration Stations',
-      'Novelty Desserts',
-      'Chocolate Fountains',
-      'Ice Cream & Gelato Stations',
-      'Edible Party Favors',
-    ],
-  },
-];
-
-const photographyVideographySections = [
-  {
-    eyebrow: 'Visual Memories',
-    title: 'Expert Photography & Videography for Events',
-    accent: 'Photography & Videography',
-    description: '',
-    items: [
-      'Still Photography',
-      'Live Event Streaming',
-      'Candid Photography',
-      'Event Highlights Reel',
-      'Album Creation',
-      'Cinematic Video Production',
-      'Drone Photography',
-      'Live Event Coverage',
-      'Product Photography',
-    ],
-  },
-];
-
-const DetailTitle = ({ title, accent }) => {
-  if (!accent || !title.includes(accent)) {
-    return <>{title}</>;
-  }
-
-  const [before, after] = title.split(accent);
-  return (
-    <>
-      {before}<span className="text-[#4A2F1D]">{accent}</span>{after}
-    </>
+      <div className="relative flex max-h-[85vh] w-full max-w-6xl items-center justify-center">
+        {item.type === 'video' ? (
+          <video src={item.url} controls autoPlay className="max-h-full max-w-full rounded-lg shadow-2xl" />
+        ) : (
+          <img src={item.url} alt="Gallery item" className="max-h-full max-w-full rounded-lg object-contain shadow-2xl" />
+        )}
+      </div>
+    </motion.div>,
+    document.body
   );
 };
 
 const ServiceGallery = ({ title, mediaFiles }) => {
-  const [selectedMedia, setSelectedMedia] = useState(null);
+  const [selectedIndex, setSelectedIndex] = useState(null);
 
   if (!mediaFiles || mediaFiles.length === 0) return null;
-  return (
-    <motion.section
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="mt-16 pt-12 border-t border-[#E8DFD5]"
-    >
-      <h3 className="font-['Playfair_Display',serif] mb-8 text-3xl font-bold md:text-4xl text-[#4A2F1D] uppercase tracking-wide">{title} Gallery</h3>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {mediaFiles.map((file, i) => {
-          const isVideo = file.endsWith('.mp4');
-          return (
-            <div key={i} className="relative aspect-square overflow-hidden rounded-[1rem] bg-[#FAF7F2] border border-[#E8DFD5] shadow-sm group cursor-pointer hover:shadow-md hover:border-[#D5C5B9] transition-all" onClick={() => setSelectedMedia(file)}>
-              {isVideo ? (
-                <video src={file} className="w-full h-full object-cover pointer-events-none" />
-              ) : (
-                <img src={file} alt={`${title} ${i}`} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 pointer-events-none" loading="lazy" />
-              )}
-              {isVideo && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/10 transition-colors pointer-events-none">
-                  <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white">
-                    ▶
-                  </div>
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </div>
 
-      {selectedMedia && createPortal(
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md" onClick={() => setSelectedMedia(null)}>
-          <button className="absolute top-6 right-6 text-white hover:text-gray-300 transition-colors z-[60]" onClick={() => setSelectedMedia(null)}>
-            <X size={32} />
-          </button>
-          <div className="relative w-full max-w-5xl max-h-[90vh] flex items-center justify-center" onClick={e => e.stopPropagation()}>
-            {selectedMedia.endsWith('.mp4') ? (
-              <video src={selectedMedia} className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl" controls autoPlay playsInline />
-            ) : (
-              <img src={selectedMedia} className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl" alt="Enlarged" />
-            )}
-          </div>
-        </div>,
-        document.body
-      )}
-    </motion.section>
+  const handleNext = (e) => {
+    e.stopPropagation();
+    setSelectedIndex((prev) => (prev === mediaFiles.length - 1 ? 0 : prev + 1));
+  };
+
+  const handlePrev = (e) => {
+    e.stopPropagation();
+    setSelectedIndex((prev) => (prev === 0 ? mediaFiles.length - 1 : prev - 1));
+  };
+
+  return (
+    <>
+      <motion.section
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="mt-16"
+      >
+        <div className="mb-10 text-center">
+          <span className="text-[#4A2F1D] text-[11px] font-bold tracking-[0.25em] uppercase mb-3 block">Gallery</span>
+          <h2 className="font-['Playfair_Display',serif] text-3xl font-bold text-[#4A2F1D]">Past {title}</h2>
+        </div>
+        
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+          {mediaFiles.map((media, index) => (
+            <motion.div
+              key={index}
+              variants={fadeUp}
+              onClick={() => setSelectedIndex(index)}
+              className="group relative aspect-square cursor-pointer overflow-hidden rounded-[1rem] bg-[#E8DFD5]"
+            >
+              {media.type === 'video' ? (
+                <video src={media.url} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" muted playsInline />
+              ) : (
+                <img src={media.url} alt="" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
+              )}
+              
+              <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-all duration-300 group-hover:bg-black/40">
+                <span className="translate-y-4 text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                  <Camera size={24} />
+                </span>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </motion.section>
+
+      <Lightbox
+        item={selectedIndex !== null ? mediaFiles[selectedIndex] : null}
+        onClose={() => setSelectedIndex(null)}
+        onNext={handleNext}
+        onPrev={handlePrev}
+      />
+    </>
   );
 };
 
-const serviceImageMapping = {
-  'Invitations & Stationery': '/images/wedding_invitations.png',
-  'Beauty Services, Makeup, and Mehendi': '/images/wedding_makeup.png',
-  'Bridal & Groom Wear and Jewellery': '/images/wedding_attire.png',
-  'Gifts and Return Gifts': 'https://thereturngifts.com/cdn/shop/articles/more_458d9c7e-fbdc-480e-a9df-215c37ba023a.png?crop=center&height=500&v=1773483263&width=600',
-  'Special Entries': '/images/wedding_entry.png',
-  'Transportation': '/images/wedding_transport.png',
-  'Event Decor and Floral Arrangements': '/images/event_decor_floral.png',
-  'Photography and Videography Services': '/images/wedding_photography.png',
-  'Catering Services': '/images/catering_services.png',
-  'Decorations': '/images/wedding_decor.png',
-  'Theme Based Parties': '/images/wedding_theme.png',
-  'Mandap / Stage': '/images/mandap.png',
-  'Floral Backdrop': 'https://tse2.mm.bing.net/th/id/OIP.sm7xrIKU-pG8hx0_Ook4OwHaJ4?r=0&rs=1&pid=ImgDetMain&o=7&rm=3',
-  'Lighting Setup': 'https://tse4.mm.bing.net/th/id/OIP.QtReBInS6C9nrermCGY6tgHaLH?r=0&rs=1&pid=ImgDetMain&o=7&rm=3',
-  'Couple Seating': 'https://tse2.mm.bing.net/th/id/OIP.jg8PtxZlH2jiNaWFevzSDAHaJ3?r=0&w=910&h=1213&rs=1&pid=ImgDetMain&o=7&rm=3',
-  'Entrance Decoration': 'https://tse4.mm.bing.net/th/id/OIP.VbRklmPQECPj1N_Q8skUiAHaLG?r=0&rs=1&pid=ImgDetMain&o=7&rm=3',
-  'Meetings and conferences': 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Employee events': 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Training and development': 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Marketing and promotional activities': 'https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Networking and relationships events': 'https://images.unsplash.com/photo-1515169067868-5387ec356754?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Special corporate celebrations': 'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Networking Events': 'https://images.unsplash.com/photo-1528605248644-14dd04022da1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Conferences': 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Product Launches': 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Corporate Meetings': 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Brand Activations': 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Mall Promotions': 'https://images.unsplash.com/photo-1519567281726-2917088b200b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Roadshows': 'https://images.unsplash.com/photo-1531058020387-3be344556be6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Retail & In-store Promotions': 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Corporate Promotions': 'https://images.unsplash.com/photo-1556761175-4b46a572b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'College & Campus Activations': 'https://images.unsplash.com/photo-1523580494112-071dcb851aa0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Sampling Campaigns': 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Society & Residential Promotions': 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Influencer & Digital Campaign Support': 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Promotional Staffing (Promoters & Hostesses)': 'https://images.unsplash.com/photo-1556761175-5973dc0f32b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Event Branding & Fabrication': 'https://images.unsplash.com/photo-1507206130118-b5907f817163?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Photography & Videography': 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Ganesh Chaturthi Celebrations': 'https://images.unsplash.com/photo-1567113463300-102a7eb3cb26?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Dasara': 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Hampi fest': 'https://images.unsplash.com/photo-1600085449557-0104683050c9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Navratri & Dandiya Nights': 'https://images.unsplash.com/photo-1605806616949-1e87b487cb2a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Diwali Events': 'https://images.unsplash.com/photo-1509015096375-7c0936bc23de?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Christmas & New Year Celebrations': 'https://images.unsplash.com/photo-1543589077-47d81606c1bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Holi Festivals': 'https://images.unsplash.com/photo-1551523910-4be66e4a6df3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Eid Celebrations': 'https://images.unsplash.com/photo-1564683214964-b31b98d1a1bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Onam, Pongal & Regional Festivals': 'https://images.unsplash.com/photo-1583089892943-e02e52f17849?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Temple & Religious Festivals': 'https://images.unsplash.com/photo-1548232979-6c557ee14752?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Community & Society Festivals': 'https://images.unsplash.com/photo-1520110120835-c96534a4c984?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'School & College Festival Events': 'https://images.unsplash.com/photo-1523580494112-071dcb851aa0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Corporate Festival Celebrations': 'https://images.unsplash.com/photo-1511556820780-d912e42b4980?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Cultural Programs & Live Performances': 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Traditional pooja setup': 'https://images.unsplash.com/photo-1596706981442-7db573cf2925?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Return gifts': 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Home revealing': 'https://images.unsplash.com/photo-1581454174312-3c1bbddf33e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Complete event coordination and on-site management': 'https://images.unsplash.com/photo-1511556820780-d912e42b4980?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Corporate Gift Hampers': 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Employee & Client Appreciation Gifts': 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Wedding Return Gifts': 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Birthday Return Gifts': 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Baby Shower & Naming Ceremony Gifts': 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'House Warming Return Gifts': 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Festival Gift Hampers': 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Event Welcome Kits': 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Conference & Delegate Kits': 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Promotional Merchandise': 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Luxury Gift Boxes': 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Eco-friendly & Sustainable Gifts': 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Customized Mementos & Trophies': 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Personalized Gift Packaging': 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Customization Options': 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Company Logo Branding': 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Name & Initial Engraving': 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Custom Printing': 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Premium Packaging': 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Personalized Tags & Thank You Cards': 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Theme-based Gift Boxes': 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Birthday Parties': 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Anniversary Parties': 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'House Parties': 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Corporate Parties': 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Cocktail Parties': 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Bachelor & Bachelorette Parties': 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Farewell Parties': 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Reunion Parties': 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Graduation Parties': 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Success & Celebration Parties': 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Theme Parties': 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Pool & Terrace Parties': 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  "Kids' Parties": 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Private Parties': 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'complete planning and management of the event': 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Arranging metals trophies and certificates': 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Power backup and technical support': 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Customized solutions': 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  'Timely and reliable service': 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-};
-
 const ImageGridServiceContent = ({ items, serviceSlug }) => {
+  if (!items || items.length === 0) return null;
+  
   return (
     <motion.section
       variants={staggerContainer}
@@ -932,13 +175,13 @@ const ImageGridServiceContent = ({ items, serviceSlug }) => {
       className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3"
     >
       {items.map((item) => (
-        <motion.div key={item} variants={fadeUp} className="group relative overflow-hidden rounded-[1.5rem] bg-white border border-[#E8DFD5] shadow-sm cursor-pointer hover:shadow-md hover:border-[#D5C5B9] transition-all duration-300">
-          <Link to={`/services/${serviceSlug}/${slugifyServiceItem(item)}`} className="block h-full">
+        <motion.div key={item.slug} variants={fadeUp} className="group relative overflow-hidden rounded-[1.5rem] bg-white border border-[#E8DFD5] shadow-sm cursor-pointer hover:shadow-md hover:border-[#D5C5B9] transition-all duration-300">
+          <Link to={`/services/${serviceSlug}/${item.slug}`} className="block h-full">
             <div className="aspect-[4/3] overflow-hidden relative p-3 pb-0">
-               <img src={serviceImageMapping[item] || 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'} alt={item} className="w-full h-full object-cover rounded-t-[1rem] transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+               <img src={serviceImageMapping[item.name] || 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'} alt={item.name} className="w-full h-full object-cover rounded-t-[1rem] transition-transform duration-700 group-hover:scale-105" loading="lazy" />
             </div>
             <div className="p-6 bg-white relative z-10">
-               <h3 className="font-['Playfair_Display',serif] text-lg font-bold text-[#4A2F1D] mb-3 group-hover:text-[#4A2F1D] transition-colors leading-snug">{item}</h3>
+               <h3 className="font-['Playfair_Display',serif] text-lg font-bold text-[#4A2F1D] mb-3 group-hover:text-[#4A2F1D] transition-colors leading-snug">{item.name}</h3>
                <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#4A2F1D] flex items-center gap-2">
                  Explore Detail <ChevronRight size={14} strokeWidth={2.5} className="group-hover:translate-x-1 transition-transform" />
                </span>
@@ -950,6 +193,19 @@ const ImageGridServiceContent = ({ items, serviceSlug }) => {
   );
 };
 
+const DetailTitle = ({ title, accent }) => {
+  if (!accent || !title || !title.includes(accent)) {
+    return <>{title}</>;
+  }
+
+  const [before, after] = title.split(accent);
+  return (
+    <>
+      {before}<span className="text-[#4A2F1D]">{accent}</span>{after}
+    </>
+  );
+};
+
 const ServiceContentSections = ({ sections }) => (
   <motion.section
     variants={staggerContainer}
@@ -958,8 +214,8 @@ const ServiceContentSections = ({ sections }) => (
     viewport={{ once: true }}
     className="mt-8 grid gap-8"
   >
-    {sections.map((section) => (
-      <motion.article key={section.title} variants={fadeUp} className="relative overflow-hidden rounded-[1.5rem] bg-white p-8 md:p-10 shadow-sm border border-[#E8DFD5]">
+    {sections.map((section, idx) => (
+      <motion.article key={idx} variants={fadeUp} className="relative overflow-hidden rounded-[1.5rem] bg-white p-8 md:p-10 shadow-sm border border-[#E8DFD5]">
         <div className="relative grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
           <div>
             <span className="text-[#4A2F1D] text-[11px] font-bold tracking-[0.25em] uppercase mb-4 block">{section.eyebrow}</span>
@@ -967,211 +223,69 @@ const ServiceContentSections = ({ sections }) => (
               <DetailTitle title={section.title} accent={section.accent} />
             </h2>
             {section.description && (
-              <p className="max-w-2xl text-[14.5px] font-medium leading-[1.8] text-[#4A2F1D]">{section.description}</p>
+              <p className="max-w-2xl text-[14.5px] font-medium leading-[1.8] text-[#4A2F1D]" dangerouslySetInnerHTML={{ __html: section.description.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
             )}
             <Link to="/contact" className="mt-8 inline-flex items-center gap-3 rounded-full bg-[#A67C65] px-8 py-3.5 text-xs font-bold uppercase tracking-widest text-white transition-all hover:bg-[#8B5E45]">
               <Mail size={15} />
               Contact Us
             </Link>
           </div>
-
-          <div className="pt-2 lg:pt-0">
-            {section.listTitle && (
-              <h3 className="font-['Playfair_Display',serif] mb-6 text-2xl font-bold leading-tight text-[#4A2F1D]">
-                {section.listTitle}
+          {section.listItems && section.listItems.length > 0 && (
+            <div>
+              <h3 className="font-['Playfair_Display',serif] mb-6 text-2xl font-bold text-[#4A2F1D]">
+                Included in this service
               </h3>
-            )}
-            <div className="grid gap-4 sm:grid-cols-2">
-              {section.items.map((item) => (
-                <div key={item} className="flex items-start gap-3 rounded-xl border border-[#E8DFD5] bg-[#FAF7F2]/50 px-4 py-4 text-[13px] font-semibold leading-tight text-[#2A1810]">
-                  <span className="shrink-0 text-[#4A2F1D] mt-0.5"><CheckCircle2 size={16} strokeWidth={2.5} /></span>
-                  <span>{item}</span>
-                </div>
-              ))}
+              <div className="grid gap-3 sm:grid-cols-2">
+                {section.listItems.map((item, i) => (
+                  <div key={i} className="flex items-start gap-3 rounded-lg border border-[#E8DFD5] bg-[#FAF7F2] p-4 transition-colors hover:border-[#D5C5B9]">
+                    <span className="mt-0.5 shrink-0 text-[#A67C65]"><CheckCircle2 size={16} strokeWidth={2.5} /></span>
+                    <span className="text-[13.5px] font-bold text-[#4A2F1D]">{item}</span>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </motion.article>
     ))}
   </motion.section>
 );
 
-const BeautyServicesContent = () => (
-  <>
-    <motion.section
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="service-detail-section relative mt-8 overflow-hidden rounded-xl p-6 text-center md:p-7"
-    >
-      <div className="service-detail-section-glow" />
-      <div className="relative mx-auto max-w-4xl">
-        <span className="service-detail-eyebrow mb-2 block">Bridal Beauty</span>
-        <h2 className="site-heading mb-3 text-3xl font-bold leading-tight md:text-5xl">
-          Beauty Services, <span className="text-gradient">Makeup, and Mehendi</span>
-        </h2>
-        <p className="text-sm leading-7 text-gray-300 md:text-base">
-          Enhance your beauty and glow with our expert Beauty Services, Makeup, and Mehendi - creating the perfect look for your unforgettable moments
-        </p>
-      </div>
-    </motion.section>
-    <ServiceContentSections sections={beautySections} />
-  </>
-);
-
-
-const BridalWearContent = () => (
-  <>
-    <motion.section
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="service-detail-section relative mt-8 overflow-hidden rounded-xl p-6 text-center md:p-7"
-    >
-      <div className="service-detail-section-glow" />
-      <div className="relative mx-auto max-w-4xl">
-        <span className="service-detail-eyebrow mb-2 block">Elegance For Every Moment</span>
-        <h2 className="site-heading mb-3 text-3xl font-bold leading-tight md:text-5xl">
-          Bridal & Groom Wear <span className="text-gradient">and Jewellery</span>
-        </h2>
-        <p className="text-sm leading-7 text-gray-300 md:text-base">
-          Complete styling support for brides and grooms, from couture attire to Jewellery details that complete every wedding look.
-        </p>
-      </div>
-    </motion.section>
-    <ServiceContentSections sections={bridalWearSections} />
-  </>
-);
-
-const PhotographyVideographyContent = () => (
-  <>
-    <motion.section
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="mt-8 text-center"
-    >
-      <h2 className="site-heading mb-8 text-4xl font-bold md:text-5xl">
-        Our Photography and Videography Services
-      </h2>
-    </motion.section>
-
-    <motion.section
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="service-detail-section relative mb-8 overflow-hidden rounded-xl p-6 md:p-7"
-    >
-      <div className="service-detail-section-glow" />
-      <div className="relative grid gap-7 lg:grid-cols-2 lg:items-center">
-        <div>
-          <h3 className="site-heading mb-4 text-2xl font-bold leading-tight md:text-3xl text-gray-100">
-            Comprehensive Photography Services for Every Occasion: Personal and Corporate Events Covered
-          </h3>
-          <p className="text-sm leading-7 text-gray-300 md:text-base">
-            At India Solution Event Management, we provide expert photography services for both personal events (weddings, birthdays, engagements) and corporate events (product launches, conferences, seminars). Our experienced photographers capture every moment with precision, ensuring high-quality visuals that tell your unique story. From intimate gatherings to grand business events, trust us to deliver timeless memories.
-          </p>
-        </div>
-        <div className="h-64 rounded-xl bg-gray-800 flex items-center justify-center text-gray-500 overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Camera" className="w-full h-full object-cover opacity-60" />
-        </div>
-      </div>
-    </motion.section>
-
-    <motion.section
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="service-detail-section relative overflow-hidden rounded-xl p-6 md:p-7"
-    >
-      <div className="service-detail-section-glow" />
-      <div className="relative grid gap-7 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-        <div className="h-64 rounded-xl bg-gray-100 flex flex-col items-center justify-center text-yellow-500">
-          <div className="flex gap-1 mb-2">
-            {[1, 2, 3, 4, 5].map((star) => (
-              <svg key={star} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <h2 className="site-heading mb-4 text-3xl font-bold leading-tight md:text-4xl">
-            Expert Photography & Videography for Events
-          </h2>
-          
-          <div className="mb-6 text-gray-400">
-             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-camera"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
-          </div>
-
-          <div className="grid gap-3 sm:grid-cols-2">
-            {photographyVideographySections[0].items.map((item) => (
-              <div key={item} className="service-detail-check-item">
-                <span className="service-detail-check-icon"><CheckCircle2 size={14} strokeWidth={2.2} /></span>
-                <span>{item}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </motion.section>
-  </>
-);
-
-const GiftsReturnContent = () => <ServiceContentSections sections={giftsReturnSections} />;
-
-const SpecialEntriesContent = () => <ServiceContentSections sections={specialEntriesSections} />;
-
-const TransportationContent = () => <ServiceContentSections sections={transportationSections} />;
-
-const BirthdayDecorationContent = () => <ServiceContentSections sections={birthdayDecorationSections} />;
-
-const FunActivitiesContent = () => <ServiceContentSections sections={funActivitiesSections} />;
-
-const CateringContent = () => <ServiceContentSections sections={cateringSections} />;
-const CorporateNetworkingContent = () => (
-  <>
-    <ServiceContentSections sections={corporateNetworkingSections} />
-    <ServiceGallery title="Networking Events" mediaFiles={corporateMedia['corporate-1']} />
-  </>
-);
-const ConferencesContent = () => (
-  <>
-    <ServiceContentSections sections={conferencesSections} />
-    <ServiceGallery title="Conferences" mediaFiles={corporateMedia['corporate-2']} />
-  </>
-);
-const ProductLaunchesContent = () => (
-  <>
-    <ServiceContentSections sections={productLaunchSections} />
-    <ServiceGallery title="Product Launches" mediaFiles={corporateMedia['corporate-3']} />
-  </>
-);
-const CorporateMeetingsContent = () => (
-  <>
-    <ServiceContentSections sections={corporateMeetingsSections} />
-    <ServiceGallery title="Corporate Meetings" mediaFiles={corporateMedia['corporate-1']} />
-  </>
-);
-const PreWeddingCeremonyContent = () => <ServiceContentSections sections={preWeddingCeremonySections} />;
-const TradeShowsContent = () => <ServiceContentSections sections={tradeShowsSections} />;
-const PromotionsContent = () => <ServiceContentSections sections={promotionsSections} />;
-const FestivalsContent = () => <ServiceContentSections sections={festivalsSections} />;
-const HouseWarmingContent = () => <ServiceContentSections sections={houseWarmingSections} />;
-const PartyContent = () => <ServiceContentSections sections={partySections} />;
-const SportingEventsContent = () => <ServiceContentSections sections={sportingEventsSections} />;
 const ServiceDetail = () => {
   const { serviceSlug, itemSlug } = useParams();
-  const service = findServiceBySlug(serviceSlug);
-  const selectedItem = itemSlug ? findServiceItemBySlug(service, itemSlug) : null;
+  
+  const { data } = useTina({
+    query: `query {
+      services(relativePath: "services.json") {
+        catalog {
+          title slug icon description
+          sections { eyebrow title accent description listItems }
+          items {
+            name slug
+            sections { eyebrow title accent description listItems }
+          }
+        }
+      }
+    }`,
+    variables: { relativePath: "services.json" },
+    data: { 
+      services: servicesFallbackData
+    }
+  });
+
+  const activeCatalog = data.services.catalog;
+  
+  const service = activeCatalog.find((item) => item.slug === serviceSlug);
+  const selectedItem = itemSlug ? service?.items?.find((item) => item.slug === itemSlug) : null;
 
   if (!service || (itemSlug && !selectedItem)) {
     return (
-      <section className="service-detail-page relative overflow-hidden px-6 pb-20 pt-40 text-white lg:px-12 lg:pt-44">
+      <section className="relative overflow-hidden px-6 pb-20 pt-40 bg-[#FAF7F2] text-[#2A1810] lg:px-12 lg:pt-44 min-h-screen">
         <div className="relative z-10 mx-auto max-w-4xl text-center">
-          <span className="service-detail-eyebrow mb-4 block">Service</span>
-          <h1 className="site-heading mb-6 text-4xl font-bold">Service Not Found</h1>
-          <p className="mb-8 text-gray-300">The service you opened is not available.</p>
-          <Link to="/services" className="service-detail-cta inline-flex items-center gap-2">
+          <span className="text-[#4A2F1D] text-[11px] font-bold tracking-[0.25em] uppercase mb-4 block">Service</span>
+          <h1 className="font-['Playfair_Display',serif] mb-6 text-4xl font-bold text-[#4A2F1D]">Service Not Found</h1>
+          <p className="mb-8 font-semibold text-[#4A2F1D]">The service you opened is not available.</p>
+          <Link to="/services" className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#4A2F1D]">
             <ArrowLeft size={16} />
             View All Services
           </Link>
@@ -1181,30 +295,18 @@ const ServiceDetail = () => {
   }
 
   const Icon = iconMap[service.icon] ?? Sparkles;
-  const relatedServices = serviceCatalog.filter((item) => item.slug !== service.slug).slice(0, 3);
-  const selectedItemSlug = selectedItem ? slugifyServiceItem(selectedItem) : '';
-  const isInvitationStationery = selectedItemSlug === 'invitations-and-stationery';
-  const isBeautyServices = selectedItemSlug === 'beauty-services-makeup-and-Mehendi';
-  const isBridalWear = selectedItemSlug === 'bridal-and-groom-wear-and-Jewellery';
-  const isGiftsReturn = service.slug === 'custom-gifts-return-gifts';
-  const isSpecialEntries = service.slug === 'special-entries';
-  const isTransportation = selectedItemSlug === 'transportation';
-  const isBirthdayDecoration = selectedItemSlug === 'birthday-decoration';
-  const isFunActivities = selectedItemSlug === 'fun-activities';
-  const isNetworkingEvents = selectedItemSlug === 'networking-events';
-  const isConferences = selectedItemSlug === 'conferences';
-  const isProductLaunches = selectedItemSlug === 'product-launches';
-  const isCorporateMeetings = selectedItemSlug === 'corporate-meetings';
-  const isEventDecorFloralArrangements = selectedItemSlug === 'event-decor-and-floral-arrangements' || selectedItemSlug === 'decorations' || selectedItemSlug === 'theme-based-parties';
-  const isPhotographyVideography = selectedItemSlug === 'photography-and-videography-services' || selectedItemSlug === 'photography-and-videography';
-  const isCateringService = service.slug === 'catering' || selectedItemSlug === 'catering-services' || selectedItemSlug === 'catering';
+  const relatedServices = activeCatalog.filter((item) => item.slug !== service.slug).slice(0, 3);
   
-  const isTradeShowService = service.slug === 'trade-show-exhibition-planning';
-  const isPromotionsService = service.slug === 'promotions';
-  const isFestivalsService = service.slug === 'festivals';
-  const isHouseWarmingService = service.slug === 'house-warming';
-  const isPartyService = service.slug === 'party';
-  const isSportingEventsService = service.slug === 'sporting-events';
+  // Decide what sections to render
+  const sectionsToRender = selectedItem?.sections || service.sections || [];
+
+  // Determine if a gallery should be rendered
+  let galleryMedia = null;
+  let galleryTitle = "";
+  if (selectedItem?.slug === 'networking-events') { galleryMedia = corporateMedia['corporate-1']; galleryTitle = "Networking Events"; }
+  if (selectedItem?.slug === 'conferences') { galleryMedia = corporateMedia['corporate-2']; galleryTitle = "Conferences"; }
+  if (selectedItem?.slug === 'product-launches') { galleryMedia = corporateMedia['corporate-3']; galleryTitle = "Product Launches"; }
+  if (selectedItem?.slug === 'corporate-meetings') { galleryMedia = corporateMedia['corporate-1']; galleryTitle = "Corporate Meetings"; }
 
   return (
     <section className="relative overflow-hidden bg-[#FAF7F2] font-sans px-5 pb-24 pt-32 text-[#2A1810] lg:px-10 lg:pt-44 min-h-screen">
@@ -1247,7 +349,7 @@ const ServiceDetail = () => {
               <h1 className="font-['Playfair_Display',serif] max-w-3xl text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-[#4A2F1D]">
                 {selectedItem ? (
                   <>
-                    {selectedItem}
+                    {selectedItem.name}
                     <span className="block text-[#4A2F1D] italic font-normal mt-2">Service</span>
                   </>
                 ) : (
@@ -1259,7 +361,7 @@ const ServiceDetail = () => {
               </h1>
               <p className="mt-6 max-w-2xl text-[14.5px] font-medium leading-[1.8] text-[#4A2F1D]">
                 {selectedItem
-                  ? `India Solution handles ${selectedItem.toLowerCase()} as part of our ${service.title.toLowerCase()} service, with careful planning, polished execution, and attention to every guest-facing detail.`
+                  ? `India Solution handles ${selectedItem.name.toLowerCase()} as part of our ${service.title.toLowerCase()} service, with careful planning, polished execution, and attention to every guest-facing detail.`
                   : service.description}
               </p>
               <Link to="/contact" className="mt-8 inline-flex items-center gap-3 rounded-full bg-[#A67C65] px-8 py-3.5 text-xs font-bold uppercase tracking-widest text-white transition-all hover:bg-[#8B5E45]">
@@ -1269,62 +371,53 @@ const ServiceDetail = () => {
             </div>
           </motion.section>
 
-          <motion.aside
-            variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
-            className="relative overflow-hidden rounded-[1.5rem] bg-[#FAF7F2] p-8 md:p-10 shadow-inner border border-[#E8DFD5]"
-          >
-            <span className="text-[#4A2F1D] text-[11px] font-bold tracking-[0.25em] uppercase mb-3 block">Service Points</span>
-            <h2 className="font-['Playfair_Display',serif] mb-6 text-3xl font-bold text-[#4A2F1D]">Choose A Detail</h2>
-            <div className="grid gap-3">
-              {service.items.map((item) => {
-                const isActive = item === selectedItem;
-                return (
-                  <motion.div key={item} variants={fadeUp}>
-                    <Link
-                      to={`/services/${service.slug}/${slugifyServiceItem(item)}`}
-                      className={`flex items-center gap-3 rounded-lg border px-4 py-3.5 text-[13px] font-semibold leading-tight transition-all ${
-                        isActive 
-                          ? 'border-[#A67C65] bg-white text-[#4A2F1D] shadow-sm' 
-                          : 'border-[#E8DFD5] bg-transparent text-[#4A2F1D] hover:border-[#D5C5B9] hover:bg-white/60 hover:text-[#4A2F1D]'
-                      }`}
-                    >
-                      <ChevronRight size={14} className={`shrink-0 ${isActive ? 'text-[#4A2F1D]' : 'text-[#D5C5B9]'}`} strokeWidth={2.5} />
-                      <span>{item}</span>
-                    </Link>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </motion.aside>
+          {service.items && service.items.length > 0 && (
+            <motion.aside
+              variants={staggerContainer}
+              initial="hidden"
+              animate="visible"
+              className="relative overflow-hidden rounded-[1.5rem] bg-[#FAF7F2] p-8 md:p-10 shadow-inner border border-[#E8DFD5]"
+            >
+              <span className="text-[#4A2F1D] text-[11px] font-bold tracking-[0.25em] uppercase mb-3 block">Service Points</span>
+              <h2 className="font-['Playfair_Display',serif] mb-6 text-3xl font-bold text-[#4A2F1D]">Choose A Detail</h2>
+              <div className="grid gap-3 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
+                {service.items.map((item) => {
+                  const isActive = item.slug === selectedItem?.slug;
+                  return (
+                    <motion.div key={item.slug} variants={fadeUp}>
+                      <Link
+                        to={`/services/${service.slug}/${item.slug}`}
+                        className={`flex items-center gap-3 rounded-lg border px-4 py-3.5 text-[13px] font-semibold leading-tight transition-all ${
+                          isActive 
+                            ? 'border-[#A67C65] bg-white text-[#4A2F1D] shadow-sm' 
+                            : 'border-[#E8DFD5] bg-transparent text-[#4A2F1D] hover:border-[#D5C5B9] hover:bg-white/60 hover:text-[#4A2F1D]'
+                        }`}
+                      >
+                        <ChevronRight size={14} className={`shrink-0 ${isActive ? 'text-[#4A2F1D]' : 'text-[#D5C5B9]'}`} strokeWidth={2.5} />
+                        <span>{item.name}</span>
+                      </Link>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </motion.aside>
+          )}
         </div>
 
+        {/* Top-Level Service Sub-Items Grid */}
         {(!selectedItem && (service.slug === 'wedding' || service.slug === 'pre-wedding-ceremony')) && (
           <ImageGridServiceContent items={service.items} serviceSlug={service.slug} />
         )}
 
-        {isInvitationStationery && <ServiceContentSections sections={invitationSections} />}
-        {isBeautyServices && <BeautyServicesContent />}
-        {isBridalWear && <BridalWearContent />}
-        {isGiftsReturn && <GiftsReturnContent />}
-        {isSpecialEntries && <SpecialEntriesContent />}
-        {isTransportation && <TransportationContent />}
-        {isBirthdayDecoration && <BirthdayDecorationContent />}
-        {isFunActivities && <FunActivitiesContent />}
-        {isNetworkingEvents && <CorporateNetworkingContent />}
-        {isConferences && <ConferencesContent />}
-        {isProductLaunches && <ProductLaunchesContent />}
-        {isCorporateMeetings && <CorporateMeetingsContent />}
-        {isCateringService && <CateringContent />}
-        {isEventDecorFloralArrangements && <PreWeddingCeremonyContent />}
-        {isPhotographyVideography && <PhotographyVideographyContent />}
-        {isTradeShowService && <TradeShowsContent />}
-        {isPromotionsService && <PromotionsContent />}
-        {isFestivalsService && <FestivalsContent />}
-        {isHouseWarmingService && <HouseWarmingContent />}
-        {isPartyService && <PartyContent />}
-        {isSportingEventsService && <SportingEventsContent />}
+        {/* Dynamic Detail Sections Rendering */}
+        {sectionsToRender && sectionsToRender.length > 0 && (
+           <ServiceContentSections sections={sectionsToRender} />
+        )}
+
+        {/* Optional Media Gallery Rendering */}
+        {galleryMedia && (
+           <ServiceGallery title={galleryTitle} mediaFiles={galleryMedia} />
+        )}
 
         <motion.section
           variants={staggerContainer}
@@ -1367,4 +460,3 @@ const ServiceDetail = () => {
 };
 
 export default ServiceDetail;
-

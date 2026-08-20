@@ -1,0 +1,63 @@
+{
+  "seo": {
+    "title": "Contact Us",
+    "description": "Get in touch with India Solution Events. Call +91 6360181932 or visit our production house in Bengaluru to plan your next extraordinary event.",
+    "keywords": "contact india solution, event planners contact bengaluru, hire event management company"
+  },
+  "header": {
+    "eyebrow": "Contact Us",
+    "titleLine1": "Let's Plan Your",
+    "titleLine2": "Next Event",
+    "description": "Share your event details with us, or reach out directly through phone, email, or our Bengaluru office."
+  },
+  "contactCards": [
+    {
+      "title": "Call Us",
+      "icon": "Phone",
+      "lines": ["+91 6360181932", "+91 9742091362"],
+      "hrefs": ["tel:+916360181932", "tel:+919742091362"]
+    },
+    {
+      "title": "E Mail",
+      "icon": "Mail",
+      "lines": ["info@india-solution.com"],
+      "hrefs": ["mailto:info@india-solution.com"]
+    },
+    {
+      "title": "Visit Us",
+      "icon": "MapPin",
+      "lines": [
+        "India Solution events and production,",
+        "83/1A Muddinpalaya, Main Rd,",
+        "Jnananjyothinagar, Railway Layout, Mallathahalli,",
+        "Bengaluru, Karnataka 560056"
+      ]
+    }
+  ],
+  "socials": [
+    {
+      "label": "Twitter",
+      "url": "#",
+      "icon": "FaTwitter",
+      "className": "bg-[#1DA1F2]"
+    },
+    {
+      "label": "Instagram",
+      "url": "#",
+      "icon": "FaInstagram",
+      "className": "bg-[#1F1F1F]"
+    },
+    {
+      "label": "YouTube",
+      "url": "#",
+      "icon": "FaYoutube",
+      "className": "bg-[#CD201F]"
+    },
+    {
+      "label": "Facebook",
+      "url": "#",
+      "icon": "FaFacebookF",
+      "className": "bg-[#3B5998]"
+    }
+  ]
+}

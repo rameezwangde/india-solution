@@ -3,11 +3,24 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Navigation } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
-import { jobsData } from '../data/jobsData';
+import { useTina } from 'tinacms/dist/react';
+import careersDataFallback from '../content/careers.json';
+import SEO from '../components/layout/SEO';
 
 const JobDetail = () => {
   const { jobId } = useParams();
   const navigate = useNavigate();
+
+  const { data } = useTina({
+    query: `query {
+      careers(relativePath: "careers.json") {
+        jobs { id title location experience jobType companyDescription mandatoryCriteria responsibilities workingConditions }
+      }
+    }`,
+    variables: { relativePath: "careers.json" },
+    data: { careers: careersDataFallback }
+  });
+
   const [job, setJob] = useState(null);
 
   const [formData, setFormData] = useState({
@@ -19,14 +32,15 @@ const JobDetail = () => {
   });
 
   useEffect(() => {
-    const foundJob = jobsData.find(j => j.id === jobId);
+    const jobsList = data.careers?.jobs || [];
+    const foundJob = jobsList.find(j => j.id === jobId);
     if (foundJob) {
       setJob(foundJob);
       window.scrollTo(0, 0);
     } else {
       navigate('/careers');
     }
-  }, [jobId, navigate]);
+  }, [jobId, navigate, data.careers]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -44,6 +58,11 @@ const JobDetail = () => {
 
   return (
     <div className="bg-[#FAF7F2] text-[#2A1810] font-sans relative overflow-hidden">
+      <SEO 
+        title={`${job.title} - Careers at India Solution`}
+        description={job.companyDescription?.substring(0, 150)}
+        keywords={`${job.title}, event management jobs, career india solution`}
+      />
       <div className="absolute inset-0 z-0 pointer-events-none">
         <img 
           src="/hero-bg.png" 

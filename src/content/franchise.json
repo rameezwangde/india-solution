@@ -1,0 +1,120 @@
+{
+  "seo": {
+    "title": "Franchise Opportunity",
+    "description": "India's First Membership-Based Event Management Franchise. One Brand. One Membership. Endless Celebrations."
+  },
+  "header": {
+    "eyebrow": "Celebration Circle™",
+    "title": "Franchise",
+    "titleItalic": "Opportunity",
+    "subtitle": "India's First Membership-Based Event Management Franchise",
+    "highlight": "One Brand. One Membership. Endless Celebrations."
+  },
+  "sections": [
+    {
+      "title": "The Opportunity",
+      "icon": "TrendingUp",
+      "items": [
+        "India's celebration economy is massive.",
+        "Customers need trusted vendors and planners.",
+        "Celebration Circle creates a lifetime membership ecosystem."
+      ]
+    },
+    {
+      "title": "Business Model",
+      "icon": "Briefcase",
+      "items": [
+        "Membership sales",
+        "Event bookings",
+        "Vendor commissions",
+        "Referral income",
+        "Annual renewals"
+      ]
+    },
+    {
+      "title": "Why This Franchise Wins",
+      "icon": "ShieldCheck",
+      "items": [
+        "Recurring revenue instead of one-time events.",
+        "Lifetime customer relationships.",
+        "Referral-driven growth."
+      ]
+    },
+    {
+      "title": "Lifetime Customer Journey",
+      "icon": "HeartHandshake",
+      "items": [
+        "Wedding",
+        "Baby Shower",
+        "Naming Ceremony",
+        "Birthdays",
+        "Housewarming",
+        "Anniversaries",
+        "Graduation",
+        "Retirement"
+      ]
+    },
+    {
+      "title": "Revenue Streams",
+      "icon": "HandCoins",
+      "items": [
+        "Memberships",
+        "Wedding planning",
+        "Birthday events",
+        "Vendor marketplace",
+        "Corporate events",
+        "Festival packages"
+      ]
+    },
+    {
+      "title": "Franchise Support",
+      "icon": "Users",
+      "items": [
+        "Brand license",
+        "CRM & App",
+        "Training",
+        "Marketing",
+        "Operations manual",
+        "Dedicated support"
+      ]
+    },
+    {
+      "title": "Technology",
+      "icon": "Laptop",
+      "items": [
+        "Member app",
+        "Booking management",
+        "Rewards",
+        "Franchise dashboard"
+      ]
+    },
+    {
+      "title": "Marketing",
+      "icon": "Target",
+      "items": [
+        "National campaigns",
+        "Digital marketing",
+        "Local branding",
+        "Lead generation"
+      ]
+    }
+  ],
+  "modelsTitle": "Franchise Models",
+  "models": [
+    { "name": "Starter", "investment": "₹5–8 Lakhs" },
+    { "name": "Premium", "investment": "₹12–18 Lakhs" },
+    { "name": "Master", "investment": "₹50 Lakhs+" }
+  ],
+  "visionTitle": "Our Vision",
+  "vision": [
+    "100 Franchisees",
+    "10,000 Members",
+    "100,000 Events",
+    "1 Million Families"
+  ],
+  "closing": {
+    "line1": "Build relationships.",
+    "line1Italic": "Build recurring income.",
+    "line2": "One Membership. Endless Celebrations."
+  }
+}

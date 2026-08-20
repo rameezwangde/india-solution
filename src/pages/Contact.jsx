@@ -4,40 +4,30 @@ import { Mail, MapPin, Phone, Send, Star } from 'lucide-react';
 import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
 import { fadeUp, staggerContainer } from '../utils/animations';
 import SEO from '../components/layout/SEO';
+import { useTina } from 'tinacms/dist/react';
+import contactDataFallback from '../content/contact.json';
 
-const contactCards = [
-  {
-    title: 'Call Us',
-    icon: Phone,
-    lines: ['+91 6360181932', '+91 9742091362'],
-    hrefs: ['tel:+916360181932', 'tel:+919742091362'],
-  },
-  {
-    title: 'E Mail',
-    icon: Mail,
-    lines: ['info@india-solution.com'],
-    hrefs: ['mailto:info@india-solution.com'],
-  },
-  {
-    title: 'Visit Us',
-    icon: MapPin,
-    lines: [
-      'India Solution events and production,',
-      '83/1A Muddinpalaya, Main Rd,',
-      'Jnananjyothinagar, Railway Layout, Mallathahalli,',
-      'Bengaluru, Karnataka 560056',
-    ],
-  },
-];
-
-const socials = [
-  { label: 'Twitter', icon: FaTwitter, className: 'bg-[#1DA1F2]' },
-  { label: 'Instagram', icon: FaInstagram, className: 'bg-[#1F1F1F]' },
-  { label: 'YouTube', icon: FaYoutube, className: 'bg-[#CD201F]' },
-  { label: 'Facebook', icon: FaFacebookF, className: 'bg-[#3B5998]' },
-];
+const iconMap = {
+  Phone, Mail, MapPin,
+  FaFacebookF, FaInstagram, FaTwitter, FaYoutube
+};
 
 const Contact = () => {
+  const { data } = useTina({
+    query: `query {
+      contact(relativePath: "contact.json") {
+        seo { title description keywords }
+        header { eyebrow titleLine1 titleLine2 description }
+        contactCards { title icon lines hrefs }
+        socials { label url icon className }
+      }
+    }`,
+    variables: { relativePath: "contact.json" },
+    data: { contact: contactDataFallback }
+  });
+
+  const pageData = data.contact;
+
   const [rating, setRating] = useState(0);
   const [formData, setFormData] = useState({
     name: '',
@@ -72,9 +62,9 @@ const Contact = () => {
   return (
     <div className="bg-[#FAF7F2] font-sans selection:bg-[#A67C65] selection:text-white relative">
       <SEO 
-        title="Contact Us"
-        description="Get in touch with India Solution Events. Call +91 6360181932 or visit our production house in Bengaluru to plan your next extraordinary event."
-        keywords="contact india solution, event planners contact bengaluru, hire event management company"
+        title={pageData.seo?.title || "Contact Us"}
+        description={pageData.seo?.description || ""}
+        keywords={pageData.seo?.keywords || ""}
       />
       <section className="relative overflow-hidden px-5 pb-14 pt-32 lg:px-12 lg:pt-40">
         <div className="absolute inset-0 z-0 bg-[#FAF7F2] overflow-hidden pointer-events-none">
@@ -88,14 +78,14 @@ const Contact = () => {
         >
           <motion.div variants={fadeUp} className="mb-6 flex items-center justify-center gap-4 text-[11px] font-bold tracking-[0.2em] text-[#4A2F1D]">
             <span className="text-[#8B5E45] text-sm">❖</span>
-            <span className="uppercase">Contact Us</span>
+            <span className="uppercase">{pageData.header?.eyebrow}</span>
             <span className="text-[#8B5E45] text-sm">❖</span>
           </motion.div>
           <h1 className="font-['Playfair_Display',serif] text-[#4A2F1D] text-5xl font-semibold leading-tight md:text-6xl mb-4">
-            Let&apos;s Plan Your <span className="italic">Next Event</span>
+            {pageData.header?.titleLine1} <span className="italic">{pageData.header?.titleLine2}</span>
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-[15px] font-semibold leading-[1.8] text-[#2A1810]">
-            Share your event details with us, or reach out directly through phone, email, or our Bengaluru office.
+            {pageData.header?.description}
           </p>
         </motion.div>
       </section>
@@ -195,16 +185,16 @@ const Contact = () => {
               viewport={{ once: true }}
               className="grid gap-5"
             >
-              {contactCards.map((card) => {
-                const Icon = card.icon;
+              {(pageData.contactCards || []).map((card) => {
+                const Icon = iconMap[card.icon];
                 return (
                   <motion.div key={card.title} variants={fadeUp} className="bg-[#FAF6F2] rounded-[2rem] shadow-[0_8px_30px_rgb(139,94,69,0.08)] border border-[#EBE3DC] p-6">
                     <div className="mb-4 flex h-14 w-14 shrink-0 items-center justify-center rounded-full border-[1.5px] border-[#D5C5B9] bg-transparent text-[#946247]">
-                      <Icon size={24} strokeWidth={1.5} />
+                      {Icon && <Icon size={24} strokeWidth={1.5} />}
                     </div>
                     <h3 className="font-['Playfair_Display',serif] text-2xl font-semibold text-[#4A2F1D] mb-4">{card.title}</h3>
                     <div className="space-y-2 text-[15px] font-semibold leading-[1.8] text-[#2A1810]">
-                      {card.lines.map((line, index) => card.hrefs?.[index] ? (
+                      {(card.lines || []).map((line, index) => card.hrefs?.[index] ? (
                         <a key={line} href={card.hrefs[index]} className="block hover:text-[#A87455] transition-colors">{line}</a>
                       ) : (
                         <p key={line}>{line}</p>
@@ -217,11 +207,11 @@ const Contact = () => {
               <motion.div variants={fadeUp} className="bg-[#FAF6F2] rounded-[2rem] shadow-[0_8px_30px_rgb(139,94,69,0.08)] border border-[#EBE3DC] p-6">
                 <h3 className="font-['Playfair_Display',serif] text-2xl font-semibold text-[#4A2F1D] mb-5">Follow Us</h3>
                 <div className="flex flex-wrap gap-3">
-                  {socials.map((social) => {
-                    const Icon = social.icon;
+                  {(pageData.socials || []).map((social) => {
+                    const Icon = iconMap[social.icon];
                     return (
-                      <a key={social.label} href="#" aria-label={social.label} className={`flex h-11 w-11 items-center justify-center rounded-[0.8rem] text-white shadow-md transition-transform hover:-translate-y-1 ${social.className}`}>
-                        <Icon size={18} />
+                      <a key={social.label} href={social.url} aria-label={social.label} className={`flex h-11 w-11 items-center justify-center rounded-[0.8rem] text-white shadow-md transition-transform hover:-translate-y-1 ${social.className}`}>
+                        {Icon && <Icon size={18} />}
                       </a>
                     );
                   })}

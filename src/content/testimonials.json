@@ -1,0 +1,72 @@
+{
+  "seo": {
+    "title": "Client Testimonials & Reviews",
+    "description": "Read what our clients have to say about their experience with India Solution Events. Discover our commitment to excellence.",
+    "keywords": "event reviews, client testimonials, india solution feedback, event planning reviews, best event management bangalore"
+  },
+  "header": {
+    "eyebrow": "Testimonials",
+    "title": "WHAT PEOPLE SAY",
+    "description": "Don't just take our word for it. Here's what our clients have to say about their experience with India Solution Events."
+  },
+  "overallRating": {
+    "score": "4.8",
+    "totalReviews": "150+"
+  },
+  "featured": {
+    "quote": "India Solution Events redefined excellence for us. Their seamless execution and eye for detail turned our vision into reality. Truly the go-to team for any high-profile event.",
+    "name": "Amit Desai",
+    "role": "Managing Director, GlobalTech Corp",
+    "initials": "AD"
+  },
+  "items": [
+    {
+      "title": "A Flawless Corporate Experience",
+      "quote": "India Solution Events turned our annual corporate meet into a seamless and impressive experience. From the elegant decor to the flawless management of our schedule, everything exceeded expectations. Our team and clients were highly impressed. Thank you for making it a grand success!",
+      "name": "Ananya Gupta",
+      "role": "Marketing Head, Prism Solutions",
+      "initials": "AG",
+      "offset": "lg:mt-10"
+    },
+    {
+      "title": "Professionalism at Its Best",
+      "quote": "Our product launch event was a huge success, all thanks to India Solution Events. The attention to detail, innovative ideas, and their ability to handle last-minute changes with grace truly stood out. We couldn't have asked for a better partner!",
+      "name": "Rajesh Kumar",
+      "role": "CEO, TechNext Innovations",
+      "initials": "RK",
+      "offset": "lg:mt-0"
+    },
+    {
+      "title": "A Dream Wedding Come True",
+      "quote": "India Solution made our wedding day absolutely magical. From the breathtaking decor to ensuring every guest felt special, they handled everything with care and professionalism. It was a day straight out of a fairy tale!",
+      "name": "Simran & Arjun",
+      "role": "Wedding Clients",
+      "initials": "SA",
+      "offset": "lg:mt-16"
+    },
+    {
+      "title": "The Perfect Birthday Bash",
+      "quote": "I couldn't believe how perfectly India Solution Events brought my son's superhero-themed birthday party to life! The decor, activities, and even the smallest details were just amazing. My son and his friends had the time of their lives!",
+      "name": "Nisha Mehta",
+      "role": "Birthday Celebration Client",
+      "initials": "NM",
+      "offset": "lg:-mt-4"
+    },
+    {
+      "title": "An Unforgettable Engagement Celebration",
+      "quote": "India Solution made our engagement party so special! From the romantic ambiance to the flawless coordination, everything was picture-perfect. Our guests couldn't stop raving about how beautiful it was. Thank you for making it so memorable!",
+      "name": "Riya & Karan",
+      "role": "Engagement Clients",
+      "initials": "RK",
+      "offset": "lg:mt-12"
+    },
+    {
+      "title": "A Celebration to Remember",
+      "quote": "India Solution Events planned my retirement party with such thoughtfulness and creativity. It was the perfect blend of nostalgia and joy, and every moment felt heartfelt. I couldn't have imagined a better way to celebrate this milestone!",
+      "name": "Vinod Sharma",
+      "role": "Retirement Celebration Client",
+      "initials": "VS",
+      "offset": "lg:mt-2"
+    }
+  ]
+}

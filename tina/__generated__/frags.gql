@@ -75,14 +75,358 @@ fragment HomeParts on Home {
   }
 }
 
+fragment AboutParts on About {
+  __typename
+  seo {
+    __typename
+    title
+    description
+    keywords
+  }
+  hero {
+    __typename
+    subtitle
+    title
+    description
+  }
+  mainSection {
+    __typename
+    paragraphs
+    buttonText
+    image
+  }
+  stats {
+    __typename
+    value
+    label
+    iconName
+  }
+  mission {
+    __typename
+    title
+    text
+  }
+  vision {
+    __typename
+    title
+    text
+  }
+  founder {
+    __typename
+    sectionSubtitle
+    sectionTitleLine1
+    sectionTitleLine2
+    image
+    name
+    role
+    location
+    aboutMyselfText
+    expertiseText
+  }
+  credentials {
+    __typename
+    title
+    items
+  }
+  achievements {
+    __typename
+    title
+    items
+  }
+  whyChooseUs {
+    __typename
+    subtitle
+    titleLine1
+    titleLine2
+    description
+    highlights {
+      __typename
+      title
+      description
+      iconName
+    }
+  }
+}
+
 fragment ServicesParts on Services {
   __typename
+  seo {
+    __typename
+    title
+    description
+    keywords
+  }
+  hero {
+    __typename
+    subtitle
+    titleLine1
+    titleLine2
+    description
+  }
   catalog {
     __typename
     title
     slug
     icon
     description
+    sections {
+      __typename
+      eyebrow
+      title
+      accent
+      description
+      listItems
+    }
+    items {
+      __typename
+      name
+      slug
+      sections {
+        __typename
+        eyebrow
+        title
+        accent
+        description
+        listItems
+      }
+    }
+  }
+}
+
+fragment GalleryParts on Gallery {
+  __typename
+  seo {
+    __typename
+    title
+    description
+    keywords
+  }
+  header {
+    __typename
+    title
+    subtitle
+    description
+  }
+  categories
+  photos {
+    __typename
+    title
+    description
+    src
+    category
+  }
+}
+
+fragment TestimonialsParts on Testimonials {
+  __typename
+  seo {
+    __typename
+    title
+    description
+    keywords
+  }
+  header {
+    __typename
+    eyebrow
+    title
+    description
+  }
+  overallRating {
+    __typename
+    score
+    totalReviews
+  }
+  featured {
+    __typename
+    quote
+    name
+    role
+    initials
+  }
+  items {
+    __typename
+    title
+    quote
+    name
+    role
+    initials
+    offset
+  }
+}
+
+fragment CareersParts on Careers {
+  __typename
+  seo {
+    __typename
+    title
+    description
+    keywords
+  }
+  header {
+    __typename
+    eyebrow
+    title
+    description
+  }
+  jobs {
+    __typename
+    id
+    title
+    location
+    experience
+    jobType
+    companyDescription
+    mandatoryCriteria
+    responsibilities
+    workingConditions
+  }
+}
+
+fragment ContactParts on Contact {
+  __typename
+  seo {
+    __typename
+    title
+    description
+    keywords
+  }
+  header {
+    __typename
+    eyebrow
+    titleLine1
+    titleLine2
+    description
+  }
+  contactCards {
+    __typename
+    title
+    icon
+    lines
+    hrefs
+  }
+  socials {
+    __typename
+    label
+    url
+    icon
+    className
+  }
+}
+
+fragment FranchiseParts on Franchise {
+  __typename
+  seo {
+    __typename
+    title
+    description
+  }
+  header {
+    __typename
+    eyebrow
+    title
+    titleItalic
+    subtitle
+    highlight
+  }
+  sections {
+    __typename
+    title
+    icon
     items
+  }
+  modelsTitle
+  models {
+    __typename
+    name
+    investment
+  }
+  visionTitle
+  vision
+  closing {
+    __typename
+    line1
+    line1Italic
+    line2
+  }
+}
+
+fragment MembershipParts on Membership {
+  __typename
+  seo {
+    __typename
+    title
+    description
+  }
+  hero {
+    __typename
+    eyebrow
+    titleLine1
+    titleItalic
+    titleLine3
+    description
+    badges
+  }
+  whySection {
+    __typename
+    title
+    description
+    cards {
+      __typename
+      icon
+      title
+      desc
+    }
+  }
+  benefitsSection {
+    __typename
+    title
+    cards {
+      __typename
+      icon
+      title
+      items
+      gradient
+    }
+  }
+  milestoneSection {
+    __typename
+    title
+    description
+    milestones {
+      __typename
+      title
+      icon
+    }
+  }
+  rewardsSection {
+    __typename
+    title
+    rewards
+  }
+  exclusiveOffersSection {
+    __typename
+    title
+    offers
+  }
+  perfectForSection {
+    __typename
+    title
+    items {
+      __typename
+      title
+      icon
+    }
+  }
+  promiseSection {
+    __typename
+    title
+    text
+    signature
+  }
+  ctaSection {
+    __typename
+    titleLine1
+    titleLine2
+    description
   }
 }

@@ -83,8 +83,22 @@ export type Query = {
   document: DocumentNode;
   home: Home;
   homeConnection: HomeConnection;
+  about: About;
+  aboutConnection: AboutConnection;
   services: Services;
   servicesConnection: ServicesConnection;
+  gallery: Gallery;
+  galleryConnection: GalleryConnection;
+  testimonials: Testimonials;
+  testimonialsConnection: TestimonialsConnection;
+  careers: Careers;
+  careersConnection: CareersConnection;
+  contact: Contact;
+  contactConnection: ContactConnection;
+  franchise: Franchise;
+  franchiseConnection: FranchiseConnection;
+  membership: Membership;
+  membershipConnection: MembershipConnection;
 };
 
 
@@ -124,6 +138,21 @@ export type QueryHomeConnectionArgs = {
 };
 
 
+export type QueryAboutArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryAboutConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<AboutFilter>;
+};
+
+
 export type QueryServicesArgs = {
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
@@ -138,9 +167,106 @@ export type QueryServicesConnectionArgs = {
   filter?: InputMaybe<ServicesFilter>;
 };
 
+
+export type QueryGalleryArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryGalleryConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<GalleryFilter>;
+};
+
+
+export type QueryTestimonialsArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryTestimonialsConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<TestimonialsFilter>;
+};
+
+
+export type QueryCareersArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryCareersConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<CareersFilter>;
+};
+
+
+export type QueryContactArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryContactConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<ContactFilter>;
+};
+
+
+export type QueryFranchiseArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryFranchiseConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<FranchiseFilter>;
+};
+
+
+export type QueryMembershipArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryMembershipConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<MembershipFilter>;
+};
+
 export type DocumentFilter = {
   home?: InputMaybe<HomeFilter>;
+  about?: InputMaybe<AboutFilter>;
   services?: InputMaybe<ServicesFilter>;
+  gallery?: InputMaybe<GalleryFilter>;
+  testimonials?: InputMaybe<TestimonialsFilter>;
+  careers?: InputMaybe<CareersFilter>;
+  contact?: InputMaybe<ContactFilter>;
+  franchise?: InputMaybe<FranchiseFilter>;
+  membership?: InputMaybe<MembershipFilter>;
 };
 
 export type DocumentConnectionEdges = {
@@ -180,7 +306,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Home | Services | Folder;
+export type DocumentNode = Home | About | Services | Gallery | Testimonials | Careers | Contact | Franchise | Membership | Folder;
 
 export type HomeSeo = {
   __typename?: 'HomeSeo';
@@ -398,21 +524,293 @@ export type HomeConnection = Connection & {
   edges?: Maybe<Array<Maybe<HomeConnectionEdges>>>;
 };
 
+export type AboutSeo = {
+  __typename?: 'AboutSeo';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  keywords?: Maybe<Scalars['String']['output']>;
+};
+
+export type AboutHero = {
+  __typename?: 'AboutHero';
+  subtitle?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+};
+
+export type AboutMainSection = {
+  __typename?: 'AboutMainSection';
+  paragraphs?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  buttonText?: Maybe<Scalars['String']['output']>;
+  image?: Maybe<Scalars['String']['output']>;
+};
+
+export type AboutStats = {
+  __typename?: 'AboutStats';
+  value?: Maybe<Scalars['String']['output']>;
+  label?: Maybe<Scalars['String']['output']>;
+  iconName?: Maybe<Scalars['String']['output']>;
+};
+
+export type AboutMission = {
+  __typename?: 'AboutMission';
+  title?: Maybe<Scalars['String']['output']>;
+  text?: Maybe<Scalars['String']['output']>;
+};
+
+export type AboutVision = {
+  __typename?: 'AboutVision';
+  title?: Maybe<Scalars['String']['output']>;
+  text?: Maybe<Scalars['String']['output']>;
+};
+
+export type AboutFounder = {
+  __typename?: 'AboutFounder';
+  sectionSubtitle?: Maybe<Scalars['String']['output']>;
+  sectionTitleLine1?: Maybe<Scalars['String']['output']>;
+  sectionTitleLine2?: Maybe<Scalars['String']['output']>;
+  image?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  role?: Maybe<Scalars['String']['output']>;
+  location?: Maybe<Scalars['String']['output']>;
+  aboutMyselfText?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  expertiseText?: Maybe<Scalars['String']['output']>;
+};
+
+export type AboutCredentials = {
+  __typename?: 'AboutCredentials';
+  title?: Maybe<Scalars['String']['output']>;
+  items?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+};
+
+export type AboutAchievements = {
+  __typename?: 'AboutAchievements';
+  title?: Maybe<Scalars['String']['output']>;
+  items?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+};
+
+export type AboutWhyChooseUsHighlights = {
+  __typename?: 'AboutWhyChooseUsHighlights';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  iconName?: Maybe<Scalars['String']['output']>;
+};
+
+export type AboutWhyChooseUs = {
+  __typename?: 'AboutWhyChooseUs';
+  subtitle?: Maybe<Scalars['String']['output']>;
+  titleLine1?: Maybe<Scalars['String']['output']>;
+  titleLine2?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  highlights?: Maybe<Array<Maybe<AboutWhyChooseUsHighlights>>>;
+};
+
+export type About = Node & Document & {
+  __typename?: 'About';
+  seo?: Maybe<AboutSeo>;
+  hero?: Maybe<AboutHero>;
+  mainSection?: Maybe<AboutMainSection>;
+  stats?: Maybe<Array<Maybe<AboutStats>>>;
+  mission?: Maybe<AboutMission>;
+  vision?: Maybe<AboutVision>;
+  founder?: Maybe<AboutFounder>;
+  credentials?: Maybe<AboutCredentials>;
+  achievements?: Maybe<AboutAchievements>;
+  whyChooseUs?: Maybe<AboutWhyChooseUs>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type AboutSeoFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  keywords?: InputMaybe<StringFilter>;
+};
+
+export type AboutHeroFilter = {
+  subtitle?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
+export type AboutMainSectionFilter = {
+  paragraphs?: InputMaybe<StringFilter>;
+  buttonText?: InputMaybe<StringFilter>;
+  image?: InputMaybe<ImageFilter>;
+};
+
+export type AboutStatsFilter = {
+  value?: InputMaybe<StringFilter>;
+  label?: InputMaybe<StringFilter>;
+  iconName?: InputMaybe<StringFilter>;
+};
+
+export type AboutMissionFilter = {
+  title?: InputMaybe<StringFilter>;
+  text?: InputMaybe<StringFilter>;
+};
+
+export type AboutVisionFilter = {
+  title?: InputMaybe<StringFilter>;
+  text?: InputMaybe<StringFilter>;
+};
+
+export type AboutFounderFilter = {
+  sectionSubtitle?: InputMaybe<StringFilter>;
+  sectionTitleLine1?: InputMaybe<StringFilter>;
+  sectionTitleLine2?: InputMaybe<StringFilter>;
+  image?: InputMaybe<ImageFilter>;
+  name?: InputMaybe<StringFilter>;
+  role?: InputMaybe<StringFilter>;
+  location?: InputMaybe<StringFilter>;
+  aboutMyselfText?: InputMaybe<StringFilter>;
+  expertiseText?: InputMaybe<StringFilter>;
+};
+
+export type AboutCredentialsFilter = {
+  title?: InputMaybe<StringFilter>;
+  items?: InputMaybe<StringFilter>;
+};
+
+export type AboutAchievementsFilter = {
+  title?: InputMaybe<StringFilter>;
+  items?: InputMaybe<StringFilter>;
+};
+
+export type AboutWhyChooseUsHighlightsFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  iconName?: InputMaybe<StringFilter>;
+};
+
+export type AboutWhyChooseUsFilter = {
+  subtitle?: InputMaybe<StringFilter>;
+  titleLine1?: InputMaybe<StringFilter>;
+  titleLine2?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  highlights?: InputMaybe<AboutWhyChooseUsHighlightsFilter>;
+};
+
+export type AboutFilter = {
+  seo?: InputMaybe<AboutSeoFilter>;
+  hero?: InputMaybe<AboutHeroFilter>;
+  mainSection?: InputMaybe<AboutMainSectionFilter>;
+  stats?: InputMaybe<AboutStatsFilter>;
+  mission?: InputMaybe<AboutMissionFilter>;
+  vision?: InputMaybe<AboutVisionFilter>;
+  founder?: InputMaybe<AboutFounderFilter>;
+  credentials?: InputMaybe<AboutCredentialsFilter>;
+  achievements?: InputMaybe<AboutAchievementsFilter>;
+  whyChooseUs?: InputMaybe<AboutWhyChooseUsFilter>;
+};
+
+export type AboutConnectionEdges = {
+  __typename?: 'AboutConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<About>;
+};
+
+export type AboutConnection = Connection & {
+  __typename?: 'AboutConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<AboutConnectionEdges>>>;
+};
+
+export type ServicesSeo = {
+  __typename?: 'ServicesSeo';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  keywords?: Maybe<Scalars['String']['output']>;
+};
+
+export type ServicesHero = {
+  __typename?: 'ServicesHero';
+  subtitle?: Maybe<Scalars['String']['output']>;
+  titleLine1?: Maybe<Scalars['String']['output']>;
+  titleLine2?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+};
+
+export type ServicesCatalogSections = {
+  __typename?: 'ServicesCatalogSections';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  accent?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  listItems?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+};
+
+export type ServicesCatalogItemsSections = {
+  __typename?: 'ServicesCatalogItemsSections';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  accent?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  listItems?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+};
+
+export type ServicesCatalogItems = {
+  __typename?: 'ServicesCatalogItems';
+  name?: Maybe<Scalars['String']['output']>;
+  slug?: Maybe<Scalars['String']['output']>;
+  sections?: Maybe<Array<Maybe<ServicesCatalogItemsSections>>>;
+};
+
 export type ServicesCatalog = {
   __typename?: 'ServicesCatalog';
   title?: Maybe<Scalars['String']['output']>;
   slug?: Maybe<Scalars['String']['output']>;
   icon?: Maybe<Scalars['String']['output']>;
   description?: Maybe<Scalars['String']['output']>;
-  items?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  sections?: Maybe<Array<Maybe<ServicesCatalogSections>>>;
+  items?: Maybe<Array<Maybe<ServicesCatalogItems>>>;
 };
 
 export type Services = Node & Document & {
   __typename?: 'Services';
+  seo?: Maybe<ServicesSeo>;
+  hero?: Maybe<ServicesHero>;
   catalog?: Maybe<Array<Maybe<ServicesCatalog>>>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
+};
+
+export type ServicesSeoFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  keywords?: InputMaybe<StringFilter>;
+};
+
+export type ServicesHeroFilter = {
+  subtitle?: InputMaybe<StringFilter>;
+  titleLine1?: InputMaybe<StringFilter>;
+  titleLine2?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
+export type ServicesCatalogSectionsFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  accent?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  listItems?: InputMaybe<StringFilter>;
+};
+
+export type ServicesCatalogItemsSectionsFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  accent?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  listItems?: InputMaybe<StringFilter>;
+};
+
+export type ServicesCatalogItemsFilter = {
+  name?: InputMaybe<StringFilter>;
+  slug?: InputMaybe<StringFilter>;
+  sections?: InputMaybe<ServicesCatalogItemsSectionsFilter>;
 };
 
 export type ServicesCatalogFilter = {
@@ -420,10 +818,13 @@ export type ServicesCatalogFilter = {
   slug?: InputMaybe<StringFilter>;
   icon?: InputMaybe<StringFilter>;
   description?: InputMaybe<StringFilter>;
-  items?: InputMaybe<StringFilter>;
+  sections?: InputMaybe<ServicesCatalogSectionsFilter>;
+  items?: InputMaybe<ServicesCatalogItemsFilter>;
 };
 
 export type ServicesFilter = {
+  seo?: InputMaybe<ServicesSeoFilter>;
+  hero?: InputMaybe<ServicesHeroFilter>;
   catalog?: InputMaybe<ServicesCatalogFilter>;
 };
 
@@ -440,6 +841,674 @@ export type ServicesConnection = Connection & {
   edges?: Maybe<Array<Maybe<ServicesConnectionEdges>>>;
 };
 
+export type GallerySeo = {
+  __typename?: 'GallerySeo';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  keywords?: Maybe<Scalars['String']['output']>;
+};
+
+export type GalleryHeader = {
+  __typename?: 'GalleryHeader';
+  title?: Maybe<Scalars['String']['output']>;
+  subtitle?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+};
+
+export type GalleryPhotos = {
+  __typename?: 'GalleryPhotos';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  src?: Maybe<Scalars['String']['output']>;
+  category?: Maybe<Scalars['String']['output']>;
+};
+
+export type Gallery = Node & Document & {
+  __typename?: 'Gallery';
+  seo?: Maybe<GallerySeo>;
+  header?: Maybe<GalleryHeader>;
+  categories?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  photos?: Maybe<Array<Maybe<GalleryPhotos>>>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type GallerySeoFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  keywords?: InputMaybe<StringFilter>;
+};
+
+export type GalleryHeaderFilter = {
+  title?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
+export type GalleryPhotosFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  src?: InputMaybe<ImageFilter>;
+  category?: InputMaybe<StringFilter>;
+};
+
+export type GalleryFilter = {
+  seo?: InputMaybe<GallerySeoFilter>;
+  header?: InputMaybe<GalleryHeaderFilter>;
+  categories?: InputMaybe<StringFilter>;
+  photos?: InputMaybe<GalleryPhotosFilter>;
+};
+
+export type GalleryConnectionEdges = {
+  __typename?: 'GalleryConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Gallery>;
+};
+
+export type GalleryConnection = Connection & {
+  __typename?: 'GalleryConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<GalleryConnectionEdges>>>;
+};
+
+export type TestimonialsSeo = {
+  __typename?: 'TestimonialsSeo';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  keywords?: Maybe<Scalars['String']['output']>;
+};
+
+export type TestimonialsHeader = {
+  __typename?: 'TestimonialsHeader';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+};
+
+export type TestimonialsOverallRating = {
+  __typename?: 'TestimonialsOverallRating';
+  score?: Maybe<Scalars['String']['output']>;
+  totalReviews?: Maybe<Scalars['String']['output']>;
+};
+
+export type TestimonialsFeatured = {
+  __typename?: 'TestimonialsFeatured';
+  quote?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  role?: Maybe<Scalars['String']['output']>;
+  initials?: Maybe<Scalars['String']['output']>;
+};
+
+export type TestimonialsItems = {
+  __typename?: 'TestimonialsItems';
+  title?: Maybe<Scalars['String']['output']>;
+  quote?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  role?: Maybe<Scalars['String']['output']>;
+  initials?: Maybe<Scalars['String']['output']>;
+  offset?: Maybe<Scalars['String']['output']>;
+};
+
+export type Testimonials = Node & Document & {
+  __typename?: 'Testimonials';
+  seo?: Maybe<TestimonialsSeo>;
+  header?: Maybe<TestimonialsHeader>;
+  overallRating?: Maybe<TestimonialsOverallRating>;
+  featured?: Maybe<TestimonialsFeatured>;
+  items?: Maybe<Array<Maybe<TestimonialsItems>>>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type TestimonialsSeoFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  keywords?: InputMaybe<StringFilter>;
+};
+
+export type TestimonialsHeaderFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
+export type TestimonialsOverallRatingFilter = {
+  score?: InputMaybe<StringFilter>;
+  totalReviews?: InputMaybe<StringFilter>;
+};
+
+export type TestimonialsFeaturedFilter = {
+  quote?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
+  role?: InputMaybe<StringFilter>;
+  initials?: InputMaybe<StringFilter>;
+};
+
+export type TestimonialsItemsFilter = {
+  title?: InputMaybe<StringFilter>;
+  quote?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
+  role?: InputMaybe<StringFilter>;
+  initials?: InputMaybe<StringFilter>;
+  offset?: InputMaybe<StringFilter>;
+};
+
+export type TestimonialsFilter = {
+  seo?: InputMaybe<TestimonialsSeoFilter>;
+  header?: InputMaybe<TestimonialsHeaderFilter>;
+  overallRating?: InputMaybe<TestimonialsOverallRatingFilter>;
+  featured?: InputMaybe<TestimonialsFeaturedFilter>;
+  items?: InputMaybe<TestimonialsItemsFilter>;
+};
+
+export type TestimonialsConnectionEdges = {
+  __typename?: 'TestimonialsConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Testimonials>;
+};
+
+export type TestimonialsConnection = Connection & {
+  __typename?: 'TestimonialsConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<TestimonialsConnectionEdges>>>;
+};
+
+export type CareersSeo = {
+  __typename?: 'CareersSeo';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  keywords?: Maybe<Scalars['String']['output']>;
+};
+
+export type CareersHeader = {
+  __typename?: 'CareersHeader';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+};
+
+export type CareersJobs = {
+  __typename?: 'CareersJobs';
+  id?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  location?: Maybe<Scalars['String']['output']>;
+  experience?: Maybe<Scalars['String']['output']>;
+  jobType?: Maybe<Scalars['String']['output']>;
+  companyDescription?: Maybe<Scalars['String']['output']>;
+  mandatoryCriteria?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  responsibilities?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  workingConditions?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+};
+
+export type Careers = Node & Document & {
+  __typename?: 'Careers';
+  seo?: Maybe<CareersSeo>;
+  header?: Maybe<CareersHeader>;
+  jobs?: Maybe<Array<Maybe<CareersJobs>>>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type CareersSeoFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  keywords?: InputMaybe<StringFilter>;
+};
+
+export type CareersHeaderFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
+export type CareersJobsFilter = {
+  id?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  location?: InputMaybe<StringFilter>;
+  experience?: InputMaybe<StringFilter>;
+  jobType?: InputMaybe<StringFilter>;
+  companyDescription?: InputMaybe<StringFilter>;
+  mandatoryCriteria?: InputMaybe<StringFilter>;
+  responsibilities?: InputMaybe<StringFilter>;
+  workingConditions?: InputMaybe<StringFilter>;
+};
+
+export type CareersFilter = {
+  seo?: InputMaybe<CareersSeoFilter>;
+  header?: InputMaybe<CareersHeaderFilter>;
+  jobs?: InputMaybe<CareersJobsFilter>;
+};
+
+export type CareersConnectionEdges = {
+  __typename?: 'CareersConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Careers>;
+};
+
+export type CareersConnection = Connection & {
+  __typename?: 'CareersConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<CareersConnectionEdges>>>;
+};
+
+export type ContactSeo = {
+  __typename?: 'ContactSeo';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  keywords?: Maybe<Scalars['String']['output']>;
+};
+
+export type ContactHeader = {
+  __typename?: 'ContactHeader';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  titleLine1?: Maybe<Scalars['String']['output']>;
+  titleLine2?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+};
+
+export type ContactContactCards = {
+  __typename?: 'ContactContactCards';
+  title?: Maybe<Scalars['String']['output']>;
+  icon?: Maybe<Scalars['String']['output']>;
+  lines?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  hrefs?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+};
+
+export type ContactSocials = {
+  __typename?: 'ContactSocials';
+  label?: Maybe<Scalars['String']['output']>;
+  url?: Maybe<Scalars['String']['output']>;
+  icon?: Maybe<Scalars['String']['output']>;
+  className?: Maybe<Scalars['String']['output']>;
+};
+
+export type Contact = Node & Document & {
+  __typename?: 'Contact';
+  seo?: Maybe<ContactSeo>;
+  header?: Maybe<ContactHeader>;
+  contactCards?: Maybe<Array<Maybe<ContactContactCards>>>;
+  socials?: Maybe<Array<Maybe<ContactSocials>>>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type ContactSeoFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  keywords?: InputMaybe<StringFilter>;
+};
+
+export type ContactHeaderFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  titleLine1?: InputMaybe<StringFilter>;
+  titleLine2?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
+export type ContactContactCardsFilter = {
+  title?: InputMaybe<StringFilter>;
+  icon?: InputMaybe<StringFilter>;
+  lines?: InputMaybe<StringFilter>;
+  hrefs?: InputMaybe<StringFilter>;
+};
+
+export type ContactSocialsFilter = {
+  label?: InputMaybe<StringFilter>;
+  url?: InputMaybe<StringFilter>;
+  icon?: InputMaybe<StringFilter>;
+  className?: InputMaybe<StringFilter>;
+};
+
+export type ContactFilter = {
+  seo?: InputMaybe<ContactSeoFilter>;
+  header?: InputMaybe<ContactHeaderFilter>;
+  contactCards?: InputMaybe<ContactContactCardsFilter>;
+  socials?: InputMaybe<ContactSocialsFilter>;
+};
+
+export type ContactConnectionEdges = {
+  __typename?: 'ContactConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Contact>;
+};
+
+export type ContactConnection = Connection & {
+  __typename?: 'ContactConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<ContactConnectionEdges>>>;
+};
+
+export type FranchiseSeo = {
+  __typename?: 'FranchiseSeo';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+};
+
+export type FranchiseHeader = {
+  __typename?: 'FranchiseHeader';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  titleItalic?: Maybe<Scalars['String']['output']>;
+  subtitle?: Maybe<Scalars['String']['output']>;
+  highlight?: Maybe<Scalars['String']['output']>;
+};
+
+export type FranchiseSections = {
+  __typename?: 'FranchiseSections';
+  title?: Maybe<Scalars['String']['output']>;
+  icon?: Maybe<Scalars['String']['output']>;
+  items?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+};
+
+export type FranchiseModels = {
+  __typename?: 'FranchiseModels';
+  name?: Maybe<Scalars['String']['output']>;
+  investment?: Maybe<Scalars['String']['output']>;
+};
+
+export type FranchiseClosing = {
+  __typename?: 'FranchiseClosing';
+  line1?: Maybe<Scalars['String']['output']>;
+  line1Italic?: Maybe<Scalars['String']['output']>;
+  line2?: Maybe<Scalars['String']['output']>;
+};
+
+export type Franchise = Node & Document & {
+  __typename?: 'Franchise';
+  seo?: Maybe<FranchiseSeo>;
+  header?: Maybe<FranchiseHeader>;
+  sections?: Maybe<Array<Maybe<FranchiseSections>>>;
+  modelsTitle?: Maybe<Scalars['String']['output']>;
+  models?: Maybe<Array<Maybe<FranchiseModels>>>;
+  visionTitle?: Maybe<Scalars['String']['output']>;
+  vision?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  closing?: Maybe<FranchiseClosing>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type FranchiseSeoFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
+export type FranchiseHeaderFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  titleItalic?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+  highlight?: InputMaybe<StringFilter>;
+};
+
+export type FranchiseSectionsFilter = {
+  title?: InputMaybe<StringFilter>;
+  icon?: InputMaybe<StringFilter>;
+  items?: InputMaybe<StringFilter>;
+};
+
+export type FranchiseModelsFilter = {
+  name?: InputMaybe<StringFilter>;
+  investment?: InputMaybe<StringFilter>;
+};
+
+export type FranchiseClosingFilter = {
+  line1?: InputMaybe<StringFilter>;
+  line1Italic?: InputMaybe<StringFilter>;
+  line2?: InputMaybe<StringFilter>;
+};
+
+export type FranchiseFilter = {
+  seo?: InputMaybe<FranchiseSeoFilter>;
+  header?: InputMaybe<FranchiseHeaderFilter>;
+  sections?: InputMaybe<FranchiseSectionsFilter>;
+  modelsTitle?: InputMaybe<StringFilter>;
+  models?: InputMaybe<FranchiseModelsFilter>;
+  visionTitle?: InputMaybe<StringFilter>;
+  vision?: InputMaybe<StringFilter>;
+  closing?: InputMaybe<FranchiseClosingFilter>;
+};
+
+export type FranchiseConnectionEdges = {
+  __typename?: 'FranchiseConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Franchise>;
+};
+
+export type FranchiseConnection = Connection & {
+  __typename?: 'FranchiseConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<FranchiseConnectionEdges>>>;
+};
+
+export type MembershipSeo = {
+  __typename?: 'MembershipSeo';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+};
+
+export type MembershipHero = {
+  __typename?: 'MembershipHero';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  titleLine1?: Maybe<Scalars['String']['output']>;
+  titleItalic?: Maybe<Scalars['String']['output']>;
+  titleLine3?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  badges?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+};
+
+export type MembershipWhySectionCards = {
+  __typename?: 'MembershipWhySectionCards';
+  icon?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  desc?: Maybe<Scalars['String']['output']>;
+};
+
+export type MembershipWhySection = {
+  __typename?: 'MembershipWhySection';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  cards?: Maybe<Array<Maybe<MembershipWhySectionCards>>>;
+};
+
+export type MembershipBenefitsSectionCards = {
+  __typename?: 'MembershipBenefitsSectionCards';
+  icon?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  items?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  gradient?: Maybe<Scalars['String']['output']>;
+};
+
+export type MembershipBenefitsSection = {
+  __typename?: 'MembershipBenefitsSection';
+  title?: Maybe<Scalars['String']['output']>;
+  cards?: Maybe<Array<Maybe<MembershipBenefitsSectionCards>>>;
+};
+
+export type MembershipMilestoneSectionMilestones = {
+  __typename?: 'MembershipMilestoneSectionMilestones';
+  title?: Maybe<Scalars['String']['output']>;
+  icon?: Maybe<Scalars['String']['output']>;
+};
+
+export type MembershipMilestoneSection = {
+  __typename?: 'MembershipMilestoneSection';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  milestones?: Maybe<Array<Maybe<MembershipMilestoneSectionMilestones>>>;
+};
+
+export type MembershipRewardsSection = {
+  __typename?: 'MembershipRewardsSection';
+  title?: Maybe<Scalars['String']['output']>;
+  rewards?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+};
+
+export type MembershipExclusiveOffersSection = {
+  __typename?: 'MembershipExclusiveOffersSection';
+  title?: Maybe<Scalars['String']['output']>;
+  offers?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+};
+
+export type MembershipPerfectForSectionItems = {
+  __typename?: 'MembershipPerfectForSectionItems';
+  title?: Maybe<Scalars['String']['output']>;
+  icon?: Maybe<Scalars['String']['output']>;
+};
+
+export type MembershipPerfectForSection = {
+  __typename?: 'MembershipPerfectForSection';
+  title?: Maybe<Scalars['String']['output']>;
+  items?: Maybe<Array<Maybe<MembershipPerfectForSectionItems>>>;
+};
+
+export type MembershipPromiseSection = {
+  __typename?: 'MembershipPromiseSection';
+  title?: Maybe<Scalars['String']['output']>;
+  text?: Maybe<Scalars['String']['output']>;
+  signature?: Maybe<Scalars['String']['output']>;
+};
+
+export type MembershipCtaSection = {
+  __typename?: 'MembershipCtaSection';
+  titleLine1?: Maybe<Scalars['String']['output']>;
+  titleLine2?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+};
+
+export type Membership = Node & Document & {
+  __typename?: 'Membership';
+  seo?: Maybe<MembershipSeo>;
+  hero?: Maybe<MembershipHero>;
+  whySection?: Maybe<MembershipWhySection>;
+  benefitsSection?: Maybe<MembershipBenefitsSection>;
+  milestoneSection?: Maybe<MembershipMilestoneSection>;
+  rewardsSection?: Maybe<MembershipRewardsSection>;
+  exclusiveOffersSection?: Maybe<MembershipExclusiveOffersSection>;
+  perfectForSection?: Maybe<MembershipPerfectForSection>;
+  promiseSection?: Maybe<MembershipPromiseSection>;
+  ctaSection?: Maybe<MembershipCtaSection>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type MembershipSeoFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
+export type MembershipHeroFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  titleLine1?: InputMaybe<StringFilter>;
+  titleItalic?: InputMaybe<StringFilter>;
+  titleLine3?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  badges?: InputMaybe<StringFilter>;
+};
+
+export type MembershipWhySectionCardsFilter = {
+  icon?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  desc?: InputMaybe<StringFilter>;
+};
+
+export type MembershipWhySectionFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  cards?: InputMaybe<MembershipWhySectionCardsFilter>;
+};
+
+export type MembershipBenefitsSectionCardsFilter = {
+  icon?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  items?: InputMaybe<StringFilter>;
+  gradient?: InputMaybe<StringFilter>;
+};
+
+export type MembershipBenefitsSectionFilter = {
+  title?: InputMaybe<StringFilter>;
+  cards?: InputMaybe<MembershipBenefitsSectionCardsFilter>;
+};
+
+export type MembershipMilestoneSectionMilestonesFilter = {
+  title?: InputMaybe<StringFilter>;
+  icon?: InputMaybe<StringFilter>;
+};
+
+export type MembershipMilestoneSectionFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  milestones?: InputMaybe<MembershipMilestoneSectionMilestonesFilter>;
+};
+
+export type MembershipRewardsSectionFilter = {
+  title?: InputMaybe<StringFilter>;
+  rewards?: InputMaybe<StringFilter>;
+};
+
+export type MembershipExclusiveOffersSectionFilter = {
+  title?: InputMaybe<StringFilter>;
+  offers?: InputMaybe<StringFilter>;
+};
+
+export type MembershipPerfectForSectionItemsFilter = {
+  title?: InputMaybe<StringFilter>;
+  icon?: InputMaybe<StringFilter>;
+};
+
+export type MembershipPerfectForSectionFilter = {
+  title?: InputMaybe<StringFilter>;
+  items?: InputMaybe<MembershipPerfectForSectionItemsFilter>;
+};
+
+export type MembershipPromiseSectionFilter = {
+  title?: InputMaybe<StringFilter>;
+  text?: InputMaybe<StringFilter>;
+  signature?: InputMaybe<StringFilter>;
+};
+
+export type MembershipCtaSectionFilter = {
+  titleLine1?: InputMaybe<StringFilter>;
+  titleLine2?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
+export type MembershipFilter = {
+  seo?: InputMaybe<MembershipSeoFilter>;
+  hero?: InputMaybe<MembershipHeroFilter>;
+  whySection?: InputMaybe<MembershipWhySectionFilter>;
+  benefitsSection?: InputMaybe<MembershipBenefitsSectionFilter>;
+  milestoneSection?: InputMaybe<MembershipMilestoneSectionFilter>;
+  rewardsSection?: InputMaybe<MembershipRewardsSectionFilter>;
+  exclusiveOffersSection?: InputMaybe<MembershipExclusiveOffersSectionFilter>;
+  perfectForSection?: InputMaybe<MembershipPerfectForSectionFilter>;
+  promiseSection?: InputMaybe<MembershipPromiseSectionFilter>;
+  ctaSection?: InputMaybe<MembershipCtaSectionFilter>;
+};
+
+export type MembershipConnectionEdges = {
+  __typename?: 'MembershipConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Membership>;
+};
+
+export type MembershipConnection = Connection & {
+  __typename?: 'MembershipConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<MembershipConnectionEdges>>>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   addPendingDocument: DocumentNode;
@@ -449,8 +1518,22 @@ export type Mutation = {
   createFolder: DocumentNode;
   updateHome: Home;
   createHome: Home;
+  updateAbout: About;
+  createAbout: About;
   updateServices: Services;
   createServices: Services;
+  updateGallery: Gallery;
+  createGallery: Gallery;
+  updateTestimonials: Testimonials;
+  createTestimonials: Testimonials;
+  updateCareers: Careers;
+  createCareers: Careers;
+  updateContact: Contact;
+  createContact: Contact;
+  updateFranchise: Franchise;
+  createFranchise: Franchise;
+  updateMembership: Membership;
+  createMembership: Membership;
 };
 
 
@@ -499,6 +1582,18 @@ export type MutationCreateHomeArgs = {
 };
 
 
+export type MutationUpdateAboutArgs = {
+  relativePath: Scalars['String']['input'];
+  params: AboutMutation;
+};
+
+
+export type MutationCreateAboutArgs = {
+  relativePath: Scalars['String']['input'];
+  params: AboutMutation;
+};
+
+
 export type MutationUpdateServicesArgs = {
   relativePath: Scalars['String']['input'];
   params: ServicesMutation;
@@ -510,15 +1605,101 @@ export type MutationCreateServicesArgs = {
   params: ServicesMutation;
 };
 
+
+export type MutationUpdateGalleryArgs = {
+  relativePath: Scalars['String']['input'];
+  params: GalleryMutation;
+};
+
+
+export type MutationCreateGalleryArgs = {
+  relativePath: Scalars['String']['input'];
+  params: GalleryMutation;
+};
+
+
+export type MutationUpdateTestimonialsArgs = {
+  relativePath: Scalars['String']['input'];
+  params: TestimonialsMutation;
+};
+
+
+export type MutationCreateTestimonialsArgs = {
+  relativePath: Scalars['String']['input'];
+  params: TestimonialsMutation;
+};
+
+
+export type MutationUpdateCareersArgs = {
+  relativePath: Scalars['String']['input'];
+  params: CareersMutation;
+};
+
+
+export type MutationCreateCareersArgs = {
+  relativePath: Scalars['String']['input'];
+  params: CareersMutation;
+};
+
+
+export type MutationUpdateContactArgs = {
+  relativePath: Scalars['String']['input'];
+  params: ContactMutation;
+};
+
+
+export type MutationCreateContactArgs = {
+  relativePath: Scalars['String']['input'];
+  params: ContactMutation;
+};
+
+
+export type MutationUpdateFranchiseArgs = {
+  relativePath: Scalars['String']['input'];
+  params: FranchiseMutation;
+};
+
+
+export type MutationCreateFranchiseArgs = {
+  relativePath: Scalars['String']['input'];
+  params: FranchiseMutation;
+};
+
+
+export type MutationUpdateMembershipArgs = {
+  relativePath: Scalars['String']['input'];
+  params: MembershipMutation;
+};
+
+
+export type MutationCreateMembershipArgs = {
+  relativePath: Scalars['String']['input'];
+  params: MembershipMutation;
+};
+
 export type DocumentUpdateMutation = {
   home?: InputMaybe<HomeMutation>;
+  about?: InputMaybe<AboutMutation>;
   services?: InputMaybe<ServicesMutation>;
+  gallery?: InputMaybe<GalleryMutation>;
+  testimonials?: InputMaybe<TestimonialsMutation>;
+  careers?: InputMaybe<CareersMutation>;
+  contact?: InputMaybe<ContactMutation>;
+  franchise?: InputMaybe<FranchiseMutation>;
+  membership?: InputMaybe<MembershipMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type DocumentMutation = {
   home?: InputMaybe<HomeMutation>;
+  about?: InputMaybe<AboutMutation>;
   services?: InputMaybe<ServicesMutation>;
+  gallery?: InputMaybe<GalleryMutation>;
+  testimonials?: InputMaybe<TestimonialsMutation>;
+  careers?: InputMaybe<CareersMutation>;
+  contact?: InputMaybe<ContactMutation>;
+  franchise?: InputMaybe<FranchiseMutation>;
+  membership?: InputMaybe<MembershipMutation>;
 };
 
 export type HomeSeoMutation = {
@@ -608,16 +1789,403 @@ export type HomeMutation = {
   happyClients?: InputMaybe<Array<InputMaybe<HomeHappyClientsMutation>>>;
 };
 
+export type AboutSeoMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  keywords?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AboutHeroMutation = {
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AboutMainSectionMutation = {
+  paragraphs?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  buttonText?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AboutStatsMutation = {
+  value?: InputMaybe<Scalars['String']['input']>;
+  label?: InputMaybe<Scalars['String']['input']>;
+  iconName?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AboutMissionMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  text?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AboutVisionMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  text?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AboutFounderMutation = {
+  sectionSubtitle?: InputMaybe<Scalars['String']['input']>;
+  sectionTitleLine1?: InputMaybe<Scalars['String']['input']>;
+  sectionTitleLine2?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  role?: InputMaybe<Scalars['String']['input']>;
+  location?: InputMaybe<Scalars['String']['input']>;
+  aboutMyselfText?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  expertiseText?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AboutCredentialsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  items?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type AboutAchievementsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  items?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type AboutWhyChooseUsHighlightsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  iconName?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AboutWhyChooseUsMutation = {
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+  titleLine1?: InputMaybe<Scalars['String']['input']>;
+  titleLine2?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  highlights?: InputMaybe<Array<InputMaybe<AboutWhyChooseUsHighlightsMutation>>>;
+};
+
+export type AboutMutation = {
+  seo?: InputMaybe<AboutSeoMutation>;
+  hero?: InputMaybe<AboutHeroMutation>;
+  mainSection?: InputMaybe<AboutMainSectionMutation>;
+  stats?: InputMaybe<Array<InputMaybe<AboutStatsMutation>>>;
+  mission?: InputMaybe<AboutMissionMutation>;
+  vision?: InputMaybe<AboutVisionMutation>;
+  founder?: InputMaybe<AboutFounderMutation>;
+  credentials?: InputMaybe<AboutCredentialsMutation>;
+  achievements?: InputMaybe<AboutAchievementsMutation>;
+  whyChooseUs?: InputMaybe<AboutWhyChooseUsMutation>;
+};
+
+export type ServicesSeoMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  keywords?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ServicesHeroMutation = {
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+  titleLine1?: InputMaybe<Scalars['String']['input']>;
+  titleLine2?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ServicesCatalogSectionsMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  accent?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  listItems?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ServicesCatalogItemsSectionsMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  accent?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  listItems?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ServicesCatalogItemsMutation = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  sections?: InputMaybe<Array<InputMaybe<ServicesCatalogItemsSectionsMutation>>>;
+};
+
 export type ServicesCatalogMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
   icon?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
-  items?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  sections?: InputMaybe<Array<InputMaybe<ServicesCatalogSectionsMutation>>>;
+  items?: InputMaybe<Array<InputMaybe<ServicesCatalogItemsMutation>>>;
 };
 
 export type ServicesMutation = {
+  seo?: InputMaybe<ServicesSeoMutation>;
+  hero?: InputMaybe<ServicesHeroMutation>;
   catalog?: InputMaybe<Array<InputMaybe<ServicesCatalogMutation>>>;
+};
+
+export type GallerySeoMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  keywords?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type GalleryHeaderMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type GalleryPhotosMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  src?: InputMaybe<Scalars['String']['input']>;
+  category?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type GalleryMutation = {
+  seo?: InputMaybe<GallerySeoMutation>;
+  header?: InputMaybe<GalleryHeaderMutation>;
+  categories?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  photos?: InputMaybe<Array<InputMaybe<GalleryPhotosMutation>>>;
+};
+
+export type TestimonialsSeoMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  keywords?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type TestimonialsHeaderMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type TestimonialsOverallRatingMutation = {
+  score?: InputMaybe<Scalars['String']['input']>;
+  totalReviews?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type TestimonialsFeaturedMutation = {
+  quote?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  role?: InputMaybe<Scalars['String']['input']>;
+  initials?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type TestimonialsItemsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  quote?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  role?: InputMaybe<Scalars['String']['input']>;
+  initials?: InputMaybe<Scalars['String']['input']>;
+  offset?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type TestimonialsMutation = {
+  seo?: InputMaybe<TestimonialsSeoMutation>;
+  header?: InputMaybe<TestimonialsHeaderMutation>;
+  overallRating?: InputMaybe<TestimonialsOverallRatingMutation>;
+  featured?: InputMaybe<TestimonialsFeaturedMutation>;
+  items?: InputMaybe<Array<InputMaybe<TestimonialsItemsMutation>>>;
+};
+
+export type CareersSeoMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  keywords?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CareersHeaderMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CareersJobsMutation = {
+  id?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  location?: InputMaybe<Scalars['String']['input']>;
+  experience?: InputMaybe<Scalars['String']['input']>;
+  jobType?: InputMaybe<Scalars['String']['input']>;
+  companyDescription?: InputMaybe<Scalars['String']['input']>;
+  mandatoryCriteria?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  responsibilities?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  workingConditions?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type CareersMutation = {
+  seo?: InputMaybe<CareersSeoMutation>;
+  header?: InputMaybe<CareersHeaderMutation>;
+  jobs?: InputMaybe<Array<InputMaybe<CareersJobsMutation>>>;
+};
+
+export type ContactSeoMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  keywords?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ContactHeaderMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  titleLine1?: InputMaybe<Scalars['String']['input']>;
+  titleLine2?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ContactContactCardsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  icon?: InputMaybe<Scalars['String']['input']>;
+  lines?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  hrefs?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ContactSocialsMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  url?: InputMaybe<Scalars['String']['input']>;
+  icon?: InputMaybe<Scalars['String']['input']>;
+  className?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ContactMutation = {
+  seo?: InputMaybe<ContactSeoMutation>;
+  header?: InputMaybe<ContactHeaderMutation>;
+  contactCards?: InputMaybe<Array<InputMaybe<ContactContactCardsMutation>>>;
+  socials?: InputMaybe<Array<InputMaybe<ContactSocialsMutation>>>;
+};
+
+export type FranchiseSeoMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type FranchiseHeaderMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  titleItalic?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+  highlight?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type FranchiseSectionsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  icon?: InputMaybe<Scalars['String']['input']>;
+  items?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type FranchiseModelsMutation = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  investment?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type FranchiseClosingMutation = {
+  line1?: InputMaybe<Scalars['String']['input']>;
+  line1Italic?: InputMaybe<Scalars['String']['input']>;
+  line2?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type FranchiseMutation = {
+  seo?: InputMaybe<FranchiseSeoMutation>;
+  header?: InputMaybe<FranchiseHeaderMutation>;
+  sections?: InputMaybe<Array<InputMaybe<FranchiseSectionsMutation>>>;
+  modelsTitle?: InputMaybe<Scalars['String']['input']>;
+  models?: InputMaybe<Array<InputMaybe<FranchiseModelsMutation>>>;
+  visionTitle?: InputMaybe<Scalars['String']['input']>;
+  vision?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  closing?: InputMaybe<FranchiseClosingMutation>;
+};
+
+export type MembershipSeoMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MembershipHeroMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  titleLine1?: InputMaybe<Scalars['String']['input']>;
+  titleItalic?: InputMaybe<Scalars['String']['input']>;
+  titleLine3?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  badges?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type MembershipWhySectionCardsMutation = {
+  icon?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  desc?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MembershipWhySectionMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  cards?: InputMaybe<Array<InputMaybe<MembershipWhySectionCardsMutation>>>;
+};
+
+export type MembershipBenefitsSectionCardsMutation = {
+  icon?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  items?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  gradient?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MembershipBenefitsSectionMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  cards?: InputMaybe<Array<InputMaybe<MembershipBenefitsSectionCardsMutation>>>;
+};
+
+export type MembershipMilestoneSectionMilestonesMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  icon?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MembershipMilestoneSectionMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  milestones?: InputMaybe<Array<InputMaybe<MembershipMilestoneSectionMilestonesMutation>>>;
+};
+
+export type MembershipRewardsSectionMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  rewards?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type MembershipExclusiveOffersSectionMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  offers?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type MembershipPerfectForSectionItemsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  icon?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MembershipPerfectForSectionMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  items?: InputMaybe<Array<InputMaybe<MembershipPerfectForSectionItemsMutation>>>;
+};
+
+export type MembershipPromiseSectionMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  text?: InputMaybe<Scalars['String']['input']>;
+  signature?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MembershipCtaSectionMutation = {
+  titleLine1?: InputMaybe<Scalars['String']['input']>;
+  titleLine2?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MembershipMutation = {
+  seo?: InputMaybe<MembershipSeoMutation>;
+  hero?: InputMaybe<MembershipHeroMutation>;
+  whySection?: InputMaybe<MembershipWhySectionMutation>;
+  benefitsSection?: InputMaybe<MembershipBenefitsSectionMutation>;
+  milestoneSection?: InputMaybe<MembershipMilestoneSectionMutation>;
+  rewardsSection?: InputMaybe<MembershipRewardsSectionMutation>;
+  exclusiveOffersSection?: InputMaybe<MembershipExclusiveOffersSectionMutation>;
+  perfectForSection?: InputMaybe<MembershipPerfectForSectionMutation>;
+  promiseSection?: InputMaybe<MembershipPromiseSectionMutation>;
+  ctaSection?: InputMaybe<MembershipCtaSectionMutation>;
 };
 
 export type StringFilter = {
@@ -721,21 +2289,422 @@ export type HomeFilter = {
   happyClients?: HomeHappyClientsFilter | null | undefined;
 };
 
+export type AboutSeoFilter = {
+  title?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  keywords?: StringFilter | null | undefined;
+};
+
+export type AboutHeroFilter = {
+  subtitle?: StringFilter | null | undefined;
+  title?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+};
+
+export type AboutMainSectionFilter = {
+  paragraphs?: StringFilter | null | undefined;
+  buttonText?: StringFilter | null | undefined;
+  image?: ImageFilter | null | undefined;
+};
+
+export type AboutStatsFilter = {
+  value?: StringFilter | null | undefined;
+  label?: StringFilter | null | undefined;
+  iconName?: StringFilter | null | undefined;
+};
+
+export type AboutMissionFilter = {
+  title?: StringFilter | null | undefined;
+  text?: StringFilter | null | undefined;
+};
+
+export type AboutVisionFilter = {
+  title?: StringFilter | null | undefined;
+  text?: StringFilter | null | undefined;
+};
+
+export type AboutFounderFilter = {
+  sectionSubtitle?: StringFilter | null | undefined;
+  sectionTitleLine1?: StringFilter | null | undefined;
+  sectionTitleLine2?: StringFilter | null | undefined;
+  image?: ImageFilter | null | undefined;
+  name?: StringFilter | null | undefined;
+  role?: StringFilter | null | undefined;
+  location?: StringFilter | null | undefined;
+  aboutMyselfText?: StringFilter | null | undefined;
+  expertiseText?: StringFilter | null | undefined;
+};
+
+export type AboutCredentialsFilter = {
+  title?: StringFilter | null | undefined;
+  items?: StringFilter | null | undefined;
+};
+
+export type AboutAchievementsFilter = {
+  title?: StringFilter | null | undefined;
+  items?: StringFilter | null | undefined;
+};
+
+export type AboutWhyChooseUsHighlightsFilter = {
+  title?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  iconName?: StringFilter | null | undefined;
+};
+
+export type AboutWhyChooseUsFilter = {
+  subtitle?: StringFilter | null | undefined;
+  titleLine1?: StringFilter | null | undefined;
+  titleLine2?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  highlights?: AboutWhyChooseUsHighlightsFilter | null | undefined;
+};
+
+export type AboutFilter = {
+  seo?: AboutSeoFilter | null | undefined;
+  hero?: AboutHeroFilter | null | undefined;
+  mainSection?: AboutMainSectionFilter | null | undefined;
+  stats?: AboutStatsFilter | null | undefined;
+  mission?: AboutMissionFilter | null | undefined;
+  vision?: AboutVisionFilter | null | undefined;
+  founder?: AboutFounderFilter | null | undefined;
+  credentials?: AboutCredentialsFilter | null | undefined;
+  achievements?: AboutAchievementsFilter | null | undefined;
+  whyChooseUs?: AboutWhyChooseUsFilter | null | undefined;
+};
+
+export type ServicesSeoFilter = {
+  title?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  keywords?: StringFilter | null | undefined;
+};
+
+export type ServicesHeroFilter = {
+  subtitle?: StringFilter | null | undefined;
+  titleLine1?: StringFilter | null | undefined;
+  titleLine2?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+};
+
+export type ServicesCatalogSectionsFilter = {
+  eyebrow?: StringFilter | null | undefined;
+  title?: StringFilter | null | undefined;
+  accent?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  listItems?: StringFilter | null | undefined;
+};
+
+export type ServicesCatalogItemsSectionsFilter = {
+  eyebrow?: StringFilter | null | undefined;
+  title?: StringFilter | null | undefined;
+  accent?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  listItems?: StringFilter | null | undefined;
+};
+
+export type ServicesCatalogItemsFilter = {
+  name?: StringFilter | null | undefined;
+  slug?: StringFilter | null | undefined;
+  sections?: ServicesCatalogItemsSectionsFilter | null | undefined;
+};
+
 export type ServicesCatalogFilter = {
   title?: StringFilter | null | undefined;
   slug?: StringFilter | null | undefined;
   icon?: StringFilter | null | undefined;
   description?: StringFilter | null | undefined;
-  items?: StringFilter | null | undefined;
+  sections?: ServicesCatalogSectionsFilter | null | undefined;
+  items?: ServicesCatalogItemsFilter | null | undefined;
 };
 
 export type ServicesFilter = {
+  seo?: ServicesSeoFilter | null | undefined;
+  hero?: ServicesHeroFilter | null | undefined;
   catalog?: ServicesCatalogFilter | null | undefined;
+};
+
+export type GallerySeoFilter = {
+  title?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  keywords?: StringFilter | null | undefined;
+};
+
+export type GalleryHeaderFilter = {
+  title?: StringFilter | null | undefined;
+  subtitle?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+};
+
+export type GalleryPhotosFilter = {
+  title?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  src?: ImageFilter | null | undefined;
+  category?: StringFilter | null | undefined;
+};
+
+export type GalleryFilter = {
+  seo?: GallerySeoFilter | null | undefined;
+  header?: GalleryHeaderFilter | null | undefined;
+  categories?: StringFilter | null | undefined;
+  photos?: GalleryPhotosFilter | null | undefined;
+};
+
+export type TestimonialsSeoFilter = {
+  title?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  keywords?: StringFilter | null | undefined;
+};
+
+export type TestimonialsHeaderFilter = {
+  eyebrow?: StringFilter | null | undefined;
+  title?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+};
+
+export type TestimonialsOverallRatingFilter = {
+  score?: StringFilter | null | undefined;
+  totalReviews?: StringFilter | null | undefined;
+};
+
+export type TestimonialsFeaturedFilter = {
+  quote?: StringFilter | null | undefined;
+  name?: StringFilter | null | undefined;
+  role?: StringFilter | null | undefined;
+  initials?: StringFilter | null | undefined;
+};
+
+export type TestimonialsItemsFilter = {
+  title?: StringFilter | null | undefined;
+  quote?: StringFilter | null | undefined;
+  name?: StringFilter | null | undefined;
+  role?: StringFilter | null | undefined;
+  initials?: StringFilter | null | undefined;
+  offset?: StringFilter | null | undefined;
+};
+
+export type TestimonialsFilter = {
+  seo?: TestimonialsSeoFilter | null | undefined;
+  header?: TestimonialsHeaderFilter | null | undefined;
+  overallRating?: TestimonialsOverallRatingFilter | null | undefined;
+  featured?: TestimonialsFeaturedFilter | null | undefined;
+  items?: TestimonialsItemsFilter | null | undefined;
+};
+
+export type CareersSeoFilter = {
+  title?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  keywords?: StringFilter | null | undefined;
+};
+
+export type CareersHeaderFilter = {
+  eyebrow?: StringFilter | null | undefined;
+  title?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+};
+
+export type CareersJobsFilter = {
+  id?: StringFilter | null | undefined;
+  title?: StringFilter | null | undefined;
+  location?: StringFilter | null | undefined;
+  experience?: StringFilter | null | undefined;
+  jobType?: StringFilter | null | undefined;
+  companyDescription?: StringFilter | null | undefined;
+  mandatoryCriteria?: StringFilter | null | undefined;
+  responsibilities?: StringFilter | null | undefined;
+  workingConditions?: StringFilter | null | undefined;
+};
+
+export type CareersFilter = {
+  seo?: CareersSeoFilter | null | undefined;
+  header?: CareersHeaderFilter | null | undefined;
+  jobs?: CareersJobsFilter | null | undefined;
+};
+
+export type ContactSeoFilter = {
+  title?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  keywords?: StringFilter | null | undefined;
+};
+
+export type ContactHeaderFilter = {
+  eyebrow?: StringFilter | null | undefined;
+  titleLine1?: StringFilter | null | undefined;
+  titleLine2?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+};
+
+export type ContactContactCardsFilter = {
+  title?: StringFilter | null | undefined;
+  icon?: StringFilter | null | undefined;
+  lines?: StringFilter | null | undefined;
+  hrefs?: StringFilter | null | undefined;
+};
+
+export type ContactSocialsFilter = {
+  label?: StringFilter | null | undefined;
+  url?: StringFilter | null | undefined;
+  icon?: StringFilter | null | undefined;
+  className?: StringFilter | null | undefined;
+};
+
+export type ContactFilter = {
+  seo?: ContactSeoFilter | null | undefined;
+  header?: ContactHeaderFilter | null | undefined;
+  contactCards?: ContactContactCardsFilter | null | undefined;
+  socials?: ContactSocialsFilter | null | undefined;
+};
+
+export type FranchiseSeoFilter = {
+  title?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+};
+
+export type FranchiseHeaderFilter = {
+  eyebrow?: StringFilter | null | undefined;
+  title?: StringFilter | null | undefined;
+  titleItalic?: StringFilter | null | undefined;
+  subtitle?: StringFilter | null | undefined;
+  highlight?: StringFilter | null | undefined;
+};
+
+export type FranchiseSectionsFilter = {
+  title?: StringFilter | null | undefined;
+  icon?: StringFilter | null | undefined;
+  items?: StringFilter | null | undefined;
+};
+
+export type FranchiseModelsFilter = {
+  name?: StringFilter | null | undefined;
+  investment?: StringFilter | null | undefined;
+};
+
+export type FranchiseClosingFilter = {
+  line1?: StringFilter | null | undefined;
+  line1Italic?: StringFilter | null | undefined;
+  line2?: StringFilter | null | undefined;
+};
+
+export type FranchiseFilter = {
+  seo?: FranchiseSeoFilter | null | undefined;
+  header?: FranchiseHeaderFilter | null | undefined;
+  sections?: FranchiseSectionsFilter | null | undefined;
+  modelsTitle?: StringFilter | null | undefined;
+  models?: FranchiseModelsFilter | null | undefined;
+  visionTitle?: StringFilter | null | undefined;
+  vision?: StringFilter | null | undefined;
+  closing?: FranchiseClosingFilter | null | undefined;
+};
+
+export type MembershipSeoFilter = {
+  title?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+};
+
+export type MembershipHeroFilter = {
+  eyebrow?: StringFilter | null | undefined;
+  titleLine1?: StringFilter | null | undefined;
+  titleItalic?: StringFilter | null | undefined;
+  titleLine3?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  badges?: StringFilter | null | undefined;
+};
+
+export type MembershipWhySectionCardsFilter = {
+  icon?: StringFilter | null | undefined;
+  title?: StringFilter | null | undefined;
+  desc?: StringFilter | null | undefined;
+};
+
+export type MembershipWhySectionFilter = {
+  title?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  cards?: MembershipWhySectionCardsFilter | null | undefined;
+};
+
+export type MembershipBenefitsSectionCardsFilter = {
+  icon?: StringFilter | null | undefined;
+  title?: StringFilter | null | undefined;
+  items?: StringFilter | null | undefined;
+  gradient?: StringFilter | null | undefined;
+};
+
+export type MembershipBenefitsSectionFilter = {
+  title?: StringFilter | null | undefined;
+  cards?: MembershipBenefitsSectionCardsFilter | null | undefined;
+};
+
+export type MembershipMilestoneSectionMilestonesFilter = {
+  title?: StringFilter | null | undefined;
+  icon?: StringFilter | null | undefined;
+};
+
+export type MembershipMilestoneSectionFilter = {
+  title?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  milestones?: MembershipMilestoneSectionMilestonesFilter | null | undefined;
+};
+
+export type MembershipRewardsSectionFilter = {
+  title?: StringFilter | null | undefined;
+  rewards?: StringFilter | null | undefined;
+};
+
+export type MembershipExclusiveOffersSectionFilter = {
+  title?: StringFilter | null | undefined;
+  offers?: StringFilter | null | undefined;
+};
+
+export type MembershipPerfectForSectionItemsFilter = {
+  title?: StringFilter | null | undefined;
+  icon?: StringFilter | null | undefined;
+};
+
+export type MembershipPerfectForSectionFilter = {
+  title?: StringFilter | null | undefined;
+  items?: MembershipPerfectForSectionItemsFilter | null | undefined;
+};
+
+export type MembershipPromiseSectionFilter = {
+  title?: StringFilter | null | undefined;
+  text?: StringFilter | null | undefined;
+  signature?: StringFilter | null | undefined;
+};
+
+export type MembershipCtaSectionFilter = {
+  titleLine1?: StringFilter | null | undefined;
+  titleLine2?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+};
+
+export type MembershipFilter = {
+  seo?: MembershipSeoFilter | null | undefined;
+  hero?: MembershipHeroFilter | null | undefined;
+  whySection?: MembershipWhySectionFilter | null | undefined;
+  benefitsSection?: MembershipBenefitsSectionFilter | null | undefined;
+  milestoneSection?: MembershipMilestoneSectionFilter | null | undefined;
+  rewardsSection?: MembershipRewardsSectionFilter | null | undefined;
+  exclusiveOffersSection?: MembershipExclusiveOffersSectionFilter | null | undefined;
+  perfectForSection?: MembershipPerfectForSectionFilter | null | undefined;
+  promiseSection?: MembershipPromiseSectionFilter | null | undefined;
+  ctaSection?: MembershipCtaSectionFilter | null | undefined;
 };
 
 export type HomePartsFragment = { __typename: 'Home', seo: { __typename: 'HomeSeo', title: string | null, description: string | null, keywords: string | null } | null, heroImages: Array<{ __typename: 'HomeHeroImages', img: string | null, alt: string | null } | null> | null, hero: { __typename: 'HomeHero', subtitle: string | null, titleLine1: string | null, titleLine2: string | null, titleLine3: string | null, contactButtonText: string | null, description: string | null } | null, about: { __typename: 'HomeAbout', subtitle: string | null, titleLine1: string | null, titleLine2: string | null, titleLine3: string | null, image: string | null, paragraphs: Array<string | null> | null } | null, stats: Array<{ __typename: 'HomeStats', value: string | null, label: string | null, iconName: string | null } | null> | null, brandStatement: { __typename: 'HomeBrandStatement', image: string | null, titleLine1: string | null, titleLine2: string | null, titleLine3: string | null, sinceText1: string | null, sinceText2: string | null, description: string | null } | null, expertiseSection: { __typename: 'HomeExpertiseSection', subtitle: string | null, titleLine1: string | null, titleLine2: string | null } | null, whyChooseUs: { __typename: 'HomeWhyChooseUs', subtitle: string | null, titleLine1: string | null, titleLine2: string | null, reasons: Array<{ __typename: 'HomeWhyChooseUsReasons', title: string | null, desc: string | null } | null> | null } | null, bottomStatement: { __typename: 'HomeBottomStatement', paragraph: string | null, titleLine1: string | null, titleLine2: string | null } | null, happyClients: Array<{ __typename: 'HomeHappyClients', name: string | null, logo: string | null } | null> | null };
 
-export type ServicesPartsFragment = { __typename: 'Services', catalog: Array<{ __typename: 'ServicesCatalog', title: string | null, slug: string | null, icon: string | null, description: string | null, items: Array<string | null> | null } | null> | null };
+export type AboutPartsFragment = { __typename: 'About', seo: { __typename: 'AboutSeo', title: string | null, description: string | null, keywords: string | null } | null, hero: { __typename: 'AboutHero', subtitle: string | null, title: string | null, description: string | null } | null, mainSection: { __typename: 'AboutMainSection', paragraphs: Array<string | null> | null, buttonText: string | null, image: string | null } | null, stats: Array<{ __typename: 'AboutStats', value: string | null, label: string | null, iconName: string | null } | null> | null, mission: { __typename: 'AboutMission', title: string | null, text: string | null } | null, vision: { __typename: 'AboutVision', title: string | null, text: string | null } | null, founder: { __typename: 'AboutFounder', sectionSubtitle: string | null, sectionTitleLine1: string | null, sectionTitleLine2: string | null, image: string | null, name: string | null, role: string | null, location: string | null, aboutMyselfText: Array<string | null> | null, expertiseText: string | null } | null, credentials: { __typename: 'AboutCredentials', title: string | null, items: Array<string | null> | null } | null, achievements: { __typename: 'AboutAchievements', title: string | null, items: Array<string | null> | null } | null, whyChooseUs: { __typename: 'AboutWhyChooseUs', subtitle: string | null, titleLine1: string | null, titleLine2: string | null, description: string | null, highlights: Array<{ __typename: 'AboutWhyChooseUsHighlights', title: string | null, description: string | null, iconName: string | null } | null> | null } | null };
+
+export type ServicesPartsFragment = { __typename: 'Services', seo: { __typename: 'ServicesSeo', title: string | null, description: string | null, keywords: string | null } | null, hero: { __typename: 'ServicesHero', subtitle: string | null, titleLine1: string | null, titleLine2: string | null, description: string | null } | null, catalog: Array<{ __typename: 'ServicesCatalog', title: string | null, slug: string | null, icon: string | null, description: string | null, sections: Array<{ __typename: 'ServicesCatalogSections', eyebrow: string | null, title: string | null, accent: string | null, description: string | null, listItems: Array<string | null> | null } | null> | null, items: Array<{ __typename: 'ServicesCatalogItems', name: string | null, slug: string | null, sections: Array<{ __typename: 'ServicesCatalogItemsSections', eyebrow: string | null, title: string | null, accent: string | null, description: string | null, listItems: Array<string | null> | null } | null> | null } | null> | null } | null> | null };
+
+export type GalleryPartsFragment = { __typename: 'Gallery', categories: Array<string | null> | null, seo: { __typename: 'GallerySeo', title: string | null, description: string | null, keywords: string | null } | null, header: { __typename: 'GalleryHeader', title: string | null, subtitle: string | null, description: string | null } | null, photos: Array<{ __typename: 'GalleryPhotos', title: string | null, description: string | null, src: string | null, category: string | null } | null> | null };
+
+export type TestimonialsPartsFragment = { __typename: 'Testimonials', seo: { __typename: 'TestimonialsSeo', title: string | null, description: string | null, keywords: string | null } | null, header: { __typename: 'TestimonialsHeader', eyebrow: string | null, title: string | null, description: string | null } | null, overallRating: { __typename: 'TestimonialsOverallRating', score: string | null, totalReviews: string | null } | null, featured: { __typename: 'TestimonialsFeatured', quote: string | null, name: string | null, role: string | null, initials: string | null } | null, items: Array<{ __typename: 'TestimonialsItems', title: string | null, quote: string | null, name: string | null, role: string | null, initials: string | null, offset: string | null } | null> | null };
+
+export type CareersPartsFragment = { __typename: 'Careers', seo: { __typename: 'CareersSeo', title: string | null, description: string | null, keywords: string | null } | null, header: { __typename: 'CareersHeader', eyebrow: string | null, title: string | null, description: string | null } | null, jobs: Array<{ __typename: 'CareersJobs', id: string | null, title: string | null, location: string | null, experience: string | null, jobType: string | null, companyDescription: string | null, mandatoryCriteria: Array<string | null> | null, responsibilities: Array<string | null> | null, workingConditions: Array<string | null> | null } | null> | null };
+
+export type ContactPartsFragment = { __typename: 'Contact', seo: { __typename: 'ContactSeo', title: string | null, description: string | null, keywords: string | null } | null, header: { __typename: 'ContactHeader', eyebrow: string | null, titleLine1: string | null, titleLine2: string | null, description: string | null } | null, contactCards: Array<{ __typename: 'ContactContactCards', title: string | null, icon: string | null, lines: Array<string | null> | null, hrefs: Array<string | null> | null } | null> | null, socials: Array<{ __typename: 'ContactSocials', label: string | null, url: string | null, icon: string | null, className: string | null } | null> | null };
+
+export type FranchisePartsFragment = { __typename: 'Franchise', modelsTitle: string | null, visionTitle: string | null, vision: Array<string | null> | null, seo: { __typename: 'FranchiseSeo', title: string | null, description: string | null } | null, header: { __typename: 'FranchiseHeader', eyebrow: string | null, title: string | null, titleItalic: string | null, subtitle: string | null, highlight: string | null } | null, sections: Array<{ __typename: 'FranchiseSections', title: string | null, icon: string | null, items: Array<string | null> | null } | null> | null, models: Array<{ __typename: 'FranchiseModels', name: string | null, investment: string | null } | null> | null, closing: { __typename: 'FranchiseClosing', line1: string | null, line1Italic: string | null, line2: string | null } | null };
+
+export type MembershipPartsFragment = { __typename: 'Membership', seo: { __typename: 'MembershipSeo', title: string | null, description: string | null } | null, hero: { __typename: 'MembershipHero', eyebrow: string | null, titleLine1: string | null, titleItalic: string | null, titleLine3: string | null, description: string | null, badges: Array<string | null> | null } | null, whySection: { __typename: 'MembershipWhySection', title: string | null, description: string | null, cards: Array<{ __typename: 'MembershipWhySectionCards', icon: string | null, title: string | null, desc: string | null } | null> | null } | null, benefitsSection: { __typename: 'MembershipBenefitsSection', title: string | null, cards: Array<{ __typename: 'MembershipBenefitsSectionCards', icon: string | null, title: string | null, items: Array<string | null> | null, gradient: string | null } | null> | null } | null, milestoneSection: { __typename: 'MembershipMilestoneSection', title: string | null, description: string | null, milestones: Array<{ __typename: 'MembershipMilestoneSectionMilestones', title: string | null, icon: string | null } | null> | null } | null, rewardsSection: { __typename: 'MembershipRewardsSection', title: string | null, rewards: Array<string | null> | null } | null, exclusiveOffersSection: { __typename: 'MembershipExclusiveOffersSection', title: string | null, offers: Array<string | null> | null } | null, perfectForSection: { __typename: 'MembershipPerfectForSection', title: string | null, items: Array<{ __typename: 'MembershipPerfectForSectionItems', title: string | null, icon: string | null } | null> | null } | null, promiseSection: { __typename: 'MembershipPromiseSection', title: string | null, text: string | null, signature: string | null } | null, ctaSection: { __typename: 'MembershipCtaSection', titleLine1: string | null, titleLine2: string | null, description: string | null } | null };
 
 export type HomeQueryVariables = Exact<{
   relativePath: string;
@@ -756,12 +2725,31 @@ export type HomeConnectionQueryVariables = Exact<{
 
 export type HomeConnectionQuery = { homeConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Home', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo: { __typename: 'HomeSeo', title: string | null, description: string | null, keywords: string | null } | null, heroImages: Array<{ __typename: 'HomeHeroImages', img: string | null, alt: string | null } | null> | null, hero: { __typename: 'HomeHero', subtitle: string | null, titleLine1: string | null, titleLine2: string | null, titleLine3: string | null, contactButtonText: string | null, description: string | null } | null, about: { __typename: 'HomeAbout', subtitle: string | null, titleLine1: string | null, titleLine2: string | null, titleLine3: string | null, image: string | null, paragraphs: Array<string | null> | null } | null, stats: Array<{ __typename: 'HomeStats', value: string | null, label: string | null, iconName: string | null } | null> | null, brandStatement: { __typename: 'HomeBrandStatement', image: string | null, titleLine1: string | null, titleLine2: string | null, titleLine3: string | null, sinceText1: string | null, sinceText2: string | null, description: string | null } | null, expertiseSection: { __typename: 'HomeExpertiseSection', subtitle: string | null, titleLine1: string | null, titleLine2: string | null } | null, whyChooseUs: { __typename: 'HomeWhyChooseUs', subtitle: string | null, titleLine1: string | null, titleLine2: string | null, reasons: Array<{ __typename: 'HomeWhyChooseUsReasons', title: string | null, desc: string | null } | null> | null } | null, bottomStatement: { __typename: 'HomeBottomStatement', paragraph: string | null, titleLine1: string | null, titleLine2: string | null } | null, happyClients: Array<{ __typename: 'HomeHappyClients', name: string | null, logo: string | null } | null> | null } | null } | null> | null } };
 
+export type AboutQueryVariables = Exact<{
+  relativePath: string;
+}>;
+
+
+export type AboutQuery = { about: { __typename: 'About', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo: { __typename: 'AboutSeo', title: string | null, description: string | null, keywords: string | null } | null, hero: { __typename: 'AboutHero', subtitle: string | null, title: string | null, description: string | null } | null, mainSection: { __typename: 'AboutMainSection', paragraphs: Array<string | null> | null, buttonText: string | null, image: string | null } | null, stats: Array<{ __typename: 'AboutStats', value: string | null, label: string | null, iconName: string | null } | null> | null, mission: { __typename: 'AboutMission', title: string | null, text: string | null } | null, vision: { __typename: 'AboutVision', title: string | null, text: string | null } | null, founder: { __typename: 'AboutFounder', sectionSubtitle: string | null, sectionTitleLine1: string | null, sectionTitleLine2: string | null, image: string | null, name: string | null, role: string | null, location: string | null, aboutMyselfText: Array<string | null> | null, expertiseText: string | null } | null, credentials: { __typename: 'AboutCredentials', title: string | null, items: Array<string | null> | null } | null, achievements: { __typename: 'AboutAchievements', title: string | null, items: Array<string | null> | null } | null, whyChooseUs: { __typename: 'AboutWhyChooseUs', subtitle: string | null, titleLine1: string | null, titleLine2: string | null, description: string | null, highlights: Array<{ __typename: 'AboutWhyChooseUsHighlights', title: string | null, description: string | null, iconName: string | null } | null> | null } | null } };
+
+export type AboutConnectionQueryVariables = Exact<{
+  before?: string | null | undefined;
+  after?: string | null | undefined;
+  first?: number | null | undefined;
+  last?: number | null | undefined;
+  sort?: string | null | undefined;
+  filter?: AboutFilter | null | undefined;
+}>;
+
+
+export type AboutConnectionQuery = { aboutConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'About', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo: { __typename: 'AboutSeo', title: string | null, description: string | null, keywords: string | null } | null, hero: { __typename: 'AboutHero', subtitle: string | null, title: string | null, description: string | null } | null, mainSection: { __typename: 'AboutMainSection', paragraphs: Array<string | null> | null, buttonText: string | null, image: string | null } | null, stats: Array<{ __typename: 'AboutStats', value: string | null, label: string | null, iconName: string | null } | null> | null, mission: { __typename: 'AboutMission', title: string | null, text: string | null } | null, vision: { __typename: 'AboutVision', title: string | null, text: string | null } | null, founder: { __typename: 'AboutFounder', sectionSubtitle: string | null, sectionTitleLine1: string | null, sectionTitleLine2: string | null, image: string | null, name: string | null, role: string | null, location: string | null, aboutMyselfText: Array<string | null> | null, expertiseText: string | null } | null, credentials: { __typename: 'AboutCredentials', title: string | null, items: Array<string | null> | null } | null, achievements: { __typename: 'AboutAchievements', title: string | null, items: Array<string | null> | null } | null, whyChooseUs: { __typename: 'AboutWhyChooseUs', subtitle: string | null, titleLine1: string | null, titleLine2: string | null, description: string | null, highlights: Array<{ __typename: 'AboutWhyChooseUsHighlights', title: string | null, description: string | null, iconName: string | null } | null> | null } | null } | null } | null> | null } };
+
 export type ServicesQueryVariables = Exact<{
   relativePath: string;
 }>;
 
 
-export type ServicesQuery = { services: { __typename: 'Services', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, catalog: Array<{ __typename: 'ServicesCatalog', title: string | null, slug: string | null, icon: string | null, description: string | null, items: Array<string | null> | null } | null> | null } };
+export type ServicesQuery = { services: { __typename: 'Services', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo: { __typename: 'ServicesSeo', title: string | null, description: string | null, keywords: string | null } | null, hero: { __typename: 'ServicesHero', subtitle: string | null, titleLine1: string | null, titleLine2: string | null, description: string | null } | null, catalog: Array<{ __typename: 'ServicesCatalog', title: string | null, slug: string | null, icon: string | null, description: string | null, sections: Array<{ __typename: 'ServicesCatalogSections', eyebrow: string | null, title: string | null, accent: string | null, description: string | null, listItems: Array<string | null> | null } | null> | null, items: Array<{ __typename: 'ServicesCatalogItems', name: string | null, slug: string | null, sections: Array<{ __typename: 'ServicesCatalogItemsSections', eyebrow: string | null, title: string | null, accent: string | null, description: string | null, listItems: Array<string | null> | null } | null> | null } | null> | null } | null> | null } };
 
 export type ServicesConnectionQueryVariables = Exact<{
   before?: string | null | undefined;
@@ -773,7 +2761,121 @@ export type ServicesConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ServicesConnectionQuery = { servicesConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Services', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, catalog: Array<{ __typename: 'ServicesCatalog', title: string | null, slug: string | null, icon: string | null, description: string | null, items: Array<string | null> | null } | null> | null } | null } | null> | null } };
+export type ServicesConnectionQuery = { servicesConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Services', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo: { __typename: 'ServicesSeo', title: string | null, description: string | null, keywords: string | null } | null, hero: { __typename: 'ServicesHero', subtitle: string | null, titleLine1: string | null, titleLine2: string | null, description: string | null } | null, catalog: Array<{ __typename: 'ServicesCatalog', title: string | null, slug: string | null, icon: string | null, description: string | null, sections: Array<{ __typename: 'ServicesCatalogSections', eyebrow: string | null, title: string | null, accent: string | null, description: string | null, listItems: Array<string | null> | null } | null> | null, items: Array<{ __typename: 'ServicesCatalogItems', name: string | null, slug: string | null, sections: Array<{ __typename: 'ServicesCatalogItemsSections', eyebrow: string | null, title: string | null, accent: string | null, description: string | null, listItems: Array<string | null> | null } | null> | null } | null> | null } | null> | null } | null } | null> | null } };
+
+export type GalleryQueryVariables = Exact<{
+  relativePath: string;
+}>;
+
+
+export type GalleryQuery = { gallery: { __typename: 'Gallery', id: string, categories: Array<string | null> | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo: { __typename: 'GallerySeo', title: string | null, description: string | null, keywords: string | null } | null, header: { __typename: 'GalleryHeader', title: string | null, subtitle: string | null, description: string | null } | null, photos: Array<{ __typename: 'GalleryPhotos', title: string | null, description: string | null, src: string | null, category: string | null } | null> | null } };
+
+export type GalleryConnectionQueryVariables = Exact<{
+  before?: string | null | undefined;
+  after?: string | null | undefined;
+  first?: number | null | undefined;
+  last?: number | null | undefined;
+  sort?: string | null | undefined;
+  filter?: GalleryFilter | null | undefined;
+}>;
+
+
+export type GalleryConnectionQuery = { galleryConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Gallery', id: string, categories: Array<string | null> | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo: { __typename: 'GallerySeo', title: string | null, description: string | null, keywords: string | null } | null, header: { __typename: 'GalleryHeader', title: string | null, subtitle: string | null, description: string | null } | null, photos: Array<{ __typename: 'GalleryPhotos', title: string | null, description: string | null, src: string | null, category: string | null } | null> | null } | null } | null> | null } };
+
+export type TestimonialsQueryVariables = Exact<{
+  relativePath: string;
+}>;
+
+
+export type TestimonialsQuery = { testimonials: { __typename: 'Testimonials', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo: { __typename: 'TestimonialsSeo', title: string | null, description: string | null, keywords: string | null } | null, header: { __typename: 'TestimonialsHeader', eyebrow: string | null, title: string | null, description: string | null } | null, overallRating: { __typename: 'TestimonialsOverallRating', score: string | null, totalReviews: string | null } | null, featured: { __typename: 'TestimonialsFeatured', quote: string | null, name: string | null, role: string | null, initials: string | null } | null, items: Array<{ __typename: 'TestimonialsItems', title: string | null, quote: string | null, name: string | null, role: string | null, initials: string | null, offset: string | null } | null> | null } };
+
+export type TestimonialsConnectionQueryVariables = Exact<{
+  before?: string | null | undefined;
+  after?: string | null | undefined;
+  first?: number | null | undefined;
+  last?: number | null | undefined;
+  sort?: string | null | undefined;
+  filter?: TestimonialsFilter | null | undefined;
+}>;
+
+
+export type TestimonialsConnectionQuery = { testimonialsConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Testimonials', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo: { __typename: 'TestimonialsSeo', title: string | null, description: string | null, keywords: string | null } | null, header: { __typename: 'TestimonialsHeader', eyebrow: string | null, title: string | null, description: string | null } | null, overallRating: { __typename: 'TestimonialsOverallRating', score: string | null, totalReviews: string | null } | null, featured: { __typename: 'TestimonialsFeatured', quote: string | null, name: string | null, role: string | null, initials: string | null } | null, items: Array<{ __typename: 'TestimonialsItems', title: string | null, quote: string | null, name: string | null, role: string | null, initials: string | null, offset: string | null } | null> | null } | null } | null> | null } };
+
+export type CareersQueryVariables = Exact<{
+  relativePath: string;
+}>;
+
+
+export type CareersQuery = { careers: { __typename: 'Careers', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo: { __typename: 'CareersSeo', title: string | null, description: string | null, keywords: string | null } | null, header: { __typename: 'CareersHeader', eyebrow: string | null, title: string | null, description: string | null } | null, jobs: Array<{ __typename: 'CareersJobs', id: string | null, title: string | null, location: string | null, experience: string | null, jobType: string | null, companyDescription: string | null, mandatoryCriteria: Array<string | null> | null, responsibilities: Array<string | null> | null, workingConditions: Array<string | null> | null } | null> | null } };
+
+export type CareersConnectionQueryVariables = Exact<{
+  before?: string | null | undefined;
+  after?: string | null | undefined;
+  first?: number | null | undefined;
+  last?: number | null | undefined;
+  sort?: string | null | undefined;
+  filter?: CareersFilter | null | undefined;
+}>;
+
+
+export type CareersConnectionQuery = { careersConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Careers', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo: { __typename: 'CareersSeo', title: string | null, description: string | null, keywords: string | null } | null, header: { __typename: 'CareersHeader', eyebrow: string | null, title: string | null, description: string | null } | null, jobs: Array<{ __typename: 'CareersJobs', id: string | null, title: string | null, location: string | null, experience: string | null, jobType: string | null, companyDescription: string | null, mandatoryCriteria: Array<string | null> | null, responsibilities: Array<string | null> | null, workingConditions: Array<string | null> | null } | null> | null } | null } | null> | null } };
+
+export type ContactQueryVariables = Exact<{
+  relativePath: string;
+}>;
+
+
+export type ContactQuery = { contact: { __typename: 'Contact', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo: { __typename: 'ContactSeo', title: string | null, description: string | null, keywords: string | null } | null, header: { __typename: 'ContactHeader', eyebrow: string | null, titleLine1: string | null, titleLine2: string | null, description: string | null } | null, contactCards: Array<{ __typename: 'ContactContactCards', title: string | null, icon: string | null, lines: Array<string | null> | null, hrefs: Array<string | null> | null } | null> | null, socials: Array<{ __typename: 'ContactSocials', label: string | null, url: string | null, icon: string | null, className: string | null } | null> | null } };
+
+export type ContactConnectionQueryVariables = Exact<{
+  before?: string | null | undefined;
+  after?: string | null | undefined;
+  first?: number | null | undefined;
+  last?: number | null | undefined;
+  sort?: string | null | undefined;
+  filter?: ContactFilter | null | undefined;
+}>;
+
+
+export type ContactConnectionQuery = { contactConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Contact', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo: { __typename: 'ContactSeo', title: string | null, description: string | null, keywords: string | null } | null, header: { __typename: 'ContactHeader', eyebrow: string | null, titleLine1: string | null, titleLine2: string | null, description: string | null } | null, contactCards: Array<{ __typename: 'ContactContactCards', title: string | null, icon: string | null, lines: Array<string | null> | null, hrefs: Array<string | null> | null } | null> | null, socials: Array<{ __typename: 'ContactSocials', label: string | null, url: string | null, icon: string | null, className: string | null } | null> | null } | null } | null> | null } };
+
+export type FranchiseQueryVariables = Exact<{
+  relativePath: string;
+}>;
+
+
+export type FranchiseQuery = { franchise: { __typename: 'Franchise', id: string, modelsTitle: string | null, visionTitle: string | null, vision: Array<string | null> | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo: { __typename: 'FranchiseSeo', title: string | null, description: string | null } | null, header: { __typename: 'FranchiseHeader', eyebrow: string | null, title: string | null, titleItalic: string | null, subtitle: string | null, highlight: string | null } | null, sections: Array<{ __typename: 'FranchiseSections', title: string | null, icon: string | null, items: Array<string | null> | null } | null> | null, models: Array<{ __typename: 'FranchiseModels', name: string | null, investment: string | null } | null> | null, closing: { __typename: 'FranchiseClosing', line1: string | null, line1Italic: string | null, line2: string | null } | null } };
+
+export type FranchiseConnectionQueryVariables = Exact<{
+  before?: string | null | undefined;
+  after?: string | null | undefined;
+  first?: number | null | undefined;
+  last?: number | null | undefined;
+  sort?: string | null | undefined;
+  filter?: FranchiseFilter | null | undefined;
+}>;
+
+
+export type FranchiseConnectionQuery = { franchiseConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Franchise', id: string, modelsTitle: string | null, visionTitle: string | null, vision: Array<string | null> | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo: { __typename: 'FranchiseSeo', title: string | null, description: string | null } | null, header: { __typename: 'FranchiseHeader', eyebrow: string | null, title: string | null, titleItalic: string | null, subtitle: string | null, highlight: string | null } | null, sections: Array<{ __typename: 'FranchiseSections', title: string | null, icon: string | null, items: Array<string | null> | null } | null> | null, models: Array<{ __typename: 'FranchiseModels', name: string | null, investment: string | null } | null> | null, closing: { __typename: 'FranchiseClosing', line1: string | null, line1Italic: string | null, line2: string | null } | null } | null } | null> | null } };
+
+export type MembershipQueryVariables = Exact<{
+  relativePath: string;
+}>;
+
+
+export type MembershipQuery = { membership: { __typename: 'Membership', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo: { __typename: 'MembershipSeo', title: string | null, description: string | null } | null, hero: { __typename: 'MembershipHero', eyebrow: string | null, titleLine1: string | null, titleItalic: string | null, titleLine3: string | null, description: string | null, badges: Array<string | null> | null } | null, whySection: { __typename: 'MembershipWhySection', title: string | null, description: string | null, cards: Array<{ __typename: 'MembershipWhySectionCards', icon: string | null, title: string | null, desc: string | null } | null> | null } | null, benefitsSection: { __typename: 'MembershipBenefitsSection', title: string | null, cards: Array<{ __typename: 'MembershipBenefitsSectionCards', icon: string | null, title: string | null, items: Array<string | null> | null, gradient: string | null } | null> | null } | null, milestoneSection: { __typename: 'MembershipMilestoneSection', title: string | null, description: string | null, milestones: Array<{ __typename: 'MembershipMilestoneSectionMilestones', title: string | null, icon: string | null } | null> | null } | null, rewardsSection: { __typename: 'MembershipRewardsSection', title: string | null, rewards: Array<string | null> | null } | null, exclusiveOffersSection: { __typename: 'MembershipExclusiveOffersSection', title: string | null, offers: Array<string | null> | null } | null, perfectForSection: { __typename: 'MembershipPerfectForSection', title: string | null, items: Array<{ __typename: 'MembershipPerfectForSectionItems', title: string | null, icon: string | null } | null> | null } | null, promiseSection: { __typename: 'MembershipPromiseSection', title: string | null, text: string | null, signature: string | null } | null, ctaSection: { __typename: 'MembershipCtaSection', titleLine1: string | null, titleLine2: string | null, description: string | null } | null } };
+
+export type MembershipConnectionQueryVariables = Exact<{
+  before?: string | null | undefined;
+  after?: string | null | undefined;
+  first?: number | null | undefined;
+  last?: number | null | undefined;
+  sort?: string | null | undefined;
+  filter?: MembershipFilter | null | undefined;
+}>;
+
+
+export type MembershipConnectionQuery = { membershipConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Membership', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo: { __typename: 'MembershipSeo', title: string | null, description: string | null } | null, hero: { __typename: 'MembershipHero', eyebrow: string | null, titleLine1: string | null, titleItalic: string | null, titleLine3: string | null, description: string | null, badges: Array<string | null> | null } | null, whySection: { __typename: 'MembershipWhySection', title: string | null, description: string | null, cards: Array<{ __typename: 'MembershipWhySectionCards', icon: string | null, title: string | null, desc: string | null } | null> | null } | null, benefitsSection: { __typename: 'MembershipBenefitsSection', title: string | null, cards: Array<{ __typename: 'MembershipBenefitsSectionCards', icon: string | null, title: string | null, items: Array<string | null> | null, gradient: string | null } | null> | null } | null, milestoneSection: { __typename: 'MembershipMilestoneSection', title: string | null, description: string | null, milestones: Array<{ __typename: 'MembershipMilestoneSectionMilestones', title: string | null, icon: string | null } | null> | null } | null, rewardsSection: { __typename: 'MembershipRewardsSection', title: string | null, rewards: Array<string | null> | null } | null, exclusiveOffersSection: { __typename: 'MembershipExclusiveOffersSection', title: string | null, offers: Array<string | null> | null } | null, perfectForSection: { __typename: 'MembershipPerfectForSection', title: string | null, items: Array<{ __typename: 'MembershipPerfectForSectionItems', title: string | null, icon: string | null } | null> | null } | null, promiseSection: { __typename: 'MembershipPromiseSection', title: string | null, text: string | null, signature: string | null } | null, ctaSection: { __typename: 'MembershipCtaSection', titleLine1: string | null, titleLine2: string | null, description: string | null } | null } | null } | null> | null } };
 
 export const HomePartsFragmentDoc = gql`
     fragment HomeParts on Home {
@@ -853,16 +2955,367 @@ export const HomePartsFragmentDoc = gql`
   }
 }
     `;
+export const AboutPartsFragmentDoc = gql`
+    fragment AboutParts on About {
+  __typename
+  seo {
+    __typename
+    title
+    description
+    keywords
+  }
+  hero {
+    __typename
+    subtitle
+    title
+    description
+  }
+  mainSection {
+    __typename
+    paragraphs
+    buttonText
+    image
+  }
+  stats {
+    __typename
+    value
+    label
+    iconName
+  }
+  mission {
+    __typename
+    title
+    text
+  }
+  vision {
+    __typename
+    title
+    text
+  }
+  founder {
+    __typename
+    sectionSubtitle
+    sectionTitleLine1
+    sectionTitleLine2
+    image
+    name
+    role
+    location
+    aboutMyselfText
+    expertiseText
+  }
+  credentials {
+    __typename
+    title
+    items
+  }
+  achievements {
+    __typename
+    title
+    items
+  }
+  whyChooseUs {
+    __typename
+    subtitle
+    titleLine1
+    titleLine2
+    description
+    highlights {
+      __typename
+      title
+      description
+      iconName
+    }
+  }
+}
+    `;
 export const ServicesPartsFragmentDoc = gql`
     fragment ServicesParts on Services {
   __typename
+  seo {
+    __typename
+    title
+    description
+    keywords
+  }
+  hero {
+    __typename
+    subtitle
+    titleLine1
+    titleLine2
+    description
+  }
   catalog {
     __typename
     title
     slug
     icon
     description
+    sections {
+      __typename
+      eyebrow
+      title
+      accent
+      description
+      listItems
+    }
+    items {
+      __typename
+      name
+      slug
+      sections {
+        __typename
+        eyebrow
+        title
+        accent
+        description
+        listItems
+      }
+    }
+  }
+}
+    `;
+export const GalleryPartsFragmentDoc = gql`
+    fragment GalleryParts on Gallery {
+  __typename
+  seo {
+    __typename
+    title
+    description
+    keywords
+  }
+  header {
+    __typename
+    title
+    subtitle
+    description
+  }
+  categories
+  photos {
+    __typename
+    title
+    description
+    src
+    category
+  }
+}
+    `;
+export const TestimonialsPartsFragmentDoc = gql`
+    fragment TestimonialsParts on Testimonials {
+  __typename
+  seo {
+    __typename
+    title
+    description
+    keywords
+  }
+  header {
+    __typename
+    eyebrow
+    title
+    description
+  }
+  overallRating {
+    __typename
+    score
+    totalReviews
+  }
+  featured {
+    __typename
+    quote
+    name
+    role
+    initials
+  }
+  items {
+    __typename
+    title
+    quote
+    name
+    role
+    initials
+    offset
+  }
+}
+    `;
+export const CareersPartsFragmentDoc = gql`
+    fragment CareersParts on Careers {
+  __typename
+  seo {
+    __typename
+    title
+    description
+    keywords
+  }
+  header {
+    __typename
+    eyebrow
+    title
+    description
+  }
+  jobs {
+    __typename
+    id
+    title
+    location
+    experience
+    jobType
+    companyDescription
+    mandatoryCriteria
+    responsibilities
+    workingConditions
+  }
+}
+    `;
+export const ContactPartsFragmentDoc = gql`
+    fragment ContactParts on Contact {
+  __typename
+  seo {
+    __typename
+    title
+    description
+    keywords
+  }
+  header {
+    __typename
+    eyebrow
+    titleLine1
+    titleLine2
+    description
+  }
+  contactCards {
+    __typename
+    title
+    icon
+    lines
+    hrefs
+  }
+  socials {
+    __typename
+    label
+    url
+    icon
+    className
+  }
+}
+    `;
+export const FranchisePartsFragmentDoc = gql`
+    fragment FranchiseParts on Franchise {
+  __typename
+  seo {
+    __typename
+    title
+    description
+  }
+  header {
+    __typename
+    eyebrow
+    title
+    titleItalic
+    subtitle
+    highlight
+  }
+  sections {
+    __typename
+    title
+    icon
     items
+  }
+  modelsTitle
+  models {
+    __typename
+    name
+    investment
+  }
+  visionTitle
+  vision
+  closing {
+    __typename
+    line1
+    line1Italic
+    line2
+  }
+}
+    `;
+export const MembershipPartsFragmentDoc = gql`
+    fragment MembershipParts on Membership {
+  __typename
+  seo {
+    __typename
+    title
+    description
+  }
+  hero {
+    __typename
+    eyebrow
+    titleLine1
+    titleItalic
+    titleLine3
+    description
+    badges
+  }
+  whySection {
+    __typename
+    title
+    description
+    cards {
+      __typename
+      icon
+      title
+      desc
+    }
+  }
+  benefitsSection {
+    __typename
+    title
+    cards {
+      __typename
+      icon
+      title
+      items
+      gradient
+    }
+  }
+  milestoneSection {
+    __typename
+    title
+    description
+    milestones {
+      __typename
+      title
+      icon
+    }
+  }
+  rewardsSection {
+    __typename
+    title
+    rewards
+  }
+  exclusiveOffersSection {
+    __typename
+    title
+    offers
+  }
+  perfectForSection {
+    __typename
+    title
+    items {
+      __typename
+      title
+      icon
+    }
+  }
+  promiseSection {
+    __typename
+    title
+    text
+    signature
+  }
+  ctaSection {
+    __typename
+    titleLine1
+    titleLine2
+    description
   }
 }
     `;
@@ -923,6 +3376,63 @@ export const HomeConnectionDocument = gql`
   }
 }
     ${HomePartsFragmentDoc}`;
+export const AboutDocument = gql`
+    query about($relativePath: String!) {
+  about(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...AboutParts
+  }
+}
+    ${AboutPartsFragmentDoc}`;
+export const AboutConnectionDocument = gql`
+    query aboutConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: AboutFilter) {
+  aboutConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...AboutParts
+      }
+    }
+  }
+}
+    ${AboutPartsFragmentDoc}`;
 export const ServicesDocument = gql`
     query services($relativePath: String!) {
   services(relativePath: $relativePath) {
@@ -980,6 +3490,348 @@ export const ServicesConnectionDocument = gql`
   }
 }
     ${ServicesPartsFragmentDoc}`;
+export const GalleryDocument = gql`
+    query gallery($relativePath: String!) {
+  gallery(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...GalleryParts
+  }
+}
+    ${GalleryPartsFragmentDoc}`;
+export const GalleryConnectionDocument = gql`
+    query galleryConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: GalleryFilter) {
+  galleryConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...GalleryParts
+      }
+    }
+  }
+}
+    ${GalleryPartsFragmentDoc}`;
+export const TestimonialsDocument = gql`
+    query testimonials($relativePath: String!) {
+  testimonials(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...TestimonialsParts
+  }
+}
+    ${TestimonialsPartsFragmentDoc}`;
+export const TestimonialsConnectionDocument = gql`
+    query testimonialsConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: TestimonialsFilter) {
+  testimonialsConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...TestimonialsParts
+      }
+    }
+  }
+}
+    ${TestimonialsPartsFragmentDoc}`;
+export const CareersDocument = gql`
+    query careers($relativePath: String!) {
+  careers(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...CareersParts
+  }
+}
+    ${CareersPartsFragmentDoc}`;
+export const CareersConnectionDocument = gql`
+    query careersConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: CareersFilter) {
+  careersConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...CareersParts
+      }
+    }
+  }
+}
+    ${CareersPartsFragmentDoc}`;
+export const ContactDocument = gql`
+    query contact($relativePath: String!) {
+  contact(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...ContactParts
+  }
+}
+    ${ContactPartsFragmentDoc}`;
+export const ContactConnectionDocument = gql`
+    query contactConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: ContactFilter) {
+  contactConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...ContactParts
+      }
+    }
+  }
+}
+    ${ContactPartsFragmentDoc}`;
+export const FranchiseDocument = gql`
+    query franchise($relativePath: String!) {
+  franchise(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...FranchiseParts
+  }
+}
+    ${FranchisePartsFragmentDoc}`;
+export const FranchiseConnectionDocument = gql`
+    query franchiseConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: FranchiseFilter) {
+  franchiseConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...FranchiseParts
+      }
+    }
+  }
+}
+    ${FranchisePartsFragmentDoc}`;
+export const MembershipDocument = gql`
+    query membership($relativePath: String!) {
+  membership(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...MembershipParts
+  }
+}
+    ${MembershipPartsFragmentDoc}`;
+export const MembershipConnectionDocument = gql`
+    query membershipConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: MembershipFilter) {
+  membershipConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...MembershipParts
+      }
+    }
+  }
+}
+    ${MembershipPartsFragmentDoc}`;
 export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<R>
   export function getSdk<C>(requester: Requester<C>) {
     return {
@@ -989,11 +3841,53 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
     homeConnection(variables?: HomeConnectionQueryVariables, options?: C): Promise<{data: HomeConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: HomeConnectionQueryVariables, query: string}> {
         return requester<{data: HomeConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: HomeConnectionQueryVariables, query: string}, HomeConnectionQueryVariables>(HomeConnectionDocument, variables, options);
       },
+    about(variables: AboutQueryVariables, options?: C): Promise<{data: AboutQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AboutQueryVariables, query: string}> {
+        return requester<{data: AboutQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AboutQueryVariables, query: string}, AboutQueryVariables>(AboutDocument, variables, options);
+      },
+    aboutConnection(variables?: AboutConnectionQueryVariables, options?: C): Promise<{data: AboutConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AboutConnectionQueryVariables, query: string}> {
+        return requester<{data: AboutConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AboutConnectionQueryVariables, query: string}, AboutConnectionQueryVariables>(AboutConnectionDocument, variables, options);
+      },
     services(variables: ServicesQueryVariables, options?: C): Promise<{data: ServicesQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ServicesQueryVariables, query: string}> {
         return requester<{data: ServicesQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ServicesQueryVariables, query: string}, ServicesQueryVariables>(ServicesDocument, variables, options);
       },
     servicesConnection(variables?: ServicesConnectionQueryVariables, options?: C): Promise<{data: ServicesConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ServicesConnectionQueryVariables, query: string}> {
         return requester<{data: ServicesConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ServicesConnectionQueryVariables, query: string}, ServicesConnectionQueryVariables>(ServicesConnectionDocument, variables, options);
+      },
+    gallery(variables: GalleryQueryVariables, options?: C): Promise<{data: GalleryQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: GalleryQueryVariables, query: string}> {
+        return requester<{data: GalleryQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: GalleryQueryVariables, query: string}, GalleryQueryVariables>(GalleryDocument, variables, options);
+      },
+    galleryConnection(variables?: GalleryConnectionQueryVariables, options?: C): Promise<{data: GalleryConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: GalleryConnectionQueryVariables, query: string}> {
+        return requester<{data: GalleryConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: GalleryConnectionQueryVariables, query: string}, GalleryConnectionQueryVariables>(GalleryConnectionDocument, variables, options);
+      },
+    testimonials(variables: TestimonialsQueryVariables, options?: C): Promise<{data: TestimonialsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TestimonialsQueryVariables, query: string}> {
+        return requester<{data: TestimonialsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TestimonialsQueryVariables, query: string}, TestimonialsQueryVariables>(TestimonialsDocument, variables, options);
+      },
+    testimonialsConnection(variables?: TestimonialsConnectionQueryVariables, options?: C): Promise<{data: TestimonialsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TestimonialsConnectionQueryVariables, query: string}> {
+        return requester<{data: TestimonialsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TestimonialsConnectionQueryVariables, query: string}, TestimonialsConnectionQueryVariables>(TestimonialsConnectionDocument, variables, options);
+      },
+    careers(variables: CareersQueryVariables, options?: C): Promise<{data: CareersQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: CareersQueryVariables, query: string}> {
+        return requester<{data: CareersQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: CareersQueryVariables, query: string}, CareersQueryVariables>(CareersDocument, variables, options);
+      },
+    careersConnection(variables?: CareersConnectionQueryVariables, options?: C): Promise<{data: CareersConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: CareersConnectionQueryVariables, query: string}> {
+        return requester<{data: CareersConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: CareersConnectionQueryVariables, query: string}, CareersConnectionQueryVariables>(CareersConnectionDocument, variables, options);
+      },
+    contact(variables: ContactQueryVariables, options?: C): Promise<{data: ContactQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ContactQueryVariables, query: string}> {
+        return requester<{data: ContactQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ContactQueryVariables, query: string}, ContactQueryVariables>(ContactDocument, variables, options);
+      },
+    contactConnection(variables?: ContactConnectionQueryVariables, options?: C): Promise<{data: ContactConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ContactConnectionQueryVariables, query: string}> {
+        return requester<{data: ContactConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ContactConnectionQueryVariables, query: string}, ContactConnectionQueryVariables>(ContactConnectionDocument, variables, options);
+      },
+    franchise(variables: FranchiseQueryVariables, options?: C): Promise<{data: FranchiseQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: FranchiseQueryVariables, query: string}> {
+        return requester<{data: FranchiseQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: FranchiseQueryVariables, query: string}, FranchiseQueryVariables>(FranchiseDocument, variables, options);
+      },
+    franchiseConnection(variables?: FranchiseConnectionQueryVariables, options?: C): Promise<{data: FranchiseConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: FranchiseConnectionQueryVariables, query: string}> {
+        return requester<{data: FranchiseConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: FranchiseConnectionQueryVariables, query: string}, FranchiseConnectionQueryVariables>(FranchiseConnectionDocument, variables, options);
+      },
+    membership(variables: MembershipQueryVariables, options?: C): Promise<{data: MembershipQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: MembershipQueryVariables, query: string}> {
+        return requester<{data: MembershipQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: MembershipQueryVariables, query: string}, MembershipQueryVariables>(MembershipDocument, variables, options);
+      },
+    membershipConnection(variables?: MembershipConnectionQueryVariables, options?: C): Promise<{data: MembershipConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: MembershipConnectionQueryVariables, query: string}> {
+        return requester<{data: MembershipConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: MembershipConnectionQueryVariables, query: string}, MembershipConnectionQueryVariables>(MembershipConnectionDocument, variables, options);
       }
     };
   }

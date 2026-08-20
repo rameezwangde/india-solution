@@ -1,0 +1,127 @@
+{
+  "seo": {
+    "title": "About Us",
+    "description": "Learn about India Solution, Bengaluru's premier event management company. We specialize in bringing bold ideas to life with unparalleled precision and creativity since 2010.",
+    "keywords": "about india solution, best event planners bengaluru, event management company history, corporate event planners"
+  },
+  "hero": {
+    "subtitle": "Who We Are",
+    "title": "ABOUT US",
+    "description": "Crafting experiences. Building relationships."
+  },
+  "mainSection": {
+    "paragraphs": [
+      "For over 15 years, **India Solution** has been one of Bengaluru's trusted names in Event Management and In-House Event Production, delivering seamless, premium-quality experiences for events of every scale.",
+      "What truly sets us apart is that everything you see at an event is produced and managed in-house. From concept development, stage production, LED walls, sound, lighting, trussing, fabrication, décor, branding, artist management, technical execution to on-site management — we handle it all under one roof.",
+      "Our passionate team and state-of-the-art infrastructure allow us to maintain the highest standards of quality, creativity, and reliability, ensuring every detail is perfect and every experience is unforgettable."
+    ],
+    "buttonText": "Our Journey",
+    "image": "/images/corporate_conference.png"
+  },
+  "stats": [
+    { "value": "15+", "label": "Years of\nExcellence", "iconName": "Calendar" },
+    { "value": "5000+", "label": "Events\nExecuted", "iconName": "Users" },
+    { "value": "4300+", "label": "Happy\nClients", "iconName": "Trophy" },
+    { "value": "Pan India", "label": "Presence\n", "iconName": "MapPin" }
+  ],
+  "mission": {
+    "title": "Our Mission",
+    "text": "To deliver exceptional event solutions by blending creativity, precision, and personalized service, ensuring every event reflects the unique personality and aspirations of our clients."
+  },
+  "vision": {
+    "title": "Our Vision",
+    "text": "To be the most trusted and innovative event management company in India, redefining celebrations and creating unforgettable experiences for our clients."
+  },
+  "founder": {
+    "sectionSubtitle": "Our Leadership",
+    "sectionTitleLine1": "Meet the",
+    "sectionTitleLine2": "Founder",
+    "image": "/FOunder.PNG",
+    "name": "Reneesh Rajan",
+    "role": "CEO & Founder",
+    "location": "India Solution, Bangalore",
+    "aboutMyselfText": [
+      "Born and raised in Bangalore, I am very passionate about Events & Production, have a strong root to my Indian culture and am an Engineer by profession. As a business owner, I have strived to find the balance in everyday challenges.",
+      "Additionally, I love what I do! I can't wait to get started each day and I enjoy working with the amazing and dynamic team I have. I am a trusted partner to all my clients. I treasure seeing an event plan coming to life and getting executed from concept to reality.",
+      "My hobbies are Playing Guitar, Dancing, Snooker and Racing.",
+      "Doing social work for a cause and helping the needy has been my passion in recent times. After years in the industry across various platforms, I founded India Solution, an event company established to make a mark in the industry by creating unique experiences for both the public and society while catering to their needs and supporting social causes."
+    ],
+    "expertiseText": "Over 13 years of experience in Event Management having worked extensively in Sales, Marketing, Communications, Cultural, Environment, Education & Social Service. Being organized, meticulous, possessing creative imagination, thoughtful communication, remarkable reliability, concept designing skills, and contagious enthusiasm for social activities."
+  },
+  "credentials": {
+    "title": "Membership Credentials",
+    "items": [
+      "Founder and CEO, Events by INDIA SOLUTION, Bengaluru.",
+      "General Secretary for Indian National Congress – Labor Cell.",
+      "Secretary for Y's Men International, Bengaluru, India.",
+      "Board Member for Karnataka, Indian National Congress – Labor Cell, Karnataka.",
+      "Business Development Head for Kannada TV Channel.",
+      "Board Committee Member of Karnataka Press Club Association.",
+      "Consultant for International Schools – NPS.",
+      "Concept Designer for Radio Mirchi Bangalore."
+    ]
+  },
+  "achievements": {
+    "title": "Achievements & Awards",
+    "items": [
+      "Bash Event Style Awards (2012) – Best Wedding Planner.",
+      "ICWF – Best Entertainment Design for Social Award Winner.",
+      "Silicon India – Award for Professional Excellence in Real Estate.",
+      "Awarded as Best Event Planner by various schools and colleges.",
+      "Business Excellence Award – Game Changer of the Year.",
+      "WOW Awards – Best Infrastructure Provider.",
+      "Successfully executed event production for 5000+ clients across cultural, fashion, corporate, wedding, and movie events throughout PAN India and abroad.",
+      "Recognized and awarded by direct clients, event managers, institutions, artist managers, clubs, sports authorities of India, and celebrities.",
+      "Kala Ratna Kanike from Exide Life.",
+      "Silicon India – Young Achiever Award.",
+      "Silicon India – Best Audio-Visual Partner of the Year.",
+      "Tuborg Award as the Best Event Planning Company.",
+      "Created the \"Save a Life with Bread\" initiative for the hungry across Karnataka during 2015–2016.",
+      "Provided 1000 manpower support for the KPCC Quit India 75 Rally at Freedom Park, Bengaluru.",
+      "Managed event requirements for the KPCC Rally in Basavanagudi, Bengaluru.",
+      "Initiated event production for the rally marking the 150th Birth Anniversary of Mahatma Gandhi Ji (2019), Bengaluru.",
+      "Made all arrangements for various election campaigns.",
+      "Active participation in Bengaluru party meetings and party initiatives.",
+      "A rigorous social worker who has stood against anti-social elements in society.",
+      "Assisted in organizing various CSR events in partnership with multiple colleges and universities in Bengaluru."
+    ]
+  },
+  "whyChooseUs": {
+    "subtitle": "Why Choose Us",
+    "titleLine1": "Why Should You",
+    "titleLine2": "Hire Us",
+    "description": "At India Solution, we don't just plan events; we create experiences that leave lasting impressions. Here's why we are the perfect choice for your event management needs:",
+    "highlights": [
+      {
+        "title": "Skilled\nTeam",
+        "description": "Our experienced and passionate\nprofessionals bring creativity to every event.",
+        "iconName": "Users"
+      },
+      {
+        "title": "Flawless\nPunctuality",
+        "description": "We ensure every event unfolds\nseamlessly and on time.",
+        "iconName": "Clock"
+      },
+      {
+        "title": "Long-Lasting\nBonds",
+        "description": "Many clients become part of the\nIndia Solution family.",
+        "iconName": "Handshake"
+      },
+      {
+        "title": "Endless\nCreativity",
+        "description": "From imaginative themes to\ninnovative corporate setups.",
+        "iconName": "Lightbulb"
+      },
+      {
+        "title": "Attention\nto Detail",
+        "description": "Every detail matters to us.\nFlawlessly executed.",
+        "iconName": "Crosshair"
+      },
+      {
+        "title": "Proven\nExcellence",
+        "description": "Our reputation is built on the\nheartfelt recommendations of clients.",
+        "iconName": "Award"
+      }
+    ]
+  }
+}
