@@ -1,4 +1,15 @@
 {
+  "seo": {
+    "title": "Premium Event Management in Bengaluru",
+    "description": "India Solution provides world-class event management, wedding planning, corporate events, and staging across Bengaluru and India. Turn your vision into extraordinary experiences with flawless execution.",
+    "keywords": "event management bengaluru, wedding planners india, corporate events, stage fabrication, premium event planners"
+  },
+  "heroImages": [
+    { "img": "/about-us.webp", "alt": "Wedding floral aisle decor" },
+    { "img": "/images/wedding_theme.png", "alt": "Candlelit event table" },
+    { "img": "/hero-stage.png", "alt": "Grand stage celebration" },
+    { "img": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=auto&fm=webp", "alt": "Corporate event stage" }
+  ],
   "hero": {
     "subtitle": "Crafting Unforgettable Moments",
     "titleLine1": "DESIGNED,",
@@ -11,6 +22,8 @@
     "titleLine1": "DESIGNED, PRODUCED",
     "titleLine2": "& DELIVERED",
     "titleLine3": "UNDER ONE ROOF.",
+    "contactButtonText": "CONTACT US",
+    "image": "/images/premium_event_stage.png",
     "paragraphs": [
       "At **India Solution**, we blend creativity, precision, and passion to craft events that leave a lasting impression. From intimate celebrations to grand corporate gatherings, every detail is thoughtfully planned and flawlessly executed.",
       "With years of experience and a dedicated team of experts, we offer end-to-end event solutions tailored to your unique vision. Our commitment to excellence, innovation, and elegance ensures that your event is not just well-managed — but truly unforgettable.",

@@ -1,0 +1,249 @@
+{
+  "catalog": [
+    {
+      "title": "Wedding",
+      "slug": "wedding",
+      "icon": "Heart",
+      "description": "Complete wedding planning support for a polished, memorable celebration.",
+      "items": [
+        "Invitations & Stationery",
+        "Beauty Services, Makeup, and Mehendi",
+        "Bridal & Groom Wear and Jewellery",
+        "Mandap / Stage",
+        "Floral Backdrop",
+        "Lighting Setup",
+        "Couple Seating",
+        "Entrance Decoration",
+        "Gifts and Return Gifts",
+        "Special Entries",
+        "Transportation"
+      ]
+    },
+    {
+      "title": "Birthday",
+      "slug": "birthday",
+      "icon": "Cake",
+      "description": "Creative birthday celebrations with decor, food, activities, and guest experiences.",
+      "items": [
+        "Invitations & Stationery",
+        "Birthday Decoration",
+        "Fun Activities",
+        "Catering & Fun Food Stations",
+        "Gifts and Return Gifts"
+      ]
+    },
+    {
+      "title": "Corporate Events",
+      "slug": "corporate-events",
+      "icon": "BriefcaseBusiness",
+      "description": "Professional event execution for business gatherings and brand moments.",
+      "items": [
+        "Meetings and conferences",
+        "Employee events",
+        "Training and development",
+        "Marketing and promotional activities",
+        "Networking and relationships events",
+        "Special corporate celebrations",
+        "Networking Events",
+        "Conferences",
+        "Product Launches",
+        "Corporate Meetings"
+      ]
+    },
+    {
+      "title": "Catering",
+      "slug": "catering",
+      "icon": "Utensils",
+      "description": "Curated food experiences for celebrations, formal events, and private parties.",
+      "items": [
+        "Pure Vegetarian Cuisine",
+        "Non-Vegetarian Cuisine",
+        "Traditional Indian Cuisine",
+        "Western Cuisine",
+        "Healthy & Diet-Friendly Options",
+        "Custom Cakes",
+        "Sweet Treats and Fun Edibles"
+      ]
+    },
+    {
+      "title": "Pre-Wedding Ceremony",
+      "slug": "pre-wedding-ceremony",
+      "icon": "Gem",
+      "description": "Beautifully coordinated ceremonies, parties, and pre-wedding memories.",
+      "items": [
+        "Event Decor and Floral Arrangements",
+        "Photography and Videography Services",
+        "Catering Services",
+        "Decorations",
+        "Theme Based Parties"
+      ]
+    },
+    {
+      "title": "Trade Show and Exhibition Planning",
+      "slug": "trade-show-exhibition-planning",
+      "icon": "PanelsTopLeft",
+      "description": "End-to-end planning for exhibitions, booth operations, and visitor management.",
+      "items": [
+        "Attendee Registration & Ticketing",
+        "Logistics & Transportation Services",
+        "Custom Booth Designs & Setup",
+        "Marketing & Promotion",
+        "Booth Maintenance & Support"
+      ]
+    },
+    {
+      "title": "Promotions",
+      "slug": "promotions",
+      "icon": "Megaphone",
+      "description": "Brand promotion solutions designed for visibility, recall, and engagement.",
+      "items": [
+        "Mobile Van Advertising",
+        "Digital Screens and Kiosks",
+        "Sampling and Demonstrations",
+        "Posters and Banners",
+        "Custom-Branded Products for Effective Promotion",
+        "Brand Activations",
+        "Product Launches",
+        "Mall Promotions",
+        "Roadshows",
+        "Retail & In-store Promotions",
+        "Corporate Promotions",
+        "College & Campus Activations",
+        "Sampling Campaigns",
+        "Society & Residential Promotions",
+        "Influencer & Digital Campaign Support",
+        "Promotional Staffing (Promoters & Hostesses)",
+        "Event Branding & Fabrication",
+        "Sound, Lighting & LED Displays",
+        "Photography & Videography"
+      ]
+    },
+    {
+      "title": "Special Entries",
+      "slug": "special-entries",
+      "icon": "Sparkles",
+      "description": "Grand and memorable entries with visual effects and premium presentation.",
+      "items": [
+        "Grand Firework Displays",
+        "Sparkling Umbrella Entry",
+        "Cold Pyro and Fog Effects",
+        "Flower Shower Entry",
+        "Drone Show Entry"
+      ]
+    },
+    {
+      "title": "Festivals",
+      "slug": "festivals",
+      "icon": "PartyPopper",
+      "description": "Festival planning with cultural detail, decor, and crowd-ready coordination.",
+      "items": [
+        "Ganesh Chaturthi Celebrations",
+        "Dasara",
+        "Hampi fest",
+        "Navratri & Dandiya Nights",
+        "Diwali Events",
+        "Christmas & New Year Celebrations",
+        "Holi Festivals",
+        "Eid Celebrations",
+        "Onam, Pongal & Regional Festivals",
+        "Temple & Religious Festivals",
+        "Community & Society Festivals",
+        "School & College Festival Events",
+        "Corporate Festival Celebrations",
+        "Cultural Programs & Live Performances"
+      ]
+    },
+    {
+      "title": "House Warming",
+      "slug": "house-warming",
+      "icon": "House",
+      "description": "Elegant house warming arrangements for family, friends, and traditional rituals.",
+      "items": [
+        "Invitation",
+        "Decorations",
+        "Catering",
+        "Photography and videography",
+        "Traditional pooja setup",
+        "Return gifts",
+        "Home revealing",
+        "Complete event coordination and on-site management"
+      ]
+    },
+    {
+      "title": "Party",
+      "slug": "party",
+      "icon": "Music",
+      "description": "Personal and milestone parties planned with thoughtful flow and details.",
+      "items": [
+        "Graduation Party Planning",
+        "Retirement Party",
+        "Toast & Speech Coordination",
+        "Catering Services",
+        "Return Gifts & Keepsakes",
+        "Birthday Parties",
+        "Anniversary Parties",
+        "House Parties",
+        "Corporate Parties",
+        "Cocktail Parties",
+        "Bachelor & Bachelorette Parties",
+        "Farewell Parties",
+        "Reunion Parties",
+        "Graduation Parties",
+        "Success & Celebration Parties",
+        "Theme Parties",
+        "Pool & Terrace Parties",
+        "Kids' Parties",
+        "Private Parties"
+      ]
+    },
+    {
+      "title": "Custom Gifts and Return Gifts",
+      "slug": "custom-gifts-return-gifts",
+      "icon": "Gift",
+      "description": "Personalized gifting options that help guests remember the occasion.",
+      "items": [
+        "Custom Key Chain",
+        "Mini Me",
+        "Corporate Gift Hampers",
+        "Employee & Client Appreciation Gifts",
+        "Wedding Return Gifts",
+        "Birthday Return Gifts",
+        "Baby Shower & Naming Ceremony Gifts",
+        "House Warming Return Gifts",
+        "Festival Gift Hampers",
+        "Event Welcome Kits",
+        "Conference & Delegate Kits",
+        "Promotional Merchandise",
+        "Luxury Gift Boxes",
+        "Eco-friendly & Sustainable Gifts",
+        "Customized Mementos & Trophies",
+        "Personalized Gift Packaging",
+        "Customization Options",
+        "Company Logo Branding",
+        "Name & Initial Engraving",
+        "Custom Printing",
+        "Premium Packaging",
+        "Personalized Tags & Thank You Cards",
+        "Theme-based Gift Boxes"
+      ]
+    },
+    {
+      "title": "Sporting Events",
+      "slug": "sporting-events",
+      "icon": "Trophy",
+      "description": "Sports event coordination covering setup, registrations, safety, and logistics.",
+      "items": [
+        "Venue Selection & Setup",
+        "Ticketing & Registration",
+        "Audio-Visual Equipment & Live Streaming",
+        "Security & Crowd Control",
+        "Transportation & Logistics",
+        "complete planning and management of the event",
+        "Arranging metals trophies and certificates",
+        "Power backup and technical support",
+        "Customized solutions",
+        "Timely and reliable service"
+      ]
+    }
+  ]
+}

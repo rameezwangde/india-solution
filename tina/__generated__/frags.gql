@@ -1,0 +1,88 @@
+fragment HomeParts on Home {
+  __typename
+  seo {
+    __typename
+    title
+    description
+    keywords
+  }
+  heroImages {
+    __typename
+    img
+    alt
+  }
+  hero {
+    __typename
+    subtitle
+    titleLine1
+    titleLine2
+    titleLine3
+    contactButtonText
+    description
+  }
+  about {
+    __typename
+    subtitle
+    titleLine1
+    titleLine2
+    titleLine3
+    image
+    paragraphs
+  }
+  stats {
+    __typename
+    value
+    label
+    iconName
+  }
+  brandStatement {
+    __typename
+    image
+    titleLine1
+    titleLine2
+    titleLine3
+    sinceText1
+    sinceText2
+    description
+  }
+  expertiseSection {
+    __typename
+    subtitle
+    titleLine1
+    titleLine2
+  }
+  whyChooseUs {
+    __typename
+    subtitle
+    titleLine1
+    titleLine2
+    reasons {
+      __typename
+      title
+      desc
+    }
+  }
+  bottomStatement {
+    __typename
+    paragraph
+    titleLine1
+    titleLine2
+  }
+  happyClients {
+    __typename
+    name
+    logo
+  }
+}
+
+fragment ServicesParts on Services {
+  __typename
+  catalog {
+    __typename
+    title
+    slug
+    icon
+    description
+    items
+  }
+}

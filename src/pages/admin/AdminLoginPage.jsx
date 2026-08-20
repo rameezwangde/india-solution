@@ -228,11 +228,18 @@ const AdminLoginPage = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-gradient-to-r from-[#9A424E] to-[#C0602F] hover:opacity-90 text-[#4A2F1D] font-bold py-4 rounded-xl transition-all flex items-center justify-center gap-2 mt-2 shadow-md hover:shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-wider text-sm"
+                className="w-full bg-gradient-to-r from-[#9A424E] to-[#C0602F] hover:opacity-90 text-[#4A2F1D] font-bold py-4 rounded-xl transition-all flex items-center justify-center gap-2 mt-2 shadow-md hover:shadow-sm disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-wider text-sm"
               >
                 {loading ? <Loader2 className="animate-spin" size={20} /> : null}
                 {loading ? 'Signing In...' : 'Sign In to Dashboard'}
               </button>
+
+              <a
+                href="/tina-admin"
+                className="w-full bg-white border border-[#E8DFD5] hover:border-[#C0602F] text-[#4A2F1D] hover:text-[#C0602F] font-bold py-4 rounded-xl transition-all flex items-center justify-center gap-2 mt-4 shadow-sm hover:shadow-md uppercase tracking-wider text-sm"
+              >
+                Go to Content Manager (CMS)
+              </a>
             </form>
 
             <div className="mt-10 pt-8 border-t border-[#E8DFD5] flex items-center justify-center gap-5 text-[#4A2F1D] text-xs font-bold uppercase tracking-wider">

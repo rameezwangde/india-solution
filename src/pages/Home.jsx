@@ -7,6 +7,7 @@ import { fadeUp, staggerContainer } from '../utils/animations';
 import { Link } from 'react-router-dom';
 import { serviceCatalog } from '../data/serviceCatalog';
 import homeData from '../content/home.json';
+import { useTina } from 'tinacms/dist/react';
 
 
 const iconMap = {
@@ -16,12 +17,35 @@ const iconMap = {
   Star
 };
 
-const stats = homeData.stats.map(stat => ({
-  ...stat,
-  icon: iconMap[stat.iconName] || Star
-}));
+
 
 const Home = () => {
+  const { data } = useTina({
+    query: `query {
+      home(relativePath: "home.json") {
+        seo { title description keywords }
+        heroImages { img alt }
+        hero { subtitle titleLine1 titleLine2 titleLine3 contactButtonText description }
+        about { subtitle titleLine1 titleLine2 titleLine3 image paragraphs }
+        stats { value label iconName }
+        brandStatement { image titleLine1 titleLine2 titleLine3 sinceText1 sinceText2 description }
+        expertiseSection { subtitle titleLine1 titleLine2 }
+        whyChooseUs { subtitle titleLine1 titleLine2 reasons { title desc } }
+        bottomStatement { paragraph titleLine1 titleLine2 }
+        happyClients { name logo }
+      }
+    }`,
+    variables: { relativePath: "home.json" },
+    data: { home: homeData },
+  });
+
+  const activeData = data.home;
+
+  const stats = activeData.stats.map(stat => ({
+    ...stat,
+    icon: iconMap[stat.iconName] || Star
+  }));
+
   const homeSchema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -64,9 +88,9 @@ const Home = () => {
     <LazyMotion features={domAnimation}>
       <div className="bg-[#FAF7F2] font-sans selection:bg-[#A67C65] selection:text-white relative">
         <SEO
-          title="Premium Event Management in Bengaluru"
-          description="India Solution provides world-class event management, wedding planning, corporate events, and staging across Bengaluru and India. Turn your vision into extraordinary experiences with flawless execution."
-          keywords="event management bengaluru, wedding planners india, corporate events, stage fabrication, premium event planners"
+          title={activeData.seo.title}
+          description={activeData.seo.description}
+          keywords={activeData.seo.keywords}
           schema={homeSchema}
         />
         {/* Hero Section */}
@@ -88,14 +112,14 @@ const Home = () => {
             <div className="mx-auto flex flex-col items-center">
               <div className="mb-6 flex items-center justify-center gap-4 text-[11px] font-bold tracking-[0.2em] text-[#4A2F1D]">
                 <span className="text-[#8B5E45] text-sm">❖</span>
-                <span className="uppercase">{homeData.hero.subtitle}</span>
+                <span className="uppercase">{activeData.hero.subtitle}</span>
                 <span className="text-[#8B5E45] text-sm">❖</span>
               </div>
 
               <h1 className="font-['Playfair_Display',serif] text-[#4A2F1D]">
-                <span className="block font-black text-6xl sm:text-7xl lg:text-[90px] tracking-wide mb-1 leading-none text-[#2A1810]">{homeData.hero.titleLine1}</span>
-                <span className="block italic font-bold text-[54px] sm:text-[64px] lg:text-[78px] text-[#4A2F1D] tracking-wide leading-[1.1]">{homeData.hero.titleLine2}</span>
-                <span className="block font-black tracking-[0.2em] text-3xl sm:text-4xl lg:text-[40px] mt-5 text-[#2A1810]">{homeData.hero.titleLine3}</span>
+                <span className="block font-black text-6xl sm:text-7xl lg:text-[90px] tracking-wide mb-1 leading-none text-[#2A1810]">{activeData.hero.titleLine1}</span>
+                <span className="block italic font-bold text-[54px] sm:text-[64px] lg:text-[78px] text-[#4A2F1D] tracking-wide leading-[1.1]">{activeData.hero.titleLine2}</span>
+                <span className="block font-black tracking-[0.2em] text-3xl sm:text-4xl lg:text-[40px] mt-5 text-[#2A1810]">{activeData.hero.titleLine3}</span>
               </h1>
 
               <div className="mx-auto my-7 flex items-center justify-center">
@@ -103,7 +127,7 @@ const Home = () => {
               </div>
 
               <p className="mx-auto max-w-2xl text-[15px] leading-[1.8] text-[#2A1810] md:text-[16px] font-semibold">
-                {homeData.hero.description}
+                {activeData.hero.description}
               </p>
             </div>
 
@@ -142,7 +166,7 @@ const Home = () => {
               <div className="flex items-center gap-4">
                 <span className="text-[#4A2F1D] text-sm">❖</span>
                 <Link to="/contact" className="bg-[#A87455] hover:bg-[#8F6145] text-white px-9 py-3.5 rounded-[4px] font-bold tracking-widest text-[12px] transition-all flex items-center gap-3 shadow-[0_8px_20px_rgb(148,98,71,0.25)] hover:shadow-[0_8px_20px_rgb(148,98,71,0.4)]">
-                  CONTACT US <ArrowRight size={15} strokeWidth={2.5} />
+                  {activeData.hero.contactButtonText} <ArrowRight size={15} strokeWidth={2.5} />
                 </Link>
                 <span className="text-[#4A2F1D] text-sm">❖</span>
               </div>
@@ -154,12 +178,7 @@ const Home = () => {
               transition={{ duration: 0.8, delay: 0.6 }}
               className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-5"
             >
-              {[
-                { img: '/about-us.webp', alt: 'Wedding floral aisle decor' },
-                { img: '/images/wedding_theme.png', alt: 'Candlelit event table' },
-                { img: '/hero-stage.png', alt: 'Grand stage celebration' },
-                { img: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=auto&fm=webp', alt: 'Corporate event stage' }
-              ].map((item, idx) => (
+              {activeData.heroImages.map((item, idx) => (
                 <div key={idx} className="relative overflow-hidden rounded-[2.5rem] aspect-[4/5] sm:aspect-[3/4] shadow-[0_10px_30px_rgb(0,0,0,0.08)] border-[6px] border-white bg-white group">
                   <img src={item.img} alt={item.alt} fetchPriority={idx < 2 ? "high" : "auto"} loading={idx < 2 ? "eager" : "lazy"} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -188,18 +207,18 @@ const Home = () => {
               >
                 <motion.div variants={fadeUp} className="mb-6 flex items-center gap-3 text-[11px] font-bold tracking-[0.2em] text-[#4A2F1D]">
                   <span className="text-[#8B5E45] text-xs">❖</span>
-                  <span className="uppercase">{homeData.about.subtitle}</span>
+                  <span className="uppercase">{activeData.about.subtitle}</span>
                   <span className="text-[#8B5E45] text-xs">❖</span>
                 </motion.div>
 
                 <motion.h2 variants={fadeUp} className="font-['Playfair_Display',serif] text-[#2A1810] mb-8">
-                  <span className="block font-black text-5xl md:text-6xl tracking-wide mb-1 leading-[1.1]">{homeData.about.titleLine1}</span>
-                  <span className="block font-bold text-4xl md:text-5xl text-[#4A2F1D] tracking-wide leading-[1.2]">{homeData.about.titleLine2}</span>
-                  <span className="block font-black tracking-[0.2em] text-2xl md:text-3xl mt-4 text-[#2A1810]">{homeData.about.titleLine3}</span>
+                  <span className="block font-black text-5xl md:text-6xl tracking-wide mb-1 leading-[1.1]">{activeData.about.titleLine1}</span>
+                  <span className="block font-bold text-4xl md:text-5xl text-[#4A2F1D] tracking-wide leading-[1.2]">{activeData.about.titleLine2}</span>
+                  <span className="block font-black tracking-[0.2em] text-2xl md:text-3xl mt-4 text-[#2A1810]">{activeData.about.titleLine3}</span>
                 </motion.h2>
 
                 <div className="space-y-6 text-[#2A1810] text-[15.5px] leading-[1.8] font-semibold">
-                  {homeData.about.paragraphs.map((paragraph, index) => {
+                  {activeData.about.paragraphs.map((paragraph, index) => {
                     const formatText = (text) => {
                       const parts = text.split(/(\*\*.*?\*\*)/);
                       return parts.map((part, i) => {
@@ -227,7 +246,7 @@ const Home = () => {
                 className="space-y-6"
               >
                 <div className="overflow-hidden rounded-[2rem] shadow-[0_12px_40px_rgba(139,94,69,0.15)] border border-[#E8DFD5]">
-                  <img src="/images/premium_event_stage.png" alt="India Solution event decor" loading="lazy" decoding="async" className="h-[350px] md:h-[450px] w-full object-cover" />
+                  <img src={activeData.about.image} alt="India Solution event decor" loading="lazy" decoding="async" className="h-[350px] md:h-[450px] w-full object-cover" />
                 </div>
 
                 <div className="bg-[#FAF6F2] rounded-[1.5rem] shadow-sm border border-[#EBE3DC] py-6 px-4">
@@ -265,7 +284,7 @@ const Home = () => {
                 transition={{ duration: 0.7 }}
                 className="relative h-[clamp(320px,35vw,500px)] overflow-hidden rounded-[2.5rem] border border-[#D5C5B9] shadow-[0_12px_40px_rgba(139,94,69,0.15)]"
               >
-                <img src={homeData.brandStatement.image} alt="India Solution Luxury Event Setup" loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
+                <img src={activeData.brandStatement.image} alt="India Solution Luxury Event Setup" loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
                 <div className="absolute inset-0 bg-black/10 pointer-events-none" />
               </motion.div>
 
@@ -277,9 +296,9 @@ const Home = () => {
                 className="max-w-xl"
               >
                 <h2 className="font-['Playfair_Display',serif] text-5xl md:text-[62px] lg:text-[72px] leading-[1.1] text-[#4A2F1D]">
-                  <span className="block mb-1">{homeData.brandStatement.titleLine1}</span>
-                  <span className="block italic text-[#4A2F1D]">{homeData.brandStatement.titleLine2}</span>
-                  <span className="block mt-1">{homeData.brandStatement.titleLine3}</span>
+                  <span className="block mb-1">{activeData.brandStatement.titleLine1}</span>
+                  <span className="block italic text-[#4A2F1D]">{activeData.brandStatement.titleLine2}</span>
+                  <span className="block mt-1">{activeData.brandStatement.titleLine3}</span>
                 </h2>
 
                 <div className="my-8 flex items-center gap-4">
@@ -289,11 +308,11 @@ const Home = () => {
                 </div>
 
                 <p className="font-['Playfair_Display',serif] text-[26px] md:text-[32px] italic tracking-widest text-[#4A2F1D] mb-6">
-                  {homeData.brandStatement.sinceText1} <span className="text-[#4A2F1D]">{homeData.brandStatement.sinceText2}</span>
+                  {activeData.brandStatement.sinceText1} <span className="text-[#4A2F1D]">{activeData.brandStatement.sinceText2}</span>
                 </p>
 
                 <p className="text-[15px] leading-[1.8] font-bold text-[#2A1810] max-w-[400px]">
-                  {homeData.brandStatement.description}
+                  {activeData.brandStatement.description}
                 </p>
               </motion.div>
             </div>
@@ -313,11 +332,11 @@ const Home = () => {
               <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-12 text-center">
                 <div className="mb-6 flex items-center justify-center gap-3 text-[11px] font-bold tracking-[0.2em] text-[#4A2F1D]">
                   <span className="text-[#8B5E45] text-xs">❖</span>
-                  <span className="uppercase">{homeData.expertiseSection.subtitle}</span>
+                  <span className="uppercase">{activeData.expertiseSection.subtitle}</span>
                   <span className="text-[#8B5E45] text-xs">❖</span>
                 </div>
                 <h3 className="font-['Playfair_Display',serif] text-4xl md:text-5xl lg:text-[54px] font-semibold text-[#4A2F1D]">
-                  {homeData.expertiseSection.titleLine1} <span className="italic text-[#4A2F1D]">{homeData.expertiseSection.titleLine2}</span>
+                  {activeData.expertiseSection.titleLine1} <span className="italic text-[#4A2F1D]">{activeData.expertiseSection.titleLine2}</span>
                 </h3>
                 <div className="mt-8 flex items-center justify-center">
                   <span className="text-[#8B5E45] text-sm">❖</span>
@@ -349,16 +368,16 @@ const Home = () => {
               <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mb-12 text-center">
                 <div className="mb-6 flex items-center justify-center gap-3 text-[11px] font-bold tracking-[0.2em] text-[#4A2F1D]">
                   <span className="text-[#8B5E45] text-xs">❖</span>
-                  <span className="uppercase">{homeData.whyChooseUs.subtitle}</span>
+                  <span className="uppercase">{activeData.whyChooseUs.subtitle}</span>
                   <span className="text-[#8B5E45] text-xs">❖</span>
                 </div>
                 <h3 className="font-['Playfair_Display',serif] text-4xl md:text-5xl lg:text-[54px] font-semibold text-[#4A2F1D]">
-                  {homeData.whyChooseUs.titleLine1} <span className="italic text-[#4A2F1D]">{homeData.whyChooseUs.titleLine2}</span>
+                  {activeData.whyChooseUs.titleLine1} <span className="italic text-[#4A2F1D]">{activeData.whyChooseUs.titleLine2}</span>
                 </h3>
               </motion.div>
 
               <div className="flex flex-wrap justify-center gap-6 lg:gap-8 max-w-[1200px] mx-auto">
-                {homeData.whyChooseUs.reasons.map((item, i) => (
+                {activeData.whyChooseUs.reasons.map((item, i) => (
                   <motion.div
                     key={i}
                     initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}
@@ -377,12 +396,12 @@ const Home = () => {
             {/* Missing Text & Headings */}
             <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mx-auto max-w-4xl text-center mt-12 mb-6">
               <p className="text-[15px] font-semibold text-[#2A1810] leading-relaxed mb-10 whitespace-pre-line">
-                {homeData.bottomStatement.paragraph}
+                {activeData.bottomStatement.paragraph}
               </p>
               <div className="flex justify-center mb-8"><span className="text-[#4A2F1D] text-sm">❖</span></div>
               <h4 className="font-['Playfair_Display',serif] text-4xl md:text-[42px] lg:text-[48px] font-semibold text-[#4A2F1D]">
-                {homeData.bottomStatement.titleLine1}<br />
-                <span className="italic text-[#4A2F1D] mt-2 block tracking-wide">{homeData.bottomStatement.titleLine2}</span>
+                {activeData.bottomStatement.titleLine1}<br />
+                <span className="italic text-[#4A2F1D] mt-2 block tracking-wide">{activeData.bottomStatement.titleLine2}</span>
               </h4>
               <div className="flex justify-center mt-8 mb-4"><span className="text-[#4A2F1D] text-sm">❖</span></div>
             </motion.div>
@@ -404,8 +423,8 @@ const Home = () => {
 
             <div className="relative z-10 mt-12 overflow-hidden py-5" style={{ maskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)' }}>
               <div className="client-logo-track flex items-center gap-0">
-                {[...homeData.happyClients, ...homeData.happyClients].map((client, index) => (
-                  <div key={`${client.name}-${index}`} className="relative flex flex-col items-center justify-center min-w-[260px] px-8 h-[80px]" aria-hidden={index >= homeData.happyClients.length}>
+                {[...activeData.happyClients, ...activeData.happyClients].map((client, index) => (
+                  <div key={`${client.name}-${index}`} className="relative flex flex-col items-center justify-center min-w-[260px] px-8 h-[80px]" aria-hidden={index >= activeData.happyClients.length}>
                     <img src={client.logo} alt={client.name} className="h-[45px] object-contain" />
                     {/* Small diamond below the logo */}
                     <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[#D5C5B9] text-[10px]">❖</div>
