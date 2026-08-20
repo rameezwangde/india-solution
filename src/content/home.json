@@ -93,10 +93,10 @@
   "happyClients": [
     { "name": "Google", "logo": "/images/google-logo.png" },
     { "name": "Capgemini", "logo": "/images/capgemini-logo.png" },
-    { "name": "DHL", "logo": "/images/dhl-logo.png" },
-    { "name": "IBM", "logo": "/images/ibm-logo.png" },
-    { "name": "Bajaj", "logo": "/images/bajaj-logo.png" },
-    { "name": "Audi", "logo": "/images/audi-logo.png" },
+    { "name": "DHL", "logo": "/images/dhl-logo.jpg" },
+    { "name": "IBM", "logo": "/images/ibm-logo.jpg" },
+    { "name": "Bajaj", "logo": "/images/bajaj-logo.jpg" },
+    { "name": "Audi", "logo": "/images/audi-logo.gif" },
     { "name": "Amazon", "logo": "/images/amazon-logo.png" }
   ]
 }
