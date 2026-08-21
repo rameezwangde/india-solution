@@ -17,8 +17,8 @@ const Gallery = () => {
         photos { src title description category }
       }
     }`,
-    variables: { relativePath: "gallery.json" },
-    data: { gallery: galleryDataFallback }
+    variables: typeof window !== 'undefined' ? (window['_tina_var_' + "gallery.json"] = window['_tina_var_' + "gallery.json"] || { relativePath: "gallery.json" }) : { relativePath: "gallery.json" },
+    data: typeof window !== 'undefined' ? (window['_tina_data_' + 'Gallery.jsx_gallery'] = window['_tina_data_' + 'Gallery.jsx_gallery'] || { gallery: galleryDataFallback }) : { gallery: galleryDataFallback }
   });
 
   const pageData = data.gallery;

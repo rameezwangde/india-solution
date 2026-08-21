@@ -31,8 +31,8 @@ const Membership = () => {
         ctaSection { titleLine1 titleLine2 description }
       }
     }`,
-    variables: { relativePath: "membership.json" },
-    data: { membership: membershipDataFallback }
+    variables: typeof window !== 'undefined' ? (window['_tina_var_' + "membership.json"] = window['_tina_var_' + "membership.json"] || { relativePath: "membership.json" }) : { relativePath: "membership.json" },
+    data: typeof window !== 'undefined' ? (window['_tina_data_' + 'Membership.jsx_membership'] = window['_tina_data_' + 'Membership.jsx_membership'] || { membership: membershipDataFallback }) : { membership: membershipDataFallback }
   });
 
   const pageData = data.membership;

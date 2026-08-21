@@ -17,8 +17,8 @@ const JobDetail = () => {
         jobs { id title location experience jobType companyDescription mandatoryCriteria responsibilities workingConditions }
       }
     }`,
-    variables: { relativePath: "careers.json" },
-    data: { careers: careersDataFallback }
+    variables: typeof window !== 'undefined' ? (window['_tina_var_' + "careers.json"] = window['_tina_var_' + "careers.json"] || { relativePath: "careers.json" }) : { relativePath: "careers.json" },
+    data: typeof window !== 'undefined' ? (window['_tina_data_' + 'JobDetail.jsx_careers'] = window['_tina_data_' + 'JobDetail.jsx_careers'] || { careers: careersDataFallback }) : { careers: careersDataFallback }
   });
 
   const [job, setJob] = useState(null);

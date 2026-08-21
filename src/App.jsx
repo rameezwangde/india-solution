@@ -9,21 +9,22 @@ import ErrorBoundary from './components/common/ErrorBoundary';
 import Navbar from './components/layout/Navbar';
 import Home from './pages/Home';
 
-// Lazy loaded Public Pages
-const About = lazy(() => import('./pages/About'));
-const Services = lazy(() => import('./pages/Services'));
-const ServiceDetail = lazy(() => import('./pages/ServiceDetail'));
-const Contact = lazy(() => import('./pages/Contact'));
-const FAQ = lazy(() => import('./pages/FAQ'));
-const Testimonials = lazy(() => import('./pages/Testimonials'));
-const InventoryDemo = lazy(() => import('./pages/InventoryDemo'));
-const Gallery = lazy(() => import('./pages/Gallery'));
-const Careers = lazy(() => import('./pages/Careers'));
-const JobDetail = lazy(() => import('./pages/JobDetail'));
-const Membership = lazy(() => import('./pages/Membership'));
-const Franchise = lazy(() => import('./pages/Franchise'));
+import About from './pages/About';
+import Services from './pages/Services';
+import ServiceDetail from './pages/ServiceDetail';
+import Contact from './pages/Contact';
+import FAQ from './pages/FAQ';
+import Testimonials from './pages/Testimonials';
+import InventoryDemo from './pages/InventoryDemo';
+import Gallery from './pages/Gallery';
+import Careers from './pages/Careers';
+import JobDetail from './pages/JobDetail';
+import Membership from './pages/Membership';
+import Franchise from './pages/Franchise';
+
 
 import Footer from './components/layout/Footer';
+import ScrollToTop from './components/layout/ScrollToTop';
 import GlobalPrefetcher from './components/layout/GlobalPrefetcher';
 import EnquiryCartBar from './components/inventory/EnquiryCartBar';
 const EnquiryCartModal = lazy(() => import('./components/inventory/EnquiryCartModal'));
@@ -47,7 +48,7 @@ const AdminBackupsPage = lazy(() => import('./pages/admin/AdminBackupsPage'));
 const AdminHelpPage = lazy(() => import('./pages/admin/AdminHelpPage'));
 const AdminNotFoundPage = lazy(() => import('./pages/admin/AdminNotFoundPage'));
 
-const PublicLayout = ({ children }) => {
+const PublicLayout = () => {
   const { cartItems, handleUpdateQuantity, handleRemoveItem, clearCart } = useCart();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -56,7 +57,15 @@ const PublicLayout = ({ children }) => {
       <GlobalPrefetcher />
       <Navbar />
       <main className="flex-grow">
-        {children}
+        <Suspense fallback={
+          <div className="min-h-screen bg-[#FAF7F2] flex items-center justify-center pt-24">
+            <div className="flex flex-col items-center gap-4">
+              <div className="w-10 h-10 border-4 border-[#E8DFD5] border-t-[#A67C65] rounded-full animate-spin"></div>
+            </div>
+          </div>
+        }>
+          <Outlet />
+        </Suspense>
       </main>
       <Footer />
 
@@ -102,6 +111,7 @@ function App() {
         <CartProvider>
         <ErrorBoundary>
           <Router>
+            <ScrollToTop />
             <Routes>
               {/* Admin Routes */}
               <Route path="/admin/login" element={<AdminLoginPage />} />
@@ -140,37 +150,25 @@ function App() {
               </Route>
 
               {/* Public Routes */}
-              <Route path="/*" element={
-                <PublicLayout>
-                  <Suspense fallback={
-                    <div className="min-h-screen bg-[#FAF7F2] flex items-center justify-center pt-24">
-                      <div className="flex flex-col items-center gap-4">
-                        <div className="w-10 h-10 border-4 border-[#E8DFD5] border-t-[#A67C65] rounded-full animate-spin"></div>
-                      </div>
-                    </div>
-                  }>
-                    <Routes>
-                      <Route path="/" element={<Home />} />
-                      <Route path="/about" element={<About />} />
-                      <Route path="/about-us" element={<About />} />
-                      <Route path="/gallery" element={<Gallery />} />
-                      <Route path="/careers" element={<Careers />} />
-                      <Route path="/careers/:jobId" element={<JobDetail />} />
-                      <Route path="/services" element={<Services />} />
-                      <Route path="/services/:serviceSlug" element={<ServiceDetail />} />
-                      <Route path="/services/:serviceSlug/:itemSlug" element={<ServiceDetail />} />
-                      <Route path="/contact" element={<Contact />} />
-                      <Route path="/membership" element={<Membership />} />
-                      <Route path="/franchise" element={<Franchise />} />
-                      <Route path="/contact-us" element={<Contact />} />
-                      <Route path="/faq" element={<FAQ />} />
-                      <Route path="/testimonials" element={<Testimonials />} />
-                      <Route path="/testimonial" element={<Testimonials />} />
-                      <Route path="/inventory-demo" element={<InventoryDemo />} />
-                    </Routes>
-                  </Suspense>
-                </PublicLayout>
-              } />
+              <Route element={<PublicLayout />}>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/about-us" element={<About />} />
+                <Route path="/gallery" element={<Gallery />} />
+                <Route path="/careers" element={<Careers />} />
+                <Route path="/careers/:jobId" element={<JobDetail />} />
+                <Route path="/services" element={<Services />} />
+                <Route path="/services/:serviceSlug" element={<ServiceDetail />} />
+                <Route path="/services/:serviceSlug/:itemSlug" element={<ServiceDetail />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/membership" element={<Membership />} />
+                <Route path="/franchise" element={<Franchise />} />
+                <Route path="/contact-us" element={<Contact />} />
+                <Route path="/faq" element={<FAQ />} />
+                <Route path="/testimonials" element={<Testimonials />} />
+                <Route path="/testimonial" element={<Testimonials />} />
+                <Route path="/inventory-demo" element={<InventoryDemo />} />
+              </Route>
             </Routes>
           </Router>
         </ErrorBoundary>

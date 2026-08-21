@@ -24,8 +24,8 @@ const Testimonials = () => {
         items { title quote name role initials offset }
       }
     }`,
-    variables: { relativePath: "testimonials.json" },
-    data: { testimonials: testimonialsDataFallback }
+    variables: typeof window !== 'undefined' ? (window['_tina_var_' + "testimonials.json"] = window['_tina_var_' + "testimonials.json"] || { relativePath: "testimonials.json" }) : { relativePath: "testimonials.json" },
+    data: typeof window !== 'undefined' ? (window['_tina_data_' + 'Testimonials.jsx_testimonials'] = window['_tina_data_' + 'Testimonials.jsx_testimonials'] || { testimonials: testimonialsDataFallback }) : { testimonials: testimonialsDataFallback }
   });
 
   const pageData = data.testimonials;

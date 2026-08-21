@@ -25,10 +25,8 @@ const About = () => {
         whyChooseUs { subtitle titleLine1 titleLine2 description highlights { title description iconName } }
       }
     }`,
-    variables: { relativePath: "about.json" },
-    data: { 
-      about: aboutData
-    }
+    variables: typeof window !== 'undefined' ? (window['_tina_var_' + "about.json"] = window['_tina_var_' + "about.json"] || { relativePath: "about.json" }) : { relativePath: "about.json" },
+    data: typeof window !== 'undefined' ? (window['_tina_data_' + 'About.jsx_about'] = window['_tina_data_' + 'About.jsx_about'] || { about: aboutData }) : { about: aboutData }
   });
 
   const activeData = data.about;

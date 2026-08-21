@@ -46,10 +46,8 @@ const Services = () => {
         catalog { title slug icon description items { name slug } }
       }
     }`,
-    variables: { relativePath: "services.json" },
-    data: { 
-      services: servicesData
-    }
+    variables: typeof window !== 'undefined' ? (window['_tina_var_' + "services.json"] = window['_tina_var_' + "services.json"] || { relativePath: "services.json" }) : { relativePath: "services.json" },
+    data: typeof window !== 'undefined' ? (window['_tina_data_' + 'Services.jsx_services'] = window['_tina_data_' + 'Services.jsx_services'] || { services: servicesData }) : { services: servicesData }
   });
 
   const activeData = data.services;

@@ -35,8 +35,8 @@ const Home = () => {
         happyClients { name logo }
       }
     }`,
-    variables: { relativePath: "home.json" },
-    data: { home: homeData },
+    variables: typeof window !== 'undefined' ? (window['_tina_var_' + "home.json"] = window['_tina_var_' + "home.json"] || { relativePath: "home.json" }) : { relativePath: "home.json" },
+    data: typeof window !== 'undefined' ? (window['_tina_data_' + 'Home.jsx_home'] = window['_tina_data_' + 'Home.jsx_home'] || { home: homeData }) : { home: homeData },
   });
 
   const activeData = data.home;

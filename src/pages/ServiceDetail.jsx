@@ -267,10 +267,8 @@ const ServiceDetail = () => {
         }
       }
     }`,
-    variables: { relativePath: "services.json" },
-    data: { 
-      services: servicesFallbackData
-    }
+    variables: typeof window !== 'undefined' ? (window['_tina_var_' + "services.json"] = window['_tina_var_' + "services.json"] || { relativePath: "services.json" }) : { relativePath: "services.json" },
+    data: typeof window !== 'undefined' ? (window['_tina_data_' + 'ServiceDetail.jsx_services'] = window['_tina_data_' + 'ServiceDetail.jsx_services'] || { services: servicesFallbackData }) : { services: servicesFallbackData }
   });
 
   const activeCatalog = data.services.catalog;

@@ -22,8 +22,8 @@ const Contact = () => {
         socials { label url icon className }
       }
     }`,
-    variables: { relativePath: "contact.json" },
-    data: { contact: contactDataFallback }
+    variables: typeof window !== 'undefined' ? (window['_tina_var_' + "contact.json"] = window['_tina_var_' + "contact.json"] || { relativePath: "contact.json" }) : { relativePath: "contact.json" },
+    data: typeof window !== 'undefined' ? (window['_tina_data_' + 'Contact.jsx_contact'] = window['_tina_data_' + 'Contact.jsx_contact'] || { contact: contactDataFallback }) : { contact: contactDataFallback }
   });
 
   const pageData = data.contact;

@@ -31,8 +31,8 @@ const Franchise = () => {
         closing { line1 line1Italic line2 }
       }
     }`,
-    variables: { relativePath: "franchise.json" },
-    data: { franchise: franchiseDataFallback }
+    variables: typeof window !== 'undefined' ? (window['_tina_var_' + "franchise.json"] = window['_tina_var_' + "franchise.json"] || { relativePath: "franchise.json" }) : { relativePath: "franchise.json" },
+    data: typeof window !== 'undefined' ? (window['_tina_data_' + 'Franchise.jsx_franchise'] = window['_tina_data_' + 'Franchise.jsx_franchise'] || { franchise: franchiseDataFallback }) : { franchise: franchiseDataFallback }
   });
 
   const pageData = data.franchise;
