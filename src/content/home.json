@@ -5,10 +5,22 @@
     "keywords": "event management bengaluru, wedding planners india, corporate events, stage fabrication, premium event planners"
   },
   "heroImages": [
-    { "img": "/about-us.webp", "alt": "Wedding floral aisle decor" },
-    { "img": "/images/wedding_theme.png", "alt": "Candlelit event table" },
-    { "img": "/hero-stage.png", "alt": "Grand stage celebration" },
-    { "img": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=auto&fm=webp", "alt": "Corporate event stage" }
+    {
+      "img": "/images/wedding.webp",
+      "alt": "Wedding floral aisle decor"
+    },
+    {
+      "img": "/images/wedding_theme.png",
+      "alt": "Candlelit event table"
+    },
+    {
+      "img": "/images/hero-stage.png",
+      "alt": "Grand stage celebration"
+    },
+    {
+      "img": "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=auto&fm=webp",
+      "alt": "Corporate event stage"
+    }
   ],
   "hero": {
     "subtitle": "Crafting Unforgettable Moments",
@@ -22,7 +34,6 @@
     "titleLine1": "DESIGNED, PRODUCED",
     "titleLine2": "& DELIVERED",
     "titleLine3": "UNDER ONE ROOF.",
-    "contactButtonText": "CONTACT US",
     "image": "/images/premium_event_stage.png",
     "paragraphs": [
       "At **India Solution**, we blend creativity, precision, and passion to craft events that leave a lasting impression. From intimate celebrations to grand corporate gatherings, every detail is thoughtfully planned and flawlessly executed.",
@@ -71,18 +82,54 @@
     "titleLine1": "Excellence in",
     "titleLine2": "Every Detail",
     "reasons": [
-      { "title": "15+ Years of\nIndustry Experience", "desc": "A legacy of trust, creativity\nand flawless execution." },
-      { "title": "Complete In-House\nProduction", "desc": "End to end solutions under\none roof for seamless delivery." },
-      { "title": "No Middlemen or\nThird-Party Dependencies", "desc": "Direct communication,\ntransparent processes." },
-      { "title": "Single Point\nof Contact", "desc": "One dedicated partner\nyou can rely on." },
-      { "title": "Premium Quality\nat Every Scale", "desc": "Uncompromising quality\nwhether intimate or grand." },
-      { "title": "Cost-Effective\nSolutions", "desc": "Maximum value without\ncompromising on quality." },
-      { "title": "Highly Experienced\nTechnical & Creative Team", "desc": "Passionate professionals bringing\nyour vision to life." },
-      { "title": "End-to-End Event\nManagement", "desc": "From concept to completion,\nwe handle it all." },
-      { "title": "Reliable Execution &\nOn-Time Delivery", "desc": "Your deadlines are our\ncommitment." },
-      { "title": "Customized Concepts &\nInnovative Designs", "desc": "Unique ideas tailored\njust for you." },
-      { "title": "Trusted by Event Companies,\nVenues, Brands & Corporates", "desc": "Long-term partnerships built\non trust and excellence." },
-      { "title": "Stress-Free\nExperience", "desc": "Everything in one place so you\ncan enjoy time with family." }
+      {
+        "title": "15+ Years of\nIndustry Experience",
+        "desc": "A legacy of trust, creativity\nand flawless execution."
+      },
+      {
+        "title": "Complete In-House\nProduction",
+        "desc": "End to end solutions under\none roof for seamless delivery."
+      },
+      {
+        "title": "No Middlemen or\nThird-Party Dependencies",
+        "desc": "Direct communication,\ntransparent processes."
+      },
+      {
+        "title": "Single Point\nof Contact",
+        "desc": "One dedicated partner\nyou can rely on."
+      },
+      {
+        "title": "Premium Quality\nat Every Scale",
+        "desc": "Uncompromising quality\nwhether intimate or grand."
+      },
+      {
+        "title": "Cost-Effective\nSolutions",
+        "desc": "Maximum value without\ncompromising on quality."
+      },
+      {
+        "title": "Highly Experienced\nTechnical & Creative Team",
+        "desc": "Passionate professionals bringing\nyour vision to life."
+      },
+      {
+        "title": "End-to-End Event\nManagement",
+        "desc": "From concept to completion,\nwe handle it all."
+      },
+      {
+        "title": "Reliable Execution &\nOn-Time Delivery",
+        "desc": "Your deadlines are our\ncommitment."
+      },
+      {
+        "title": "Customized Concepts &\nInnovative Designs",
+        "desc": "Unique ideas tailored\njust for you."
+      },
+      {
+        "title": "Trusted by Event Companies,\nVenues, Brands & Corporates",
+        "desc": "Long-term partnerships built\non trust and excellence."
+      },
+      {
+        "title": "Stress-Free\nExperience",
+        "desc": "Everything in one place so you\ncan enjoy time with family."
+      }
     ]
   },
   "bottomStatement": {
@@ -91,12 +138,33 @@
     "titleLine2": "ENDLESS POSSIBILITIES."
   },
   "happyClients": [
-    { "name": "Google", "logo": "/images/google-logo.png" },
-    { "name": "Capgemini", "logo": "/images/capgemini-logo.png" },
-    { "name": "DHL", "logo": "/images/dhl-logo.jpg" },
-    { "name": "IBM", "logo": "/images/ibm-logo.jpg" },
-    { "name": "Bajaj", "logo": "/images/bajaj-logo.jpg" },
-    { "name": "Audi", "logo": "/images/audi-logo.gif" },
-    { "name": "Amazon", "logo": "/images/amazon-logo.png" }
+    {
+      "name": "Google",
+      "logo": "/images/google-logo.png"
+    },
+    {
+      "name": "Capgemini",
+      "logo": "/images/capgemini-logo.png"
+    },
+    {
+      "name": "DHL",
+      "logo": "/images/dhl-logo.jpg"
+    },
+    {
+      "name": "IBM",
+      "logo": "/images/ibm-logo.jpg"
+    },
+    {
+      "name": "Bajaj",
+      "logo": "/images/bajaj-logo.jpg"
+    },
+    {
+      "name": "Audi",
+      "logo": "/images/audi-logo.gif"
+    },
+    {
+      "name": "Amazon",
+      "logo": "/images/amazon-logo.png"
+    }
   ]
 }
