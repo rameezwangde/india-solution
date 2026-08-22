@@ -17,123 +17,123 @@
   ],
   "photos": [
     {
-      "src": "/images/corporate_networking.png",
       "title": "Networking Events",
       "description": "Facilitating meaningful connections with professional and engaging networking environments.",
+      "src": "/images/networking-events.png",
       "category": "Corporate"
     },
     {
-      "src": "/images/corporate_networking.png",
       "title": "Conferences",
       "description": "Seamless execution of large-scale professional conferences and corporate summits.",
+      "src": "/images/corporate_networking.png",
       "category": "Conferences"
     },
     {
-      "src": "/images/corporate_launch.png",
       "title": "Product Launches",
       "description": "Impactful brand reveals and product showcases designed to captivate your audience.",
+      "src": "/images/corporate_launch.png",
       "category": "Product Launches"
     },
     {
-      "src": "/images/corporate_meeting.png",
       "title": "Corporate Meetings",
       "description": "Expertly managed meetings and boardrooms with flawless technical execution.",
+      "src": "/images/corporate_meeting.png",
       "category": "Corporate"
     },
     {
-      "src": "/images/event_decor_floral.png",
       "title": "Event Decor and Floral Arrangements",
       "description": "Stunning floral designs and thematic decor to set the perfect mood.",
+      "src": "/images/event_decor_floral.png",
       "category": "Weddings"
     },
     {
-      "src": "/images/wedding_photography.png",
       "title": "Photography and Videography",
       "description": "Capturing your precious moments with cinematic brilliance.",
+      "src": "/images/wedding_photography.png",
       "category": "Weddings"
     },
     {
-      "src": "/images/catering_services.png",
       "title": "Catering Services",
       "description": "Exquisite culinary experiences tailored to your taste and theme.",
+      "src": "/images/catering_services.png",
       "category": "Weddings"
     },
     {
-      "src": "/images/wedding_theme.png",
       "title": "Theme Based Parties",
       "description": "Creative and immersive party themes for unforgettable celebrations.",
+      "src": "/images/wedding_theme.png",
       "category": "Weddings"
     },
     {
-      "src": "/images/welcome_experience.png",
       "title": "Welcome Experience",
       "description": "Creating memorable first impressions through seamless arrivals, hospitality, and guest assistance.",
+      "src": "/images/welcome_experience.png",
       "category": "Weddings"
     },
     {
-      "src": "https://www.theknot.com/tk-media/images/b0e84a56-db35-4752-acdd-c8d39c2743cc",
       "title": "Haldi Celebrations",
       "description": "Vibrant rituals brought to life with thoughtful planning, decor, and guest experiences.",
+      "src": "https://www.theknot.com/tk-media/images/b0e84a56-db35-4752-acdd-c8d39c2743cc",
       "category": "Weddings"
     },
     {
-      "src": "/images/mehandi.png",
       "title": "Mehandi Celebrations",
       "description": "A colorful celebration filled with artistry, entertainment, and joyful moments.",
+      "src": "/images/mehandi.png",
       "category": "Weddings"
     },
     {
-      "src": "/images/wedding_sangeet.png",
       "title": "Sangeet Night",
       "description": "Performance-driven evenings featuring music, dance, entertainment, and family celebrations.",
+      "src": "/images/wedding_sangeet.png",
       "category": "Weddings"
     },
     {
-      "src": "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       "title": "Cocktail Evening",
       "description": "Sophisticated social experiences with curated entertainment, music, and elevated hospitality.",
+      "src": "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       "category": "Weddings"
     },
     {
-      "src": "https://tse1.mm.bing.net/th/id/OIP.Mo9UQ-g_fQOxqflIPyCIigHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
       "title": "Poolside Celebrations",
       "description": "Relaxed daytime festivities with themed styling, music, refreshments, and guest engagement.",
+      "src": "https://tse1.mm.bing.net/th/id/OIP.Mo9UQ-g_fQOxqflIPyCIigHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
       "category": "Weddings"
     },
     {
-      "src": "/images/wedding_invitations.png",
       "title": "Invitations & Stationery",
       "description": "Elegant luxury invitations to set the tone for your big day.",
+      "src": "/images/wedding_invitations.png",
       "category": "Weddings"
     },
     {
-      "src": "/images/wedding_makeup.png",
       "title": "Beauty, Makeup, and Styling",
       "description": "Enhancing beauty for your special day.",
+      "src": "/images/wedding_makeup.png",
       "category": "Weddings"
     },
     {
-      "src": "/images/wedding_attire.png",
       "title": "Bridal & Groom Wear",
       "description": "Exquisite styles for your most special moments.",
+      "src": "/images/wedding_attire.png",
       "category": "Weddings"
     },
     {
-      "src": "/images/wedding_entry.png",
       "title": "Special Entries",
       "description": "Grand entrances that leave everyone amazed.",
+      "src": "/images/wedding_entry.png",
       "category": "Weddings"
     },
     {
-      "src": "/images/wedding_transport.png",
       "title": "Transportation",
       "description": "Comfort, elegance, and punctuality you can trust.",
+      "src": "/images/wedding_transport.png",
       "category": "Weddings"
     },
     {
-      "src": "/images/wedding_ceremony_new.png",
       "title": "Wedding Ceremony",
       "description": "Beautifully planned ceremonies full of love and tradition.",
+      "src": "/images/wedding_ceremony_new.png",
       "category": "Weddings"
     }
   ]
