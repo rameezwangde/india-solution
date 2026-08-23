@@ -449,14 +449,36 @@ var config_default = defineConfig({
           {
             type: "object",
             name: "photos",
-            label: "Gallery Photos",
+            label: "Gallery Cards",
             list: true,
-            ui: { itemProps: (item) => ({ label: item?.title || "Photo" }) },
+            ui: { itemProps: (item) => ({ label: item?.title || "Gallery Card" }) },
             fields: [
               { type: "string", name: "title", label: "Title" },
               { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
-              { type: "image", name: "src", label: "Image URL" },
-              { type: "string", name: "category", label: "Category (Must exactly match a filter)" }
+              { type: "image", name: "src", label: "Cover Image URL" },
+              { type: "string", name: "category", label: "Category (Must exactly match a filter)" },
+              {
+                type: "object",
+                name: "mediaItems",
+                label: "Relevant Photos & Videos",
+                list: true,
+                ui: { itemProps: (item) => ({ label: item?.type || "Media Item" }) },
+                fields: [
+                  {
+                    type: "string",
+                    name: "type",
+                    label: "Media Type",
+                    options: ["image", "video"],
+                    required: true
+                  },
+                  {
+                    type: "image",
+                    name: "src",
+                    label: "Media File URL",
+                    description: "WARNING: STRICT 50MB LIMIT for videos. Please compress videos before uploading."
+                  }
+                ]
+              }
             ]
           }
         ]

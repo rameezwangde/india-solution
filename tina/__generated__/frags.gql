@@ -214,6 +214,11 @@ fragment GalleryParts on Gallery {
     description
     src
     category
+    mediaItems {
+      __typename
+      type
+      src
+    }
   }
 }
 

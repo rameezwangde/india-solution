@@ -619,11 +619,17 @@ type GalleryHeader {
   description: String
 }
 
+type GalleryPhotosMediaItems {
+  type: String!
+  src: String
+}
+
 type GalleryPhotos {
   title: String
   description: String
   src: String
   category: String
+  mediaItems: [GalleryPhotosMediaItems]
 }
 
 type Gallery implements Node & Document {
@@ -648,11 +654,17 @@ input GalleryHeaderFilter {
   description: StringFilter
 }
 
+input GalleryPhotosMediaItemsFilter {
+  type: StringFilter
+  src: ImageFilter
+}
+
 input GalleryPhotosFilter {
   title: StringFilter
   description: StringFilter
   src: ImageFilter
   category: StringFilter
+  mediaItems: GalleryPhotosMediaItemsFilter
 }
 
 input GalleryFilter {
@@ -1506,11 +1518,17 @@ input GalleryHeaderMutation {
   description: String
 }
 
+input GalleryPhotosMediaItemsMutation {
+  type: String
+  src: String
+}
+
 input GalleryPhotosMutation {
   title: String
   description: String
   src: String
   category: String
+  mediaItems: [GalleryPhotosMediaItemsMutation]
 }
 
 input GalleryMutation {

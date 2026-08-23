@@ -855,12 +855,19 @@ export type GalleryHeader = {
   description?: Maybe<Scalars['String']['output']>;
 };
 
+export type GalleryPhotosMediaItems = {
+  __typename?: 'GalleryPhotosMediaItems';
+  type: Scalars['String']['output'];
+  src?: Maybe<Scalars['String']['output']>;
+};
+
 export type GalleryPhotos = {
   __typename?: 'GalleryPhotos';
   title?: Maybe<Scalars['String']['output']>;
   description?: Maybe<Scalars['String']['output']>;
   src?: Maybe<Scalars['String']['output']>;
   category?: Maybe<Scalars['String']['output']>;
+  mediaItems?: Maybe<Array<Maybe<GalleryPhotosMediaItems>>>;
 };
 
 export type Gallery = Node & Document & {
@@ -886,11 +893,17 @@ export type GalleryHeaderFilter = {
   description?: InputMaybe<StringFilter>;
 };
 
+export type GalleryPhotosMediaItemsFilter = {
+  type?: InputMaybe<StringFilter>;
+  src?: InputMaybe<ImageFilter>;
+};
+
 export type GalleryPhotosFilter = {
   title?: InputMaybe<StringFilter>;
   description?: InputMaybe<StringFilter>;
   src?: InputMaybe<ImageFilter>;
   category?: InputMaybe<StringFilter>;
+  mediaItems?: InputMaybe<GalleryPhotosMediaItemsFilter>;
 };
 
 export type GalleryFilter = {
@@ -1934,11 +1947,17 @@ export type GalleryHeaderMutation = {
   description?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type GalleryPhotosMediaItemsMutation = {
+  type?: InputMaybe<Scalars['String']['input']>;
+  src?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type GalleryPhotosMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   src?: InputMaybe<Scalars['String']['input']>;
   category?: InputMaybe<Scalars['String']['input']>;
+  mediaItems?: InputMaybe<Array<InputMaybe<GalleryPhotosMediaItemsMutation>>>;
 };
 
 export type GalleryMutation = {
@@ -2434,11 +2453,17 @@ export type GalleryHeaderFilter = {
   description?: StringFilter | null | undefined;
 };
 
+export type GalleryPhotosMediaItemsFilter = {
+  type?: StringFilter | null | undefined;
+  src?: ImageFilter | null | undefined;
+};
+
 export type GalleryPhotosFilter = {
   title?: StringFilter | null | undefined;
   description?: StringFilter | null | undefined;
   src?: ImageFilter | null | undefined;
   category?: StringFilter | null | undefined;
+  mediaItems?: GalleryPhotosMediaItemsFilter | null | undefined;
 };
 
 export type GalleryFilter = {
@@ -2694,7 +2719,7 @@ export type AboutPartsFragment = { __typename: 'About', seo: { __typename: 'Abou
 
 export type ServicesPartsFragment = { __typename: 'Services', seo: { __typename: 'ServicesSeo', title: string | null, description: string | null, keywords: string | null } | null, hero: { __typename: 'ServicesHero', subtitle: string | null, titleLine1: string | null, titleLine2: string | null, description: string | null } | null, catalog: Array<{ __typename: 'ServicesCatalog', title: string | null, slug: string | null, icon: string | null, description: string | null, sections: Array<{ __typename: 'ServicesCatalogSections', eyebrow: string | null, title: string | null, accent: string | null, description: string | null, listItems: Array<string | null> | null } | null> | null, items: Array<{ __typename: 'ServicesCatalogItems', name: string | null, slug: string | null, sections: Array<{ __typename: 'ServicesCatalogItemsSections', eyebrow: string | null, title: string | null, accent: string | null, description: string | null, listItems: Array<string | null> | null } | null> | null } | null> | null } | null> | null };
 
-export type GalleryPartsFragment = { __typename: 'Gallery', categories: Array<string | null> | null, seo: { __typename: 'GallerySeo', title: string | null, description: string | null, keywords: string | null } | null, header: { __typename: 'GalleryHeader', title: string | null, subtitle: string | null, description: string | null } | null, photos: Array<{ __typename: 'GalleryPhotos', title: string | null, description: string | null, src: string | null, category: string | null } | null> | null };
+export type GalleryPartsFragment = { __typename: 'Gallery', categories: Array<string | null> | null, seo: { __typename: 'GallerySeo', title: string | null, description: string | null, keywords: string | null } | null, header: { __typename: 'GalleryHeader', title: string | null, subtitle: string | null, description: string | null } | null, photos: Array<{ __typename: 'GalleryPhotos', title: string | null, description: string | null, src: string | null, category: string | null, mediaItems: Array<{ __typename: 'GalleryPhotosMediaItems', type: string, src: string | null } | null> | null } | null> | null };
 
 export type TestimonialsPartsFragment = { __typename: 'Testimonials', seo: { __typename: 'TestimonialsSeo', title: string | null, description: string | null, keywords: string | null } | null, header: { __typename: 'TestimonialsHeader', eyebrow: string | null, title: string | null, description: string | null } | null, overallRating: { __typename: 'TestimonialsOverallRating', score: string | null, totalReviews: string | null } | null, featured: { __typename: 'TestimonialsFeatured', quote: string | null, name: string | null, role: string | null, initials: string | null } | null, items: Array<{ __typename: 'TestimonialsItems', title: string | null, quote: string | null, name: string | null, role: string | null, initials: string | null, offset: string | null } | null> | null };
 
@@ -2768,7 +2793,7 @@ export type GalleryQueryVariables = Exact<{
 }>;
 
 
-export type GalleryQuery = { gallery: { __typename: 'Gallery', id: string, categories: Array<string | null> | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo: { __typename: 'GallerySeo', title: string | null, description: string | null, keywords: string | null } | null, header: { __typename: 'GalleryHeader', title: string | null, subtitle: string | null, description: string | null } | null, photos: Array<{ __typename: 'GalleryPhotos', title: string | null, description: string | null, src: string | null, category: string | null } | null> | null } };
+export type GalleryQuery = { gallery: { __typename: 'Gallery', id: string, categories: Array<string | null> | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo: { __typename: 'GallerySeo', title: string | null, description: string | null, keywords: string | null } | null, header: { __typename: 'GalleryHeader', title: string | null, subtitle: string | null, description: string | null } | null, photos: Array<{ __typename: 'GalleryPhotos', title: string | null, description: string | null, src: string | null, category: string | null, mediaItems: Array<{ __typename: 'GalleryPhotosMediaItems', type: string, src: string | null } | null> | null } | null> | null } };
 
 export type GalleryConnectionQueryVariables = Exact<{
   before?: string | null | undefined;
@@ -2780,7 +2805,7 @@ export type GalleryConnectionQueryVariables = Exact<{
 }>;
 
 
-export type GalleryConnectionQuery = { galleryConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Gallery', id: string, categories: Array<string | null> | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo: { __typename: 'GallerySeo', title: string | null, description: string | null, keywords: string | null } | null, header: { __typename: 'GalleryHeader', title: string | null, subtitle: string | null, description: string | null } | null, photos: Array<{ __typename: 'GalleryPhotos', title: string | null, description: string | null, src: string | null, category: string | null } | null> | null } | null } | null> | null } };
+export type GalleryConnectionQuery = { galleryConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Gallery', id: string, categories: Array<string | null> | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo: { __typename: 'GallerySeo', title: string | null, description: string | null, keywords: string | null } | null, header: { __typename: 'GalleryHeader', title: string | null, subtitle: string | null, description: string | null } | null, photos: Array<{ __typename: 'GalleryPhotos', title: string | null, description: string | null, src: string | null, category: string | null, mediaItems: Array<{ __typename: 'GalleryPhotosMediaItems', type: string, src: string | null } | null> | null } | null> | null } | null } | null> | null } };
 
 export type TestimonialsQueryVariables = Exact<{
   relativePath: string;
@@ -3097,6 +3122,11 @@ export const GalleryPartsFragmentDoc = gql`
     description
     src
     category
+    mediaItems {
+      __typename
+      type
+      src
+    }
   }
 }
     `;

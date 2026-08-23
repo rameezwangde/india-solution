@@ -225,6 +225,11 @@ export const GalleryPartsFragmentDoc = gql`
     description
     src
     category
+    mediaItems {
+      __typename
+      type
+      src
+    }
   }
 }
     `;

@@ -3,10 +3,38 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { fadeUp, staggerContainer } from '../utils/animations';
 import SEO from '../components/layout/SEO';
 import { useTina } from 'tinacms/dist/react';
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import galleryDataFallback from '../content/gallery.json';
 
 const Gallery = () => {
   const [filter, setFilter] = useState('All');
+  const [selectedCard, setSelectedCard] = useState(null);
+  const [mediaIndex, setMediaIndex] = useState(0);
+
+  const openLightbox = (card) => {
+    setSelectedCard(card);
+    setMediaIndex(0);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeLightbox = () => {
+    setSelectedCard(null);
+    document.body.style.overflow = 'auto';
+  };
+
+  const nextMedia = (e) => {
+    e.stopPropagation();
+    if (!selectedCard) return;
+    const items = selectedCard.mediaItems?.length > 0 ? selectedCard.mediaItems : [{ type: 'image', src: selectedCard.src }];
+    setMediaIndex((prev) => (prev + 1) % items.length);
+  };
+
+  const prevMedia = (e) => {
+    e.stopPropagation();
+    if (!selectedCard) return;
+    const items = selectedCard.mediaItems?.length > 0 ? selectedCard.mediaItems : [{ type: 'image', src: selectedCard.src }];
+    setMediaIndex((prev) => (prev - 1 + items.length) % items.length);
+  };
 
   const { data } = useTina({
     query: `query {
@@ -14,7 +42,13 @@ const Gallery = () => {
         seo { title description keywords }
         header { title subtitle description }
         categories
-        photos { src title description category }
+        photos { 
+          src 
+          title 
+          description 
+          category 
+          mediaItems { type src }
+        }
       }
     }`,
     variables: typeof window !== 'undefined' ? (window['_tina_var_' + "gallery.json"] = window['_tina_var_' + "gallery.json"] || { relativePath: "gallery.json" }) : { relativePath: "gallery.json" },
@@ -103,7 +137,8 @@ const Gallery = () => {
                 <motion.div 
                   variants={fadeUp}
                   key={`${item.title}-${i}`} 
-                  className="flex flex-col bg-white rounded-[1.25rem] overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E8DFD5]/40 group hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all duration-300"
+                  onClick={() => openLightbox(item)}
+                  className="flex flex-col bg-white rounded-[1.25rem] overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#E8DFD5]/40 group hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all duration-300 cursor-pointer"
                 >
                   <div className="relative aspect-[4/2.5] overflow-hidden bg-[#FAF7F2]">
                     <img 
@@ -127,6 +162,87 @@ const Gallery = () => {
           )}
         </AnimatePresence>
       </div>
+
+      {/* Lightbox Modal */}
+      <AnimatePresence>
+        {selectedCard && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 sm:p-6"
+            onClick={closeLightbox}
+          >
+            {/* Close Button */}
+            <button
+              onClick={closeLightbox}
+              className="absolute top-6 right-6 z-50 p-2 text-white/70 hover:text-white bg-black/50 hover:bg-black/80 rounded-full transition-all"
+            >
+              <X size={28} />
+            </button>
+
+            {/* Navigation & Content */}
+            <div 
+              className="relative w-full max-w-6xl max-h-[90vh] flex items-center justify-center"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {(() => {
+                const items = selectedCard.mediaItems?.length > 0 ? selectedCard.mediaItems : [{ type: 'image', src: selectedCard.src }];
+                const currentItem = items[mediaIndex];
+                const hasMultiple = items.length > 1;
+
+                return (
+                  <>
+                    {hasMultiple && (
+                      <button
+                        onClick={prevMedia}
+                        className="absolute left-4 md:-left-12 z-50 p-3 text-white/70 hover:text-white bg-black/50 hover:bg-black/80 rounded-full transition-all"
+                      >
+                        <ChevronLeft size={32} />
+                      </button>
+                    )}
+
+                    <div className="relative w-full h-full flex flex-col items-center justify-center">
+                      {currentItem.type === 'video' ? (
+                        <video
+                          src={currentItem.src}
+                          controls
+                          autoPlay
+                          className="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl"
+                        />
+                      ) : (
+                        <img
+                          src={currentItem.src}
+                          alt={selectedCard.title}
+                          className="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl"
+                        />
+                      )}
+                      
+                      <div className="mt-4 text-center text-white">
+                        <h3 className="text-xl font-bold font-serif mb-1">{selectedCard.title}</h3>
+                        {hasMultiple && (
+                          <p className="text-sm text-white/70">
+                            {mediaIndex + 1} of {items.length}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+
+                    {hasMultiple && (
+                      <button
+                        onClick={nextMedia}
+                        className="absolute right-4 md:-right-12 z-50 p-3 text-white/70 hover:text-white bg-black/50 hover:bg-black/80 rounded-full transition-all"
+                      >
+                        <ChevronRight size={32} />
+                      </button>
+                    )}
+                  </>
+                );
+              })()}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
