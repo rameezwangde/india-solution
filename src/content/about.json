@@ -16,13 +16,29 @@
       "Our passionate team and state-of-the-art infrastructure allow us to maintain the highest standards of quality, creativity, and reliability, ensuring every detail is perfect and every experience is unforgettable."
     ],
     "buttonText": "Our Journey",
-    "image": "/images/corporate_conference.png"
+    "image": "/images/WhatsApp-Image-2026-08-23-at-3.24.11-PM-(1).jpeg"
   },
   "stats": [
-    { "value": "15+", "label": "Years of\nExcellence", "iconName": "Calendar" },
-    { "value": "5000+", "label": "Events\nExecuted", "iconName": "Users" },
-    { "value": "4300+", "label": "Happy\nClients", "iconName": "Trophy" },
-    { "value": "Pan India", "label": "Presence\n", "iconName": "MapPin" }
+    {
+      "value": "15+",
+      "label": "Years of\nExcellence",
+      "iconName": "Calendar"
+    },
+    {
+      "value": "5000+",
+      "label": "Events\nExecuted",
+      "iconName": "Users"
+    },
+    {
+      "value": "4300+",
+      "label": "Happy\nClients",
+      "iconName": "Trophy"
+    },
+    {
+      "value": "Pan India",
+      "label": "Presence\n",
+      "iconName": "MapPin"
+    }
   ],
   "mission": {
     "title": "Our Mission",
@@ -36,7 +52,7 @@
     "sectionSubtitle": "Our Leadership",
     "sectionTitleLine1": "Meet the",
     "sectionTitleLine2": "Founder",
-    "image": "/FOunder.PNG",
+    "image": "/images/FOunder.PNG",
     "name": "Reneesh Rajan",
     "role": "CEO & Founder",
     "location": "India Solution, Bangalore",
