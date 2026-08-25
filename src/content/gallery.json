@@ -20,7 +20,14 @@
       "title": "Networking Events",
       "description": "Facilitating meaningful connections with professional and engaging networking environments.",
       "src": "/images/networking.webp",
-      "category": "Corporate"
+      "category": "Corporate",
+      "mediaItems": [
+        {
+          "type": "image",
+          "src": "/images/networking-events.webp"
+        },
+        {}
+      ]
     },
     {
       "title": "Conferences",
