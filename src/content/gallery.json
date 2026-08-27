@@ -51,7 +51,13 @@
       "title": "Event Decor and Floral Arrangements",
       "description": "Stunning floral designs and thematic decor to set the perfect mood.",
       "src": "/images/beautiful-floral.jpeg",
-      "category": "Weddings"
+      "category": "Weddings",
+      "mediaItems": [
+        {
+          "type": "video",
+          "src": "/images/WhatsApp-Video-2026-08-27-at-5.20.48-PM.mp4"
+        }
+      ]
     },
     {
       "title": "Photography and Videography",
