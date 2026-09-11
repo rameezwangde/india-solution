@@ -1,4 +1,4 @@
-import { defineConfig } from 'tinacms';
+import { defineConfig } from 'tinacms'; // trigger indexing
 
 // Your hosting provider likely exposes this as an environment variable
 const branch =
