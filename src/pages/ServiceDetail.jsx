@@ -178,7 +178,7 @@ const ImageGridServiceContent = ({ items, serviceSlug }) => {
         <motion.div key={item.slug} variants={fadeUp} className="group relative overflow-hidden rounded-[1.5rem] bg-white border border-[#E8DFD5] shadow-sm cursor-pointer hover:shadow-md hover:border-[#D5C5B9] transition-all duration-300">
           <Link to={`/services/${serviceSlug}/${item.slug}`} className="block h-full">
             <div className="aspect-[4/3] overflow-hidden relative p-3 pb-0">
-               <img src={serviceImageMapping[item.name] || 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'} alt={item.name} className="w-full h-full object-cover rounded-t-[1rem] transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+               <img src={item.image || serviceImageMapping[item.name] || 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'} alt={item.name} className="w-full h-full object-cover rounded-t-[1rem] transition-transform duration-700 group-hover:scale-105" loading="lazy" />
             </div>
             <div className="p-6 bg-white relative z-10">
                <h3 className="font-['Playfair_Display',serif] text-lg font-bold text-[#4A2F1D] mb-3 group-hover:text-[#4A2F1D] transition-colors leading-snug">{item.name}</h3>
@@ -261,7 +261,7 @@ const ServiceDetail = () => {
           title slug icon description
           sections { eyebrow title accent description listItems }
           items {
-            name slug
+            name slug image
             sections { eyebrow title accent description listItems }
           }
         }

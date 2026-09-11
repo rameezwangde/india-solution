@@ -397,6 +397,7 @@ export default defineConfig({
                 fields: [
                   { type: 'string', name: 'name', label: 'Item Name' },
                   { type: 'string', name: 'slug', label: 'Item Slug' },
+                  { type: 'image', name: 'image', label: 'Item Image' },
                   {
                     type: 'object',
                     name: 'sections',
