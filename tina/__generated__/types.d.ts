@@ -755,6 +755,7 @@ export type ServicesCatalogItems = {
   __typename?: 'ServicesCatalogItems';
   name?: Maybe<Scalars['String']['output']>;
   slug?: Maybe<Scalars['String']['output']>;
+  image?: Maybe<Scalars['String']['output']>;
   sections?: Maybe<Array<Maybe<ServicesCatalogItemsSections>>>;
 };
 
@@ -810,6 +811,7 @@ export type ServicesCatalogItemsSectionsFilter = {
 export type ServicesCatalogItemsFilter = {
   name?: InputMaybe<StringFilter>;
   slug?: InputMaybe<StringFilter>;
+  image?: InputMaybe<ImageFilter>;
   sections?: InputMaybe<ServicesCatalogItemsSectionsFilter>;
 };
 
@@ -1917,6 +1919,7 @@ export type ServicesCatalogItemsSectionsMutation = {
 export type ServicesCatalogItemsMutation = {
   name?: InputMaybe<Scalars['String']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
   sections?: InputMaybe<Array<InputMaybe<ServicesCatalogItemsSectionsMutation>>>;
 };
 
@@ -2423,6 +2426,7 @@ export type ServicesCatalogItemsSectionsFilter = {
 export type ServicesCatalogItemsFilter = {
   name?: StringFilter | null | undefined;
   slug?: StringFilter | null | undefined;
+  image?: ImageFilter | null | undefined;
   sections?: ServicesCatalogItemsSectionsFilter | null | undefined;
 };
 
@@ -2717,7 +2721,7 @@ export type HomePartsFragment = { __typename: 'Home', seo: { __typename: 'HomeSe
 
 export type AboutPartsFragment = { __typename: 'About', seo: { __typename: 'AboutSeo', title: string | null, description: string | null, keywords: string | null } | null, hero: { __typename: 'AboutHero', subtitle: string | null, title: string | null, description: string | null } | null, mainSection: { __typename: 'AboutMainSection', paragraphs: Array<string | null> | null, buttonText: string | null, image: string | null } | null, stats: Array<{ __typename: 'AboutStats', value: string | null, label: string | null, iconName: string | null } | null> | null, mission: { __typename: 'AboutMission', title: string | null, text: string | null } | null, vision: { __typename: 'AboutVision', title: string | null, text: string | null } | null, founder: { __typename: 'AboutFounder', sectionSubtitle: string | null, sectionTitleLine1: string | null, sectionTitleLine2: string | null, image: string | null, name: string | null, role: string | null, location: string | null, aboutMyselfText: Array<string | null> | null, expertiseText: string | null } | null, credentials: { __typename: 'AboutCredentials', title: string | null, items: Array<string | null> | null } | null, achievements: { __typename: 'AboutAchievements', title: string | null, items: Array<string | null> | null } | null, whyChooseUs: { __typename: 'AboutWhyChooseUs', subtitle: string | null, titleLine1: string | null, titleLine2: string | null, description: string | null, highlights: Array<{ __typename: 'AboutWhyChooseUsHighlights', title: string | null, description: string | null, iconName: string | null } | null> | null } | null };
 
-export type ServicesPartsFragment = { __typename: 'Services', seo: { __typename: 'ServicesSeo', title: string | null, description: string | null, keywords: string | null } | null, hero: { __typename: 'ServicesHero', subtitle: string | null, titleLine1: string | null, titleLine2: string | null, description: string | null } | null, catalog: Array<{ __typename: 'ServicesCatalog', title: string | null, slug: string | null, icon: string | null, description: string | null, sections: Array<{ __typename: 'ServicesCatalogSections', eyebrow: string | null, title: string | null, accent: string | null, description: string | null, listItems: Array<string | null> | null } | null> | null, items: Array<{ __typename: 'ServicesCatalogItems', name: string | null, slug: string | null, sections: Array<{ __typename: 'ServicesCatalogItemsSections', eyebrow: string | null, title: string | null, accent: string | null, description: string | null, listItems: Array<string | null> | null } | null> | null } | null> | null } | null> | null };
+export type ServicesPartsFragment = { __typename: 'Services', seo: { __typename: 'ServicesSeo', title: string | null, description: string | null, keywords: string | null } | null, hero: { __typename: 'ServicesHero', subtitle: string | null, titleLine1: string | null, titleLine2: string | null, description: string | null } | null, catalog: Array<{ __typename: 'ServicesCatalog', title: string | null, slug: string | null, icon: string | null, description: string | null, sections: Array<{ __typename: 'ServicesCatalogSections', eyebrow: string | null, title: string | null, accent: string | null, description: string | null, listItems: Array<string | null> | null } | null> | null, items: Array<{ __typename: 'ServicesCatalogItems', name: string | null, slug: string | null, image: string | null, sections: Array<{ __typename: 'ServicesCatalogItemsSections', eyebrow: string | null, title: string | null, accent: string | null, description: string | null, listItems: Array<string | null> | null } | null> | null } | null> | null } | null> | null };
 
 export type GalleryPartsFragment = { __typename: 'Gallery', categories: Array<string | null> | null, seo: { __typename: 'GallerySeo', title: string | null, description: string | null, keywords: string | null } | null, header: { __typename: 'GalleryHeader', title: string | null, subtitle: string | null, description: string | null } | null, photos: Array<{ __typename: 'GalleryPhotos', title: string | null, description: string | null, src: string | null, category: string | null, mediaItems: Array<{ __typename: 'GalleryPhotosMediaItems', type: string, src: string | null } | null> | null } | null> | null };
 
@@ -2774,7 +2778,7 @@ export type ServicesQueryVariables = Exact<{
 }>;
 
 
-export type ServicesQuery = { services: { __typename: 'Services', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo: { __typename: 'ServicesSeo', title: string | null, description: string | null, keywords: string | null } | null, hero: { __typename: 'ServicesHero', subtitle: string | null, titleLine1: string | null, titleLine2: string | null, description: string | null } | null, catalog: Array<{ __typename: 'ServicesCatalog', title: string | null, slug: string | null, icon: string | null, description: string | null, sections: Array<{ __typename: 'ServicesCatalogSections', eyebrow: string | null, title: string | null, accent: string | null, description: string | null, listItems: Array<string | null> | null } | null> | null, items: Array<{ __typename: 'ServicesCatalogItems', name: string | null, slug: string | null, sections: Array<{ __typename: 'ServicesCatalogItemsSections', eyebrow: string | null, title: string | null, accent: string | null, description: string | null, listItems: Array<string | null> | null } | null> | null } | null> | null } | null> | null } };
+export type ServicesQuery = { services: { __typename: 'Services', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo: { __typename: 'ServicesSeo', title: string | null, description: string | null, keywords: string | null } | null, hero: { __typename: 'ServicesHero', subtitle: string | null, titleLine1: string | null, titleLine2: string | null, description: string | null } | null, catalog: Array<{ __typename: 'ServicesCatalog', title: string | null, slug: string | null, icon: string | null, description: string | null, sections: Array<{ __typename: 'ServicesCatalogSections', eyebrow: string | null, title: string | null, accent: string | null, description: string | null, listItems: Array<string | null> | null } | null> | null, items: Array<{ __typename: 'ServicesCatalogItems', name: string | null, slug: string | null, image: string | null, sections: Array<{ __typename: 'ServicesCatalogItemsSections', eyebrow: string | null, title: string | null, accent: string | null, description: string | null, listItems: Array<string | null> | null } | null> | null } | null> | null } | null> | null } };
 
 export type ServicesConnectionQueryVariables = Exact<{
   before?: string | null | undefined;
@@ -2786,7 +2790,7 @@ export type ServicesConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ServicesConnectionQuery = { servicesConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Services', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo: { __typename: 'ServicesSeo', title: string | null, description: string | null, keywords: string | null } | null, hero: { __typename: 'ServicesHero', subtitle: string | null, titleLine1: string | null, titleLine2: string | null, description: string | null } | null, catalog: Array<{ __typename: 'ServicesCatalog', title: string | null, slug: string | null, icon: string | null, description: string | null, sections: Array<{ __typename: 'ServicesCatalogSections', eyebrow: string | null, title: string | null, accent: string | null, description: string | null, listItems: Array<string | null> | null } | null> | null, items: Array<{ __typename: 'ServicesCatalogItems', name: string | null, slug: string | null, sections: Array<{ __typename: 'ServicesCatalogItemsSections', eyebrow: string | null, title: string | null, accent: string | null, description: string | null, listItems: Array<string | null> | null } | null> | null } | null> | null } | null> | null } | null } | null> | null } };
+export type ServicesConnectionQuery = { servicesConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Services', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo: { __typename: 'ServicesSeo', title: string | null, description: string | null, keywords: string | null } | null, hero: { __typename: 'ServicesHero', subtitle: string | null, titleLine1: string | null, titleLine2: string | null, description: string | null } | null, catalog: Array<{ __typename: 'ServicesCatalog', title: string | null, slug: string | null, icon: string | null, description: string | null, sections: Array<{ __typename: 'ServicesCatalogSections', eyebrow: string | null, title: string | null, accent: string | null, description: string | null, listItems: Array<string | null> | null } | null> | null, items: Array<{ __typename: 'ServicesCatalogItems', name: string | null, slug: string | null, image: string | null, sections: Array<{ __typename: 'ServicesCatalogItemsSections', eyebrow: string | null, title: string | null, accent: string | null, description: string | null, listItems: Array<string | null> | null } | null> | null } | null> | null } | null> | null } | null } | null> | null } };
 
 export type GalleryQueryVariables = Exact<{
   relativePath: string;
@@ -3088,6 +3092,7 @@ export const ServicesPartsFragmentDoc = gql`
       __typename
       name
       slug
+      image
       sections {
         __typename
         eyebrow

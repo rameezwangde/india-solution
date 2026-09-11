@@ -181,6 +181,7 @@ fragment ServicesParts on Services {
       __typename
       name
       slug
+      image
       sections {
         __typename
         eyebrow

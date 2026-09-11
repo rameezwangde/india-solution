@@ -191,6 +191,7 @@ export const ServicesPartsFragmentDoc = gql`
       __typename
       name
       slug
+      image
       sections {
         __typename
         eyebrow

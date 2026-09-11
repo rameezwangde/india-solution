@@ -525,6 +525,7 @@ type ServicesCatalogItemsSections {
 type ServicesCatalogItems {
   name: String
   slug: String
+  image: String
   sections: [ServicesCatalogItemsSections]
 }
 
@@ -578,6 +579,7 @@ input ServicesCatalogItemsSectionsFilter {
 input ServicesCatalogItemsFilter {
   name: StringFilter
   slug: StringFilter
+  image: ImageFilter
   sections: ServicesCatalogItemsSectionsFilter
 }
 
@@ -1488,6 +1490,7 @@ input ServicesCatalogItemsSectionsMutation {
 input ServicesCatalogItemsMutation {
   name: String
   slug: String
+  image: String
   sections: [ServicesCatalogItemsSectionsMutation]
 }
 
