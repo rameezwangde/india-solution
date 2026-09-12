@@ -37,6 +37,32 @@ const iconMap = {
   Utensils,
 };
 
+const itemImageMap = {
+  'invitations-and-stationery': '/website/invitations and stationery.jpg',
+  'beauty-services-makeup-and-mehendi': '/website/beauty services, makeup and mehendi.jpg',
+  'bridal-and-groom-wear-and-jewellery': '/website/bridal and groom wear and jewellery.jpg',
+  'mandap-stage': '/website/mandap stage.jpg',
+  'floral-backdrop': '/website/floral backdrop.jpg',
+  'lighting-setup': '/website/lightning setup.jpg',
+  'couple-seating': '/website/couple seating.jpg',
+  'entrance-decoration': '/website/entrance decoration.jpg',
+  'gifts-and-return-gifts': '/website/gifts and returne.jpg',
+  'special-entries': '/website/special entries.jpg',
+  'birthday-decoration': '/website/birthday decoration.jpg',
+  'fun-activities': '/website/fun activities.jpg',
+  'catering-and-fun-food-stations': '/website/catering and fun food stations.jpg',
+  'meetings-and-conferences': '/website/meetings and conferences.jpg',
+  'employee-events': '/website/employee event.jpg',
+  'training-and-development': '/website/training and development.jpg',
+  'marketing-and-promotional-activities': '/website/marketing and promotional activities.jpg',
+  'networking-and-relationships-events': '/website/networking and relationship events.jpeg',
+  'special-corporate-celebrations': '/website/special corporate celebrations.jpg',
+  'networking-events': '/website/networking events.jpg',
+  'conferences': '/website/conference.jpg',
+  'product-launches': '/website/product launch.jpg',
+  'corporate-meetings': '/website/corporate meeting.jpg'
+};
+
 const Services = () => {
   const { data } = useTina({
     query: `query {
@@ -176,16 +202,30 @@ const Services = () => {
                 </div>
 
                 <div className="mt-4 grid gap-3">
-                  {service.items && service.items.map((item) => (
-                    <Link
-                      key={item.slug}
-                      to={`/services/${service.slug}/${item.slug}`}
-                      className="flex items-center gap-3 rounded-lg border border-[#E8DFD5] bg-[#FAF7F2]/50 px-4 py-3 text-[13px] font-bold leading-tight text-[#2A1810] transition-all hover:-translate-y-0.5 hover:border-[#A67C65] hover:shadow-sm"
-                    >
-                      <ChevronRight size={14} className="shrink-0 text-[#4A2F1D]" strokeWidth={2.5} />
-                      <span>{item.name}</span>
-                    </Link>
-                  ))}
+                  {service.items && service.items.map((item) => {
+                    const imageSrc = itemImageMap[item.slug];
+                    return (
+                      <Link
+                        key={item.slug}
+                        to={`/services/${service.slug}/${item.slug}`}
+                        className="group/item flex items-center gap-4 rounded-xl border border-[#E8DFD5] bg-[#FAF7F2]/50 p-2 text-[14px] font-bold leading-tight text-[#2A1810] transition-all hover:-translate-y-1 hover:border-[#A67C65] hover:shadow-md hover:bg-white"
+                      >
+                        {imageSrc ? (
+                          <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-lg">
+                            <img src={imageSrc} alt={item.name} className="h-full w-full object-cover transition-transform duration-500 group-hover/item:scale-110" />
+                          </div>
+                        ) : (
+                          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[#E8DFD5]/50 text-[#4A2F1D]">
+                            <ChevronRight size={18} strokeWidth={2.5} />
+                          </div>
+                        )}
+                        <span className="flex-1">{item.name}</span>
+                        {imageSrc && (
+                          <ChevronRight size={16} className="shrink-0 text-[#A67C65] opacity-0 transition-all group-hover/item:opacity-100 mr-2" strokeWidth={2.5} />
+                        )}
+                      </Link>
+                    );
+                  })}
                 </div>
               </motion.article>
             );

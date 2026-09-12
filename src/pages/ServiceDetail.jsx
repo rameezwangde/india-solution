@@ -45,6 +45,32 @@ const iconMap = {
   Utensils,
 };
 
+const itemImageMap = {
+  'invitations-and-stationery': '/website/invitations and stationery.jpg',
+  'beauty-services-makeup-and-mehendi': '/website/beauty services, makeup and mehendi.jpg',
+  'bridal-and-groom-wear-and-jewellery': '/website/bridal and groom wear and jewellery.jpg',
+  'mandap-stage': '/website/mandap stage.jpg',
+  'floral-backdrop': '/website/floral backdrop.jpg',
+  'lighting-setup': '/website/lighting setup.jpg',
+  'couple-seating': '/website/couple seating.jpg',
+  'entrance-decoration': '/website/entrance decoration.jpg',
+  'gifts-and-return-gifts': '/website/gifts and returne.jpg',
+  'special-entries': '/website/special entries.jpg',
+  'birthday-decoration': '/website/birthday decoration.jpg',
+  'fun-activities': '/website/fun activities.jpg',
+  'catering-and-fun-food-stations': '/website/catering and fun food stations.jpg',
+  'meetings-and-conferences': '/website/meetings and conferences.jpg',
+  'employee-events': '/website/employee event.jpg',
+  'training-and-development': '/website/training and development.jpg',
+  'marketing-and-promotional-activities': '/website/marketing and promotional activities.jpg',
+  'networking-and-relationships-events': '/website/networking and relationship events.jpeg',
+  'special-corporate-celebrations': '/website/special corporate celebrations.jpg',
+  'networking-events': '/website/networking events.jpg',
+  'conferences': '/website/conference.jpg',
+  'product-launches': '/website/product launch.jpg',
+  'corporate-meetings': '/website/corporate meeting.jpg'
+};
+
 const serviceImageMapping = {
   'Wedding Planning': 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
   'Stage Fabrication': 'https://images.unsplash.com/photo-1478146896981-b80fe463b330?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
@@ -178,7 +204,7 @@ const ImageGridServiceContent = ({ items, serviceSlug }) => {
         <motion.div key={item.slug} variants={fadeUp} className="group relative overflow-hidden rounded-[1.5rem] bg-white border border-[#E8DFD5] shadow-sm cursor-pointer hover:shadow-md hover:border-[#D5C5B9] transition-all duration-300">
           <Link to={`/services/${serviceSlug}/${item.slug}`} className="block h-full">
             <div className="aspect-[4/3] overflow-hidden relative p-3 pb-0">
-               <img src={item.image || serviceImageMapping[item.name] || 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'} alt={item.name} className="w-full h-full object-cover rounded-t-[1rem] transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+               <img src={itemImageMap[item.slug] || item.image || serviceImageMapping[item.name] || 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'} alt={item.name} className="w-full h-full object-cover rounded-t-[1rem] transition-transform duration-700 group-hover:scale-105" loading="lazy" />
             </div>
             <div className="p-6 bg-white relative z-10">
                <h3 className="font-['Playfair_Display',serif] text-lg font-bold text-[#4A2F1D] mb-3 group-hover:text-[#4A2F1D] transition-colors leading-snug">{item.name}</h3>
@@ -306,6 +332,9 @@ const ServiceDetail = () => {
   if (selectedItem?.slug === 'product-launches') { galleryMedia = corporateMedia['corporate-3']; galleryTitle = "Product Launches"; }
   if (selectedItem?.slug === 'corporate-meetings') { galleryMedia = corporateMedia['corporate-1']; galleryTitle = "Corporate Meetings"; }
 
+  // Check if we have an image for the selected item or service
+  const currentImageSrc = selectedItem ? itemImageMap[selectedItem.slug] : null;
+
   return (
     <section className="relative overflow-hidden bg-[#FAF7F2] font-sans px-5 pb-24 pt-32 text-[#2A1810] lg:px-10 lg:pt-44 min-h-screen">
       {/* Global Background Watermarks */}
@@ -337,12 +366,19 @@ const ServiceDetail = () => {
           <motion.section
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            className="relative overflow-hidden rounded-[1.5rem] bg-white p-8 md:p-10 shadow-sm border border-[#E8DFD5]"
+            className="relative overflow-hidden rounded-[1.5rem] bg-white shadow-sm border border-[#E8DFD5] flex flex-col"
           >
-            <div className="relative">
-              <div className="mb-7 flex h-16 w-16 items-center justify-center rounded-full bg-[#FAF7F2] border-[1.5px] border-[#D5C5B9] text-[#4A2F1D]">
-                <Icon size={26} strokeWidth={1.5} />
+            {currentImageSrc && (
+              <div className="w-full h-64 md:h-80 overflow-hidden shrink-0">
+                <img src={currentImageSrc} alt={selectedItem.name} className="w-full h-full object-cover" />
               </div>
+            )}
+            <div className="relative p-8 md:p-10 flex-1">
+              {!currentImageSrc && (
+                <div className="mb-7 flex h-16 w-16 items-center justify-center rounded-full bg-[#FAF7F2] border-[1.5px] border-[#D5C5B9] text-[#4A2F1D]">
+                  <Icon size={26} strokeWidth={1.5} />
+                </div>
+              )}
               <span className="text-[#4A2F1D] text-[11px] font-bold tracking-[0.25em] uppercase mb-4 block">{service.title}</span>
               <h1 className="font-['Playfair_Display',serif] max-w-3xl text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-[#4A2F1D]">
                 {selectedItem ? (
@@ -374,11 +410,11 @@ const ServiceDetail = () => {
               variants={staggerContainer}
               initial="hidden"
               animate="visible"
-              className="relative overflow-hidden rounded-[1.5rem] bg-[#FAF7F2] p-8 md:p-10 shadow-inner border border-[#E8DFD5]"
+              className="relative overflow-hidden rounded-[1.5rem] bg-[#FAF7F2] p-8 md:p-10 shadow-inner border border-[#E8DFD5] h-fit"
             >
               <span className="text-[#4A2F1D] text-[11px] font-bold tracking-[0.25em] uppercase mb-3 block">Service Points</span>
               <h2 className="font-['Playfair_Display',serif] mb-6 text-3xl font-bold text-[#4A2F1D]">Choose A Detail</h2>
-              <div className="grid gap-3 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
+              <div className="grid gap-3 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
                 {service.items.map((item) => {
                   const isActive = item.slug === selectedItem?.slug;
                   return (
@@ -458,3 +494,4 @@ const ServiceDetail = () => {
 };
 
 export default ServiceDetail;
+
