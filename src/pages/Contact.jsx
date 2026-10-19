@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Mail, MapPin, Phone, Send, Star } from 'lucide-react';
 import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
@@ -13,6 +14,8 @@ const iconMap = {
 };
 
 const Contact = () => {
+  const [searchParams] = useSearchParams();
+  const serviceQuery = searchParams.get('service');
   const { data } = useTina({
     query: `query {
       contact(relativePath: "contact.json") {
@@ -33,11 +36,21 @@ const Contact = () => {
     name: '',
     email: '',
     phone: '',
-    eventType: '',
+    eventType: serviceQuery || '',
     eventDate: '',
     eventLocation: '',
-    message: ''
+    message: serviceQuery ? `Hi, I am interested in booking / inquiring about: ${serviceQuery}. Please provide package details, pricing, and availability.` : ''
   });
+
+  useEffect(() => {
+    if (serviceQuery) {
+      setFormData(prev => ({
+        ...prev,
+        eventType: serviceQuery,
+        message: `Hi, I am interested in booking / inquiring about: ${serviceQuery}. Please provide package details, pricing, and availability.`
+      }));
+    }
+  }, [serviceQuery]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail } from 'lucide-react';
 import { FaFacebookF, FaInstagram, FaYoutube, FaLinkedinIn } from 'react-icons/fa';
@@ -114,6 +115,50 @@ const Footer = () => {
             </ul>
           </div>
 
+        </div>
+
+        {/* Popular Event Searches Keyword Cloud for SEO Crawler Coverage */}
+        <div className="py-6 border-t border-[#E8DFD5]/80">
+          <p className="text-[11px] font-black tracking-widest text-[#4A2F1D] uppercase mb-3 text-center sm:text-left">
+            POPULAR SEARCHES & EVENT SERVICES IN BENGALURU
+          </p>
+          <div className="flex flex-wrap gap-x-3 gap-y-1.5 text-[11px] text-[#6B5041]">
+            {[
+              "Caterers For Wedding",
+              "Candid Wedding Photographers",
+              "Wedding Decorators",
+              "Wedding Planners",
+              "Stage Decorators",
+              "Birthday Party Organisers",
+              "Balloon Decorators",
+              "Sound Systems On Rent-JBL",
+              "DJ System On Rent",
+              "Exhibition Stalls On Rent",
+              "Corporate Event Organisers",
+              "Caterers For Muslim Wedding",
+              "Wedding Mandap Decorators",
+              "Drone Photographers",
+              "Shamiana Contractors",
+              "Theme Party Organisers",
+              "Tent House",
+              "Artist Management",
+              "Dance Troupe",
+              "Magicians",
+              "Product Promotion Services",
+              "Eco Friendly Wedding Planners",
+              "Outdoor Wedding Photographers"
+            ].map((kw, i) => (
+              <React.Fragment key={i}>
+                <Link
+                  to={`/contact?service=${encodeURIComponent(kw)}`}
+                  className="hover:text-[#C0602F] transition-colors underline-offset-2 hover:underline"
+                >
+                  {kw}
+                </Link>
+                {i < 22 && <span className="text-[#D5C5B9]">•</span>}
+              </React.Fragment>
+            ))}
+          </div>
         </div>
 
         <div className="pt-6 mt-4 relative text-center flex flex-col md:flex-row justify-between items-center gap-4">

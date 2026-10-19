@@ -3,9 +3,11 @@ import { ArrowRight, CalendarDays, Users, Award, Star, Quote, ChevronLeft, Chevr
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
 import SEO from '../components/layout/SEO';
+import SeoServicesHub from '../components/layout/SeoServicesHub';
 import { fadeUp, staggerContainer } from '../utils/animations';
 import { Link } from 'react-router-dom';
 import { serviceCatalog } from '../data/serviceCatalog';
+import { allSeoKeywordsFlat } from '../data/seoKeywords';
 import homeData from '../content/home.json';
 import { useTina } from 'tinacms/dist/react';
 
@@ -57,6 +59,17 @@ const Home = () => {
         "logo": "https://www.india-solution.com/logo-only.png",
         "telephone": "+916360181932",
         "email": "info@india-solution.com",
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Event Services & Rental Catalog",
+          "itemListElement": allSeoKeywordsFlat.map((kw, i) => ({
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": kw
+            }
+          }))
+        },
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "India Solution Production House, Railway Mens Employees layout, Jnananjyothinagar",
@@ -436,6 +449,9 @@ const Home = () => {
             </div>
           </div>
         </section>
+
+        {/* SEO Area-wise Inquiries & Services Hub */}
+        <SeoServicesHub />
       </div>
     </LazyMotion>
   );
