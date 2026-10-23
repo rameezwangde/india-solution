@@ -116,6 +116,8 @@ const Contact = () => {
               whileInView="visible"
               viewport={{ once: true }}
               onSubmit={handleSubmit}
+              toolname="event_inquiry_form"
+              tooldescription="Submit an inquiry or booking request for wedding, catering, corporate, or party events in Bengaluru"
               className="bg-[#FAF6F2] rounded-[2rem] shadow-[0_8px_30px_rgb(139,94,69,0.08)] border border-[#EBE3DC] p-6 md:p-8"
             >
               <motion.div variants={fadeUp} className="mb-7">
@@ -126,17 +128,17 @@ const Contact = () => {
               <div className="grid gap-5">
                 <motion.label variants={fadeUp} className="block">
                   <span className="mb-2 block text-[13px] font-bold text-[#4A2F1D]">Name</span>
-                  <input name="name" value={formData.name} onChange={handleChange} required className="w-full rounded-[0.8rem] border border-[#EBE3DC] bg-white px-4 py-3.5 text-[15px] font-medium text-[#2A1810] outline-none transition-all placeholder:text-[#A69C96] focus:border-[#A87455] focus:ring-1 focus:ring-[#A87455] shadow-sm" type="text" placeholder="Your Name" />
+                  <input name="name" value={formData.name} onChange={handleChange} required toolparamdescription="Full name of person requesting the event service" className="w-full rounded-[0.8rem] border border-[#EBE3DC] bg-white px-4 py-3.5 text-[15px] font-medium text-[#2A1810] outline-none transition-all placeholder:text-[#A69C96] focus:border-[#A87455] focus:ring-1 focus:ring-[#A87455] shadow-sm" type="text" placeholder="Your Name" />
                 </motion.label>
 
                 <motion.label variants={fadeUp} className="block">
                   <span className="mb-2 block text-[13px] font-bold text-[#4A2F1D]">Email Address</span>
-                  <input name="email" value={formData.email} onChange={handleChange} className="w-full rounded-[0.8rem] border border-[#EBE3DC] bg-white px-4 py-3.5 text-[15px] font-medium text-[#2A1810] outline-none transition-all placeholder:text-[#A69C96] focus:border-[#A87455] focus:ring-1 focus:ring-[#A87455] shadow-sm" type="email" placeholder="Your E mail" />
+                  <input name="email" value={formData.email} onChange={handleChange} toolparamdescription="Email address to receive the quote and details" className="w-full rounded-[0.8rem] border border-[#EBE3DC] bg-white px-4 py-3.5 text-[15px] font-medium text-[#2A1810] outline-none transition-all placeholder:text-[#A69C96] focus:border-[#A87455] focus:ring-1 focus:ring-[#A87455] shadow-sm" type="email" placeholder="Your E mail" />
                 </motion.label>
 
                 <motion.label variants={fadeUp} className="block">
                   <span className="mb-2 block text-[13px] font-bold text-[#4A2F1D]">Phone Number <span className="text-[#A87455]">*</span></span>
-                  <input name="phone" value={formData.phone} onChange={handleChange} required className="w-full rounded-[0.8rem] border border-[#EBE3DC] bg-white px-4 py-3.5 text-[15px] font-medium text-[#2A1810] outline-none transition-all placeholder:text-[#A69C96] focus:border-[#A87455] focus:ring-1 focus:ring-[#A87455] shadow-sm" type="tel" placeholder="Your Contact Number" maxLength={10} />
+                  <input name="phone" value={formData.phone} onChange={handleChange} required toolparamdescription="10-digit Indian phone number to reach the client" className="w-full rounded-[0.8rem] border border-[#EBE3DC] bg-white px-4 py-3.5 text-[15px] font-medium text-[#2A1810] outline-none transition-all placeholder:text-[#A69C96] focus:border-[#A87455] focus:ring-1 focus:ring-[#A87455] shadow-sm" type="tel" placeholder="Your Contact Number" maxLength={10} />
                   <span className="mt-1 block text-right text-[11px] font-bold text-[#A69C96]">{formData.phone.length} / 10</span>
                 </motion.label>
 
