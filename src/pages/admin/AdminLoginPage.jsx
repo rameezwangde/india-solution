@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation, Navigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { Helmet } from 'react-helmet-async';
 import { Eye, EyeOff, Loader2, Mail, Lock, ShieldCheck, Box, MessageSquare, BarChart2, ArrowLeft } from 'lucide-react';
 import { useAdminAuth } from '../../context/AdminAuthContext';
 
@@ -66,6 +67,11 @@ const AdminLoginPage = () => {
 
   return (
     <div className="min-h-screen bg-[#FAF7F2] flex items-center justify-center p-4 md:p-8 relative overflow-hidden font-sans">
+      <Helmet>
+        <title>Admin Login | India Solution Events</title>
+        <meta name="robots" content="noindex, nofollow, noarchive" />
+        <meta name="googlebot" content="noindex, nofollow, noarchive" />
+      </Helmet>
       {/* Background Watermarks */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <img src="/hero-bg.png" alt="" className="absolute -left-40 top-0 w-[60%] h-full object-cover object-left opacity-[0.03]" />

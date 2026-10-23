@@ -101,7 +101,7 @@ const Navbar = () => {
                   </Link>
                 </div>
                 <div className="ml-1 xl:ml-2">
-                  <Link to="/admin" className="flex items-center justify-center gap-1 px-3 py-1.5 rounded border border-[#C0602F] bg-[#F5E6DA] text-[#C0602F] font-bold text-[11px] xl:text-[12px] hover:bg-[#C0602F] hover:text-white transition-colors whitespace-nowrap w-full">
+                  <Link to="/admin" rel="nofollow" className="flex items-center justify-center gap-1 px-3 py-1.5 rounded border border-[#C0602F] bg-[#F5E6DA] text-[#C0602F] font-bold text-[11px] xl:text-[12px] hover:bg-[#C0602F] hover:text-white transition-colors whitespace-nowrap w-full">
                     <User size={12} strokeWidth={2.5} /> <span>Admin Login</span>
                   </Link>
                 </div>
@@ -143,7 +143,7 @@ const Navbar = () => {
                  <Link to="/membership" className="w-full flex justify-center items-center gap-2 px-4 py-3 rounded-md border-[1.5px] border-[#C0602F] text-[#C0602F] font-semibold text-[14px] hover:bg-[#C0602F] hover:text-white transition-colors">
                    <User size={16} strokeWidth={2.5} /> Membership
                  </Link>
-                 <Link to="/admin" className="w-full flex justify-center items-center gap-2 px-4 py-3 rounded-md border border-transparent text-[#C0602F] font-semibold text-[14px] hover:bg-[#F5E6DA] transition-colors">
+                 <Link to="/admin" rel="nofollow" className="w-full flex justify-center items-center gap-2 px-4 py-3 rounded-md border border-transparent text-[#C0602F] font-semibold text-[14px] hover:bg-[#F5E6DA] transition-colors">
                    <User size={16} strokeWidth={2.5} /> Admin Login
                  </Link>
               </div>

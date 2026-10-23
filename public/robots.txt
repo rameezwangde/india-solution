@@ -2,6 +2,7 @@ User-agent: *
 Allow: /
 
 # Prevent indexing of admin and backend paths
+Disallow: /admin
 Disallow: /admin/
 Disallow: /api/
 
