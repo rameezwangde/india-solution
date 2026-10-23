@@ -28,6 +28,7 @@ import { fadeUp, staggerContainer } from '../utils/animations';
 import { corporateMedia } from '../data/corporateMedia';
 import { useTina } from 'tinacms/dist/react';
 import servicesFallbackData from '../content/services.json';
+import SEO from '../components/layout/SEO';
 
 const iconMap = {
   BriefcaseBusiness,
@@ -335,8 +336,19 @@ const ServiceDetail = () => {
   // Check if we have an image for the selected item or service
   const currentImageSrc = selectedItem ? itemImageMap[selectedItem.slug] : null;
 
+  const pageTitle = selectedItem
+    ? `${selectedItem.name} - ${service.title} Services | India Solution Events`
+    : `${service.title} Management & Services in Bengaluru`;
+  const pageDescription = selectedItem?.sections?.[0]?.description || service.description || "Premium event management, planning and vendor services in Bengaluru.";
+
   return (
     <section className="relative overflow-hidden bg-[#FAF7F2] font-sans px-5 pb-24 pt-32 text-[#2A1810] lg:px-10 lg:pt-44 min-h-screen">
+      <SEO 
+        title={pageTitle}
+        description={pageDescription}
+        keywords={`${service.title}, ${selectedItem?.name || ''}, Event management Bangalore, Wedding planning Bangalore, India Solution`}
+        image={currentImageSrc || "/hero-bg.webp"}
+      />
       {/* Global Background Watermarks */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <img 
